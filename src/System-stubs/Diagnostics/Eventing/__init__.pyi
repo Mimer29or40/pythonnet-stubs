@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import overload
 
 from System import Array
@@ -22,11 +20,16 @@ class EventDescriptor(ValueType):
     """"""
 
     def __init__(
-        self, id: int, version: int, channel: int, level: int, opcode: int, task: int, keywords: int
+        self,
+        id: int,
+        version: int,
+        channel: int,
+        level: int,
+        opcode: int,
+        task: int,
+        keywords: int,
     ):
-        """
-
-        :param id:
+        """:param id:
         :param version:
         :param channel:
         :param level:
@@ -36,171 +39,104 @@ class EventDescriptor(ValueType):
         """
     @property
     def Channel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Keywords(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Level(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Opcode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Task(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Version(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventProvider(Object, IDisposable):
     """"""
 
     def __init__(self, providerGuid: Guid):
-        """
-
-        :param providerGuid:
-        """
+        """:param providerGuid:"""
     def Close(self) -> None:
         """"""
     @classmethod
     def CreateActivityId(cls) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetLastWriteEventError(cls) -> EventProvider.WriteEventErrorCode:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self, level: int, keywords: int) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :return:
         """
     @classmethod
     def SetActivityId(cls, id: Guid) -> None:
-        """
-
-        :param id:
-        """
+        """:param id:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WriteEvent(self, eventDescriptor: EventDescriptor, eventPayload: Array[object]) -> bool:
-        """
-
-        :param eventDescriptor:
+        """:param eventDescriptor:
         :param eventPayload:
         :return:
         """
     @overload
     def WriteEvent(self, eventDescriptor: EventDescriptor, data: str) -> bool:
-        """
-
-        :param eventDescriptor:
+        """:param eventDescriptor:
         :param data:
         :return:
         """
     @overload
     def WriteMessageEvent(self, eventMessage: str) -> bool:
-        """
-
-        :param eventMessage:
+        """:param eventMessage:
         :return:
         """
     @overload
     def WriteMessageEvent(self, eventMessage: str, eventLevel: int, eventKeywords: int) -> bool:
-        """
-
-        :param eventMessage:
+        """:param eventMessage:
         :param eventLevel:
         :param eventKeywords:
         :return:
         """
     def WriteTransferEvent(
-        self, eventDescriptor: EventDescriptor, relatedActivityId: Guid, eventPayload: Array[object]
+        self,
+        eventDescriptor: EventDescriptor,
+        relatedActivityId: Guid,
+        eventPayload: Array[object],
     ) -> bool:
-        """
-
-        :param eventDescriptor:
+        """:param eventDescriptor:
         :param relatedActivityId:
         :param eventPayload:
         :return:
@@ -221,141 +157,86 @@ class EventProviderTraceListener(TraceListener, IDisposable):
 
     @overload
     def __init__(self, providerId: str):
-        """
-
-        :param providerId:
-        """
+        """:param providerId:"""
     @overload
     def __init__(self, providerId: str, name: str):
-        """
-
-        :param providerId:
+        """:param providerId:
         :param name:
         """
     @overload
     def __init__(self, providerId: str, name: str, delimiter: str):
-        """
-
-        :param providerId:
+        """:param providerId:
         :param name:
         :param delimiter:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Delimiter(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Delimiter.setter
     def Delimiter(self, value: str) -> None: ...
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -365,9 +246,7 @@ class EventProviderTraceListener(TraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -382,9 +261,7 @@ class EventProviderTraceListener(TraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -392,11 +269,13 @@ class EventProviderTraceListener(TraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -410,9 +289,7 @@ class EventProviderTraceListener(TraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -428,9 +305,7 @@ class EventProviderTraceListener(TraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -445,9 +320,7 @@ class EventProviderTraceListener(TraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -455,53 +328,33 @@ class EventProviderTraceListener(TraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """

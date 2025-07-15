@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import overload
 
 from System import Array
@@ -15,46 +13,25 @@ class TimerQueue(Object):
     @classmethod
     @property
     def Instances(cls) -> Array[TimerQueue]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DeleteTimer(self, timer: TimerQueueTimer) -> None:
-        """
-
-        :param timer:
-        """
+        """:param timer:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveTimerToCorrectList(self, timer: TimerQueueTimer, shortList: bool) -> None:
-        """
-
-        :param timer:
+        """:param timer:
         :param shortList:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UpdateTimer(self, timer: TimerQueueTimer, dueTime: int, period: int) -> bool:
-        """
-
-        :param timer:
+        """:param timer:
         :param dueTime:
         :param period:
         :return:
@@ -68,36 +45,20 @@ class TimerQueueTimer(Object, IThreadPoolWorkItem):
         """"""
     @overload
     def Close(self, toSignal: WaitHandle) -> bool:
-        """
-
-        :param toSignal:
+        """:param toSignal:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

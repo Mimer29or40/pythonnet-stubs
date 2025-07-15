@@ -1,12 +1,8 @@
-from __future__ import annotations
-
 from abc import ABC
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Optional
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -95,58 +91,33 @@ class AsyncCausalityTracer(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AwaitTaskContinuation(TaskContinuation, IThreadPoolWorkItem):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BeginEndAwaitableAdapter(Object, ICriticalNotifyCompletion, INotifyCompletion):
     """"""
@@ -160,51 +131,25 @@ class BeginEndAwaitableAdapter(Object, ICriticalNotifyCompletion, INotifyComplet
         """"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAwaiter(self) -> BeginEndAwaitableAdapter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResult(self) -> IAsyncResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnCompleted(self, continuation: Action) -> None:
-        """
-
-        :param continuation:
-        """
+        """:param continuation:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UnsafeOnCompleted(self, continuation: Action) -> None:
-        """
-
-        :param continuation:
-        """
+        """:param continuation:"""
 
 class CausalityRelation(Enum):
     """"""
@@ -244,33 +189,19 @@ class CompletionActionInvoker(Object, IThreadPoolWorkItem):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConcurrentExclusiveSchedulerPair(Object):
     """"""
@@ -280,68 +211,44 @@ class ConcurrentExclusiveSchedulerPair(Object):
         """"""
     @overload
     def __init__(self, taskScheduler: TaskScheduler):
-        """
-
-        :param taskScheduler:
-        """
+        """:param taskScheduler:"""
     @overload
     def __init__(self, taskScheduler: TaskScheduler, maxConcurrencyLevel: int):
-        """
-
-        :param taskScheduler:
+        """:param taskScheduler:
         :param maxConcurrencyLevel:
         """
     @overload
     def __init__(
-        self, taskScheduler: TaskScheduler, maxConcurrencyLevel: int, maxItemsPerTask: int
+        self,
+        taskScheduler: TaskScheduler,
+        maxConcurrencyLevel: int,
+        maxItemsPerTask: int,
     ):
-        """
-
-        :param taskScheduler:
+        """:param taskScheduler:
         :param maxConcurrencyLevel:
         :param maxItemsPerTask:
         """
     @property
     def Completion(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConcurrentScheduler(self) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExclusiveScheduler(self) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Complete(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContinuationResultTaskFromResultTask(
     Generic[TAntecedentResult, TResult],
@@ -361,9 +268,7 @@ class ContinuationResultTaskFromResultTask(
         internalOptions: InternalTaskOptions,
         stackMark: StackCrawlMark,
     ):
-        """
-
-        :param antecedent:
+        """:param antecedent:
         :param function:
         :param state:
         :param creationOptions:
@@ -372,134 +277,82 @@ class ContinuationResultTaskFromResultTask(
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> TResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -507,9 +360,7 @@ class ContinuationResultTaskFromResultTask(
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -519,9 +370,7 @@ class ContinuationResultTaskFromResultTask(
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -529,19 +378,17 @@ class ContinuationResultTaskFromResultTask(
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -549,9 +396,7 @@ class ContinuationResultTaskFromResultTask(
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -562,20 +407,19 @@ class ContinuationResultTaskFromResultTask(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -587,9 +431,7 @@ class ContinuationResultTaskFromResultTask(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -601,9 +443,7 @@ class ContinuationResultTaskFromResultTask(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -615,9 +455,7 @@ class ContinuationResultTaskFromResultTask(
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -629,9 +467,7 @@ class ContinuationResultTaskFromResultTask(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -644,9 +480,7 @@ class ContinuationResultTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -660,9 +494,7 @@ class ContinuationResultTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -677,9 +509,7 @@ class ContinuationResultTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -695,9 +525,7 @@ class ContinuationResultTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -707,84 +535,52 @@ class ContinuationResultTaskFromResultTask(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -803,9 +599,7 @@ class ContinuationResultTaskFromTask(
         internalOptions: InternalTaskOptions,
         stackMark: StackCrawlMark,
     ):
-        """
-
-        :param antecedent:
+        """:param antecedent:
         :param function:
         :param state:
         :param creationOptions:
@@ -814,134 +608,82 @@ class ContinuationResultTaskFromTask(
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> TResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -949,9 +691,7 @@ class ContinuationResultTaskFromTask(
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -961,9 +701,7 @@ class ContinuationResultTaskFromTask(
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -971,19 +709,17 @@ class ContinuationResultTaskFromTask(
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -991,9 +727,7 @@ class ContinuationResultTaskFromTask(
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -1004,20 +738,19 @@ class ContinuationResultTaskFromTask(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -1029,9 +762,7 @@ class ContinuationResultTaskFromTask(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -1043,9 +774,7 @@ class ContinuationResultTaskFromTask(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -1057,9 +786,7 @@ class ContinuationResultTaskFromTask(
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -1071,9 +798,7 @@ class ContinuationResultTaskFromTask(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -1086,9 +811,7 @@ class ContinuationResultTaskFromTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -1102,9 +825,7 @@ class ContinuationResultTaskFromTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -1119,9 +840,7 @@ class ContinuationResultTaskFromTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -1137,9 +856,7 @@ class ContinuationResultTaskFromTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -1149,84 +866,52 @@ class ContinuationResultTaskFromTask(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -1245,9 +930,7 @@ class ContinuationTaskFromResultTask(
         internalOptions: InternalTaskOptions,
         stackMark: StackCrawlMark,
     ):
-        """
-
-        :param antecedent:
+        """:param antecedent:
         :param action:
         :param state:
         :param creationOptions:
@@ -1256,128 +939,79 @@ class ContinuationTaskFromResultTask(
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -1385,9 +1019,7 @@ class ContinuationTaskFromResultTask(
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -1397,9 +1029,7 @@ class ContinuationTaskFromResultTask(
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -1407,19 +1037,17 @@ class ContinuationTaskFromResultTask(
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -1427,9 +1055,7 @@ class ContinuationTaskFromResultTask(
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -1440,20 +1066,19 @@ class ContinuationTaskFromResultTask(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -1465,9 +1090,7 @@ class ContinuationTaskFromResultTask(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -1479,9 +1102,7 @@ class ContinuationTaskFromResultTask(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -1493,9 +1114,7 @@ class ContinuationTaskFromResultTask(
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -1507,9 +1126,7 @@ class ContinuationTaskFromResultTask(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -1522,9 +1139,7 @@ class ContinuationTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -1538,9 +1153,7 @@ class ContinuationTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -1555,9 +1168,7 @@ class ContinuationTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -1573,9 +1184,7 @@ class ContinuationTaskFromResultTask(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -1585,84 +1194,52 @@ class ContinuationTaskFromResultTask(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -1679,9 +1256,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         internalOptions: InternalTaskOptions,
         stackMark: StackCrawlMark,
     ):
-        """
-
-        :param antecedent:
+        """:param antecedent:
         :param action:
         :param state:
         :param creationOptions:
@@ -1690,128 +1265,79 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -1819,9 +1345,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -1831,9 +1355,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -1841,19 +1363,17 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -1861,9 +1381,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -1874,20 +1392,19 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -1899,9 +1416,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -1913,9 +1428,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -1927,9 +1440,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -1941,9 +1452,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -1956,9 +1465,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -1972,9 +1479,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -1989,9 +1494,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -2007,9 +1510,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -2019,84 +1520,52 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -2105,110 +1574,63 @@ class GenericDelegateCache(ABC, Generic[TAntecedentResult, TResult], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IProducerConsumerQueue(Generic[T], IEnumerable[T], IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEmpty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Enqueue(self, item: T) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def GetCountSafe(self, syncObj: object) -> int:
-        """
-
-        :param syncObj:
+        """:param syncObj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
-    def TryDequeue(self, result: T) -> Tuple[bool, T]:
-        """
-
-        :param result:
+        """:return:"""
+    def TryDequeue(self, result: T) -> tuple[bool, T]:
+        """:param result:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ITaskCompletionAction:
     """"""
 
     def Invoke(self, completingTask: Task) -> None:
-        """
-
-        :param completingTask:
-        """
+        """:param completingTask:"""
 
 class IndexRange(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InternalTaskOptions(Enum):
     """"""
@@ -2248,51 +1670,28 @@ class MultiProducerMultiConsumerQueue(
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEmpty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEmpty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
@@ -2300,154 +1699,90 @@ class MultiProducerMultiConsumerQueue(
         """"""
     @overload
     def Enqueue(self, item: T) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     @overload
     def Enqueue(self, item: T) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCountSafe(self, syncObj: object) -> int:
-        """
-
-        :param syncObj:
+        """:param syncObj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToArray(self) -> Array[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryAdd(self, item: T) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
-    def TryDequeue(self, result: T) -> Tuple[bool, T]:
+    def TryDequeue(self, result: T) -> tuple[bool, T]:
         """"""
     @overload
-    def TryDequeue(self, result: T) -> Tuple[bool, T]:
-        """
-
-        :param result:
+    def TryDequeue(self, result: T) -> tuple[bool, T]:
+        """:param result:
         :return:
         """
-    def TryPeek(self, result: T) -> Tuple[bool, T]:
+    def TryPeek(self, result: T) -> tuple[bool, T]:
         """"""
-    def TryTake(self, item: T) -> Tuple[bool, T]:
+    def TryTake(self, item: T) -> tuple[bool, T]:
         """"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PaddingFor32(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PaddingHelpers(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Parallel(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
@@ -2455,9 +1790,7 @@ class Parallel(ABC, Object):
     def For(
         cls, fromInclusive: int, toExclusive: int, body: Action[int, ParallelLoopState]
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param body:
         :return:
@@ -2465,9 +1798,7 @@ class Parallel(ABC, Object):
     @classmethod
     @overload
     def For(cls, fromInclusive: int, toExclusive: int, body: Action[int]) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param body:
         :return:
@@ -2477,9 +1808,7 @@ class Parallel(ABC, Object):
     def For(
         cls, fromInclusive: int, toExclusive: int, body: Action[int, ParallelLoopState]
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param body:
         :return:
@@ -2487,9 +1816,7 @@ class Parallel(ABC, Object):
     @classmethod
     @overload
     def For(cls, fromInclusive: int, toExclusive: int, body: Action[int]) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param body:
         :return:
@@ -2503,9 +1830,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[int, ParallelLoopState],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param parallelOptions:
         :param body:
@@ -2520,9 +1845,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[int],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param parallelOptions:
         :param body:
@@ -2537,9 +1860,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[int, ParallelLoopState],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param parallelOptions:
         :param body:
@@ -2554,9 +1875,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[int],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param parallelOptions:
         :param body:
@@ -2572,9 +1891,7 @@ class Parallel(ABC, Object):
         body: Func[int, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param localInit:
         :param body:
@@ -2591,9 +1908,7 @@ class Parallel(ABC, Object):
         body: Func[int, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param localInit:
         :param body:
@@ -2611,9 +1926,7 @@ class Parallel(ABC, Object):
         body: Func[int, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param parallelOptions:
         :param localInit:
@@ -2632,9 +1945,7 @@ class Parallel(ABC, Object):
         body: Func[int, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param parallelOptions:
         :param localInit:
@@ -2645,11 +1956,11 @@ class Parallel(ABC, Object):
     @classmethod
     @overload
     def ForEach(
-        cls, source: OrderablePartitioner[TSource], body: Action[TSource, ParallelLoopState, int]
+        cls,
+        source: OrderablePartitioner[TSource],
+        body: Action[TSource, ParallelLoopState, int],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param body:
         :return:
         """
@@ -2658,18 +1969,14 @@ class Parallel(ABC, Object):
     def ForEach(
         cls, source: Partitioner[TSource], body: Action[TSource, ParallelLoopState]
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param body:
         :return:
         """
     @classmethod
     @overload
     def ForEach(cls, source: Partitioner[TSource], body: Action[TSource]) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param body:
         :return:
         """
@@ -2678,9 +1985,7 @@ class Parallel(ABC, Object):
     def ForEach(
         cls, source: IEnumerable[TSource], body: Action[TSource, ParallelLoopState, int]
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param body:
         :return:
         """
@@ -2689,18 +1994,14 @@ class Parallel(ABC, Object):
     def ForEach(
         cls, source: IEnumerable[TSource], body: Action[TSource, ParallelLoopState]
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param body:
         :return:
         """
     @classmethod
     @overload
     def ForEach(cls, source: IEnumerable[TSource], body: Action[TSource]) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param body:
         :return:
         """
@@ -2712,9 +2013,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[TSource, ParallelLoopState, int],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param body:
         :return:
@@ -2727,9 +2026,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[TSource, ParallelLoopState],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param body:
         :return:
@@ -2737,11 +2034,12 @@ class Parallel(ABC, Object):
     @classmethod
     @overload
     def ForEach(
-        cls, source: Partitioner[TSource], parallelOptions: ParallelOptions, body: Action[TSource]
+        cls,
+        source: Partitioner[TSource],
+        parallelOptions: ParallelOptions,
+        body: Action[TSource],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param body:
         :return:
@@ -2754,9 +2052,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[TSource, ParallelLoopState, int],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param body:
         :return:
@@ -2769,9 +2065,7 @@ class Parallel(ABC, Object):
         parallelOptions: ParallelOptions,
         body: Action[TSource, ParallelLoopState],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param body:
         :return:
@@ -2779,11 +2073,12 @@ class Parallel(ABC, Object):
     @classmethod
     @overload
     def ForEach(
-        cls, source: IEnumerable[TSource], parallelOptions: ParallelOptions, body: Action[TSource]
+        cls,
+        source: IEnumerable[TSource],
+        parallelOptions: ParallelOptions,
+        body: Action[TSource],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param body:
         :return:
@@ -2797,9 +2092,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, int, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param localInit:
         :param body:
         :param localFinally:
@@ -2814,9 +2107,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param localInit:
         :param body:
         :param localFinally:
@@ -2831,9 +2122,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param localInit:
         :param body:
         :param localFinally:
@@ -2848,9 +2137,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, int, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param localInit:
         :param body:
         :param localFinally:
@@ -2866,9 +2153,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, int, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param localInit:
         :param body:
@@ -2885,9 +2170,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param localInit:
         :param body:
@@ -2904,9 +2187,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param localInit:
         :param body:
@@ -2923,9 +2204,7 @@ class Parallel(ABC, Object):
         body: Func[TSource, ParallelLoopState, int, TLocal, TLocal],
         localFinally: Action[TLocal],
     ) -> ParallelLoopResult:
-        """
-
-        :param source:
+        """:param source:
         :param parallelOptions:
         :param localInit:
         :param body:
@@ -2933,163 +2212,100 @@ class Parallel(ABC, Object):
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Invoke(cls, actions: Array[Action]) -> None:
-        """
-
-        :param actions:
-        """
+        """:param actions:"""
     @classmethod
     @overload
     def Invoke(cls, parallelOptions: ParallelOptions, actions: Array[Action]) -> None:
-        """
-
-        :param parallelOptions:
+        """:param parallelOptions:
         :param actions:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -3097,9 +2313,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -3109,9 +2323,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -3119,19 +2331,17 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -3139,9 +2349,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -3152,20 +2360,19 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -3177,9 +2384,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -3191,9 +2396,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -3205,9 +2408,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -3219,9 +2420,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -3234,9 +2433,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -3250,9 +2447,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -3267,9 +2462,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -3285,9 +2478,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -3297,84 +2488,52 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -3384,128 +2543,79 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -3513,9 +2623,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -3525,9 +2633,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -3535,19 +2641,17 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -3555,9 +2659,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -3568,20 +2670,19 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -3593,9 +2694,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -3607,9 +2706,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -3621,9 +2718,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -3635,9 +2730,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -3650,9 +2743,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -3666,9 +2757,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -3683,9 +2772,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -3701,9 +2788,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -3713,84 +2798,52 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -3800,196 +2853,110 @@ class ParallelLoopResult(ValueType):
 
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def LowestBreakIteration(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def LowestBreakIteration(self) -> int | None:
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelLoopState(Object):
     """"""
 
     @property
     def IsExceptional(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStopped(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def LowestBreakIteration(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def LowestBreakIteration(self) -> int | None:
+        """:return:"""
     @property
     def ShouldExitCurrentIteration(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Break(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelLoopState32(ParallelLoopState):
     """"""
 
     @property
     def IsExceptional(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStopped(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def LowestBreakIteration(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def LowestBreakIteration(self) -> int | None:
+        """:return:"""
     @property
     def ShouldExitCurrentIteration(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Break(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelLoopState64(ParallelLoopState):
     """"""
 
     @property
     def IsExceptional(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStopped(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def LowestBreakIteration(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def LowestBreakIteration(self) -> int | None:
+        """:return:"""
     @property
     def ShouldExitCurrentIteration(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Break(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelLoopStateFlags(Object):
     """"""
@@ -3997,26 +2964,15 @@ class ParallelLoopStateFlags(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelLoopStateFlags32(ParallelLoopStateFlags):
     """"""
@@ -4024,26 +2980,15 @@ class ParallelLoopStateFlags32(ParallelLoopStateFlags):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelLoopStateFlags64(ParallelLoopStateFlags):
     """"""
@@ -4051,26 +2996,15 @@ class ParallelLoopStateFlags64(ParallelLoopStateFlags):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelOptions(Object):
     """"""
@@ -4079,124 +3013,71 @@ class ParallelOptions(Object):
         """"""
     @property
     def CancellationToken(self) -> CancellationToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CancellationToken.setter
     def CancellationToken(self, value: CancellationToken) -> None: ...
     @property
     def MaxDegreeOfParallelism(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaxDegreeOfParallelism.setter
     def MaxDegreeOfParallelism(self, value: int) -> None: ...
     @property
     def TaskScheduler(self) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TaskScheduler.setter
     def TaskScheduler(self, value: TaskScheduler) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RangeManager(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RangeWorker(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Shared(Generic[T], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SingleProducerSingleConsumerQueue(
     Generic[T], Object, IEnumerable[T], IEnumerable, IProducerConsumerQueue[T]
@@ -4205,86 +3086,49 @@ class SingleProducerSingleConsumerQueue(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEmpty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Clear(self) -> None:
         """"""
     def Enqueue(self, item: T) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCountSafe(self, syncObj: object) -> int:
-        """
-
-        :param syncObj:
+        """:param syncObj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
+        """:return:"""
+    def TryDequeue(self, result: T) -> tuple[bool, T]:
+        """:param result:
         :return:
         """
-    def TryDequeue(self, result: T) -> Tuple[bool, T]:
-        """
-
+    def TryDequeueIf(self, predicate: Predicate[T], result: T) -> tuple[bool, T]:
+        """:param predicate:
         :param result:
         :return:
         """
-    def TryDequeueIf(self, predicate: Predicate[T], result: T) -> Tuple[bool, T]:
-        """
-
-        :param predicate:
-        :param result:
-        :return:
-        """
-    def TryPeek(self, result: T) -> Tuple[bool, T]:
-        """
-
-        :param result:
+    def TryPeek(self, result: T) -> tuple[bool, T]:
+        """:param result:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StackGuard(Object):
     """"""
@@ -4292,83 +3136,47 @@ class StackGuard(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StandardTaskContinuation(TaskContinuation):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SynchronizationContextAwaitTaskContinuation(AwaitTaskContinuation, IThreadPoolWorkItem):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SynchronizationContextTaskScheduler(TaskScheduler):
     """"""
@@ -4376,50 +3184,27 @@ class SynchronizationContextTaskScheduler(TaskScheduler):
     @classmethod
     @property
     def Current(cls) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Default(cls) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumConcurrencyLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     UnobservedTaskException: EventType[EventHandler[UnobservedTaskExceptionEventArgs]] = ...
     """"""
 
@@ -4427,168 +3212,92 @@ class SystemThreadingTasks_FutureDebugView(Generic[TResult], Object):
     """"""
 
     def __init__(self, task: Task[TResult]):
-        """
-
-        :param task:
-        """
+        """:param task:"""
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CancellationPending(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Exception(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> TResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemThreadingTasks_TaskDebugView(Object):
     """"""
 
     def __init__(self, task: Task):
-        """
-
-        :param task:
-        """
+        """:param task:"""
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CancellationPending(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Exception(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
 
     @overload
     def __init__(self, action: Action):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @overload
     def __init__(self, action: Action, creationOptions: TaskCreationOptions):
-        """
-
-        :param action:
+        """:param action:
         :param creationOptions:
         """
     @overload
     def __init__(self, action: Action, cancellationToken: CancellationToken):
-        """
-
-        :param action:
+        """:param action:
         :param cancellationToken:
         """
     @overload
     def __init__(self, action: Action[object], state: object):
-        """
-
-        :param action:
+        """:param action:
         :param state:
         """
     @overload
@@ -4598,25 +3307,29 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         cancellationToken: CancellationToken,
         creationOptions: TaskCreationOptions,
     ):
-        """
-
-        :param action:
+        """:param action:
         :param cancellationToken:
         :param creationOptions:
         """
     @overload
-    def __init__(self, action: Action[object], state: object, creationOptions: TaskCreationOptions):
-        """
-
-        :param action:
+    def __init__(
+        self,
+        action: Action[object],
+        state: object,
+        creationOptions: TaskCreationOptions,
+    ):
+        """:param action:
         :param state:
         :param creationOptions:
         """
     @overload
-    def __init__(self, action: Action[object], state: object, cancellationToken: CancellationToken):
-        """
-
-        :param action:
+    def __init__(
+        self,
+        action: Action[object],
+        state: object,
+        cancellationToken: CancellationToken,
+    ):
+        """:param action:
         :param state:
         :param cancellationToken:
         """
@@ -4628,137 +3341,86 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         cancellationToken: CancellationToken,
         creationOptions: TaskCreationOptions,
     ):
-        """
-
-        :param action:
+        """:param action:
         :param state:
         :param cancellationToken:
         :param creationOptions:
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -4766,9 +3428,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -4778,9 +3438,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -4788,19 +3446,17 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -4808,9 +3464,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -4821,20 +3475,19 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -4846,9 +3499,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -4860,9 +3511,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -4874,9 +3523,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -4888,9 +3535,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -4903,9 +3548,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -4919,9 +3562,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -4936,9 +3577,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -4954,9 +3593,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -4966,135 +3603,95 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     @classmethod
     @overload
     def Delay(cls, millisecondsDelay: int) -> Task:
-        """
-
-        :param millisecondsDelay:
+        """:param millisecondsDelay:
         :return:
         """
     @classmethod
     @overload
     def Delay(cls, delay: TimeSpan) -> Task:
-        """
-
-        :param delay:
+        """:param delay:
         :return:
         """
     @classmethod
     @overload
     def Delay(cls, millisecondsDelay: int, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param millisecondsDelay:
+        """:param millisecondsDelay:
         :param cancellationToken:
         :return:
         """
     @classmethod
     @overload
     def Delay(cls, delay: TimeSpan, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param delay:
+        """:param delay:
         :param cancellationToken:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     @classmethod
     def FromCanceled(cls, cancellationToken: CancellationToken) -> Task[TResult]:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     @classmethod
     def FromException(cls, exception: Exception) -> Task[TResult]:
-        """
-
-        :param exception:
+        """:param exception:
         :return:
         """
     @classmethod
     def FromResult(cls, result: TResult) -> Task[TResult]:
-        """
-
-        :param result:
+        """:param result:
         :return:
         """
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @classmethod
     @overload
     def Run(cls, action: Action) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :return:
         """
     @classmethod
     @overload
     def Run(cls, function: Func[TResult]) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :return:
         """
     @classmethod
     @overload
     def Run(cls, function: Func[Task[TResult]]) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :return:
         """
     @classmethod
     @overload
     def Run(cls, function: Func[Task]) -> Task:
-        """
-
-        :param function:
+        """:param function:
         :return:
         """
     @classmethod
     @overload
     def Run(cls, action: Action, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param cancellationToken:
         :return:
         """
     @classmethod
     @overload
     def Run(cls, function: Func[TResult], cancellationToken: CancellationToken) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :return:
         """
@@ -5103,18 +3700,14 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     def Run(
         cls, function: Func[Task[TResult]], cancellationToken: CancellationToken
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :return:
         """
     @classmethod
     @overload
     def Run(cls, function: Func[Task], cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :return:
         """
@@ -5123,96 +3716,70 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
     @classmethod
     @overload
     def WaitAll(cls, tasks: Array[Task]) -> None:
-        """
-
-        :param tasks:
-        """
+        """:param tasks:"""
     @classmethod
     @overload
     def WaitAll(cls, tasks: Array[Task], cancellationToken: CancellationToken) -> None:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param cancellationToken:
         """
     @classmethod
     @overload
     def WaitAll(cls, tasks: Array[Task], millisecondsTimeout: int) -> bool:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param millisecondsTimeout:
         :return:
         """
     @classmethod
     @overload
     def WaitAll(cls, tasks: Array[Task], timeout: TimeSpan) -> bool:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param timeout:
         :return:
         """
     @classmethod
     @overload
     def WaitAll(
-        cls, tasks: Array[Task], millisecondsTimeout: int, cancellationToken: CancellationToken
+        cls,
+        tasks: Array[Task],
+        millisecondsTimeout: int,
+        cancellationToken: CancellationToken,
     ) -> bool:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param millisecondsTimeout:
         :param cancellationToken:
         :return:
@@ -5220,46 +3787,39 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     @classmethod
     @overload
     def WaitAny(cls, tasks: Array[Task]) -> int:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WaitAny(cls, tasks: Array[Task], cancellationToken: CancellationToken) -> int:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param cancellationToken:
         :return:
         """
     @classmethod
     @overload
     def WaitAny(cls, tasks: Array[Task], millisecondsTimeout: int) -> int:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param millisecondsTimeout:
         :return:
         """
     @classmethod
     @overload
     def WaitAny(cls, tasks: Array[Task], timeout: TimeSpan) -> int:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param timeout:
         :return:
         """
     @classmethod
     @overload
     def WaitAny(
-        cls, tasks: Array[Task], millisecondsTimeout: int, cancellationToken: CancellationToken
+        cls,
+        tasks: Array[Task],
+        millisecondsTimeout: int,
+        cancellationToken: CancellationToken,
     ) -> int:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param millisecondsTimeout:
         :param cancellationToken:
         :return:
@@ -5267,73 +3827,54 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     @classmethod
     @overload
     def WhenAll(cls, tasks: IEnumerable[Task[TResult]]) -> Task[Array[TResult]]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WhenAll(cls, tasks: IEnumerable[Task]) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WhenAll(cls, tasks: Array[Task[TResult]]) -> Task[Array[TResult]]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WhenAll(cls, tasks: Array[Task]) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WhenAny(cls, tasks: IEnumerable[Task[TResult]]) -> Task[Task[TResult]]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WhenAny(cls, tasks: IEnumerable[Task]) -> Task[Task]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WhenAny(cls, tasks: Array[Task[TResult]]) -> Task[Task[TResult]]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     @overload
     def WhenAny(cls, tasks: Array[Task]) -> Task[Task]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :return:
         """
     @classmethod
     def Yield(cls) -> YieldAwaitable:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskCanceledException(OperationCanceledException, _Exception, ISerializable):
     """"""
@@ -5343,156 +3884,89 @@ class TaskCanceledException(OperationCanceledException, _Exception, ISerializabl
         """"""
     @overload
     def __init__(self, task: Task):
-        """
-
-        :param task:
-        """
+        """:param task:"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def CancellationToken(self) -> CancellationToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Task(self) -> Task:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskCompletionSource(Generic[TResult], Object):
     """"""
@@ -5502,100 +3976,58 @@ class TaskCompletionSource(Generic[TResult], Object):
         """"""
     @overload
     def __init__(self, creationOptions: TaskCreationOptions):
-        """
-
-        :param creationOptions:
-        """
+        """:param creationOptions:"""
     @overload
     def __init__(self, state: object):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @overload
     def __init__(self, state: object, creationOptions: TaskCreationOptions):
-        """
-
-        :param state:
+        """:param state:
         :param creationOptions:
         """
     @property
     def Task(self) -> Task[TResult]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetCanceled(self) -> None:
         """"""
     @overload
     def SetException(self, exceptions: IEnumerable[Exception]) -> None:
-        """
-
-        :param exceptions:
-        """
+        """:param exceptions:"""
     @overload
     def SetException(self, exception: Exception) -> None:
-        """
-
-        :param exception:
-        """
+        """:param exception:"""
     def SetResult(self, result: TResult) -> None:
-        """
-
-        :param result:
-        """
+        """:param result:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TrySetCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TrySetCanceled(self, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     @overload
     def TrySetException(self, exceptions: IEnumerable[Exception]) -> bool:
-        """
-
-        :param exceptions:
+        """:param exceptions:
         :return:
         """
     @overload
     def TrySetException(self, exception: Exception) -> bool:
-        """
-
-        :param exception:
+        """:param exception:
         :return:
         """
     def TrySetResult(self, result: TResult) -> bool:
-        """
-
-        :param result:
+        """:param result:
         :return:
         """
 
@@ -5603,26 +4035,15 @@ class TaskContinuation(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskContinuationOptions(Enum):
     """"""
@@ -5680,65 +4101,39 @@ class TaskExceptionHolder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskExtensions(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Unwrap(cls, task: Task[Task[TResult]]) -> Task[TResult]:
-        """
-
-        :param task:
+        """:param task:
         :return:
         """
     @classmethod
     @overload
     def Unwrap(cls, task: Task[Task]) -> Task:
-        """
-
-        :param task:
+        """:param task:
         :return:
         """
 
@@ -5750,23 +4145,17 @@ class TaskFactory(Object):
         """"""
     @overload
     def __init__(self, scheduler: TaskScheduler):
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def __init__(self, cancellationToken: CancellationToken):
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def __init__(
-        self, creationOptions: TaskCreationOptions, continuationOptions: TaskContinuationOptions
+        self,
+        creationOptions: TaskCreationOptions,
+        continuationOptions: TaskContinuationOptions,
     ):
-        """
-
-        :param creationOptions:
+        """:param creationOptions:
         :param continuationOptions:
         """
     @overload
@@ -5777,46 +4166,30 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ):
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :param creationOptions:
         :param continuationOptions:
         :param scheduler:
         """
     @property
     def CancellationToken(self) -> CancellationToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContinuationOptions(self) -> TaskContinuationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Scheduler(self) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ContinueWhenAll(
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Array[Task[TAntecedentResult]]],
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :return:
         """
@@ -5826,17 +4199,13 @@ class TaskFactory(Object):
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
     @overload
     def ContinueWhenAll(self, tasks: Array[Task], continuationAction: Action[Array[Task]]) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :return:
         """
@@ -5844,9 +4213,7 @@ class TaskFactory(Object):
     def ContinueWhenAll(
         self, tasks: Array[Task], continuationFunction: Func[Array[Task], TResult]
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
@@ -5857,9 +4224,7 @@ class TaskFactory(Object):
         continuationAction: Action[Array[Task[TAntecedentResult]]],
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param continuationOptions:
         :return:
@@ -5871,9 +4236,7 @@ class TaskFactory(Object):
         continuationAction: Action[Array[Task[TAntecedentResult]]],
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :return:
@@ -5885,9 +4248,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -5899,9 +4260,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -5913,9 +4272,7 @@ class TaskFactory(Object):
         continuationAction: Action[Array[Task]],
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param continuationOptions:
         :return:
@@ -5927,9 +4284,7 @@ class TaskFactory(Object):
         continuationAction: Action[Array[Task]],
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :return:
@@ -5941,9 +4296,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Array[Task], TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -5955,9 +4308,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Array[Task], TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -5971,9 +4322,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
@@ -5989,9 +4338,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6007,9 +4354,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6025,9 +4370,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6040,9 +4383,7 @@ class TaskFactory(Object):
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Task[TAntecedentResult]],
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :return:
         """
@@ -6052,17 +4393,13 @@ class TaskFactory(Object):
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
     @overload
     def ContinueWhenAny(self, tasks: Array[Task], continuationAction: Action[Task]) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :return:
         """
@@ -6070,9 +4407,7 @@ class TaskFactory(Object):
     def ContinueWhenAny(
         self, tasks: Array[Task], continuationFunction: Func[Task, TResult]
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
@@ -6083,9 +4418,7 @@ class TaskFactory(Object):
         continuationAction: Action[Task[TAntecedentResult]],
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param continuationOptions:
         :return:
@@ -6097,9 +4430,7 @@ class TaskFactory(Object):
         continuationAction: Action[Task[TAntecedentResult]],
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :return:
@@ -6111,9 +4442,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Task[TAntecedentResult], TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -6125,9 +4454,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Task[TAntecedentResult], TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -6139,9 +4466,7 @@ class TaskFactory(Object):
         continuationAction: Action[Task],
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param continuationOptions:
         :return:
@@ -6153,9 +4478,7 @@ class TaskFactory(Object):
         continuationAction: Action[Task],
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :return:
@@ -6167,9 +4490,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -6181,9 +4502,7 @@ class TaskFactory(Object):
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -6197,9 +4516,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6215,9 +4532,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6233,9 +4548,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6251,9 +4564,7 @@ class TaskFactory(Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6261,16 +4572,12 @@ class TaskFactory(Object):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FromAsync(self, asyncResult: IAsyncResult, endMethod: Action[IAsyncResult]) -> Task:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :return:
         """
@@ -6278,9 +4585,7 @@ class TaskFactory(Object):
     def FromAsync(
         self, asyncResult: IAsyncResult, endMethod: Func[IAsyncResult, TResult]
     ) -> Task[TResult]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :return:
         """
@@ -6291,9 +4596,7 @@ class TaskFactory(Object):
         endMethod: Action[IAsyncResult],
         state: object,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param state:
         :return:
@@ -6305,9 +4608,7 @@ class TaskFactory(Object):
         endMethod: Func[IAsyncResult, TResult],
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param state:
         :return:
@@ -6319,9 +4620,7 @@ class TaskFactory(Object):
         endMethod: Action[IAsyncResult],
         creationOptions: TaskCreationOptions,
     ) -> Task:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :param creationOptions:
         :return:
@@ -6333,9 +4632,7 @@ class TaskFactory(Object):
         endMethod: Func[IAsyncResult, TResult],
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :param creationOptions:
         :return:
@@ -6348,9 +4645,7 @@ class TaskFactory(Object):
         arg1: TArg1,
         state: object,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param state:
@@ -6364,9 +4659,7 @@ class TaskFactory(Object):
         arg1: TArg1,
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param state:
@@ -6380,9 +4673,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param state:
         :param creationOptions:
@@ -6396,9 +4687,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param state:
         :param creationOptions:
@@ -6412,9 +4701,7 @@ class TaskFactory(Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :param creationOptions:
         :param scheduler:
@@ -6428,9 +4715,7 @@ class TaskFactory(Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :param creationOptions:
         :param scheduler:
@@ -6445,9 +4730,7 @@ class TaskFactory(Object):
         arg2: TArg2,
         state: object,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6463,9 +4746,7 @@ class TaskFactory(Object):
         arg2: TArg2,
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6481,9 +4762,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param state:
@@ -6499,9 +4778,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param state:
@@ -6518,9 +4795,7 @@ class TaskFactory(Object):
         arg3: TArg3,
         state: object,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6538,9 +4813,7 @@ class TaskFactory(Object):
         arg3: TArg3,
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6558,9 +4831,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6578,9 +4849,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6599,9 +4868,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6621,9 +4888,7 @@ class TaskFactory(Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -6633,50 +4898,34 @@ class TaskFactory(Object):
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def StartNew(self, action: Action) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :return:
         """
     @overload
     def StartNew(self, function: Func[TResult]) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :return:
         """
     @overload
     def StartNew(self, action: Action, creationOptions: TaskCreationOptions) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param creationOptions:
         :return:
         """
     @overload
     def StartNew(self, action: Action, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param cancellationToken:
         :return:
         """
     @overload
     def StartNew(self, action: Action[object], state: object) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param state:
         :return:
         """
@@ -6684,9 +4933,7 @@ class TaskFactory(Object):
     def StartNew(
         self, function: Func[TResult], creationOptions: TaskCreationOptions
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param creationOptions:
         :return:
         """
@@ -6694,60 +4941,60 @@ class TaskFactory(Object):
     def StartNew(
         self, function: Func[TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :return:
         """
     @overload
     def StartNew(self, function: Func[object, TResult], state: object) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :return:
         """
     @overload
     def StartNew(
-        self, action: Action[object], state: object, creationOptions: TaskCreationOptions
+        self,
+        action: Action[object],
+        state: object,
+        creationOptions: TaskCreationOptions,
     ) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param state:
         :param creationOptions:
         :return:
         """
     @overload
     def StartNew(
-        self, action: Action[object], state: object, cancellationToken: CancellationToken
+        self,
+        action: Action[object],
+        state: object,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param state:
         :param cancellationToken:
         :return:
         """
     @overload
     def StartNew(
-        self, function: Func[object, TResult], state: object, creationOptions: TaskCreationOptions
+        self,
+        function: Func[object, TResult],
+        state: object,
+        creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param creationOptions:
         :return:
         """
     @overload
     def StartNew(
-        self, function: Func[object, TResult], state: object, cancellationToken: CancellationToken
+        self,
+        function: Func[object, TResult],
+        state: object,
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param cancellationToken:
         :return:
@@ -6760,9 +5007,7 @@ class TaskFactory(Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param cancellationToken:
         :param creationOptions:
         :param scheduler:
@@ -6776,9 +5021,7 @@ class TaskFactory(Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :param creationOptions:
         :param scheduler:
@@ -6793,9 +5036,7 @@ class TaskFactory(Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param action:
+        """:param action:
         :param state:
         :param cancellationToken:
         :param creationOptions:
@@ -6811,9 +5052,7 @@ class TaskFactory(Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param cancellationToken:
         :param creationOptions:
@@ -6821,10 +5060,7 @@ class TaskFactory(Object):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskFactory(Generic[TResult], Object):
     """"""
@@ -6834,23 +5070,17 @@ class TaskFactory(Generic[TResult], Object):
         """"""
     @overload
     def __init__(self, scheduler: TaskScheduler):
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def __init__(self, cancellationToken: CancellationToken):
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def __init__(
-        self, creationOptions: TaskCreationOptions, continuationOptions: TaskContinuationOptions
+        self,
+        creationOptions: TaskCreationOptions,
+        continuationOptions: TaskContinuationOptions,
     ):
-        """
-
-        :param creationOptions:
+        """:param creationOptions:
         :param continuationOptions:
         """
     @overload
@@ -6861,46 +5091,30 @@ class TaskFactory(Generic[TResult], Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ):
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :param creationOptions:
         :param continuationOptions:
         :param scheduler:
         """
     @property
     def CancellationToken(self) -> CancellationToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContinuationOptions(self) -> TaskContinuationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Scheduler(self) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ContinueWhenAll(
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
@@ -6908,9 +5122,7 @@ class TaskFactory(Generic[TResult], Object):
     def ContinueWhenAll(
         self, tasks: Array[Task], continuationFunction: Func[Array[Task], TResult]
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
@@ -6921,9 +5133,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -6935,9 +5145,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -6949,9 +5157,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Array[Task], TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -6963,9 +5169,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Array[Task], TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -6979,9 +5183,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -6997,9 +5199,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -7012,9 +5212,7 @@ class TaskFactory(Generic[TResult], Object):
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
@@ -7022,9 +5220,7 @@ class TaskFactory(Generic[TResult], Object):
     def ContinueWhenAny(
         self, tasks: Array[Task], continuationFunction: Func[Task, TResult]
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :return:
         """
@@ -7035,9 +5231,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Task[TAntecedentResult], TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -7049,9 +5243,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Task[TAntecedentResult], TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -7063,9 +5255,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param continuationOptions:
         :return:
@@ -7077,9 +5267,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :return:
@@ -7093,9 +5281,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -7111,9 +5297,7 @@ class TaskFactory(Generic[TResult], Object):
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param tasks:
+        """:param tasks:
         :param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
@@ -7121,18 +5305,14 @@ class TaskFactory(Generic[TResult], Object):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FromAsync(
         self, asyncResult: IAsyncResult, endMethod: Func[IAsyncResult, TResult]
     ) -> Task[TResult]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :return:
         """
@@ -7143,9 +5323,7 @@ class TaskFactory(Generic[TResult], Object):
         endMethod: Func[IAsyncResult, TResult],
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param state:
         :return:
@@ -7157,9 +5335,7 @@ class TaskFactory(Generic[TResult], Object):
         endMethod: Func[IAsyncResult, TResult],
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :param creationOptions:
         :return:
@@ -7172,9 +5348,7 @@ class TaskFactory(Generic[TResult], Object):
         arg1: TArg1,
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param state:
@@ -7188,9 +5362,7 @@ class TaskFactory(Generic[TResult], Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param state:
         :param creationOptions:
@@ -7204,9 +5376,7 @@ class TaskFactory(Generic[TResult], Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endMethod:
         :param creationOptions:
         :param scheduler:
@@ -7221,9 +5391,7 @@ class TaskFactory(Generic[TResult], Object):
         arg2: TArg2,
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -7239,9 +5407,7 @@ class TaskFactory(Generic[TResult], Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param state:
@@ -7258,9 +5424,7 @@ class TaskFactory(Generic[TResult], Object):
         arg3: TArg3,
         state: object,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -7278,9 +5442,7 @@ class TaskFactory(Generic[TResult], Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -7299,9 +5461,7 @@ class TaskFactory(Generic[TResult], Object):
         state: object,
         creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param beginMethod:
+        """:param beginMethod:
         :param endMethod:
         :param arg1:
         :param arg2:
@@ -7311,29 +5471,19 @@ class TaskFactory(Generic[TResult], Object):
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def StartNew(self, function: Func[TResult]) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :return:
         """
     @overload
     def StartNew(
         self, function: Func[TResult], creationOptions: TaskCreationOptions
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param creationOptions:
         :return:
         """
@@ -7341,38 +5491,36 @@ class TaskFactory(Generic[TResult], Object):
     def StartNew(
         self, function: Func[TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :return:
         """
     @overload
     def StartNew(self, function: Func[object, TResult], state: object) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :return:
         """
     @overload
     def StartNew(
-        self, function: Func[object, TResult], state: object, creationOptions: TaskCreationOptions
+        self,
+        function: Func[object, TResult],
+        state: object,
+        creationOptions: TaskCreationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param creationOptions:
         :return:
         """
     @overload
     def StartNew(
-        self, function: Func[object, TResult], state: object, cancellationToken: CancellationToken
+        self,
+        function: Func[object, TResult],
+        state: object,
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param cancellationToken:
         :return:
@@ -7385,9 +5533,7 @@ class TaskFactory(Generic[TResult], Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :param creationOptions:
         :param scheduler:
@@ -7402,9 +5548,7 @@ class TaskFactory(Generic[TResult], Object):
         creationOptions: TaskCreationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param cancellationToken:
         :param creationOptions:
@@ -7412,10 +5556,7 @@ class TaskFactory(Generic[TResult], Object):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskScheduler(ABC, Object):
     """"""
@@ -7423,56 +5564,30 @@ class TaskScheduler(ABC, Object):
     @classmethod
     @property
     def Current(cls) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Default(cls) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumConcurrencyLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def FromCurrentSynchronizationContext(cls) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     UnobservedTaskException: EventType[EventHandler[UnobservedTaskExceptionEventArgs]] = ...
     """"""
 
@@ -7480,33 +5595,19 @@ class TaskSchedulerAwaitTaskContinuation(AwaitTaskContinuation, IThreadPoolWorkI
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskSchedulerException(Exception, _Exception, ISerializable):
     """"""
@@ -7516,144 +5617,83 @@ class TaskSchedulerException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, innerException: Exception):
-        """
-
-        :param innerException:
-        """
+        """:param innerException:"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TaskStatus(Enum):
     """"""
@@ -7680,70 +5720,46 @@ class TaskToApm(ABC, Object):
 
     @classmethod
     def Begin(cls, task: Task, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param task:
+        """:param task:
         :param callback:
         :param state:
         :return:
         """
     @classmethod
     def End(cls, asyncResult: IAsyncResult) -> TResult:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
 
     @overload
     def __init__(self, function: Func[TResult]):
-        """
-
-        :param function:
-        """
+        """:param function:"""
     @overload
     def __init__(self, function: Func[TResult], creationOptions: TaskCreationOptions):
-        """
-
-        :param function:
+        """:param function:
         :param creationOptions:
         """
     @overload
     def __init__(self, function: Func[TResult], cancellationToken: CancellationToken):
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         """
     @overload
     def __init__(self, function: Func[object, TResult], state: object):
-        """
-
-        :param function:
+        """:param function:
         :param state:
         """
     @overload
@@ -7753,29 +5769,29 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         cancellationToken: CancellationToken,
         creationOptions: TaskCreationOptions,
     ):
-        """
-
-        :param function:
+        """:param function:
         :param cancellationToken:
         :param creationOptions:
         """
     @overload
     def __init__(
-        self, function: Func[object, TResult], state: object, creationOptions: TaskCreationOptions
+        self,
+        function: Func[object, TResult],
+        state: object,
+        creationOptions: TaskCreationOptions,
     ):
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param creationOptions:
         """
     @overload
     def __init__(
-        self, function: Func[object, TResult], state: object, cancellationToken: CancellationToken
+        self,
+        function: Func[object, TResult],
+        state: object,
+        cancellationToken: CancellationToken,
     ):
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param cancellationToken:
         """
@@ -7787,143 +5803,89 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         cancellationToken: CancellationToken,
         creationOptions: TaskCreationOptions,
     ):
-        """
-
-        :param function:
+        """:param function:
         :param state:
         :param cancellationToken:
         :param creationOptions:
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> TResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -7931,9 +5893,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -7943,9 +5903,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -7953,19 +5911,17 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -7973,9 +5929,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -7986,20 +5940,19 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -8011,9 +5964,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -8025,9 +5976,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -8039,9 +5988,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -8053,9 +6000,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -8068,9 +6013,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -8084,9 +6027,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -8101,9 +6042,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -8119,9 +6058,7 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -8131,84 +6068,52 @@ class Task(Generic[TResult], Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -8219,50 +6124,27 @@ class ThreadPoolTaskScheduler(TaskScheduler):
     @classmethod
     @property
     def Current(cls) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Default(cls) -> TaskScheduler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumConcurrencyLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     UnobservedTaskException: EventType[EventHandler[UnobservedTaskExceptionEventArgs]] = ...
     """"""
 
@@ -8276,120 +6158,80 @@ class TplEtwProvider(EventSource, IDisposable):
     """
     @property
     def ConstructionException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CurrentThreadActivityId(cls) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Guid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Settings(self) -> EventSourceSettings:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AwaitTaskContinuationScheduled(
-        self, OriginatingTaskSchedulerID: int, OriginatingTaskID: int, ContinuwWithTaskId: int
+        self,
+        OriginatingTaskSchedulerID: int,
+        OriginatingTaskID: int,
+        ContinuwWithTaskId: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param ContinuwWithTaskId:
         """
     def DebugFacilityMessage(self, Facility: str, Message: str) -> None:
-        """
-
-        :param Facility:
+        """:param Facility:
         :param Message:
         """
     def DebugFacilityMessage1(self, Facility: str, Message: str, Value1: str) -> None:
-        """
-
-        :param Facility:
+        """:param Facility:
         :param Message:
         :param Value1:
         """
     def DebugMessage(self, Message: str) -> None:
-        """
-
-        :param Message:
-        """
+        """:param Message:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTrait(self, key: str) -> str:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :return:
         """
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :param channel:
         :return:
         """
     def NewID(self, TaskID: int) -> None:
-        """
-
-        :param TaskID:
-        """
+        """:param TaskID:"""
     def ParallelFork(
-        self, OriginatingTaskSchedulerID: int, OriginatingTaskID: int, ForkJoinContextID: int
+        self,
+        OriginatingTaskSchedulerID: int,
+        OriginatingTaskID: int,
+        ForkJoinContextID: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param ForkJoinContextID:
         """
@@ -8401,29 +6243,29 @@ class TplEtwProvider(EventSource, IDisposable):
         OperationType: TplEtwProvider.ForkJoinOperationType,
         ActionCount: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param ForkJoinContextID:
         :param OperationType:
         :param ActionCount:
         """
     def ParallelInvokeEnd(
-        self, OriginatingTaskSchedulerID: int, OriginatingTaskID: int, ForkJoinContextID: int
+        self,
+        OriginatingTaskSchedulerID: int,
+        OriginatingTaskID: int,
+        ForkJoinContextID: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param ForkJoinContextID:
         """
     def ParallelJoin(
-        self, OriginatingTaskSchedulerID: int, OriginatingTaskID: int, ForkJoinContextID: int
+        self,
+        OriginatingTaskSchedulerID: int,
+        OriginatingTaskID: int,
+        ForkJoinContextID: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param ForkJoinContextID:
         """
@@ -8436,9 +6278,7 @@ class TplEtwProvider(EventSource, IDisposable):
         InclusiveFrom: int,
         ExclusiveTo: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param ForkJoinContextID:
         :param OperationType:
@@ -8452,40 +6292,29 @@ class TplEtwProvider(EventSource, IDisposable):
         ForkJoinContextID: int,
         TotalIterations: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param ForkJoinContextID:
         :param TotalIterations:
         """
     def RunningContinuation(self, TaskID: int, Object: object) -> None:
-        """
-
-        :param TaskID:
+        """:param TaskID:
         :param Object:
         """
     @overload
     def RunningContinuationList(self, TaskID: int, Index: int, Object: int) -> None:
-        """
-
-        :param TaskID:
+        """:param TaskID:
         :param Index:
         :param Object:
         """
     @overload
     def RunningContinuationList(self, TaskID: int, Index: int, Object: object) -> None:
-        """
-
-        :param TaskID:
+        """:param TaskID:
         :param Index:
         :param Object:
         """
     def SetActivityId(self, NewId: Guid) -> None:
-        """
-
-        :param NewId:
-        """
+        """:param NewId:"""
     def TaskCompleted(
         self,
         OriginatingTaskSchedulerID: int,
@@ -8493,9 +6322,7 @@ class TplEtwProvider(EventSource, IDisposable):
         TaskID: int,
         IsExceptional: bool,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param TaskID:
         :param IsExceptional:
@@ -8509,9 +6336,7 @@ class TplEtwProvider(EventSource, IDisposable):
         TaskCreationOptions: int,
         appDomain: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param TaskID:
         :param CreatingTaskID:
@@ -8521,9 +6346,7 @@ class TplEtwProvider(EventSource, IDisposable):
     def TaskStarted(
         self, OriginatingTaskSchedulerID: int, OriginatingTaskID: int, TaskID: int
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param TaskID:
         """
@@ -8536,9 +6359,7 @@ class TplEtwProvider(EventSource, IDisposable):
         ContinueWithTaskID: int,
         appDomain: int,
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param TaskID:
         :param Behavior:
@@ -8546,92 +6367,59 @@ class TplEtwProvider(EventSource, IDisposable):
         :param appDomain:
         """
     def TaskWaitContinuationComplete(self, TaskID: int) -> None:
-        """
-
-        :param TaskID:
-        """
+        """:param TaskID:"""
     def TaskWaitContinuationStarted(self, TaskID: int) -> None:
-        """
-
-        :param TaskID:
-        """
+        """:param TaskID:"""
     def TaskWaitEnd(
         self, OriginatingTaskSchedulerID: int, OriginatingTaskID: int, TaskID: int
     ) -> None:
-        """
-
-        :param OriginatingTaskSchedulerID:
+        """:param OriginatingTaskSchedulerID:
         :param OriginatingTaskID:
         :param TaskID:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TraceOperationBegin(self, TaskID: int, OperationName: str, RelatedContext: int) -> None:
-        """
-
-        :param TaskID:
+        """:param TaskID:
         :param OperationName:
         :param RelatedContext:
         """
     def TraceOperationEnd(self, TaskID: int, Status: AsyncCausalityStatus) -> None:
-        """
-
-        :param TaskID:
+        """:param TaskID:
         :param Status:
         """
     def TraceOperationRelation(self, TaskID: int, Relation: CausalityRelation) -> None:
-        """
-
-        :param TaskID:
+        """:param TaskID:
         :param Relation:
         """
     def TraceSynchronousWorkBegin(self, TaskID: int, Work: CausalitySynchronousWork) -> None:
-        """
-
-        :param TaskID:
+        """:param TaskID:
         :param Work:
         """
     def TraceSynchronousWorkEnd(self, Work: CausalitySynchronousWork) -> None:
-        """
-
-        :param Work:
-        """
+        """:param Work:"""
     @overload
     def Write(self, eventName: str) -> None:
-        """
-
-        :param eventName:
-        """
+        """:param eventName:"""
     @overload
     def Write(self, eventName: str, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
@@ -8644,9 +6432,7 @@ class TplEtwProvider(EventSource, IDisposable):
         relatedActivityId: Guid,
         data: T,
     ) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param activityId:
         :param relatedActivityId:
@@ -8693,26 +6479,15 @@ class TplEtwProvider(EventSource, IDisposable):
         def __init__(self):
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class TaskWaitBehavior(Enum):
         """"""
@@ -8746,70 +6521,39 @@ class TplEtwProvider(EventSource, IDisposable):
         def __init__(self):
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class UnobservedTaskExceptionEventArgs(EventArgs):
     """"""
 
     def __init__(self, exception: AggregateException):
-        """
-
-        :param exception:
-        """
+        """:param exception:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Observed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetObserved(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnwrapPromise(
     Generic[TResult],
@@ -8822,141 +6566,87 @@ class UnwrapPromise(
     """"""
 
     def __init__(self, outerTask: Task, lookForOce: bool):
-        """
-
-        :param outerTask:
+        """:param outerTask:
         :param lookForOce:
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CompletedTask(cls) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CreationOptions(self) -> TaskCreationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def CurrentId(cls) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def CurrentId(cls) -> int | None:
+        """:return:"""
     @property
     def Exception(self) -> AggregateException:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Factory(cls) -> TaskFactory:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFaulted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> TResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> TaskStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ConfigureAwait(self, continueOnCapturedContext: bool) -> ConfiguredTaskAwaitable:
-        """
-
-        :param continueOnCapturedContext:
+        """:param continueOnCapturedContext:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task]) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task, object], state: object) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task], continuationOptions: TaskContinuationOptions
+        self,
+        continuationAction: Action[Task],
+        continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(self, continuationAction: Action[Task], scheduler: TaskScheduler) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param scheduler:
         :return:
         """
@@ -8964,9 +6654,7 @@ class UnwrapPromise(
     def ContinueWith(
         self, continuationAction: Action[Task], cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :return:
         """
@@ -8976,9 +6664,7 @@ class UnwrapPromise(
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param continuationOptions:
         :return:
         """
@@ -8986,19 +6672,17 @@ class UnwrapPromise(
     def ContinueWith(
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param scheduler:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
+        self,
+        continuationFunction: Func[Task, TResult],
+        cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :return:
         """
@@ -9006,9 +6690,7 @@ class UnwrapPromise(
     def ContinueWith(
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :return:
         """
@@ -9019,20 +6701,19 @@ class UnwrapPromise(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param continuationOptions:
         :return:
         """
     @overload
     def ContinueWith(
-        self, continuationAction: Action[Task, object], state: object, scheduler: TaskScheduler
+        self,
+        continuationAction: Action[Task, object],
+        state: object,
+        scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param scheduler:
         :return:
@@ -9044,9 +6725,7 @@ class UnwrapPromise(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :return:
@@ -9058,9 +6737,7 @@ class UnwrapPromise(
         state: object,
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param continuationOptions:
         :return:
@@ -9072,9 +6749,7 @@ class UnwrapPromise(
         state: object,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param scheduler:
         :return:
@@ -9086,9 +6761,7 @@ class UnwrapPromise(
         state: object,
         cancellationToken: CancellationToken,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :return:
@@ -9101,9 +6774,7 @@ class UnwrapPromise(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -9117,9 +6788,7 @@ class UnwrapPromise(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param cancellationToken:
         :param continuationOptions:
         :param scheduler:
@@ -9134,9 +6803,7 @@ class UnwrapPromise(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task:
-        """
-
-        :param continuationAction:
+        """:param continuationAction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -9152,9 +6819,7 @@ class UnwrapPromise(
         continuationOptions: TaskContinuationOptions,
         scheduler: TaskScheduler,
     ) -> Task[TResult]:
-        """
-
-        :param continuationFunction:
+        """:param continuationFunction:
         :param state:
         :param cancellationToken:
         :param continuationOptions:
@@ -9164,89 +6829,54 @@ class UnwrapPromise(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetAwaiter(self) -> TaskAwaiter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Invoke(self, completingTask: Task) -> None:
-        """
-
-        :param completingTask:
-        """
+        """:param completingTask:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     @overload
     def RunSynchronously(self) -> None:
         """"""
     @overload
     def RunSynchronously(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, scheduler: TaskScheduler) -> None:
-        """
-
-        :param scheduler:
-        """
+        """:param scheduler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
@@ -9255,23 +6885,12 @@ class VoidTaskResult(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

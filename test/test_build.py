@@ -1,10 +1,10 @@
+from __future__ import annotations
+
 import unittest
+from collections.abc import Mapping
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
-from typing import Mapping
-from typing import Sequence
-from typing import Set
-from typing import Tuple
 
 from test_base import TestBase
 
@@ -3081,7 +3081,7 @@ class TestImports(TestBase):
         imports.add_type(CType(name="TypeA", namespace="NamespaceB"))
         imports.add_type(CType(name="TypeB", namespace="NamespaceB"))
 
-        expected: Set[str] = {
+        expected: set[str] = {
             "NamespaceA.TypeA",
             "NamespaceA.TypeB",
             "NamespaceB.TypeA",
@@ -3108,7 +3108,7 @@ class TestImports(TestBase):
         for type in types:
             imports.add_type(type)
 
-        expected: Set[str] = {"Namespace.Type", "Namespace.InnerA", "Namespace.InnerB"}
+        expected: set[str] = {"Namespace.Type", "Namespace.InnerA", "Namespace.InnerB"}
 
         self.assertEqual(expected, imports.types)
 
@@ -3130,7 +3130,7 @@ class TestImports(TestBase):
         for type in types:
             imports.add_type(type, inner=False)
 
-        expected: Set[str] = {"Namespace.Type"}
+        expected: set[str] = {"Namespace.Type"}
 
         self.assertEqual(expected, imports.types)
 
@@ -3145,8 +3145,8 @@ class TestImports(TestBase):
         for type in types:
             imports.add_type(type)
 
-        expected_types: Set[str] = {"typing.TypeVar"}
-        expected_type_vars: Set[str] = {"T", "U", "V"}
+        expected_types: set[str] = {"typing.TypeVar"}
+        expected_type_vars: set[str] = {"T", "U", "V"}
 
         self.assertEqual(expected_types, imports.types)
         self.assertEqual(expected_type_vars, imports.type_vars)
@@ -3200,9 +3200,9 @@ class TestImports(TestBase):
         lines: Sequence[str] = imports.build()
         expected: Sequence[str] = (
             "from typing import TypeVar",
-            f'T = TypeVar("T")',
-            f'U = TypeVar("U")',
-            f'V = TypeVar("V")',
+            'T = TypeVar("T")',
+            'U = TypeVar("U")',
+            'V = TypeVar("V")',
         )
 
         self.assertEqual(expected, lines)
@@ -3215,7 +3215,7 @@ class TestImports(TestBase):
         expected: Sequence[str] = (
             "from typing import Generic",
             "from typing import TypeVar",
-            f'T = TypeVar("T")',
+            'T = TypeVar("T")',
             "class EventType(Generic[T]):",
             "    def __iadd__(self, other: T): ...",
             "    def __isub__(self, other: T): ...",
@@ -4491,7 +4491,10 @@ class TestBuildClass(TestBase):
                 "Namespace:Class.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -4579,10 +4582,12 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -4592,10 +4597,12 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -4637,7 +4644,8 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -4647,10 +4655,12 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -4831,7 +4841,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = set()
+        expected: set[str] = set()
 
         self.assertEqual(expected, imports.types)
 
@@ -4855,7 +4865,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"abc.ABC"}
+        expected: set[str] = {"abc.ABC"}
 
         self.assertEqual(expected, imports.types)
 
@@ -4882,7 +4892,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Generic", "typing.TypeVar"}
+        expected: set[str] = {"typing.Generic", "typing.TypeVar"}
 
         self.assertEqual(expected, imports.types)
 
@@ -4906,7 +4916,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.Super"}
+        expected: set[str] = {"Namespace.Super"}
 
         self.assertEqual(expected, imports.types)
 
@@ -4933,7 +4943,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
+        expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
         self.assertEqual(expected, imports.types)
 
@@ -4968,7 +4978,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Final", "Namespace.FieldType"}
+        expected: set[str] = {"typing.Final", "Namespace.FieldType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -4997,7 +5007,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = set()
+        expected: set[str] = set()
 
         self.assertEqual(expected, imports.types)
 
@@ -5019,7 +5029,10 @@ class TestBuildClass(TestBase):
                 "Namespace:Class.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -5032,7 +5045,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.overload", "Namespace.Type"}
+        expected: set[str] = {"typing.overload", "Namespace.Type"}
 
         self.assertEqual(expected, imports.types)
 
@@ -5067,7 +5080,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType"}
+        expected: set[str] = {"Namespace.PropertyType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -5089,10 +5102,12 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5102,10 +5117,12 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5118,7 +5135,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
+        expected: set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -5140,7 +5157,8 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5150,10 +5168,12 @@ class TestBuildClass(TestBase):
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5166,7 +5186,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.overload", "Namespace.ParamType", "Namespace.MethodType"}
+        expected: set[str] = {
+            "typing.overload",
+            "Namespace.ParamType",
+            "Namespace.MethodType",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -5201,7 +5225,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.EventHandler"}
+        expected: set[str] = {"Namespace.EventHandler"}
 
         self.assertEqual(expected, imports.types)
 
@@ -5281,7 +5305,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Callable", "System.Enum", "Namespace.DelegateType"}
+        expected: set[str] = {
+            "typing.Callable",
+            "System.Enum",
+            "Namespace.DelegateType",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -5557,7 +5585,10 @@ class TestBuildStruct(TestBase):
                 "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -5645,10 +5676,12 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5658,10 +5691,12 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5703,7 +5738,8 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5713,10 +5749,12 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -5897,7 +5935,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = set()
+        expected: set[str] = set()
 
         self.assertEqual(expected, imports.types)
 
@@ -5921,7 +5959,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"abc.ABC"}
+        expected: set[str] = {"abc.ABC"}
 
         self.assertEqual(expected, imports.types)
 
@@ -5948,7 +5986,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Generic", "typing.TypeVar"}
+        expected: set[str] = {"typing.Generic", "typing.TypeVar"}
 
         self.assertEqual(expected, imports.types)
 
@@ -5972,7 +6010,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.Super"}
+        expected: set[str] = {"Namespace.Super"}
 
         self.assertEqual(expected, imports.types)
 
@@ -5999,7 +6037,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
+        expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6034,7 +6072,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Final", "Namespace.FieldType"}
+        expected: set[str] = {"typing.Final", "Namespace.FieldType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6063,7 +6101,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = set()
+        expected: set[str] = set()
 
         self.assertEqual(expected, imports.types)
 
@@ -6085,7 +6123,10 @@ class TestBuildStruct(TestBase):
                 "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -6098,7 +6139,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.overload", "Namespace.Type"}
+        expected: set[str] = {"typing.overload", "Namespace.Type"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6133,7 +6174,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType"}
+        expected: set[str] = {"Namespace.PropertyType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6155,10 +6196,12 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6168,10 +6211,12 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6184,7 +6229,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
+        expected: set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6206,7 +6251,8 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6216,10 +6262,12 @@ class TestBuildStruct(TestBase):
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6232,7 +6280,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.overload", "Namespace.MethodType", "Namespace.ParamType"}
+        expected: set[str] = {
+            "typing.overload",
+            "Namespace.MethodType",
+            "Namespace.ParamType",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -6267,7 +6319,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.EventHandler"}
+        expected: set[str] = {"Namespace.EventHandler"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6347,7 +6399,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Callable", "Namespace.DelegateType", "System.Enum"}
+        expected: set[str] = {
+            "typing.Callable",
+            "Namespace.DelegateType",
+            "System.Enum",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -6561,10 +6617,12 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6574,10 +6632,12 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6616,7 +6676,8 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6626,10 +6687,12 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6801,7 +6864,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = set()
+        expected: set[str] = set()
 
         self.assertEqual(expected, imports.types)
 
@@ -6825,7 +6888,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Generic", "typing.TypeVar"}
+        expected: set[str] = {"typing.Generic", "typing.TypeVar"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6849,7 +6912,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
+        expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6881,7 +6944,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Final", "Namespace.FieldType"}
+        expected: set[str] = {"typing.Final", "Namespace.FieldType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6913,7 +6976,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType"}
+        expected: set[str] = {"Namespace.PropertyType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6932,10 +6995,12 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6945,10 +7010,12 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6961,7 +7028,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
+        expected: set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -6980,7 +7047,8 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -6990,10 +7058,12 @@ class TestBuildInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
+                            name="param0",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                         CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
+                            name="param1",
+                            type=CType(name="ParamType", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
@@ -7006,7 +7076,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.overload", "Namespace.ParamType", "Namespace.MethodType"}
+        expected: set[str] = {
+            "typing.overload",
+            "Namespace.ParamType",
+            "Namespace.MethodType",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -7038,7 +7112,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.EventHandler"}
+        expected: set[str] = {"Namespace.EventHandler"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7115,7 +7189,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Callable", "Namespace.DelegateType", "System.Enum"}
+        expected: set[str] = {
+            "typing.Callable",
+            "Namespace.DelegateType",
+            "System.Enum",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -7208,7 +7286,7 @@ class TestBuildEnum(TestBase):
         doc: Doc = Doc({})
 
         build_enum(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"System.Enum"}
+        expected: set[str] = {"System.Enum"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7223,7 +7301,7 @@ class TestBuildEnum(TestBase):
         doc: Doc = Doc({})
 
         build_enum(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"System.Enum"}
+        expected: set[str] = {"System.Enum"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7349,7 +7427,11 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc({})
 
         build_delegate(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Callable", "Namespace.ReturnType", "Namespace.ParamType"}
+        expected: set[str] = {
+            "typing.Callable",
+            "Namespace.ReturnType",
+            "Namespace.ParamType",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -7365,7 +7447,7 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc({})
 
         build_delegate(type_def=type_def, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Callable", "Namespace.ReturnType"}
+        expected: set[str] = {"typing.Callable", "Namespace.ReturnType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7443,7 +7525,7 @@ class TestBuildDelegate(TestBase):
 
 class TestBuildType(TestBase):
     def test_build(self) -> None:
-        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+        tests: Sequence[tuple[CType, str, set[str]]] = (
             (CType(name="Boolean", namespace="System"), "Boolean", {"System.Boolean"}),
             (CType(name="SByte", namespace="System"), "SByte", {"System.SByte"}),
             (CType(name="Byte", namespace="System"), "Byte", {"System.Byte"}),
@@ -7465,7 +7547,7 @@ class TestBuildType(TestBase):
 
             type: CType = test[0]
             expected: str = test[1]
-            expected_types: Set[str] = test[2]
+            expected_types: set[str] = test[2]
 
             with self.subTest(type=type.name):
                 result: str = build_type(type, imports)
@@ -7474,7 +7556,7 @@ class TestBuildType(TestBase):
                 self.assertEqual(expected_types, imports.types)
 
     def test_build_nullable(self) -> None:
-        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+        tests: Sequence[tuple[CType, str, set[str]]] = (
             (
                 CType(name="Boolean", namespace="System", nullable=True),
                 "Optional[Boolean]",
@@ -7556,7 +7638,7 @@ class TestBuildType(TestBase):
 
             type: CType = test[0]
             expected: str = test[1]
-            expected_types: Set[str] = test[2]
+            expected_types: set[str] = test[2]
 
             with self.subTest(type=type.name):
                 result: str = build_type(type, imports)
@@ -7565,7 +7647,7 @@ class TestBuildType(TestBase):
                 self.assertEqual(expected_types, imports.types)
 
     def test_build_convert(self) -> None:
-        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+        tests: Sequence[tuple[CType, str, set[str]]] = (
             (CType(name="Boolean", namespace="System"), "bool", set()),
             (CType(name="SByte", namespace="System"), "int", set()),
             (CType(name="Byte", namespace="System"), "int", set()),
@@ -7586,7 +7668,7 @@ class TestBuildType(TestBase):
 
             type: CType = test[0]
             expected: str = test[1]
-            expected_types: Set[str] = test[2]
+            expected_types: set[str] = test[2]
 
             with self.subTest(type=type.name):
                 result: str = build_type(type, imports, convert=True)
@@ -7595,7 +7677,7 @@ class TestBuildType(TestBase):
                 self.assertEqual(expected_types, imports.types)
 
     def test_build_convert_nullable(self) -> None:
-        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+        tests: Sequence[tuple[CType, str, set[str]]] = (
             (
                 CType(name="Boolean", namespace="System", nullable=True),
                 "Optional[bool]",
@@ -7667,7 +7749,7 @@ class TestBuildType(TestBase):
 
             type: CType = test[0]
             expected: str = test[1]
-            expected_types: Set[str] = test[2]
+            expected_types: set[str] = test[2]
 
             with self.subTest(type=type.name):
                 result: str = build_type(type, imports, convert=True)
@@ -7776,7 +7858,7 @@ class TestBuildField(TestBase):
         doc: Doc = Doc({})
 
         build_field(field=field, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Final", "Namespace.ReturnType"}
+        expected: set[str] = {"typing.Final", "Namespace.ReturnType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7791,7 +7873,7 @@ class TestBuildField(TestBase):
         doc: Doc = Doc({})
 
         build_field(field=field, imports=imports, doc=doc)
-        expected: Set[str] = {"typing.Final", "typing.ClassVar", "Namespace.ReturnType"}
+        expected: set[str] = {"typing.Final", "typing.ClassVar", "Namespace.ReturnType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7953,7 +8035,7 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        expected: Set[str] = {"Namespace.Param"}
+        expected: set[str] = {"Namespace.Param"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7974,7 +8056,7 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        expected: Set[str] = {"typing.overload", "Namespace.Param"}
+        expected: set[str] = {"typing.overload", "Namespace.Param"}
 
         self.assertEqual(expected, imports.types)
 
@@ -7992,7 +8074,7 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        expected: Set[str] = set()
+        expected: set[str] = set()
 
         self.assertEqual(expected, imports.types)
 
@@ -8010,7 +8092,7 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        expected: Set[str] = {"typing.overload"}
+        expected: set[str] = {"typing.overload"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8250,7 +8332,7 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType"}
+        expected: set[str] = {"Namespace.PropertyType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8265,7 +8347,7 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType"}
+        expected: set[str] = {"Namespace.PropertyType"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8280,7 +8362,11 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType", "typing.ClassVar", "typing.Final"}
+        expected: set[str] = {
+            "Namespace.PropertyType",
+            "typing.ClassVar",
+            "typing.Final",
+        }
 
         self.assertEqual(expected, imports.types)
 
@@ -8296,7 +8382,7 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType", "typing.ClassVar"}
+        expected: set[str] = {"Namespace.PropertyType", "typing.ClassVar"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8808,7 +8894,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"Namespace.Param", "Namespace.Return"}
+        expected: set[str] = {"Namespace.Param", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8827,7 +8913,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"Namespace.Param", "Namespace.Return"}
+        expected: set[str] = {"Namespace.Param", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8845,7 +8931,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
+        expected: set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8864,7 +8950,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
+        expected: set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8879,7 +8965,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"Namespace.Return"}
+        expected: set[str] = {"Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8895,7 +8981,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"Namespace.Return"}
+        expected: set[str] = {"Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8910,7 +8996,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {"typing.overload", "Namespace.Return"}
+        expected: set[str] = {"typing.overload", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8926,7 +9012,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {"typing.overload", "Namespace.Return"}
+        expected: set[str] = {"typing.overload", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8947,7 +9033,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
+        expected: set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8969,7 +9055,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
+        expected: set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8990,7 +9076,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {
+        expected: set[str] = {
             "typing.overload",
             "typing.Tuple",
             "Namespace.Param",
@@ -9017,7 +9103,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {
+        expected: set[str] = {
             "typing.overload",
             "typing.Tuple",
             "Namespace.Param",
@@ -9040,7 +9126,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"typing.Tuple", "Namespace.Return"}
+        expected: set[str] = {"typing.Tuple", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -9059,7 +9145,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        expected: Set[str] = {"typing.Tuple", "Namespace.Return"}
+        expected: set[str] = {"typing.Tuple", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -9077,7 +9163,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
+        expected: set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -9096,7 +9182,7 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        expected: Set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
+        expected: set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
 
         self.assertEqual(expected, imports.types)
 
@@ -9761,7 +9847,7 @@ class TestBuildEvent(TestBase):
         doc: Doc = Doc({})
 
         build_event(event=event, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.Event"}
+        expected: set[str] = {"Namespace.Event"}
 
         self.assertEqual(expected, imports.types)
 

@@ -1,10 +1,7 @@
-from __future__ import annotations
-
 from abc import ABC
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
-from typing import Iterator
-from typing import Tuple
 from typing import overload
 
 from System import Array
@@ -34,7 +31,6 @@ from System.IO import Stream
 from System.IO import UnmanagedMemoryStream
 from System.Reflection import Assembly
 from System.Reflection import MethodBase
-from System.Resources.ResourceManager import ResourceManagerMediator
 from System.Runtime.InteropServices import _Attribute
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import ISerializable
@@ -51,26 +47,20 @@ class FastResourceComparer(
         """"""
     @overload
     def Compare(self, x: object, y: object) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     @overload
     def Compare(self, x: str, y: str) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     @classmethod
     @overload
     def CompareOrdinal(cls, bytes: Array[int], aCharLength: int, b: str) -> int:
-        """
-
-        :param bytes:
+        """:param bytes:
         :param aCharLength:
         :param b:
         :return:
@@ -78,91 +68,59 @@ class FastResourceComparer(
     @classmethod
     @overload
     def CompareOrdinal(cls, a: str, bytes: Array[int], bCharLength: int) -> int:
-        """
-
-        :param a:
+        """:param a:
         :param bytes:
         :param bCharLength:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, x: object, y: object) -> bool:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     @overload
     def Equals(self, x: str, y: str) -> bool:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self, obj: object) -> int:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetHashCode(self, obj: str) -> int:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileBasedResourceGroveler(Object, IResourceGroveler):
     """"""
 
     def __init__(self, mediator: ResourceManager.ResourceManagerMediator):
-        """
-
-        :param mediator:
-        """
+        """:param mediator:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GrovelForResourceSet(
         self,
         culture: CultureInfo,
@@ -171,9 +129,7 @@ class FileBasedResourceGroveler(Object, IResourceGroveler):
         createIfNotExists: bool,
         stackMark: StackCrawlMark,
     ) -> ResourceSet:
-        """
-
-        :param culture:
+        """:param culture:
         :param localResourceSets:
         :param tryParents:
         :param createIfNotExists:
@@ -181,17 +137,12 @@ class FileBasedResourceGroveler(Object, IResourceGroveler):
         :return:
         """
     def HasNeutralResources(self, culture: CultureInfo, defaultResName: str) -> bool:
-        """
-
-        :param culture:
+        """:param culture:
         :param defaultResName:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IResourceGroveler:
     """"""
@@ -204,9 +155,7 @@ class IResourceGroveler:
         createIfNotExists: bool,
         stackMark: StackCrawlMark,
     ) -> ResourceSet:
-        """
-
-        :param culture:
+        """:param culture:
         :param localResourceSets:
         :param tryParents:
         :param createIfNotExists:
@@ -214,9 +163,7 @@ class IResourceGroveler:
         :return:
         """
     def HasNeutralResources(self, culture: CultureInfo, defaultResName: str) -> bool:
-        """
-
-        :param culture:
+        """:param culture:
         :param defaultResName:
         :return:
         """
@@ -229,38 +176,26 @@ class IResourceReader(IEnumerable, IDisposable):
     def Dispose(self) -> None:
         """"""
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IResourceWriter(IDisposable):
     """"""
 
     @overload
     def AddResource(self, name: str, value: Array[int]) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddResource(self, name: str, value: object) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddResource(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     def Close(self) -> None:
@@ -274,26 +209,15 @@ class ManifestBasedResourceGroveler(Object, IResourceGroveler):
     """"""
 
     def __init__(self, mediator: ResourceManager.ResourceManagerMediator):
-        """
-
-        :param mediator:
-        """
+        """:param mediator:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GrovelForResourceSet(
         self,
         culture: CultureInfo,
@@ -302,9 +226,7 @@ class ManifestBasedResourceGroveler(Object, IResourceGroveler):
         createIfNotExists: bool,
         stackMark: StackCrawlMark,
     ) -> ResourceSet:
-        """
-
-        :param culture:
+        """:param culture:
         :param localResourceSets:
         :param tryParents:
         :param createIfNotExists:
@@ -312,17 +234,12 @@ class ManifestBasedResourceGroveler(Object, IResourceGroveler):
         :return:
         """
     def HasNeutralResources(self, culture: CultureInfo, defaultResName: str) -> bool:
-        """
-
-        :param culture:
+        """:param culture:
         :param defaultResName:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MissingManifestResourceException(SystemException, _Exception, ISerializable):
     """"""
@@ -332,138 +249,80 @@ class MissingManifestResourceException(SystemException, _Exception, ISerializabl
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MissingSatelliteAssemblyException(SystemException, _Exception, ISerializable):
     """"""
@@ -473,225 +332,133 @@ class MissingSatelliteAssemblyException(SystemException, _Exception, ISerializab
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @overload
     def __init__(self, message: str, cultureName: str):
-        """
-
-        :param message:
+        """:param message:
         :param cultureName:
         """
     @property
     def CultureName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NeutralResourcesLanguageAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, cultureName: str):
-        """
-
-        :param cultureName:
-        """
+        """:param cultureName:"""
     @overload
     def __init__(self, cultureName: str, location: UltimateResourceFallbackLocation):
-        """
-
-        :param cultureName:
+        """:param cultureName:
         :param location:
         """
     @property
     def CultureName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Location(self) -> UltimateResourceFallbackLocation:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -703,9 +470,7 @@ class NeutralResourcesLanguageAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -715,21 +480,13 @@ class NeutralResourcesLanguageAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PRIExceptionInfo(Object):
     """"""
@@ -747,93 +504,51 @@ class PRIExceptionInfo(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceFallbackManager(Object, IEnumerable[CultureInfo], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[CultureInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceLocator(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceManager(Object):
     """"""
@@ -850,291 +565,183 @@ class ResourceManager(Object):
     """
     @overload
     def __init__(self, resourceSource: Type):
-        """
-
-        :param resourceSource:
-        """
+        """:param resourceSource:"""
     @overload
     def __init__(self, baseName: str, assembly: Assembly):
-        """
-
-        :param baseName:
+        """:param baseName:
         :param assembly:
         """
     @overload
     def __init__(self, baseName: str, assembly: Assembly, usingResourceSet: Type):
-        """
-
-        :param baseName:
+        """:param baseName:
         :param assembly:
         :param usingResourceSet:
         """
     @property
     def BaseName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IgnoreCase(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IgnoreCase.setter
     def IgnoreCase(self, value: bool) -> None: ...
     @property
     def ResourceSetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def CreateFileBasedResourceManager(
         cls, baseName: str, resourceDir: str, usingResourceSet: Type
     ) -> ResourceManager:
-        """
-
-        :param baseName:
+        """:param baseName:
         :param resourceDir:
         :param usingResourceSet:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObject(self, name: str) -> object:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetObject(self, name: str, culture: CultureInfo) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param culture:
         :return:
         """
     def GetResourceSet(
         self, culture: CultureInfo, createIfNotExists: bool, tryParents: bool
     ) -> ResourceSet:
-        """
-
-        :param culture:
+        """:param culture:
         :param createIfNotExists:
         :param tryParents:
         :return:
         """
     @overload
     def GetStream(self, name: str) -> UnmanagedMemoryStream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetStream(self, name: str, culture: CultureInfo) -> UnmanagedMemoryStream:
-        """
-
-        :param name:
+        """:param name:
         :param culture:
         :return:
         """
     @overload
     def GetString(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetString(self, name: str, culture: CultureInfo) -> str:
-        """
-
-        :param name:
+        """:param name:
         :param culture:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReleaseAllResources(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceReader(Object, IEnumerable, IResourceReader, IDisposable):
     """"""
 
     @overload
     def __init__(self, stream: Stream):
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResourceData(
         self, resourceName: str, resourceType: str, resourceData: int
-    ) -> Tuple[None, str, int]:
-        """
-
-        :param resourceName:
+    ) -> tuple[None, str, int]:
+        """:param resourceName:
         :param resourceType:
         :param resourceData:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceSet(Object, IEnumerable, IDisposable):
     """"""
 
     @overload
     def __init__(self, stream: Stream):
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
     @overload
     def __init__(self, reader: IResourceReader):
-        """
-
-        :param reader:
-        """
+        """:param reader:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetDefaultReader(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDefaultWriter(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObject(self, name: str) -> object:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetObject(self, name: str, ignoreCase: bool) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     @overload
     def GetString(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetString(self, name: str, ignoreCase: bool) -> str:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceTypeCode(Enum):
     """"""
@@ -1187,64 +794,43 @@ class ResourceWriter(Object, IResourceWriter, IDisposable):
 
     @overload
     def __init__(self, stream: Stream):
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @property
     def TypeNameConverter(self) -> Func[Type, str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TypeNameConverter.setter
     def TypeNameConverter(self, value: Func[Type, str]) -> None: ...
     @overload
     def AddResource(self, name: str, value: Stream) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddResource(self, name: str, value: Array[int]) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddResource(self, name: str, value: object) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddResource(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddResource(self, name: str, value: Stream, closeAfterWrite: bool) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         :param closeAfterWrite:
         """
     def AddResourceData(self, name: str, typeName: str, serializedData: Array[int]) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param typeName:
         :param serializedData:
         """
@@ -1253,28 +839,17 @@ class ResourceWriter(Object, IResourceWriter, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Generate(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RuntimeResourceSet(ResourceSet, IEnumerable, IDisposable):
     """"""
@@ -1284,136 +859,81 @@ class RuntimeResourceSet(ResourceSet, IEnumerable, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetDefaultReader(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDefaultWriter(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObject(self, name: str) -> object:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetObject(self, name: str, ignoreCase: bool) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     @overload
     def GetString(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetString(self, name: str, ignoreCase: bool) -> str:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SatelliteContractVersionAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, version: str):
-        """
-
-        :param version:
-        """
+        """:param version:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Version(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1425,9 +945,7 @@ class SatelliteContractVersionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1437,21 +955,13 @@ class SatelliteContractVersionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UltimateResourceFallbackLocation(Enum):
     """"""
@@ -1468,55 +978,35 @@ class WindowsRuntimeResourceManagerBase(Object):
         """"""
     @property
     def GlobalResourceContextBestFitCultureInfo(self) -> CultureInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetString(self, stringName: str, startingCulture: str, neutralResourcesCulture: str) -> str:
-        """
-
-        :param stringName:
+        """:param stringName:
         :param startingCulture:
         :param neutralResourcesCulture:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Initialize(
         self, libpath: str, reswFilename: str, exceptionInfo: PRIExceptionInfo
-    ) -> Tuple[bool, PRIExceptionInfo]:
-        """
-
-        :param libpath:
+    ) -> tuple[bool, PRIExceptionInfo]:
+        """:param libpath:
         :param reswFilename:
         :param exceptionInfo:
         :return:
         """
     def SetGlobalResourceContextDefaultCulture(self, ci: CultureInfo) -> bool:
-        """
-
-        :param ci:
+        """:param ci:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class __HResults(ABC, Object):
     """"""
@@ -1527,23 +1017,12 @@ class __HResults(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

@@ -1,9 +1,6 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import ClassVar
 from typing import Final
-from typing import Tuple
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeFileHandle
@@ -43,113 +40,62 @@ class INormalizeForIsolatedStorage:
     """"""
 
     def Normalize(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IsolatedStorage(ABC, MarshalByRefObject):
     """"""
 
     @property
     def ApplicationIdentity(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyIdentity(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AvailableFreeSpace(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DomainIdentity(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Quota(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Scope(self) -> IsolatedStorageScope:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UsedSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IncreaseQuotaTo(self, newQuotaSize: int) -> bool:
-        """
-
-        :param newQuotaSize:
+        """:param newQuotaSize:
         :return:
         """
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IsolatedStorageException(Exception, _Exception, ISerializable):
     """"""
@@ -159,354 +105,208 @@ class IsolatedStorageException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IsolatedStorageFile(IsolatedStorage, IDisposable):
     """"""
 
     @property
     def ApplicationIdentity(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyIdentity(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AvailableFreeSpace(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DomainIdentity(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def IsEnabled(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Quota(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Scope(self) -> IsolatedStorageScope:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UsedSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     @overload
     def CopyFile(self, sourceFileName: str, destinationFileName: str) -> None:
-        """
-
-        :param sourceFileName:
+        """:param sourceFileName:
         :param destinationFileName:
         """
     @overload
     def CopyFile(self, sourceFileName: str, destinationFileName: str, overwrite: bool) -> None:
-        """
-
-        :param sourceFileName:
+        """:param sourceFileName:
         :param destinationFileName:
         :param overwrite:
         """
     def CreateDirectory(self, dir: str) -> None:
-        """
-
-        :param dir:
-        """
+        """:param dir:"""
     def CreateFile(self, path: str) -> IsolatedStorageFileStream:
-        """
-
-        :param path:
+        """:param path:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def DeleteDirectory(self, dir: str) -> None:
-        """
-
-        :param dir:
-        """
+        """:param dir:"""
     def DeleteFile(self, file: str) -> None:
-        """
-
-        :param file:
-        """
+        """:param file:"""
     def DirectoryExists(self, path: str) -> bool:
-        """
-
-        :param path:
+        """:param path:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FileExists(self, path: str) -> bool:
-        """
-
-        :param path:
+        """:param path:
         :return:
         """
     def GetCreationTime(self, path: str) -> DateTimeOffset:
-        """
-
-        :param path:
+        """:param path:
         :return:
         """
     @overload
     def GetDirectoryNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetDirectoryNames(self, searchPattern: str) -> Array[str]:
-        """
-
-        :param searchPattern:
+        """:param searchPattern:
         :return:
         """
     @classmethod
     def GetEnumerator(cls, scope: IsolatedStorageScope) -> IEnumerator:
-        """
-
-        :param scope:
+        """:param scope:
         :return:
         """
     @overload
     def GetFileNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetFileNames(self, searchPattern: str) -> Array[str]:
-        """
-
-        :param searchPattern:
+        """:param searchPattern:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLastAccessTime(self, path: str) -> DateTimeOffset:
-        """
-
-        :param path:
+        """:param path:
         :return:
         """
     def GetLastWriteTime(self, path: str) -> DateTimeOffset:
-        """
-
-        :param path:
+        """:param path:
         :return:
         """
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetMachineStoreForApplication(cls) -> IsolatedStorageFile:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetMachineStoreForAssembly(cls) -> IsolatedStorageFile:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetMachineStoreForDomain(cls) -> IsolatedStorageFile:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetStore(
         cls, scope: IsolatedStorageScope, applicationIdentity: object
     ) -> IsolatedStorageFile:
-        """
-
-        :param scope:
+        """:param scope:
         :param applicationIdentity:
         :return:
         """
@@ -515,20 +315,19 @@ class IsolatedStorageFile(IsolatedStorage, IDisposable):
     def GetStore(
         cls, scope: IsolatedStorageScope, applicationEvidenceType: Type
     ) -> IsolatedStorageFile:
-        """
-
-        :param scope:
+        """:param scope:
         :param applicationEvidenceType:
         :return:
         """
     @classmethod
     @overload
     def GetStore(
-        cls, scope: IsolatedStorageScope, domainIdentity: object, assemblyIdentity: object
+        cls,
+        scope: IsolatedStorageScope,
+        domainIdentity: object,
+        assemblyIdentity: object,
     ) -> IsolatedStorageFile:
-        """
-
-        :param scope:
+        """:param scope:
         :param domainIdentity:
         :param assemblyIdentity:
         :return:
@@ -536,11 +335,12 @@ class IsolatedStorageFile(IsolatedStorage, IDisposable):
     @classmethod
     @overload
     def GetStore(
-        cls, scope: IsolatedStorageScope, domainEvidenceType: Type, assemblyEvidenceType: Type
+        cls,
+        scope: IsolatedStorageScope,
+        domainEvidenceType: Type,
+        assemblyEvidenceType: Type,
     ) -> IsolatedStorageFile:
-        """
-
-        :param scope:
+        """:param scope:
         :param domainEvidenceType:
         :param assemblyEvidenceType:
         :return:
@@ -555,9 +355,7 @@ class IsolatedStorageFile(IsolatedStorage, IDisposable):
         assemblyEvidence: Evidence,
         assemblyEvidenceType: Type,
     ) -> IsolatedStorageFile:
-        """
-
-        :param scope:
+        """:param scope:
         :param domainEvidence:
         :param domainEvidenceType:
         :param assemblyEvidence:
@@ -565,70 +363,42 @@ class IsolatedStorageFile(IsolatedStorage, IDisposable):
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetUserStoreForApplication(cls) -> IsolatedStorageFile:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetUserStoreForAssembly(cls) -> IsolatedStorageFile:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetUserStoreForDomain(cls) -> IsolatedStorageFile:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetUserStoreForSite(cls) -> IsolatedStorageFile:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IncreaseQuotaTo(self, newQuotaSize: int) -> bool:
-        """
-
-        :param newQuotaSize:
+        """:param newQuotaSize:
         :return:
         """
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveDirectory(self, sourceDirectoryName: str, destinationDirectoryName: str) -> None:
-        """
-
-        :param sourceDirectoryName:
+        """:param sourceDirectoryName:
         :param destinationDirectoryName:
         """
     def MoveFile(self, sourceFileName: str, destinationFileName: str) -> None:
-        """
-
-        :param sourceFileName:
+        """:param sourceFileName:
         :param destinationFileName:
         """
     @overload
     def OpenFile(self, path: str, mode: FileMode) -> IsolatedStorageFileStream:
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :return:
         """
     @overload
     def OpenFile(self, path: str, mode: FileMode, access: FileAccess) -> IsolatedStorageFileStream:
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         :return:
@@ -637,9 +407,7 @@ class IsolatedStorageFile(IsolatedStorage, IDisposable):
     def OpenFile(
         self, path: str, mode: FileMode, access: FileAccess, share: FileShare
     ) -> IsolatedStorageFileStream:
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         :param share:
@@ -651,94 +419,61 @@ class IsolatedStorageFile(IsolatedStorage, IDisposable):
     @classmethod
     @overload
     def Remove(cls, scope: IsolatedStorageScope) -> None:
-        """
-
-        :param scope:
-        """
+        """:param scope:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IsolatedStorageFileEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IsolatedStorageFileStream(FileStream, IDisposable):
     """"""
 
     @overload
     def __init__(self, path: str, mode: FileMode):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         """
     @overload
     def __init__(self, path: str, mode: FileMode, isf: IsolatedStorageFile):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param isf:
         """
     @overload
     def __init__(self, path: str, mode: FileMode, access: FileAccess):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         """
     @overload
     def __init__(self, path: str, mode: FileMode, access: FileAccess, isf: IsolatedStorageFile):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         :param isf:
         """
     @overload
     def __init__(self, path: str, mode: FileMode, access: FileAccess, share: FileShare):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         :param share:
@@ -752,9 +487,7 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
         share: FileShare,
         isf: IsolatedStorageFile,
     ):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         :param share:
@@ -762,11 +495,14 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
         """
     @overload
     def __init__(
-        self, path: str, mode: FileMode, access: FileAccess, share: FileShare, bufferSize: int
+        self,
+        path: str,
+        mode: FileMode,
+        access: FileAccess,
+        share: FileShare,
+        bufferSize: int,
     ):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         :param share:
@@ -782,9 +518,7 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
         bufferSize: int,
         isf: IsolatedStorageFile,
     ):
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param access:
         :param share:
@@ -793,88 +527,55 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAsync(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafeFileHandle(self) -> SafeFileHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -882,11 +583,14 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -897,29 +601,20 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -927,36 +622,25 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -964,149 +648,101 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
         """"""
     @overload
     def Flush(self, flushToDisk: bool) -> None:
-        """
-
-        :param flushToDisk:
-        """
+        """:param flushToDisk:"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetAccessControl(self) -> FileSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Lock(self, position: int, length: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param length:
         """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetAccessControl(self, fileSecurity: FileSecurity) -> None:
-        """
-
-        :param fileSecurity:
-        """
+        """:param fileSecurity:"""
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Unlock(self, position: int, length: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param length:
         """
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class IsolatedStorageScope(Enum):
     """"""
@@ -1137,150 +773,84 @@ class IsolatedStorageSecurityState(SecurityState):
 
     @property
     def Options(self) -> IsolatedStorageSecurityOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Quota(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Quota.setter
     def Quota(self, value: int) -> None: ...
     @property
     def UsedSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def EnsureState(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsStateAvailable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeIsolatedStorageFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TwoLevelFileEnumerator(Object, IEnumerator):
     """"""
 
     def __init__(self, root: str):
-        """
-
-        :param root:
-        """
+        """:param root:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TwoPaths(Object):
     """"""
@@ -1298,26 +868,15 @@ class TwoPaths(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class __HResults(ABC, Object):
     """"""
@@ -1328,23 +887,12 @@ class __HResults(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Generic
 from typing import TypeVar
 from typing import overload
@@ -33,108 +31,63 @@ class SoundPlayer(Component, IComponent, ISerializable, IDisposable):
         """"""
     @overload
     def __init__(self, stream: Stream):
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
     @overload
     def __init__(self, soundLocation: str):
-        """
-
-        :param soundLocation:
-        """
+        """:param soundLocation:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLoadCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LoadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LoadTimeout.setter
     def LoadTimeout(self, value: int) -> None: ...
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def SoundLocation(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SoundLocation.setter
     def SoundLocation(self, value: str) -> None: ...
     @property
     def Stream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Stream.setter
     def Stream(self, value: Stream) -> None: ...
     @property
     def Tag(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Tag.setter
     def Tag(self, value: object) -> None: ...
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Load(self) -> None:
         """"""
     def LoadAsync(self) -> None:
@@ -148,10 +101,7 @@ class SoundPlayer(Component, IComponent, ISerializable, IDisposable):
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
     LoadCompleted: EventType[AsyncCompletedEventHandler] = ...
@@ -165,28 +115,17 @@ class SystemSound(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Play(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemSounds(Object):
     """"""
@@ -194,56 +133,30 @@ class SystemSounds(Object):
     @classmethod
     @property
     def Asterisk(cls) -> SystemSound:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Beep(cls) -> SystemSound:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Exclamation(cls) -> SystemSound:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Hand(cls) -> SystemSound:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Question(cls) -> SystemSound:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import TypeVar
 from typing import overload
@@ -20,428 +18,250 @@ class CriticalHandleMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CriticalHandleZeroOrMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeAccessTokenHandle(SafeHandle, IDisposable):
     """"""
 
     def __init__(self, handle: IntPtr):
-        """
-
-        :param handle:
-        """
+        """:param handle:"""
     @classmethod
     @property
     def InvalidHandle(cls) -> SafeAccessTokenHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeAxlBufferHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeBCryptAlgorithmHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeBCryptHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeBCryptKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCapiHandleBase(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCapiHashHandle(SafeCapiHandleBase, IDisposable):
     """"""
@@ -449,430 +269,249 @@ class SafeCapiHashHandle(SafeCapiHandleBase, IDisposable):
     @classmethod
     @property
     def InvalidHandle(cls) -> SafeCapiHashHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCapiKeyHandle(SafeCapiHandleBase, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Duplicate(self) -> SafeCspHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeEventLogReadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeEventLogWriteHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool):
-        """
-
-        :param preexistingHandle:
+        """:param preexistingHandle:
         :param ownsHandle:
         """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFileMapViewHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFileMappingHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def SetHandleAsInvalid(self) -> None:
@@ -880,334 +519,193 @@ class SafeFileMappingHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFindHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeHandleMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeHandleZeroOrMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLocalAllocHandle(SafeBuffer, IDisposable):
     """"""
 
     @property
     def ByteLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcquirePointer(self, pointer: int) -> None:
-        """
-
-        :param pointer:
-        """
+        """:param pointer:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Initialize(self, numElements: int) -> None:
-        """
-
-        :param numElements:
-        """
+        """:param numElements:"""
     @overload
     def Initialize(self, numBytes: int) -> None:
-        """
-
-        :param numBytes:
-        """
+        """:param numBytes:"""
     @overload
     def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
-        """
-
-        :param numElements:
+        """:param numElements:
         :param sizeOfEachElement:
         """
     def Read(self, byteOffset: int) -> T:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :return:
         """
     def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1217,20 +715,13 @@ class SafeLocalAllocHandle(SafeBuffer, IDisposable):
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, byteOffset: int, value: T) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param value:
         """
     def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1241,198 +732,114 @@ class SafeLocalMemHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLsaLogonProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
     """"""
 
     @property
     def ByteLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcquirePointer(self, pointer: int) -> None:
-        """
-
-        :param pointer:
-        """
+        """:param pointer:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Initialize(self, numElements: int) -> None:
-        """
-
-        :param numElements:
-        """
+        """:param numElements:"""
     @overload
     def Initialize(self, numBytes: int) -> None:
-        """
-
-        :param numBytes:
-        """
+        """:param numBytes:"""
     @overload
     def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
-        """
-
-        :param numElements:
+        """:param numElements:
         :param sizeOfEachElement:
         """
     def Read(self, byteOffset: int) -> T:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :return:
         """
     def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1442,20 +849,13 @@ class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, byteOffset: int, value: T) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param value:
         """
     def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1466,143 +866,82 @@ class SafeLsaPolicyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
     """"""
 
     @property
     def ByteLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcquirePointer(self, pointer: int) -> None:
-        """
-
-        :param pointer:
-        """
+        """:param pointer:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Initialize(self, numElements: int) -> None:
-        """
-
-        :param numElements:
-        """
+        """:param numElements:"""
     @overload
     def Initialize(self, numBytes: int) -> None:
-        """
-
-        :param numBytes:
-        """
+        """:param numBytes:"""
     @overload
     def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
-        """
-
-        :param numElements:
+        """:param numElements:
         :param sizeOfEachElement:
         """
     def Read(self, byteOffset: int) -> T:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :return:
         """
     def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1612,20 +951,13 @@ class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, byteOffset: int, value: T) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param value:
         """
     def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1636,143 +968,82 @@ class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable)
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
     """"""
 
     @property
     def ByteLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcquirePointer(self, pointer: int) -> None:
-        """
-
-        :param pointer:
-        """
+        """:param pointer:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Initialize(self, numElements: int) -> None:
-        """
-
-        :param numElements:
-        """
+        """:param numElements:"""
     @overload
     def Initialize(self, numBytes: int) -> None:
-        """
-
-        :param numBytes:
-        """
+        """:param numBytes:"""
     @overload
     def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
-        """
-
-        :param numElements:
+        """:param numElements:
         :param sizeOfEachElement:
         """
     def Read(self, byteOffset: int) -> T:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :return:
         """
     def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1782,20 +1053,13 @@ class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, byteOffset: int, value: T) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param value:
         """
     def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -1806,55 +1070,32 @@ class SafeNCryptHandle(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeNCryptKeyHandle(SafeNCryptHandle, IDisposable):
     """"""
@@ -1864,62 +1105,37 @@ class SafeNCryptKeyHandle(SafeNCryptHandle, IDisposable):
         """"""
     @overload
     def __init__(self, handle: IntPtr, parentHandle: SafeHandle):
-        """
-
-        :param handle:
+        """:param handle:
         :param parentHandle:
         """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeNCryptProviderHandle(SafeNCryptHandle, IDisposable):
     """"""
@@ -1928,55 +1144,32 @@ class SafeNCryptProviderHandle(SafeNCryptHandle, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeNCryptSecretHandle(SafeNCryptHandle, IDisposable):
     """"""
@@ -1985,260 +1178,152 @@ class SafeNCryptSecretHandle(SafeNCryptHandle, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafePEFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafePerfProviderHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafePipeHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool):
-        """
-
-        :param preexistingHandle:
+        """:param preexistingHandle:
         :param ownsHandle:
         """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     def __init__(self, existingHandle: IntPtr, ownsHandle: bool):
-        """
-
-        :param existingHandle:
+        """:param existingHandle:
         :param ownsHandle:
         """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def SetHandleAsInvalid(self) -> None:
@@ -2246,115 +1331,67 @@ class SafeProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeRegistryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool):
-        """
-
-        :param preexistingHandle:
+        """:param preexistingHandle:
         :param ownsHandle:
         """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeThreadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def SetHandleAsInvalid(self) -> None:
@@ -2362,304 +1399,176 @@ class SafeThreadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeTimerHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeUserTokenHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeViewOfFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeWaitHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     def __init__(self, existingHandle: IntPtr, ownsHandle: bool):
-        """
-
-        :param existingHandle:
+        """:param existingHandle:
         :param ownsHandle:
         """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeX509ChainHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

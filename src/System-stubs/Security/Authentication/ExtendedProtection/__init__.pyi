@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Iterator
+from collections.abc import Iterator
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
@@ -20,7 +18,6 @@ from System.Collections import ReadOnlyCollectionBase
 from System.ComponentModel import ITypeDescriptorContext
 from System.ComponentModel import PropertyDescriptorCollection
 from System.ComponentModel import TypeConverter
-from System.ComponentModel.TypeConverter import StandardValuesCollection
 from System.Globalization import CultureInfo
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
@@ -31,61 +28,35 @@ class ChannelBinding(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ChannelBindingKind(Enum):
     """"""
@@ -102,15 +73,10 @@ class ExtendedProtectionPolicy(Object, ISerializable):
 
     @overload
     def __init__(self, policyEnforcement: PolicyEnforcement):
-        """
-
-        :param policyEnforcement:
-        """
+        """:param policyEnforcement:"""
     @overload
     def __init__(self, policyEnforcement: PolicyEnforcement, customChannelBinding: ChannelBinding):
-        """
-
-        :param policyEnforcement:
+        """:param policyEnforcement:
         :param customChannelBinding:
         """
     @overload
@@ -120,9 +86,7 @@ class ExtendedProtectionPolicy(Object, ISerializable):
         protectionScenario: ProtectionScenario,
         customServiceNames: ICollection,
     ):
-        """
-
-        :param policyEnforcement:
+        """:param policyEnforcement:
         :param protectionScenario:
         :param customServiceNames:
         """
@@ -133,70 +97,40 @@ class ExtendedProtectionPolicy(Object, ISerializable):
         protectionScenario: ProtectionScenario,
         customServiceNames: ServiceNameCollection,
     ):
-        """
-
-        :param policyEnforcement:
+        """:param policyEnforcement:
         :param protectionScenario:
         :param customServiceNames:
         """
     @property
     def CustomChannelBinding(self) -> ChannelBinding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomServiceNames(self) -> ServiceNameCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def OSSupportsExtendedProtection(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PolicyEnforcement(self) -> PolicyEnforcement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProtectionScenario(self) -> ProtectionScenario:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExtendedProtectionPolicyTypeConverter(TypeConverter):
     """"""
@@ -205,79 +139,59 @@ class ExtendedProtectionPolicyTypeConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -285,18 +199,14 @@ class ExtendedProtectionPolicyTypeConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -308,9 +218,7 @@ class ExtendedProtectionPolicyTypeConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -318,31 +226,23 @@ class ExtendedProtectionPolicyTypeConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -350,161 +250,112 @@ class ExtendedProtectionPolicyTypeConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PolicyEnforcement(Enum):
     """"""
@@ -528,132 +379,73 @@ class ServiceNameCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     """"""
 
     def __init__(self, items: ICollection):
-        """
-
-        :param items:
-        """
+        """:param items:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Contains(self, searchServiceName: str) -> bool:
-        """
-
-        :param searchServiceName:
+        """:param searchServiceName:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Merge(self, serviceNames: IEnumerable) -> ServiceNameCollection:
-        """
-
-        :param serviceNames:
+        """:param serviceNames:
         :return:
         """
     @overload
     def Merge(self, serviceName: str) -> ServiceNameCollection:
-        """
-
-        :param serviceName:
+        """:param serviceName:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TokenBinding(Object):
     """"""
 
     @property
     def BindingType(self) -> TokenBindingType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawTokenBindingId(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TokenBindingType(Enum):
     """"""

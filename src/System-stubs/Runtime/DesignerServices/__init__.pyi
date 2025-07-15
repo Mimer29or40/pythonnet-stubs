@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import overload
 
 from System import Object
@@ -11,61 +9,35 @@ class WindowsRuntimeDesignerContext(Object):
     """"""
 
     def __init__(self, paths: IEnumerable[str], name: str):
-        """
-
-        :param paths:
+        """:param paths:
         :param name:
         """
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAssembly(self, assemblyName: str) -> Assembly:
-        """
-
-        :param assemblyName:
+        """:param assemblyName:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self, typeName: str) -> Type:
-        """
-
-        :param typeName:
+        """:param typeName:
         :return:
         """
     @classmethod
     def InitializeSharedContext(cls, paths: IEnumerable[str]) -> None:
-        """
-
-        :param paths:
-        """
+        """:param paths:"""
     @classmethod
     def SetIterationContext(cls, context: WindowsRuntimeDesignerContext) -> None:
-        """
-
-        :param context:
-        """
+        """:param context:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

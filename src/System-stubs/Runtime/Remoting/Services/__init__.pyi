@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from System import Array
 from System import IntPtr
 from System import MarshalByRefObject
@@ -19,45 +17,28 @@ class EnterpriseServicesHelper(Object):
     def CreateConstructionReturnMessage(
         cls, ctorMsg: IConstructionCallMessage, retObj: MarshalByRefObject
     ) -> IConstructionReturnMessage:
-        """
-
-        :param ctorMsg:
+        """:param ctorMsg:
         :param retObj:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def SwitchWrappers(cls, oldcp: RealProxy, newcp: RealProxy) -> None:
-        """
-
-        :param oldcp:
+        """:param oldcp:
         :param newcp:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def WrapIUnknownWithComObject(cls, punk: IntPtr) -> object:
-        """
-
-        :param punk:
+        """:param punk:
         :return:
         """
 
@@ -65,20 +46,13 @@ class ITrackingHandler:
     """"""
 
     def DisconnectedObject(self, obj: object) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     def MarshaledObject(self, obj: object, _or: ObjRef) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param _or:
         """
     def UnmarshaledObject(self, obj: object, _or: ObjRef) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param _or:
         """
 
@@ -90,40 +64,20 @@ class TrackingServices(Object):
     @classmethod
     @property
     def RegisteredHandlers(cls) -> Array[ITrackingHandler]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def RegisterTrackingHandler(cls, handler: ITrackingHandler) -> None:
-        """
-
-        :param handler:
-        """
+        """:param handler:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UnregisterTrackingHandler(cls, handler: ITrackingHandler) -> None:
-        """
-
-        :param handler:
-        """
+        """:param handler:"""

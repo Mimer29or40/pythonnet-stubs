@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import overload
 
 from System import Array
@@ -20,60 +18,41 @@ class IExpando(IReflect):
 
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def AddMethod(self, name: str, method: Delegate) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param method:
         :return:
         """
     def AddProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -86,9 +65,7 @@ class IExpando(IReflect):
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -96,22 +73,16 @@ class IExpando(IReflect):
         :return:
         """
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -125,9 +96,7 @@ class IExpando(IReflect):
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -146,9 +115,7 @@ class IExpando(IReflect):
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -159,7 +126,4 @@ class IExpando(IReflect):
         :return:
         """
     def RemoveMember(self, m: MemberInfo) -> None:
-        """
-
-        :param m:
-        """
+        """:param m:"""

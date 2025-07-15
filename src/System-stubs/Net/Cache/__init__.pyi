@@ -1,7 +1,4 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Tuple
 from typing import overload
 
 from Microsoft.Win32 import WinInetCache
@@ -27,70 +24,46 @@ class BaseWrapperStream(ABC, Stream, IRequestLifetimeTracker, IDisposable):
     """"""
 
     def __init__(self, wrappedStream: Stream):
-        """
-
-        :param wrappedStream:
-        """
+        """:param wrappedStream:"""
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -98,11 +71,14 @@ class BaseWrapperStream(ABC, Stream, IRequestLifetimeTracker, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -113,29 +89,20 @@ class BaseWrapperStream(ABC, Stream, IRequestLifetimeTracker, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -143,162 +110,113 @@ class BaseWrapperStream(ABC, Stream, IRequestLifetimeTracker, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class CacheFreshnessStatus(Enum):
     """"""
@@ -343,64 +261,43 @@ class CombinedReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, I
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -408,11 +305,14 @@ class CombinedReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, I
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -422,35 +322,23 @@ class CombinedReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, I
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -458,226 +346,156 @@ class CombinedReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, I
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class ForwardingReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -685,11 +503,14 @@ class ForwardingReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -699,35 +520,23 @@ class ForwardingReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -735,187 +544,127 @@ class ForwardingReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class FtpRequestCacheValidator(HttpRequestCacheValidator):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpCacheAgeControl(Enum):
     """"""
@@ -985,30 +734,23 @@ class HttpRequestCachePolicy(RequestCachePolicy):
         """"""
     @overload
     def __init__(self, level: HttpRequestCacheLevel):
-        """
-
-        :param level:
-        """
+        """:param level:"""
     @overload
     def __init__(self, cacheSyncDate: DateTime):
-        """
-
-        :param cacheSyncDate:
-        """
+        """:param cacheSyncDate:"""
     @overload
     def __init__(self, cacheAgeControl: HttpCacheAgeControl, ageOrFreshOrStale: TimeSpan):
-        """
-
-        :param cacheAgeControl:
+        """:param cacheAgeControl:
         :param ageOrFreshOrStale:
         """
     @overload
     def __init__(
-        self, cacheAgeControl: HttpCacheAgeControl, maxAge: TimeSpan, freshOrStale: TimeSpan
+        self,
+        cacheAgeControl: HttpCacheAgeControl,
+        maxAge: TimeSpan,
+        freshOrStale: TimeSpan,
     ):
-        """
-
-        :param cacheAgeControl:
+        """:param cacheAgeControl:
         :param maxAge:
         :param freshOrStale:
         """
@@ -1020,153 +762,93 @@ class HttpRequestCachePolicy(RequestCachePolicy):
         freshOrStale: TimeSpan,
         cacheSyncDate: DateTime,
     ):
-        """
-
-        :param cacheAgeControl:
+        """:param cacheAgeControl:
         :param maxAge:
         :param freshOrStale:
         :param cacheSyncDate:
         """
     @property
     def CacheSyncDate(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Level(self) -> RequestCacheLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaxAge(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaxStale(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinFresh(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpRequestCacheValidator(RequestCacheValidator):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MetadataUpdateStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1174,11 +856,14 @@ class MetadataUpdateStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1188,35 +873,23 @@ class MetadataUpdateStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1224,226 +897,156 @@ class MetadataUpdateStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class RangeStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1451,11 +1054,14 @@ class RangeStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposa
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1465,35 +1071,23 @@ class RangeStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposa
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1501,237 +1095,155 @@ class RangeStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposa
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class RequestCache(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestCacheBinding(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestCacheEntry(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestCacheLevel(Enum):
     """"""
@@ -1755,26 +1267,15 @@ class RequestCacheManager(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestCachePolicy(Object):
     """"""
@@ -1784,219 +1285,126 @@ class RequestCachePolicy(Object):
         """"""
     @overload
     def __init__(self, level: RequestCacheLevel):
-        """
-
-        :param level:
-        """
+        """:param level:"""
     @property
     def Level(self) -> RequestCacheLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestCacheProtocol(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestCacheValidator(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResponseCacheControl(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Rfc2616(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def OnUpdateCache(cls, ctx: HttpRequestCacheValidator) -> CacheValidationStatus:
-        """
-
-        :param ctx:
+        """:param ctx:
         :return:
         """
     @classmethod
     def OnValidateCache(cls, ctx: HttpRequestCacheValidator) -> CacheValidationStatus:
-        """
-
-        :param ctx:
+        """:param ctx:
         :return:
         """
     @classmethod
     def OnValidateFreshness(cls, ctx: HttpRequestCacheValidator) -> CacheFreshnessStatus:
-        """
-
-        :param ctx:
+        """:param ctx:
         :return:
         """
     @classmethod
     def OnValidateRequest(cls, ctx: HttpRequestCacheValidator) -> CacheValidationStatus:
-        """
-
-        :param ctx:
+        """:param ctx:
         :return:
         """
     @classmethod
     def OnValidateResponse(cls, ctx: HttpRequestCacheValidator) -> CacheValidationStatus:
-        """
-
-        :param ctx:
+        """:param ctx:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SingleItemRequestCache(WinInetCache):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _WinInetCache(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

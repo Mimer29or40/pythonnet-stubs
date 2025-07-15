@@ -1,10 +1,8 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
-from typing import Iterator
 from typing import overload
 
 from System import Array
@@ -30,251 +28,137 @@ class CachedCodeEntry(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Capture(Object):
     """"""
 
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CaptureCollection(Object, ICollection, IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> Capture:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, i: int) -> Capture:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CaptureEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Capture(self) -> Capture:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompiledRegexRunner(RegexRunner):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompiledRegexRunnerFactory(RegexRunnerFactory):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 CreateInstanceDelegate: Callable[[], RegexRunner] = ...
 """
@@ -288,26 +172,15 @@ class ExclusiveReference(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 FindFirstCharDelegate: Callable[[RegexRunner], bool] = ...
 """
@@ -321,426 +194,232 @@ class Group(Capture):
 
     @property
     def Captures(self) -> CaptureCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Success(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Synchronized(cls, inner: Group) -> Group:
-        """
-
-        :param inner:
+        """:param inner:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupCollection(Object, ICollection, IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> Group:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, groupnum: int) -> Group:
-        """
-
-        :param groupnum:
+        """:param groupnum:
         :return:
         """
     @overload
     def __getitem__(self, groupname: str) -> Group:
-        """
-
-        :param groupname:
+        """:param groupname:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Capture(self) -> Capture:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Match(Group):
     """"""
 
     @property
     def Captures(self) -> CaptureCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Empty(cls) -> Match:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Groups(self) -> GroupCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Success(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def NextMatch(self) -> Match:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Result(self, replacement: str) -> str:
-        """
-
-        :param replacement:
+        """:param replacement:
         :return:
         """
     @classmethod
     def Synchronized(cls, inner: Match) -> Match:
-        """
-
-        :param inner:
+        """:param inner:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MatchCollection(Object, ICollection, IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> Match:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, i: int) -> Match:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MatchEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 MatchEvaluator: Callable[[Match], str] = ...
 """
@@ -754,85 +433,45 @@ class MatchSparse(Match):
 
     @property
     def Captures(self) -> CaptureCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Empty(cls) -> Match:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Groups(self) -> GroupCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Success(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def NextMatch(self) -> Match:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Result(self, replacement: str) -> str:
-        """
-
-        :param replacement:
+        """:param replacement:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 NoParamDelegate: Callable[[RegexRunner], None] = ...
 """
@@ -850,61 +489,40 @@ class Regex(Object, ISerializable):
     """
     @overload
     def __init__(self, pattern: str):
-        """
-
-        :param pattern:
-        """
+        """:param pattern:"""
     @overload
     def __init__(self, pattern: str, options: RegexOptions):
-        """
-
-        :param pattern:
+        """:param pattern:
         :param options:
         """
     @overload
     def __init__(self, pattern: str, options: RegexOptions, matchTimeout: TimeSpan):
-        """
-
-        :param pattern:
+        """:param pattern:
         :param options:
         :param matchTimeout:
         """
     @classmethod
     @property
     def CacheSize(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @CacheSize.setter
     def CacheSize(cls, value: int) -> None: ...
     @property
     def MatchTimeout(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Options(self) -> RegexOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RightToLeft(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def CompileToAssembly(
         cls, regexinfos: Array[RegexCompilationInfo], assemblyname: AssemblyName
     ) -> None:
-        """
-
-        :param regexinfos:
+        """:param regexinfos:
         :param assemblyname:
         """
     @classmethod
@@ -915,9 +533,7 @@ class Regex(Object, ISerializable):
         assemblyname: AssemblyName,
         attributes: Array[CustomAttributeBuilder],
     ) -> None:
-        """
-
-        :param regexinfos:
+        """:param regexinfos:
         :param assemblyname:
         :param attributes:
         """
@@ -930,94 +546,62 @@ class Regex(Object, ISerializable):
         attributes: Array[CustomAttributeBuilder],
         resourceFile: str,
     ) -> None:
-        """
-
-        :param regexinfos:
+        """:param regexinfos:
         :param assemblyname:
         :param attributes:
         :param resourceFile:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def Escape(cls, str: str) -> str:
-        """
-
-        :param str:
+        """:param str:
         :return:
         """
     def GetGroupNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGroupNumbers(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GroupNameFromNumber(self, i: int) -> str:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def GroupNumberFromName(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def IsMatch(self, input: str) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def IsMatch(self, input: str, startat: int) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param startat:
         :return:
         """
     @classmethod
     @overload
     def IsMatch(cls, input: str, pattern: str) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :return:
         """
     @classmethod
     @overload
     def IsMatch(cls, input: str, pattern: str, options: RegexOptions) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :return:
@@ -1027,9 +611,7 @@ class Regex(Object, ISerializable):
     def IsMatch(
         cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
     ) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :param matchTimeout:
@@ -1037,33 +619,25 @@ class Regex(Object, ISerializable):
         """
     @overload
     def Match(self, input: str) -> Match:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def Match(self, input: str, startat: int) -> Match:
-        """
-
-        :param input:
+        """:param input:
         :param startat:
         :return:
         """
     @classmethod
     @overload
     def Match(cls, input: str, pattern: str) -> Match:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :return:
         """
     @overload
     def Match(self, input: str, beginning: int, length: int) -> Match:
-        """
-
-        :param input:
+        """:param input:
         :param beginning:
         :param length:
         :return:
@@ -1071,9 +645,7 @@ class Regex(Object, ISerializable):
     @classmethod
     @overload
     def Match(cls, input: str, pattern: str, options: RegexOptions) -> Match:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :return:
@@ -1083,9 +655,7 @@ class Regex(Object, ISerializable):
     def Match(
         cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
     ) -> Match:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :param matchTimeout:
@@ -1093,34 +663,26 @@ class Regex(Object, ISerializable):
         """
     @overload
     def Matches(self, input: str) -> MatchCollection:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def Matches(self, input: str, startat: int) -> MatchCollection:
-        """
-
-        :param input:
+        """:param input:
         :param startat:
         :return:
         """
     @classmethod
     @overload
     def Matches(cls, input: str, pattern: str) -> MatchCollection:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :return:
         """
     @classmethod
     @overload
     def Matches(cls, input: str, pattern: str, options: RegexOptions) -> MatchCollection:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :return:
@@ -1130,9 +692,7 @@ class Regex(Object, ISerializable):
     def Matches(
         cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
     ) -> MatchCollection:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :param matchTimeout:
@@ -1140,25 +700,19 @@ class Regex(Object, ISerializable):
         """
     @overload
     def Replace(self, input: str, evaluator: MatchEvaluator) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param evaluator:
         :return:
         """
     @overload
     def Replace(self, input: str, replacement: str) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param replacement:
         :return:
         """
     @overload
     def Replace(self, input: str, evaluator: MatchEvaluator, count: int) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param evaluator:
         :param count:
         :return:
@@ -1166,18 +720,14 @@ class Regex(Object, ISerializable):
     @classmethod
     @overload
     def Replace(cls, input: str, pattern: str, evaluator: MatchEvaluator) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param evaluator:
         :return:
         """
     @overload
     def Replace(self, input: str, replacement: str, count: int) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param replacement:
         :param count:
         :return:
@@ -1185,18 +735,14 @@ class Regex(Object, ISerializable):
     @classmethod
     @overload
     def Replace(cls, input: str, pattern: str, replacement: str) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param replacement:
         :return:
         """
     @overload
     def Replace(self, input: str, evaluator: MatchEvaluator, count: int, startat: int) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param evaluator:
         :param count:
         :param startat:
@@ -1207,9 +753,7 @@ class Regex(Object, ISerializable):
     def Replace(
         cls, input: str, pattern: str, evaluator: MatchEvaluator, options: RegexOptions
     ) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param evaluator:
         :param options:
@@ -1217,9 +761,7 @@ class Regex(Object, ISerializable):
         """
     @overload
     def Replace(self, input: str, replacement: str, count: int, startat: int) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param replacement:
         :param count:
         :param startat:
@@ -1228,9 +770,7 @@ class Regex(Object, ISerializable):
     @classmethod
     @overload
     def Replace(cls, input: str, pattern: str, replacement: str, options: RegexOptions) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param replacement:
         :param options:
@@ -1246,9 +786,7 @@ class Regex(Object, ISerializable):
         options: RegexOptions,
         matchTimeout: TimeSpan,
     ) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param evaluator:
         :param options:
@@ -1265,9 +803,7 @@ class Regex(Object, ISerializable):
         options: RegexOptions,
         matchTimeout: TimeSpan,
     ) -> str:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param replacement:
         :param options:
@@ -1276,33 +812,25 @@ class Regex(Object, ISerializable):
         """
     @overload
     def Split(self, input: str) -> Array[str]:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def Split(self, input: str, count: int) -> Array[str]:
-        """
-
-        :param input:
+        """:param input:
         :param count:
         :return:
         """
     @classmethod
     @overload
     def Split(cls, input: str, pattern: str) -> Array[str]:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :return:
         """
     @overload
     def Split(self, input: str, count: int, startat: int) -> Array[str]:
-        """
-
-        :param input:
+        """:param input:
         :param count:
         :param startat:
         :return:
@@ -1310,9 +838,7 @@ class Regex(Object, ISerializable):
     @classmethod
     @overload
     def Split(cls, input: str, pattern: str, options: RegexOptions) -> Array[str]:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :return:
@@ -1322,24 +848,17 @@ class Regex(Object, ISerializable):
     def Split(
         cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
     ) -> Array[str]:
-        """
-
-        :param input:
+        """:param input:
         :param pattern:
         :param options:
         :param matchTimeout:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Unescape(cls, str: str) -> str:
-        """
-
-        :param str:
+        """:param str:
         :return:
         """
 
@@ -1347,87 +866,57 @@ class RegexBoyerMoore(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexCharClass(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexCode(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexCompilationInfo(Object):
     """"""
 
     @overload
     def __init__(
-        self, pattern: str, options: RegexOptions, name: str, fullnamespace: str, ispublic: bool
+        self,
+        pattern: str,
+        options: RegexOptions,
+        name: str,
+        fullnamespace: str,
+        ispublic: bool,
     ):
-        """
-
-        :param pattern:
+        """:param pattern:
         :param options:
         :param name:
         :param fullnamespace:
@@ -1443,9 +932,7 @@ class RegexCompilationInfo(Object):
         ispublic: bool,
         matchTimeout: TimeSpan,
     ):
-        """
-
-        :param pattern:
+        """:param pattern:
         :param options:
         :param name:
         :param fullnamespace:
@@ -1454,198 +941,114 @@ class RegexCompilationInfo(Object):
         """
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsPublic.setter
     def IsPublic(self, value: bool) -> None: ...
     @property
     def MatchTimeout(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MatchTimeout.setter
     def MatchTimeout(self, value: TimeSpan) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Namespace.setter
     def Namespace(self, value: str) -> None: ...
     @property
     def Options(self) -> RegexOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Options.setter
     def Options(self, value: RegexOptions) -> None: ...
     @property
     def Pattern(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Pattern.setter
     def Pattern(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexCompiler(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexFC(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexFCD(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexInterpreter(RegexRunner):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexLWCGCompiler(RegexCompiler):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexMatchTimeoutException(TimeoutException, _Exception, ISerializable):
     """"""
@@ -1655,189 +1058,109 @@ class RegexMatchTimeoutException(TimeoutException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @overload
     def __init__(self, regexInput: str, regexPattern: str, matchTimeout: TimeSpan):
-        """
-
-        :param regexInput:
+        """:param regexInput:
         :param regexPattern:
         :param matchTimeout:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Input(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MatchTimeout(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Pattern(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexNode(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexOptions(Enum):
     """"""
@@ -1867,201 +1190,113 @@ class RegexParser(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexPrefix(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexReplacement(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexRunner(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexRunnerFactory(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexTree(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexTypeCompiler(RegexCompiler):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegexWriter(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SharedReference(Object):
     """"""
@@ -2069,23 +1304,12 @@ class SharedReference(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

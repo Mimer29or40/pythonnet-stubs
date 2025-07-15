@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import ClassVar
 from typing import Final
@@ -22,46 +20,33 @@ class Claim(Object):
 
     @overload
     def __init__(self, reader: BinaryReader):
-        """
-
-        :param reader:
-        """
+        """:param reader:"""
     @overload
     def __init__(self, reader: BinaryReader, subject: ClaimsIdentity):
-        """
-
-        :param reader:
+        """:param reader:
         :param subject:
         """
     @overload
     def __init__(self, type: str, value: str):
-        """
-
-        :param type:
+        """:param type:
         :param value:
         """
     @overload
     def __init__(self, type: str, value: str, valueType: str):
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :param valueType:
         """
     @overload
     def __init__(self, type: str, value: str, valueType: str, issuer: str):
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :param valueType:
         :param issuer:
         """
     @overload
     def __init__(self, type: str, value: str, valueType: str, issuer: str, originalIssuer: str):
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :param valueType:
         :param issuer:
@@ -77,9 +62,7 @@ class Claim(Object):
         originalIssuer: str,
         subject: ClaimsIdentity,
     ):
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :param valueType:
         :param issuer:
@@ -88,85 +71,45 @@ class Claim(Object):
         """
     @property
     def Issuer(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OriginalIssuer(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary[str, str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Subject(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Type(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ValueType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Clone(self) -> Claim:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Clone(self, identity: ClaimsIdentity) -> Claim:
-        """
-
-        :param identity:
+        """:param identity:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
 
 class ClaimTypes(ABC, Object):
     """"""
@@ -442,26 +385,15 @@ class ClaimTypes(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ClaimValueTypes(ABC, Object):
     """"""
@@ -602,26 +534,15 @@ class ClaimValueTypes(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ClaimsIdentity(Object, IIdentity):
     """"""
@@ -646,57 +567,41 @@ class ClaimsIdentity(Object, IIdentity):
         """"""
     @overload
     def __init__(self, claims: IEnumerable[Claim]):
-        """
-
-        :param claims:
-        """
+        """:param claims:"""
     @overload
     def __init__(self, reader: BinaryReader):
-        """
-
-        :param reader:
-        """
+        """:param reader:"""
     @overload
     def __init__(self, identity: IIdentity):
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def __init__(self, authenticationType: str):
-        """
-
-        :param authenticationType:
-        """
+        """:param authenticationType:"""
     @overload
     def __init__(self, claims: IEnumerable[Claim], authenticationType: str):
-        """
-
-        :param claims:
+        """:param claims:
         :param authenticationType:
         """
     @overload
     def __init__(self, identity: IIdentity, claims: IEnumerable[Claim]):
-        """
-
-        :param identity:
+        """:param identity:
         :param claims:
         """
     @overload
     def __init__(self, authenticationType: str, nameType: str, roleType: str):
-        """
-
-        :param authenticationType:
+        """:param authenticationType:
         :param nameType:
         :param roleType:
         """
     @overload
     def __init__(
-        self, claims: IEnumerable[Claim], authenticationType: str, nameType: str, roleType: str
+        self,
+        claims: IEnumerable[Claim],
+        authenticationType: str,
+        nameType: str,
+        roleType: str,
     ):
-        """
-
-        :param claims:
+        """:param claims:
         :param authenticationType:
         :param nameType:
         :param roleType:
@@ -710,9 +615,7 @@ class ClaimsIdentity(Object, IIdentity):
         nameType: str,
         roleType: str,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param claims:
         :param authenticationType:
         :param nameType:
@@ -720,159 +623,92 @@ class ClaimsIdentity(Object, IIdentity):
         """
     @property
     def Actor(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Actor.setter
     def Actor(self, value: ClaimsIdentity) -> None: ...
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BootstrapContext(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BootstrapContext.setter
     def BootstrapContext(self, value: object) -> None: ...
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Label(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Label.setter
     def Label(self, value: str) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NameClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RoleClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     def AddClaims(self, claims: IEnumerable[Claim]) -> None:
-        """
-
-        :param claims:
-        """
+        """:param claims:"""
     def Clone(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindAll(self, type: str) -> IEnumerable[Claim]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def FindFirst(self, match: Predicate[Claim]) -> Claim:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindFirst(self, type: str) -> Claim:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasClaim(self, match: Predicate[Claim]) -> bool:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def HasClaim(self, type: str, value: str) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :return:
         """
     def RemoveClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryRemoveClaim(self, claim: Claim) -> bool:
-        """
-
-        :param claim:
+        """:param claim:
         :return:
         """
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
 
 class ClaimsPrincipal(Object, IPrincipal):
     """"""
@@ -882,165 +718,100 @@ class ClaimsPrincipal(Object, IPrincipal):
         """"""
     @overload
     def __init__(self, identities: IEnumerable[ClaimsIdentity]):
-        """
-
-        :param identities:
-        """
+        """:param identities:"""
     @overload
     def __init__(self, reader: BinaryReader):
-        """
-
-        :param reader:
-        """
+        """:param reader:"""
     @overload
     def __init__(self, identity: IIdentity):
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def __init__(self, principal: IPrincipal):
-        """
-
-        :param principal:
-        """
+        """:param principal:"""
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def ClaimsPrincipalSelector(cls) -> Func[ClaimsPrincipal]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @ClaimsPrincipalSelector.setter
     def ClaimsPrincipalSelector(cls, value: Func[ClaimsPrincipal]) -> None: ...
     @classmethod
     @property
     def Current(cls) -> ClaimsPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identities(self) -> IEnumerable[ClaimsIdentity]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identity(self) -> IIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def PrimaryIdentitySelector(cls) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
-        """
-
-        :return:
-        """
+    def PrimaryIdentitySelector(
+        cls,
+    ) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
+        """:return:"""
     @classmethod
     @PrimaryIdentitySelector.setter
     def PrimaryIdentitySelector(
         cls, value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]
     ) -> None: ...
     def AddIdentities(self, identities: IEnumerable[ClaimsIdentity]) -> None:
-        """
-
-        :param identities:
-        """
+        """:param identities:"""
     def AddIdentity(self, identity: ClaimsIdentity) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def Clone(self) -> ClaimsPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindAll(self, type: str) -> IEnumerable[Claim]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def FindFirst(self, match: Predicate[Claim]) -> Claim:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindFirst(self, type: str) -> Claim:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasClaim(self, match: Predicate[Claim]) -> bool:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def HasClaim(self, type: str, value: str) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :return:
         """
     def IsInRole(self, role: str) -> bool:
-        """
-
-        :param role:
+        """:param role:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
 
 class DynamicRoleClaimProvider(ABC, Object):
     """"""
@@ -1049,67 +820,38 @@ class DynamicRoleClaimProvider(ABC, Object):
     def AddDynamicRoleClaims(
         cls, claimsIdentity: ClaimsIdentity, claims: IEnumerable[Claim]
     ) -> None:
-        """
-
-        :param claimsIdentity:
+        """:param claimsIdentity:
         :param claims:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RoleClaimProvider(Object):
     """"""
 
     def __init__(self, issuer: str, roles: Array[str], subject: ClaimsIdentity):
-        """
-
-        :param issuer:
+        """:param issuer:
         :param roles:
         :param subject:
         """
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

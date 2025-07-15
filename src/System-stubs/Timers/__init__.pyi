@@ -1,8 +1,5 @@
-from __future__ import annotations
-
-from typing import Callable
+from collections.abc import Callable
 from typing import Generic
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -34,31 +31,17 @@ class ElapsedEventArgs(EventArgs):
 
     @property
     def SignalTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ElapsedEventHandler: Callable[[object, ElapsedEventArgs], None] = ...
 """
@@ -75,54 +58,33 @@ class Timer(Component, IComponent, ISupportInitialize, IDisposable):
         """"""
     @overload
     def __init__(self, interval: float):
-        """
-
-        :param interval:
-        """
+        """:param interval:"""
     @property
     def AutoReset(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AutoReset.setter
     def AutoReset(self, value: bool) -> None: ...
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
     def Interval(self) -> float:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Interval.setter
     def Interval(self, value: float) -> None: ...
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def SynchronizingObject(self) -> ISynchronizeInvoke:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SynchronizingObject.setter
     def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
     def BeginInit(self) -> None:
@@ -130,9 +92,7 @@ class Timer(Component, IComponent, ISupportInitialize, IDisposable):
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
@@ -140,40 +100,23 @@ class Timer(Component, IComponent, ISupportInitialize, IDisposable):
     def EndInit(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Start(self) -> None:
         """"""
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
     Elapsed: EventType[ElapsedEventHandler] = ...
@@ -183,61 +126,37 @@ class TimersDescriptionAttribute(DescriptionAttribute, _Attribute):
     """"""
 
     def __init__(self, description: str):
-        """
-
-        :param description:
-        """
+        """:param description:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -249,9 +168,7 @@ class TimersDescriptionAttribute(DescriptionAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -261,18 +178,10 @@ class TimersDescriptionAttribute(DescriptionAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

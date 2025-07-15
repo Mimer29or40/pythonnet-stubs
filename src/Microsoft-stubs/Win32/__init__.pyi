@@ -1,29 +1,11 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
-from Microsoft.Win32.NativeMethods import PDH_FMT_COUNTERVALUE
-from Microsoft.Win32.NativeMethods import PDH_RAW_COUNTER
-from Microsoft.Win32.NativeMethods import SECURITY_ATTRIBUTES
-from Microsoft.Win32.NativeMethods import STARTUPINFO
-from Microsoft.Win32.NativeMethods import TEXTMETRIC
-from Microsoft.Win32.NativeMethods import USEROBJECTFLAGS
-from Microsoft.Win32.NativeMethods import WNDCLASS
-from Microsoft.Win32.NativeMethods import WNDCLASS_I
-from Microsoft.Win32.NativeMethods import ConHndlr
-from Microsoft.Win32.NativeMethods import EnumThreadWindowsCallback
-from Microsoft.Win32.NativeMethods import NtModuleInfo
-from Microsoft.Win32.NativeMethods import NtProcessBasicInfo
-from Microsoft.Win32.NativeMethods import ShellExecuteInfo
-from Microsoft.Win32.NativeMethods import TokenPrivileges
-from Microsoft.Win32.NativeMethods import WinThreadEntry
 from Microsoft.Win32.SafeHandles import SafeFileHandle
 from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
 from Microsoft.Win32.SafeHandles import SafeLibraryHandle
@@ -31,7 +13,6 @@ from Microsoft.Win32.SafeHandles import SafeProcessHandle
 from Microsoft.Win32.SafeHandles import SafeRegistryHandle
 from Microsoft.Win32.SafeHandles import SafeThreadHandle
 from Microsoft.Win32.SafeHandles import SafeWaitHandle
-from Microsoft.Win32.SafeNativeMethods import PROCESS_INFORMATION
 from System import Array
 from System import Delegate
 from System import Enum
@@ -85,26 +66,15 @@ class ASM_CACHE(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ASM_NAME(ABC, Object):
     """"""
@@ -220,26 +190,15 @@ class ASM_NAME(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CANOF(ABC, Object):
     """"""
@@ -255,120 +214,77 @@ class CANOF(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Fusion(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ReadCache(cls, alAssems: ArrayList, name: str, nFlag: int) -> None:
-        """
-
-        :param alAssems:
+        """:param alAssems:
         :param name:
         :param nFlag:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IApplicationContext:
     """"""
 
-    def Get(self, szName: str, pvValue: int, pcbValue: int, dwFlags: int) -> Tuple[None, int]:
-        """
-
-        :param szName:
+    def Get(self, szName: str, pvValue: int, pcbValue: int, dwFlags: int) -> tuple[None, int]:
+        """:param szName:
         :param pvValue:
         :param pcbValue:
         :param dwFlags:
         """
-    def GetContextNameObject(self, ppName: IAssemblyName) -> Tuple[None, IAssemblyName]:
-        """
-
-        :param ppName:
-        """
-    def GetDynamicDirectory(self, wzDynamicDir: int, pdwSize: int) -> Tuple[None, int]:
-        """
-
-        :param wzDynamicDir:
+    def GetContextNameObject(self, ppName: IAssemblyName) -> tuple[None, IAssemblyName]:
+        """:param ppName:"""
+    def GetDynamicDirectory(self, wzDynamicDir: int, pdwSize: int) -> tuple[None, int]:
+        """:param wzDynamicDir:
         :param pdwSize:
         """
     def Set(self, szName: str, pvValue: int, cbValue: int, dwFlags: int) -> None:
-        """
-
-        :param szName:
+        """:param szName:
         :param pvValue:
         :param cbValue:
         :param dwFlags:
         """
     def SetContextNameObject(self, pName: IAssemblyName) -> None:
-        """
-
-        :param pName:
-        """
+        """:param pName:"""
 
 class IAssemblyEnum:
     """"""
 
-    def Clone(self, ppEnum: IAssemblyEnum) -> Tuple[int, IAssemblyEnum]:
-        """
-
-        :param ppEnum:
+    def Clone(self, ppEnum: IAssemblyEnum) -> tuple[int, IAssemblyEnum]:
+        """:param ppEnum:
         :return:
         """
     def GetNextAssembly(
         self, ppAppCtx: IApplicationContext, ppName: IAssemblyName, dwFlags: int
-    ) -> Tuple[int, IApplicationContext, IAssemblyName]:
-        """
-
-        :param ppAppCtx:
+    ) -> tuple[int, IApplicationContext, IAssemblyName]:
+        """:param ppAppCtx:
         :param ppName:
         :param dwFlags:
         :return:
         """
     def Reset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IAssemblyName:
     """"""
@@ -383,10 +299,8 @@ class IAssemblyName:
         pvReserved: int,
         cbReserved: int,
         ppv: int,
-    ) -> Tuple[int, int]:
-        """
-
-        :param refIID:
+    ) -> tuple[int, int]:
+        """:param refIID:
         :param pAsmBindSink:
         :param pApplicationContext:
         :param szCodeBase:
@@ -396,60 +310,43 @@ class IAssemblyName:
         :param ppv:
         :return:
         """
-    def Clone(self, pName: IAssemblyName) -> Tuple[int, IAssemblyName]:
-        """
-
-        :param pName:
+    def Clone(self, pName: IAssemblyName) -> tuple[int, IAssemblyName]:
+        """:param pName:
         :return:
         """
     def Finalize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDisplayName(
         self, szDisplayName: IntPtr, pccDisplayName: int, dwDisplayFlags: int
     ) -> int:
-        """
-
-        :param szDisplayName:
+        """:param szDisplayName:
         :param pccDisplayName:
         :param dwDisplayFlags:
         :return:
         """
-    def GetName(self, lpcwBuffer: int, pwzName: int) -> Tuple[int, int, int]:
-        """
-
-        :param lpcwBuffer:
+    def GetName(self, lpcwBuffer: int, pwzName: int) -> tuple[int, int, int]:
+        """:param lpcwBuffer:
         :param pwzName:
         :return:
         """
     def GetProperty(self, PropertyId: int, pvProperty: IntPtr, pcbProperty: int) -> int:
-        """
-
-        :param PropertyId:
+        """:param PropertyId:
         :param pvProperty:
         :param pcbProperty:
         :return:
         """
-    def GetVersion(self, pdwVersionHi: int, pdwVersionLow: int) -> Tuple[int, int, int]:
-        """
-
-        :param pdwVersionHi:
+    def GetVersion(self, pdwVersionHi: int, pdwVersionLow: int) -> tuple[int, int, int]:
+        """:param pdwVersionHi:
         :param pdwVersionLow:
         :return:
         """
     def IsEqual(self, pName: IAssemblyName, dwCmpFlags: int) -> int:
-        """
-
-        :param pName:
+        """:param pName:
         :param dwCmpFlags:
         :return:
         """
     def SetProperty(self, PropertyId: int, pvProperty: IntPtr, cbProperty: int) -> int:
-        """
-
-        :param PropertyId:
+        """:param PropertyId:
         :param pvProperty:
         :param cbProperty:
         :return:
@@ -461,29 +358,20 @@ class IInternetSecurityManager:
     def GetSecurityId(
         self, pwszUrl: str, pbSecurityId: int, pcbSecurityId: int, dwReserved: int
     ) -> None:
-        """
-
-        :param pwszUrl:
+        """:param pwszUrl:
         :param pbSecurityId:
         :param pcbSecurityId:
         :param dwReserved:
         """
     def GetSecuritySite(self, ppSite: None) -> None:
-        """
-
-        :param ppSite:
-        """
+        """:param ppSite:"""
     def GetZoneMappings(self, dwZone: int, ppenumString: None, dwFlags: int) -> None:
-        """
-
-        :param dwZone:
+        """:param dwZone:
         :param ppenumString:
         :param dwFlags:
         """
-    def MapUrlToZone(self, pwszUrl: str, pdwZone: int, dwFlags: int) -> Tuple[None, int]:
-        """
-
-        :param pwszUrl:
+    def MapUrlToZone(self, pwszUrl: str, pdwZone: int, dwFlags: int) -> tuple[None, int]:
+        """:param pwszUrl:
         :param pdwZone:
         :param dwFlags:
         """
@@ -498,9 +386,7 @@ class IInternetSecurityManager:
         dwFlags: int,
         dwReserved: int,
     ) -> None:
-        """
-
-        :param pwszUrl:
+        """:param pwszUrl:
         :param dwAction:
         :param pPolicy:
         :param cbPolicy:
@@ -519,9 +405,7 @@ class IInternetSecurityManager:
         cbContext: int,
         dwReserved: int,
     ) -> None:
-        """
-
-        :param pwszUrl:
+        """:param pwszUrl:
         :param guidKey:
         :param ppPolicy:
         :param pcbPolicy:
@@ -530,14 +414,9 @@ class IInternetSecurityManager:
         :param dwReserved:
         """
     def SetSecuritySite(self, pSite: None) -> None:
-        """
-
-        :param pSite:
-        """
+        """:param pSite:"""
     def SetZoneMapping(self, dwZone: int, lpszPattern: str, dwFlags: int) -> None:
-        """
-
-        :param dwZone:
+        """:param dwZone:
         :param lpszPattern:
         :param dwFlags:
         """
@@ -548,42 +427,23 @@ class InternetSecurityManager(__ComObject):
     def __init__(self):
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IntranetZoneCredentialPolicy(Object, ICredentialPolicy):
     """"""
@@ -591,21 +451,13 @@ class IntranetZoneCredentialPolicy(Object, ICredentialPolicy):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ShouldSendCredential(
         self,
         challengeUri: Uri,
@@ -613,19 +465,14 @@ class IntranetZoneCredentialPolicy(Object, ICredentialPolicy):
         credential: NetworkCredential,
         authenticationModule: IAuthenticationModule,
     ) -> bool:
-        """
-
-        :param challengeUri:
+        """:param challengeUri:
         :param request:
         :param credential:
         :param authenticationModule:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NativeMethods(ABC, Object):
     """"""
@@ -3490,9 +3337,7 @@ class NativeMethods(ABC, Object):
         PreviousState: IntPtr,
         ReturnLength: IntPtr,
     ) -> bool:
-        """
-
-        :param TokenHandle:
+        """:param TokenHandle:
         :param DisableAllPrivileges:
         :param NewState:
         :param BufferLength:
@@ -3511,9 +3356,7 @@ class NativeMethods(ABC, Object):
         dwFlagsAndAttributes: int,
         hTemplateFile: SafeFileHandle,
     ) -> SafeFileHandle:
-        """
-
-        :param lpFileName:
+        """:param lpFileName:
         :param dwDesiredAccess:
         :param dwShareMode:
         :param lpSecurityAttributes:
@@ -3529,10 +3372,8 @@ class NativeMethods(ABC, Object):
         hWritePipe: SafeFileHandle,
         lpPipeAttributes: NativeMethods.SECURITY_ATTRIBUTES,
         nSize: int,
-    ) -> Tuple[bool, SafeFileHandle, SafeFileHandle]:
-        """
-
-        :param hReadPipe:
+    ) -> tuple[bool, SafeFileHandle, SafeFileHandle]:
+        """:param hReadPipe:
         :param hWritePipe:
         :param lpPipeAttributes:
         :param nSize:
@@ -3552,9 +3393,7 @@ class NativeMethods(ABC, Object):
         lpStartupInfo: NativeMethods.STARTUPINFO,
         lpProcessInformation: SafeNativeMethods.PROCESS_INFORMATION,
     ) -> bool:
-        """
-
-        :param lpApplicationName:
+        """:param lpApplicationName:
         :param lpCommandLine:
         :param lpProcessAttributes:
         :param lpThreadAttributes:
@@ -3581,9 +3420,7 @@ class NativeMethods(ABC, Object):
         lpStartupInfo: NativeMethods.STARTUPINFO,
         lpProcessInformation: SafeNativeMethods.PROCESS_INFORMATION,
     ) -> bool:
-        """
-
-        :param hToken:
+        """:param hToken:
         :param lpApplicationName:
         :param lpCommandLine:
         :param lpProcessAttributes:
@@ -3598,9 +3435,7 @@ class NativeMethods(ABC, Object):
         """
     @classmethod
     def CreateToolhelp32Snapshot(cls, flags: int, processId: int) -> IntPtr:
-        """
-
-        :param flags:
+        """:param flags:
         :param processId:
         :return:
         """
@@ -3615,10 +3450,8 @@ class NativeMethods(ABC, Object):
         dwDesiredAccess: int,
         bInheritHandle: bool,
         dwOptions: int,
-    ) -> Tuple[bool, SafeFileHandle]:
-        """
-
-        :param hSourceProcessHandle:
+    ) -> tuple[bool, SafeFileHandle]:
+        """:param hSourceProcessHandle:
         :param hSourceHandle:
         :param hTargetProcess:
         :param targetHandle:
@@ -3638,10 +3471,8 @@ class NativeMethods(ABC, Object):
         dwDesiredAccess: int,
         bInheritHandle: bool,
         dwOptions: int,
-    ) -> Tuple[bool, SafeWaitHandle]:
-        """
-
-        :param hSourceProcessHandle:
+    ) -> tuple[bool, SafeWaitHandle]:
+        """:param hSourceProcessHandle:
         :param hSourceHandle:
         :param hTargetProcess:
         :param targetHandle:
@@ -3654,19 +3485,15 @@ class NativeMethods(ABC, Object):
     def EnumProcessModules(
         cls, handle: SafeProcessHandle, modules: IntPtr, size: int, needed: int
     ) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param modules:
         :param size:
         :param needed:
         :return:
         """
     @classmethod
-    def EnumProcesses(cls, processIds: Array[int], size: int, needed: int) -> Tuple[bool, int]:
-        """
-
-        :param processIds:
+    def EnumProcesses(cls, processIds: Array[int], size: int, needed: int) -> tuple[bool, int]:
+        """:param processIds:
         :param size:
         :param needed:
         :return:
@@ -3675,45 +3502,30 @@ class NativeMethods(ABC, Object):
     def EnumWindows(
         cls, callback: NativeMethods.EnumThreadWindowsCallback, extraData: IntPtr
     ) -> bool:
-        """
-
-        :param callback:
+        """:param callback:
         :param extraData:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetCurrentProcess(cls) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetCurrentProcessId(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetExitCodeProcess(
         cls, processHandle: SafeProcessHandle, exitCode: int
-    ) -> Tuple[bool, int]:
-        """
-
-        :param processHandle:
+    ) -> tuple[bool, int]:
+        """:param processHandle:
         :param exitCode:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetModuleBaseName(
         cls,
@@ -3722,9 +3534,7 @@ class NativeMethods(ABC, Object):
         baseName: StringBuilder,
         size: int,
     ) -> int:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :param moduleHandle:
         :param baseName:
         :param size:
@@ -3739,9 +3549,7 @@ class NativeMethods(ABC, Object):
         baseName: StringBuilder,
         size: int,
     ) -> int:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :param moduleHandle:
         :param baseName:
         :param size:
@@ -3750,11 +3558,13 @@ class NativeMethods(ABC, Object):
     @classmethod
     @overload
     def GetModuleFileNameEx(
-        cls, processHandle: HandleRef, moduleHandle: HandleRef, baseName: StringBuilder, size: int
+        cls,
+        processHandle: HandleRef,
+        moduleHandle: HandleRef,
+        baseName: StringBuilder,
+        size: int,
     ) -> int:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :param moduleHandle:
         :param baseName:
         :param size:
@@ -3768,9 +3578,7 @@ class NativeMethods(ABC, Object):
         ntModuleInfo: NativeMethods.NtModuleInfo,
         size: int,
     ) -> bool:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :param moduleHandle:
         :param ntModuleInfo:
         :param size:
@@ -3778,18 +3586,14 @@ class NativeMethods(ABC, Object):
         """
     @classmethod
     def GetPriorityClass(cls, handle: SafeProcessHandle) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     def GetProcessAffinityMask(
         cls, handle: SafeProcessHandle, processMask: IntPtr, systemMask: IntPtr
-    ) -> Tuple[bool, IntPtr, IntPtr]:
-        """
-
-        :param handle:
+    ) -> tuple[bool, IntPtr, IntPtr]:
+        """:param handle:
         :param processMask:
         :param systemMask:
         :return:
@@ -3797,20 +3601,16 @@ class NativeMethods(ABC, Object):
     @classmethod
     def GetProcessPriorityBoost(
         cls, handle: SafeProcessHandle, disabled: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param handle:
+    ) -> tuple[bool, bool]:
+        """:param handle:
         :param disabled:
         :return:
         """
     @classmethod
     def GetProcessTimes(
         cls, handle: SafeProcessHandle, creation: int, exit: int, kernel: int, user: int
-    ) -> Tuple[bool, int, int, int, int]:
-        """
-
-        :param handle:
+    ) -> tuple[bool, int, int, int, int]:
+        """:param handle:
         :param creation:
         :param exit:
         :param kernel:
@@ -3820,43 +3620,33 @@ class NativeMethods(ABC, Object):
     @classmethod
     def GetProcessWorkingSetSize(
         cls, handle: SafeProcessHandle, min: IntPtr, max: IntPtr
-    ) -> Tuple[bool, IntPtr, IntPtr]:
-        """
-
-        :param handle:
+    ) -> tuple[bool, IntPtr, IntPtr]:
+        """:param handle:
         :param min:
         :param max:
         :return:
         """
     @classmethod
     def GetStdHandle(cls, whichHandle: int) -> IntPtr:
-        """
-
-        :param whichHandle:
+        """:param whichHandle:
         :return:
         """
     @classmethod
     def GetThreadPriority(cls, handle: SafeThreadHandle) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
-    def GetThreadPriorityBoost(cls, handle: SafeThreadHandle, disabled: bool) -> Tuple[bool, bool]:
-        """
-
-        :param handle:
+    def GetThreadPriorityBoost(cls, handle: SafeThreadHandle, disabled: bool) -> tuple[bool, bool]:
+        """:param handle:
         :param disabled:
         :return:
         """
     @classmethod
     def GetThreadTimes(
         cls, handle: SafeThreadHandle, creation: int, exit: int, kernel: int, user: int
-    ) -> Tuple[bool, int, int, int, int]:
-        """
-
-        :param handle:
+    ) -> tuple[bool, int, int, int, int]:
+        """:param handle:
         :param creation:
         :param exit:
         :param kernel:
@@ -3864,81 +3654,60 @@ class NativeMethods(ABC, Object):
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetWindow(cls, hWnd: HandleRef, uCmd: int) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param uCmd:
         :return:
         """
     @classmethod
     def GetWindowLong(cls, hWnd: HandleRef, nIndex: int) -> int:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param nIndex:
         :return:
         """
     @classmethod
     def GetWindowText(cls, hWnd: HandleRef, lpString: StringBuilder, nMaxCount: int) -> int:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param lpString:
         :param nMaxCount:
         :return:
         """
     @classmethod
     def GetWindowTextLength(cls, hWnd: HandleRef) -> int:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :return:
         """
     @classmethod
-    def GetWindowThreadProcessId(cls, handle: HandleRef, processId: int) -> Tuple[int, int]:
-        """
-
-        :param handle:
+    def GetWindowThreadProcessId(cls, handle: HandleRef, processId: int) -> tuple[int, int]:
+        """:param handle:
         :param processId:
         :return:
         """
     @classmethod
     def IsWindowVisible(cls, hWnd: HandleRef) -> bool:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :return:
         """
     @classmethod
     def LookupPrivilegeValue(
         cls, lpSystemName: str, lpName: str, lpLuid: LUID
-    ) -> Tuple[bool, LUID]:
-        """
-
-        :param lpSystemName:
+    ) -> tuple[bool, LUID]:
+        """:param lpSystemName:
         :param lpName:
         :param lpLuid:
         :return:
         """
     @classmethod
     def Module32First(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param entry:
         :return:
         """
     @classmethod
     def Module32Next(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param entry:
         :return:
         """
@@ -3951,9 +3720,7 @@ class NativeMethods(ABC, Object):
         size: int,
         returnedSize: Array[int],
     ) -> int:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :param query:
         :param info:
         :param size:
@@ -3963,10 +3730,8 @@ class NativeMethods(ABC, Object):
     @classmethod
     def NtQuerySystemInformation(
         cls, query: int, dataPtr: IntPtr, size: int, returnedSize: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param query:
+    ) -> tuple[int, int]:
+        """:param query:
         :param dataPtr:
         :param size:
         :param returnedSize:
@@ -3974,9 +3739,7 @@ class NativeMethods(ABC, Object):
         """
     @classmethod
     def OpenProcess(cls, access: int, inherit: bool, processId: int) -> SafeProcessHandle:
-        """
-
-        :param access:
+        """:param access:
         :param inherit:
         :param processId:
         :return:
@@ -3984,28 +3747,22 @@ class NativeMethods(ABC, Object):
     @classmethod
     def OpenProcessToken(
         cls, ProcessHandle: HandleRef, DesiredAccess: int, TokenHandle: IntPtr
-    ) -> Tuple[bool, IntPtr]:
-        """
-
-        :param ProcessHandle:
+    ) -> tuple[bool, IntPtr]:
+        """:param ProcessHandle:
         :param DesiredAccess:
         :param TokenHandle:
         :return:
         """
     @classmethod
     def OpenThread(cls, access: int, inherit: bool, threadId: int) -> SafeThreadHandle:
-        """
-
-        :param access:
+        """:param access:
         :param inherit:
         :param threadId:
         :return:
         """
     @classmethod
     def PostMessage(cls, hwnd: HandleRef, msg: int, wparam: IntPtr, lparam: IntPtr) -> int:
-        """
-
-        :param hwnd:
+        """:param hwnd:
         :param msg:
         :param wparam:
         :param lparam:
@@ -4013,27 +3770,21 @@ class NativeMethods(ABC, Object):
         """
     @classmethod
     def Process32First(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param entry:
         :return:
         """
     @classmethod
     def Process32Next(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param entry:
         :return:
         """
     @classmethod
     def RtlGetVersion(
         cls, lpVersionInformation: RTL_OSVERSIONINFOEX
-    ) -> Tuple[int, RTL_OSVERSIONINFOEX]:
-        """
-
-        :param lpVersionInformation:
+    ) -> tuple[int, RTL_OSVERSIONINFOEX]:
+        """:param lpVersionInformation:
         :return:
         """
     @classmethod
@@ -4046,10 +3797,8 @@ class NativeMethods(ABC, Object):
         flags: int,
         timeout: int,
         pdwResult: IntPtr,
-    ) -> Tuple[IntPtr, IntPtr]:
-        """
-
-        :param hWnd:
+    ) -> tuple[IntPtr, IntPtr]:
+        """:param hWnd:
         :param msg:
         :param wParam:
         :param lParam:
@@ -4060,110 +3809,81 @@ class NativeMethods(ABC, Object):
         """
     @classmethod
     def SetPriorityClass(cls, handle: SafeProcessHandle, priorityClass: int) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param priorityClass:
         :return:
         """
     @classmethod
     def SetProcessAffinityMask(cls, handle: SafeProcessHandle, mask: IntPtr) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param mask:
         :return:
         """
     @classmethod
     def SetProcessPriorityBoost(cls, handle: SafeProcessHandle, disabled: bool) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param disabled:
         :return:
         """
     @classmethod
     def SetProcessWorkingSetSize(cls, handle: SafeProcessHandle, min: IntPtr, max: IntPtr) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param min:
         :param max:
         :return:
         """
     @classmethod
     def SetThreadAffinityMask(cls, handle: SafeThreadHandle, mask: HandleRef) -> IntPtr:
-        """
-
-        :param handle:
+        """:param handle:
         :param mask:
         :return:
         """
     @classmethod
     def SetThreadIdealProcessor(cls, handle: SafeThreadHandle, processor: int) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :param processor:
         :return:
         """
     @classmethod
     def SetThreadPriority(cls, handle: SafeThreadHandle, priority: int) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param priority:
         :return:
         """
     @classmethod
     def SetThreadPriorityBoost(cls, handle: SafeThreadHandle, disabled: bool) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param disabled:
         :return:
         """
     @classmethod
     def ShellExecuteEx(cls, info: NativeMethods.ShellExecuteInfo) -> bool:
-        """
-
-        :param info:
+        """:param info:
         :return:
         """
     @classmethod
     def TerminateProcess(cls, processHandle: SafeProcessHandle, exitCode: int) -> bool:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :param exitCode:
         :return:
         """
     @classmethod
     def Thread32First(cls, handle: HandleRef, entry: NativeMethods.WinThreadEntry) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param entry:
         :return:
         """
     @classmethod
     def Thread32Next(cls, handle: HandleRef, entry: NativeMethods.WinThreadEntry) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :param entry:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def WaitForInputIdle(cls, handle: SafeProcessHandle, milliseconds: int) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :param milliseconds:
         :return:
         """
@@ -4192,26 +3912,15 @@ class NativeMethods(ABC, Object):
         wParam: Final[IntPtr] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class PDH_FMT_COUNTERVALUE(Object):
         """"""
@@ -4223,26 +3932,15 @@ class NativeMethods(ABC, Object):
         def __init__(self):
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class PDH_RAW_COUNTER(Object):
         """"""
@@ -4260,51 +3958,29 @@ class NativeMethods(ABC, Object):
         def __init__(self):
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class RTL_OSVERSIONINFOEX(ValueType):
         """"""
 
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class StructFormat(Enum):
         """"""
@@ -4325,6 +4001,7 @@ class NativeMethods(ABC, Object):
         """"""
         Auto: StructFormatEnum = ...
         """"""
+
     WndProc: Callable[[IntPtr, int, IntPtr, IntPtr], IntPtr] = ...
     """
     
@@ -4364,62 +4041,34 @@ class OAVariantLib(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PowerModeChangedEventArgs(EventArgs):
     """"""
 
     def __init__(self, mode: PowerModes):
-        """
-
-        :param mode:
-        """
+        """:param mode:"""
     @property
     def Mode(self) -> PowerModes:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 PowerModeChangedEventHandler: Callable[[object, PowerModeChangedEventArgs], None] = ...
 """
@@ -4477,26 +4126,16 @@ class Registry(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetValue(cls, keyName: str, valueName: str, defaultValue: object) -> object:
-        """
-
-        :param keyName:
+        """:param keyName:
         :param valueName:
         :param defaultValue:
         :return:
@@ -4504,9 +4143,7 @@ class Registry(ABC, Object):
     @classmethod
     @overload
     def SetValue(cls, keyName: str, valueName: str, value: object) -> None:
-        """
-
-        :param keyName:
+        """:param keyName:
         :param valueName:
         :param value:
         """
@@ -4515,18 +4152,13 @@ class Registry(ABC, Object):
     def SetValue(
         cls, keyName: str, valueName: str, value: object, valueKind: RegistryValueKind
     ) -> None:
-        """
-
-        :param keyName:
+        """:param keyName:
         :param valueName:
         :param value:
         :param valueKind:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegistryHive(Enum):
     """"""
@@ -4551,72 +4183,50 @@ class RegistryKey(MarshalByRefObject, IDisposable):
 
     @property
     def Handle(self) -> SafeRegistryHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubKeyCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ValueCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def View(self) -> RegistryView:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     @overload
     def CreateSubKey(self, subkey: str) -> RegistryKey:
-        """
-
-        :param subkey:
+        """:param subkey:
         :return:
         """
     @overload
     def CreateSubKey(self, subkey: str, permissionCheck: RegistryKeyPermissionCheck) -> RegistryKey:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param permissionCheck:
         :return:
         """
     @overload
     def CreateSubKey(self, subkey: str, writable: bool) -> RegistryKey:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param writable:
         :return:
         """
     @overload
     def CreateSubKey(
-        self, subkey: str, permissionCheck: RegistryKeyPermissionCheck, options: RegistryOptions
+        self,
+        subkey: str,
+        permissionCheck: RegistryKeyPermissionCheck,
+        options: RegistryOptions,
     ) -> RegistryKey:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param permissionCheck:
         :param options:
         :return:
@@ -4628,18 +4238,14 @@ class RegistryKey(MarshalByRefObject, IDisposable):
         permissionCheck: RegistryKeyPermissionCheck,
         registrySecurity: RegistrySecurity,
     ) -> RegistryKey:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param permissionCheck:
         :param registrySecurity:
         :return:
         """
     @overload
     def CreateSubKey(self, subkey: str, writable: bool, options: RegistryOptions) -> RegistryKey:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param writable:
         :param options:
         :return:
@@ -4652,9 +4258,7 @@ class RegistryKey(MarshalByRefObject, IDisposable):
         registryOptions: RegistryOptions,
         registrySecurity: RegistrySecurity,
     ) -> RegistryKey:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param permissionCheck:
         :param registryOptions:
         :param registrySecurity:
@@ -4662,49 +4266,32 @@ class RegistryKey(MarshalByRefObject, IDisposable):
         """
     @overload
     def DeleteSubKey(self, subkey: str) -> None:
-        """
-
-        :param subkey:
-        """
+        """:param subkey:"""
     @overload
     def DeleteSubKey(self, subkey: str, throwOnMissingSubKey: bool) -> None:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param throwOnMissingSubKey:
         """
     @overload
     def DeleteSubKeyTree(self, subkey: str) -> None:
-        """
-
-        :param subkey:
-        """
+        """:param subkey:"""
     @overload
     def DeleteSubKeyTree(self, subkey: str, throwOnMissingSubKey: bool) -> None:
-        """
-
-        :param subkey:
+        """:param subkey:
         :param throwOnMissingSubKey:
         """
     @overload
     def DeleteValue(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def DeleteValue(self, name: str, throwOnMissingValue: bool) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnMissingValue:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
@@ -4712,107 +4299,68 @@ class RegistryKey(MarshalByRefObject, IDisposable):
     @classmethod
     @overload
     def FromHandle(cls, handle: SafeRegistryHandle) -> RegistryKey:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     @overload
     def FromHandle(cls, handle: SafeRegistryHandle, view: RegistryView) -> RegistryKey:
-        """
-
-        :param handle:
+        """:param handle:
         :param view:
         :return:
         """
     @overload
     def GetAccessControl(self) -> RegistrySecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetAccessControl(self, includeSections: AccessControlSections) -> RegistrySecurity:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSubKeyNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetValue(self, name: str) -> object:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetValue(self, name: str, defaultValue: object) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param defaultValue:
         :return:
         """
     @overload
     def GetValue(self, name: str, defaultValue: object, options: RegistryValueOptions) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param defaultValue:
         :param options:
         :return:
         """
     def GetValueKind(self, name: str) -> RegistryValueKind:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetValueNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def OpenBaseKey(cls, hKey: RegistryHive, view: RegistryView) -> RegistryKey:
-        """
-
-        :param hKey:
+        """:param hKey:
         :param view:
         :return:
         """
     @classmethod
     @overload
     def OpenRemoteBaseKey(cls, hKey: RegistryHive, machineName: str) -> RegistryKey:
-        """
-
-        :param hKey:
+        """:param hKey:
         :param machineName:
         :return:
         """
@@ -4821,80 +4369,61 @@ class RegistryKey(MarshalByRefObject, IDisposable):
     def OpenRemoteBaseKey(
         cls, hKey: RegistryHive, machineName: str, view: RegistryView
     ) -> RegistryKey:
-        """
-
-        :param hKey:
+        """:param hKey:
         :param machineName:
         :param view:
         :return:
         """
     @overload
     def OpenSubKey(self, name: str) -> RegistryKey:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def OpenSubKey(self, name: str, permissionCheck: RegistryKeyPermissionCheck) -> RegistryKey:
-        """
-
-        :param name:
+        """:param name:
         :param permissionCheck:
         :return:
         """
     @overload
     def OpenSubKey(self, name: str, rights: RegistryRights) -> RegistryKey:
-        """
-
-        :param name:
+        """:param name:
         :param rights:
         :return:
         """
     @overload
     def OpenSubKey(self, name: str, writable: bool) -> RegistryKey:
-        """
-
-        :param name:
+        """:param name:
         :param writable:
         :return:
         """
     @overload
     def OpenSubKey(
-        self, name: str, permissionCheck: RegistryKeyPermissionCheck, rights: RegistryRights
+        self,
+        name: str,
+        permissionCheck: RegistryKeyPermissionCheck,
+        rights: RegistryRights,
     ) -> RegistryKey:
-        """
-
-        :param name:
+        """:param name:
         :param permissionCheck:
         :param rights:
         :return:
         """
     def SetAccessControl(self, registrySecurity: RegistrySecurity) -> None:
-        """
-
-        :param registrySecurity:
-        """
+        """:param registrySecurity:"""
     @overload
     def SetValue(self, name: str, value: object) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def SetValue(self, name: str, value: object, valueKind: RegistryValueKind) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         :param valueKind:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegistryKeyPermissionCheck(Enum):
     """"""
@@ -4957,28 +4486,16 @@ class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def SetHandleAsInvalid(self) -> None:
@@ -4986,26 +4503,15 @@ class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeNativeMethods(ABC, Object):
     """"""
@@ -5062,15 +4568,11 @@ class SafeNativeMethods(ABC, Object):
     """
     @classmethod
     def CloseHandle(cls, handle: IntPtr) -> bool:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
@@ -5083,9 +4585,7 @@ class SafeNativeMethods(ABC, Object):
         pRawValue2: NativeMethods.PDH_RAW_COUNTER,
         pFmtValue: NativeMethods.PDH_FMT_COUNTERVALUE,
     ) -> int:
-        """
-
-        :param dwCounterType:
+        """:param dwCounterType:
         :param dwFormat:
         :param pTimeBase:
         :param pRawValue1:
@@ -5105,9 +4605,7 @@ class SafeNativeMethods(ABC, Object):
         nSize: int,
         arguments: Array[IntPtr],
     ) -> int:
-        """
-
-        :param dwFlags:
+        """:param dwFlags:
         :param lpSource:
         :param dwMessageId:
         :param dwLanguageId:
@@ -5128,9 +4626,7 @@ class SafeNativeMethods(ABC, Object):
         nSize: int,
         arguments: Array[IntPtr],
     ) -> int:
-        """
-
-        :param dwFlags:
+        """:param dwFlags:
         :param lpSource_mustBeNull:
         :param dwMessageId:
         :param dwLanguageId:
@@ -5141,75 +4637,53 @@ class SafeNativeMethods(ABC, Object):
         """
     @classmethod
     def FreeLibrary(cls, hModule: HandleRef) -> bool:
-        """
-
-        :param hModule:
+        """:param hModule:
         :return:
         """
     @classmethod
     def GetComputerName(cls, lpBuffer: StringBuilder, nSize: Array[int]) -> bool:
-        """
-
-        :param lpBuffer:
+        """:param lpBuffer:
         :param nSize:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetStockObject(cls, nIndex: int) -> IntPtr:
-        """
-
-        :param nIndex:
+        """:param nIndex:
         :return:
         """
     @classmethod
     def GetTextMetrics(
         cls, hDC: IntPtr, tm: NativeMethods.TEXTMETRIC
-    ) -> Tuple[bool, NativeMethods.TEXTMETRIC]:
-        """
-
-        :param hDC:
+    ) -> tuple[bool, NativeMethods.TEXTMETRIC]:
+        """:param hDC:
         :param tm:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def InterlockedCompareExchange(cls, pDestination: IntPtr, exchange: int, compare: int) -> int:
-        """
-
-        :param pDestination:
+        """:param pDestination:
         :param exchange:
         :param compare:
         :return:
         """
     @classmethod
     def IsWow64Process(cls, hProcess: SafeProcessHandle, Wow64Process: bool) -> bool:
-        """
-
-        :param hProcess:
+        """:param hProcess:
         :param Wow64Process:
         :return:
         """
     @classmethod
     def LoadLibrary(cls, libFilename: str) -> IntPtr:
-        """
-
-        :param libFilename:
+        """:param libFilename:
         :return:
         """
     @classmethod
     def MessageBox(cls, hWnd: IntPtr, text: str, caption: str, type: int) -> int:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param text:
         :param caption:
         :param type:
@@ -5217,36 +4691,24 @@ class SafeNativeMethods(ABC, Object):
         """
     @classmethod
     def OutputDebugString(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
-    def QueryPerformanceCounter(cls, value: int) -> Tuple[bool, int]:
-        """
-
-        :param value:
+    def QueryPerformanceCounter(cls, value: int) -> tuple[bool, int]:
+        """:param value:
         :return:
         """
     @classmethod
-    def QueryPerformanceFrequency(cls, value: int) -> Tuple[bool, int]:
-        """
-
-        :param value:
+    def QueryPerformanceFrequency(cls, value: int) -> tuple[bool, int]:
+        """:param value:
         :return:
         """
     @classmethod
     def RegisterWindowMessage(cls, msg: str) -> int:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SessionEndReasons(Enum):
     """"""
@@ -5260,37 +4722,20 @@ class SessionEndedEventArgs(EventArgs):
     """"""
 
     def __init__(self, reason: SessionEndReasons):
-        """
-
-        :param reason:
-        """
+        """:param reason:"""
     @property
     def Reason(self) -> SessionEndReasons:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 SessionEndedEventHandler: Callable[[object, SessionEndedEventArgs], None] = ...
 """
@@ -5303,45 +4748,25 @@ class SessionEndingEventArgs(EventArgs):
     """"""
 
     def __init__(self, reason: SessionEndReasons):
-        """
-
-        :param reason:
-        """
+        """:param reason:"""
     @property
     def Cancel(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Cancel.setter
     def Cancel(self, value: bool) -> None: ...
     @property
     def Reason(self) -> SessionEndReasons:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 SessionEndingEventHandler: Callable[[object, SessionEndingEventArgs], None] = ...
 """
@@ -5354,37 +4779,20 @@ class SessionSwitchEventArgs(EventArgs):
     """"""
 
     def __init__(self, reason: SessionSwitchReason):
-        """
-
-        :param reason:
-        """
+        """:param reason:"""
     @property
     def Reason(self) -> SessionSwitchReason:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 SessionSwitchEventHandler: Callable[[object, SessionSwitchEventArgs], None] = ...
 """
@@ -5420,44 +4828,25 @@ class SystemEvents(Object):
 
     @classmethod
     def CreateTimer(cls, interval: int) -> IntPtr:
-        """
-
-        :param interval:
+        """:param interval:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def InvokeOnEventsThread(cls, method: Delegate) -> None:
-        """
-
-        :param method:
-        """
+        """:param method:"""
     @classmethod
     def KillTimer(cls, timerId: IntPtr) -> None:
-        """
-
-        :param timerId:
-        """
+        """:param timerId:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     DisplaySettingsChanged: EventType[EventHandler] = ...
     """"""
     DisplaySettingsChanging: EventType[EventHandler] = ...
@@ -5491,37 +4880,20 @@ class TimerElapsedEventArgs(EventArgs):
     """"""
 
     def __init__(self, timerId: IntPtr):
-        """
-
-        :param timerId:
-        """
+        """:param timerId:"""
     @property
     def TimerId(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 TimerElapsedEventHandler: Callable[[object, TimerElapsedEventArgs], None] = ...
 """
@@ -5840,9 +5212,7 @@ class UnsafeNativeMethods(ABC, Object):
     """
     @classmethod
     def ClearEventLog(cls, hEventLog: SafeHandle, lpctstrBackupFileName: HandleRef) -> bool:
-        """
-
-        :param hEventLog:
+        """:param hEventLog:
         :param lpctstrBackupFileName:
         :return:
         """
@@ -5862,9 +5232,7 @@ class UnsafeNativeMethods(ABC, Object):
         hInst: HandleRef,
         pvParam: object,
     ) -> IntPtr:
-        """
-
-        :param exStyle:
+        """:param exStyle:
         :param lpszClassName:
         :param lpszWindowName:
         :param style:
@@ -5880,9 +5248,7 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def DefWindowProc(cls, hWnd: IntPtr, msg: int, wParam: IntPtr, lParam: IntPtr) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param msg:
         :param wParam:
         :param lParam:
@@ -5890,124 +5256,93 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def DestroyWindow(cls, hWnd: HandleRef) -> bool:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :return:
         """
     @classmethod
     def DispatchMessage(cls, msg: MSG) -> int:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     @classmethod
     def GetClassInfo(
         cls, hInst: HandleRef, lpszClass: str, wc: NativeMethods.WNDCLASS_I
-    ) -> Tuple[bool, NativeMethods.WNDCLASS_I]:
-        """
-
-        :param hInst:
+    ) -> tuple[bool, NativeMethods.WNDCLASS_I]:
+        """:param hInst:
         :param lpszClass:
         :param wc:
         :return:
         """
     @classmethod
     def GetDC(cls, hWnd: IntPtr) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :return:
         """
     @classmethod
     def GetFileVersionInfo(
         cls, lptstrFilename: str, dwHandle: int, dwLen: int, lpData: HandleRef
     ) -> bool:
-        """
-
-        :param lptstrFilename:
+        """:param lptstrFilename:
         :param dwHandle:
         :param dwLen:
         :param lpData:
         :return:
         """
     @classmethod
-    def GetFileVersionInfoSize(cls, lptstrFilename: str, handle: int) -> Tuple[int, int]:
-        """
-
-        :param lptstrFilename:
+    def GetFileVersionInfoSize(cls, lptstrFilename: str, handle: int) -> tuple[int, int]:
+        """:param lptstrFilename:
         :param handle:
         :return:
         """
     @classmethod
     def GetModuleFileName(cls, hModule: HandleRef, buffer: StringBuilder, length: int) -> int:
-        """
-
-        :param hModule:
+        """:param hModule:
         :param buffer:
         :param length:
         :return:
         """
     @classmethod
     def GetModuleHandle(cls, modName: str) -> IntPtr:
-        """
-
-        :param modName:
+        """:param modName:
         :return:
         """
     @classmethod
-    def GetNumberOfEventLogRecords(cls, hEventLog: SafeHandle, count: int) -> Tuple[bool, int]:
-        """
-
-        :param hEventLog:
+    def GetNumberOfEventLogRecords(cls, hEventLog: SafeHandle, count: int) -> tuple[bool, int]:
+        """:param hEventLog:
         :param count:
         :return:
         """
     @classmethod
-    def GetOldestEventLogRecord(cls, hEventLog: SafeHandle, number: int) -> Tuple[bool, int]:
-        """
-
-        :param hEventLog:
+    def GetOldestEventLogRecord(cls, hEventLog: SafeHandle, number: int) -> tuple[bool, int]:
+        """:param hEventLog:
         :param number:
         :return:
         """
     @classmethod
     @overload
     def GetProcAddress(cls, hModule: HandleRef, lpProcName: str) -> IntPtr:
-        """
-
-        :param hModule:
+        """:param hModule:
         :param lpProcName:
         :return:
         """
     @classmethod
     @overload
     def GetProcAddress(cls, hModule: IntPtr, methodName: str) -> IntPtr:
-        """
-
-        :param hModule:
+        """:param hModule:
         :param methodName:
         :return:
         """
     @classmethod
     def GetProcessWindowStation(cls) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetStdHandle(cls, type: int) -> IntPtr:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def GetSystemMetrics(cls, nIndex: int) -> int:
-        """
-
-        :param nIndex:
+        """:param nIndex:
         :return:
         """
     @classmethod
@@ -6019,9 +5354,7 @@ class UnsafeNativeMethods(ABC, Object):
         nLength: int,
         lpnLengthNeeded: int,
     ) -> bool:
-        """
-
-        :param hObj:
+        """:param hObj:
         :param nIndex:
         :param pvBuffer:
         :param nLength:
@@ -6030,16 +5363,12 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def IsWindow(cls, hWnd: HandleRef) -> bool:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :return:
         """
     @classmethod
     def KillTimer(cls, hwnd: HandleRef, idEvent: HandleRef) -> bool:
-        """
-
-        :param hwnd:
+        """:param hwnd:
         :param idEvent:
         :return:
         """
@@ -6054,9 +5383,7 @@ class UnsafeNativeMethods(ABC, Object):
         domainNameSize: int,
         eUse: int,
     ) -> int:
-        """
-
-        :param systemName:
+        """:param systemName:
         :param pSid:
         :param szUserName:
         :param userNameSize:
@@ -6067,11 +5394,14 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def MsgWaitForMultipleObjectsEx(
-        cls, nCount: int, pHandles: IntPtr, dwMilliseconds: int, dwWakeMask: int, dwFlags: int
+        cls,
+        nCount: int,
+        pHandles: IntPtr,
+        dwMilliseconds: int,
+        dwWakeMask: int,
+        dwFlags: int,
     ) -> int:
-        """
-
-        :param nCount:
+        """:param nCount:
         :param pHandles:
         :param dwMilliseconds:
         :param dwWakeMask:
@@ -6080,19 +5410,15 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def NotifyChangeEventLog(cls, hEventLog: SafeHandle, hEvent: SafeWaitHandle) -> bool:
-        """
-
-        :param hEventLog:
+        """:param hEventLog:
         :param hEvent:
         :return:
         """
     @classmethod
     def PeekMessage(
         cls, msg: MSG, hwnd: HandleRef, msgMin: int, msgMax: int, remove: int
-    ) -> Tuple[bool, MSG]:
-        """
-
-        :param msg:
+    ) -> tuple[bool, MSG]:
+        """:param msg:
         :param hwnd:
         :param msgMin:
         :param msgMax:
@@ -6101,9 +5427,7 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def PostMessage(cls, hwnd: HandleRef, msg: int, wparam: IntPtr, lparam: IntPtr) -> bool:
-        """
-
-        :param hwnd:
+        """:param hwnd:
         :param msg:
         :param wparam:
         :param lparam:
@@ -6120,10 +5444,8 @@ class UnsafeNativeMethods(ABC, Object):
         lpBytesReturned: int,
         overlappedPointer: NativeOverlapped,
         lpCompletionRoutine: HandleRef,
-    ) -> Tuple[bool, int]:
-        """
-
-        :param hDirectory:
+    ) -> tuple[bool, int]:
+        """:param hDirectory:
         :param lpBuffer:
         :param nBufferLength:
         :param bWatchSubtree:
@@ -6143,10 +5465,8 @@ class UnsafeNativeMethods(ABC, Object):
         numberOfBytesToRead: int,
         bytesRead: int,
         minNumOfBytesNeeded: int,
-    ) -> Tuple[bool, int, int]:
-        """
-
-        :param hEventLog:
+    ) -> tuple[bool, int, int]:
+        """:param hEventLog:
         :param dwReadFlags:
         :param dwRecordOffset:
         :param buffer:
@@ -6157,16 +5477,12 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def RegisterClass(cls, wc: NativeMethods.WNDCLASS) -> int:
-        """
-
-        :param wc:
+        """:param wc:
         :return:
         """
     @classmethod
     def ReleaseDC(cls, hWnd: IntPtr, hDC: IntPtr) -> int:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param hDC:
         :return:
         """
@@ -6183,9 +5499,7 @@ class UnsafeNativeMethods(ABC, Object):
         strings: HandleRef,
         rawData: Array[int],
     ) -> bool:
-        """
-
-        :param hEventLog:
+        """:param hEventLog:
         :param type:
         :param category:
         :param eventID:
@@ -6198,17 +5512,13 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def SelectObject(cls, hDC: IntPtr, hObject: IntPtr) -> IntPtr:
-        """
-
-        :param hDC:
+        """:param hDC:
         :param hObject:
         :return:
         """
     @classmethod
     def SendMessage(cls, hWnd: HandleRef, msg: int, wParam: IntPtr, lParam: IntPtr) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param msg:
         :param wParam:
         :param lParam:
@@ -6216,36 +5526,28 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def SetClassLong(cls, hWnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param nIndex:
         :param dwNewLong:
         :return:
         """
     @classmethod
     def SetClassLongPtr32(cls, hwnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
-        """
-
-        :param hwnd:
+        """:param hwnd:
         :param nIndex:
         :param dwNewLong:
         :return:
         """
     @classmethod
     def SetClassLongPtr64(cls, hwnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
-        """
-
-        :param hwnd:
+        """:param hwnd:
         :param nIndex:
         :param dwNewLong:
         :return:
         """
     @classmethod
     def SetConsoleCtrlHandler(cls, handler: NativeMethods.ConHndlr, add: int) -> bool:
-        """
-
-        :param handler:
+        """:param handler:
         :param add:
         :return:
         """
@@ -6253,9 +5555,7 @@ class UnsafeNativeMethods(ABC, Object):
     def SetTimer(
         cls, hWnd: HandleRef, nIDEvent: HandleRef, uElapse: int, lpTimerProc: HandleRef
     ) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param nIDEvent:
         :param uElapse:
         :param lpTimerProc:
@@ -6263,51 +5563,39 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def SetWindowLong(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param nIndex:
         :param dwNewLong:
         :return:
         """
     @classmethod
     def SetWindowLongPtr32(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param nIndex:
         :param dwNewLong:
         :return:
         """
     @classmethod
     def SetWindowLongPtr64(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param nIndex:
         :param dwNewLong:
         :return:
         """
     @classmethod
-    def TranslateMessage(cls, msg: MSG) -> Tuple[bool, MSG]:
-        """
-
-        :param msg:
+    def TranslateMessage(cls, msg: MSG) -> tuple[bool, MSG]:
+        """:param msg:
         :return:
         """
     @classmethod
     def UnregisterClass(cls, lpClassName: str, hInstance: HandleRef) -> int:
-        """
-
-        :param lpClassName:
+        """:param lpClassName:
         :param hInstance:
         :return:
         """
     @classmethod
     def VerLanguageName(cls, langID: int, lpBuffer: StringBuilder, nSize: int) -> int:
-        """
-
-        :param langID:
+        """:param langID:
         :param lpBuffer:
         :param nSize:
         :return:
@@ -6315,10 +5603,8 @@ class UnsafeNativeMethods(ABC, Object):
     @classmethod
     def VerQueryValue(
         cls, pBlock: HandleRef, lpSubBlock: str, lplpBuffer: IntPtr, len: int
-    ) -> Tuple[bool, IntPtr, int]:
-        """
-
-        :param pBlock:
+    ) -> tuple[bool, IntPtr, int]:
+        """:param pBlock:
         :param lpSubBlock:
         :param lplpBuffer:
         :param len:
@@ -6326,98 +5612,64 @@ class UnsafeNativeMethods(ABC, Object):
         """
     @classmethod
     def WTSRegisterSessionNotification(cls, hWnd: HandleRef, dwFlags: int) -> bool:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :param dwFlags:
         :return:
         """
     @classmethod
     def WTSUnRegisterSessionNotification(cls, hWnd: HandleRef) -> bool:
-        """
-
-        :param hWnd:
+        """:param hWnd:
         :return:
         """
     @classmethod
     def WaitNamedPipe(cls, name: str, timeout: int) -> bool:
-        """
-
-        :param name:
+        """:param name:
         :param timeout:
         :return:
         """
     @classmethod
-    def WldpIsDynamicCodePolicyEnabled(cls, enabled: int) -> Tuple[int, int]:
-        """
-
-        :param enabled:
+    def WldpIsDynamicCodePolicyEnabled(cls, enabled: int) -> tuple[int, int]:
+        """:param enabled:
         :return:
         """
     @classmethod
     def WldpQueryDynamicCodeTrust(
         cls, fileHandle: SafeFileHandle, image: IntPtr, imageSize: int
     ) -> int:
-        """
-
-        :param fileHandle:
+        """:param fileHandle:
         :param image:
         :param imageSize:
         :return:
         """
     @classmethod
     def WldpSetDynamicCodeTrust(cls, fileHandle: SafeFileHandle) -> int:
-        """
-
-        :param fileHandle:
+        """:param fileHandle:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class WIN32_FILE_ATTRIBUTE_DATA(ValueType):
         """"""
 
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class UserPreferenceCategory(Enum):
     """"""
@@ -6455,37 +5707,20 @@ class UserPreferenceChangedEventArgs(EventArgs):
     """"""
 
     def __init__(self, category: UserPreferenceCategory):
-        """
-
-        :param category:
-        """
+        """:param category:"""
     @property
     def Category(self) -> UserPreferenceCategory:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UserPreferenceChangedEventHandler: Callable[[object, UserPreferenceChangedEventArgs], None] = ...
 """
@@ -6498,37 +5733,20 @@ class UserPreferenceChangingEventArgs(EventArgs):
     """"""
 
     def __init__(self, category: UserPreferenceCategory):
-        """
-
-        :param category:
-        """
+        """:param category:"""
     @property
     def Category(self) -> UserPreferenceCategory:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UserPreferenceChangingEventHandler: Callable[[object, UserPreferenceChangingEventArgs], None] = ...
 """
@@ -6541,48 +5759,26 @@ class Win32Native(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WinInetCache(RequestCache):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

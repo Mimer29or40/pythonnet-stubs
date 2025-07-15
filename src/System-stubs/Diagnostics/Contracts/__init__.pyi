@@ -1,8 +1,5 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import Generic
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -37,31 +34,21 @@ class Contract(ABC, Object):
     @classmethod
     @overload
     def Assert(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Assert(cls, condition: bool, userMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param userMessage:
         """
     @classmethod
     @overload
     def Assume(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Assume(cls, condition: bool, userMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param userMessage:
         """
     @classmethod
@@ -70,54 +57,38 @@ class Contract(ABC, Object):
     @classmethod
     @overload
     def Ensures(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Ensures(cls, condition: bool, userMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param userMessage:
         """
     @classmethod
     @overload
     def EnsuresOnThrow(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def EnsuresOnThrow(cls, condition: bool, userMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param userMessage:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Exists(cls, collection: IEnumerable[T], predicate: Predicate[T]) -> bool:
-        """
-
-        :param collection:
+        """:param collection:
         :param predicate:
         :return:
         """
     @classmethod
     @overload
     def Exists(cls, fromInclusive: int, toExclusive: int, predicate: Predicate[int]) -> bool:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param predicate:
         :return:
@@ -125,85 +96,55 @@ class Contract(ABC, Object):
     @classmethod
     @overload
     def ForAll(cls, collection: IEnumerable[T], predicate: Predicate[T]) -> bool:
-        """
-
-        :param collection:
+        """:param collection:
         :param predicate:
         :return:
         """
     @classmethod
     @overload
     def ForAll(cls, fromInclusive: int, toExclusive: int, predicate: Predicate[int]) -> bool:
-        """
-
-        :param fromInclusive:
+        """:param fromInclusive:
         :param toExclusive:
         :param predicate:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Invariant(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Invariant(cls, condition: bool, userMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param userMessage:
         """
     @classmethod
     def OldValue(cls, value: T) -> T:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     @overload
     def Requires(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Requires(cls, condition: bool, userMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param userMessage:
         """
     @classmethod
     def Result(cls) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
-    def ValueAtReturn(cls, value: T) -> Tuple[T, T]:
-        """
-
-        :param value:
+    def ValueAtReturn(cls, value: T) -> tuple[T, T]:
+        """:param value:
         :return:
         """
     ContractFailed: EventType[EventHandler[ContractFailedEventArgs]] = ...
@@ -216,49 +157,31 @@ class ContractAbbreviatorAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -270,9 +193,7 @@ class ContractAbbreviatorAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -282,21 +203,13 @@ class ContractAbbreviatorAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractArgumentValidatorAttribute(Attribute, _Attribute):
     """"""
@@ -305,49 +218,31 @@ class ContractArgumentValidatorAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -359,9 +254,7 @@ class ContractArgumentValidatorAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -371,81 +264,49 @@ class ContractArgumentValidatorAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractClassAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, typeContainingContracts: Type):
-        """
-
-        :param typeContainingContracts:
-        """
+        """:param typeContainingContracts:"""
     @property
     def TypeContainingContracts(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -457,9 +318,7 @@ class ContractClassAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -469,81 +328,49 @@ class ContractClassAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractClassForAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, typeContractsAreFor: Type):
-        """
-
-        :param typeContractsAreFor:
-        """
+        """:param typeContractsAreFor:"""
     @property
     def TypeContractsAreFor(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -555,9 +382,7 @@ class ContractClassForAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -567,21 +392,13 @@ class ContractClassForAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractException(Exception, _Exception, ISerializable):
     """"""
@@ -594,9 +411,7 @@ class ContractException(Exception, _Exception, ISerializable):
         condition: str,
         innerException: Exception,
     ):
-        """
-
-        :param kind:
+        """:param kind:
         :param failure:
         :param userMessage:
         :param condition:
@@ -604,149 +419,84 @@ class ContractException(Exception, _Exception, ISerializable):
         """
     @property
     def Condition(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Failure(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Kind(self) -> ContractFailureKind:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserMessage(self) -> str:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractFailedEventArgs(EventArgs):
     """"""
@@ -758,74 +508,43 @@ class ContractFailedEventArgs(EventArgs):
         condition: str,
         originalException: Exception,
     ):
-        """
-
-        :param failureKind:
+        """:param failureKind:
         :param message:
         :param condition:
         :param originalException:
         """
     @property
     def Condition(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FailureKind(self) -> ContractFailureKind:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Handled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OriginalException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unwind(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandled(self) -> None:
         """"""
     def SetUnwind(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractFailureKind(Enum):
     """"""
@@ -850,49 +569,31 @@ class ContractInvariantMethodAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -904,9 +605,7 @@ class ContractInvariantMethodAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -916,110 +615,68 @@ class ContractInvariantMethodAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractOptionAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, category: str, setting: str, enabled: bool):
-        """
-
-        :param category:
+        """:param category:
         :param setting:
         :param enabled:
         """
     @overload
     def __init__(self, category: str, setting: str, value: str):
-        """
-
-        :param category:
+        """:param category:
         :param setting:
         :param value:
         """
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Setting(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1031,9 +688,7 @@ class ContractOptionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1043,81 +698,49 @@ class ContractOptionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractPublicPropertyNameAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1129,9 +752,7 @@ class ContractPublicPropertyNameAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1141,21 +762,13 @@ class ContractPublicPropertyNameAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractReferenceAssemblyAttribute(Attribute, _Attribute):
     """"""
@@ -1164,49 +777,31 @@ class ContractReferenceAssemblyAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1218,9 +813,7 @@ class ContractReferenceAssemblyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1230,21 +823,13 @@ class ContractReferenceAssemblyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractRuntimeIgnoredAttribute(Attribute, _Attribute):
     """"""
@@ -1253,49 +838,31 @@ class ContractRuntimeIgnoredAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1307,9 +874,7 @@ class ContractRuntimeIgnoredAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1319,81 +884,49 @@ class ContractRuntimeIgnoredAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContractVerificationAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, value: bool):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1405,9 +938,7 @@ class ContractVerificationAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1417,21 +948,13 @@ class ContractVerificationAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PureAttribute(Attribute, _Attribute):
     """"""
@@ -1440,49 +963,31 @@ class PureAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1494,9 +999,7 @@ class PureAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1506,18 +1009,10 @@ class PureAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

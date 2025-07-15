@@ -1,6 +1,3 @@
-from __future__ import annotations
-
-from typing import Tuple
 from typing import overload
 
 from System import Array
@@ -22,9 +19,7 @@ class ManifestSignedXml(SignedXml):
     """"""
 
     def __init__(self, manifestXml: XmlDocument, manifest: ManifestKinds):
-        """
-
-        :param manifestXml:
+        """:param manifestXml:
         :param manifest:
         """
     @property
@@ -93,7 +88,7 @@ class ManifestSignedXml(SignedXml):
         """"""
     def CheckSignatureReturningKey(
         self, signingKey: AsymmetricAlgorithm
-    ) -> Tuple[bool, AsymmetricAlgorithm]:
+    ) -> tuple[bool, AsymmetricAlgorithm]:
         """"""
     @overload
     def ComputeSignature(self) -> None:
@@ -102,38 +97,25 @@ class ManifestSignedXml(SignedXml):
     def ComputeSignature(self, macAlg: KeyedHashAlgorithm) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIdElement(self, document: XmlDocument, idValue: str) -> XmlElement:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXml(self) -> XmlElement:
         """"""
     def LoadXml(self, value: XmlElement) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def VerifySignature(
         self, revocationFlag: X509RevocationFlag, revocationMode: X509RevocationMode
     ) -> ManifestSignatureInformation:
-        """
-
-        :param revocationFlag:
+        """:param revocationFlag:
         :param revocationMode:
         :return:
         """

@@ -1,12 +1,9 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -40,7 +37,6 @@ from System.ComponentModel import MemberDescriptor
 from System.ComponentModel import PropertyDescriptor
 from System.ComponentModel import PropertyDescriptorCollection
 from System.ComponentModel import TypeDescriptionProvider
-from System.ComponentModel.Design.DesignerOptionService import DesignerOptionCollection
 from System.Globalization import CultureInfo
 from System.IO import Stream
 from System.Reflection import Assembly
@@ -65,44 +61,25 @@ class ActiveDesignerEventArgs(EventArgs):
     """"""
 
     def __init__(self, oldDesigner: IDesignerHost, newDesigner: IDesignerHost):
-        """
-
-        :param oldDesigner:
+        """:param oldDesigner:
         :param newDesigner:
         """
     @property
     def NewDesigner(self) -> IDesignerHost:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OldDesigner(self) -> IDesignerHost:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ActiveDesignerEventHandler: Callable[[object, ActiveDesignerEventArgs], None] = ...
 """
@@ -124,253 +101,150 @@ class CheckoutException(ExternalException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @overload
     def __init__(self, message: str, errorCode: int):
-        """
-
-        :param message:
+        """:param message:
         :param errorCode:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CommandID(Object):
     """"""
 
     def __init__(self, menuGroup: Guid, commandID: int):
-        """
-
-        :param menuGroup:
+        """:param menuGroup:
         :param commandID:
         """
     @property
     def Guid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ID(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComponentChangedEventArgs(EventArgs):
     """"""
 
     def __init__(
-        self, component: object, member: MemberDescriptor, oldValue: object, newValue: object
+        self,
+        component: object,
+        member: MemberDescriptor,
+        oldValue: object,
+        newValue: object,
     ):
-        """
-
-        :param component:
+        """:param component:
         :param member:
         :param oldValue:
         :param newValue:
         """
     @property
     def Component(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Member(self) -> MemberDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NewValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OldValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ComponentChangedEventHandler: Callable[[object, ComponentChangedEventArgs], None] = ...
 """
@@ -383,44 +257,25 @@ class ComponentChangingEventArgs(EventArgs):
     """"""
 
     def __init__(self, component: object, member: MemberDescriptor):
-        """
-
-        :param component:
+        """:param component:
         :param member:
         """
     @property
     def Component(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Member(self) -> MemberDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ComponentChangingEventHandler: Callable[[object, ComponentChangingEventArgs], None] = ...
 """
@@ -433,37 +288,20 @@ class ComponentEventArgs(EventArgs):
     """"""
 
     def __init__(self, component: IComponent):
-        """
-
-        :param component:
-        """
+        """:param component:"""
     @property
     def Component(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ComponentEventHandler: Callable[[object, ComponentEventArgs], None] = ...
 """
@@ -476,51 +314,29 @@ class ComponentRenameEventArgs(EventArgs):
     """"""
 
     def __init__(self, component: object, oldName: str, newName: str):
-        """
-
-        :param component:
+        """:param component:
         :param oldName:
         :param newName:
         """
     @property
     def Component(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NewName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OldName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ComponentRenameEventHandler: Callable[[object, ComponentRenameEventArgs], None] = ...
 """
@@ -534,130 +350,69 @@ class DesignerCollection(Object, ICollection, IEnumerable):
 
     @overload
     def __init__(self, designers: IList):
-        """
-
-        :param designers:
-        """
+        """:param designers:"""
     @overload
     def __init__(self, designers: Array[IDesignerHost]):
-        """
-
-        :param designers:
-        """
+        """:param designers:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> IDesignerHost:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> IDesignerHost:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesignerEventArgs(EventArgs):
     """"""
 
     def __init__(self, host: IDesignerHost):
-        """
-
-        :param host:
-        """
+        """:param host:"""
     @property
     def Designer(self) -> IDesignerHost:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DesignerEventHandler: Callable[[object, DesignerEventArgs], None] = ...
 """
@@ -671,79 +426,46 @@ class DesignerOptionService(ABC, Object, IDesignerOptionService):
 
     @property
     def Options(self) -> DesignerOptionService.DesignerOptionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOptionValue(self, pageName: str, valueName: str) -> object:
-        """
-
-        :param pageName:
+        """:param pageName:
         :param valueName:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetOptionValue(self, pageName: str, valueName: str, value: object) -> None:
-        """
-
-        :param pageName:
+        """:param pageName:
         :param valueName:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class DesignerOptionCollection(Object, ICollection, IEnumerable, IList):
         """"""
 
         @property
         def Count(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def IsFixedSize(self) -> bool:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def IsReadOnly(self) -> bool:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def IsSynchronized(self) -> bool:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def Item(self) -> object:
-            """
-
-            :return:
-            """
+            """:return:"""
         @Item.setter
         def Item(self, value: object) -> None: ...
         @property
@@ -757,114 +479,69 @@ class DesignerOptionService(ABC, Object, IDesignerOptionService):
             """"""
         @property
         def SyncRoot(self) -> object:
-            """
-
-            :return:
-            """
+            """:return:"""
         def Add(self, value: object) -> int:
-            """
-
-            :param value:
+            """:param value:
             :return:
             """
         def Clear(self) -> None:
             """"""
         def Contains(self, value: object) -> bool:
-            """
-
-            :param value:
+            """:param value:
             :return:
             """
         def CopyTo(self, array: Array, index: int) -> None:
-            """
-
-            :param array:
+            """:param array:
             :param index:
             """
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetEnumerator(self) -> IEnumerator:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         @overload
         def IndexOf(self, value: DesignerOptionService.DesignerOptionCollection) -> int:
             """"""
         @overload
         def IndexOf(self, value: object) -> int:
-            """
-
-            :param value:
+            """:param value:
             :return:
             """
         def Insert(self, index: int, value: object) -> None:
-            """
-
-            :param index:
+            """:param index:
             :param value:
             """
         def Remove(self, value: object) -> None:
-            """
-
-            :param value:
-            """
+            """:param value:"""
         def RemoveAt(self, index: int) -> None:
-            """
-
-            :param index:
-            """
+            """:param index:"""
         def ShowDialog(self) -> bool:
             """"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
         def __contains__(self, value: object) -> bool:
-            """
-
-            :param value:
+            """:param value:
             :return:
             """
         @overload
         def __getitem__(self, index: int) -> object:
-            """
-
-            :param index:
+            """:param index:
             :return:
             """
         @overload
         def __getitem__(self, name: str) -> DesignerOptionService.DesignerOptionCollection:
             """"""
         def __iter__(self) -> Iterator[object]:
-            """
-
-            :return:
-            """
+            """:return:"""
         def __len__(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def __setitem__(self, index: int, value: object) -> None:
-            """
-
-            :param index:
+            """:param index:
             :param value:
             """
 
@@ -873,22 +550,13 @@ class DesignerTransaction(ABC, Object, IDisposable):
 
     @property
     def Canceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Committed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Cancel(self) -> None:
         """"""
     def Commit(self) -> None:
@@ -896,76 +564,43 @@ class DesignerTransaction(ABC, Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesignerTransactionCloseEventArgs(EventArgs):
     """"""
 
     @overload
     def __init__(self, commit: bool):
-        """
-
-        :param commit:
-        """
+        """:param commit:"""
     @overload
     def __init__(self, commit: bool, lastTransaction: bool):
-        """
-
-        :param commit:
+        """:param commit:
         :param lastTransaction:
         """
     @property
     def LastTransaction(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransactionCommitted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DesignerTransactionCloseEventHandler: Callable[
     [object, DesignerTransactionCloseEventArgs], None
@@ -981,113 +616,68 @@ class DesignerVerb(MenuCommand):
 
     @overload
     def __init__(self, text: str, handler: EventHandler):
-        """
-
-        :param text:
+        """:param text:
         :param handler:
         """
     @overload
     def __init__(self, text: str, handler: EventHandler, startCommandID: CommandID):
-        """
-
-        :param text:
+        """:param text:
         :param handler:
         :param startCommandID:
         """
     @property
     def Checked(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Checked.setter
     def Checked(self, value: bool) -> None: ...
     @property
     def CommandID(self) -> CommandID:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Description.setter
     def Description(self, value: str) -> None: ...
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
     def OleStatus(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Supported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Supported.setter
     def Supported(self, value: bool) -> None: ...
     @property
     def Text(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Visible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Visible.setter
     def Visible(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Invoke(self) -> None:
         """"""
     @overload
     def Invoke(self, arg: object) -> None:
-        """
-
-        :param arg:
-        """
+        """:param arg:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     CommandChanged: EventType[EventHandler] = ...
     """"""
 
@@ -1099,217 +689,130 @@ class DesignerVerbCollection(CollectionBase, ICollection, IEnumerable, IList):
         """"""
     @overload
     def __init__(self, value: Array[DesignerVerb]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: DesignerVerb) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: DesignerVerbCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[DesignerVerb]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: DesignerVerb) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[DesignerVerb], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: DesignerVerb) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: DesignerVerb) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: DesignerVerb) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: DesignerVerb) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -1320,83 +823,50 @@ class DesigntimeLicenseContext(LicenseContext, IServiceProvider):
         """"""
     @property
     def UsageMode(self) -> LicenseUsageMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSavedLicenseKey(self, type: Type, resourceAssembly: Assembly) -> str:
-        """
-
-        :param type:
+        """:param type:
         :param resourceAssembly:
         :return:
         """
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetSavedLicenseKey(self, type: Type, key: str) -> None:
-        """
-
-        :param type:
+        """:param type:
         :param key:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesigntimeLicenseContextSerializer(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Serialize(cls, o: Stream, cryptoKey: str, context: DesigntimeLicenseContext) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param cryptoKey:
         :param context:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HelpContextType(Enum):
     """"""
@@ -1423,67 +893,40 @@ class HelpKeywordAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, keyword: str):
-        """
-
-        :param keyword:
-        """
+        """:param keyword:"""
     @overload
     def __init__(self, t: Type):
-        """
-
-        :param t:
-        """
+        """:param t:"""
     @property
     def HelpKeyword(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1495,9 +938,7 @@ class HelpKeywordAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1507,21 +948,13 @@ class HelpKeywordAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HelpKeywordType(Enum):
     """"""
@@ -1537,19 +970,19 @@ class IComponentChangeService:
     """"""
 
     def OnComponentChanged(
-        self, component: object, member: MemberDescriptor, oldValue: object, newValue: object
+        self,
+        component: object,
+        member: MemberDescriptor,
+        oldValue: object,
+        newValue: object,
     ) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param member:
         :param oldValue:
         :param newValue:
         """
     def OnComponentChanging(self, component: object, member: MemberDescriptor) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param member:
         """
     ComponentAdded: EventType[ComponentEventHandler] = ...
@@ -1571,9 +1004,7 @@ class IComponentDiscoveryService:
     """"""
 
     def GetComponentTypes(self, designerHost: IDesignerHost, baseType: Type) -> ICollection:
-        """
-
-        :param designerHost:
+        """:param designerHost:
         :param baseType:
         :return:
         """
@@ -1582,56 +1013,35 @@ class IComponentInitializer:
     """"""
 
     def InitializeExistingComponent(self, defaultValues: IDictionary) -> None:
-        """
-
-        :param defaultValues:
-        """
+        """:param defaultValues:"""
     def InitializeNewComponent(self, defaultValues: IDictionary) -> None:
-        """
-
-        :param defaultValues:
-        """
+        """:param defaultValues:"""
 
 class IDesigner(IDisposable):
     """"""
 
     @property
     def Component(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Verbs(self) -> DesignerVerbCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def DoDefaultAction(self) -> None:
         """"""
     def Initialize(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
 
 class IDesignerEventService:
     """"""
 
     @property
     def ActiveDesigner(self) -> IDesignerHost:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Designers(self) -> DesignerCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     ActiveDesignerChanged: EventType[ActiveDesignerEventHandler] = ...
     """"""
     DesignerCreated: EventType[DesignerEventHandler] = ...
@@ -1645,171 +1055,104 @@ class IDesignerFilter:
     """"""
 
     def PostFilterAttributes(self, attributes: IDictionary) -> None:
-        """
-
-        :param attributes:
-        """
+        """:param attributes:"""
     def PostFilterEvents(self, events: IDictionary) -> None:
-        """
-
-        :param events:
-        """
+        """:param events:"""
     def PostFilterProperties(self, properties: IDictionary) -> None:
-        """
-
-        :param properties:
-        """
+        """:param properties:"""
     def PreFilterAttributes(self, attributes: IDictionary) -> None:
-        """
-
-        :param attributes:
-        """
+        """:param attributes:"""
     def PreFilterEvents(self, events: IDictionary) -> None:
-        """
-
-        :param events:
-        """
+        """:param events:"""
     def PreFilterProperties(self, properties: IDictionary) -> None:
-        """
-
-        :param properties:
-        """
+        """:param properties:"""
 
 class IDesignerHost(IServiceContainer, IServiceProvider):
     """"""
 
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InTransaction(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Loading(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RootComponent(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RootComponentClassName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransactionDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Activate(self) -> None:
         """"""
     @overload
     def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param callback:
         """
     @overload
     def AddService(self, serviceType: Type, serviceInstance: object) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param serviceInstance:
         """
     @overload
     def AddService(
         self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
     ) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param callback:
         :param promote:
         """
     @overload
     def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param serviceInstance:
         :param promote:
         """
     @overload
     def CreateComponent(self, componentClass: Type) -> IComponent:
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :return:
         """
     @overload
     def CreateComponent(self, componentClass: Type, name: str) -> IComponent:
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :param name:
         :return:
         """
     @overload
     def CreateTransaction(self) -> DesignerTransaction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateTransaction(self, description: str) -> DesignerTransaction:
-        """
-
-        :param description:
+        """:param description:
         :return:
         """
     def DestroyComponent(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     def GetDesigner(self, component: IComponent) -> IDesigner:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     def GetType(self, typeName: str) -> Type:
-        """
-
-        :param typeName:
+        """:param typeName:
         :return:
         """
     @overload
     def RemoveService(self, serviceType: Type) -> None:
-        """
-
-        :param serviceType:
-        """
+        """:param serviceType:"""
     @overload
     def RemoveService(self, serviceType: Type, promote: bool) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param promote:
         """
     Activated: EventType[EventHandler] = ...
@@ -1832,25 +1175,18 @@ class IDesignerHostTransactionState:
 
     @property
     def IsClosingTransaction(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDesignerOptionService:
     """"""
 
     def GetOptionValue(self, pageName: str, valueName: str) -> object:
-        """
-
-        :param pageName:
+        """:param pageName:
         :param valueName:
         :return:
         """
     def SetOptionValue(self, pageName: str, valueName: str, value: object) -> None:
-        """
-
-        :param pageName:
+        """:param pageName:
         :param valueName:
         :param value:
         """
@@ -1859,21 +1195,15 @@ class IDictionaryService:
     """"""
 
     def GetKey(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def GetValue(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def SetValue(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -1881,54 +1211,37 @@ class IEventBindingService:
     """"""
 
     def CreateUniqueMethodName(self, component: IComponent, e: EventDescriptor) -> str:
-        """
-
-        :param component:
+        """:param component:
         :param e:
         :return:
         """
     def GetCompatibleMethods(self, e: EventDescriptor) -> ICollection:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     def GetEvent(self, property: PropertyDescriptor) -> EventDescriptor:
-        """
-
-        :param property:
+        """:param property:
         :return:
         """
     def GetEventProperties(self, events: EventDescriptorCollection) -> PropertyDescriptorCollection:
-        """
-
-        :param events:
+        """:param events:
         :return:
         """
     def GetEventProperty(self, e: EventDescriptor) -> PropertyDescriptor:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @overload
     def ShowCode(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ShowCode(self, lineNumber: int) -> bool:
-        """
-
-        :param lineNumber:
+        """:param lineNumber:
         :return:
         """
     @overload
     def ShowCode(self, component: IComponent, e: EventDescriptor) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :param e:
         :return:
         """
@@ -1937,78 +1250,50 @@ class IExtenderListService:
     """"""
 
     def GetExtenderProviders(self) -> Array[IExtenderProvider]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IExtenderProviderService:
     """"""
 
     def AddExtenderProvider(self, provider: IExtenderProvider) -> None:
-        """
-
-        :param provider:
-        """
+        """:param provider:"""
     def RemoveExtenderProvider(self, provider: IExtenderProvider) -> None:
-        """
-
-        :param provider:
-        """
+        """:param provider:"""
 
 class IHelpService:
     """"""
 
     def AddContextAttribute(self, name: str, value: str, keywordType: HelpKeywordType) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         :param keywordType:
         """
     def ClearContextAttributes(self) -> None:
         """"""
     def CreateLocalContext(self, contextType: HelpContextType) -> IHelpService:
-        """
-
-        :param contextType:
+        """:param contextType:
         :return:
         """
     def RemoveContextAttribute(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     def RemoveLocalContext(self, localContext: IHelpService) -> None:
-        """
-
-        :param localContext:
-        """
+        """:param localContext:"""
     def ShowHelpFromKeyword(self, helpKeyword: str) -> None:
-        """
-
-        :param helpKeyword:
-        """
+        """:param helpKeyword:"""
     def ShowHelpFromUrl(self, helpUrl: str) -> None:
-        """
-
-        :param helpUrl:
-        """
+        """:param helpUrl:"""
 
 class IInheritanceService:
     """"""
 
     def AddInheritedComponents(self, component: IComponent, container: IContainer) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param container:
         """
     def GetInheritanceAttribute(self, component: IComponent) -> InheritanceAttribute:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
 
@@ -2017,46 +1302,25 @@ class IMenuCommandService:
 
     @property
     def Verbs(self) -> DesignerVerbCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddCommand(self, command: MenuCommand) -> None:
-        """
-
-        :param command:
-        """
+        """:param command:"""
     def AddVerb(self, verb: DesignerVerb) -> None:
-        """
-
-        :param verb:
-        """
+        """:param verb:"""
     def FindCommand(self, commandID: CommandID) -> MenuCommand:
-        """
-
-        :param commandID:
+        """:param commandID:
         :return:
         """
     def GlobalInvoke(self, commandID: CommandID) -> bool:
-        """
-
-        :param commandID:
+        """:param commandID:
         :return:
         """
     def RemoveCommand(self, command: MenuCommand) -> None:
-        """
-
-        :param command:
-        """
+        """:param command:"""
     def RemoveVerb(self, verb: DesignerVerb) -> None:
-        """
-
-        :param verb:
-        """
+        """:param verb:"""
     def ShowContextMenu(self, menuID: CommandID, x: int, y: int) -> None:
-        """
-
-        :param menuID:
+        """:param menuID:
         :param x:
         :param y:
         """
@@ -2065,34 +1329,23 @@ class IReferenceService:
     """"""
 
     def GetComponent(self, reference: object) -> IComponent:
-        """
-
-        :param reference:
+        """:param reference:
         :return:
         """
     def GetName(self, reference: object) -> str:
-        """
-
-        :param reference:
+        """:param reference:
         :return:
         """
     def GetReference(self, name: str) -> object:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetReferences(self) -> Array[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetReferences(self, baseType: Type) -> Array[object]:
-        """
-
-        :param baseType:
+        """:param baseType:
         :return:
         """
 
@@ -2100,15 +1353,11 @@ class IResourceService:
     """"""
 
     def GetResourceReader(self, info: CultureInfo) -> IResourceReader:
-        """
-
-        :param info:
+        """:param info:
         :return:
         """
     def GetResourceWriter(self, info: CultureInfo) -> IResourceWriter:
-        """
-
-        :param info:
+        """:param info:
         :return:
         """
 
@@ -2117,75 +1366,45 @@ class IRootDesigner(IDesigner, IDisposable):
 
     @property
     def Component(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportedTechnologies(self) -> Array[ViewTechnology]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Verbs(self) -> DesignerVerbCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def DoDefaultAction(self) -> None:
         """"""
     def GetView(self, technology: ViewTechnology) -> object:
-        """
-
-        :param technology:
+        """:param technology:
         :return:
         """
     def Initialize(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
 
 class ISelectionService:
     """"""
 
     @property
     def PrimarySelection(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SelectionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetComponentSelected(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetSelectedComponents(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def SetSelectedComponents(self, components: ICollection) -> None:
-        """
-
-        :param components:
-        """
+        """:param components:"""
     @overload
     def SetSelectedComponents(self, components: ICollection, selectionType: SelectionTypes) -> None:
-        """
-
-        :param components:
+        """:param components:
         :param selectionType:
         """
     SelectionChanged: EventType[EventHandler] = ...
@@ -2198,53 +1417,38 @@ class IServiceContainer(IServiceProvider):
 
     @overload
     def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param callback:
         """
     @overload
     def AddService(self, serviceType: Type, serviceInstance: object) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param serviceInstance:
         """
     @overload
     def AddService(
         self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
     ) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param callback:
         :param promote:
         """
     @overload
     def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param serviceInstance:
         :param promote:
         """
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     @overload
     def RemoveService(self, serviceType: Type) -> None:
-        """
-
-        :param serviceType:
-        """
+        """:param serviceType:"""
     @overload
     def RemoveService(self, serviceType: Type, promote: bool) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param promote:
         """
 
@@ -2253,59 +1457,38 @@ class ITreeDesigner(IDesigner, IDisposable):
 
     @property
     def Children(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Component(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Parent(self) -> IDesigner:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Verbs(self) -> DesignerVerbCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def DoDefaultAction(self) -> None:
         """"""
     def Initialize(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
 
 class ITypeDescriptorFilterService:
     """"""
 
     def FilterAttributes(self, component: IComponent, attributes: IDictionary) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :param attributes:
         :return:
         """
     def FilterEvents(self, component: IComponent, events: IDictionary) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :param events:
         :return:
         """
     def FilterProperties(self, component: IComponent, properties: IDictionary) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :param properties:
         :return:
         """
@@ -2314,9 +1497,7 @@ class ITypeDiscoveryService:
     """"""
 
     def GetTypes(self, baseType: Type, excludeGlobalTypes: bool) -> ICollection:
-        """
-
-        :param baseType:
+        """:param baseType:
         :param excludeGlobalTypes:
         :return:
         """
@@ -2326,144 +1507,92 @@ class ITypeResolutionService:
 
     @overload
     def GetAssembly(self, name: AssemblyName) -> Assembly:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetAssembly(self, name: AssemblyName, throwOnError: bool) -> Assembly:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :return:
         """
     def GetPathOfAssembly(self, name: AssemblyName) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :param ignoreCase:
         :return:
         """
     def ReferenceAssembly(self, name: AssemblyName) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
 
 class MenuCommand(Object):
     """"""
 
     def __init__(self, handler: EventHandler, command: CommandID):
-        """
-
-        :param handler:
+        """:param handler:
         :param command:
         """
     @property
     def Checked(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Checked.setter
     def Checked(self, value: bool) -> None: ...
     @property
     def CommandID(self) -> CommandID:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
     def OleStatus(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Supported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Supported.setter
     def Supported(self, value: bool) -> None: ...
     @property
     def Visible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Visible.setter
     def Visible(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Invoke(self) -> None:
         """"""
     @overload
     def Invoke(self, arg: object) -> None:
-        """
-
-        :param arg:
-        """
+        """:param arg:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     CommandChanged: EventType[EventHandler] = ...
     """"""
 
@@ -2474,50 +1603,30 @@ class RuntimeLicenseContext(LicenseContext, IServiceProvider):
         """"""
     @property
     def UsageMode(self) -> LicenseUsageMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSavedLicenseKey(self, type: Type, resourceAssembly: Assembly) -> str:
-        """
-
-        :param type:
+        """:param type:
         :param resourceAssembly:
         :return:
         """
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetSavedLicenseKey(self, type: Type, key: str) -> None:
-        """
-
-        :param type:
+        """:param type:
         :param key:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SelectionTypes(Enum):
     """"""
@@ -2553,84 +1662,55 @@ class ServiceContainer(Object, IServiceContainer, IDisposable, IServiceProvider)
         """"""
     @overload
     def __init__(self, parentProvider: IServiceProvider):
-        """
-
-        :param parentProvider:
-        """
+        """:param parentProvider:"""
     @overload
     def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param callback:
         """
     @overload
     def AddService(self, serviceType: Type, serviceInstance: object) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param serviceInstance:
         """
     @overload
     def AddService(
         self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
     ) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param callback:
         :param promote:
         """
     @overload
     def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param serviceInstance:
         :param promote:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def RemoveService(self, serviceType: Type) -> None:
-        """
-
-        :param serviceType:
-        """
+        """:param serviceType:"""
     @overload
     def RemoveService(self, serviceType: Type, promote: bool) -> None:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :param promote:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ServiceCreatorCallback: Callable[[IServiceContainer, Type], object] = ...
 """
@@ -2921,26 +2001,15 @@ class StandardCommands(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StandardToolWindows(Object):
     """"""
@@ -2988,65 +2057,39 @@ class StandardToolWindows(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeDescriptionProviderService(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProvider(self, instance: object) -> TypeDescriptionProvider:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetProvider(self, type: Type) -> TypeDescriptionProvider:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ViewTechnology(Enum):
     """"""

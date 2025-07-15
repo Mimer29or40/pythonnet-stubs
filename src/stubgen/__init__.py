@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Final
 
 __name__: Final[str] = "stubgen"

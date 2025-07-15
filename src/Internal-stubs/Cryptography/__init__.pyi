@@ -1,9 +1,6 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import overload
 
-from Interop.NCrypt import ErrorCode
 from Microsoft.Win32.SafeHandles import SafeBCryptAlgorithmHandle
 from System import Array
 from System import Func
@@ -25,39 +22,28 @@ class BasicSymmetricCipher(ABC, Object, IDisposable):
 
     @property
     def BlockSizeInBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Transform(
-        self, input: Array[int], inputOffset: int, count: int, output: Array[int], outputOffset: int
+        self,
+        input: Array[int],
+        inputOffset: int,
+        count: int,
+        output: Array[int],
+        outputOffset: int,
     ) -> int:
-        """
-
-        :param input:
+        """:param input:
         :param inputOffset:
         :param count:
         :param output:
@@ -65,9 +51,7 @@ class BasicSymmetricCipher(ABC, Object, IDisposable):
         :return:
         """
     def TransformFinal(self, input: Array[int], inputOffset: int, count: int) -> Array[int]:
-        """
-
-        :param input:
+        """:param input:
         :param inputOffset:
         :param count:
         :return:
@@ -85,9 +69,7 @@ class BasicSymmetricCipherBCrypt(BasicSymmetricCipher, IDisposable):
         iv: Array[int],
         encrypting: bool,
     ):
-        """
-
-        :param algorithm:
+        """:param algorithm:
         :param cipherMode:
         :param blockSizeInBytes:
         :param key:
@@ -96,39 +78,28 @@ class BasicSymmetricCipherBCrypt(BasicSymmetricCipher, IDisposable):
         """
     @property
     def BlockSizeInBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Transform(
-        self, input: Array[int], inputOffset: int, count: int, output: Array[int], outputOffset: int
+        self,
+        input: Array[int],
+        inputOffset: int,
+        count: int,
+        output: Array[int],
+        outputOffset: int,
     ) -> int:
-        """
-
-        :param input:
+        """:param input:
         :param inputOffset:
         :param count:
         :param output:
@@ -136,9 +107,7 @@ class BasicSymmetricCipherBCrypt(BasicSymmetricCipher, IDisposable):
         :return:
         """
     def TransformFinal(self, input: Array[int], inputOffset: int, count: int) -> Array[int]:
-        """
-
-        :param input:
+        """:param input:
         :param inputOffset:
         :param count:
         :return:
@@ -155,9 +124,7 @@ class BasicSymmetricCipherNCrypt(BasicSymmetricCipher, IDisposable):
         iv: Array[int],
         encrypting: bool,
     ):
-        """
-
-        :param cngKeyFactory:
+        """:param cngKeyFactory:
         :param cipherMode:
         :param blockSizeInBytes:
         :param iv:
@@ -165,39 +132,28 @@ class BasicSymmetricCipherNCrypt(BasicSymmetricCipher, IDisposable):
         """
     @property
     def BlockSizeInBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Transform(
-        self, input: Array[int], inputOffset: int, count: int, output: Array[int], outputOffset: int
+        self,
+        input: Array[int],
+        inputOffset: int,
+        count: int,
+        output: Array[int],
+        outputOffset: int,
     ) -> int:
-        """
-
-        :param input:
+        """:param input:
         :param inputOffset:
         :param count:
         :param output:
@@ -205,9 +161,7 @@ class BasicSymmetricCipherNCrypt(BasicSymmetricCipher, IDisposable):
         :return:
         """
     def TransformFinal(self, input: Array[int], inputOffset: int, count: int) -> Array[int]:
-        """
-
-        :param input:
+        """:param input:
         :param inputOffset:
         :param count:
         :return:
@@ -218,10 +172,7 @@ class CngSymmetricAlgorithmCore(ValueType):
 
     @overload
     def __init__(self, outer: ICngSymmetricAlgorithm):
-        """
-
-        :param outer:
-        """
+        """:param outer:"""
     @overload
     def __init__(
         self,
@@ -230,45 +181,31 @@ class CngSymmetricAlgorithmCore(ValueType):
         provider: CngProvider,
         openOptions: CngKeyOpenOptions,
     ):
-        """
-
-        :param outer:
+        """:param outer:
         :param keyName:
         :param provider:
         :param openOptions:
         """
     @overload
     def CreateDecryptor(self) -> ICryptoTransform:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateDecryptor(self, rgbKey: Array[int], rgbIV: Array[int]) -> ICryptoTransform:
-        """
-
-        :param rgbKey:
+        """:param rgbKey:
         :param rgbIV:
         :return:
         """
     @overload
     def CreateEncryptor(self) -> ICryptoTransform:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateEncryptor(self, rgbKey: Array[int], rgbIV: Array[int]) -> ICryptoTransform:
-        """
-
-        :param rgbKey:
+        """:param rgbKey:
         :param rgbIV:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GenerateIV(self) -> None:
@@ -276,122 +213,74 @@ class CngSymmetricAlgorithmCore(ValueType):
     def GenerateKey(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeyIfExportable(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetKey(self, key: Array[int]) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def SetKeySize(self, keySize: int, outer: ICngSymmetricAlgorithm) -> None:
-        """
-
-        :param keySize:
+        """:param keySize:
         :param outer:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CryptoThrowHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ToCryptographicException(cls, hr: int) -> CryptographicException:
-        """
-
-        :param hr:
+        """:param hr:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Helpers(ABC, Object):
     """"""
 
     @classmethod
     def BitSizeToByteSize(cls, bits: int) -> int:
-        """
-
-        :param bits:
+        """:param bits:
         :return:
         """
     @classmethod
     def CloneByteArray(cls, src: Array[int]) -> Array[int]:
-        """
-
-        :param src:
+        """:param src:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GenerateRandom(cls, count: int) -> Array[int]:
-        """
-
-        :param count:
+        """:param count:
         :return:
         """
     @classmethod
     def GetCipherIv(cls, cipherMode: CipherMode, iv: Array[int]) -> Array[int]:
-        """
-
-        :param cipherMode:
+        """:param cipherMode:
         :param iv:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsLegalSize(cls, size: int, legalSizes: Array[KeySizes]) -> bool:
-        """
-
-        :param size:
+        """:param size:
         :param legalSizes:
         :return:
         """
@@ -399,21 +288,14 @@ class Helpers(ABC, Object):
     def ToCryptographicException(
         cls, errorCode: Interop.NCrypt.ErrorCode
     ) -> CryptographicException:
-        """
-
-        :param errorCode:
+        """:param errorCode:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UsesIv(cls, cipherMode: CipherMode) -> bool:
-        """
-
-        :param cipherMode:
+        """:param cipherMode:
         :return:
         """
 
@@ -422,66 +304,37 @@ class ICngSymmetricAlgorithm:
 
     @property
     def BaseKey(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BaseKey.setter
     def BaseKey(self, value: Array[int]) -> None: ...
     @property
     def BaseKeySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BaseKeySize.setter
     def BaseKeySize(self, value: int) -> None: ...
     @property
     def BlockSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IV(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IV.setter
     def IV(self, value: Array[int]) -> None: ...
     @property
     def LegalKeySizes(self) -> Array[KeySizes]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Mode(self) -> CipherMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Padding(self) -> PaddingMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEphemeralModeHandle(self) -> SafeBCryptAlgorithmHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNCryptAlgorithmIdentifier(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsWeakKey(self, key: Array[int]) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
 
@@ -489,124 +342,73 @@ class KeyPropertyName(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SymmetricImportExportExtensions(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetSymmetricKeyDataIfExportable(cls, cngKey: CngKey, algorithm: str) -> Array[int]:
-        """
-
-        :param cngKey:
+        """:param cngKey:
         :param algorithm:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ToCngKey(cls, key: Array[int], algorithm: str) -> CngKey:
-        """
-
-        :param key:
+        """:param key:
         :param algorithm:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UniversalCryptoDecryptor(UniversalCryptoTransform, ICryptoTransform, IDisposable):
     """"""
 
     def __init__(self, paddingMode: PaddingMode, basicSymmetricCipher: BasicSymmetricCipher):
-        """
-
-        :param paddingMode:
+        """:param paddingMode:
         :param basicSymmetricCipher:
         """
     @property
     def CanReuseTransform(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTransformMultipleBlocks(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InputBlockSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputBlockSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TransformBlock(
         self,
         inputBuffer: Array[int],
@@ -615,9 +417,7 @@ class UniversalCryptoDecryptor(UniversalCryptoTransform, ICryptoTransform, IDisp
         outputBuffer: Array[int],
         outputOffset: int,
     ) -> int:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param inputOffset:
         :param inputCount:
         :param outputBuffer:
@@ -627,9 +427,7 @@ class UniversalCryptoDecryptor(UniversalCryptoTransform, ICryptoTransform, IDisp
     def TransformFinalBlock(
         self, inputBuffer: Array[int], inputOffset: int, inputCount: int
     ) -> Array[int]:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param inputOffset:
         :param inputCount:
         :return:
@@ -639,58 +437,33 @@ class UniversalCryptoEncryptor(UniversalCryptoTransform, ICryptoTransform, IDisp
     """"""
 
     def __init__(self, paddingMode: PaddingMode, basicSymmetricCipher: BasicSymmetricCipher):
-        """
-
-        :param paddingMode:
+        """:param paddingMode:
         :param basicSymmetricCipher:
         """
     @property
     def CanReuseTransform(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTransformMultipleBlocks(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InputBlockSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputBlockSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TransformBlock(
         self,
         inputBuffer: Array[int],
@@ -699,9 +472,7 @@ class UniversalCryptoEncryptor(UniversalCryptoTransform, ICryptoTransform, IDisp
         outputBuffer: Array[int],
         outputOffset: int,
     ) -> int:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param inputOffset:
         :param inputCount:
         :param outputBuffer:
@@ -711,9 +482,7 @@ class UniversalCryptoEncryptor(UniversalCryptoTransform, ICryptoTransform, IDisp
     def TransformFinalBlock(
         self, inputBuffer: Array[int], inputOffset: int, inputCount: int
     ) -> Array[int]:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param inputOffset:
         :param inputCount:
         :return:
@@ -724,35 +493,21 @@ class UniversalCryptoTransform(ABC, Object, ICryptoTransform, IDisposable):
 
     @property
     def CanReuseTransform(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTransformMultipleBlocks(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InputBlockSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputBlockSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Create(
         cls, paddingMode: PaddingMode, cipher: BasicSymmetricCipher, encrypting: bool
     ) -> ICryptoTransform:
-        """
-
-        :param paddingMode:
+        """:param paddingMode:
         :param cipher:
         :param encrypting:
         :return:
@@ -760,26 +515,15 @@ class UniversalCryptoTransform(ABC, Object, ICryptoTransform, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TransformBlock(
         self,
         inputBuffer: Array[int],
@@ -788,9 +532,7 @@ class UniversalCryptoTransform(ABC, Object, ICryptoTransform, IDisposable):
         outputBuffer: Array[int],
         outputOffset: int,
     ) -> int:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param inputOffset:
         :param inputCount:
         :param outputBuffer:
@@ -800,9 +542,7 @@ class UniversalCryptoTransform(ABC, Object, ICryptoTransform, IDisposable):
     def TransformFinalBlock(
         self, inputBuffer: Array[int], inputOffset: int, inputCount: int
     ) -> Array[int]:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param inputOffset:
         :param inputCount:
         :return:

@@ -1,11 +1,8 @@
-from __future__ import annotations
-
 from abc import ABC
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Optional
 from typing import TypeVar
 from typing import overload
 
@@ -80,99 +77,61 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 class AnyAllSearchOperator(
-    Generic[TInput], UnaryQueryOperator[TInput, Boolean], IEnumerable[Boolean], IEnumerable
+    Generic[TInput],
+    UnaryQueryOperator[TInput, Boolean],
+    IEnumerable[Boolean],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[bool]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[bool]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[bool]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ArrayMergeHelper(Generic[TInputOutput], Object, IMergeHelper[TInputOutput]):
     """"""
 
     def __init__(self, settings: QuerySettings, queryResults: QueryResults[TInputOutput]):
-        """
-
-        :param settings:
+        """:param settings:
         :param queryResults:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Execute(self) -> None:
         """"""
     def GetEnumerator(self) -> IEnumerator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResultsAsArray(self) -> Array[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssociativeAggregationOperator(
     Generic[TInput, TIntermediate, TOutput],
@@ -183,53 +142,31 @@ class AssociativeAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
+        self, mergeOptions: ParallelMergeOptions | None
     ) -> IEnumerator[TIntermediate]:
-        """
-
-        :param mergeOptions:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TIntermediate]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsynchronousChannel(Generic[T], Object, IDisposable):
     """"""
@@ -237,26 +174,15 @@ class AsynchronousChannel(Generic[T], Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsynchronousChannelMergeEnumerator(
     Generic[T], MergeEnumerator[T], IEnumerator[T], IEnumerator, IDisposable
@@ -265,40 +191,23 @@ class AsynchronousChannelMergeEnumerator(
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BinaryQueryOperator(
     ABC,
@@ -310,39 +219,23 @@ class BinaryQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TLeftInput, TLeftKey],
@@ -351,9 +244,7 @@ class BinaryQueryOperator(
         preferStriping: bool,
         settings: QuerySettings,
     ) -> None:
-        """
-
-        :param leftPartitionedStream:
+        """:param leftPartitionedStream:
         :param rightPartitionedStream:
         :param outputRecipient:
         :param preferStriping:
@@ -361,91 +252,52 @@ class BinaryQueryOperator(
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CancellableEnumerable(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CancellationState(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConcatKey(Generic[TLeftKey, TRightKey], ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConcatQueryOperator(
     Generic[TSource],
@@ -456,39 +308,23 @@ class ConcatQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TSource, TLeftKey],
@@ -497,9 +333,7 @@ class ConcatQueryOperator(
         preferStriping: bool,
         settings: QuerySettings,
     ) -> None:
-        """
-
-        :param leftPartitionedStream:
+        """:param leftPartitionedStream:
         :param rightPartitionedStream:
         :param outputRecipient:
         :param preferStriping:
@@ -507,68 +341,43 @@ class ConcatQueryOperator(
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContainsSearchOperator(
-    Generic[TInput], UnaryQueryOperator[TInput, Boolean], IEnumerable[Boolean], IEnumerable
+    Generic[TInput],
+    UnaryQueryOperator[TInput, Boolean],
+    IEnumerable[Boolean],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[bool]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[bool]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[bool]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CountAggregationOperator(
     Generic[TSource],
@@ -579,296 +388,178 @@ class CountAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DecimalAverageAggregationOperator(
-    InlinedAggregationOperator[Decimal, Pair, Int64, Decimal], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Decimal, Pair, Int64, Decimal],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DecimalMinMaxAggregationOperator(
-    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
+    InlinedAggregationOperator[Decimal, Decimal, Decimal],
+    IEnumerable[Decimal],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Decimal]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Decimal]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Decimal]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DecimalSumAggregationOperator(
-    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
+    InlinedAggregationOperator[Decimal, Decimal, Decimal],
+    IEnumerable[Decimal],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Decimal]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Decimal]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Decimal]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultIfEmptyQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+    Generic[TSource],
+    UnaryQueryOperator[TSource, TSource],
+    IEnumerable[TSource],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultMergeHelper(Generic[TInputOutput, TIgnoreKey], Object, IMergeHelper[TInputOutput]):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Execute(self) -> None:
         """"""
     def GetEnumerator(self) -> IEnumerator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResultsAsArray(self) -> Array[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DistinctQueryOperator(
     Generic[TInputOutput],
@@ -879,105 +570,61 @@ class DistinctQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[TInputOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DoubleAverageAggregationOperator(
-    InlinedAggregationOperator[Double, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Double, Pair, Int64, Double],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DoubleMinMaxAggregationOperator(
     InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
@@ -985,51 +632,29 @@ class DoubleMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[float]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DoubleSumAggregationOperator(
     InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
@@ -1037,148 +662,91 @@ class DoubleSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[float]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ElementAtQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+    Generic[TSource],
+    UnaryQueryOperator[TSource, TSource],
+    IEnumerable[TSource],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EmptyEnumerable(Generic[T], ParallelQuery[T], IEnumerable[T], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EmptyEnumerator(
-    Generic[T], QueryOperatorEnumerator[T, Int32], IEnumerator[T], IEnumerator, IDisposable
+    Generic[T],
+    QueryOperatorEnumerator[T, Int32],
+    IEnumerator[T],
+    IEnumerator,
+    IDisposable,
 ):
     """"""
 
@@ -1186,10 +754,7 @@ class EmptyEnumerator(
         """"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Dispose(self) -> None:
         """"""
@@ -1197,75 +762,41 @@ class EmptyEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EnumerableWrapperWeakToStrong(Object, IEnumerable[Object], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExceptQueryOperator(
     Generic[TInputOutput],
@@ -1276,41 +807,23 @@ class ExceptQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[TInputOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TInputOutput, TLeftKey],
@@ -1319,9 +832,7 @@ class ExceptQueryOperator(
         preferStriping: bool,
         settings: QuerySettings,
     ) -> None:
-        """
-
-        :param leftPartitionedStream:
+        """:param leftPartitionedStream:
         :param rightPartitionedStream:
         :param outputRecipient:
         :param preferStriping:
@@ -1329,195 +840,117 @@ class ExceptQueryOperator(
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExceptionAggregator(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExchangeUtilities(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FirstQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+    Generic[TSource],
+    UnaryQueryOperator[TSource, TSource],
+    IEnumerable[TSource],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FixedMaxHeap(Generic[TElement], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FloatAverageAggregationOperator(
-    InlinedAggregationOperator[Single, Pair, Int64, Single], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Single, Pair, Int64, Single],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FloatMinMaxAggregationOperator(
     InlinedAggregationOperator[Single, Single, Single], IEnumerable[Single], IEnumerable
@@ -1525,51 +958,29 @@ class FloatMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[float]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FloatSumAggregationOperator(
     InlinedAggregationOperator[Single, Double, Single], IEnumerable[Double], IEnumerable
@@ -1577,128 +988,76 @@ class FloatSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[float]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ForAllOperator(
-    Generic[TInput], UnaryQueryOperator[TInput, TInput], IEnumerable[TInput], IEnumerable
+    Generic[TInput],
+    UnaryQueryOperator[TInput, TInput],
+    IEnumerable[TInput],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TInput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ForAllSpoolingTask(Generic[TInputOutput, TIgnoreKey], SpoolingTaskBase):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupByElementSelectorQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TElement, TOrderKey],
@@ -1709,26 +1068,15 @@ class GroupByElementSelectorQueryOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupByGrouping(
     Generic[TGroupKey, TElement],
@@ -1741,48 +1089,25 @@ class GroupByGrouping(
 
     @property
     def Key(self) -> TGroupKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupByIdentityQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TOrderKey],
@@ -1793,26 +1118,15 @@ class GroupByIdentityQueryOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupByQueryOperator(
     Generic[TSource, TGroupKey, TElement],
@@ -1823,53 +1137,31 @@ class GroupByQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
+        self, mergeOptions: ParallelMergeOptions | None
     ) -> IEnumerator[IGrouping, TElement]:
-        """
-
-        :param mergeOptions:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[IGrouping, TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupByQueryOperatorEnumerator(
     ABC,
@@ -1881,26 +1173,15 @@ class GroupByQueryOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GroupJoinQueryOperator(
     Generic[TLeftInput, TRightInput, TKey, TOutput],
@@ -1911,39 +1192,23 @@ class GroupJoinQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TLeftInput, TLeftKey],
@@ -1952,9 +1217,7 @@ class GroupJoinQueryOperator(
         preferStriping: bool,
         settings: QuerySettings,
     ) -> None:
-        """
-
-        :param leftPartitionedStream:
+        """:param leftPartitionedStream:
         :param rightPartitionedStream:
         :param outputRecipient:
         :param preferStriping:
@@ -1962,41 +1225,24 @@ class GroupJoinQueryOperator(
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GrowingArray(Generic[T], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HashJoinQueryOperatorEnumerator(
     Generic[TLeftInput, TLeftKey, TRightInput, THashKey, TOutput],
@@ -2007,113 +1253,69 @@ class HashJoinQueryOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HashLookup(Generic[TKey, TValue], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HashRepartitionEnumerator(
-    Generic[TInputOutput, THashKey, TIgnoreKey], QueryOperatorEnumerator[Pair, THashKey, Int32]
+    Generic[TInputOutput, THashKey, TIgnoreKey],
+    QueryOperatorEnumerator[Pair, THashKey, Int32],
 ):
     """"""
 
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HashRepartitionStream(
-    ABC, Generic[TInputOutput, THashKey, TOrderKey], PartitionedStream[Pair, THashKey, TOrderKey]
+    ABC,
+    Generic[TInputOutput, THashKey, TOrderKey],
+    PartitionedStream[Pair, THashKey, TOrderKey],
 ):
     """"""
 
     @property
     def PartitionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IMergeHelper(Generic[TInputOutput]):
     """"""
@@ -2121,23 +1323,15 @@ class IMergeHelper(Generic[TInputOutput]):
     def Execute(self) -> None:
         """"""
     def GetEnumerator(self) -> IEnumerator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResultsAsArray(self) -> Array[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IParallelPartitionable(Generic[T]):
     """"""
 
     def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator, int]:
-        """
-
-        :param partitionCount:
+        """:param partitionCount:
         :return:
         """
 
@@ -2145,62 +1339,40 @@ class IPartitionedStreamRecipient(Generic[TElement]):
     """"""
 
     def Receive(self, partitionedStream: PartitionedStream[TElement, TKey]) -> None:
-        """
-
-        :param partitionedStream:
-        """
+        """:param partitionedStream:"""
 
 class IndexedSelectQueryOperator(
-    Generic[TInput, TOutput], UnaryQueryOperator[TInput, TOutput], IEnumerable[TOutput], IEnumerable
+    Generic[TInput, TOutput],
+    UnaryQueryOperator[TInput, TOutput],
+    IEnumerable[TOutput],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IndexedWhereQueryOperator(
     Generic[TInputOutput],
@@ -2211,53 +1383,29 @@ class IndexedWhereQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[TInputOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InlinedAggregationOperator(
     ABC,
@@ -2269,53 +1417,31 @@ class InlinedAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
+        self, mergeOptions: ParallelMergeOptions | None
     ) -> IEnumerator[TIntermediate]:
-        """
-
-        :param mergeOptions:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TIntermediate]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InlinedAggregationOperatorEnumerator(
     ABC, Generic[TIntermediate], QueryOperatorEnumerator[TIntermediate, Int32]
@@ -2325,78 +1451,47 @@ class InlinedAggregationOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IntAverageAggregationOperator(
-    InlinedAggregationOperator[Int32, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Int32, Pair, Int64, Double],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IntMinMaxAggregationOperator(
     InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
@@ -2404,51 +1499,29 @@ class IntMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IntSumAggregationOperator(
     InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
@@ -2456,136 +1529,83 @@ class IntSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IntValueEvent(ManualResetEventSlim, IDisposable):
     """"""
 
     @property
     def IsSet(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SpinCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def Set(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param cancellationToken:
         :return:
         """
@@ -2599,41 +1619,23 @@ class IntersectQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[TInputOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TInputOutput, TLeftKey],
@@ -2642,9 +1644,7 @@ class IntersectQueryOperator(
         preferStriping: bool,
         settings: QuerySettings,
     ) -> None:
-        """
-
-        :param leftPartitionedStream:
+        """:param leftPartitionedStream:
         :param rightPartitionedStream:
         :param outputRecipient:
         :param preferStriping:
@@ -2652,16 +1652,10 @@ class IntersectQueryOperator(
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class JoinQueryOperator(
     Generic[TLeftInput, TRightInput, TKey, TOutput],
@@ -2672,39 +1666,23 @@ class JoinQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TLeftInput, TLeftKey],
@@ -2713,9 +1691,7 @@ class JoinQueryOperator(
         preferStriping: bool,
         settings: QuerySettings,
     ) -> None:
-        """
-
-        :param leftPartitionedStream:
+        """:param leftPartitionedStream:
         :param rightPartitionedStream:
         :param outputRecipient:
         :param preferStriping:
@@ -2723,110 +1699,65 @@ class JoinQueryOperator(
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LastQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+    Generic[TSource],
+    UnaryQueryOperator[TSource, TSource],
+    IEnumerable[TSource],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListChunk(Generic[TInputOutput], Object, IEnumerable[TInputOutput], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListQueryResults(
     Generic[T], QueryResults[T], ICollection[T], IEnumerable[T], IList[T], IEnumerable
@@ -2835,175 +1766,103 @@ class ListQueryResults(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: T) -> None: ...
     def Add(self, item: T) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: T) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, item: T) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def Insert(self, index: int, item: T) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     def Remove(self, item: T) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: T) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> T:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: T) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
 class LongAverageAggregationOperator(
-    InlinedAggregationOperator[Int64, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Int64, Pair, Int64, Double],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LongCountAggregationOperator(
     Generic[TSource],
@@ -3014,51 +1873,29 @@ class LongCountAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LongMinMaxAggregationOperator(
     InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
@@ -3066,51 +1903,29 @@ class LongMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LongSumAggregationOperator(
     InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
@@ -3118,51 +1933,29 @@ class LongSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Lookup(
     Generic[TKey, TElement],
@@ -3175,387 +1968,234 @@ class Lookup(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> IEnumerable[TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Contains(self, key: TKey) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[IGrouping, TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MergeEnumerator(
-    ABC, Generic[TInputOutput], Object, IEnumerator[TInputOutput], IEnumerator, IDisposable
+    ABC,
+    Generic[TInputOutput],
+    Object,
+    IEnumerator[TInputOutput],
+    IEnumerator,
+    IDisposable,
 ):
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MergeExecutor(Generic[TInputOutput], Object, IEnumerable[TInputOutput], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NoKeyMemoizationRequired(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NullableDecimalAverageAggregationOperator(
-    InlinedAggregationOperator[Decimal, Pair, Int64, Decimal], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Decimal, Pair, Int64, Decimal],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NullableDecimalMinMaxAggregationOperator(
-    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
+    InlinedAggregationOperator[Decimal, Decimal, Decimal],
+    IEnumerable[Decimal],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[Decimal]]:
-        """
-
-        :param mergeOptions:
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[Decimal | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[Decimal]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[Decimal | None]:
+        """:return:"""
 
 class NullableDecimalSumAggregationOperator(
-    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
+    InlinedAggregationOperator[Decimal, Decimal, Decimal],
+    IEnumerable[Decimal],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[Decimal]]:
-        """
-
-        :param mergeOptions:
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[Decimal | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[Decimal]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[Decimal | None]:
+        """:return:"""
 
 class NullableDoubleAverageAggregationOperator(
-    InlinedAggregationOperator[Double, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Double, Pair, Int64, Double],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NullableDoubleMinMaxAggregationOperator(
     InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
@@ -3563,53 +2203,29 @@ class NullableDoubleMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[float]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[float]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[float | None]:
+        """:return:"""
 
 class NullableDoubleSumAggregationOperator(
     InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
@@ -3617,105 +2233,61 @@ class NullableDoubleSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[float]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[float]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[float | None]:
+        """:return:"""
 
 class NullableFloatAverageAggregationOperator(
-    InlinedAggregationOperator[Single, Pair, Int64, Single], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Single, Pair, Int64, Single],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NullableFloatMinMaxAggregationOperator(
     InlinedAggregationOperator[Single, Single, Single], IEnumerable[Single], IEnumerable
@@ -3723,53 +2295,29 @@ class NullableFloatMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[float]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[float]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[float | None]:
+        """:return:"""
 
 class NullableFloatSumAggregationOperator(
     InlinedAggregationOperator[Single, Double, Single], IEnumerable[Double], IEnumerable
@@ -3777,105 +2325,61 @@ class NullableFloatSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[float]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[float | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[float]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[float | None]:
+        """:return:"""
 
 class NullableIntAverageAggregationOperator(
-    InlinedAggregationOperator[Int32, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Int32, Pair, Int64, Double],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NullableIntMinMaxAggregationOperator(
     InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
@@ -3883,53 +2387,29 @@ class NullableIntMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[int]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[int]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[int | None]:
+        """:return:"""
 
 class NullableIntSumAggregationOperator(
     InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
@@ -3937,105 +2417,61 @@ class NullableIntSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[int]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[int]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[int | None]:
+        """:return:"""
 
 class NullableLongAverageAggregationOperator(
-    InlinedAggregationOperator[Int64, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
+    InlinedAggregationOperator[Int64, Pair, Int64, Double],
+    IEnumerable[Pair, Int64],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[Pair, int]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Pair, int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NullableLongMinMaxAggregationOperator(
     InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
@@ -4043,53 +2479,29 @@ class NullableLongMinMaxAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[int]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[int]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[int | None]:
+        """:return:"""
 
 class NullableLongSumAggregationOperator(
     InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
@@ -4097,147 +2509,81 @@ class NullableLongSumAggregationOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[Optional[int]]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[int | None]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def __iter__(self) -> Iterator[Optional[int]]:
-        """
-
-        :return:
-        """
+    def __iter__(self) -> Iterator[int | None]:
+        """:return:"""
 
 class OrderPreservingMergeHelper(Generic[TInputOutput, TKey], Object, IMergeHelper[TInputOutput]):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Execute(self) -> None:
         """"""
     def GetEnumerator(self) -> IEnumerator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResultsAsArray(self) -> Array[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderPreservingPipeliningMergeHelper(Generic[TOutput, TKey], Object, IMergeHelper[TOutput]):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Execute(self) -> None:
         """"""
     def GetEnumerator(self) -> IEnumerator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResultsAsArray(self) -> Array[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderPreservingPipeliningSpoolingTask(Generic[TOutput, TKey], SpoolingTaskBase):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Spool(
         cls,
@@ -4253,35 +2599,21 @@ class OrderPreservingPipeliningSpoolingTask(Generic[TOutput, TKey], SpoolingTask
     ) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderPreservingSpoolingTask(Generic[TInputOutput, TKey], SpoolingTaskBase):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderedGroupByElementSelectorQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TElement, TOrderKey],
@@ -4292,26 +2624,15 @@ class OrderedGroupByElementSelectorQueryOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderedGroupByGrouping(
     Generic[TGroupKey, TOrderKey, TElement],
@@ -4324,48 +2645,25 @@ class OrderedGroupByGrouping(
 
     @property
     def Key(self) -> TGroupKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderedGroupByIdentityQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TOrderKey],
@@ -4376,26 +2674,15 @@ class OrderedGroupByIdentityQueryOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderedGroupByQueryOperatorEnumerator(
     ABC,
@@ -4407,55 +2694,34 @@ class OrderedGroupByQueryOperatorEnumerator(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderedHashRepartitionEnumerator(
-    Generic[TInputOutput, THashKey, TOrderKey], QueryOperatorEnumerator[Pair, THashKey, TOrderKey]
+    Generic[TInputOutput, THashKey, TOrderKey],
+    QueryOperatorEnumerator[Pair, THashKey, TOrderKey],
 ):
     """"""
 
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderedHashRepartitionStream(
     Generic[TInputOutput, THashKey, TOrderKey],
@@ -4465,31 +2731,17 @@ class OrderedHashRepartitionStream(
 
     @property
     def PartitionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrderingQueryOperator(
     Generic[TSource], QueryOperator[TSource], IEnumerable[TSource], IEnumerable
@@ -4497,57 +2749,33 @@ class OrderingQueryOperator(
     """"""
 
     def __init__(self, child: QueryOperator[TSource], orderOn: bool):
-        """
-
-        :param child:
+        """:param child:
         :param orderOn:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrdinalIndexState(Enum):
     """"""
@@ -4565,262 +2793,146 @@ class Pair(Generic[T, U], ValueType):
     """"""
 
     def __init__(self, first: T, second: U):
-        """
-
-        :param first:
+        """:param first:
         :param second:
         """
     @property
     def First(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @First.setter
     def First(self, value: T) -> None: ...
     @property
     def Second(self) -> U:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Second.setter
     def Second(self, value: U) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PairComparer(Generic[T, U], Object, IComparer[Pair, U]):
     """"""
 
     def __init__(self, comparer1: IComparer[T], comparer2: IComparer[U]):
-        """
-
-        :param comparer1:
+        """:param comparer1:
         :param comparer2:
         """
     def Compare(self, x: Pair[T, U], y: Pair[T, U]) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelEnumerableWrapper(ParallelQuery[Object], IEnumerable[Object], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParallelEnumerableWrapper(Generic[T], ParallelQuery[T], IEnumerable[T], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PartitionedDataSource(Generic[T], PartitionedStream[T, Int32]):
     """"""
 
     @property
     def PartitionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PartitionedStream(Generic[TElement, TKey], Object):
     """"""
 
     @property
     def PartitionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PartitionedStreamMerger(Generic[TOutput], Object, IPartitionedStreamRecipient[TOutput]):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Receive(self, partitionedStream: PartitionedStream[TOutput, TKey]) -> None:
-        """
-
-        :param partitionedStream:
-        """
+        """:param partitionedStream:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PartitionerQueryOperator(
     Generic[TElement], QueryOperator[TElement], IEnumerable[TElement], IEnumerable
@@ -4828,196 +2940,117 @@ class PartitionerQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TElement]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TElement]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PipelineSpoolingTask(Generic[TInputOutput, TIgnoreKey], SpoolingTaskBase):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PlinqEtwProvider(EventSource, IDisposable):
     """"""
 
     @property
     def ConstructionException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CurrentThreadActivityId(cls) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Guid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Settings(self) -> EventSourceSettings:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTrait(self, key: str) -> str:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :return:
         """
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :param channel:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Write(self, eventName: str) -> None:
-        """
-
-        :param eventName:
-        """
+        """:param eventName:"""
     @overload
     def Write(self, eventName: str, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
@@ -5030,9 +3063,7 @@ class PlinqEtwProvider(EventSource, IDisposable):
         relatedActivityId: Guid,
         data: T,
     ) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param activityId:
         :param relatedActivityId:
@@ -5051,51 +3082,29 @@ class PlinqEtwProvider(EventSource, IDisposable):
         def __init__(self):
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class Producer(Generic[TKey], ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProducerComparerInt(Object, IComparer[Producer[Int32]]):
     """"""
@@ -5103,33 +3112,20 @@ class ProducerComparerInt(Object, IComparer[Producer[Int32]]):
     def __init__(self):
         """"""
     def Compare(self, x: Producer[int], y: Producer[int]) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryAggregationOptions(Enum):
     """"""
@@ -5149,76 +3145,43 @@ class QueryExecutionOption(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryLifecycle(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryOpeningEnumerator(
     Generic[TOutput], Object, IEnumerator[TOutput], IEnumerator, IDisposable
@@ -5227,40 +3190,23 @@ class QueryOpeningEnumerator(
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryOperator(
     ABC, Generic[TOutput], ParallelQuery[TOutput], IEnumerable[TOutput], IEnumerable
@@ -5268,51 +3214,29 @@ class QueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryOperatorEnumerator(ABC, Generic[TElement, TKey], Object):
     """"""
@@ -5320,147 +3244,84 @@ class QueryOperatorEnumerator(ABC, Generic[TElement, TKey], Object):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryResults(ABC, Generic[T], Object, ICollection[T], IEnumerable[T], IList[T], IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: T) -> None: ...
     def Add(self, item: T) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: T) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, item: T) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def Insert(self, index: int, item: T) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     def Remove(self, item: T) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: T) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> T:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: T) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -5470,76 +3331,43 @@ class QuerySettings(ValueType):
     def CleanStateAtQueryEnd(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryTask(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueryTaskGroupState(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RangeEnumerable(
     ParallelQuery[Int32], IEnumerable[Int32], IEnumerable, IParallelPartitionable[Int32]
@@ -5547,49 +3375,27 @@ class RangeEnumerable(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator, int]:
-        """
-
-        :param partitionCount:
+        """:param partitionCount:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RepeatEnumerable(
     Generic[TResult],
@@ -5601,133 +3407,79 @@ class RepeatEnumerable(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator, int]:
-        """
-
-        :param partitionCount:
+        """:param partitionCount:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TResult]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReverseComparer(Generic[T], Object, IComparer[T]):
     """"""
 
     def Compare(self, x: T, y: T) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReverseQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+    Generic[TSource],
+    UnaryQueryOperator[TSource, TSource],
+    IEnumerable[TSource],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ScanQueryOperator(
     Generic[TElement], QueryOperator[TElement], IEnumerable[TElement], IEnumerable
@@ -5736,81 +3488,45 @@ class ScanQueryOperator(
 
     @property
     def Data(self) -> IEnumerable[TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TElement]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TElement]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Scheduling(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SelectManyQueryOperator(
     Generic[TLeftInput, TRightInput, TOutput],
@@ -5821,205 +3537,123 @@ class SelectManyQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SelectQueryOperator(
-    Generic[TInput, TOutput], UnaryQueryOperator[TInput, TOutput], IEnumerable[TOutput], IEnumerable
+    Generic[TInput, TOutput],
+    UnaryQueryOperator[TInput, TOutput],
+    IEnumerable[TOutput],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Shared(Generic[T], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SingleQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+    Generic[TSource],
+    UnaryQueryOperator[TSource, TSource],
+    IEnumerable[TSource],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TSource]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SortHelper(ABC, Generic[TInputOutput], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SortHelper(Generic[TInputOutput, TKey], SortHelper[TInputOutput], IDisposable):
     """"""
@@ -6027,26 +3661,15 @@ class SortHelper(Generic[TInputOutput, TKey], SortHelper[TInputOutput], IDisposa
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SortQueryOperator(
     Generic[TInputOutput, TSortKey],
@@ -6058,98 +3681,62 @@ class SortQueryOperator(
     """"""
 
     def CreateOrderedEnumerable(
-        self, keySelector: Func[TInputOutput, TKey], comparer: IComparer[TKey], descending: bool
+        self,
+        keySelector: Func[TInputOutput, TKey],
+        comparer: IComparer[TKey],
+        descending: bool,
     ) -> IOrderedEnumerable[TInputOutput]:
-        """
-
-        :param keySelector:
+        """:param keySelector:
         :param comparer:
         :param descending:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[TInputOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SortQueryOperatorEnumerator(
-    Generic[TInputOutput, TKey, TSortKey], QueryOperatorEnumerator[TInputOutput, TSortKey]
+    Generic[TInputOutput, TKey, TSortKey],
+    QueryOperatorEnumerator[TInputOutput, TSortKey],
 ):
     """"""
 
     @property
     def KeyComparer(self) -> IComparer[TSortKey]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SortQueryOperatorResults(
     Generic[TInputOutput, TSortKey],
@@ -6163,121 +3750,69 @@ class SortQueryOperatorResults(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> TInputOutput:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: TInputOutput) -> None: ...
     def Add(self, item: TInputOutput) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: TInputOutput) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[TInputOutput], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, item: TInputOutput) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def Insert(self, index: int, item: TInputOutput) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     def Remove(self, item: TInputOutput) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: TInputOutput) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> TInputOutput:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: TInputOutput) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -6285,101 +3820,57 @@ class SpoolingTask(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SpoolingTaskBase(ABC, QueryTask):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StopAndGoSpoolingTask(Generic[TInputOutput, TIgnoreKey], SpoolingTaskBase):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SynchronousChannel(Generic[T], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SynchronousChannelMergeEnumerator(
     Generic[T], MergeEnumerator[T], IEnumerator[T], IEnumerator, IDisposable
@@ -6388,221 +3879,137 @@ class SynchronousChannelMergeEnumerator(
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TakeOrSkipQueryOperator(
-    Generic[TResult], UnaryQueryOperator[TResult, TResult], IEnumerable[TResult], IEnumerable
+    Generic[TResult],
+    UnaryQueryOperator[TResult, TResult],
+    IEnumerable[TResult],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TResult]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TResult]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TResult]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TakeOrSkipWhileQueryOperator(
-    Generic[TResult], UnaryQueryOperator[TResult, TResult], IEnumerable[TResult], IEnumerable
+    Generic[TResult],
+    UnaryQueryOperator[TResult, TResult],
+    IEnumerable[TResult],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TResult]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TResult]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TResult]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TraceHelpers(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnaryQueryOperator(
-    ABC, Generic[TInput, TOutput], QueryOperator[TOutput], IEnumerable[TOutput], IEnumerable
+    ABC,
+    Generic[TInput, TOutput],
+    QueryOperator[TOutput],
+    IEnumerable[TOutput],
+    IEnumerable,
 ):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnionQueryOperator(
     Generic[TInputOutput],
@@ -6613,41 +4020,23 @@ class UnionQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[TInputOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TInputOutput, TLeftKey],
@@ -6656,9 +4045,7 @@ class UnionQueryOperator(
         preferStriping: bool,
         settings: QuerySettings,
     ) -> None:
-        """
-
-        :param leftPartitionedStream:
+        """:param leftPartitionedStream:
         :param rightPartitionedStream:
         :param outputRecipient:
         :param preferStriping:
@@ -6666,16 +4053,10 @@ class UnionQueryOperator(
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnorderedHashRepartitionStream(
     Generic[TInputOutput, THashKey, TIgnoreKey],
@@ -6685,56 +4066,31 @@ class UnorderedHashRepartitionStream(
 
     @property
     def PartitionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Util(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WhereQueryOperator(
     Generic[TInputOutput],
@@ -6745,120 +4101,70 @@ class WhereQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(
-        self, mergeOptions: Optional[ParallelMergeOptions]
-    ) -> IEnumerator[TInputOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TInputOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Wrapper(Generic[T], ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WrapperEqualityComparer(Generic[T], ValueType, IEqualityComparer[Wrapper[T]]):
     """"""
 
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, x: Wrapper[T], y: Wrapper[T]) -> bool:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self, obj: Wrapper[T]) -> int:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ZipQueryOperator(
     Generic[TLeftInput, TRightInput, TOutput],
@@ -6869,48 +4175,26 @@ class ZipQueryOperator(
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
-        """
-
-        :param mergeOptions:
+    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
+        """:param mergeOptions:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[TOutput]:
-        """
-
-        :return:
-        """
+        """:return:"""

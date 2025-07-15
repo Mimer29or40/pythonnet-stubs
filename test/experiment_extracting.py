@@ -1,13 +1,10 @@
 from __future__ import annotations
 
 import dataclasses
+from collections.abc import Collection
+from collections.abc import Mapping
+from collections.abc import Sequence
 from dataclasses import replace
-from typing import Collection
-from typing import Dict
-from typing import List
-from typing import Mapping
-from typing import Sequence
-from typing import Tuple
 
 import clr
 from System.Reflection import Assembly
@@ -30,7 +27,7 @@ from stubgen.model import CProperty
 def _extract_properties(
     type: TypeInfo, binding_flags: BindingFlags = None
 ) -> Collection[CProperty]:
-    found: Dict[str, CProperty] = {}
+    found: dict[str, CProperty] = {}
 
     info: PropertyInfo
     if binding_flags is None:
@@ -40,7 +37,7 @@ def _extract_properties(
         key: str = obj.to_doc_json()[0]
         found[key] = obj
 
-    bases: List[CProperty] = []
+    bases: list[CProperty] = []
     base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
     if type.BaseType is not None:
         bases.extend(_extract_properties(type.BaseType, binding_flags=base_binding_flags))
@@ -70,7 +67,7 @@ def extract_properties(info: TypeInfo) -> Mapping[str, CProperty]:
 
 
 def _extract_methods(type: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CMethod]:
-    found: Dict[str, CMethod] = {}
+    found: dict[str, CMethod] = {}
 
     info: MethodInfo
     if binding_flags is None:
@@ -80,7 +77,7 @@ def _extract_methods(type: TypeInfo, binding_flags: BindingFlags = None) -> Coll
         key: str = obj.to_doc_json()[0]
         found[key] = obj
 
-    bases: List[CMethod] = []
+    bases: list[CMethod] = []
     base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
     if type.BaseType is not None:
         bases.extend(_extract_methods(type.BaseType, binding_flags=base_binding_flags))
@@ -102,9 +99,9 @@ def _extract_methods(type: TypeInfo, binding_flags: BindingFlags = None) -> Coll
 
 
 def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
-    raw: List[CMethod] = list(_extract_methods(info))
+    raw: list[CMethod] = list(_extract_methods(info))
 
-    supported_methods: Mapping[str, Tuple[str, bool]] = {
+    supported_methods: Mapping[str, tuple[str, bool]] = {
         "op_Addition": ("__add__", True),
         "op_BitwiseAnd": ("__and__", True),
         "op_BitwiseOr": ("__or__", True),
@@ -143,7 +140,10 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
         parameters: Sequence[CParameter] = method.parameters
         if remove_param:
             parameters = tuple(
-                map(lambda p: dataclasses.replace(p, name="other"), method.parameters[1:])
+                map(
+                    lambda p: dataclasses.replace(p, name="other"),
+                    method.parameters[1:],
+                )
             )
 
         method: CMethod = dataclasses.replace(

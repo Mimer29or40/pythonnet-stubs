@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import overload
 
@@ -14,10 +12,7 @@ class ISoapXsd:
     """"""
 
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapAnyUri(Object, ISoapXsd):
     """"""
@@ -27,58 +22,33 @@ class SoapAnyUri(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapAnyUri:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapBase64Binary(Object, ISoapXsd):
     """"""
@@ -88,58 +58,33 @@ class SoapBase64Binary(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: Array[int]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: Array[int]) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapBase64Binary:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapDate(Object, ISoapXsd):
     """"""
@@ -149,73 +94,43 @@ class SoapDate(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: DateTime):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: DateTime, sign: int):
-        """
-
-        :param value:
+        """:param value:
         :param sign:
         """
     @property
     def Sign(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Sign.setter
     def Sign(self, value: int) -> None: ...
     @property
     def Value(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapDate:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapDateTime(Object):
     """"""
@@ -225,45 +140,27 @@ class SoapDateTime(Object):
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> DateTime:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def ToString(cls, value: DateTime) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
 
@@ -275,58 +172,33 @@ class SoapDay(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: DateTime):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapDay:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapDuration(Object):
     """"""
@@ -336,45 +208,27 @@ class SoapDuration(Object):
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> TimeSpan:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def ToString(cls, timeSpan: TimeSpan) -> str:
-        """
-
-        :param timeSpan:
+        """:param timeSpan:
         :return:
         """
 
@@ -386,58 +240,33 @@ class SoapEntities(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapEntities:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapEntity(Object, ISoapXsd):
     """"""
@@ -447,58 +276,33 @@ class SoapEntity(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapEntity:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapHexBinary(Object, ISoapXsd):
     """"""
@@ -508,58 +312,33 @@ class SoapHexBinary(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: Array[int]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: Array[int]) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapHexBinary:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapId(Object, ISoapXsd):
     """"""
@@ -569,58 +348,33 @@ class SoapId(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapId:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapIdref(Object, ISoapXsd):
     """"""
@@ -630,58 +384,33 @@ class SoapIdref(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapIdref:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapIdrefs(Object, ISoapXsd):
     """"""
@@ -691,58 +420,33 @@ class SoapIdrefs(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapIdrefs:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapInteger(Object, ISoapXsd):
     """"""
@@ -752,58 +456,33 @@ class SoapInteger(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: Decimal):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: Decimal) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapInteger:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapLanguage(Object, ISoapXsd):
     """"""
@@ -813,58 +492,33 @@ class SoapLanguage(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapLanguage:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapMonth(Object, ISoapXsd):
     """"""
@@ -874,58 +528,33 @@ class SoapMonth(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: DateTime):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapMonth:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapMonthDay(Object, ISoapXsd):
     """"""
@@ -935,58 +564,33 @@ class SoapMonthDay(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: DateTime):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapMonthDay:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapName(Object, ISoapXsd):
     """"""
@@ -996,58 +600,33 @@ class SoapName(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapName:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNcName(Object, ISoapXsd):
     """"""
@@ -1057,58 +636,33 @@ class SoapNcName(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNcName:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNegativeInteger(Object, ISoapXsd):
     """"""
@@ -1118,58 +672,33 @@ class SoapNegativeInteger(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: Decimal):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: Decimal) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNegativeInteger:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNmtoken(Object, ISoapXsd):
     """"""
@@ -1179,58 +708,33 @@ class SoapNmtoken(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNmtoken:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNmtokens(Object, ISoapXsd):
     """"""
@@ -1240,58 +744,33 @@ class SoapNmtokens(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNmtokens:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNonNegativeInteger(Object, ISoapXsd):
     """"""
@@ -1301,58 +780,33 @@ class SoapNonNegativeInteger(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: Decimal):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: Decimal) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNonNegativeInteger:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNonPositiveInteger(Object, ISoapXsd):
     """"""
@@ -1362,58 +816,33 @@ class SoapNonPositiveInteger(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: Decimal):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: Decimal) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNonPositiveInteger:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNormalizedString(Object, ISoapXsd):
     """"""
@@ -1423,58 +852,33 @@ class SoapNormalizedString(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNormalizedString:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapNotation(Object, ISoapXsd):
     """"""
@@ -1484,58 +888,33 @@ class SoapNotation(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapNotation:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapPositiveInteger(Object, ISoapXsd):
     """"""
@@ -1545,58 +924,33 @@ class SoapPositiveInteger(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: Decimal):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: Decimal) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapPositiveInteger:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapQName(Object, ISoapXsd):
     """"""
@@ -1606,89 +960,54 @@ class SoapQName(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, key: str, name: str):
-        """
-
-        :param key:
+        """:param key:
         :param name:
         """
     @overload
     def __init__(self, key: str, name: str, namespaceValue: str):
-        """
-
-        :param key:
+        """:param key:
         :param name:
         :param namespaceValue:
         """
     @property
     def Key(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Key.setter
     def Key(self, value: str) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Namespace.setter
     def Namespace(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapQName:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapTime(Object, ISoapXsd):
     """"""
@@ -1698,58 +1017,33 @@ class SoapTime(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: DateTime):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapTime:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapToken(Object, ISoapXsd):
     """"""
@@ -1759,83 +1053,47 @@ class SoapToken(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapToken:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapType(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapYear(Object, ISoapXsd):
     """"""
@@ -1845,73 +1103,43 @@ class SoapYear(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: DateTime):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: DateTime, sign: int):
-        """
-
-        :param value:
+        """:param value:
         :param sign:
         """
     @property
     def Sign(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Sign.setter
     def Sign(self, value: int) -> None: ...
     @property
     def Value(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapYear:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapYearMonth(Object, ISoapXsd):
     """"""
@@ -1921,70 +1149,40 @@ class SoapYearMonth(Object, ISoapXsd):
         """"""
     @overload
     def __init__(self, value: DateTime):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: DateTime, sign: int):
-        """
-
-        :param value:
+        """:param value:
         :param sign:
         """
     @property
     def Sign(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Sign.setter
     def Sign(self, value: int) -> None: ...
     @property
     def Value(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def XsdType(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetXsdType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, value: str) -> SoapYearMonth:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

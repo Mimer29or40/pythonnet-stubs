@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sys
 
 import clr
@@ -16,7 +18,7 @@ def main() -> None:
     print(asm0)
     # print(clr.GetClrType("TestLib.ClassWithSuper"))
     try:
-        from TestLib import ClassWithFields
+        pass
     except Exception as e:
         print(e)
 

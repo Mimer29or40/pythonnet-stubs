@@ -1,7 +1,4 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Tuple
 from typing import overload
 
 from System import Array
@@ -13,11 +10,14 @@ class IClrStrongName:
     """"""
 
     def GetHashFromAssemblyFile(
-        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pszFilePath:
+        self,
+        pszFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pszFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -25,11 +25,14 @@ class IClrStrongName:
         :return:
         """
     def GetHashFromAssemblyFileW(
-        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pwzFilePath:
+        self,
+        pwzFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pwzFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -44,10 +47,8 @@ class IClrStrongName:
         pbHash: Array[int],
         cchHash: int,
         pchHash: int,
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pbBlob:
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pbBlob:
         :param cchBlob:
         :param piHashAlg:
         :param pbHash:
@@ -56,11 +57,14 @@ class IClrStrongName:
         :return:
         """
     def GetHashFromFile(
-        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pszFilePath:
+        self,
+        pszFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pszFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -68,11 +72,14 @@ class IClrStrongName:
         :return:
         """
     def GetHashFromFileW(
-        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pwzFilePath:
+        self,
+        pwzFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pwzFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -80,11 +87,14 @@ class IClrStrongName:
         :return:
         """
     def GetHashFromHandle(
-        self, hFile: IntPtr, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param hFile:
+        self,
+        hFile: IntPtr,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param hFile:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -93,36 +103,28 @@ class IClrStrongName:
         """
     def StrongNameCompareAssemblies(
         self, pwzAssembly1: str, pwzAssembly2: str, dwResult: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pwzAssembly1:
+    ) -> tuple[int, int]:
+        """:param pwzAssembly1:
         :param pwzAssembly2:
         :param dwResult:
         :return:
         """
     def StrongNameFreeBuffer(self, pbMemory: IntPtr) -> int:
-        """
-
-        :param pbMemory:
+        """:param pbMemory:
         :return:
         """
     def StrongNameGetBlob(
         self, pwzFilePath: str, pbBlob: Array[int], pcbBlob: int
-    ) -> Tuple[int, Array[int], int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, Array[int], int]:
+        """:param pwzFilePath:
         :param pbBlob:
         :param pcbBlob:
         :return:
         """
     def StrongNameGetBlobFromImage(
         self, pbBase: IntPtr, dwLength: int, pbBlob: Array[int], pcbBlob: int
-    ) -> Tuple[int, Array[int], int]:
-        """
-
-        :param pbBase:
+    ) -> tuple[int, Array[int], int]:
+        """:param pbBase:
         :param dwLength:
         :param pbBlob:
         :param pcbBlob:
@@ -135,35 +137,27 @@ class IClrStrongName:
         cbKeyBlob: int,
         ppbPublicKeyBlob: IntPtr,
         pcbPublicKeyBlob: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
         :param ppbPublicKeyBlob:
         :param pcbPublicKeyBlob:
         :return:
         """
-    def StrongNameHashSize(self, ulHashAlg: int, cbSize: int) -> Tuple[int, int]:
-        """
-
-        :param ulHashAlg:
+    def StrongNameHashSize(self, ulHashAlg: int, cbSize: int) -> tuple[int, int]:
+        """:param ulHashAlg:
         :param cbSize:
         :return:
         """
     def StrongNameKeyDelete(self, pwzKeyContainer: str) -> int:
-        """
-
-        :param pwzKeyContainer:
+        """:param pwzKeyContainer:
         :return:
         """
     def StrongNameKeyGen(
         self, pwzKeyContainer: str, dwFlags: int, ppbKeyBlob: IntPtr, pcbKeyBlob: int
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param dwFlags:
         :param ppbKeyBlob:
         :param pcbKeyBlob:
@@ -176,10 +170,8 @@ class IClrStrongName:
         dwKeySize: int,
         ppbKeyBlob: IntPtr,
         pcbKeyBlob: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param dwFlags:
         :param dwKeySize:
         :param ppbKeyBlob:
@@ -189,9 +181,7 @@ class IClrStrongName:
     def StrongNameKeyInstall(
         self, pwzKeyContainer: str, pbKeyBlob: Array[int], cbKeyBlob: int
     ) -> int:
-        """
-
-        :param pwzKeyContainer:
+        """:param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
         :return:
@@ -204,10 +194,8 @@ class IClrStrongName:
         cbKeyBlob: int,
         ppbSignatureBlob: IntPtr,
         pcbSignatureBlob: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzFilePath:
         :param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
@@ -224,10 +212,8 @@ class IClrStrongName:
         ppbSignatureBlob: IntPtr,
         pcbSignatureBlob: int,
         dwFlags: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param wszFilePath:
+    ) -> tuple[int, IntPtr, int]:
+        """:param wszFilePath:
         :param wszKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
@@ -238,40 +224,32 @@ class IClrStrongName:
         """
     def StrongNameSignatureSize(
         self, pbPublicKeyBlob: Array[int], cbPublicKeyBlob: int, pcbSize: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pbPublicKeyBlob:
+    ) -> tuple[int, int]:
+        """:param pbPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param pcbSize:
         :return:
         """
     def StrongNameSignatureVerification(
         self, pwzFilePath: str, dwInFlags: int, dwOutFlags: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, int]:
+        """:param pwzFilePath:
         :param dwInFlags:
         :param dwOutFlags:
         :return:
         """
     def StrongNameSignatureVerificationEx(
         self, pwzFilePath: str, fForceVerification: bool, fWasVerified: bool
-    ) -> Tuple[int, bool]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, bool]:
+        """:param pwzFilePath:
         :param fForceVerification:
         :param fWasVerified:
         :return:
         """
     def StrongNameSignatureVerificationFromImage(
         self, pbBase: IntPtr, dwLength: int, dwInFlags: int, dwOutFlags: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pbBase:
+    ) -> tuple[int, int]:
+        """:param pbBase:
         :param dwLength:
         :param dwInFlags:
         :param dwOutFlags:
@@ -279,10 +257,8 @@ class IClrStrongName:
         """
     def StrongNameTokenFromAssembly(
         self, pwzFilePath: str, ppbStrongNameToken: IntPtr, pcbStrongNameToken: int
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzFilePath:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
         :return:
@@ -294,10 +270,8 @@ class IClrStrongName:
         pcbStrongNameToken: int,
         ppbPublicKeyBlob: IntPtr,
         pcbPublicKeyBlob: int,
-    ) -> Tuple[int, IntPtr, int, IntPtr, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, IntPtr, int, IntPtr, int]:
+        """:param pwzFilePath:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
         :param ppbPublicKeyBlob:
@@ -310,10 +284,8 @@ class IClrStrongName:
         cbPublicKeyBlob: int,
         ppbStrongNameToken: IntPtr,
         pcbStrongNameToken: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pbPublicKeyBlob:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pbPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
@@ -324,11 +296,14 @@ class IClrStrongNameUsingIntPtr:
     """"""
 
     def GetHashFromAssemblyFile(
-        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pszFilePath:
+        self,
+        pszFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pszFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -336,11 +311,14 @@ class IClrStrongNameUsingIntPtr:
         :return:
         """
     def GetHashFromAssemblyFileW(
-        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pwzFilePath:
+        self,
+        pwzFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pwzFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -355,10 +333,8 @@ class IClrStrongNameUsingIntPtr:
         pbHash: Array[int],
         cchHash: int,
         pchHash: int,
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pbBlob:
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pbBlob:
         :param cchBlob:
         :param piHashAlg:
         :param pbHash:
@@ -367,11 +343,14 @@ class IClrStrongNameUsingIntPtr:
         :return:
         """
     def GetHashFromFile(
-        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pszFilePath:
+        self,
+        pszFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pszFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -379,11 +358,14 @@ class IClrStrongNameUsingIntPtr:
         :return:
         """
     def GetHashFromFileW(
-        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param pwzFilePath:
+        self,
+        pwzFilePath: str,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param pwzFilePath:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -391,11 +373,14 @@ class IClrStrongNameUsingIntPtr:
         :return:
         """
     def GetHashFromHandle(
-        self, hFile: IntPtr, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
-    ) -> Tuple[int, int, Array[int], int]:
-        """
-
-        :param hFile:
+        self,
+        hFile: IntPtr,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> tuple[int, int, Array[int], int]:
+        """:param hFile:
         :param piHashAlg:
         :param pbHash:
         :param cchHash:
@@ -404,36 +389,28 @@ class IClrStrongNameUsingIntPtr:
         """
     def StrongNameCompareAssemblies(
         self, pwzAssembly1: str, pwzAssembly2: str, dwResult: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pwzAssembly1:
+    ) -> tuple[int, int]:
+        """:param pwzAssembly1:
         :param pwzAssembly2:
         :param dwResult:
         :return:
         """
     def StrongNameFreeBuffer(self, pbMemory: IntPtr) -> int:
-        """
-
-        :param pbMemory:
+        """:param pbMemory:
         :return:
         """
     def StrongNameGetBlob(
         self, pwzFilePath: str, pbBlob: Array[int], pcbBlob: int
-    ) -> Tuple[int, Array[int], int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, Array[int], int]:
+        """:param pwzFilePath:
         :param pbBlob:
         :param pcbBlob:
         :return:
         """
     def StrongNameGetBlobFromImage(
         self, pbBase: IntPtr, dwLength: int, pbBlob: Array[int], pcbBlob: int
-    ) -> Tuple[int, Array[int], int]:
-        """
-
-        :param pbBase:
+    ) -> tuple[int, Array[int], int]:
+        """:param pbBase:
         :param dwLength:
         :param pbBlob:
         :param pcbBlob:
@@ -446,35 +423,27 @@ class IClrStrongNameUsingIntPtr:
         cbKeyBlob: int,
         ppbPublicKeyBlob: IntPtr,
         pcbPublicKeyBlob: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
         :param ppbPublicKeyBlob:
         :param pcbPublicKeyBlob:
         :return:
         """
-    def StrongNameHashSize(self, ulHashAlg: int, cbSize: int) -> Tuple[int, int]:
-        """
-
-        :param ulHashAlg:
+    def StrongNameHashSize(self, ulHashAlg: int, cbSize: int) -> tuple[int, int]:
+        """:param ulHashAlg:
         :param cbSize:
         :return:
         """
     def StrongNameKeyDelete(self, pwzKeyContainer: str) -> int:
-        """
-
-        :param pwzKeyContainer:
+        """:param pwzKeyContainer:
         :return:
         """
     def StrongNameKeyGen(
         self, pwzKeyContainer: str, dwFlags: int, ppbKeyBlob: IntPtr, pcbKeyBlob: int
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param dwFlags:
         :param ppbKeyBlob:
         :param pcbKeyBlob:
@@ -487,10 +456,8 @@ class IClrStrongNameUsingIntPtr:
         dwKeySize: int,
         ppbKeyBlob: IntPtr,
         pcbKeyBlob: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param dwFlags:
         :param dwKeySize:
         :param ppbKeyBlob:
@@ -498,9 +465,7 @@ class IClrStrongNameUsingIntPtr:
         :return:
         """
     def StrongNameKeyInstall(self, pwzKeyContainer: str, pbKeyBlob: IntPtr, cbKeyBlob: int) -> int:
-        """
-
-        :param pwzKeyContainer:
+        """:param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
         :return:
@@ -513,10 +478,8 @@ class IClrStrongNameUsingIntPtr:
         cbKeyBlob: int,
         ppbSignatureBlob: IntPtr,
         pcbSignatureBlob: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzFilePath:
         :param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
@@ -533,10 +496,8 @@ class IClrStrongNameUsingIntPtr:
         ppbSignatureBlob: IntPtr,
         pcbSignatureBlob: int,
         dwFlags: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param wszFilePath:
+    ) -> tuple[int, IntPtr, int]:
+        """:param wszFilePath:
         :param wszKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
@@ -547,40 +508,32 @@ class IClrStrongNameUsingIntPtr:
         """
     def StrongNameSignatureSize(
         self, pbPublicKeyBlob: IntPtr, cbPublicKeyBlob: int, pcbSize: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pbPublicKeyBlob:
+    ) -> tuple[int, int]:
+        """:param pbPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param pcbSize:
         :return:
         """
     def StrongNameSignatureVerification(
         self, pwzFilePath: str, dwInFlags: int, dwOutFlags: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, int]:
+        """:param pwzFilePath:
         :param dwInFlags:
         :param dwOutFlags:
         :return:
         """
     def StrongNameSignatureVerificationEx(
         self, pwzFilePath: str, fForceVerification: bool, fWasVerified: bool
-    ) -> Tuple[int, bool]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, bool]:
+        """:param pwzFilePath:
         :param fForceVerification:
         :param fWasVerified:
         :return:
         """
     def StrongNameSignatureVerificationFromImage(
         self, pbBase: IntPtr, dwLength: int, dwInFlags: int, dwOutFlags: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param pbBase:
+    ) -> tuple[int, int]:
+        """:param pbBase:
         :param dwLength:
         :param dwInFlags:
         :param dwOutFlags:
@@ -588,10 +541,8 @@ class IClrStrongNameUsingIntPtr:
         """
     def StrongNameTokenFromAssembly(
         self, pwzFilePath: str, ppbStrongNameToken: IntPtr, pcbStrongNameToken: int
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pwzFilePath:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
         :return:
@@ -603,10 +554,8 @@ class IClrStrongNameUsingIntPtr:
         pcbStrongNameToken: int,
         ppbPublicKeyBlob: IntPtr,
         pcbPublicKeyBlob: int,
-    ) -> Tuple[int, IntPtr, int, IntPtr, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[int, IntPtr, int, IntPtr, int]:
+        """:param pwzFilePath:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
         :param ppbPublicKeyBlob:
@@ -619,10 +568,8 @@ class IClrStrongNameUsingIntPtr:
         cbPublicKeyBlob: int,
         ppbStrongNameToken: IntPtr,
         pcbStrongNameToken: int,
-    ) -> Tuple[int, IntPtr, int]:
-        """
-
-        :param pbPublicKeyBlob:
+    ) -> tuple[int, IntPtr, int]:
+        """:param pbPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
@@ -633,33 +580,19 @@ class StrongNameHelpers(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def StrongNameErrorInfo(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def StrongNameFreeBuffer(cls, pbMemory: IntPtr) -> None:
-        """
-
-        :param pbMemory:
-        """
+        """:param pbMemory:"""
     @classmethod
     @overload
     def StrongNameGetPublicKey(
@@ -669,10 +602,8 @@ class StrongNameHelpers(ABC, Object):
         cbKeyBlob: int,
         ppbPublicKeyBlob: IntPtr,
         pcbPublicKeyBlob: int,
-    ) -> Tuple[bool, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[bool, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param bKeyBlob:
         :param cbKeyBlob:
         :param ppbPublicKeyBlob:
@@ -688,10 +619,8 @@ class StrongNameHelpers(ABC, Object):
         cbKeyBlob: int,
         ppbPublicKeyBlob: IntPtr,
         pcbPublicKeyBlob: int,
-    ) -> Tuple[bool, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[bool, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
         :param ppbPublicKeyBlob:
@@ -700,18 +629,14 @@ class StrongNameHelpers(ABC, Object):
         """
     @classmethod
     def StrongNameKeyDelete(cls, pwzKeyContainer: str) -> bool:
-        """
-
-        :param pwzKeyContainer:
+        """:param pwzKeyContainer:
         :return:
         """
     @classmethod
     def StrongNameKeyGen(
         cls, pwzKeyContainer: str, dwFlags: int, ppbKeyBlob: IntPtr, pcbKeyBlob: int
-    ) -> Tuple[bool, IntPtr, int]:
-        """
-
-        :param pwzKeyContainer:
+    ) -> tuple[bool, IntPtr, int]:
+        """:param pwzKeyContainer:
         :param dwFlags:
         :param ppbKeyBlob:
         :param pcbKeyBlob:
@@ -722,9 +647,7 @@ class StrongNameHelpers(ABC, Object):
     def StrongNameKeyInstall(
         cls, pwzKeyContainer: str, bKeyBlob: Array[int], cbKeyBlob: int
     ) -> bool:
-        """
-
-        :param pwzKeyContainer:
+        """:param pwzKeyContainer:
         :param bKeyBlob:
         :param cbKeyBlob:
         :return:
@@ -732,9 +655,7 @@ class StrongNameHelpers(ABC, Object):
     @classmethod
     @overload
     def StrongNameKeyInstall(cls, pwzKeyContainer: str, pbKeyBlob: IntPtr, cbKeyBlob: int) -> bool:
-        """
-
-        :param pwzKeyContainer:
+        """:param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
         :return:
@@ -742,11 +663,13 @@ class StrongNameHelpers(ABC, Object):
     @classmethod
     @overload
     def StrongNameSignatureGeneration(
-        cls, pwzFilePath: str, pwzKeyContainer: str, bKeyBlob: Array[int], cbKeyBlob: int
+        cls,
+        pwzFilePath: str,
+        pwzKeyContainer: str,
+        bKeyBlob: Array[int],
+        cbKeyBlob: int,
     ) -> bool:
-        """
-
-        :param pwzFilePath:
+        """:param pwzFilePath:
         :param pwzKeyContainer:
         :param bKeyBlob:
         :param cbKeyBlob:
@@ -757,9 +680,7 @@ class StrongNameHelpers(ABC, Object):
     def StrongNameSignatureGeneration(
         cls, pwzFilePath: str, pwzKeyContainer: str, pbKeyBlob: IntPtr, cbKeyBlob: int
     ) -> bool:
-        """
-
-        :param pwzFilePath:
+        """:param pwzFilePath:
         :param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
@@ -775,10 +696,8 @@ class StrongNameHelpers(ABC, Object):
         cbKeyBlob: int,
         ppbSignatureBlob: IntPtr,
         pcbSignatureBlob: int,
-    ) -> Tuple[bool, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[bool, int]:
+        """:param pwzFilePath:
         :param pwzKeyContainer:
         :param bKeyBlob:
         :param cbKeyBlob:
@@ -796,10 +715,8 @@ class StrongNameHelpers(ABC, Object):
         cbKeyBlob: int,
         ppbSignatureBlob: IntPtr,
         pcbSignatureBlob: int,
-    ) -> Tuple[bool, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[bool, int]:
+        """:param pwzFilePath:
         :param pwzKeyContainer:
         :param pbKeyBlob:
         :param cbKeyBlob:
@@ -811,10 +728,8 @@ class StrongNameHelpers(ABC, Object):
     @overload
     def StrongNameSignatureSize(
         cls, bPublicKeyBlob: Array[int], cbPublicKeyBlob: int, pcbSize: int
-    ) -> Tuple[bool, int]:
-        """
-
-        :param bPublicKeyBlob:
+    ) -> tuple[bool, int]:
+        """:param bPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param pcbSize:
         :return:
@@ -823,10 +738,8 @@ class StrongNameHelpers(ABC, Object):
     @overload
     def StrongNameSignatureSize(
         cls, pbPublicKeyBlob: IntPtr, cbPublicKeyBlob: int, pcbSize: int
-    ) -> Tuple[bool, int]:
-        """
-
-        :param pbPublicKeyBlob:
+    ) -> tuple[bool, int]:
+        """:param pbPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param pcbSize:
         :return:
@@ -834,10 +747,8 @@ class StrongNameHelpers(ABC, Object):
     @classmethod
     def StrongNameSignatureVerification(
         cls, pwzFilePath: str, dwInFlags: int, pdwOutFlags: int
-    ) -> Tuple[bool, int]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[bool, int]:
+        """:param pwzFilePath:
         :param dwInFlags:
         :param pdwOutFlags:
         :return:
@@ -845,10 +756,8 @@ class StrongNameHelpers(ABC, Object):
     @classmethod
     def StrongNameSignatureVerificationEx(
         cls, pwzFilePath: str, fForceVerification: bool, pfWasVerified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param pwzFilePath:
+    ) -> tuple[bool, bool]:
+        """:param pwzFilePath:
         :param fForceVerification:
         :param pfWasVerified:
         :return:
@@ -861,10 +770,8 @@ class StrongNameHelpers(ABC, Object):
         cbPublicKeyBlob: int,
         ppbStrongNameToken: IntPtr,
         pcbStrongNameToken: int,
-    ) -> Tuple[bool, IntPtr, int]:
-        """
-
-        :param bPublicKeyBlob:
+    ) -> tuple[bool, IntPtr, int]:
+        """:param bPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
@@ -878,17 +785,12 @@ class StrongNameHelpers(ABC, Object):
         cbPublicKeyBlob: int,
         ppbStrongNameToken: IntPtr,
         pcbStrongNameToken: int,
-    ) -> Tuple[bool, IntPtr, int]:
-        """
-
-        :param pbPublicKeyBlob:
+    ) -> tuple[bool, IntPtr, int]:
+        """:param pbPublicKeyBlob:
         :param cbPublicKeyBlob:
         :param ppbStrongNameToken:
         :param pcbStrongNameToken:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

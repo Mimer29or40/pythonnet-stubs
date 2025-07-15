@@ -1,6 +1,3 @@
-from __future__ import annotations
-
-from typing import Tuple
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeMemoryMappedFileHandle
@@ -43,33 +40,24 @@ class MemoryMappedFile(Object, IDisposable):
 
     @property
     def SafeMemoryMappedFileHandle(self) -> SafeMemoryMappedFileHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def CreateFromFile(cls, path: str) -> MemoryMappedFile:
-        """
-
-        :param path:
+        """:param path:
         :return:
         """
     @classmethod
     @overload
     def CreateFromFile(cls, path: str, mode: FileMode) -> MemoryMappedFile:
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :return:
         """
     @classmethod
     @overload
     def CreateFromFile(cls, path: str, mode: FileMode, mapName: str) -> MemoryMappedFile:
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param mapName:
         :return:
@@ -79,9 +67,7 @@ class MemoryMappedFile(Object, IDisposable):
     def CreateFromFile(
         cls, path: str, mode: FileMode, mapName: str, capacity: int
     ) -> MemoryMappedFile:
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param mapName:
         :param capacity:
@@ -90,11 +76,14 @@ class MemoryMappedFile(Object, IDisposable):
     @classmethod
     @overload
     def CreateFromFile(
-        cls, path: str, mode: FileMode, mapName: str, capacity: int, access: MemoryMappedFileAccess
+        cls,
+        path: str,
+        mode: FileMode,
+        mapName: str,
+        capacity: int,
+        access: MemoryMappedFileAccess,
     ) -> MemoryMappedFile:
-        """
-
-        :param path:
+        """:param path:
         :param mode:
         :param mapName:
         :param capacity:
@@ -112,9 +101,7 @@ class MemoryMappedFile(Object, IDisposable):
         inheritability: HandleInheritability,
         leaveOpen: bool,
     ) -> MemoryMappedFile:
-        """
-
-        :param fileStream:
+        """:param fileStream:
         :param mapName:
         :param capacity:
         :param access:
@@ -134,9 +121,7 @@ class MemoryMappedFile(Object, IDisposable):
         inheritability: HandleInheritability,
         leaveOpen: bool,
     ) -> MemoryMappedFile:
-        """
-
-        :param fileStream:
+        """:param fileStream:
         :param mapName:
         :param capacity:
         :param access:
@@ -148,9 +133,7 @@ class MemoryMappedFile(Object, IDisposable):
     @classmethod
     @overload
     def CreateNew(cls, mapName: str, capacity: int) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :return:
         """
@@ -159,9 +142,7 @@ class MemoryMappedFile(Object, IDisposable):
     def CreateNew(
         cls, mapName: str, capacity: int, access: MemoryMappedFileAccess
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :param access:
         :return:
@@ -176,9 +157,7 @@ class MemoryMappedFile(Object, IDisposable):
         options: MemoryMappedFileOptions,
         inheritability: HandleInheritability,
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :param access:
         :param options:
@@ -196,9 +175,7 @@ class MemoryMappedFile(Object, IDisposable):
         memoryMappedFileSecurity: MemoryMappedFileSecurity,
         inheritability: HandleInheritability,
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :param access:
         :param options:
@@ -209,9 +186,7 @@ class MemoryMappedFile(Object, IDisposable):
     @classmethod
     @overload
     def CreateOrOpen(cls, mapName: str, capacity: int) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :return:
         """
@@ -220,9 +195,7 @@ class MemoryMappedFile(Object, IDisposable):
     def CreateOrOpen(
         cls, mapName: str, capacity: int, access: MemoryMappedFileAccess
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :param access:
         :return:
@@ -237,9 +210,7 @@ class MemoryMappedFile(Object, IDisposable):
         options: MemoryMappedFileOptions,
         inheritability: HandleInheritability,
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :param access:
         :param options:
@@ -257,9 +228,7 @@ class MemoryMappedFile(Object, IDisposable):
         memoryMappedFileSecurity: MemoryMappedFileSecurity,
         inheritability: HandleInheritability,
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param capacity:
         :param access:
         :param options:
@@ -269,15 +238,10 @@ class MemoryMappedFile(Object, IDisposable):
         """
     @overload
     def CreateViewAccessor(self) -> MemoryMappedViewAccessor:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateViewAccessor(self, offset: int, size: int) -> MemoryMappedViewAccessor:
-        """
-
-        :param offset:
+        """:param offset:
         :param size:
         :return:
         """
@@ -285,24 +249,17 @@ class MemoryMappedFile(Object, IDisposable):
     def CreateViewAccessor(
         self, offset: int, size: int, access: MemoryMappedFileAccess
     ) -> MemoryMappedViewAccessor:
-        """
-
-        :param offset:
+        """:param offset:
         :param size:
         :param access:
         :return:
         """
     @overload
     def CreateViewStream(self) -> MemoryMappedViewStream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateViewStream(self, offset: int, size: int) -> MemoryMappedViewStream:
-        """
-
-        :param offset:
+        """:param offset:
         :param size:
         :return:
         """
@@ -310,9 +267,7 @@ class MemoryMappedFile(Object, IDisposable):
     def CreateViewStream(
         self, offset: int, size: int, access: MemoryMappedFileAccess
     ) -> MemoryMappedViewStream:
-        """
-
-        :param offset:
+        """:param offset:
         :param size:
         :param access:
         :return:
@@ -320,32 +275,19 @@ class MemoryMappedFile(Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessControl(self) -> MemoryMappedFileSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def OpenExisting(cls, mapName: str) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :return:
         """
     @classmethod
@@ -353,9 +295,7 @@ class MemoryMappedFile(Object, IDisposable):
     def OpenExisting(
         cls, mapName: str, desiredAccessRights: MemoryMappedFileRights
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param desiredAccessRights:
         :return:
         """
@@ -367,23 +307,15 @@ class MemoryMappedFile(Object, IDisposable):
         desiredAccessRights: MemoryMappedFileRights,
         inheritability: HandleInheritability,
     ) -> MemoryMappedFile:
-        """
-
-        :param mapName:
+        """:param mapName:
         :param desiredAccessRights:
         :param inheritability:
         :return:
         """
     def SetAccessControl(self, memoryMappedFileSecurity: MemoryMappedFileSecurity) -> None:
-        """
-
-        :param memoryMappedFileSecurity:
-        """
+        """:param memoryMappedFileSecurity:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MemoryMappedFileAccess(Enum):
     """"""
@@ -446,46 +378,25 @@ class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
         """"""
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -495,9 +406,7 @@ class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -506,15 +415,9 @@ class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
         :return:
         """
     def AddAccessRule(self, rule: AccessRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: AuditRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -524,9 +427,7 @@ class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -535,17 +436,13 @@ class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -553,180 +450,105 @@ class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: AccessRule[MemoryMappedFileRights]) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: AccessRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: AccessRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: AuditRule[MemoryMappedFileRights]) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: AuditRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: AuditRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: AccessRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: AccessRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: AuditRule[MemoryMappedFileRights]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MemoryMappedView(Object, IDisposable):
     """"""
@@ -734,285 +556,185 @@ class MemoryMappedView(Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self, capacity: IntPtr) -> None:
-        """
-
-        :param capacity:
-        """
+        """:param capacity:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MemoryMappedViewAccessor(UnmanagedMemoryAccessor, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PointerOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
-    def Read(self, position: int, structure: T) -> Tuple[None, T]:
-        """
-
-        :param position:
+        """:return:"""
+    def Read(self, position: int, structure: T) -> tuple[None, T]:
+        """:param position:
         :param structure:
         """
     def ReadArray(self, position: int, array: Array[T], offset: int, count: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :param array:
         :param offset:
         :param count:
         :return:
         """
     def ReadBoolean(self, position: int) -> bool:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadByte(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadChar(self, position: int) -> Char:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadDecimal(self, position: int) -> Decimal:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadDouble(self, position: int) -> float:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadInt16(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadInt32(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadInt64(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadSByte(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadSingle(self, position: int) -> float:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadUInt16(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadUInt32(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ReadUInt64(self, position: int) -> int:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Write(self, position: int, structure: T) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param structure:
         """
     @overload
     def Write(self, position: int, value: bool) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: Char) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: Decimal) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: float) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: float) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     @overload
     def Write(self, position: int, value: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param value:
         """
     def WriteArray(self, position: int, array: Array[T], offset: int, count: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param array:
         :param offset:
         :param count:
@@ -1023,90 +745,57 @@ class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PointerOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def PositionPointer(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PositionPointer.setter
     def PositionPointer(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1114,11 +803,14 @@ class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1129,29 +821,20 @@ class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1159,154 +842,108 @@ class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""

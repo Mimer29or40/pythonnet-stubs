@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 import random
 import unittest
-from typing import MutableSequence
-from typing import Sequence
+from collections.abc import MutableSequence
+from collections.abc import Sequence
 
 from test_base import TestBase
 
@@ -464,22 +466,40 @@ class TestCClass(TestBase):
                 "Namespace:Class.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
                 "Namespace:Class.__init__(Namespace:Type, Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
                 "Namespace:Class.__init__(Namespace:Type, Namespace:Type, Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param2", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param2",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -818,14 +838,22 @@ class TestCClass(TestBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Type", namespace="Namespace", reference=True, nullable=True
+                                name="Type",
+                                namespace="Namespace",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Type", namespace="Namespace"),
-                        CType(name="Type", namespace="Namespace", reference=True, nullable=True),
+                        CType(
+                            name="Type",
+                            namespace="Namespace",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                 ),
                 "Namespace:Class.InstanceMethodWithNullableParam(Namespace:Type?) -> Namespace:Type": CMethod(
@@ -864,7 +892,10 @@ class TestCClass(TestBase):
                     name="InstanceMethodWithParams1",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
@@ -872,8 +903,14 @@ class TestCClass(TestBase):
                     name="InstanceMethodWithParams2",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
@@ -910,14 +947,22 @@ class TestCClass(TestBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Type", namespace="Namespace", reference=True, nullable=True
+                                name="Type",
+                                namespace="Namespace",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Type", namespace="Namespace"),
-                        CType(name="Type", namespace="Namespace", reference=True, nullable=True),
+                        CType(
+                            name="Type",
+                            namespace="Namespace",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                     static=True,
                 ),
@@ -960,7 +1005,10 @@ class TestCClass(TestBase):
                     name="StaticMethodWithParams1",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
@@ -969,8 +1017,14 @@ class TestCClass(TestBase):
                     name="StaticMethodWithParams2",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
@@ -2625,7 +2679,10 @@ class TestCClass(TestBase):
                 "Namespace:Class.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -2641,7 +2698,10 @@ class TestCClass(TestBase):
                     name="Method",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
@@ -3136,22 +3196,40 @@ class TestCStruct(TestBase):
                 "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
                 "Namespace:Struct.__init__(Namespace:Type, Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
                 "Namespace:Struct.__init__(Namespace:Type, Namespace:Type, Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param2", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param2",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -3490,14 +3568,22 @@ class TestCStruct(TestBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Type", namespace="Namespace", reference=True, nullable=True
+                                name="Type",
+                                namespace="Namespace",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Type", namespace="Namespace"),
-                        CType(name="Type", namespace="Namespace", reference=True, nullable=True),
+                        CType(
+                            name="Type",
+                            namespace="Namespace",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                 ),
                 "Namespace:Struct.InstanceMethodWithNullableParam(Namespace:Type?) -> Namespace:Type": CMethod(
@@ -3536,7 +3622,10 @@ class TestCStruct(TestBase):
                     name="InstanceMethodWithParams1",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
@@ -3544,8 +3633,14 @@ class TestCStruct(TestBase):
                     name="InstanceMethodWithParams2",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
@@ -3582,14 +3677,22 @@ class TestCStruct(TestBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Type", namespace="Namespace", reference=True, nullable=True
+                                name="Type",
+                                namespace="Namespace",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Type", namespace="Namespace"),
-                        CType(name="Type", namespace="Namespace", reference=True, nullable=True),
+                        CType(
+                            name="Type",
+                            namespace="Namespace",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                     static=True,
                 ),
@@ -3632,7 +3735,10 @@ class TestCStruct(TestBase):
                     name="StaticMethodWithParams1",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
@@ -3641,8 +3747,14 @@ class TestCStruct(TestBase):
                     name="StaticMethodWithParams2",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
+                        CParameter(
+                            name="param1",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
@@ -4027,7 +4139,10 @@ class TestCStruct(TestBase):
                     name="op_False",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="self", type=CType(name="Struct", namespace="Namespace")),
+                        CParameter(
+                            name="self",
+                            type=CType(name="Struct", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
@@ -5297,7 +5412,10 @@ class TestCStruct(TestBase):
                 "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                 ),
             },
@@ -5313,7 +5431,10 @@ class TestCStruct(TestBase):
                     name="Method",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
@@ -5974,14 +6095,22 @@ class TestCInterface(TestBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Int32", namespace="System", reference=True, nullable=True
+                                name="Int32",
+                                namespace="System",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                 ),
                 "Namespace:Interface.InstanceMethodWithNullableParam(System:Int32?) -> System:Int32": CMethod(
@@ -6189,7 +6318,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6199,7 +6329,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6209,7 +6340,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -6219,7 +6351,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -6235,7 +6368,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -6245,7 +6379,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -6255,7 +6390,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6265,7 +6401,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6281,7 +6418,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6297,7 +6435,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6307,7 +6446,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6317,7 +6457,8 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
                         CParameter(
-                            name="other", type=CType(name="Interface", namespace="Namespace")
+                            name="other",
+                            type=CType(name="Interface", namespace="Namespace"),
                         ),
                     ),
                     return_types=(CType(name="Interface", namespace="Namespace"),),
@@ -6576,7 +6717,11 @@ class TestCInterface(TestBase):
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
                     return_types=(
-                        CType(name="Iterator", namespace="typing", inner=(CType(name="object"),)),
+                        CType(
+                            name="Iterator",
+                            namespace="typing",
+                            inner=(CType(name="object"),),
+                        ),
                     ),
                 ),
                 "Namespace:Interface.__len__() -> int": CMethod(
@@ -6895,7 +7040,10 @@ class TestCInterface(TestBase):
                     name="Method",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(
+                            name="param0",
+                            type=CType(name="Type", namespace="Namespace"),
+                        ),
                     ),
                     return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
@@ -7718,7 +7866,12 @@ class TestCType(TestBase):
             CType(name="TypeA", namespace="NamespaceB"),
             CType(name="TypeB", namespace="NamespaceB"),
             CType(name="TypeB", namespace="NamespaceB", inner=(CType(name="T"),)),
-            CType(name="TypeB", namespace="NamespaceB", inner=(CType(name="T"),), reference=True),
+            CType(
+                name="TypeB",
+                namespace="NamespaceB",
+                inner=(CType(name="T"),),
+                reference=True,
+            ),
             CType(
                 name="TypeB",
                 namespace="NamespaceB",
@@ -8096,7 +8249,11 @@ class TestCConstructor(TestBase):
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)
         self.assertDictEqual(
-            {"doc": "", "doc_formatted": {}, "parameters": {"param0": "", "param1": ""}},
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "parameters": {"param0": "", "param1": ""},
+            },
             json,
         )
 

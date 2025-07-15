@@ -1,7 +1,4 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Tuple
 
 from System import Attribute
 from System import Enum
@@ -28,41 +25,25 @@ class AgileAsyncWorkerItem(Object):
     """"""
 
     def __init__(self, message: IMethodCallMessage, ar: AsyncResult, target: object):
-        """
-
-        :param message:
+        """:param message:
         :param ar:
         :param target:
         """
     def DoAsyncCall(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ThreadPoolCallBack(cls, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CallType(Enum):
     """"""
@@ -78,26 +59,15 @@ class MessageData(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
     """"""
@@ -106,71 +76,50 @@ class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateInstance(self, serverType: Type) -> MarshalByRefObject:
-        """
-
-        :param serverType:
+        """:param serverType:
         :return:
         """
     def CreateProxy(
-        self, objRef: ObjRef, serverType: Type, serverObject: object, serverContext: Context
+        self,
+        objRef: ObjRef,
+        serverType: Type,
+        serverObject: object,
+        serverContext: Context,
     ) -> RealProxy:
-        """
-
-        :param objRef:
+        """:param objRef:
         :param serverType:
         :param serverObject:
         :param serverContext:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> None:
-        """
-
-        :param msg:
-        """
+        """:param msg:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -182,9 +131,7 @@ class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -194,120 +141,74 @@ class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
         :param puArgErr:
         """
     def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> bool:
-        """
-
-        :param ctx:
+        """:param ctx:
         :param msg:
         :return:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RealProxy(ABC, Object):
     """"""
 
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCOMIUnknown(self, fIsMarshalled: bool) -> IntPtr:
-        """
-
-        :param fIsMarshalled:
+        """:param fIsMarshalled:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetProxiedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetStubData(cls, rp: RealProxy) -> object:
-        """
-
-        :param rp:
+        """:param rp:
         :return:
         """
     def GetTransparentProxy(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeServerObject(
         self, ctorMsg: IConstructionCallMessage
     ) -> IConstructionReturnMessage:
-        """
-
-        :param ctorMsg:
+        """:param ctorMsg:
         :return:
         """
     def Invoke(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def SetCOMIUnknown(self, i: IntPtr) -> None:
-        """
-
-        :param i:
-        """
+        """:param i:"""
     @classmethod
     def SetStubData(cls, rp: RealProxy, stubData: object) -> None:
-        """
-
-        :param rp:
+        """:param rp:
         :param stubData:
         """
     def SupportsInterface(self, iid: Guid) -> IntPtr:
-        """
-
-        :param iid:
+        """:param iid:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RealProxyFlags(Enum):
     """"""
@@ -323,96 +224,56 @@ class RemotingProxy(RealProxy, IRemotingTypeInfo):
     """"""
 
     def __init__(self, serverType: Type):
-        """
-
-        :param serverType:
-        """
+        """:param serverType:"""
     @property
     def TypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TypeName.setter
     def TypeName(self, value: str) -> None: ...
     def CanCastTo(self, fromType: Type, o: object) -> bool:
-        """
-
-        :param fromType:
+        """:param fromType:
         :param o:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCOMIUnknown(self, fIsMarshalled: bool) -> IntPtr:
-        """
-
-        :param fIsMarshalled:
+        """:param fIsMarshalled:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetProxiedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTransparentProxy(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeServerObject(
         self, ctorMsg: IConstructionCallMessage
     ) -> IConstructionReturnMessage:
-        """
-
-        :param ctorMsg:
+        """:param ctorMsg:
         :return:
         """
     def Invoke(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def SetCOMIUnknown(self, i: IntPtr) -> None:
-        """
-
-        :param i:
-        """
+        """:param i:"""
     def SupportsInterface(self, iid: Guid) -> IntPtr:
-        """
-
-        :param iid:
+        """:param iid:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

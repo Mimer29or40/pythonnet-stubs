@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import Final
 from typing import overload
@@ -80,31 +78,17 @@ class AssemblyReferenceDependentAssemblyEntry(Object, IDisposable):
         """"""
     @overload
     def Dispose(self, fDisposing: bool) -> None:
-        """
-
-        :param fDisposing:
-        """
+        """:param fDisposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssemblyReferenceDependentAssemblyEntryFieldId(Enum):
     """"""
@@ -121,31 +105,19 @@ class AssemblyReferenceDependentAssemblyEntryFieldId(Enum):
         ...
     )
     """"""
-    AssemblyReferenceDependentAssembly_HashValueSize: AssemblyReferenceDependentAssemblyEntryFieldId = (
-        ...
-    )
+    AssemblyReferenceDependentAssembly_HashValueSize: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
-    AssemblyReferenceDependentAssembly_HashAlgorithm: AssemblyReferenceDependentAssemblyEntryFieldId = (
-        ...
-    )
+    AssemblyReferenceDependentAssembly_HashAlgorithm: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
     AssemblyReferenceDependentAssembly_Flags: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
-    AssemblyReferenceDependentAssembly_ResourceFallbackCulture: AssemblyReferenceDependentAssemblyEntryFieldId = (
-        ...
-    )
+    AssemblyReferenceDependentAssembly_ResourceFallbackCulture: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
-    AssemblyReferenceDependentAssembly_Description: AssemblyReferenceDependentAssemblyEntryFieldId = (
-        ...
-    )
+    AssemblyReferenceDependentAssembly_Description: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
-    AssemblyReferenceDependentAssembly_SupportUrl: AssemblyReferenceDependentAssemblyEntryFieldId = (
-        ...
-    )
+    AssemblyReferenceDependentAssembly_SupportUrl: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
-    AssemblyReferenceDependentAssembly_HashElements: AssemblyReferenceDependentAssemblyEntryFieldId = (
-        ...
-    )
+    AssemblyReferenceDependentAssembly_HashElements: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
 
 class AssemblyReferenceEntry(Object):
@@ -169,26 +141,15 @@ class AssemblyReferenceEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssemblyReferenceEntryFieldId(Enum):
     """"""
@@ -214,26 +175,15 @@ class AssemblyRequestEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssemblyRequestEntryFieldId(Enum):
     """"""
@@ -262,26 +212,15 @@ class CLRSurrogateEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CLRSurrogateEntryFieldId(Enum):
     """"""
@@ -358,29 +297,17 @@ class CMS_ASSEMBLY_DEPLOYMENT_FLAG(Enum):
 class CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG(Enum):
     """"""
 
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_OPTIONAL: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = (
-        ...
-    )
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_OPTIONAL: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = ...
     """"""
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_VISIBLE: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = (
-        ...
-    )
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_VISIBLE: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = ...
     """"""
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_PREREQUISITE: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = (
-        ...
-    )
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_PREREQUISITE: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = ...
     """"""
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_RESOURCE_FALLBACK_CULTURE_INTERNAL: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = (
-        ...
-    )
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_RESOURCE_FALLBACK_CULTURE_INTERNAL: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = ...
     """"""
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_INSTALL: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = (
-        ...
-    )
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_INSTALL: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = ...
     """"""
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_ALLOW_DELAYED_BINDING: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = (
-        ...
-    )
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_ALLOW_DELAYED_BINDING: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = ...
     """"""
 
 class CMS_ASSEMBLY_REFERENCE_FLAG(Enum):
@@ -545,26 +472,15 @@ class COMServerEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class COMServerEntryFieldId(Enum):
     """"""
@@ -605,26 +521,15 @@ class CategoryMembershipDataEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CategoryMembershipDataEntryFieldId(Enum):
     """"""
@@ -650,26 +555,15 @@ class CategoryMembershipEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CategoryMembershipEntryFieldId(Enum):
     """"""
@@ -681,26 +575,15 @@ class CmsUtils(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompatibleFrameworksMetadataEntry(Object):
     """"""
@@ -713,26 +596,15 @@ class CompatibleFrameworksMetadataEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompatibleFrameworksMetadataEntryFieldId(Enum):
     """"""
@@ -781,26 +653,15 @@ class DependentOSMetadataEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DependentOSMetadataEntryFieldId(Enum):
     """"""
@@ -851,26 +712,15 @@ class DeploymentMetadataEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DeploymentMetadataEntryFieldId(Enum):
     """"""
@@ -922,26 +772,15 @@ class DescriptionMetadataEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DescriptionMetadataEntryFieldId(Enum):
     """"""
@@ -990,26 +829,15 @@ class EntryPointEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EntryPointEntryFieldId(Enum):
     """"""
@@ -1054,26 +882,15 @@ class FileAssociationEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileAssociationEntryFieldId(Enum):
     """"""
@@ -1172,31 +989,17 @@ class FileEntry(Object, IDisposable):
         """"""
     @overload
     def Dispose(self, fDisposing: bool) -> None:
-        """
-
-        :param fDisposing:
-        """
+        """:param fDisposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileEntryFieldId(Enum):
     """"""
@@ -1280,31 +1083,17 @@ class HashElementEntry(Object, IDisposable):
         """"""
     @overload
     def Dispose(self, fDisposing: bool) -> None:
-        """
-
-        :param fDisposing:
-        """
+        """:param fDisposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HashElementEntryFieldId(Enum):
     """"""
@@ -1329,1094 +1118,599 @@ class IAssemblyReferenceDependentAssemblyEntry:
 
     @property
     def AllData(self) -> AssemblyReferenceDependentAssemblyEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Codebase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Flags(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Group(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashAlgorithm(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashElements(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResourceFallbackCulture(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportUrl(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IAssemblyReferenceEntry:
     """"""
 
     @property
     def AllData(self) -> AssemblyReferenceEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DependentAssembly(self) -> IAssemblyReferenceDependentAssemblyEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Flags(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReferenceIdentity(self) -> IReferenceIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IAssemblyRequestEntry:
     """"""
 
     @property
     def AllData(self) -> AssemblyRequestEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def permissionSetID(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICLRSurrogateEntry:
     """"""
 
     @property
     def AllData(self) -> CLRSurrogateEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ClassName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Clsid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RuntimeVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICMS:
     """"""
 
     @property
     def AssemblyReferenceSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyRequestSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CLRSurrogateSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def COMRedirectionSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CategoryMembershipSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompatibleFrameworksSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterSetSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DirectorySection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EntryPointSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventMapSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventTagSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileAssociationSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identity(self) -> IDefinitionIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataSectionEntry(self) -> ISectionEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PermissionSetSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProgIdRedirectionSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RegistryKeySection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StringSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WindowClassSection(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICOMServerEntry:
     """"""
 
     @property
     def AllData(self) -> COMServerEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Clsid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConfiguredGuid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Flags(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HostFile(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementedClsid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RuntimeVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ThreadingModel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeLibrary(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICategoryMembershipDataEntry:
     """"""
 
     @property
     def AllData(self) -> CategoryMembershipDataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Xml(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICategoryMembershipEntry:
     """"""
 
     @property
     def AllData(self) -> CategoryMembershipEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identity(self) -> IDefinitionIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubcategoryMembership(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICompatibleFrameworksMetadataEntry:
     """"""
 
     @property
     def AllData(self) -> CompatibleFrameworksMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportUrl(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDependentOSMetadataEntry:
     """"""
 
     @property
     def AllData(self) -> DependentOSMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BuildNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MajorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ServicePackMajor(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ServicePackMinor(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportUrl(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDeploymentMetadataEntry:
     """"""
 
     @property
     def AllData(self) -> DeploymentMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeploymentFlags(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeploymentProviderCodebase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumAge(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumAge_Unit(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinimumRequiredVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDescriptionMetadataEntry:
     """"""
 
     @property
     def AllData(self) -> DescriptionMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorReportUrl(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IconFile(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Product(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Publisher(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SuiteName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportUrl(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IEntryPointEntry:
     """"""
 
     @property
     def AllData(self) -> EntryPointEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CommandLine_File(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CommandLine_Parameters(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Flags(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identity(self) -> IReferenceIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IFileAssociationEntry:
     """"""
 
     @property
     def AllData(self) -> FileAssociationEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DefaultIcon(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Extension(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Parameter(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProgID(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IFileEntry:
     """"""
 
     @property
     def AllData(self) -> FileEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Flags(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Group(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashAlgorithm(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashElements(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImportPath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LoadFrom(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Location(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MuiMapping(self) -> IMuiResourceMapEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SourceName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SourcePath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WritableType(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IHashElementEntry:
     """"""
 
     @property
     def AllData(self) -> HashElementEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DigestMethod(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DigestValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Transform(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransformMetadata(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Xml(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IMetadataSectionEntry:
     """"""
 
     @property
     def AllData(self) -> MetadataSectionEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CdfIdentity(self) -> IDefinitionIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompatibleFrameworksData(self) -> ICompatibleFrameworksMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DependentOSData(self) -> IDependentOSMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeploymentData(self) -> IDeploymentMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DescriptionData(self) -> IDescriptionMetadataEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashAlgorithm(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def KeyInfoElement(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LocalPath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ManifestFlags(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ManifestHash(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MvidValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RequestedExecutionLevel(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RequestedExecutionLevelUIAccess(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResourceTypeManifestResourcesDependency(self) -> IReferenceIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResourceTypeResourcesDependency(self) -> IReferenceIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RuntimeImageVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SchemaVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UsagePatterns(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def defaultPermissionSetID(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IMuiResourceIdLookupMapEntry:
     """"""
 
     @property
     def AllData(self) -> MuiResourceIdLookupMapEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IMuiResourceMapEntry:
     """"""
 
     @property
     def AllData(self) -> MuiResourceMapEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResourceTypeIdInt(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResourceTypeIdString(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IMuiResourceTypeIdIntEntry:
     """"""
 
     @property
     def AllData(self) -> MuiResourceTypeIdIntEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IntegerIds(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StringIds(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IMuiResourceTypeIdStringEntry:
     """"""
 
     @property
     def AllData(self) -> MuiResourceTypeIdStringEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IntegerIds(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StringIds(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPermissionSetEntry:
     """"""
 
     @property
     def AllData(self) -> PermissionSetEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def XmlSegment(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IProgIdRedirectionEntry:
     """"""
 
     @property
     def AllData(self) -> ProgIdRedirectionEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProgId(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectedGuid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IResourceTableMappingEntry:
     """"""
 
     @property
     def AllData(self) -> ResourceTableMappingEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FinalStringMapped(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def id(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ISubcategoryMembershipEntry:
     """"""
 
     @property
     def AllData(self) -> SubcategoryMembershipEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CategoryMembershipData(self) -> ISection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Subcategory(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IWindowClassEntry:
     """"""
 
     @property
     def AllData(self) -> WindowClassEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ClassName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HostDll(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def fVersioned(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MetadataSectionEntry(Object, IDisposable):
     """"""
@@ -2538,31 +1832,17 @@ class MetadataSectionEntry(Object, IDisposable):
         """"""
     @overload
     def Dispose(self, fDisposing: bool) -> None:
-        """
-
-        :param fDisposing:
-        """
+        """:param fDisposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MetadataSectionEntryFieldId(Enum):
     """"""
@@ -2623,26 +1903,15 @@ class MuiResourceIdLookupMapEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MuiResourceIdLookupMapEntryFieldId(Enum):
     """"""
@@ -2680,31 +1949,17 @@ class MuiResourceMapEntry(Object, IDisposable):
         """"""
     @overload
     def Dispose(self, fDisposing: bool) -> None:
-        """
-
-        :param fDisposing:
-        """
+        """:param fDisposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MuiResourceMapEntryFieldId(Enum):
     """"""
@@ -2748,31 +2003,17 @@ class MuiResourceTypeIdIntEntry(Object, IDisposable):
         """"""
     @overload
     def Dispose(self, fDisposing: bool) -> None:
-        """
-
-        :param fDisposing:
-        """
+        """:param fDisposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MuiResourceTypeIdIntEntryFieldId(Enum):
     """"""
@@ -2816,31 +2057,17 @@ class MuiResourceTypeIdStringEntry(Object, IDisposable):
         """"""
     @overload
     def Dispose(self, fDisposing: bool) -> None:
-        """
-
-        :param fDisposing:
-        """
+        """:param fDisposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MuiResourceTypeIdStringEntryFieldId(Enum):
     """"""
@@ -2870,26 +2097,15 @@ class PermissionSetEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PermissionSetEntryFieldId(Enum):
     """"""
@@ -2913,26 +2129,15 @@ class ProgIdRedirectionEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProgIdRedirectionEntryFieldId(Enum):
     """"""
@@ -2956,26 +2161,15 @@ class ResourceTableMappingEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceTableMappingEntryFieldId(Enum):
     """"""
@@ -2999,26 +2193,15 @@ class SubcategoryMembershipEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SubcategoryMembershipEntryFieldId(Enum):
     """"""
@@ -3047,26 +2230,15 @@ class WindowClassEntry(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WindowClassEntryFieldId(Enum):
     """"""

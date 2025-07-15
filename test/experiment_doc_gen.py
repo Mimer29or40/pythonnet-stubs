@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 import requests
 from bs4 import BeautifulSoup
 from bs4 import Tag
@@ -27,7 +25,7 @@ def main() -> None:
         print(class_desc)
 
         remarks_tag: Tag = content.find("h2", id="remarks")
-        remarks_paragraphs: List[str] = []
+        remarks_paragraphs: list[str] = []
         tag: Tag
         for tag in remarks_tag.find_all_next():
             if tag.name == "p":

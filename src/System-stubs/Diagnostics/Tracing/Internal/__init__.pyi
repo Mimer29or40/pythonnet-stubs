@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import ClassVar
 from typing import Final
@@ -19,44 +17,26 @@ class Environment(ABC, Object):
     @classmethod
     @property
     def TickCount(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetResourceString(cls, key: str, args: Array[object]) -> str:
-        """
-
-        :param key:
+        """:param key:
         :param args:
         :return:
         """
     @classmethod
     def GetRuntimeResourceString(cls, key: str, args: Array[object]) -> str:
-        """
-
-        :param key:
+        """:param key:
         :param args:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

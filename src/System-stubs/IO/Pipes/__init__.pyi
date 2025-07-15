@@ -1,10 +1,7 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
 from typing import ClassVar
 from typing import Final
-from typing import Tuple
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafePipeHandle
@@ -42,134 +39,82 @@ class AnonymousPipeClientStream(PipeStream, IDisposable):
 
     @overload
     def __init__(self, pipeHandleAsString: str):
-        """
-
-        :param pipeHandleAsString:
-        """
+        """:param pipeHandleAsString:"""
     @overload
     def __init__(self, direction: PipeDirection, safePipeHandle: SafePipeHandle):
-        """
-
-        :param direction:
+        """:param direction:
         :param safePipeHandle:
         """
     @overload
     def __init__(self, direction: PipeDirection, pipeHandleAsString: str):
-        """
-
-        :param direction:
+        """:param direction:
         :param pipeHandleAsString:
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAsync(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConnected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMessageComplete(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadMode.setter
     def ReadMode(self, value: PipeTransmissionMode) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafePipeHandle(self) -> SafePipeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransmissionMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -177,11 +122,14 @@ class AnonymousPipeClientStream(PipeStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -192,29 +140,20 @@ class AnonymousPipeClientStream(PipeStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -222,169 +161,117 @@ class AnonymousPipeClientStream(PipeStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetAccessControl(self) -> PipeSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetAccessControl(self, pipeSecurity: PipeSecurity) -> None:
-        """
-
-        :param pipeSecurity:
-        """
+        """:param pipeSecurity:"""
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WaitForPipeDrain(self) -> None:
         """"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class AnonymousPipeServerStream(PipeStream, IDisposable):
     """"""
@@ -394,15 +281,10 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
         """"""
     @overload
     def __init__(self, direction: PipeDirection):
-        """
-
-        :param direction:
-        """
+        """:param direction:"""
     @overload
     def __init__(self, direction: PipeDirection, inheritability: HandleInheritability):
-        """
-
-        :param direction:
+        """:param direction:
         :param inheritability:
         """
     @overload
@@ -412,19 +294,18 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
         serverSafePipeHandle: SafePipeHandle,
         clientSafePipeHandle: SafePipeHandle,
     ):
-        """
-
-        :param direction:
+        """:param direction:
         :param serverSafePipeHandle:
         :param clientSafePipeHandle:
         """
     @overload
     def __init__(
-        self, direction: PipeDirection, inheritability: HandleInheritability, bufferSize: int
+        self,
+        direction: PipeDirection,
+        inheritability: HandleInheritability,
+        bufferSize: int,
     ):
-        """
-
-        :param direction:
+        """:param direction:
         :param inheritability:
         :param bufferSize:
         """
@@ -436,129 +317,79 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
         bufferSize: int,
         pipeSecurity: PipeSecurity,
     ):
-        """
-
-        :param direction:
+        """:param direction:
         :param inheritability:
         :param bufferSize:
         :param pipeSecurity:
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ClientSafePipeHandle(self) -> SafePipeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAsync(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConnected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMessageComplete(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadMode.setter
     def ReadMode(self, value: PipeTransmissionMode) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafePipeHandle(self) -> SafePipeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransmissionMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -566,11 +397,14 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -581,29 +415,20 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -611,17 +436,13 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
@@ -629,220 +450,146 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
     def DisposeLocalCopyOfClientHandle(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetAccessControl(self) -> PipeSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetClientHandleAsString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetAccessControl(self, pipeSecurity: PipeSecurity) -> None:
-        """
-
-        :param pipeSecurity:
-        """
+        """:param pipeSecurity:"""
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WaitForPipeDrain(self) -> None:
         """"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class IOCancellationHelper(Object):
     """"""
 
     def __init__(self, cancellationToken: CancellationToken):
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     def AllowCancellation(self, handle: SafeHandle, overlapped: NativeOverlapped) -> None:
-        """
-
-        :param handle:
+        """:param handle:
         :param overlapped:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetOperationCompleted(self) -> None:
         """"""
     def ThrowIOOperationAborted(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NamedPipeClientStream(PipeStream, IDisposable):
     """"""
 
     @overload
     def __init__(self, pipeName: str):
-        """
-
-        :param pipeName:
-        """
+        """:param pipeName:"""
     @overload
     def __init__(self, serverName: str, pipeName: str):
-        """
-
-        :param serverName:
+        """:param serverName:
         :param pipeName:
         """
     @overload
     def __init__(self, serverName: str, pipeName: str, direction: PipeDirection):
-        """
-
-        :param serverName:
+        """:param serverName:
         :param pipeName:
         :param direction:
         """
@@ -854,20 +601,20 @@ class NamedPipeClientStream(PipeStream, IDisposable):
         isConnected: bool,
         safePipeHandle: SafePipeHandle,
     ):
-        """
-
-        :param direction:
+        """:param direction:
         :param isAsync:
         :param isConnected:
         :param safePipeHandle:
         """
     @overload
     def __init__(
-        self, serverName: str, pipeName: str, direction: PipeDirection, options: PipeOptions
+        self,
+        serverName: str,
+        pipeName: str,
+        direction: PipeDirection,
+        options: PipeOptions,
     ):
-        """
-
-        :param serverName:
+        """:param serverName:
         :param pipeName:
         :param direction:
         :param options:
@@ -881,9 +628,7 @@ class NamedPipeClientStream(PipeStream, IDisposable):
         options: PipeOptions,
         impersonationLevel: TokenImpersonationLevel,
     ):
-        """
-
-        :param serverName:
+        """:param serverName:
         :param pipeName:
         :param direction:
         :param options:
@@ -899,9 +644,7 @@ class NamedPipeClientStream(PipeStream, IDisposable):
         impersonationLevel: TokenImpersonationLevel,
         inheritability: HandleInheritability,
     ):
-        """
-
-        :param serverName:
+        """:param serverName:
         :param pipeName:
         :param desiredAccessRights:
         :param options:
@@ -918,9 +661,7 @@ class NamedPipeClientStream(PipeStream, IDisposable):
         impersonationLevel: TokenImpersonationLevel,
         inheritability: HandleInheritability,
     ):
-        """
-
-        :param serverName:
+        """:param serverName:
         :param pipeName:
         :param direction:
         :param options:
@@ -929,120 +670,72 @@ class NamedPipeClientStream(PipeStream, IDisposable):
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAsync(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConnected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMessageComplete(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NumberOfServerInstances(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadMode.setter
     def ReadMode(self, value: PipeTransmissionMode) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafePipeHandle(self) -> SafePipeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransmissionMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1050,11 +743,14 @@ class NamedPipeClientStream(PipeStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1068,63 +764,42 @@ class NamedPipeClientStream(PipeStream, IDisposable):
         """"""
     @overload
     def Connect(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def ConnectAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ConnectAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     @overload
     def ConnectAsync(self, timeout: int) -> Task:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def ConnectAsync(self, timeout: int, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1132,169 +807,117 @@ class NamedPipeClientStream(PipeStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetAccessControl(self) -> PipeSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetAccessControl(self, pipeSecurity: PipeSecurity) -> None:
-        """
-
-        :param pipeSecurity:
-        """
+        """:param pipeSecurity:"""
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WaitForPipeDrain(self) -> None:
         """"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class NamedPipeServerStream(PipeStream, IDisposable):
     """"""
@@ -1306,22 +929,15 @@ class NamedPipeServerStream(PipeStream, IDisposable):
     """
     @overload
     def __init__(self, pipeName: str):
-        """
-
-        :param pipeName:
-        """
+        """:param pipeName:"""
     @overload
     def __init__(self, pipeName: str, direction: PipeDirection):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         """
     @overload
     def __init__(self, pipeName: str, direction: PipeDirection, maxNumberOfServerInstances: int):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         :param maxNumberOfServerInstances:
         """
@@ -1333,9 +949,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         isConnected: bool,
         safePipeHandle: SafePipeHandle,
     ):
-        """
-
-        :param direction:
+        """:param direction:
         :param isAsync:
         :param isConnected:
         :param safePipeHandle:
@@ -1348,9 +962,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         maxNumberOfServerInstances: int,
         transmissionMode: PipeTransmissionMode,
     ):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         :param maxNumberOfServerInstances:
         :param transmissionMode:
@@ -1364,9 +976,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         transmissionMode: PipeTransmissionMode,
         options: PipeOptions,
     ):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         :param maxNumberOfServerInstances:
         :param transmissionMode:
@@ -1383,9 +993,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         inBufferSize: int,
         outBufferSize: int,
     ):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         :param maxNumberOfServerInstances:
         :param transmissionMode:
@@ -1405,9 +1013,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         outBufferSize: int,
         pipeSecurity: PipeSecurity,
     ):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         :param maxNumberOfServerInstances:
         :param transmissionMode:
@@ -1429,9 +1035,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         pipeSecurity: PipeSecurity,
         inheritability: HandleInheritability,
     ):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         :param maxNumberOfServerInstances:
         :param transmissionMode:
@@ -1455,9 +1059,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         inheritability: HandleInheritability,
         additionalAccessRights: PipeAccessRights,
     ):
-        """
-
-        :param pipeName:
+        """:param pipeName:
         :param direction:
         :param maxNumberOfServerInstances:
         :param transmissionMode:
@@ -1470,114 +1072,69 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAsync(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConnected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMessageComplete(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadMode.setter
     def ReadMode(self, value: PipeTransmissionMode) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafePipeHandle(self) -> SafePipeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransmissionMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1585,18 +1142,19 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         :return:
         """
     def BeginWaitForConnection(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1607,29 +1165,20 @@ class NamedPipeServerStream(PipeStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1637,17 +1186,13 @@ class NamedPipeServerStream(PipeStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Disconnect(self) -> None:
@@ -1655,183 +1200,121 @@ class NamedPipeServerStream(PipeStream, IDisposable):
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWaitForConnection(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetAccessControl(self) -> PipeSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetImpersonationUserName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RunAsClient(self, impersonationWorker: PipeStreamImpersonationWorker) -> None:
-        """
-
-        :param impersonationWorker:
-        """
+        """:param impersonationWorker:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetAccessControl(self, pipeSecurity: PipeSecurity) -> None:
-        """
-
-        :param pipeSecurity:
-        """
+        """:param pipeSecurity:"""
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WaitForConnection(self) -> None:
         """"""
     @overload
     def WaitForConnectionAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitForConnectionAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def WaitForPipeDrain(self) -> None:
         """"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class PipeAccessRights(Enum):
     """"""
@@ -1876,79 +1359,49 @@ class PipeAccessRule(AccessRule):
 
     @overload
     def __init__(
-        self, identity: IdentityReference, rights: PipeAccessRights, type: AccessControlType
+        self,
+        identity: IdentityReference,
+        rights: PipeAccessRights,
+        type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, rights: PipeAccessRights, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param type:
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PipeAccessRights(self) -> PipeAccessRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PipeAsyncResult(Object, IAsyncResult):
     """"""
@@ -1957,126 +1410,70 @@ class PipeAsyncResult(Object, IAsyncResult):
         """"""
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PipeAuditRule(AuditRule):
     """"""
 
     @overload
     def __init__(self, identity: IdentityReference, rights: PipeAccessRights, flags: AuditFlags):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param flags:
         """
     @overload
     def __init__(self, identity: str, rights: PipeAccessRights, flags: AuditFlags):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param flags:
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PipeAccessRights(self) -> PipeAccessRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PipeDirection(Enum):
     """"""
@@ -2105,46 +1502,25 @@ class PipeSecurity(NativeObjectSecurity):
         """"""
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -2154,9 +1530,7 @@ class PipeSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2165,15 +1539,9 @@ class PipeSecurity(NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: PipeAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: PipeAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -2183,9 +1551,7 @@ class PipeSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2194,17 +1560,13 @@ class PipeSecurity(NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -2212,175 +1574,103 @@ class PipeSecurity(NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: PipeAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleSpecific(self, rule: PipeAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: PipeAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: PipeAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: PipeAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: PipeAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: PipeAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: PipeAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PipeState(Enum):
     """"""
@@ -2401,114 +1691,69 @@ class PipeStream(ABC, Stream, IDisposable):
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAsync(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConnected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMessageComplete(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadMode.setter
     def ReadMode(self, value: PipeTransmissionMode) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafePipeHandle(self) -> SafePipeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransmissionMode(self) -> PipeTransmissionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -2516,11 +1761,14 @@ class PipeStream(ABC, Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -2531,29 +1779,20 @@ class PipeStream(ABC, Stream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -2561,169 +1800,117 @@ class PipeStream(ABC, Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetAccessControl(self) -> PipeSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetAccessControl(self, pipeSecurity: PipeSecurity) -> None:
-        """
-
-        :param pipeSecurity:
-        """
+        """:param pipeSecurity:"""
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WaitForPipeDrain(self) -> None:
         """"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class PipeStreamAsyncResult(Object, IAsyncResult):
     """"""
@@ -2732,49 +1919,26 @@ class PipeStreamAsyncResult(Object, IAsyncResult):
         """"""
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 PipeStreamImpersonationWorker: Callable[[], None] = ...
 """"""

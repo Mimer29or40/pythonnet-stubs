@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import ClassVar
 from typing import Final
@@ -11,7 +9,6 @@ from System import Func
 from System import Object
 from System import Type
 from System import ValueType
-from System.Collections.Immutable.ImmutableArray import Builder
 
 T = TypeVar("T")
 
@@ -20,32 +17,19 @@ class ImmutableArray(ABC, Object):
 
     @classmethod
     def CreateBuilder(cls, capacity: int) -> ImmutableArray.Builder[T]:
-        """
-
-        :param capacity:
+        """:param capacity:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ImmutableArray(Generic[T], ValueType):
     """"""
@@ -56,75 +40,47 @@ class ImmutableArray(Generic[T], ValueType):
     :return: 
     """
     def __init__(self, array: Array[T]):
-        """
-
-        :param array:
-        """
+        """:param array:"""
     @property
     def IsDefault(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingArray(self) -> Array[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(
-        self, sourceIndex: int, destination: Array[T], destinationIndex: int, length: int
+        self,
+        sourceIndex: int,
+        destination: Array[T],
+        destinationIndex: int,
+        length: int,
     ) -> None:
-        """
-
-        :param sourceIndex:
+        """:param sourceIndex:
         :param destination:
         :param destinationIndex:
         :param length:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FirstOrDefault(self, predicate: Func[T, bool]) -> T:
-        """
-
-        :param predicate:
+        """:param predicate:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, index: int) -> T:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
 
@@ -145,28 +101,17 @@ class ImmutableArray(Generic[T], ValueType):
         def Add(self, item: T) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def MoveToImmutable(self) -> ImmutableArray[T]:
             """"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
         def __getitem__(self, index: int) -> T:
             """"""
         def __setitem__(self, index: int, value: T) -> None:

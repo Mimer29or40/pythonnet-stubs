@@ -1,9 +1,10 @@
+from __future__ import annotations
+
 import difflib
 import pprint
 import unittest
-from typing import Mapping
-from typing import Optional
-from unittest.util import _common_shorten_repr  # noqa
+from collections.abc import Mapping
+from unittest.util import _common_shorten_repr
 from unittest.util import safe_repr
 
 from stubgen.model import CClass
@@ -43,22 +44,22 @@ class TestBase(unittest.TestCase):
         self.addTypeEqualityFunc(CEvent, self.assertCEvent)
 
     def assertMapping(self, map1: Mapping, map2: Mapping, msg: str = None) -> None:
-        self.assertIsInstance(map1, Mapping, f"map1 is not a Mapping")
-        self.assertIsInstance(map2, Mapping, f"map2 is not a Mapping")
+        self.assertIsInstance(map1, Mapping, "map1 is not a Mapping")
+        self.assertIsInstance(map2, Mapping, "map2 is not a Mapping")
 
-        differing: Optional[str] = None
+        differing: str | None = None
         len1 = 0
         try:
             len1 = len(map1)
         except (TypeError, NotImplementedError):
-            differing = f"map1 has no length.    Non-mapping?"
+            differing = "map1 has no length.    Non-mapping?"
 
         len2 = 0
         if differing is None:
             try:
                 len2 = len(map2)
             except (TypeError, NotImplementedError):
-                differing = f"map2 has no length.    Non-mapping?"
+                differing = "map2 has no length.    Non-mapping?"
 
         if differing is None:
             if map1 == map2:
@@ -66,7 +67,7 @@ class TestBase(unittest.TestCase):
 
             differing = "Mapping differ: %s != %s\n".format(*_common_shorten_repr(map1, map2))
 
-            for i, (key1, key2) in enumerate(zip(map1, map2)):
+            for i, (key1, key2) in enumerate(zip(map1, map2, strict=False)):
                 if key1 != key2:
                     differing += f"\nKeys at index {i} are different: {key1} != {key2}\n"
                     break
@@ -104,12 +105,12 @@ class TestBase(unittest.TestCase):
                     )
                 except (TypeError, IndexError, NotImplementedError):
                     differing += f"Unable to index element {len1} of second Mapping\n"
-        standard_msg: Optional[str] = differing
+        standard_msg: str | None = differing
         diff_msg = "\n" + "\n".join(
             difflib.ndiff(pprint.pformat(map1).splitlines(), pprint.pformat(map2).splitlines())
         )
 
-        standard_msg = self._truncateMessage(standard_msg, diff_msg)  # noqa
+        standard_msg = self._truncateMessage(standard_msg, diff_msg)
         msg = self._formatMessage(msg, standard_msg)
         self.fail(msg)
 

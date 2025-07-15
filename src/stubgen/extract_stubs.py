@@ -4,19 +4,14 @@ import dataclasses
 import itertools
 import json
 from collections import defaultdict
+from collections.abc import Callable
+from collections.abc import Collection
+from collections.abc import Mapping
+from collections.abc import Sequence
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Callable
-from typing import Collection
-from typing import Dict
-from typing import List
-from typing import Mapping
-from typing import Optional
-from typing import Sequence
-from typing import Tuple
 from typing import TypeVar
-from typing import Union
 
 import clr
 from System import Delegate
@@ -56,7 +51,7 @@ logger = get_logger(__name__)
 T = TypeVar("T")
 
 
-def extract_type_def(info: TypeInfo) -> Optional[CTypeDefinition]:
+def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
     def is_delegate() -> bool:
         if info in (Delegate, MulticastDelegate):
             return False
@@ -78,7 +73,7 @@ def extract_type_def(info: TypeInfo) -> Optional[CTypeDefinition]:
         return extract_class(info)
 
 
-def extract_class(info: TypeInfo) -> Optional[CClass]:
+def extract_class(info: TypeInfo) -> CClass | None:
     logger.info(f'Extracting class "{info.Namespace}.{info.Name}"')
     return CClass(
         name=make_python_name(info.Name),
@@ -97,7 +92,7 @@ def extract_class(info: TypeInfo) -> Optional[CClass]:
     )
 
 
-def extract_struct(info: TypeInfo) -> Optional[CStruct]:
+def extract_struct(info: TypeInfo) -> CStruct | None:
     logger.info(f'Extracting struct "{info.Namespace}.{info.Name}"')
     return CStruct(
         name=make_python_name(info.Name),
@@ -116,7 +111,7 @@ def extract_struct(info: TypeInfo) -> Optional[CStruct]:
     )
 
 
-def extract_interface(info: TypeInfo) -> Optional[CInterface]:
+def extract_interface(info: TypeInfo) -> CInterface | None:
     logger.info(f'Extracting interface "{info.Namespace}.{info.Name}"')
     return CInterface(
         name=make_python_name(info.Name),
@@ -132,7 +127,7 @@ def extract_interface(info: TypeInfo) -> Optional[CInterface]:
     )
 
 
-def extract_enum(info: TypeInfo) -> Optional[CEnum]:
+def extract_enum(info: TypeInfo) -> CEnum | None:
     logger.info(f'Extracting enum "{info.Namespace}.{info.Name}"')
     return CEnum(
         name=make_python_name(info.Name),
@@ -142,7 +137,7 @@ def extract_enum(info: TypeInfo) -> Optional[CEnum]:
     )
 
 
-def extract_delegate(info: TypeInfo) -> Optional[CDelegate]:
+def extract_delegate(info: TypeInfo) -> CDelegate | None:
     logger.info(f'Extracting delegate "{info.Namespace}.{info.Name}"')
 
     invoke: MethodInfo = info.GetMethod("Invoke")
@@ -156,7 +151,7 @@ def extract_delegate(info: TypeInfo) -> Optional[CDelegate]:
     )
 
 
-def extract_type(info: TypeInfo, use_generic: bool = False) -> Optional[CType]:
+def extract_type(info: TypeInfo, use_generic: bool = False) -> CType | None:
     if info is None:
         return None
 
@@ -244,9 +239,9 @@ def extract_property(info: PropertyInfo) -> CProperty:
 
 
 def extract_method(info: MethodInfo) -> CMethod:
-    return_types: List[CType] = [extract_type(info.ReturnType)]
+    return_types: list[CType] = [extract_type(info.ReturnType)]
 
-    parameters: List[CParameter] = []
+    parameters: list[CParameter] = []
     for parameter_info in info.GetParameters():
         parameter: CParameter = extract_parameter(parameter_info)
         parameters.append(parameter)
@@ -272,10 +267,10 @@ def extract_event(info: EventInfo) -> CEvent:
 
 def extract_base_members(
     type_info: TypeInfo,
-    found: Dict[str, T],
+    found: dict[str, T],
     extract: Callable[[TypeInfo, BindingFlags], Collection[T]],
 ) -> None:
-    bases: List[T] = []
+    bases: list[T] = []
     base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
     if type_info.BaseType is not None:
         bases.extend(extract(type_info.BaseType, base_binding_flags))
@@ -296,7 +291,7 @@ def extract_base_members(
 
 def extract_fields(type_info: TypeInfo) -> Mapping[str, CField]:
     def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CField]:
-        found: Dict[str, CField] = {}
+        found: dict[str, CField] = {}
 
         info: FieldInfo
         if binding_flags is None:
@@ -321,7 +316,7 @@ def extract_constructors(type_info: TypeInfo) -> Mapping[str, CConstructor]:
     def extract_raw(
         type_info: TypeInfo, binding_flags: BindingFlags = None
     ) -> Collection[CConstructor]:
-        found: Dict[str, CConstructor] = {}
+        found: dict[str, CConstructor] = {}
 
         info: ConstructorInfo
         if binding_flags is None:
@@ -344,7 +339,7 @@ def extract_properties(type_info: TypeInfo) -> Mapping[str, CProperty]:
     def extract_raw(
         type_info: TypeInfo, binding_flags: BindingFlags = None
     ) -> Collection[CProperty]:
-        found: Dict[str, CProperty] = {}
+        found: dict[str, CProperty] = {}
 
         info: PropertyInfo
         if binding_flags is None:
@@ -373,7 +368,7 @@ def extract_properties(type_info: TypeInfo) -> Mapping[str, CProperty]:
 
 def extract_methods(type_info: TypeInfo) -> Mapping[str, CMethod]:
     def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CMethod]:
-        found: Dict[str, CMethod] = {}
+        found: dict[str, CMethod] = {}
 
         info: MethodInfo
         if binding_flags is None:
@@ -387,9 +382,9 @@ def extract_methods(type_info: TypeInfo) -> Mapping[str, CMethod]:
 
         return found.values()
 
-    raw_members: List[CMethod] = list(extract_raw(type_info))
+    raw_members: list[CMethod] = list(extract_raw(type_info))
 
-    supported_methods: Mapping[str, Tuple[str, bool]] = {
+    supported_methods: Mapping[str, tuple[str, bool]] = {
         "op_Addition": ("__add__", True),
         "op_BitwiseAnd": ("__and__", True),
         "op_BitwiseOr": ("__or__", True),
@@ -428,7 +423,10 @@ def extract_methods(type_info: TypeInfo) -> Mapping[str, CMethod]:
             parameters: Sequence[CParameter] = method.parameters
             if remove_param:
                 parameters = tuple(
-                    map(lambda p: dataclasses.replace(p, name="other"), method.parameters[1:])
+                    map(
+                        lambda p: dataclasses.replace(p, name="other"),
+                        method.parameters[1:],
+                    )
                 )
 
             method: CMethod = dataclasses.replace(
@@ -468,7 +466,7 @@ def extract_methods(type_info: TypeInfo) -> Mapping[str, CMethod]:
 
 def extract_events(type_info: TypeInfo) -> Mapping[str, CEvent]:
     def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CEvent]:
-        found: Dict[str, CEvent] = {}
+        found: dict[str, CEvent] = {}
 
         info: EventInfo
         if binding_flags is None:
@@ -493,7 +491,7 @@ def extract_nested_types(type_info: TypeInfo) -> Mapping[str, CTypeDefinition]:
     def extract_raw(
         type_info: TypeInfo, binding_flags: BindingFlags = None
     ) -> Collection[CTypeDefinition]:
-        found: Dict[str, CTypeDefinition] = {}
+        found: dict[str, CTypeDefinition] = {}
 
         info: TypeInfo
         if binding_flags is None:
@@ -512,8 +510,8 @@ def extract_nested_types(type_info: TypeInfo) -> Mapping[str, CTypeDefinition]:
     return {str(member): member for member in sorted_members}
 
 
-def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> Union[int, str]:
-    logger.info(f"Extracting assembly: %r", assembly_name)
+def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> int | str:
+    logger.info("Extracting assembly: %r", assembly_name)
 
     assembly: Assembly = clr.AddReference(assembly_name)
     name: AssemblyName = assembly.GetName()
@@ -532,7 +530,7 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
         return 1
 
     logger.debug("Parsing types")
-    type_definitions: Dict[str, List[CTypeDefinition]] = defaultdict(list)
+    type_definitions: dict[str, list[CTypeDefinition]] = defaultdict(list)
     info: TypeInfo
     for info in assembly.GetTypes():
         if info.Namespace is None or info.IsNested:
@@ -590,7 +588,7 @@ def extract_assemblies(
     overwrite: bool,
     skip_failed: bool,
     multi_threaded: bool,
-) -> Union[int, str]:
+) -> int | str:
     if multi_threaded:
         executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
         for exit_code in executor.map(
@@ -607,7 +605,7 @@ def extract_assemblies(
         assembly_name: str
         for assembly_name in assembly_names:
             try:
-                exit_code: Union[int, str] = extract_assembly(assembly_name, output_dir, overwrite)
+                exit_code: int | str = extract_assembly(assembly_name, output_dir, overwrite)
                 if exit_code != 0 and not skip_failed:
                     return exit_code
             except Exception as e:

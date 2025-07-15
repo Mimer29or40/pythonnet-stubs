@@ -1,11 +1,8 @@
-from __future__ import annotations
-
 from abc import ABC
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -86,72 +83,42 @@ class AccessRule(ABC, AuthorizationRule):
 
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AccessRule(Generic[T], AccessRule):
     """"""
 
     @overload
     def __init__(self, identity: IdentityReference, rights: T, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, rights: T, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param type:
         """
@@ -164,9 +131,7 @@ class AccessRule(Generic[T], AccessRule):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -181,9 +146,7 @@ class AccessRule(Generic[T], AccessRule):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -191,99 +154,53 @@ class AccessRule(Generic[T], AccessRule):
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Rights(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AceEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AceFlags(Enum):
     """"""
@@ -376,72 +293,42 @@ class AuditRule(ABC, AuthorizationRule):
 
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuditRule(Generic[T], AuditRule):
     """"""
 
     @overload
     def __init__(self, identity: IdentityReference, rights: T, flags: AuditFlags):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param flags:
         """
     @overload
     def __init__(self, identity: str, rights: T, flags: AuditFlags):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param flags:
         """
@@ -454,9 +341,7 @@ class AuditRule(Generic[T], AuditRule):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -471,9 +356,7 @@ class AuditRule(Generic[T], AuditRule):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param rights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -481,110 +364,58 @@ class AuditRule(Generic[T], AuditRule):
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Rights(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuthorizationRule(ABC, Object):
     """"""
 
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuthorizationRuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     """"""
@@ -593,95 +424,52 @@ class AuthorizationRuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerab
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> AuthorizationRule:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddRule(self, rule: AuthorizationRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, rules: Array[AuthorizationRule], index: int) -> None:
-        """
-
-        :param rules:
+        """:param rules:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> AuthorizationRule:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CommonAce(QualifiedAce):
     """"""
@@ -695,9 +483,7 @@ class CommonAce(QualifiedAce):
         isCallback: bool,
         opaque: Array[int],
     ):
-        """
-
-        :param flags:
+        """:param flags:
         :param qualifier:
         :param accessMask:
         :param sid:
@@ -706,270 +492,148 @@ class CommonAce(QualifiedAce):
         """
     @property
     def AccessMask(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AccessMask.setter
     def AccessMask(self, value: int) -> None: ...
     @property
     def AceFlags(self) -> AceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AceFlags.setter
     def AceFlags(self, value: AceFlags) -> None: ...
     @property
     def AceQualifier(self) -> AceQualifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AceType(self) -> AceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCallback(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OpaqueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityIdentifier(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityIdentifier.setter
     def SecurityIdentifier(self, value: SecurityIdentifier) -> None: ...
     def Copy(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOpaque(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def MaxOpaqueLength(cls, isCallback: bool) -> int:
-        """
-
-        :param isCallback:
+        """:param isCallback:
         :return:
         """
     def SetOpaque(self, opaque: Array[int]) -> None:
-        """
-
-        :param opaque:
-        """
+        """:param opaque:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CommonAcl(ABC, GenericAcl, ICollection, IEnumerable):
     """"""
 
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContainer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDS(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: GenericAce) -> None: ...
     @property
     def Revision(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[GenericAce], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Purge(self, sid: SecurityIdentifier) -> None:
-        """
-
-        :param sid:
-        """
+        """:param sid:"""
     def RemoveInheritedAces(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> GenericAce:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: GenericAce) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -978,46 +642,25 @@ class CommonObjectSecurity(ABC, ObjectSecurity):
 
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -1027,9 +670,7 @@ class CommonObjectSecurity(ABC, ObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -1046,9 +687,7 @@ class CommonObjectSecurity(ABC, ObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -1057,17 +696,13 @@ class CommonObjectSecurity(ABC, ObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -1075,158 +710,107 @@ class CommonObjectSecurity(ABC, ObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CommonSecurityDescriptor(GenericSecurityDescriptor):
     """"""
 
     @overload
-    def __init__(self, isContainer: bool, isDS: bool, rawSecurityDescriptor: RawSecurityDescriptor):
-        """
-
-        :param isContainer:
+    def __init__(
+        self,
+        isContainer: bool,
+        isDS: bool,
+        rawSecurityDescriptor: RawSecurityDescriptor,
+    ):
+        """:param isContainer:
         :param isDS:
         :param rawSecurityDescriptor:
         """
     @overload
     def __init__(self, isContainer: bool, isDS: bool, sddlForm: str):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param sddlForm:
         """
     @overload
     def __init__(self, isContainer: bool, isDS: bool, binaryForm: Array[int], offset: int):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param binaryForm:
         :param offset:
@@ -1242,9 +826,7 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         systemAcl: SystemAcl,
         discretionaryAcl: DiscretionaryAcl,
     ):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param flags:
         :param owner:
@@ -1254,146 +836,84 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         """
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ControlFlags(self) -> ControlFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DiscretionaryAcl(self) -> DiscretionaryAcl:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DiscretionaryAcl.setter
     def DiscretionaryAcl(self, value: DiscretionaryAcl) -> None: ...
     @property
     def Group(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Group.setter
     def Group(self, value: SecurityIdentifier) -> None: ...
     @property
     def IsContainer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDS(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDiscretionaryAclCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSystemAclCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Owner(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Owner.setter
     def Owner(self, value: SecurityIdentifier) -> None: ...
     @classmethod
     @property
     def Revision(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SystemAcl(self) -> SystemAcl:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SystemAcl.setter
     def SystemAcl(self, value: SystemAcl) -> None: ...
     def AddDiscretionaryAcl(self, revision: int, trusted: int) -> None:
-        """
-
-        :param revision:
+        """:param revision:
         :param trusted:
         """
     def AddSystemAcl(self, revision: int, trusted: int) -> None:
-        """
-
-        :param revision:
+        """:param revision:
         :param trusted:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PurgeAccessControl(self, sid: SecurityIdentifier) -> None:
-        """
-
-        :param sid:
-        """
+        """:param sid:"""
     def PurgeAudit(self, sid: SecurityIdentifier) -> None:
-        """
-
-        :param sid:
-        """
+        """:param sid:"""
     def SetDiscretionaryAclProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetSystemAclProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompoundAce(KnownAce):
     """"""
@@ -1405,113 +925,65 @@ class CompoundAce(KnownAce):
         compoundAceType: CompoundAceType,
         sid: SecurityIdentifier,
     ):
-        """
-
-        :param flags:
+        """:param flags:
         :param accessMask:
         :param compoundAceType:
         :param sid:
         """
     @property
     def AccessMask(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AccessMask.setter
     def AccessMask(self, value: int) -> None: ...
     @property
     def AceFlags(self) -> AceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AceFlags.setter
     def AceFlags(self, value: AceFlags) -> None: ...
     @property
     def AceType(self) -> AceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompoundAceType(self) -> CompoundAceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CompoundAceType.setter
     def CompoundAceType(self, value: CompoundAceType) -> None: ...
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityIdentifier(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityIdentifier.setter
     def SecurityIdentifier(self, value: SecurityIdentifier) -> None: ...
     def Copy(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompoundAceType(Enum):
     """"""
@@ -1562,158 +1034,98 @@ class CryptoKeyAccessRule(AccessRule):
 
     @overload
     def __init__(
-        self, identity: IdentityReference, cryptoKeyRights: CryptoKeyRights, type: AccessControlType
+        self,
+        identity: IdentityReference,
+        cryptoKeyRights: CryptoKeyRights,
+        type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param cryptoKeyRights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, cryptoKeyRights: CryptoKeyRights, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param cryptoKeyRights:
         :param type:
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CryptoKeyRights(self) -> CryptoKeyRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CryptoKeyAuditRule(AuditRule):
     """"""
 
     @overload
     def __init__(
-        self, identity: IdentityReference, cryptoKeyRights: CryptoKeyRights, flags: AuditFlags
+        self,
+        identity: IdentityReference,
+        cryptoKeyRights: CryptoKeyRights,
+        flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param cryptoKeyRights:
         :param flags:
         """
     @overload
     def __init__(self, identity: str, cryptoKeyRights: CryptoKeyRights, flags: AuditFlags):
-        """
-
-        :param identity:
+        """:param identity:
         :param cryptoKeyRights:
         :param flags:
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CryptoKeyRights(self) -> CryptoKeyRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CryptoKeyRights(Enum):
     """"""
@@ -1759,52 +1171,28 @@ class CryptoKeySecurity(NativeObjectSecurity):
         """"""
     @overload
     def __init__(self, securityDescriptor: CommonSecurityDescriptor):
-        """
-
-        :param securityDescriptor:
-        """
+        """:param securityDescriptor:"""
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -1814,9 +1202,7 @@ class CryptoKeySecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -1825,15 +1211,9 @@ class CryptoKeySecurity(NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: CryptoKeyAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: CryptoKeyAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -1843,9 +1223,7 @@ class CryptoKeySecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -1854,17 +1232,13 @@ class CryptoKeySecurity(NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -1872,180 +1246,105 @@ class CryptoKeySecurity(NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: CryptoKeyAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: CryptoKeyAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: CryptoKeyAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: CryptoKeyAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: CryptoKeyAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: CryptoKeyAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: CryptoKeyAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: CryptoKeyAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: CryptoKeyAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CustomAce(GenericAce):
     """"""
@@ -2056,150 +1355,81 @@ class CustomAce(GenericAce):
     :return: 
     """
     def __init__(self, type: AceType, flags: AceFlags, opaque: Array[int]):
-        """
-
-        :param type:
+        """:param type:
         :param flags:
         :param opaque:
         """
     @property
     def AceFlags(self) -> AceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AceFlags.setter
     def AceFlags(self, value: AceFlags) -> None: ...
     @property
     def AceType(self) -> AceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OpaqueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Copy(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOpaque(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetOpaque(self, opaque: Array[int]) -> None:
-        """
-
-        :param opaque:
-        """
+        """:param opaque:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DirectoryObjectSecurity(ABC, ObjectSecurity):
     """"""
 
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AccessRuleFactory(
         self,
@@ -2210,9 +1440,7 @@ class DirectoryObjectSecurity(ABC, ObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2232,9 +1460,7 @@ class DirectoryObjectSecurity(ABC, ObjectSecurity):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2254,9 +1480,7 @@ class DirectoryObjectSecurity(ABC, ObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2276,9 +1500,7 @@ class DirectoryObjectSecurity(ABC, ObjectSecurity):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2289,17 +1511,13 @@ class DirectoryObjectSecurity(ABC, ObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -2307,133 +1525,83 @@ class DirectoryObjectSecurity(ABC, ObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DirectorySecurity(FileSystemSecurity):
     """"""
@@ -2443,53 +1611,30 @@ class DirectorySecurity(FileSystemSecurity):
         """"""
     @overload
     def __init__(self, name: str, includeSections: AccessControlSections):
-        """
-
-        :param name:
+        """:param name:
         :param includeSections:
         """
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -2499,9 +1644,7 @@ class DirectorySecurity(FileSystemSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2510,15 +1653,9 @@ class DirectorySecurity(FileSystemSecurity):
         :return:
         """
     def AddAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -2528,9 +1665,7 @@ class DirectorySecurity(FileSystemSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -2539,17 +1674,13 @@ class DirectorySecurity(FileSystemSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -2557,272 +1688,165 @@ class DirectorySecurity(FileSystemSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: FileSystemAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: FileSystemAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
     """"""
 
     @overload
     def __init__(self, isContainer: bool, isDS: bool, rawAcl: RawAcl):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param rawAcl:
         """
     @overload
     def __init__(self, isContainer: bool, isDS: bool, capacity: int):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param capacity:
         """
     @overload
     def __init__(self, isContainer: bool, isDS: bool, revision: int, capacity: int):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param revision:
         :param capacity:
         """
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContainer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDS(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: GenericAce) -> None: ...
     @property
     def Revision(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AddAccess(
-        self, accessType: AccessControlType, sid: SecurityIdentifier, rule: ObjectAccessRule
+        self,
+        accessType: AccessControlType,
+        sid: SecurityIdentifier,
+        rule: ObjectAccessRule,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param rule:
         """
@@ -2835,9 +1859,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -2855,9 +1877,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -2868,57 +1888,38 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[GenericAce], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Purge(self, sid: SecurityIdentifier) -> None:
-        """
-
-        :param sid:
-        """
+        """:param sid:"""
     @overload
     def RemoveAccess(
-        self, accessType: AccessControlType, sid: SecurityIdentifier, rule: ObjectAccessRule
+        self,
+        accessType: AccessControlType,
+        sid: SecurityIdentifier,
+        rule: ObjectAccessRule,
     ) -> bool:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param rule:
         :return:
@@ -2932,9 +1933,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> bool:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -2953,9 +1952,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> bool:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -2967,11 +1964,12 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         """
     @overload
     def RemoveAccessSpecific(
-        self, accessType: AccessControlType, sid: SecurityIdentifier, rule: ObjectAccessRule
+        self,
+        accessType: AccessControlType,
+        sid: SecurityIdentifier,
+        rule: ObjectAccessRule,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param rule:
         """
@@ -2984,9 +1982,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -3004,9 +2000,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -3019,11 +2013,12 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         """"""
     @overload
     def SetAccess(
-        self, accessType: AccessControlType, sid: SecurityIdentifier, rule: ObjectAccessRule
+        self,
+        accessType: AccessControlType,
+        sid: SecurityIdentifier,
+        rule: ObjectAccessRule,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param rule:
         """
@@ -3036,9 +2031,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -3056,9 +2049,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> None:
-        """
-
-        :param accessType:
+        """:param accessType:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -3068,36 +2059,21 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
         :param inheritedObjectType:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> GenericAce:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: GenericAce) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -3111,147 +2087,86 @@ class EventWaitHandleAccessRule(AccessRule):
         eventRights: EventWaitHandleRights,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, eventRights: EventWaitHandleRights, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param type:
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventWaitHandleRights(self) -> EventWaitHandleRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventWaitHandleAuditRule(AuditRule):
     """"""
 
     def __init__(
-        self, identity: IdentityReference, eventRights: EventWaitHandleRights, flags: AuditFlags
+        self,
+        identity: IdentityReference,
+        eventRights: EventWaitHandleRights,
+        flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param flags:
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventWaitHandleRights(self) -> EventWaitHandleRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventWaitHandleRights(Enum):
     """"""
@@ -3278,46 +2193,25 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         """"""
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -3327,9 +2221,7 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -3338,15 +2230,9 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: EventWaitHandleAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: EventWaitHandleAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -3356,9 +2242,7 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -3367,17 +2251,13 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -3385,180 +2265,105 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: EventWaitHandleAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: EventWaitHandleAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: EventWaitHandleAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: EventWaitHandleAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: EventWaitHandleAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: EventWaitHandleAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: EventWaitHandleAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: EventWaitHandleAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: EventWaitHandleAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileSecurity(FileSystemSecurity):
     """"""
@@ -3568,53 +2373,30 @@ class FileSecurity(FileSystemSecurity):
         """"""
     @overload
     def __init__(self, fileName: str, includeSections: AccessControlSections):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param includeSections:
         """
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -3624,9 +2406,7 @@ class FileSecurity(FileSystemSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -3635,15 +2415,9 @@ class FileSecurity(FileSystemSecurity):
         :return:
         """
     def AddAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -3653,9 +2427,7 @@ class FileSecurity(FileSystemSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -3664,17 +2436,13 @@ class FileSecurity(FileSystemSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -3682,180 +2450,105 @@ class FileSecurity(FileSystemSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: FileSystemAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: FileSystemAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileSystemAccessRule(AccessRule):
     """"""
@@ -3867,17 +2560,13 @@ class FileSystemAccessRule(AccessRule):
         fileSystemRights: FileSystemRights,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, fileSystemRights: FileSystemRights, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param type:
         """
@@ -3890,9 +2579,7 @@ class FileSystemAccessRule(AccessRule):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -3907,9 +2594,7 @@ class FileSystemAccessRule(AccessRule):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -3917,80 +2602,50 @@ class FileSystemAccessRule(AccessRule):
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileSystemRights(self) -> FileSystemRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileSystemAuditRule(AuditRule):
     """"""
 
     @overload
     def __init__(
-        self, identity: IdentityReference, fileSystemRights: FileSystemRights, flags: AuditFlags
+        self,
+        identity: IdentityReference,
+        fileSystemRights: FileSystemRights,
+        flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param flags:
         """
     @overload
     def __init__(self, identity: str, fileSystemRights: FileSystemRights, flags: AuditFlags):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param flags:
         """
@@ -4003,9 +2658,7 @@ class FileSystemAuditRule(AuditRule):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -4020,9 +2673,7 @@ class FileSystemAuditRule(AuditRule):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param fileSystemRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -4030,61 +2681,32 @@ class FileSystemAuditRule(AuditRule):
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileSystemRights(self) -> FileSystemRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileSystemRights(Enum):
     """"""
@@ -4141,46 +2763,25 @@ class FileSystemSecurity(ABC, NativeObjectSecurity):
 
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -4190,9 +2791,7 @@ class FileSystemSecurity(ABC, NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -4201,15 +2800,9 @@ class FileSystemSecurity(ABC, NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -4219,9 +2812,7 @@ class FileSystemSecurity(ABC, NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -4230,17 +2821,13 @@ class FileSystemSecurity(ABC, NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -4248,293 +2835,171 @@ class FileSystemSecurity(ABC, NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: FileSystemAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: FileSystemAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: FileSystemAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: FileSystemAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GenericAce(ABC, Object):
     """"""
 
     @property
     def AceFlags(self) -> AceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AceFlags.setter
     def AceFlags(self, value: AceFlags) -> None: ...
     @property
     def AceType(self) -> AceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Copy(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def CreateFromBinaryForm(cls, binaryForm: Array[int], offset: int) -> GenericAce:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: GenericAce) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: GenericAce) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: GenericAce, right: GenericAce) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: GenericAce, right: GenericAce) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -4559,114 +3024,64 @@ class GenericAcl(ABC, Object, ICollection, IEnumerable):
     """
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: GenericAce) -> None: ...
     @property
     def Revision(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[GenericAce], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> GenericAce:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: GenericAce) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -4675,78 +3090,45 @@ class GenericSecurityDescriptor(ABC, Object):
 
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ControlFlags(self) -> ControlFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Group(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Group.setter
     def Group(self, value: SecurityIdentifier) -> None: ...
     @property
     def Owner(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Owner.setter
     def Owner(self, value: SecurityIdentifier) -> None: ...
     @classmethod
     @property
     def Revision(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsSddlConversionSupported(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InheritanceFlags(Enum):
     """"""
@@ -4763,243 +3145,139 @@ class KnownAce(ABC, GenericAce):
 
     @property
     def AccessMask(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AccessMask.setter
     def AccessMask(self, value: int) -> None: ...
     @property
     def AceFlags(self) -> AceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AceFlags.setter
     def AceFlags(self, value: AceFlags) -> None: ...
     @property
     def AceType(self) -> AceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityIdentifier(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityIdentifier.setter
     def SecurityIdentifier(self, value: SecurityIdentifier) -> None: ...
     def Copy(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MutexAccessRule(AccessRule):
     """"""
 
     @overload
     def __init__(
-        self, identity: IdentityReference, eventRights: MutexRights, type: AccessControlType
+        self,
+        identity: IdentityReference,
+        eventRights: MutexRights,
+        type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, eventRights: MutexRights, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param type:
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MutexRights(self) -> MutexRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MutexAuditRule(AuditRule):
     """"""
 
     def __init__(self, identity: IdentityReference, eventRights: MutexRights, flags: AuditFlags):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param flags:
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MutexRights(self) -> MutexRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MutexRights(Enum):
     """"""
@@ -5027,53 +3305,30 @@ class MutexSecurity(NativeObjectSecurity):
         """"""
     @overload
     def __init__(self, name: str, includeSections: AccessControlSections):
-        """
-
-        :param name:
+        """:param name:
         :param includeSections:
         """
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -5083,9 +3338,7 @@ class MutexSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -5094,15 +3347,9 @@ class MutexSecurity(NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: MutexAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: MutexAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -5112,9 +3359,7 @@ class MutexSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -5123,17 +3368,13 @@ class MutexSecurity(NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -5141,226 +3382,130 @@ class MutexSecurity(NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: MutexAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: MutexAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: MutexAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: MutexAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: MutexAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: MutexAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: MutexAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: MutexAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: MutexAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NativeObjectSecurity(ABC, CommonObjectSecurity):
     """"""
 
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -5370,9 +3515,7 @@ class NativeObjectSecurity(ABC, CommonObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -5389,9 +3532,7 @@ class NativeObjectSecurity(ABC, CommonObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -5400,17 +3541,13 @@ class NativeObjectSecurity(ABC, CommonObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -5418,206 +3555,121 @@ class NativeObjectSecurity(ABC, CommonObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectAccessRule(ABC, AccessRule):
     """"""
 
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritedObjectType(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectFlags(self) -> ObjectAceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectType(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectAce(QualifiedAce):
     """"""
@@ -5634,9 +3686,7 @@ class ObjectAce(QualifiedAce):
         isCallback: bool,
         opaque: Array[int],
     ):
-        """
-
-        :param aceFlags:
+        """:param aceFlags:
         :param qualifier:
         :param accessMask:
         :param sid:
@@ -5648,155 +3698,86 @@ class ObjectAce(QualifiedAce):
         """
     @property
     def AccessMask(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AccessMask.setter
     def AccessMask(self, value: int) -> None: ...
     @property
     def AceFlags(self) -> AceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AceFlags.setter
     def AceFlags(self, value: AceFlags) -> None: ...
     @property
     def AceQualifier(self) -> AceQualifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AceType(self) -> AceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritedObjectAceType(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InheritedObjectAceType.setter
     def InheritedObjectAceType(self, value: Guid) -> None: ...
     @property
     def IsCallback(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectAceFlags(self) -> ObjectAceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ObjectAceFlags.setter
     def ObjectAceFlags(self, value: ObjectAceFlags) -> None: ...
     @property
     def ObjectAceType(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ObjectAceType.setter
     def ObjectAceType(self, value: Guid) -> None: ...
     @property
     def OpaqueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityIdentifier(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityIdentifier.setter
     def SecurityIdentifier(self, value: SecurityIdentifier) -> None: ...
     def Copy(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOpaque(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def MaxOpaqueLength(cls, isCallback: bool) -> int:
-        """
-
-        :param isCallback:
+        """:param isCallback:
         :return:
         """
     def SetOpaque(self, opaque: Array[int]) -> None:
-        """
-
-        :param opaque:
-        """
+        """:param opaque:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectAceFlags(Enum):
     """"""
@@ -5813,119 +3794,63 @@ class ObjectAuditRule(ABC, AuditRule):
 
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritedObjectType(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectFlags(self) -> ObjectAceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectType(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectSecurity(ABC, Object):
     """"""
 
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -5935,9 +3860,7 @@ class ObjectSecurity(ABC, Object):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -5954,9 +3877,7 @@ class ObjectSecurity(ABC, Object):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -5965,183 +3886,109 @@ class ObjectSecurity(ABC, Object):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsSddlConversionSupported(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectSecurity(ABC, Generic[T], NativeObjectSecurity):
     """"""
 
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -6151,9 +3998,7 @@ class ObjectSecurity(ABC, Generic[T], NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -6162,15 +4007,9 @@ class ObjectSecurity(ABC, Generic[T], NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: AccessRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: AuditRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -6180,9 +4019,7 @@ class ObjectSecurity(ABC, Generic[T], NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -6191,17 +4028,13 @@ class ObjectSecurity(ABC, Generic[T], NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -6209,180 +4042,105 @@ class ObjectSecurity(ABC, Generic[T], NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: AccessRule[T]) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: AccessRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: AccessRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: AuditRule[T]) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: AuditRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: AuditRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: AccessRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: AccessRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: AuditRule[T]) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Privilege(Object):
     """"""
@@ -6548,41 +4306,24 @@ class Privilege(Object):
     :return: 
     """
     def __init__(self, privilegeName: str):
-        """
-
-        :param privilegeName:
-        """
+        """:param privilegeName:"""
     @property
     def NeedToRevert(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Enable(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Revert(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PrivilegeNotHeldException(UnauthorizedAccessException, _Exception, ISerializable):
     """"""
@@ -6592,144 +4333,83 @@ class PrivilegeNotHeldException(UnauthorizedAccessException, _Exception, ISerial
         """"""
     @overload
     def __init__(self, privilege: str):
-        """
-
-        :param privilege:
-        """
+        """:param privilege:"""
     @overload
     def __init__(self, privilege: str, inner: Exception):
-        """
-
-        :param privilege:
+        """:param privilege:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivilegeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PropagationFlags(Enum):
     """"""
@@ -6746,263 +4426,146 @@ class QualifiedAce(ABC, KnownAce):
 
     @property
     def AccessMask(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AccessMask.setter
     def AccessMask(self, value: int) -> None: ...
     @property
     def AceFlags(self) -> AceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AceFlags.setter
     def AceFlags(self, value: AceFlags) -> None: ...
     @property
     def AceQualifier(self) -> AceQualifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AceType(self) -> AceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCallback(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OpaqueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityIdentifier(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityIdentifier.setter
     def SecurityIdentifier(self, value: SecurityIdentifier) -> None: ...
     def Copy(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOpaque(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetOpaque(self, opaque: Array[int]) -> None:
-        """
-
-        :param opaque:
-        """
+        """:param opaque:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RawAcl(GenericAcl, ICollection, IEnumerable):
     """"""
 
     @overload
     def __init__(self, binaryForm: Array[int], offset: int):
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     @overload
     def __init__(self, revision: int, capacity: int):
-        """
-
-        :param revision:
+        """:param revision:
         :param capacity:
         """
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: GenericAce) -> None: ...
     @property
     def Revision(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[GenericAce], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InsertAce(self, index: int, ace: GenericAce) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param ace:
         """
     def RemoveAce(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> GenericAce:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: GenericAce) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -7011,15 +4574,10 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
 
     @overload
     def __init__(self, sddlForm: str):
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def __init__(self, binaryForm: Array[int], offset: int):
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     @overload
@@ -7031,9 +4589,7 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         systemAcl: RawAcl,
         discretionaryAcl: RawAcl,
     ):
-        """
-
-        :param flags:
+        """:param flags:
         :param owner:
         :param group:
         :param systemAcl:
@@ -7041,120 +4597,77 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         """
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ControlFlags(self) -> ControlFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DiscretionaryAcl(self) -> RawAcl:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DiscretionaryAcl.setter
     def DiscretionaryAcl(self, value: RawAcl) -> None: ...
     @property
     def Group(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Group.setter
     def Group(self, value: SecurityIdentifier) -> None: ...
     @property
     def Owner(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Owner.setter
     def Owner(self, value: SecurityIdentifier) -> None: ...
     @property
     def ResourceManagerControl(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ResourceManagerControl.setter
     def ResourceManagerControl(self, value: int) -> None: ...
     @classmethod
     @property
     def Revision(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SystemAcl(self) -> RawAcl:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SystemAcl.setter
     def SystemAcl(self, value: RawAcl) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetFlags(self, flags: ControlFlags) -> None:
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegistryAccessRule(AccessRule):
     """"""
 
     @overload
     def __init__(
-        self, identity: IdentityReference, registryRights: RegistryRights, type: AccessControlType
+        self,
+        identity: IdentityReference,
+        registryRights: RegistryRights,
+        type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param registryRights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, registryRights: RegistryRights, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param registryRights:
         :param type:
         """
@@ -7167,9 +4680,7 @@ class RegistryAccessRule(AccessRule):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param registryRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -7184,9 +4695,7 @@ class RegistryAccessRule(AccessRule):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param registryRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -7194,61 +4703,32 @@ class RegistryAccessRule(AccessRule):
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RegistryRights(self) -> RegistryRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegistryAuditRule(AuditRule):
     """"""
@@ -7262,9 +4742,7 @@ class RegistryAuditRule(AuditRule):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param registryRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -7279,9 +4757,7 @@ class RegistryAuditRule(AuditRule):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param registryRights:
         :param inheritanceFlags:
         :param propagationFlags:
@@ -7289,61 +4765,32 @@ class RegistryAuditRule(AuditRule):
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RegistryRights(self) -> RegistryRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegistryRights(Enum):
     """"""
@@ -7384,46 +4831,25 @@ class RegistrySecurity(NativeObjectSecurity):
         """"""
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -7433,9 +4859,7 @@ class RegistrySecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -7444,15 +4868,9 @@ class RegistrySecurity(NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: RegistryAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: RegistryAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -7462,9 +4880,7 @@ class RegistrySecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -7473,17 +4889,13 @@ class RegistrySecurity(NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -7491,180 +4903,105 @@ class RegistrySecurity(NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: RegistryAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: RegistryAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: RegistryAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: RegistryAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: RegistryAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: RegistryAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: RegistryAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: RegistryAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: RegistryAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResourceType(Enum):
     """"""
@@ -7713,149 +5050,91 @@ class SemaphoreAccessRule(AccessRule):
 
     @overload
     def __init__(
-        self, identity: IdentityReference, eventRights: SemaphoreRights, type: AccessControlType
+        self,
+        identity: IdentityReference,
+        eventRights: SemaphoreRights,
+        type: AccessControlType,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param type:
         """
     @overload
     def __init__(self, identity: str, eventRights: SemaphoreRights, type: AccessControlType):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param type:
         """
     @property
     def AccessControlType(self) -> AccessControlType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SemaphoreRights(self) -> SemaphoreRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SemaphoreAuditRule(AuditRule):
     """"""
 
     def __init__(
-        self, identity: IdentityReference, eventRights: SemaphoreRights, flags: AuditFlags
+        self,
+        identity: IdentityReference,
+        eventRights: SemaphoreRights,
+        flags: AuditFlags,
     ):
-        """
-
-        :param identity:
+        """:param identity:
         :param eventRights:
         :param flags:
         """
     @property
     def AuditFlags(self) -> AuditFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdentityReference(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InheritanceFlags(self) -> InheritanceFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInherited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropagationFlags(self) -> PropagationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SemaphoreRights(self) -> SemaphoreRights:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SemaphoreRights(Enum):
     """"""
@@ -7883,53 +5162,30 @@ class SemaphoreSecurity(NativeObjectSecurity):
         """"""
     @overload
     def __init__(self, name: str, includeSections: AccessControlSections):
-        """
-
-        :param name:
+        """:param name:
         :param includeSections:
         """
     @property
     def AccessRightType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AccessRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAccessRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AreAuditRulesProtected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AuditRuleType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AccessRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -7939,9 +5195,7 @@ class SemaphoreSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         type: AccessControlType,
     ) -> AccessRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -7950,15 +5204,9 @@ class SemaphoreSecurity(NativeObjectSecurity):
         :return:
         """
     def AddAccessRule(self, rule: SemaphoreAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AddAuditRule(self, rule: SemaphoreAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def AuditRuleFactory(
         self,
         identityReference: IdentityReference,
@@ -7968,9 +5216,7 @@ class SemaphoreSecurity(NativeObjectSecurity):
         propagationFlags: PropagationFlags,
         flags: AuditFlags,
     ) -> AuditRule:
-        """
-
-        :param identityReference:
+        """:param identityReference:
         :param accessMask:
         :param isInherited:
         :param inheritanceFlags:
@@ -7979,17 +5225,13 @@ class SemaphoreSecurity(NativeObjectSecurity):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
@@ -7997,270 +5239,160 @@ class SemaphoreSecurity(NativeObjectSecurity):
     def GetAuditRules(
         self, includeExplicit: bool, includeInherited: bool, targetType: Type
     ) -> AuthorizationRuleCollection:
-        """
-
-        :param includeExplicit:
+        """:param includeExplicit:
         :param includeInherited:
         :param targetType:
         :return:
         """
     def GetGroup(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOwner(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def GetSecurityDescriptorBinaryForm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSecurityDescriptorSddlForm(self, includeSections: AccessControlSections) -> str:
-        """
-
-        :param includeSections:
+        """:param includeSections:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyAccessRule(
         self, modification: AccessControlModification, rule: AccessRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def ModifyAuditRule(
         self, modification: AccessControlModification, rule: AuditRule, modified: bool
-    ) -> Tuple[bool, bool]:
-        """
-
-        :param modification:
+    ) -> tuple[bool, bool]:
+        """:param modification:
         :param rule:
         :param modified:
         :return:
         """
     def PurgeAccessRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def PurgeAuditRules(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def RemoveAccessRule(self, rule: SemaphoreAccessRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAccessRuleAll(self, rule: SemaphoreAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAccessRuleSpecific(self, rule: SemaphoreAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRule(self, rule: SemaphoreAuditRule) -> bool:
-        """
-
-        :param rule:
+        """:param rule:
         :return:
         """
     def RemoveAuditRuleAll(self, rule: SemaphoreAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def RemoveAuditRuleSpecific(self, rule: SemaphoreAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def ResetAccessRule(self, rule: SemaphoreAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRule(self, rule: SemaphoreAccessRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAccessRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetAuditRule(self, rule: SemaphoreAuditRule) -> None:
-        """
-
-        :param rule:
-        """
+        """:param rule:"""
     def SetAuditRuleProtection(self, isProtected: bool, preserveInheritance: bool) -> None:
-        """
-
-        :param isProtected:
+        """:param isProtected:
         :param preserveInheritance:
         """
     def SetGroup(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def SetOwner(self, identity: IdentityReference) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     @overload
     def SetSecurityDescriptorBinaryForm(self, binaryForm: Array[int]) -> None:
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def SetSecurityDescriptorBinaryForm(
         self, binaryForm: Array[int], includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param includeSections:
         """
     @overload
     def SetSecurityDescriptorSddlForm(self, sddlForm: str) -> None:
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def SetSecurityDescriptorSddlForm(
         self, sddlForm: str, includeSections: AccessControlSections
     ) -> None:
-        """
-
-        :param sddlForm:
+        """:param sddlForm:
         :param includeSections:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemAcl(CommonAcl, ICollection, IEnumerable):
     """"""
 
     @overload
     def __init__(self, isContainer: bool, isDS: bool, rawAcl: RawAcl):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param rawAcl:
         """
     @overload
     def __init__(self, isContainer: bool, isDS: bool, capacity: int):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param capacity:
         """
     @overload
     def __init__(self, isContainer: bool, isDS: bool, revision: int, capacity: int):
-        """
-
-        :param isContainer:
+        """:param isContainer:
         :param isDS:
         :param revision:
         :param capacity:
         """
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCanonical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContainer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDS(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> GenericAce:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: GenericAce) -> None: ...
     @property
     def Revision(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AddAudit(self, sid: SecurityIdentifier, rule: ObjectAuditRule) -> None:
-        """
-
-        :param sid:
+        """:param sid:
         :param rule:
         """
     @overload
@@ -8272,9 +5404,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> None:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8292,9 +5422,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> None:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8305,55 +5433,33 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[GenericAce], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Purge(self, sid: SecurityIdentifier) -> None:
-        """
-
-        :param sid:
-        """
+        """:param sid:"""
     @overload
     def RemoveAudit(self, sid: SecurityIdentifier, rule: ObjectAuditRule) -> bool:
-        """
-
-        :param sid:
+        """:param sid:
         :param rule:
         :return:
         """
@@ -8366,9 +5472,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> bool:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8387,9 +5491,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> bool:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8401,9 +5503,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         """
     @overload
     def RemoveAuditSpecific(self, sid: SecurityIdentifier, rule: ObjectAuditRule) -> None:
-        """
-
-        :param sid:
+        """:param sid:
         :param rule:
         """
     @overload
@@ -8415,9 +5515,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> None:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8435,9 +5533,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> None:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8450,9 +5546,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         """"""
     @overload
     def SetAudit(self, sid: SecurityIdentifier, rule: ObjectAuditRule) -> None:
-        """
-
-        :param sid:
+        """:param sid:
         :param rule:
         """
     @overload
@@ -8464,9 +5558,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         inheritanceFlags: InheritanceFlags,
         propagationFlags: PropagationFlags,
     ) -> None:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8484,9 +5576,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         objectType: Guid,
         inheritedObjectType: Guid,
     ) -> None:
-        """
-
-        :param auditFlags:
+        """:param auditFlags:
         :param sid:
         :param accessMask:
         :param inheritanceFlags:
@@ -8496,36 +5586,21 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
         :param inheritedObjectType:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> GenericAce:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: GenericAce) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -8533,23 +5608,12 @@ class Win32(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

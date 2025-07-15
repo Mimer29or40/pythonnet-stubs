@@ -1,8 +1,5 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Iterator
-from typing import Tuple
+from collections.abc import Iterator
 from typing import overload
 
 from System import Array
@@ -30,162 +27,89 @@ class ADAsyncWorkItem(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AggregateDictionary(Object, ICollection, IDictionary, IEnumerable):
     """"""
 
     def __init__(self, dictionaries: ICollection):
-        """
-
-        :param dictionaries:
-        """
+        """:param dictionaries:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -193,207 +117,116 @@ class AsyncMessageHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsyncWorkItem(Object, IMessageSink):
     """"""
 
     @property
     def NextSink(self) -> IMessageSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
-        """
-
-        :param msg:
+        """:param msg:
         :param replySink:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BaseChannelObjectWithProperties(ABC, Object, ICollection, IDictionary, IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -404,137 +237,75 @@ class BaseChannelSinkWithProperties(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -545,137 +316,75 @@ class BaseChannelWithProperties(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -683,55 +392,31 @@ class ChannelDataStore(Object, IChannelDataStore):
     """"""
 
     def __init__(self, channelURIs: Array[str]):
-        """
-
-        :param channelURIs:
-        """
+        """:param channelURIs:"""
     @property
     def ChannelUris(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -741,15 +426,10 @@ class ChannelServices(Object):
     @classmethod
     @property
     def RegisteredChannels(cls) -> Array[IChannel]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def AsyncDispatchMessage(cls, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
-        """
-
-        :param msg:
+        """:param msg:
         :param replySink:
         :return:
         """
@@ -757,93 +437,62 @@ class ChannelServices(Object):
     def CreateServerChannelSinkChain(
         cls, provider: IServerChannelSinkProvider, channel: IChannelReceiver
     ) -> IServerChannelSink:
-        """
-
-        :param provider:
+        """:param provider:
         :param channel:
         :return:
         """
     @classmethod
     def DispatchMessage(
         cls, sinkStack: IServerChannelSinkStack, msg: IMessage, replyMsg: IMessage
-    ) -> Tuple[ServerProcessing, IMessage]:
-        """
-
-        :param sinkStack:
+    ) -> tuple[ServerProcessing, IMessage]:
+        """:param sinkStack:
         :param msg:
         :param replyMsg:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetChannel(cls, name: str) -> IChannel:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @classmethod
     def GetChannelSinkProperties(cls, obj: object) -> IDictionary:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetUrlsForObject(cls, obj: MarshalByRefObject) -> Array[str]:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def RegisterChannel(cls, chnl: IChannel) -> None:
-        """
-
-        :param chnl:
-        """
+        """:param chnl:"""
     @classmethod
     @overload
     def RegisterChannel(cls, chnl: IChannel, ensureSecurity: bool) -> None:
-        """
-
-        :param chnl:
+        """:param chnl:
         :param ensureSecurity:
         """
     @classmethod
     def SyncDispatchMessage(cls, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UnregisterChannel(cls, chnl: IChannel) -> None:
-        """
-
-        :param chnl:
-        """
+        """:param chnl:"""
 
 class ChannelServicesData(Object):
     """"""
@@ -851,26 +500,15 @@ class ChannelServicesData(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ClientChannelSinkStack(Object, IClientChannelSinkStack, IClientResponseChannelSinkStack):
     """"""
@@ -880,59 +518,33 @@ class ClientChannelSinkStack(Object, IClientChannelSinkStack, IClientResponseCha
         """"""
     @overload
     def __init__(self, replySink: IMessageSink):
-        """
-
-        :param replySink:
-        """
+        """:param replySink:"""
     def AsyncProcessResponse(self, headers: ITransportHeaders, stream: Stream) -> None:
-        """
-
-        :param headers:
+        """:param headers:
         :param stream:
         """
     def DispatchException(self, e: Exception) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def DispatchReplyMessage(self, msg: IMessage) -> None:
-        """
-
-        :param msg:
-        """
+        """:param msg:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Pop(self, sink: IClientChannelSink) -> object:
-        """
-
-        :param sink:
+        """:param sink:
         :return:
         """
     def Push(self, sink: IClientChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CrossAppDomainChannel(Object, IChannel, IChannelReceiver, IChannelSender):
     """"""
@@ -941,176 +553,101 @@ class CrossAppDomainChannel(Object, IChannel, IChannelReceiver, IChannelSender):
         """"""
     @property
     def ChannelData(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelPriority(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelURI(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateMessageSink(
         self, url: str, remoteChannelData: object, objectURI: str
-    ) -> Tuple[IMessageSink, str]:
-        """
-
-        :param url:
+    ) -> tuple[IMessageSink, str]:
+        """:param url:
         :param remoteChannelData:
         :param objectURI:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUrlsForUri(self, objectURI: str) -> Array[str]:
-        """
-
-        :param objectURI:
+        """:param objectURI:
         :return:
         """
-    def Parse(self, url: str, objectURI: str) -> Tuple[str, str]:
-        """
-
-        :param url:
+    def Parse(self, url: str, objectURI: str) -> tuple[str, str]:
+        """:param url:
         :param objectURI:
         :return:
         """
     def StartListening(self, data: object) -> None:
-        """
-
-        :param data:
-        """
+        """:param data:"""
     def StopListening(self, data: object) -> None:
-        """
-
-        :param data:
-        """
+        """:param data:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CrossAppDomainData(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CrossAppDomainSerializer(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CrossAppDomainSink(InternalSink, IMessageSink):
     """"""
 
     @property
     def NextSink(self) -> IMessageSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
-        """
-
-        :param msg:
+        """:param msg:
         :param replySink:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CrossContextChannel(InternalSink, IMessageSink):
     """"""
@@ -1119,121 +656,68 @@ class CrossContextChannel(InternalSink, IMessageSink):
         """"""
     @property
     def NextSink(self) -> IMessageSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
-        """
-
-        :param msg:
+        """:param msg:
         :param replySink:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DictionaryEnumeratorByKeys(Object, IDictionaryEnumerator, IEnumerator):
     """"""
 
     def __init__(self, properties: IDictionary):
-        """
-
-        :param properties:
-        """
+        """:param properties:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Entry(self) -> DictionaryEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Key(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DispatchChannelSink(Object, IChannelSinkBase, IServerChannelSink):
     """"""
 
     @property
     def NextChannelSink(self) -> IServerChannelSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessResponse(
         self,
         sinkStack: IServerResponseChannelSinkStack,
@@ -1242,25 +726,18 @@ class DispatchChannelSink(Object, IChannelSinkBase, IServerChannelSink):
         headers: ITransportHeaders,
         stream: Stream,
     ) -> None:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param state:
         :param msg:
         :param headers:
         :param stream:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponseStream(
         self,
         sinkStack: IServerResponseChannelSinkStack,
@@ -1268,19 +745,14 @@ class DispatchChannelSink(Object, IChannelSinkBase, IServerChannelSink):
         msg: IMessage,
         headers: ITransportHeaders,
     ) -> Stream:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param state:
         :param msg:
         :param headers:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ProcessMessage(
         self,
         sinkStack: IServerChannelSinkStack,
@@ -1290,10 +762,8 @@ class DispatchChannelSink(Object, IChannelSinkBase, IServerChannelSink):
         responseMsg: IMessage,
         responseHeaders: ITransportHeaders,
         responseStream: Stream,
-    ) -> Tuple[ServerProcessing, IMessage, ITransportHeaders, Stream]:
-        """
-
-        :param sinkStack:
+    ) -> tuple[ServerProcessing, IMessage, ITransportHeaders, Stream]:
+        """:param sinkStack:
         :param requestMsg:
         :param requestHeaders:
         :param requestStream:
@@ -1303,74 +773,44 @@ class DispatchChannelSink(Object, IChannelSinkBase, IServerChannelSink):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DispatchChannelSinkProvider(Object, IServerChannelSinkProvider):
     """"""
 
     @property
     def Next(self) -> IServerChannelSinkProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Next.setter
     def Next(self, value: IServerChannelSinkProvider) -> None: ...
     def CreateSink(self, channel: IChannelReceiver) -> IServerChannelSink:
-        """
-
-        :param channel:
+        """:param channel:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetChannelData(self, channelData: IChannelDataStore) -> None:
-        """
-
-        :param channelData:
-        """
+        """:param channelData:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IChannel:
     """"""
 
     @property
     def ChannelName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelPriority(self) -> int:
-        """
-
-        :return:
-        """
-    def Parse(self, url: str, objectURI: str) -> Tuple[str, str]:
-        """
-
-        :param url:
+        """:return:"""
+    def Parse(self, url: str, objectURI: str) -> tuple[str, str]:
+        """:param url:
         :param objectURI:
         :return:
         """
@@ -1380,28 +820,18 @@ class IChannelDataStore:
 
     @property
     def ChannelUris(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -1410,102 +840,61 @@ class IChannelReceiver(IChannel):
 
     @property
     def ChannelData(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelPriority(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUrlsForUri(self, objectURI: str) -> Array[str]:
-        """
-
-        :param objectURI:
+        """:param objectURI:
         :return:
         """
-    def Parse(self, url: str, objectURI: str) -> Tuple[str, str]:
-        """
-
-        :param url:
+    def Parse(self, url: str, objectURI: str) -> tuple[str, str]:
+        """:param url:
         :param objectURI:
         :return:
         """
     def StartListening(self, data: object) -> None:
-        """
-
-        :param data:
-        """
+        """:param data:"""
     def StopListening(self, data: object) -> None:
-        """
-
-        :param data:
-        """
+        """:param data:"""
 
 class IChannelReceiverHook:
     """"""
 
     @property
     def ChannelScheme(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelSinkChain(self) -> IServerChannelSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WantsToListen(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddHookChannelUri(self, channelUri: str) -> None:
-        """
-
-        :param channelUri:
-        """
+        """:param channelUri:"""
 
 class IChannelSender(IChannel):
     """"""
 
     @property
     def ChannelName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChannelPriority(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateMessageSink(
         self, url: str, remoteChannelData: object, objectURI: str
-    ) -> Tuple[IMessageSink, str]:
-        """
-
-        :param url:
+    ) -> tuple[IMessageSink, str]:
+        """:param url:
         :param remoteChannelData:
         :param objectURI:
         :return:
         """
-    def Parse(self, url: str, objectURI: str) -> Tuple[str, str]:
-        """
-
-        :param url:
+    def Parse(self, url: str, objectURI: str) -> tuple[str, str]:
+        """:param url:
         :param objectURI:
         :return:
         """
@@ -1515,26 +904,17 @@ class IChannelSinkBase:
 
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IClientChannelSink(IChannelSinkBase):
     """"""
 
     @property
     def NextChannelSink(self) -> IClientChannelSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessRequest(
         self,
         sinkStack: IClientChannelSinkStack,
@@ -1542,9 +922,7 @@ class IClientChannelSink(IChannelSinkBase):
         headers: ITransportHeaders,
         stream: Stream,
     ) -> None:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param msg:
         :param headers:
         :param stream:
@@ -1556,17 +934,13 @@ class IClientChannelSink(IChannelSinkBase):
         headers: ITransportHeaders,
         stream: Stream,
     ) -> None:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param state:
         :param headers:
         :param stream:
         """
     def GetRequestStream(self, msg: IMessage, headers: ITransportHeaders) -> Stream:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :return:
         """
@@ -1577,10 +951,8 @@ class IClientChannelSink(IChannelSinkBase):
         requestStream: Stream,
         responseHeaders: ITransportHeaders,
         responseStream: Stream,
-    ) -> Tuple[None, ITransportHeaders, Stream]:
-        """
-
-        :param msg:
+    ) -> tuple[None, ITransportHeaders, Stream]:
+        """:param msg:
         :param requestHeaders:
         :param requestStream:
         :param responseHeaders:
@@ -1592,18 +964,13 @@ class IClientChannelSinkProvider:
 
     @property
     def Next(self) -> IClientChannelSinkProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Next.setter
     def Next(self, value: IClientChannelSinkProvider) -> None: ...
     def CreateSink(
         self, channel: IChannelSender, url: str, remoteChannelData: object
     ) -> IClientChannelSink:
-        """
-
-        :param channel:
+        """:param channel:
         :param url:
         :param remoteChannelData:
         :return:
@@ -1613,31 +980,19 @@ class IClientChannelSinkStack(IClientResponseChannelSinkStack):
     """"""
 
     def AsyncProcessResponse(self, headers: ITransportHeaders, stream: Stream) -> None:
-        """
-
-        :param headers:
+        """:param headers:
         :param stream:
         """
     def DispatchException(self, e: Exception) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def DispatchReplyMessage(self, msg: IMessage) -> None:
-        """
-
-        :param msg:
-        """
+        """:param msg:"""
     def Pop(self, sink: IClientChannelSink) -> object:
-        """
-
-        :param sink:
+        """:param sink:
         :return:
         """
     def Push(self, sink: IClientChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
 
@@ -1646,26 +1001,15 @@ class IClientFormatterSink(IChannelSinkBase, IClientChannelSink, IMessageSink):
 
     @property
     def NextChannelSink(self) -> IClientChannelSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NextSink(self) -> IMessageSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
-        """
-
-        :param msg:
+        """:param msg:
         :param replySink:
         :return:
         """
@@ -1676,9 +1020,7 @@ class IClientFormatterSink(IChannelSinkBase, IClientChannelSink, IMessageSink):
         headers: ITransportHeaders,
         stream: Stream,
     ) -> None:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param msg:
         :param headers:
         :param stream:
@@ -1690,17 +1032,13 @@ class IClientFormatterSink(IChannelSinkBase, IClientChannelSink, IMessageSink):
         headers: ITransportHeaders,
         stream: Stream,
     ) -> None:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param state:
         :param headers:
         :param stream:
         """
     def GetRequestStream(self, msg: IMessage, headers: ITransportHeaders) -> Stream:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :return:
         """
@@ -1711,19 +1049,15 @@ class IClientFormatterSink(IChannelSinkBase, IClientChannelSink, IMessageSink):
         requestStream: Stream,
         responseHeaders: ITransportHeaders,
         responseStream: Stream,
-    ) -> Tuple[None, ITransportHeaders, Stream]:
-        """
-
-        :param msg:
+    ) -> tuple[None, ITransportHeaders, Stream]:
+        """:param msg:
         :param requestHeaders:
         :param requestStream:
         :param responseHeaders:
         :param responseStream:
         """
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
 
@@ -1732,18 +1066,13 @@ class IClientFormatterSinkProvider(IClientChannelSinkProvider):
 
     @property
     def Next(self) -> IClientChannelSinkProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Next.setter
     def Next(self, value: IClientChannelSinkProvider) -> None: ...
     def CreateSink(
         self, channel: IChannelSender, url: str, remoteChannelData: object
     ) -> IClientChannelSink:
-        """
-
-        :param channel:
+        """:param channel:
         :param url:
         :param remoteChannelData:
         :return:
@@ -1753,31 +1082,20 @@ class IClientResponseChannelSinkStack:
     """"""
 
     def AsyncProcessResponse(self, headers: ITransportHeaders, stream: Stream) -> None:
-        """
-
-        :param headers:
+        """:param headers:
         :param stream:
         """
     def DispatchException(self, e: Exception) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def DispatchReplyMessage(self, msg: IMessage) -> None:
-        """
-
-        :param msg:
-        """
+        """:param msg:"""
 
 class ISecurableChannel:
     """"""
 
     @property
     def IsSecured(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsSecured.setter
     def IsSecured(self, value: bool) -> None: ...
 
@@ -1786,16 +1104,10 @@ class IServerChannelSink(IChannelSinkBase):
 
     @property
     def NextChannelSink(self) -> IServerChannelSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessResponse(
         self,
         sinkStack: IServerResponseChannelSinkStack,
@@ -1804,9 +1116,7 @@ class IServerChannelSink(IChannelSinkBase):
         headers: ITransportHeaders,
         stream: Stream,
     ) -> None:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param state:
         :param msg:
         :param headers:
@@ -1819,9 +1129,7 @@ class IServerChannelSink(IChannelSinkBase):
         msg: IMessage,
         headers: ITransportHeaders,
     ) -> Stream:
-        """
-
-        :param sinkStack:
+        """:param sinkStack:
         :param state:
         :param msg:
         :param headers:
@@ -1836,10 +1144,8 @@ class IServerChannelSink(IChannelSinkBase):
         responseMsg: IMessage,
         responseHeaders: ITransportHeaders,
         responseStream: Stream,
-    ) -> Tuple[ServerProcessing, IMessage, ITransportHeaders, Stream]:
-        """
-
-        :param sinkStack:
+    ) -> tuple[ServerProcessing, IMessage, ITransportHeaders, Stream]:
+        """:param sinkStack:
         :param requestMsg:
         :param requestHeaders:
         :param requestStream:
@@ -1854,23 +1160,15 @@ class IServerChannelSinkProvider:
 
     @property
     def Next(self) -> IServerChannelSinkProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Next.setter
     def Next(self, value: IServerChannelSinkProvider) -> None: ...
     def CreateSink(self, channel: IChannelReceiver) -> IServerChannelSink:
-        """
-
-        :param channel:
+        """:param channel:
         :return:
         """
     def GetChannelData(self, channelData: IChannelDataStore) -> None:
-        """
-
-        :param channelData:
-        """
+        """:param channelData:"""
 
 class IServerChannelSinkStack(IServerResponseChannelSinkStack):
     """"""
@@ -1878,46 +1176,31 @@ class IServerChannelSinkStack(IServerResponseChannelSinkStack):
     def AsyncProcessResponse(
         self, msg: IMessage, headers: ITransportHeaders, stream: Stream
     ) -> None:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :param stream:
         """
     def GetResponseStream(self, msg: IMessage, headers: ITransportHeaders) -> Stream:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :return:
         """
     def Pop(self, sink: IServerChannelSink) -> object:
-        """
-
-        :param sink:
+        """:param sink:
         :return:
         """
     def Push(self, sink: IServerChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
     def ServerCallback(self, ar: IAsyncResult) -> None:
-        """
-
-        :param ar:
-        """
+        """:param ar:"""
     def Store(self, sink: IServerChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
     def StoreAndDispatch(self, sink: IServerChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
 
@@ -1926,23 +1209,15 @@ class IServerFormatterSinkProvider(IServerChannelSinkProvider):
 
     @property
     def Next(self) -> IServerChannelSinkProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Next.setter
     def Next(self, value: IServerChannelSinkProvider) -> None: ...
     def CreateSink(self, channel: IChannelReceiver) -> IServerChannelSink:
-        """
-
-        :param channel:
+        """:param channel:
         :return:
         """
     def GetChannelData(self, channelData: IChannelDataStore) -> None:
-        """
-
-        :param channelData:
-        """
+        """:param channelData:"""
 
 class IServerResponseChannelSinkStack:
     """"""
@@ -1950,16 +1225,12 @@ class IServerResponseChannelSinkStack:
     def AsyncProcessResponse(
         self, msg: IMessage, headers: ITransportHeaders, stream: Stream
     ) -> None:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :param stream:
         """
     def GetResponseStream(self, msg: IMessage, headers: ITransportHeaders) -> Stream:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :return:
         """
@@ -1969,27 +1240,17 @@ class ITransportHeaders:
 
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -1997,76 +1258,43 @@ class Perf_Contexts(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegisteredChannel(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegisteredChannelList(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RemotingProfilerEvent(Enum):
     """"""
@@ -2081,44 +1309,26 @@ class ServerAsyncReplyTerminatorSink(Object, IMessageSink):
 
     @property
     def NextSink(self) -> IMessageSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
-        """
-
-        :param msg:
+        """:param msg:
         :param replySink:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServerChannelSinkStack(Object, IServerChannelSinkStack, IServerResponseChannelSinkStack):
     """"""
@@ -2128,69 +1338,43 @@ class ServerChannelSinkStack(Object, IServerChannelSinkStack, IServerResponseCha
     def AsyncProcessResponse(
         self, msg: IMessage, headers: ITransportHeaders, stream: Stream
     ) -> None:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :param stream:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponseStream(self, msg: IMessage, headers: ITransportHeaders) -> Stream:
-        """
-
-        :param msg:
+        """:param msg:
         :param headers:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Pop(self, sink: IServerChannelSink) -> object:
-        """
-
-        :param sink:
+        """:param sink:
         :return:
         """
     def Push(self, sink: IServerChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
     def ServerCallback(self, ar: IAsyncResult) -> None:
-        """
-
-        :param ar:
-        """
+        """:param ar:"""
     def Store(self, sink: IServerChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
     def StoreAndDispatch(self, sink: IServerChannelSink, state: object) -> None:
-        """
-
-        :param sink:
+        """:param sink:
         :param state:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServerProcessing(Enum):
     """"""
@@ -2206,49 +1390,26 @@ class SinkProviderData(Object):
     """"""
 
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Children(self) -> IList:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Properties(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TransportHeaders(Object, ITransportHeaders):
     """"""
@@ -2257,47 +1418,26 @@ class TransportHeaders(Object, ITransportHeaders):
         """"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """

@@ -1,6 +1,6 @@
-from typing import List
+from __future__ import annotations
 
-ASSEMBLIES: List[str] = [
+ASSEMBLIES: list[str] = [
     "System",
     "System.Activities",
     "System.Activities.Core.Presentation",
@@ -93,13 +93,13 @@ ASSEMBLIES: List[str] = [
     "System.Xml.Serialization",
 ]
 
-BUILT_INS: List[str] = [
+BUILT_INS: list[str] = [
     "clr",
     "clrmodule",
     "mscorlib",
 ]
 
-CORE: List[str] = [
+CORE: list[str] = [
     "mscorlib",
     "System",
     "System.Core",

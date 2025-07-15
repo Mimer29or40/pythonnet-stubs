@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 import json
 import unittest
+from collections.abc import Mapping
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
-from typing import Dict
-from typing import Mapping
-from typing import Sequence
 
 import clr
 from System.Reflection import Assembly
@@ -65,7 +66,7 @@ class TestExtractBase(TestBase):
 
     @classmethod
     def get_types(cls, *type_names: str) -> Mapping[str, TypeInfo]:
-        type_map: Dict[str, TypeInfo] = dict.fromkeys(type_names)
+        type_map: dict[str, TypeInfo] = dict.fromkeys(type_names)
         type_name: str
         type_info: TypeInfo
         for type_info in cls.assembly.GetTypes():
@@ -650,14 +651,22 @@ class TestCClass(TestExtractBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Int32", namespace="System", reference=True, nullable=True
+                                name="Int32",
+                                namespace="System",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                 ),
                 "TestLib:ClassWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
@@ -742,14 +751,22 @@ class TestCClass(TestExtractBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Int32", namespace="System", reference=True, nullable=True
+                                name="Int32",
+                                namespace="System",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                     static=True,
                 ),
@@ -1476,7 +1493,10 @@ class TestCClass(TestExtractBase):
                                 inner=(CType(name="Int32", namespace="System"),),
                             ),
                         ),
-                        CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
+                        CParameter(
+                            name="arrayIndex",
+                            type=CType(name="Int32", namespace="System"),
+                        ),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
@@ -2496,14 +2516,22 @@ class TestCStruct(TestExtractBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Int32", namespace="System", reference=True, nullable=True
+                                name="Int32",
+                                namespace="System",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                 ),
                 "TestLib:StructWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
@@ -2588,14 +2616,22 @@ class TestCStruct(TestExtractBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Int32", namespace="System", reference=True, nullable=True
+                                name="Int32",
+                                namespace="System",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                     static=True,
                 ),
@@ -3312,7 +3348,10 @@ class TestCStruct(TestExtractBase):
                                 inner=(CType(name="Int32", namespace="System"),),
                             ),
                         ),
-                        CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
+                        CParameter(
+                            name="arrayIndex",
+                            type=CType(name="Int32", namespace="System"),
+                        ),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
@@ -3991,14 +4030,22 @@ class TestCInterface(TestExtractBase):
                         CParameter(
                             name="param0",
                             type=CType(
-                                name="Int32", namespace="System", reference=True, nullable=True
+                                name="Int32",
+                                namespace="System",
+                                reference=True,
+                                nullable=True,
                             ),
                             out=True,
                         ),
                     ),
                     return_types=(
                         CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                     ),
                 ),
                 "TestLib:IInterfaceWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
@@ -4076,11 +4123,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4094,11 +4147,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4112,11 +4171,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4130,7 +4195,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4144,11 +4212,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4162,11 +4236,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4180,7 +4260,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4192,11 +4275,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4208,11 +4297,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4224,7 +4319,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4238,11 +4336,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4254,11 +4358,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4270,7 +4380,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4282,11 +4395,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4300,11 +4419,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4318,7 +4443,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4332,11 +4460,17 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4350,7 +4484,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4362,7 +4499,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4376,7 +4516,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="self",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4390,7 +4533,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4403,7 +4549,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4416,7 +4565,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4427,7 +4579,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4446,7 +4601,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4457,7 +4615,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
@@ -4468,7 +4629,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4481,7 +4645,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4502,7 +4669,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4523,7 +4693,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4536,7 +4709,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4549,7 +4725,10 @@ class TestCInterface(TestExtractBase):
                     parameters=(
                         CParameter(
                             name="other",
-                            type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                            type=CType(
+                                name="IInterfaceWithOperatorMethods",
+                                namespace="TestLib",
+                            ),
                         ),
                     ),
                     return_types=(
@@ -4662,7 +4841,10 @@ class TestCInterface(TestExtractBase):
                                 inner=(CType(name="Int32", namespace="System"),),
                             ),
                         ),
-                        CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
+                        CParameter(
+                            name="arrayIndex",
+                            type=CType(name="Int32", namespace="System"),
+                        ),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
@@ -5552,7 +5734,9 @@ class TestCMethod(TestExtractBase):
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
                     CParameter(
-                        name="param0", type=CType(name="Int32", namespace="System"), default=True
+                        name="param0",
+                        type=CType(name="Int32", namespace="System"),
+                        default=True,
                     ),
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
@@ -5575,7 +5759,12 @@ class TestCMethod(TestExtractBase):
                 parameters=(
                     CParameter(
                         name="param0",
-                        type=CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        type=CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                         out=True,
                     ),
                 ),
@@ -5589,7 +5778,8 @@ class TestCMethod(TestExtractBase):
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
                     CParameter(
-                        name="param0", type=CType(name="Int32", namespace="System", nullable=True)
+                        name="param0",
+                        type=CType(name="Int32", namespace="System", nullable=True),
                     ),
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
@@ -5637,7 +5827,9 @@ class TestCMethod(TestExtractBase):
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
                     CParameter(
-                        name="param0", type=CType(name="Int32", namespace="System"), default=True
+                        name="param0",
+                        type=CType(name="Int32", namespace="System"),
+                        default=True,
                     ),
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
@@ -5662,7 +5854,12 @@ class TestCMethod(TestExtractBase):
                 parameters=(
                     CParameter(
                         name="param0",
-                        type=CType(name="Int32", namespace="System", reference=True, nullable=True),
+                        type=CType(
+                            name="Int32",
+                            namespace="System",
+                            reference=True,
+                            nullable=True,
+                        ),
                         out=True,
                     ),
                 ),
@@ -5677,7 +5874,8 @@ class TestCMethod(TestExtractBase):
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
                     CParameter(
-                        name="param0", type=CType(name="Int32", namespace="System", nullable=True)
+                        name="param0",
+                        type=CType(name="Int32", namespace="System", nullable=True),
                     ),
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),

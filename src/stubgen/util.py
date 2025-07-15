@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 import functools
 import keyword
 import re
 import time
+from collections.abc import Callable
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Callable
 
 from stubgen.log import get_logger
 

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import Generic
 from typing import TypeVar
@@ -36,7 +34,6 @@ from System.ComponentModel import ISite
 from System.ComponentModel import ITypeDescriptorContext
 from System.ComponentModel import PropertyDescriptorCollection
 from System.ComponentModel import TypeConverter
-from System.ComponentModel.TypeConverter import StandardValuesCollection
 from System.Globalization import CultureInfo
 from System.IO import TextReader
 from System.IO import TextWriter
@@ -54,174 +51,124 @@ class VBCodeGenerator(CodeCompiler, ICodeCompiler, ICodeGenerator):
     def CompileAssemblyFromDom(
         self, options: CompilerParameters, compilationUnit: CodeCompileUnit
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param compilationUnit:
         :return:
         """
     def CompileAssemblyFromDomBatch(
         self, options: CompilerParameters, compilationUnits: Array[CodeCompileUnit]
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param compilationUnits:
         :return:
         """
     def CompileAssemblyFromFile(
         self, options: CompilerParameters, fileName: str
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param fileName:
         :return:
         """
     def CompileAssemblyFromFileBatch(
         self, options: CompilerParameters, fileNames: Array[str]
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param fileNames:
         :return:
         """
     def CompileAssemblyFromSource(
         self, options: CompilerParameters, source: str
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param source:
         :return:
         """
     def CompileAssemblyFromSourceBatch(
         self, options: CompilerParameters, sources: Array[str]
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param sources:
         :return:
         """
     def CreateEscapedIdentifier(self, value: str) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CreateValidIdentifier(self, value: str) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GenerateCodeFromCompileUnit(
         self, e: CodeCompileUnit, w: TextWriter, o: CodeGeneratorOptions
     ) -> None:
-        """
-
-        :param e:
+        """:param e:
         :param w:
         :param o:
         """
     def GenerateCodeFromExpression(
         self, e: CodeExpression, w: TextWriter, o: CodeGeneratorOptions
     ) -> None:
-        """
-
-        :param e:
+        """:param e:
         :param w:
         :param o:
         """
     def GenerateCodeFromMember(
         self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
     ) -> None:
-        """
-
-        :param member:
+        """:param member:
         :param writer:
         :param options:
         """
     def GenerateCodeFromNamespace(
         self, e: CodeNamespace, w: TextWriter, o: CodeGeneratorOptions
     ) -> None:
-        """
-
-        :param e:
+        """:param e:
         :param w:
         :param o:
         """
     def GenerateCodeFromStatement(
         self, e: CodeStatement, w: TextWriter, o: CodeGeneratorOptions
     ) -> None:
-        """
-
-        :param e:
+        """:param e:
         :param w:
         :param o:
         """
     def GenerateCodeFromType(
         self, e: CodeTypeDeclaration, w: TextWriter, o: CodeGeneratorOptions
     ) -> None:
-        """
-
-        :param e:
+        """:param e:
         :param w:
         :param o:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeOutput(self, type: CodeTypeReference) -> str:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def IsKeyword(cls, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def IsValidIdentifier(self, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Supports(self, supports: GeneratorSupport) -> bool:
-        """
-
-        :param supports:
+        """:param supports:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ValidateIdentifier(self, value: str) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class VBCodeProvider(CodeDomProvider, IComponent, IDisposable):
     """"""
@@ -231,228 +178,164 @@ class VBCodeProvider(CodeDomProvider, IComponent, IDisposable):
         """"""
     @overload
     def __init__(self, providerOptions: IDictionary[str, str]):
-        """
-
-        :param providerOptions:
-        """
+        """:param providerOptions:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileExtension(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LanguageOptions(self) -> LanguageOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     def CompileAssemblyFromDom(
         self, options: CompilerParameters, compilationUnits: Array[CodeCompileUnit]
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param compilationUnits:
         :return:
         """
     def CompileAssemblyFromFile(
         self, options: CompilerParameters, fileNames: Array[str]
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param fileNames:
         :return:
         """
     def CompileAssemblyFromSource(
         self, options: CompilerParameters, sources: Array[str]
     ) -> CompilerResults:
-        """
-
-        :param options:
+        """:param options:
         :param sources:
         :return:
         """
     def CreateCompiler(self) -> ICodeCompiler:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateEscapedIdentifier(self, value: str) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CreateGenerator(self) -> ICodeGenerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateGenerator(self, output: TextWriter) -> ICodeGenerator:
-        """
-
-        :param output:
+        """:param output:
         :return:
         """
     @overload
     def CreateGenerator(self, fileName: str) -> ICodeGenerator:
-        """
-
-        :param fileName:
+        """:param fileName:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def CreateParser(self) -> ICodeParser:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateValidIdentifier(self, value: str) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GenerateCodeFromCompileUnit(
-        self, compileUnit: CodeCompileUnit, writer: TextWriter, options: CodeGeneratorOptions
+        self,
+        compileUnit: CodeCompileUnit,
+        writer: TextWriter,
+        options: CodeGeneratorOptions,
     ) -> None:
-        """
-
-        :param compileUnit:
+        """:param compileUnit:
         :param writer:
         :param options:
         """
     def GenerateCodeFromExpression(
-        self, expression: CodeExpression, writer: TextWriter, options: CodeGeneratorOptions
+        self,
+        expression: CodeExpression,
+        writer: TextWriter,
+        options: CodeGeneratorOptions,
     ) -> None:
-        """
-
-        :param expression:
+        """:param expression:
         :param writer:
         :param options:
         """
     def GenerateCodeFromMember(
         self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
     ) -> None:
-        """
-
-        :param member:
+        """:param member:
         :param writer:
         :param options:
         """
     def GenerateCodeFromNamespace(
-        self, codeNamespace: CodeNamespace, writer: TextWriter, options: CodeGeneratorOptions
+        self,
+        codeNamespace: CodeNamespace,
+        writer: TextWriter,
+        options: CodeGeneratorOptions,
     ) -> None:
-        """
-
-        :param codeNamespace:
+        """:param codeNamespace:
         :param writer:
         :param options:
         """
     def GenerateCodeFromStatement(
-        self, statement: CodeStatement, writer: TextWriter, options: CodeGeneratorOptions
+        self,
+        statement: CodeStatement,
+        writer: TextWriter,
+        options: CodeGeneratorOptions,
     ) -> None:
-        """
-
-        :param statement:
+        """:param statement:
         :param writer:
         :param options:
         """
     def GenerateCodeFromType(
-        self, codeType: CodeTypeDeclaration, writer: TextWriter, options: CodeGeneratorOptions
+        self,
+        codeType: CodeTypeDeclaration,
+        writer: TextWriter,
+        options: CodeGeneratorOptions,
     ) -> None:
-        """
-
-        :param codeType:
+        """:param codeType:
         :param writer:
         :param options:
         """
     def GetConverter(self, type: Type) -> TypeConverter:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeOutput(self, type: CodeTypeReference) -> str:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsValidIdentifier(self, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Parse(self, codeStream: TextReader) -> CodeCompileUnit:
-        """
-
-        :param codeStream:
+        """:param codeStream:
         :return:
         """
     def Supports(self, generatorSupport: GeneratorSupport) -> bool:
-        """
-
-        :param generatorSupport:
+        """:param generatorSupport:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
 
@@ -462,85 +345,62 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
     @classmethod
     @property
     def Default(cls) -> VBMemberAttributeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -548,18 +408,14 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -571,9 +427,7 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -581,31 +435,23 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -613,240 +459,171 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class VBModifierAttributeConverter(ABC, TypeConverter):
     """"""
 
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -854,18 +631,14 @@ class VBModifierAttributeConverter(ABC, TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -877,9 +650,7 @@ class VBModifierAttributeConverter(ABC, TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -887,31 +658,23 @@ class VBModifierAttributeConverter(ABC, TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -919,161 +682,112 @@ class VBModifierAttributeConverter(ABC, TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class VBTypeAttributeConverter(VBModifierAttributeConverter):
     """"""
@@ -1081,85 +795,62 @@ class VBTypeAttributeConverter(VBModifierAttributeConverter):
     @classmethod
     @property
     def Default(cls) -> VBTypeAttributeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -1167,18 +858,14 @@ class VBTypeAttributeConverter(VBModifierAttributeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -1190,9 +877,7 @@ class VBTypeAttributeConverter(VBModifierAttributeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -1200,31 +885,23 @@ class VBTypeAttributeConverter(VBModifierAttributeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -1232,158 +909,109 @@ class VBTypeAttributeConverter(VBModifierAttributeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

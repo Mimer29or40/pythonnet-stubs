@@ -1,12 +1,9 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -53,7 +50,6 @@ from System.Collections.Generic import IEnumerator
 from System.Collections.Generic import IList
 from System.Collections.Specialized import NameValueCollection
 from System.Collections.Specialized import StringDictionary
-from System.Collections.Specialized.NameObjectCollectionBase import KeysCollection
 from System.ComponentModel import AsyncCompletedEventArgs
 from System.ComponentModel import AsyncCompletedEventHandler
 from System.ComponentModel import Component
@@ -77,7 +73,6 @@ from System.IO.Compression import CompressionMode
 from System.IO.Compression import DeflateStream
 from System.IO.Compression import GZipStream
 from System.Net.Cache import RequestCachePolicy
-from System.Net.HttpListener import ExtendedProtectionSelector
 from System.Net.Mime import IEncodableStream
 from System.Net.SecureCredential import Flags
 from System.Net.SecureCredential2 import Flags
@@ -150,26 +145,15 @@ class AddressInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AddressInfoHints(Enum):
     """"""
@@ -273,47 +257,32 @@ class AsyncProtocolRequest(Object):
     :return: 
     """
     def __init__(self, userAsyncResult: LazyAsyncResult):
-        """
-
-        :param userAsyncResult:
-        """
+        """:param userAsyncResult:"""
     @property
     def MustCompleteSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetNextRequest(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncProtocolCallback
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncProtocolCallback,
     ) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsyncRequestContext(RequestContextBase, IDisposable):
     """"""
@@ -323,51 +292,29 @@ class AsyncRequestContext(RequestContextBase, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuthIdentity(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuthenticationManager(Object):
     """"""
@@ -375,87 +322,54 @@ class AuthenticationManager(Object):
     @classmethod
     @property
     def CredentialPolicy(cls) -> ICredentialPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @CredentialPolicy.setter
     def CredentialPolicy(cls, value: ICredentialPolicy) -> None: ...
     @classmethod
     @property
     def CustomTargetNameDictionary(cls) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def RegisteredModules(cls) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Authenticate(
         cls, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def PreAuthenticate(cls, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     @classmethod
     def Register(cls, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Unregister(cls, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     @classmethod
     @overload
     def Unregister(cls, authenticationScheme: str) -> None:
-        """
-
-        :param authenticationScheme:
-        """
+        """:param authenticationScheme:"""
 
 class AuthenticationManager2(AuthenticationManagerBase, IAuthenticationManager):
     """"""
@@ -465,218 +379,127 @@ class AuthenticationManager2(AuthenticationManagerBase, IAuthenticationManager):
         """"""
     @overload
     def __init__(self, maxPrefixLookupEntries: int):
-        """
-
-        :param maxPrefixLookupEntries:
-        """
+        """:param maxPrefixLookupEntries:"""
     @property
     def CredentialPolicy(self) -> ICredentialPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CredentialPolicy.setter
     def CredentialPolicy(self, value: ICredentialPolicy) -> None: ...
     @property
     def CustomTargetNameDictionary(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OSSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RegisteredModules(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SpnDictionary(self) -> SpnDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SspSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def BindModule(self, uri: Uri, response: Authorization, module: IAuthenticationModule) -> None:
-        """
-
-        :param uri:
+        """:param uri:
         :param response:
         :param module:
         """
     def EnsureConfigLoaded(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def Register(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Unregister(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     @overload
     def Unregister(self, authenticationScheme: str) -> None:
-        """
-
-        :param authenticationScheme:
-        """
+        """:param authenticationScheme:"""
 
 class AuthenticationManagerBase(ABC, Object, IAuthenticationManager):
     """"""
 
     @property
     def CredentialPolicy(self) -> ICredentialPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CredentialPolicy.setter
     def CredentialPolicy(self, value: ICredentialPolicy) -> None: ...
     @property
     def CustomTargetNameDictionary(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OSSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RegisteredModules(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SpnDictionary(self) -> SpnDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SspSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def BindModule(self, uri: Uri, response: Authorization, module: IAuthenticationModule) -> None:
-        """
-
-        :param uri:
+        """:param uri:
         :param response:
         :param module:
         """
     def EnsureConfigLoaded(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def Register(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Unregister(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     @overload
     def Unregister(self, authenticationScheme: str) -> None:
-        """
-
-        :param authenticationScheme:
-        """
+        """:param authenticationScheme:"""
 
 class AuthenticationManagerDefault(AuthenticationManagerBase, IAuthenticationManager):
     """"""
@@ -685,106 +508,62 @@ class AuthenticationManagerDefault(AuthenticationManagerBase, IAuthenticationMan
         """"""
     @property
     def CredentialPolicy(self) -> ICredentialPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CredentialPolicy.setter
     def CredentialPolicy(self, value: ICredentialPolicy) -> None: ...
     @property
     def CustomTargetNameDictionary(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OSSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RegisteredModules(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SpnDictionary(self) -> SpnDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SspSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def BindModule(self, uri: Uri, response: Authorization, module: IAuthenticationModule) -> None:
-        """
-
-        :param uri:
+        """:param uri:
         :param response:
         :param module:
         """
     def EnsureConfigLoaded(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def Register(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Unregister(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     @overload
     def Unregister(self, authenticationScheme: str) -> None:
-        """
-
-        :param authenticationScheme:
-        """
+        """:param authenticationScheme:"""
 
 AuthenticationSchemeSelector: Callable[[HttpListenerRequest], AuthenticationSchemes] = ...
 """
@@ -815,220 +594,133 @@ class AuthenticationState(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Authorization(Object):
     """"""
 
     @overload
     def __init__(self, token: str):
-        """
-
-        :param token:
-        """
+        """:param token:"""
     @overload
     def __init__(self, token: str, finished: bool):
-        """
-
-        :param token:
+        """:param token:
         :param finished:
         """
     @overload
     def __init__(self, token: str, finished: bool, connectionGroupId: str):
-        """
-
-        :param token:
+        """:param token:
         :param finished:
         :param connectionGroupId:
         """
     @property
     def Complete(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectionGroupId(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MutuallyAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MutuallyAuthenticated.setter
     def MutuallyAuthenticated(self, value: bool) -> None: ...
     @property
     def ProtectionRealm(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProtectionRealm.setter
     def ProtectionRealm(self, value: Array[str]) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AutoWebProxyScriptEngine(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AutoWebProxyScriptWrapper(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Base64Stream(DelegatedStream, IEncodableStream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1036,11 +728,14 @@ class Base64Stream(DelegatedStream, IEncodableStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1051,29 +746,20 @@ class Base64Stream(DelegatedStream, IEncodableStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1081,23 +767,17 @@ class Base64Stream(DelegatedStream, IEncodableStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def DecodeBytes(self, buffer: Array[int], offset: int, count: int) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
@@ -1105,239 +785,156 @@ class Base64Stream(DelegatedStream, IEncodableStream, IDisposable):
     def Dispose(self) -> None:
         """"""
     def EncodeBytes(self, buffer: Array[int], offset: int, count: int) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetEncodedString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class BaseLoggingObject(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BaseWebProxyFinder(ABC, Object, IWebProxyFinder, IDisposable):
     """"""
 
     def __init__(self, engine: AutoWebProxyScriptEngine):
-        """
-
-        :param engine:
-        """
+        """:param engine:"""
     @property
     def IsUnrecognizedScheme(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
-    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> Tuple[bool, IList[str]]:
-        """
-
-        :param destination:
+        """:return:"""
+    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> tuple[bool, IList[str]]:
+        """:param destination:
         :param proxyList:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BasicClient(Object, IAuthenticationModule):
     """"""
@@ -1346,54 +943,33 @@ class BasicClient(Object, IAuthenticationModule):
         """"""
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanPreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 BindIPEndPoint: Callable[[ServicePoint, IPEndPoint, int], IPEndPoint] = ...
 """
@@ -1408,26 +984,15 @@ class Bindings(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Blob(ValueType):
     """"""
@@ -1443,26 +1008,15 @@ class Blob(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BoundaryType(Enum):
     """"""
@@ -1514,9 +1068,7 @@ class BufferAsyncResult(LazyAsyncResult, IAsyncResult):
         asyncState: object,
         asyncCallback: AsyncCallback,
     ):
-        """
-
-        :param asyncObject:
+        """:param asyncObject:
         :param buffers:
         :param asyncState:
         :param asyncCallback:
@@ -1531,9 +1083,7 @@ class BufferAsyncResult(LazyAsyncResult, IAsyncResult):
         asyncState: object,
         asyncCallback: AsyncCallback,
     ):
-        """
-
-        :param asyncObject:
+        """:param asyncObject:
         :param buffer:
         :param offset:
         :param count:
@@ -1551,9 +1101,7 @@ class BufferAsyncResult(LazyAsyncResult, IAsyncResult):
         asyncState: object,
         asyncCallback: AsyncCallback,
     ):
-        """
-
-        :param asyncObject:
+        """:param asyncObject:
         :param buffer:
         :param offset:
         :param count:
@@ -1563,74 +1111,40 @@ class BufferAsyncResult(LazyAsyncResult, IAsyncResult):
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BufferOffsetSize(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BufferType(Enum):
     """"""
@@ -1669,64 +1183,43 @@ class BufferedReadStream(DelegatedStream, IDisposable):
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1734,11 +1227,14 @@ class BufferedReadStream(DelegatedStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1749,29 +1245,20 @@ class BufferedReadStream(DelegatedStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1779,218 +1266,145 @@ class BufferedReadStream(DelegatedStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class CachedTransportContext(TransportContext):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetChannelBinding(self, kind: ChannelBindingKind) -> ChannelBinding:
-        """
-
-        :param kind:
+        """:param kind:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTlsTokenBindings(self) -> IEnumerable[TokenBinding]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CallbackClosure(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CaseInsensitiveAscii(Object, IComparer, IEqualityComparer):
     """"""
@@ -1998,50 +1412,33 @@ class CaseInsensitiveAscii(Object, IComparer, IEqualityComparer):
     def __init__(self):
         """"""
     def Compare(self, x: object, y: object) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, x: object, y: object) -> bool:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self, obj: object) -> int:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CertEnhKeyUse(ValueType):
     """"""
@@ -2054,51 +1451,29 @@ class CertEnhKeyUse(ValueType):
     rgpszUsageIdentifier: Final[None] = ...
     """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CertPolicyValidationCallback(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CertUsage(Enum):
     """"""
@@ -2122,26 +1497,15 @@ class CertUsageMatch(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CertificateEncoding(Enum):
     """"""
@@ -2264,26 +1628,15 @@ class ChainParameters(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ChainPolicyParameter(ValueType):
     """"""
@@ -2309,26 +1662,15 @@ class ChainPolicyParameter(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ChainPolicyStatus(ValueType):
     """"""
@@ -2361,26 +1703,15 @@ class ChainPolicyStatus(ValueType):
     pvExtraPolicyStatus: Final[None] = ...
     """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ChainPolicyType(Enum):
     """"""
@@ -2409,34 +1740,22 @@ class ChunkParser(Object):
         initialBufferCount: int,
         maxBufferLength: int,
     ):
-        """
-
-        :param dataSource:
+        """:param dataSource:
         :param internalBuffer:
         :param initialBufferOffset:
         :param initialBufferCount:
         :param maxBufferLength:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Read(self, userBuffer: Array[int], userBufferOffset: int, userBufferCount: int) -> int:
-        """
-
-        :param userBuffer:
+        """:param userBuffer:
         :param userBufferOffset:
         :param userBufferCount:
         :return:
@@ -2450,9 +1769,7 @@ class ChunkParser(Object):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param caller:
+        """:param caller:
         :param userBuffer:
         :param userBufferOffset:
         :param userBufferCount:
@@ -2461,21 +1778,13 @@ class ChunkParser(Object):
         :return:
         """
     def ReadCallback(self, ar: IAsyncResult) -> None:
-        """
-
-        :param ar:
-        """
+        """:param ar:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryGetLeftoverBytes(
         self, buffer: int, leftoverBufferOffset: int, leftoverBufferSize: int
-    ) -> Tuple[bool, int, int, int]:
-        """
-
-        :param buffer:
+    ) -> tuple[bool, int, int, int]:
+        """:param buffer:
         :param leftoverBufferOffset:
         :param leftoverBufferSize:
         :return:
@@ -2486,64 +1795,43 @@ class ClosableStream(DelegatedStream, IDisposable):
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -2551,11 +1839,14 @@ class ClosableStream(DelegatedStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -2566,29 +1857,20 @@ class ClosableStream(DelegatedStream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -2596,157 +1878,111 @@ class ClosableStream(DelegatedStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class CloseExState(Enum):
     """"""
@@ -2762,90 +1998,58 @@ class ComNetOS(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CommandStream(PooledStream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -2853,11 +2057,14 @@ class CommandStream(PooledStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -2869,35 +2076,23 @@ class CommandStream(PooledStream, IDisposable):
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -2905,157 +2100,111 @@ class CommandStream(PooledStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class Comparer(Object, IComparer):
     """"""
@@ -3063,33 +2212,20 @@ class Comparer(Object, IComparer):
     def __init__(self):
         """"""
     def Compare(self, x: object, y: object) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 CompletionDelegate: Callable[[Array[int], Exception, object], None] = ...
 """
@@ -3104,9 +2240,7 @@ class ConnectStream(Stream, ICloseEx, IRequestLifetimeTracker, IDisposable):
 
     @overload
     def __init__(self, connection: Connection, request: HttpWebRequest):
-        """
-
-        :param connection:
+        """:param connection:
         :param request:
         """
     @overload
@@ -3120,9 +2254,7 @@ class ConnectStream(Stream, ICloseEx, IRequestLifetimeTracker, IDisposable):
         chunked: bool,
         request: HttpWebRequest,
     ):
-        """
-
-        :param connection:
+        """:param connection:
         :param buffer:
         :param offset:
         :param bufferCount:
@@ -3132,64 +2264,43 @@ class ConnectStream(Stream, ICloseEx, IRequestLifetimeTracker, IDisposable):
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -3197,11 +2308,14 @@ class ConnectStream(Stream, ICloseEx, IRequestLifetimeTracker, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -3211,35 +2325,23 @@ class ConnectStream(Stream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -3247,262 +2349,176 @@ class ConnectStream(Stream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class ConnectStreamContext(TransportContext):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetChannelBinding(self, kind: ChannelBindingKind) -> ChannelBinding:
-        """
-
-        :param kind:
+        """:param kind:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTlsTokenBindings(self) -> IEnumerable[TokenBinding]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Connection(PooledStream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -3510,11 +2526,14 @@ class Connection(PooledStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -3526,35 +2545,23 @@ class Connection(PooledStream, IDisposable):
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -3562,182 +2569,125 @@ class Connection(PooledStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class ConnectionGroup(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConnectionModes(Enum):
     """"""
@@ -3755,76 +2705,43 @@ class ConnectionPool(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConnectionPoolManager(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConnectionReturnResult(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContentTypeValues(Enum):
     """"""
@@ -3883,49 +2800,26 @@ class ContextAwareResult(LazyAsyncResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContextFlags(Enum):
     """"""
@@ -3983,159 +2877,100 @@ class Cookie(Object):
         """"""
     @overload
     def __init__(self, name: str, value: str):
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def __init__(self, name: str, value: str, path: str):
-        """
-
-        :param name:
+        """:param name:
         :param value:
         :param path:
         """
     @overload
     def __init__(self, name: str, value: str, path: str, domain: str):
-        """
-
-        :param name:
+        """:param name:
         :param value:
         :param path:
         :param domain:
         """
     @property
     def Comment(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Comment.setter
     def Comment(self, value: str) -> None: ...
     @property
     def CommentUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CommentUri.setter
     def CommentUri(self, value: Uri) -> None: ...
     @property
     def Discard(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Discard.setter
     def Discard(self, value: bool) -> None: ...
     @property
     def Domain(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Domain.setter
     def Domain(self, value: str) -> None: ...
     @property
     def Expired(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expired.setter
     def Expired(self, value: bool) -> None: ...
     @property
     def Expires(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expires.setter
     def Expires(self, value: DateTime) -> None: ...
     @property
     def HttpOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HttpOnly.setter
     def HttpOnly(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Path(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Path.setter
     def Path(self, value: str) -> None: ...
     @property
     def Port(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Port.setter
     def Port(self, value: str) -> None: ...
     @property
     def Secure(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Secure.setter
     def Secure(self, value: bool) -> None: ...
     @property
     def TimeStamp(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     @property
     def Version(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Version.setter
     def Version(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CookieCollection(Object, ICollection, IEnumerable):
     """"""
@@ -4144,116 +2979,65 @@ class CookieCollection(Object, ICollection, IEnumerable):
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> Cookie:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, cookie: Cookie) -> None:
-        """
-
-        :param cookie:
-        """
+        """:param cookie:"""
     @overload
     def Add(self, cookies: CookieCollection) -> None:
-        """
-
-        :param cookies:
-        """
+        """:param cookies:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[Cookie], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> Cookie:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> Cookie:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CookieContainer(Object):
     """"""
@@ -4278,113 +3062,69 @@ class CookieContainer(Object):
         """"""
     @overload
     def __init__(self, capacity: int):
-        """
-
-        :param capacity:
-        """
+        """:param capacity:"""
     @overload
     def __init__(self, capacity: int, perDomainCapacity: int, maxCookieSize: int):
-        """
-
-        :param capacity:
+        """:param capacity:
         :param perDomainCapacity:
         :param maxCookieSize:
         """
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaxCookieSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaxCookieSize.setter
     def MaxCookieSize(self, value: int) -> None: ...
     @property
     def PerDomainCapacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PerDomainCapacity.setter
     def PerDomainCapacity(self, value: int) -> None: ...
     @overload
     def Add(self, cookie: Cookie) -> None:
-        """
-
-        :param cookie:
-        """
+        """:param cookie:"""
     @overload
     def Add(self, cookies: CookieCollection) -> None:
-        """
-
-        :param cookies:
-        """
+        """:param cookies:"""
     @overload
     def Add(self, uri: Uri, cookie: Cookie) -> None:
-        """
-
-        :param uri:
+        """:param uri:
         :param cookie:
         """
     @overload
     def Add(self, uri: Uri, cookies: CookieCollection) -> None:
-        """
-
-        :param uri:
+        """:param uri:
         :param cookies:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCookieHeader(self, uri: Uri) -> str:
-        """
-
-        :param uri:
+        """:param uri:
         :return:
         """
     def GetCookies(self, uri: Uri) -> CookieCollection:
-        """
-
-        :param uri:
+        """:param uri:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetCookies(self, uri: Uri, cookieHeader: str) -> None:
-        """
-
-        :param uri:
+        """:param uri:
         :param cookieHeader:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CookieException(FormatException, _Exception, ISerializable):
     """"""
@@ -4393,175 +3133,100 @@ class CookieException(FormatException, _Exception, ISerializable):
         """"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CookieModule(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CookieParser(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CookieToken(Enum):
     """"""
@@ -4611,26 +3276,15 @@ class CookieTokenizer(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CookieVariant(Enum):
     """"""
@@ -4682,26 +3336,15 @@ class CoreResponseData(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 CreateConnectionDelegate: Callable[[ConnectionPool], PooledStream] = ...
 """
@@ -4718,149 +3361,96 @@ class CredentialCache(Object, IEnumerable, ICredentials, ICredentialsByHost):
     @classmethod
     @property
     def DefaultCredentials(cls) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultNetworkCredentials(cls) -> NetworkCredential:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, uriPrefix: Uri, authType: str, cred: NetworkCredential) -> None:
-        """
-
-        :param uriPrefix:
+        """:param uriPrefix:
         :param authType:
         :param cred:
         """
     @overload
     def Add(
-        self, host: str, port: int, authenticationType: str, credential: NetworkCredential
+        self,
+        host: str,
+        port: int,
+        authenticationType: str,
+        credential: NetworkCredential,
     ) -> None:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param authenticationType:
         :param credential:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCredential(self, uri: Uri, authType: str) -> NetworkCredential:
-        """
-
-        :param uri:
+        """:param uri:
         :param authType:
         :return:
         """
     @overload
     def GetCredential(self, host: str, port: int, authenticationType: str) -> NetworkCredential:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param authenticationType:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Remove(self, uriPrefix: Uri, authType: str) -> None:
-        """
-
-        :param uriPrefix:
+        """:param uriPrefix:
         :param authType:
         """
     @overload
     def Remove(self, host: str, port: int, authenticationType: str) -> None:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param authenticationType:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CredentialHostKey(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CredentialKey(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CredentialUse(Enum):
     """"""
@@ -4908,35 +3498,22 @@ class DefaultCertPolicy(Object, ICertificatePolicy):
         request: WebRequest,
         certificateProblem: int,
     ) -> bool:
-        """
-
-        :param srvPoint:
+        """:param srvPoint:
         :param certificate:
         :param request:
         :param certificateProblem:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultPorts(Enum):
     """"""
@@ -4960,77 +3537,51 @@ class DeflateWrapperStream(DeflateStream, ICloseEx, IRequestLifetimeTracker, IDi
     """"""
 
     def __init__(self, stream: Stream, mode: CompressionMode):
-        """
-
-        :param stream:
+        """:param stream:
         :param mode:
         """
     @property
     def BaseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -5038,11 +3589,14 @@ class DeflateWrapperStream(DeflateStream, ICloseEx, IRequestLifetimeTracker, IDi
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -5052,35 +3606,23 @@ class DeflateWrapperStream(DeflateStream, ICloseEx, IRequestLifetimeTracker, IDi
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -5088,251 +3630,170 @@ class DeflateWrapperStream(DeflateStream, ICloseEx, IRequestLifetimeTracker, IDi
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class DelayedRegex(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DelegatedStream(Stream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -5340,11 +3801,14 @@ class DelegatedStream(Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -5355,29 +3819,20 @@ class DelegatedStream(Stream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -5385,157 +3840,111 @@ class DelegatedStream(Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class DigestClient(Object, IAuthenticationModule, ISessionAuthenticationModule):
     """"""
@@ -5544,69 +3953,40 @@ class DigestClient(Object, IAuthenticationModule, ISessionAuthenticationModule):
         """"""
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanPreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanUseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def ClearSession(self, webRequest: WebRequest) -> None:
-        """
-
-        :param webRequest:
-        """
+        """:param webRequest:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Update(self, challenge: str, webRequest: WebRequest) -> bool:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param webRequest:
         :return:
         """
@@ -5617,43 +3997,23 @@ class DirectProxy(ProxyChain, IEnumerable[Uri], IEnumerable, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Uri]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Dns(ABC, Object):
     """"""
@@ -5662,9 +4022,7 @@ class Dns(ABC, Object):
     def BeginGetHostAddresses(
         cls, hostNameOrAddress: str, requestCallback: AsyncCallback, state: object
     ) -> IAsyncResult:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param requestCallback:
         :param state:
         :return:
@@ -5673,9 +4031,7 @@ class Dns(ABC, Object):
     def BeginGetHostByName(
         cls, hostName: str, requestCallback: AsyncCallback, stateObject: object
     ) -> IAsyncResult:
-        """
-
-        :param hostName:
+        """:param hostName:
         :param requestCallback:
         :param stateObject:
         :return:
@@ -5685,9 +4041,7 @@ class Dns(ABC, Object):
     def BeginGetHostEntry(
         cls, address: IPAddress, requestCallback: AsyncCallback, stateObject: object
     ) -> IAsyncResult:
-        """
-
-        :param address:
+        """:param address:
         :param requestCallback:
         :param stateObject:
         :return:
@@ -5697,9 +4051,7 @@ class Dns(ABC, Object):
     def BeginGetHostEntry(
         cls, hostNameOrAddress: str, requestCallback: AsyncCallback, stateObject: object
     ) -> IAsyncResult:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param requestCallback:
         :param stateObject:
         :return:
@@ -5708,231 +4060,156 @@ class Dns(ABC, Object):
     def BeginResolve(
         cls, hostName: str, requestCallback: AsyncCallback, stateObject: object
     ) -> IAsyncResult:
-        """
-
-        :param hostName:
+        """:param hostName:
         :param requestCallback:
         :param stateObject:
         :return:
         """
     @classmethod
     def EndGetHostAddresses(cls, asyncResult: IAsyncResult) -> Array[IPAddress]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     @classmethod
     def EndGetHostByName(cls, asyncResult: IAsyncResult) -> IPHostEntry:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     @classmethod
     def EndGetHostEntry(cls, asyncResult: IAsyncResult) -> IPHostEntry:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     @classmethod
     def EndResolve(cls, asyncResult: IAsyncResult) -> IPHostEntry:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetHostAddresses(cls, hostNameOrAddress: str) -> Array[IPAddress]:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :return:
         """
     @classmethod
     def GetHostAddressesAsync(cls, hostNameOrAddress: str) -> Task[Array[IPAddress]]:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :return:
         """
     @classmethod
     @overload
     def GetHostByAddress(cls, address: IPAddress) -> IPHostEntry:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def GetHostByAddress(cls, address: str) -> IPHostEntry:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     def GetHostByName(cls, hostName: str) -> IPHostEntry:
-        """
-
-        :param hostName:
+        """:param hostName:
         :return:
         """
     @classmethod
     @overload
     def GetHostEntry(cls, address: IPAddress) -> IPHostEntry:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def GetHostEntry(cls, hostNameOrAddress: str) -> IPHostEntry:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :return:
         """
     @classmethod
     @overload
     def GetHostEntryAsync(cls, address: IPAddress) -> Task[IPHostEntry]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def GetHostEntryAsync(cls, hostNameOrAddress: str) -> Task[IPHostEntry]:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :return:
         """
     @classmethod
     def GetHostName(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Resolve(cls, hostName: str) -> IPHostEntry:
-        """
-
-        :param hostName:
+        """:param hostName:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DnsEndPoint(EndPoint):
     """"""
 
     @overload
     def __init__(self, host: str, port: int):
-        """
-
-        :param host:
+        """:param host:
         :param port:
         """
     @overload
     def __init__(self, host: str, port: int, addressFamily: AddressFamily):
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param addressFamily:
         """
     @property
     def AddressFamily(self) -> AddressFamily:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Host(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Port(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Create(self, socketAddress: SocketAddress) -> EndPoint:
-        """
-
-        :param socketAddress:
+        """:param socketAddress:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Serialize(self) -> SocketAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DnsPermission(
-    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+    CodeAccessPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
 ):
     """"""
 
     def __init__(self, state: PermissionState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     def Assert(self) -> None:
         """"""
     def Copy(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Demand(self) -> None:
         """"""
@@ -5942,59 +4219,33 @@ class DnsPermission(
     def Deny(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FromXml(self, e: SecurityElement) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Intersect(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsSubsetOf(self, target: IPermission) -> bool:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsUnrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PermitOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> SecurityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Union(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
 
@@ -6002,76 +4253,46 @@ class DnsPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
 
     def __init__(self, action: SecurityAction):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @property
     def Action(self) -> SecurityAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Unrestricted.setter
     def Unrestricted(self, value: bool) -> None: ...
     def CreatePermission(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6083,9 +4304,7 @@ class DnsPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6095,70 +4314,39 @@ class DnsPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DownloadDataCompletedEventArgs(AsyncCompletedEventArgs):
     """"""
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DownloadDataCompletedEventHandler: Callable[[object, DownloadDataCompletedEventArgs], None] = ...
 """
@@ -6172,49 +4360,26 @@ class DownloadProgressChangedEventArgs(ProgressChangedEventArgs):
 
     @property
     def BytesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProgressPercentage(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TotalBytesToReceive(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DownloadProgressChangedEventHandler: Callable[
     [object, DownloadProgressChangedEventArgs], None
@@ -6230,49 +4395,26 @@ class DownloadStringCompletedEventArgs(AsyncCompletedEventArgs):
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DownloadStringCompletedEventHandler: Callable[
     [object, DownloadStringCompletedEventArgs], None
@@ -6290,93 +4432,54 @@ class EmptyWebProxy(Object, IAutoWebProxy, IWebProxy):
         """"""
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetProxies(self, destination: Uri) -> ProxyChain:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     def GetProxy(self, destination: Uri) -> Uri:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsBypassed(self, host: Uri) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EndPoint(ABC, Object):
     """"""
 
     @property
     def AddressFamily(self) -> AddressFamily:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Create(self, socketAddress: SocketAddress) -> EndPoint:
-        """
-
-        :param socketAddress:
+        """:param socketAddress:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Serialize(self) -> SocketAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Endianness(Enum):
     """"""
@@ -6391,43 +4494,23 @@ class EndpointPermission(Object):
 
     @property
     def Hostname(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Port(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Transport(self) -> TransportType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EntitySendFormat(Enum):
     """"""
@@ -6441,395 +4524,231 @@ class ExceptionHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileWebRequest(WebRequest, ISerializable):
     """"""
 
     @property
     def AuthenticationLevel(self) -> AuthenticationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AuthenticationLevel.setter
     def AuthenticationLevel(self, value: AuthenticationLevel) -> None: ...
     @property
     def CachePolicy(self) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CachePolicy.setter
     def CachePolicy(self, value: RequestCachePolicy) -> None: ...
     @property
     def ConnectionGroupName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ConnectionGroupName.setter
     def ConnectionGroupName(self, value: str) -> None: ...
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def CreatorInstance(self) -> IWebRequestCreate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     @classmethod
     @property
     def DefaultCachePolicy(cls) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultCachePolicy.setter
     def DefaultCachePolicy(cls, value: RequestCachePolicy) -> None: ...
     @classmethod
     @property
     def DefaultWebProxy(cls) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultWebProxy.setter
     def DefaultWebProxy(cls, value: IWebProxy) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Headers.setter
     def Headers(self, value: WebHeaderCollection) -> None: ...
     @property
     def ImpersonationLevel(self) -> TokenImpersonationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ImpersonationLevel.setter
     def ImpersonationLevel(self, value: TokenImpersonationLevel) -> None: ...
     @property
     def Method(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Method.setter
     def Method(self, value: str) -> None: ...
     @property
     def PreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PreAuthenticate.setter
     def PreAuthenticate(self, value: bool) -> None: ...
     @property
     def Proxy(self) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Proxy.setter
     def Proxy(self, value: IWebProxy) -> None: ...
     @property
     def RequestUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Timeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Timeout.setter
     def Timeout(self, value: int) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     def Abort(self) -> None:
         """"""
     def BeginGetRequestStream(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def BeginGetResponse(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def EndGetRequestStream(self, asyncResult: IAsyncResult) -> Stream:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndGetResponse(self, asyncResult: IAsyncResult) -> WebResponse:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetRequestStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRequestStreamAsync(self) -> Task[Stream]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponse(self) -> WebResponse:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponseAsync(self) -> Task[WebResponse]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileWebRequestCreator(Object, IWebRequestCreate):
     """"""
 
     def Create(self, uri: Uri) -> WebRequest:
-        """
-
-        :param uri:
+        """:param uri:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileWebResponse(WebResponse, ICloseEx, ISerializable, IDisposable):
     """"""
 
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFromCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMutuallyAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResponseUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsHeaders(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetResponseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileWebStream(FileStream, ICloseEx, IDisposable):
     """"""
@@ -6843,9 +4762,7 @@ class FileWebStream(FileStream, ICloseEx, IDisposable):
         access: FileAccess,
         sharing: FileShare,
     ):
-        """
-
-        :param request:
+        """:param request:
         :param path:
         :param mode:
         :param access:
@@ -6862,9 +4779,7 @@ class FileWebStream(FileStream, ICloseEx, IDisposable):
         length: int,
         _async: bool,
     ):
-        """
-
-        :param request:
+        """:param request:
         :param path:
         :param mode:
         :param access:
@@ -6874,88 +4789,55 @@ class FileWebStream(FileStream, ICloseEx, IDisposable):
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAsync(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def SafeFileHandle(self) -> SafeFileHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -6963,11 +4845,14 @@ class FileWebStream(FileStream, ICloseEx, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -6977,35 +4862,23 @@ class FileWebStream(FileStream, ICloseEx, IDisposable):
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -7013,36 +4886,25 @@ class FileWebStream(FileStream, ICloseEx, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -7050,192 +4912,125 @@ class FileWebStream(FileStream, ICloseEx, IDisposable):
         """"""
     @overload
     def Flush(self, flushToDisk: bool) -> None:
-        """
-
-        :param flushToDisk:
-        """
+        """:param flushToDisk:"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetAccessControl(self) -> FileSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Lock(self, position: int, length: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param length:
         """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetAccessControl(self, fileSecurity: FileSecurity) -> None:
-        """
-
-        :param fileSecurity:
-        """
+        """:param fileSecurity:"""
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Unlock(self, position: int, length: int) -> None:
-        """
-
-        :param position:
+        """:param position:
         :param length:
         """
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class FixedSizeReader(Object):
     """"""
 
     def __init__(self, transport: Stream):
-        """
-
-        :param transport:
-        """
+        """:param transport:"""
     def AsyncReadPacket(self, request: AsyncProtocolRequest) -> None:
-        """
-
-        :param request:
-        """
+        """:param request:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadPacket(self, buffer: Array[int], offset: int, count: int) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FrameHeader(Object):
     """"""
@@ -7275,150 +5070,94 @@ class FrameHeader(Object):
         """"""
     @overload
     def __init__(self, messageId: int, majorV: int, minorV: int):
-        """
-
-        :param messageId:
+        """:param messageId:
         :param majorV:
         :param minorV:
         """
     @property
     def MajorV(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaxMessageSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessageId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MessageId.setter
     def MessageId(self, value: int) -> None: ...
     @property
     def MinorV(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PayloadSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PayloadSize.setter
     def PayloadSize(self, value: int) -> None: ...
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyFrom(self, bytes: Array[int], start: int, verifier: FrameHeader) -> None:
-        """
-
-        :param bytes:
+        """:param bytes:
         :param start:
         :param verifier:
         """
     def CopyTo(self, dest: Array[int], start: int) -> None:
-        """
-
-        :param dest:
+        """:param dest:
         :param start:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FtpControlStream(CommandStream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -7426,11 +5165,14 @@ class FtpControlStream(CommandStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -7442,35 +5184,23 @@ class FtpControlStream(CommandStream, IDisposable):
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -7478,221 +5208,154 @@ class FtpControlStream(CommandStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class FtpDataStream(Stream, ICloseEx, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -7700,11 +5363,14 @@ class FtpDataStream(Stream, ICloseEx, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -7714,35 +5380,23 @@ class FtpDataStream(Stream, ICloseEx, IDisposable):
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -7750,157 +5404,111 @@ class FtpDataStream(Stream, ICloseEx, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class FtpLoginState(Enum):
     """"""
@@ -7942,26 +5550,15 @@ class FtpMethodInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FtpOperation(Enum):
     """"""
@@ -8088,546 +5685,325 @@ class FtpWebRequest(WebRequest, ISerializable):
 
     @property
     def AuthenticationLevel(self) -> AuthenticationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AuthenticationLevel.setter
     def AuthenticationLevel(self, value: AuthenticationLevel) -> None: ...
     @property
     def CachePolicy(self) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CachePolicy.setter
     def CachePolicy(self, value: RequestCachePolicy) -> None: ...
     @property
     def ClientCertificates(self) -> X509CertificateCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ClientCertificates.setter
     def ClientCertificates(self, value: X509CertificateCollection) -> None: ...
     @property
     def ConnectionGroupName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ConnectionGroupName.setter
     def ConnectionGroupName(self, value: str) -> None: ...
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentOffset.setter
     def ContentOffset(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def CreatorInstance(self) -> IWebRequestCreate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     @classmethod
     @property
     def DefaultCachePolicy(cls) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultCachePolicy.setter
     def DefaultCachePolicy(cls, value: RequestCachePolicy) -> None: ...
     @classmethod
     @property
     def DefaultWebProxy(cls) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultWebProxy.setter
     def DefaultWebProxy(cls, value: IWebProxy) -> None: ...
     @property
     def EnableSsl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableSsl.setter
     def EnableSsl(self, value: bool) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Headers.setter
     def Headers(self, value: WebHeaderCollection) -> None: ...
     @property
     def ImpersonationLevel(self) -> TokenImpersonationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ImpersonationLevel.setter
     def ImpersonationLevel(self, value: TokenImpersonationLevel) -> None: ...
     @property
     def KeepAlive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @KeepAlive.setter
     def KeepAlive(self, value: bool) -> None: ...
     @property
     def Method(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Method.setter
     def Method(self, value: str) -> None: ...
     @property
     def PreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PreAuthenticate.setter
     def PreAuthenticate(self, value: bool) -> None: ...
     @property
     def Proxy(self) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Proxy.setter
     def Proxy(self, value: IWebProxy) -> None: ...
     @property
     def ReadWriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadWriteTimeout.setter
     def ReadWriteTimeout(self, value: int) -> None: ...
     @property
     def RenameTo(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RenameTo.setter
     def RenameTo(self, value: str) -> None: ...
     @property
     def RequestUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ServicePoint(self) -> ServicePoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Timeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Timeout.setter
     def Timeout(self, value: int) -> None: ...
     @property
     def UseBinary(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseBinary.setter
     def UseBinary(self, value: bool) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     @property
     def UsePassive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UsePassive.setter
     def UsePassive(self, value: bool) -> None: ...
     def Abort(self) -> None:
         """"""
     def BeginGetRequestStream(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def BeginGetResponse(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def EndGetRequestStream(self, asyncResult: IAsyncResult) -> Stream:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndGetResponse(self, asyncResult: IAsyncResult) -> WebResponse:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetRequestStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRequestStreamAsync(self) -> Task[Stream]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponse(self) -> WebResponse:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponseAsync(self) -> Task[WebResponse]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FtpWebRequestCreator(Object, IWebRequestCreate):
     """"""
 
     def Create(self, uri: Uri) -> WebRequest:
-        """
-
-        :param uri:
+        """:param uri:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FtpWebResponse(WebResponse, ISerializable, IDisposable):
     """"""
 
     @property
     def BannerMessage(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def ExitMessage(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFromCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMutuallyAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LastModified(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResponseUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusCode(self) -> FtpStatusCode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsHeaders(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WelcomeMessage(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetResponseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GZipWrapperStream(GZipStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
 
     def __init__(self, stream: Stream, mode: CompressionMode):
-        """
-
-        :param stream:
+        """:param stream:
         :param mode:
         """
     @property
     def BaseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -8635,11 +6011,14 @@ class GZipWrapperStream(GZipStream, ICloseEx, IRequestLifetimeTracker, IDisposab
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -8649,35 +6028,23 @@ class GZipWrapperStream(GZipStream, ICloseEx, IRequestLifetimeTracker, IDisposab
     def Close(self) -> None:
         """"""
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -8685,162 +6052,113 @@ class GZipWrapperStream(GZipStream, ICloseEx, IRequestLifetimeTracker, IDisposab
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 GeneralAsyncDelegate: Callable[[object, object], None] = ...
 """
@@ -8854,64 +6172,45 @@ class GlobalLog(ABC, Object):
 
     @classmethod
     def AddToArray(cls, msg: str) -> None:
-        """
-
-        :param msg:
-        """
+        """:param msg:"""
     @classmethod
     @overload
     def Assert(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Assert(cls, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     @classmethod
     @overload
     def Assert(cls, condition: bool, messageFormat: str, data: Array[object]) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param messageFormat:
         :param data:
         """
     @classmethod
     @overload
     def Dump(cls, buffer: Array[int]) -> None:
-        """
-
-        :param buffer:
-        """
+        """:param buffer:"""
     @classmethod
     @overload
     def Dump(cls, buffer: Array[int], length: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param length:
         """
     @classmethod
     @overload
     def Dump(cls, buffer: Array[int], offset: int, length: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param length:
         """
     @classmethod
     @overload
     def Dump(cls, buffer: IntPtr, offset: int, length: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param length:
         """
@@ -8921,96 +6220,61 @@ class GlobalLog(ABC, Object):
     @classmethod
     @overload
     def Enter(cls, func: str) -> None:
-        """
-
-        :param func:
-        """
+        """:param func:"""
     @classmethod
     @overload
     def Enter(cls, func: str, parms: str) -> None:
-        """
-
-        :param func:
+        """:param func:
         :param parms:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Ignore(cls, msg: object) -> None:
-        """
-
-        :param msg:
-        """
+        """:param msg:"""
     @classmethod
     @overload
     def Leave(cls, func: str) -> None:
-        """
-
-        :param func:
-        """
+        """:param func:"""
     @classmethod
     @overload
     def Leave(cls, func: str, returnval: bool) -> None:
-        """
-
-        :param func:
+        """:param func:
         :param returnval:
         """
     @classmethod
     @overload
     def Leave(cls, func: str, returnval: int) -> None:
-        """
-
-        :param func:
+        """:param func:
         :param returnval:
         """
     @classmethod
     @overload
     def Leave(cls, func: str, result: str) -> None:
-        """
-
-        :param func:
+        """:param func:
         :param result:
         """
     @classmethod
     def LeaveException(cls, func: str, exception: Exception) -> None:
-        """
-
-        :param func:
+        """:param func:
         :param exception:
         """
     @classmethod
     def Print(cls, msg: str) -> None:
-        """
-
-        :param msg:
-        """
+        """:param msg:"""
     @classmethod
     def PrintHex(cls, msg: str, value: object) -> None:
-        """
-
-        :param msg:
+        """:param msg:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GlobalProxySelection(Object):
     """"""
@@ -9020,90 +6284,51 @@ class GlobalProxySelection(Object):
     @classmethod
     @property
     def Select(cls) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @Select.setter
     def Select(cls, value: IWebProxy) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetEmptyWebProxy(cls) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GlobalSSPI(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HeaderInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HeaderInfoTable(Object):
     """"""
@@ -9111,26 +6336,15 @@ class HeaderInfoTable(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 HeaderParser: Callable[[str], Array[str]] = ...
 """
@@ -9143,51 +6357,29 @@ class HeaderVariantInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HostHeaderString(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 HttpAbortDelegate: Callable[[HttpWebRequest, WebException], bool] = ...
 """
@@ -9220,59 +6412,35 @@ class HttpDateParse(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
-    def ParseHttpDate(cls, DateString: str, dtOut: DateTime) -> Tuple[bool, DateTime]:
-        """
-
-        :param DateString:
+    def ParseHttpDate(cls, DateString: str, dtOut: DateTime) -> tuple[bool, DateTime]:
+        """:param DateString:
         :param dtOut:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpDigest(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpDigestChallenge(Object):
     """"""
@@ -9280,30 +6448,17 @@ class HttpDigestChallenge(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def defineAttribute(self, name: str, value: str) -> bool:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         :return:
         """
@@ -9627,26 +6782,15 @@ class HttpKnownHeaderNames(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListener(Object, IDisposable):
     """"""
@@ -9655,99 +6799,63 @@ class HttpListener(Object, IDisposable):
         """"""
     @property
     def AuthenticationSchemeSelectorDelegate(self) -> AuthenticationSchemeSelector:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AuthenticationSchemeSelectorDelegate.setter
     def AuthenticationSchemeSelectorDelegate(self, value: AuthenticationSchemeSelector) -> None: ...
     @property
     def AuthenticationSchemes(self) -> AuthenticationSchemes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AuthenticationSchemes.setter
     def AuthenticationSchemes(self, value: AuthenticationSchemes) -> None: ...
     @property
     def DefaultServiceNames(self) -> ServiceNameCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExtendedProtectionPolicy(self) -> ExtendedProtectionPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ExtendedProtectionPolicy.setter
     def ExtendedProtectionPolicy(self, value: ExtendedProtectionPolicy) -> None: ...
     @property
-    def ExtendedProtectionSelectorDelegate(self) -> HttpListener.ExtendedProtectionSelector:
-        """
-
-        :return:
-        """
+    def ExtendedProtectionSelectorDelegate(
+        self,
+    ) -> HttpListener.ExtendedProtectionSelector:
+        """:return:"""
     @ExtendedProtectionSelectorDelegate.setter
     def ExtendedProtectionSelectorDelegate(
         self, value: HttpListener.ExtendedProtectionSelector
     ) -> None: ...
     @property
     def IgnoreWriteExceptions(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IgnoreWriteExceptions.setter
     def IgnoreWriteExceptions(self, value: bool) -> None: ...
     @property
     def IsListening(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def IsSupported(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Prefixes(self) -> HttpListenerPrefixCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Realm(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Realm.setter
     def Realm(self, value: str) -> None: ...
     @property
     def TimeoutManager(self) -> HttpListenerTimeoutManager:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnsafeConnectionNtlmAuthentication(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UnsafeConnectionNtlmAuthentication.setter
     def UnsafeConnectionNtlmAuthentication(self, value: bool) -> None: ...
     def Abort(self) -> None:
         """"""
     def BeginGetContext(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
@@ -9756,46 +6864,27 @@ class HttpListener(Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def EndGetContext(self, asyncResult: IAsyncResult) -> HttpListenerContext:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetContext(self) -> HttpListenerContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetContextAsync(self) -> Task[HttpListenerContext]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Start(self) -> None:
         """"""
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     ExtendedProtectionSelector: Callable[[HttpListenerRequest], ExtendedProtectionPolicy] = ...
     """
     
@@ -9807,208 +6896,123 @@ class HttpListenerBasicIdentity(GenericIdentity, IIdentity):
     """"""
 
     def __init__(self, username: str, password: str):
-        """
-
-        :param username:
+        """:param username:
         :param password:
         """
     @property
     def Actor(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Actor.setter
     def Actor(self, value: ClaimsIdentity) -> None: ...
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BootstrapContext(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BootstrapContext.setter
     def BootstrapContext(self, value: object) -> None: ...
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Label(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Label.setter
     def Label(self, value: str) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NameClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Password(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RoleClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     def AddClaims(self, claims: IEnumerable[Claim]) -> None:
-        """
-
-        :param claims:
-        """
+        """:param claims:"""
     def Clone(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindAll(self, type: str) -> IEnumerable[Claim]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def FindFirst(self, match: Predicate[Claim]) -> Claim:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindFirst(self, type: str) -> Claim:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasClaim(self, match: Predicate[Claim]) -> bool:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def HasClaim(self, type: str, value: str) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :return:
         """
     def RemoveClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryRemoveClaim(self, claim: Claim) -> bool:
-        """
-
-        :param claim:
+        """:param claim:
         :return:
         """
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
 
 class HttpListenerContext(Object):
     """"""
 
     @property
     def Request(self) -> HttpListenerRequest:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Response(self) -> HttpListenerResponse:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def User(self) -> IPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AcceptWebSocketAsync(self, subProtocol: str) -> Task[HttpListenerWebSocketContext]:
-        """
-
-        :param subProtocol:
+        """:param subProtocol:
         :return:
         """
     @overload
     def AcceptWebSocketAsync(
         self, subProtocol: str, keepAliveInterval: TimeSpan
     ) -> Task[HttpListenerWebSocketContext]:
-        """
-
-        :param subProtocol:
+        """:param subProtocol:
         :param keepAliveInterval:
         :return:
         """
@@ -10016,9 +7020,7 @@ class HttpListenerContext(Object):
     def AcceptWebSocketAsync(
         self, subProtocol: str, receiveBufferSize: int, keepAliveInterval: TimeSpan
     ) -> Task[HttpListenerWebSocketContext]:
-        """
-
-        :param subProtocol:
+        """:param subProtocol:
         :param receiveBufferSize:
         :param keepAliveInterval:
         :return:
@@ -10031,35 +7033,22 @@ class HttpListenerContext(Object):
         keepAliveInterval: TimeSpan,
         internalBuffer: ArraySegment[int],
     ) -> Task[HttpListenerWebSocketContext]:
-        """
-
-        :param subProtocol:
+        """:param subProtocol:
         :param receiveBufferSize:
         :param keepAliveInterval:
         :param internalBuffer:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerException(Win32Exception, _Exception, ISerializable):
     """"""
@@ -10069,525 +7058,289 @@ class HttpListenerException(Win32Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, errorCode: int):
-        """
-
-        :param errorCode:
-        """
+        """:param errorCode:"""
     @overload
     def __init__(self, errorCode: int, message: str):
-        """
-
-        :param errorCode:
+        """:param errorCode:
         :param message:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NativeErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerPrefixCollection(Object, ICollection[String], IEnumerable[String], IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, item: str) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: str) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, offset: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param offset:
         """
     @overload
     def CopyTo(self, array: Array[str], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, item: str) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerRequest(Object):
     """"""
 
     @property
     def AcceptTypes(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ClientCertificateError(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentLength64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Cookies(self) -> CookieCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasEntityBody(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Headers(self) -> NameValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HttpMethod(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InputStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLocal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecureConnection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsWebSocketRequest(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def KeepAlive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LocalEndPoint(self) -> IPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProtocolVersion(self) -> Version:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def QueryString(self) -> NameValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RawUrl(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RemoteEndPoint(self) -> IPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RequestTraceIdentifier(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ServiceName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransportContext(self) -> TransportContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Url(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UrlReferrer(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserAgent(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserHostAddress(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserHostName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserLanguages(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginGetClientCertificate(
         self, requestCallback: AsyncCallback, state: object
     ) -> IAsyncResult:
-        """
-
-        :param requestCallback:
+        """:param requestCallback:
         :param state:
         :return:
         """
     def EndGetClientCertificate(self, asyncResult: IAsyncResult) -> X509Certificate2:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetClientCertificate(self) -> X509Certificate2:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetClientCertificateAsync(self) -> Task[X509Certificate2]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerRequestContext(TransportContext):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetChannelBinding(self, kind: ChannelBindingKind) -> ChannelBinding:
-        """
-
-        :param kind:
+        """:param kind:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTlsTokenBindings(self) -> IEnumerable[TokenBinding]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerRequestUriBuilder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetRequestUri(
         cls,
@@ -10597,9 +7350,7 @@ class HttpListenerRequestUriBuilder(Object):
         cookedUriPath: str,
         cookedUriQuery: str,
     ) -> Uri:
-        """
-
-        :param rawUri:
+        """:param rawUri:
         :param cookedUriScheme:
         :param cookedUriHost:
         :param cookedUriPath:
@@ -10607,130 +7358,81 @@ class HttpListenerRequestUriBuilder(Object):
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerResponse(Object, IDisposable):
     """"""
 
     @property
     def ContentEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentEncoding.setter
     def ContentEncoding(self, value: Encoding) -> None: ...
     @property
     def ContentLength64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength64.setter
     def ContentLength64(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def Cookies(self) -> CookieCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Cookies.setter
     def Cookies(self, value: CookieCollection) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Headers.setter
     def Headers(self, value: WebHeaderCollection) -> None: ...
     @property
     def KeepAlive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @KeepAlive.setter
     def KeepAlive(self, value: bool) -> None: ...
     @property
     def OutputStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProtocolVersion(self) -> Version:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProtocolVersion.setter
     def ProtocolVersion(self, value: Version) -> None: ...
     @property
     def RedirectLocation(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RedirectLocation.setter
     def RedirectLocation(self, value: str) -> None: ...
     @property
     def SendChunked(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendChunked.setter
     def SendChunked(self, value: bool) -> None: ...
     @property
     def StatusCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StatusCode.setter
     def StatusCode(self, value: int) -> None: ...
     @property
     def StatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StatusDescription.setter
     def StatusDescription(self, value: str) -> None: ...
     def Abort(self) -> None:
         """"""
     def AddHeader(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     def AppendCookie(self, cookie: Cookie) -> None:
-        """
-
-        :param cookie:
-        """
+        """:param cookie:"""
     def AppendHeader(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
@@ -10738,122 +7440,71 @@ class HttpListenerResponse(Object, IDisposable):
         """"""
     @overload
     def Close(self, responseEntity: Array[int], willBlock: bool) -> None:
-        """
-
-        :param responseEntity:
+        """:param responseEntity:
         :param willBlock:
         """
     def CopyFrom(self, templateResponse: HttpListenerResponse) -> None:
-        """
-
-        :param templateResponse:
-        """
+        """:param templateResponse:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Redirect(self, url: str) -> None:
-        """
-
-        :param url:
-        """
+        """:param url:"""
     def SetCookie(self, cookie: Cookie) -> None:
-        """
-
-        :param cookie:
-        """
+        """:param cookie:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerTimeoutManager(Object):
     """"""
 
     @property
     def DrainEntityBody(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DrainEntityBody.setter
     def DrainEntityBody(self, value: TimeSpan) -> None: ...
     @property
     def EntityBody(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EntityBody.setter
     def EntityBody(self, value: TimeSpan) -> None: ...
     @property
     def HeaderWait(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HeaderWait.setter
     def HeaderWait(self, value: TimeSpan) -> None: ...
     @property
     def IdleConnection(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IdleConnection.setter
     def IdleConnection(self, value: TimeSpan) -> None: ...
     @property
     def MinSendBytesPerSecond(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MinSendBytesPerSecond.setter
     def MinSendBytesPerSecond(self, value: int) -> None: ...
     @property
     def RequestQueue(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RequestQueue.setter
     def RequestQueue(self, value: TimeSpan) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpProcessingResult(Enum):
     """"""
@@ -10869,26 +7520,15 @@ class HttpProtocolUtils(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpRequestCreator(Object, IWebRequestCreate):
     """"""
@@ -10896,32 +7536,19 @@ class HttpRequestCreator(Object, IWebRequestCreate):
     def __init__(self):
         """"""
     def Create(self, uri: Uri) -> WebRequest:
-        """
-
-        :param uri:
+        """:param uri:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpRequestHeader(Enum):
     """"""
@@ -11014,107 +7641,69 @@ class HttpRequestQueueV2Handle(CriticalHandleZeroOrMinusOneIsInvalid, IDisposabl
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpRequestStream(Stream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -11122,11 +7711,14 @@ class HttpRequestStream(Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -11137,29 +7729,20 @@ class HttpRequestStream(Stream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -11167,157 +7750,111 @@ class HttpRequestStream(Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class HttpResponseHeader(Enum):
     """"""
@@ -11388,64 +7925,43 @@ class HttpResponseStream(Stream, IDisposable):
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -11453,11 +7969,14 @@ class HttpResponseStream(Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -11468,29 +7987,20 @@ class HttpResponseStream(Stream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -11498,249 +8008,163 @@ class HttpResponseStream(Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class HttpResponseStreamAsyncResult(LazyAsyncResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpServerSessionHandle(CriticalHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpStatusCode(Enum):
     """"""
@@ -11844,26 +8268,15 @@ class HttpStatusDescription(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpSysSettings(ABC, Object):
     """"""
@@ -11871,38 +8284,21 @@ class HttpSysSettings(ABC, Object):
     @classmethod
     @property
     def EnableNonUtf8(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def FavorUtf8(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpVersion(Object):
     """"""
@@ -11920,26 +8316,15 @@ class HttpVersion(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpWebRequest(WebRequest, ISerializable):
     """"""
@@ -11948,568 +8333,357 @@ class HttpWebRequest(WebRequest, ISerializable):
         """"""
     @property
     def Accept(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Accept.setter
     def Accept(self, value: str) -> None: ...
     @property
     def Address(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AllowAutoRedirect(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AllowAutoRedirect.setter
     def AllowAutoRedirect(self, value: bool) -> None: ...
     @property
     def AllowReadStreamBuffering(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AllowReadStreamBuffering.setter
     def AllowReadStreamBuffering(self, value: bool) -> None: ...
     @property
     def AllowWriteStreamBuffering(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AllowWriteStreamBuffering.setter
     def AllowWriteStreamBuffering(self, value: bool) -> None: ...
     @property
     def AuthenticationLevel(self) -> AuthenticationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AuthenticationLevel.setter
     def AuthenticationLevel(self, value: AuthenticationLevel) -> None: ...
     @property
     def AutomaticDecompression(self) -> DecompressionMethods:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AutomaticDecompression.setter
     def AutomaticDecompression(self, value: DecompressionMethods) -> None: ...
     @property
     def CachePolicy(self) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CachePolicy.setter
     def CachePolicy(self, value: RequestCachePolicy) -> None: ...
     @property
     def ClientCertificates(self) -> X509CertificateCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ClientCertificates.setter
     def ClientCertificates(self, value: X509CertificateCollection) -> None: ...
     @property
     def Connection(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Connection.setter
     def Connection(self, value: str) -> None: ...
     @property
     def ConnectionGroupName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ConnectionGroupName.setter
     def ConnectionGroupName(self, value: str) -> None: ...
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def ContinueDelegate(self) -> HttpContinueDelegate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContinueDelegate.setter
     def ContinueDelegate(self, value: HttpContinueDelegate) -> None: ...
     @property
     def ContinueTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContinueTimeout.setter
     def ContinueTimeout(self, value: int) -> None: ...
     @property
     def CookieContainer(self) -> CookieContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CookieContainer.setter
     def CookieContainer(self, value: CookieContainer) -> None: ...
     @property
     def CreatorInstance(self) -> IWebRequestCreate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     @property
     def Date(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Date.setter
     def Date(self, value: DateTime) -> None: ...
     @classmethod
     @property
     def DefaultCachePolicy(cls) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultCachePolicy.setter
     def DefaultCachePolicy(cls, value: RequestCachePolicy) -> None: ...
     @classmethod
     @property
     def DefaultMaximumErrorResponseLength(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultMaximumErrorResponseLength.setter
     def DefaultMaximumErrorResponseLength(cls, value: int) -> None: ...
     @classmethod
     @property
     def DefaultMaximumResponseHeadersLength(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultMaximumResponseHeadersLength.setter
     def DefaultMaximumResponseHeadersLength(cls, value: int) -> None: ...
     @classmethod
     @property
     def DefaultWebProxy(cls) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultWebProxy.setter
     def DefaultWebProxy(cls, value: IWebProxy) -> None: ...
     @property
     def Expect(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expect.setter
     def Expect(self, value: str) -> None: ...
     @property
     def HaveResponse(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Headers.setter
     def Headers(self, value: WebHeaderCollection) -> None: ...
     @property
     def Host(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Host.setter
     def Host(self, value: str) -> None: ...
     @property
     def IfModifiedSince(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IfModifiedSince.setter
     def IfModifiedSince(self, value: DateTime) -> None: ...
     @property
     def ImpersonationLevel(self) -> TokenImpersonationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ImpersonationLevel.setter
     def ImpersonationLevel(self, value: TokenImpersonationLevel) -> None: ...
     @property
     def KeepAlive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @KeepAlive.setter
     def KeepAlive(self, value: bool) -> None: ...
     @property
     def MaximumAutomaticRedirections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumAutomaticRedirections.setter
     def MaximumAutomaticRedirections(self, value: int) -> None: ...
     @property
     def MaximumResponseHeadersLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumResponseHeadersLength.setter
     def MaximumResponseHeadersLength(self, value: int) -> None: ...
     @property
     def MediaType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MediaType.setter
     def MediaType(self, value: str) -> None: ...
     @property
     def Method(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Method.setter
     def Method(self, value: str) -> None: ...
     @property
     def Pipelined(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Pipelined.setter
     def Pipelined(self, value: bool) -> None: ...
     @property
     def PreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PreAuthenticate.setter
     def PreAuthenticate(self, value: bool) -> None: ...
     @property
     def ProtocolVersion(self) -> Version:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProtocolVersion.setter
     def ProtocolVersion(self, value: Version) -> None: ...
     @property
     def Proxy(self) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Proxy.setter
     def Proxy(self, value: IWebProxy) -> None: ...
     @property
     def ReadWriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadWriteTimeout.setter
     def ReadWriteTimeout(self, value: int) -> None: ...
     @property
     def Referer(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Referer.setter
     def Referer(self, value: str) -> None: ...
     @property
     def RequestUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SendChunked(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendChunked.setter
     def SendChunked(self, value: bool) -> None: ...
     @property
-    def ServerCertificateValidationCallback(self) -> RemoteCertificateValidationCallback:
-        """
-
-        :return:
-        """
+    def ServerCertificateValidationCallback(
+        self,
+    ) -> RemoteCertificateValidationCallback:
+        """:return:"""
     @ServerCertificateValidationCallback.setter
     def ServerCertificateValidationCallback(
         self, value: RemoteCertificateValidationCallback
     ) -> None: ...
     @property
     def ServicePoint(self) -> ServicePoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsCookieContainer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Timeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Timeout.setter
     def Timeout(self, value: int) -> None: ...
     @property
     def TransferEncoding(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TransferEncoding.setter
     def TransferEncoding(self, value: str) -> None: ...
     @property
     def UnsafeAuthenticatedConnectionSharing(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UnsafeAuthenticatedConnectionSharing.setter
     def UnsafeAuthenticatedConnectionSharing(self, value: bool) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     @property
     def UserAgent(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UserAgent.setter
     def UserAgent(self, value: str) -> None: ...
     def Abort(self) -> None:
         """"""
     @overload
     def AddRange(self, range: int) -> None:
-        """
-
-        :param range:
-        """
+        """:param range:"""
     @overload
     def AddRange(self, range: int) -> None:
-        """
-
-        :param range:
-        """
+        """:param range:"""
     @overload
     def AddRange(self, _from: int, to: int) -> None:
-        """
-
-        :param _from:
+        """:param _from:
         :param to:
         """
     @overload
     def AddRange(self, _from: int, to: int) -> None:
-        """
-
-        :param _from:
+        """:param _from:
         :param to:
         """
     @overload
     def AddRange(self, rangeSpecifier: str, range: int) -> None:
-        """
-
-        :param rangeSpecifier:
+        """:param rangeSpecifier:
         :param range:
         """
     @overload
     def AddRange(self, rangeSpecifier: str, range: int) -> None:
-        """
-
-        :param rangeSpecifier:
+        """:param rangeSpecifier:
         :param range:
         """
     @overload
     def AddRange(self, rangeSpecifier: str, _from: int, to: int) -> None:
-        """
-
-        :param rangeSpecifier:
+        """:param rangeSpecifier:
         :param _from:
         :param to:
         """
     @overload
     def AddRange(self, rangeSpecifier: str, _from: int, to: int) -> None:
-        """
-
-        :param rangeSpecifier:
+        """:param rangeSpecifier:
         :param _from:
         :param to:
         """
     def BeginGetRequestStream(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def BeginGetResponse(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     @overload
     def EndGetRequestStream(self, asyncResult: IAsyncResult) -> Stream:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     @overload
     def EndGetRequestStream(
         self, asyncResult: IAsyncResult, context: TransportContext
-    ) -> Tuple[Stream, TransportContext]:
-        """
-
-        :param asyncResult:
+    ) -> tuple[Stream, TransportContext]:
+        """:param asyncResult:
         :param context:
         :return:
         """
     def EndGetResponse(self, asyncResult: IAsyncResult) -> WebResponse:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetRequestStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
-    def GetRequestStream(self, context: TransportContext) -> Tuple[Stream, TransportContext]:
-        """
-
-        :param context:
+    def GetRequestStream(self, context: TransportContext) -> tuple[Stream, TransportContext]:
+        """:param context:
         :return:
         """
     def GetRequestStreamAsync(self) -> Task[Stream]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponse(self) -> WebResponse:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponseAsync(self) -> Task[WebResponse]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpWebResponse(WebResponse, ISerializable, IDisposable):
     """"""
@@ -12518,164 +8692,90 @@ class HttpWebResponse(WebResponse, ISerializable, IDisposable):
         """"""
     @property
     def CharacterSet(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentEncoding(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def Cookies(self) -> CookieCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Cookies.setter
     def Cookies(self, value: CookieCollection) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFromCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMutuallyAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LastModified(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Method(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProtocolVersion(self) -> Version:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResponseUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Server(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusCode(self) -> HttpStatusCode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsHeaders(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetResponseHeader(self, headerName: str) -> str:
-        """
-
-        :param headerName:
+        """:param headerName:
         :return:
         """
     def GetResponseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpWriteMode(Enum):
     """"""
@@ -12695,165 +8795,103 @@ class HybridWebProxyFinder(Object, IWebProxyFinder, IDisposable):
     """"""
 
     def __init__(self, engine: AutoWebProxyScriptEngine):
-        """
-
-        :param engine:
-        """
+        """:param engine:"""
     @property
     def IsValid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
-    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> Tuple[bool, IList[str]]:
-        """
-
-        :param destination:
+        """:return:"""
+    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> tuple[bool, IList[str]]:
+        """:param destination:
         :param proxyList:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IAuthenticationManager:
     """"""
 
     @property
     def CredentialPolicy(self) -> ICredentialPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CredentialPolicy.setter
     def CredentialPolicy(self, value: ICredentialPolicy) -> None: ...
     @property
     def CustomTargetNameDictionary(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OSSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RegisteredModules(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SpnDictionary(self) -> SpnDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SspSupportsExtendedProtection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def BindModule(self, uri: Uri, response: Authorization, module: IAuthenticationModule) -> None:
-        """
-
-        :param uri:
+        """:param uri:
         :param response:
         :param module:
         """
     def EnsureConfigLoaded(self) -> None:
         """"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def Register(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     @overload
     def Unregister(self, authenticationModule: IAuthenticationModule) -> None:
-        """
-
-        :param authenticationModule:
-        """
+        """:param authenticationModule:"""
     @overload
     def Unregister(self, authenticationScheme: str) -> None:
-        """
-
-        :param authenticationScheme:
-        """
+        """:param authenticationScheme:"""
 
 class IAuthenticationModule:
     """"""
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanPreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
@@ -12863,28 +8901,19 @@ class IAutoWebProxy(IWebProxy):
 
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     def GetProxies(self, destination: Uri) -> ProxyChain:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     def GetProxy(self, destination: Uri) -> Uri:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     def IsBypassed(self, host: Uri) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
 
@@ -12898,9 +8927,7 @@ class ICertificatePolicy:
         request: WebRequest,
         certificateProblem: int,
     ) -> bool:
-        """
-
-        :param srvPoint:
+        """:param srvPoint:
         :param certificate:
         :param request:
         :param certificateProblem:
@@ -12911,10 +8938,7 @@ class ICloseEx:
     """"""
 
     def CloseEx(self, closeState: CloseExState) -> None:
-        """
-
-        :param closeState:
-        """
+        """:param closeState:"""
 
 class ICredentialPolicy:
     """"""
@@ -12926,9 +8950,7 @@ class ICredentialPolicy:
         credential: NetworkCredential,
         authenticationModule: IAuthenticationModule,
     ) -> bool:
-        """
-
-        :param challengeUri:
+        """:param challengeUri:
         :param request:
         :param credential:
         :param authenticationModule:
@@ -12939,9 +8961,7 @@ class ICredentials:
     """"""
 
     def GetCredential(self, uri: Uri, authType: str) -> NetworkCredential:
-        """
-
-        :param uri:
+        """:param uri:
         :param authType:
         :return:
         """
@@ -12950,9 +8970,7 @@ class ICredentialsByHost:
     """"""
 
     def GetCredential(self, host: str, port: int, authenticationType: str) -> NetworkCredential:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param authenticationType:
         :return:
@@ -12998,178 +9016,108 @@ class IPAddress(Object):
     """
     @overload
     def __init__(self, address: Array[int]):
-        """
-
-        :param address:
-        """
+        """:param address:"""
     @overload
     def __init__(self, newAddress: int):
-        """
-
-        :param newAddress:
-        """
+        """:param newAddress:"""
     @overload
     def __init__(self, address: Array[int], scopeid: int):
-        """
-
-        :param address:
+        """:param address:
         :param scopeid:
         """
     @property
     def Address(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Address.setter
     def Address(self, value: int) -> None: ...
     @property
     def AddressFamily(self) -> AddressFamily:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsIPv4MappedToIPv6(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsIPv6LinkLocal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsIPv6Multicast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsIPv6SiteLocal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsIPv6Teredo(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ScopeId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ScopeId.setter
     def ScopeId(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAddressBytes(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
+        """:return:"""
+    @classmethod
+    @overload
+    def HostToNetworkOrder(cls, host: int) -> int:
+        """:param host:
         :return:
         """
     @classmethod
     @overload
     def HostToNetworkOrder(cls, host: int) -> int:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     @classmethod
     @overload
     def HostToNetworkOrder(cls, host: int) -> int:
-        """
-
-        :param host:
-        :return:
-        """
-    @classmethod
-    @overload
-    def HostToNetworkOrder(cls, host: int) -> int:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     @classmethod
     def IsLoopback(cls, address: IPAddress) -> bool:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     def MapToIPv4(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MapToIPv6(self) -> IPAddress:
-        """
-
+        """:return:"""
+    @classmethod
+    @overload
+    def NetworkToHostOrder(cls, network: int) -> int:
+        """:param network:
         :return:
         """
     @classmethod
     @overload
     def NetworkToHostOrder(cls, network: int) -> int:
-        """
-
-        :param network:
+        """:param network:
         :return:
         """
     @classmethod
     @overload
     def NetworkToHostOrder(cls, network: int) -> int:
-        """
-
-        :param network:
-        :return:
-        """
-    @classmethod
-    @overload
-    def NetworkToHostOrder(cls, network: int) -> int:
-        """
-
-        :param network:
+        """:param network:
         :return:
         """
     @classmethod
     def Parse(cls, ipString: str) -> IPAddress:
-        """
-
-        :param ipString:
+        """:param ipString:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
-    def TryParse(cls, ipString: str, address: IPAddress) -> Tuple[bool, IPAddress]:
-        """
-
-        :param ipString:
+    def TryParse(cls, ipString: str, address: IPAddress) -> tuple[bool, IPAddress]:
+        """:param ipString:
         :param address:
         :return:
         """
@@ -13189,72 +9137,43 @@ class IPEndPoint(EndPoint):
     """
     @overload
     def __init__(self, address: IPAddress, port: int):
-        """
-
-        :param address:
+        """:param address:
         :param port:
         """
     @overload
     def __init__(self, address: int, port: int):
-        """
-
-        :param address:
+        """:param address:
         :param port:
         """
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Address.setter
     def Address(self, value: IPAddress) -> None: ...
     @property
     def AddressFamily(self) -> AddressFamily:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Port(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Port.setter
     def Port(self, value: int) -> None: ...
     def Create(self, socketAddress: SocketAddress) -> EndPoint:
-        """
-
-        :param socketAddress:
+        """:param socketAddress:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Serialize(self) -> SocketAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPHostEntry(Object):
     """"""
@@ -13263,156 +9182,93 @@ class IPHostEntry(Object):
         """"""
     @property
     def AddressList(self) -> Array[IPAddress]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AddressList.setter
     def AddressList(self, value: Array[IPAddress]) -> None: ...
     @property
     def Aliases(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Aliases.setter
     def Aliases(self, value: Array[str]) -> None: ...
     @property
     def HostName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HostName.setter
     def HostName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPMulticastRequest(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPv6MulticastRequest(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IRequestLifetimeTracker:
     """"""
 
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
+        """:param requestStartTimestamp:"""
 
 class ISessionAuthenticationModule(IAuthenticationModule):
     """"""
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanPreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanUseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def ClearSession(self, webRequest: WebRequest) -> None:
-        """
-
-        :param webRequest:
-        """
+        """:param webRequest:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def Update(self, challenge: str, webRequest: WebRequest) -> bool:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param webRequest:
         :return:
         """
@@ -13422,22 +9278,15 @@ class IWebProxy:
 
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     def GetProxy(self, destination: Uri) -> Uri:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     def IsBypassed(self, host: Uri) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
 
@@ -13446,18 +9295,13 @@ class IWebProxyFinder(IDisposable):
 
     @property
     def IsValid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
-    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> Tuple[bool, IList[str]]:
-        """
-
-        :param destination:
+    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> tuple[bool, IList[str]]:
+        """:param destination:
         :param proxyList:
         :return:
         """
@@ -13470,17 +9314,13 @@ class IWebProxyScript:
     def Close(self) -> None:
         """"""
     def Load(self, scriptLocation: Uri, script: str, helperType: Type) -> bool:
-        """
-
-        :param scriptLocation:
+        """:param scriptLocation:
         :param script:
         :param helperType:
         :return:
         """
     def Run(self, url: str, host: str) -> str:
-        """
-
-        :param url:
+        """:param url:
         :param host:
         :return:
         """
@@ -13489,9 +9329,7 @@ class IWebRequestCreate:
     """"""
 
     def Create(self, uri: Uri) -> WebRequest:
-        """
-
-        :param uri:
+        """:param uri:
         :return:
         """
 
@@ -13533,201 +9371,115 @@ class IntPtrHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InterlockedGate(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InterlockedStack(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InternalException(SystemException, _Exception, ISerializable):
     """"""
 
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IssuerListInfoEx(ValueType):
     """"""
@@ -13743,32 +9495,19 @@ class IssuerListInfoEx(ValueType):
     :return: 
     """
     def __init__(self, handle: SafeHandle, nativeBuffer: Array[int]):
-        """
-
-        :param handle:
+        """:param handle:
         :param nativeBuffer:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class KerberosClient(Object, IAuthenticationModule, ISessionAuthenticationModule):
     """"""
@@ -13777,69 +9516,40 @@ class KerberosClient(Object, IAuthenticationModule, ISessionAuthenticationModule
         """"""
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanPreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanUseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def ClearSession(self, webRequest: WebRequest) -> None:
-        """
-
-        :param webRequest:
-        """
+        """:param webRequest:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Update(self, challenge: str, webRequest: WebRequest) -> bool:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param webRequest:
         :return:
         """
@@ -13849,212 +9559,117 @@ class KnownHttpVerb(Object):
 
     @overload
     def Equals(self, verb: KnownHttpVerb) -> bool:
-        """
-
-        :param verb:
+        """:param verb:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, name: str) -> KnownHttpVerb:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LazyAsyncResult(Object, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Linger(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListenerAsyncResult(LazyAsyncResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListenerClientCertAsyncResult(LazyAsyncResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListenerClientCertState(Enum):
     """"""
@@ -14071,90 +9686,51 @@ class ListenerPrefixEnumerator(Object, IEnumerator[String], IEnumerator, IDispos
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Logging(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NTAuthentication(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NameInfoFlags(Enum):
     """"""
@@ -14174,51 +9750,29 @@ class NclConstants(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NclUtilities(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NegotiateClient(Object, IAuthenticationModule, ISessionAuthenticationModule):
     """"""
@@ -14227,69 +9781,40 @@ class NegotiateClient(Object, IAuthenticationModule, ISessionAuthenticationModul
         """"""
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanPreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanUseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def ClearSession(self, webRequest: WebRequest) -> None:
-        """
-
-        :param webRequest:
-        """
+        """:param webRequest:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Update(self, challenge: str, webRequest: WebRequest) -> bool:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param webRequest:
         :return:
         """
@@ -14298,264 +9823,155 @@ class NegotiationInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NegotiationInfoClass(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NestedMultipleAsyncResult(LazyAsyncResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NestedSingleAsyncResult(LazyAsyncResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetRes(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetWebStatusCodeString(cls, statusCode: FtpStatusCode, statusDescription: str) -> str:
-        """
-
-        :param statusCode:
+        """:param statusCode:
         :param statusDescription:
         :return:
         """
     @classmethod
     @overload
     def GetWebStatusCodeString(cls, statusCode: HttpStatusCode, statusDescription: str) -> str:
-        """
-
-        :param statusCode:
+        """:param statusCode:
         :param statusDescription:
         :return:
         """
     @classmethod
     @overload
     def GetWebStatusString(cls, Status: WebExceptionStatus) -> str:
-        """
-
-        :param Status:
+        """:param Status:
         :return:
         """
     @classmethod
     @overload
     def GetWebStatusString(cls, Res: str, Status: WebExceptionStatus) -> str:
-        """
-
-        :param Res:
+        """:param Res:
         :param Status:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetWebProxyFinder(BaseWebProxyFinder, IWebProxyFinder, IDisposable):
     """"""
 
     def __init__(self, engine: AutoWebProxyScriptEngine):
-        """
-
-        :param engine:
-        """
+        """:param engine:"""
     @property
     def IsUnrecognizedScheme(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
-    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> Tuple[bool, IList[str]]:
-        """
-
-        :param destination:
+        """:return:"""
+    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> tuple[bool, IList[str]]:
+        """:param destination:
         :param proxyList:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkAccess(Enum):
     """"""
@@ -14571,26 +9987,15 @@ class NetworkAddressChangePolled(Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkCredential(Object, ICredentials, ICredentialsByHost):
     """"""
@@ -14600,104 +10005,69 @@ class NetworkCredential(Object, ICredentials, ICredentialsByHost):
         """"""
     @overload
     def __init__(self, userName: str, password: SecureString):
-        """
-
-        :param userName:
+        """:param userName:
         :param password:
         """
     @overload
     def __init__(self, userName: str, password: str):
-        """
-
-        :param userName:
+        """:param userName:
         :param password:
         """
     @overload
     def __init__(self, userName: str, password: SecureString, domain: str):
-        """
-
-        :param userName:
+        """:param userName:
         :param password:
         :param domain:
         """
     @overload
     def __init__(self, userName: str, password: str, domain: str):
-        """
-
-        :param userName:
+        """:param userName:
         :param password:
         :param domain:
         """
     @property
     def Domain(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Domain.setter
     def Domain(self, value: str) -> None: ...
     @property
     def Password(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Password.setter
     def Password(self, value: str) -> None: ...
     @property
     def SecurePassword(self) -> SecureString:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurePassword.setter
     def SecurePassword(self, value: SecureString) -> None: ...
     @property
     def UserName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UserName.setter
     def UserName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCredential(self, uri: Uri, authType: str) -> NetworkCredential:
-        """
-
-        :param uri:
+        """:param uri:
         :param authType:
         :return:
         """
     @overload
     def GetCredential(self, host: str, port: int, authenticationType: str) -> NetworkCredential:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param authenticationType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkingPerfCounterName(Enum):
     """"""
@@ -14734,76 +10104,44 @@ class NetworkingPerfCounters(Object):
 
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Instance(cls) -> NetworkingPerfCounters:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Decrement(self, perfCounter: NetworkingPerfCounterName) -> None:
-        """
-
-        :param perfCounter:
-        """
+        """:param perfCounter:"""
     @overload
     def Decrement(self, perfCounter: NetworkingPerfCounterName, amount: int) -> None:
-        """
-
-        :param perfCounter:
+        """:param perfCounter:
         :param amount:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetTimestamp(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Increment(self, perfCounter: NetworkingPerfCounterName) -> None:
-        """
-
-        :param perfCounter:
-        """
+        """:param perfCounter:"""
     @overload
     def Increment(self, perfCounter: NetworkingPerfCounterName, amount: int) -> None:
-        """
-
-        :param perfCounter:
+        """:param perfCounter:
         :param amount:
         """
     def IncrementAverage(self, perfCounter: NetworkingPerfCounterName, startTimestamp: int) -> None:
-        """
-
-        :param perfCounter:
+        """:param perfCounter:
         :param startTimestamp:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NtlmClient(Object, IAuthenticationModule, ISessionAuthenticationModule):
     """"""
@@ -14812,69 +10150,40 @@ class NtlmClient(Object, IAuthenticationModule, ISessionAuthenticationModule):
         """"""
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanPreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanUseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self, challenge: str, request: WebRequest, credentials: ICredentials
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param request:
         :param credentials:
         :return:
         """
     def ClearSession(self, webRequest: WebRequest) -> None:
-        """
-
-        :param webRequest:
-        """
+        """:param webRequest:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
-        """
-
-        :param request:
+        """:param request:
         :param credentials:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Update(self, challenge: str, webRequest: WebRequest) -> bool:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param webRequest:
         :return:
         """
@@ -14884,49 +10193,26 @@ class OpenReadCompletedEventArgs(AsyncCompletedEventArgs):
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 OpenReadCompletedEventHandler: Callable[[object, OpenReadCompletedEventArgs], None] = ...
 """
@@ -14940,49 +10226,26 @@ class OpenWriteCompletedEventArgs(AsyncCompletedEventArgs):
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 OpenWriteCompletedEventHandler: Callable[[object, OpenWriteCompletedEventArgs], None] = ...
 """
@@ -14998,71 +10261,38 @@ class PathList(Object):
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCookiesCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, s: str) -> object:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     def __setitem__(self, s: str, value: object) -> None:
-        """
-
-        :param s:
+        """:param s:
         :param value:
         """
 
@@ -15070,97 +10300,63 @@ class PolicyWrapper(Object):
     """"""
 
     def Accept(self, Certificate: X509Certificate, CertificateProblem: int) -> bool:
-        """
-
-        :param Certificate:
+        """:param Certificate:
         :param CertificateProblem:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PooledStream(Stream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -15168,11 +10364,14 @@ class PooledStream(Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -15184,35 +10383,23 @@ class PooledStream(Stream, IDisposable):
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -15220,157 +10407,111 @@ class PooledStream(Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class PrefixLookup(Object):
     """"""
@@ -15380,43 +10521,25 @@ class PrefixLookup(Object):
         """"""
     @overload
     def __init__(self, capacity: int):
-        """
-
-        :param capacity:
-        """
+        """:param capacity:"""
     def Add(self, prefix: str, value: object) -> None:
-        """
-
-        :param prefix:
+        """:param prefix:
         :param value:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Lookup(self, lookupKey: str) -> object:
-        """
-
-        :param lookupKey:
+        """:param lookupKey:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProtocolViolationException(InvalidOperationException, _Exception, ISerializable):
     """"""
@@ -15426,131 +10549,75 @@ class ProtocolViolationException(InvalidOperationException, _Exception, ISeriali
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProxyChain(ABC, Object, IEnumerable[Uri], IEnumerable, IDisposable):
     """"""
@@ -15558,43 +10625,23 @@ class ProxyChain(ABC, Object, IEnumerable[Uri], IEnumerable, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Uri]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProxyScriptChain(ProxyChain, IEnumerable[Uri], IEnumerable, IDisposable):
     """"""
@@ -15602,43 +10649,23 @@ class ProxyScriptChain(ProxyChain, IEnumerable[Uri], IEnumerable, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Uri]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReadState(Enum):
     """"""
@@ -15656,124 +10683,75 @@ class ReceiveState(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegBlobWebProxyDataBuilder(WebProxyDataBuilder):
     """"""
 
     def __init__(self, connectoid: str, registry: SafeRegistryHandle):
-        """
-
-        :param connectoid:
+        """:param connectoid:
         :param registry:
         """
     def Build(self) -> WebProxyData:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegistryConfiguration(ABC, Object):
     """"""
 
     @classmethod
     def AppConfigReadInt(cls, configVariable: str, defaultValue: int) -> int:
-        """
-
-        :param configVariable:
+        """:param configVariable:
         :param defaultValue:
         :return:
         """
     @classmethod
     def AppConfigReadString(cls, configVariable: str, defaultValue: str) -> str:
-        """
-
-        :param configVariable:
+        """:param configVariable:
         :param defaultValue:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GlobalConfigReadInt(cls, configVariable: str, defaultValue: int) -> int:
-        """
-
-        :param configVariable:
+        """:param configVariable:
         :param defaultValue:
         :return:
         """
     @classmethod
     def GlobalConfigReadString(cls, configVariable: str, defaultValue: str) -> str:
-        """
-
-        :param configVariable:
+        """:param configVariable:
         :param defaultValue:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestContextBase(ABC, Object, IDisposable):
     """"""
@@ -15783,51 +10761,29 @@ class RequestContextBase(ABC, Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestLifetimeSetter(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResponseDescription(Object):
     """"""
@@ -15835,76 +10791,43 @@ class ResponseDescription(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RtcState(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SSL_EXTRA_CERT_CHAIN_POLICY_PARA(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SSPIAuthType(Object, SSPIInterface):
     """"""
@@ -15913,10 +10836,7 @@ class SSPIAuthType(Object, SSPIInterface):
         """"""
     @property
     def SecurityPackages(self) -> Array[SecurityPackageInfoClass]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityPackages.setter
     def SecurityPackages(self, value: Array[SecurityPackageInfoClass]) -> None: ...
     @overload
@@ -15930,9 +10850,7 @@ class SSPIAuthType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param inputBuffer:
         :param inFlags:
@@ -15952,9 +10870,7 @@ class SSPIAuthType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param inputBuffers:
         :param inFlags:
@@ -15970,10 +10886,8 @@ class SSPIAuthType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: AuthIdentity,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -15986,10 +10900,8 @@ class SSPIAuthType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: SafeSspiAuthDataHandle,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16002,10 +10914,8 @@ class SSPIAuthType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: SecureCredential,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16018,10 +10928,8 @@ class SSPIAuthType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: SecureCredential2,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16029,10 +10937,8 @@ class SSPIAuthType(Object, SSPIInterface):
         """
     def AcquireDefaultCredential(
         self, moduleName: str, usage: CredentialUse, outCredential: SafeFreeCredentials
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param outCredential:
         :return:
@@ -16040,66 +10946,54 @@ class SSPIAuthType(Object, SSPIInterface):
     def ApplyControlToken(
         self, refContext: SafeDeleteContext, inputBuffers: Array[SecurityBuffer]
     ) -> int:
-        """
-
-        :param refContext:
+        """:param refContext:
         :param inputBuffers:
         :return:
         """
     def CompleteAuthToken(
         self, refContext: SafeDeleteContext, inputBuffers: Array[SecurityBuffer]
     ) -> int:
-        """
-
-        :param refContext:
+        """:param refContext:
         :param inputBuffers:
         :return:
         """
     def DecryptMessage(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
         """
     def EncryptMessage(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
         """
     def EnumerateSecurityPackages(
         self, pkgnum: int, pkgArray: SafeFreeContextBuffer
-    ) -> Tuple[int, int, SafeFreeContextBuffer]:
-        """
-
-        :param pkgnum:
+    ) -> tuple[int, int, SafeFreeContextBuffer]:
+        """:param pkgnum:
         :param pkgArray:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def InitializeSecurityContext(
         self,
@@ -16112,9 +11006,7 @@ class SSPIAuthType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param targetName:
         :param inFlags:
@@ -16136,9 +11028,7 @@ class SSPIAuthType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param targetName:
         :param inFlags:
@@ -16149,11 +11039,12 @@ class SSPIAuthType(Object, SSPIInterface):
         :return:
         """
     def MakeSignature(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
@@ -16165,10 +11056,8 @@ class SSPIAuthType(Object, SSPIInterface):
         buffer: Array[int],
         handleType: Type,
         refHandle: SafeHandle,
-    ) -> Tuple[int, SafeHandle]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeHandle]:
+        """:param phContext:
         :param attribute:
         :param buffer:
         :param handleType:
@@ -16180,44 +11069,39 @@ class SSPIAuthType(Object, SSPIInterface):
         phContext: SafeDeleteContext,
         attribute: ContextAttribute,
         refHandle: SafeFreeContextBufferChannelBinding,
-    ) -> Tuple[int, SafeFreeContextBufferChannelBinding]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeFreeContextBufferChannelBinding]:
+        """:param phContext:
         :param attribute:
         :param refHandle:
         :return:
         """
     def QuerySecurityContextToken(
         self, phContext: SafeDeleteContext, phToken: SafeCloseHandle
-    ) -> Tuple[int, SafeCloseHandle]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeCloseHandle]:
+        """:param phContext:
         :param phToken:
         :return:
         """
     def SetContextAttributes(
-        self, phContext: SafeDeleteContext, attribute: ContextAttribute, buffer: Array[int]
+        self,
+        phContext: SafeDeleteContext,
+        attribute: ContextAttribute,
+        buffer: Array[int],
     ) -> int:
-        """
-
-        :param phContext:
+        """:param phContext:
         :param attribute:
         :param buffer:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def VerifySignature(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
@@ -16228,41 +11112,24 @@ class SSPIHandle(ValueType):
 
     @property
     def IsZero(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SSPIInterface:
     """"""
 
     @property
     def SecurityPackages(self) -> Array[SecurityPackageInfoClass]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityPackages.setter
     def SecurityPackages(self, value: Array[SecurityPackageInfoClass]) -> None: ...
     @overload
@@ -16276,9 +11143,7 @@ class SSPIInterface:
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param inputBuffer:
         :param inFlags:
@@ -16298,9 +11163,7 @@ class SSPIInterface:
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param inputBuffers:
         :param inFlags:
@@ -16316,10 +11179,8 @@ class SSPIInterface:
         usage: CredentialUse,
         authdata: AuthIdentity,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16332,10 +11193,8 @@ class SSPIInterface:
         usage: CredentialUse,
         authdata: SafeSspiAuthDataHandle,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16348,10 +11207,8 @@ class SSPIInterface:
         usage: CredentialUse,
         authdata: SecureCredential,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16364,10 +11221,8 @@ class SSPIInterface:
         usage: CredentialUse,
         authdata: SecureCredential2,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16375,10 +11230,8 @@ class SSPIInterface:
         """
     def AcquireDefaultCredential(
         self, moduleName: str, usage: CredentialUse, outCredential: SafeFreeCredentials
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param outCredential:
         :return:
@@ -16386,47 +11239,43 @@ class SSPIInterface:
     def ApplyControlToken(
         self, refContext: SafeDeleteContext, inputBuffers: Array[SecurityBuffer]
     ) -> int:
-        """
-
-        :param refContext:
+        """:param refContext:
         :param inputBuffers:
         :return:
         """
     def CompleteAuthToken(
         self, refContext: SafeDeleteContext, inputBuffers: Array[SecurityBuffer]
     ) -> int:
-        """
-
-        :param refContext:
+        """:param refContext:
         :param inputBuffers:
         :return:
         """
     def DecryptMessage(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
         """
     def EncryptMessage(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
         """
     def EnumerateSecurityPackages(
         self, pkgnum: int, pkgArray: SafeFreeContextBuffer
-    ) -> Tuple[int, int, SafeFreeContextBuffer]:
-        """
-
-        :param pkgnum:
+    ) -> tuple[int, int, SafeFreeContextBuffer]:
+        """:param pkgnum:
         :param pkgArray:
         :return:
         """
@@ -16442,9 +11291,7 @@ class SSPIInterface:
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param targetName:
         :param inFlags:
@@ -16466,9 +11313,7 @@ class SSPIInterface:
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param targetName:
         :param inFlags:
@@ -16479,11 +11324,12 @@ class SSPIInterface:
         :return:
         """
     def MakeSignature(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
@@ -16495,10 +11341,8 @@ class SSPIInterface:
         buffer: Array[int],
         handleType: Type,
         refHandle: SafeHandle,
-    ) -> Tuple[int, SafeHandle]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeHandle]:
+        """:param phContext:
         :param attribute:
         :param buffer:
         :param handleType:
@@ -16510,39 +11354,37 @@ class SSPIInterface:
         phContext: SafeDeleteContext,
         attribute: ContextAttribute,
         refHandle: SafeFreeContextBufferChannelBinding,
-    ) -> Tuple[int, SafeFreeContextBufferChannelBinding]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeFreeContextBufferChannelBinding]:
+        """:param phContext:
         :param attribute:
         :param refHandle:
         :return:
         """
     def QuerySecurityContextToken(
         self, phContext: SafeDeleteContext, phToken: SafeCloseHandle
-    ) -> Tuple[int, SafeCloseHandle]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeCloseHandle]:
+        """:param phContext:
         :param phToken:
         :return:
         """
     def SetContextAttributes(
-        self, phContext: SafeDeleteContext, attribute: ContextAttribute, buffer: Array[int]
+        self,
+        phContext: SafeDeleteContext,
+        attribute: ContextAttribute,
+        buffer: Array[int],
     ) -> int:
-        """
-
-        :param phContext:
+        """:param phContext:
         :param attribute:
         :param buffer:
         :return:
         """
     def VerifySignature(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
@@ -16555,10 +11397,7 @@ class SSPISecureChannelType(Object, SSPIInterface):
         """"""
     @property
     def SecurityPackages(self) -> Array[SecurityPackageInfoClass]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityPackages.setter
     def SecurityPackages(self, value: Array[SecurityPackageInfoClass]) -> None: ...
     @overload
@@ -16572,9 +11411,7 @@ class SSPISecureChannelType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param inputBuffer:
         :param inFlags:
@@ -16594,9 +11431,7 @@ class SSPISecureChannelType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param inputBuffers:
         :param inFlags:
@@ -16612,10 +11447,8 @@ class SSPISecureChannelType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: AuthIdentity,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16628,10 +11461,8 @@ class SSPISecureChannelType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: SafeSspiAuthDataHandle,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16644,10 +11475,8 @@ class SSPISecureChannelType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: SecureCredential,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16660,10 +11489,8 @@ class SSPISecureChannelType(Object, SSPIInterface):
         usage: CredentialUse,
         authdata: SecureCredential2,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param authdata:
         :param outCredential:
@@ -16671,10 +11498,8 @@ class SSPISecureChannelType(Object, SSPIInterface):
         """
     def AcquireDefaultCredential(
         self, moduleName: str, usage: CredentialUse, outCredential: SafeFreeCredentials
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param moduleName:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param moduleName:
         :param usage:
         :param outCredential:
         :return:
@@ -16682,66 +11507,54 @@ class SSPISecureChannelType(Object, SSPIInterface):
     def ApplyControlToken(
         self, refContext: SafeDeleteContext, inputBuffers: Array[SecurityBuffer]
     ) -> int:
-        """
-
-        :param refContext:
+        """:param refContext:
         :param inputBuffers:
         :return:
         """
     def CompleteAuthToken(
         self, refContext: SafeDeleteContext, inputBuffers: Array[SecurityBuffer]
     ) -> int:
-        """
-
-        :param refContext:
+        """:param refContext:
         :param inputBuffers:
         :return:
         """
     def DecryptMessage(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
         """
     def EncryptMessage(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
         """
     def EnumerateSecurityPackages(
         self, pkgnum: int, pkgArray: SafeFreeContextBuffer
-    ) -> Tuple[int, int, SafeFreeContextBuffer]:
-        """
-
-        :param pkgnum:
+    ) -> tuple[int, int, SafeFreeContextBuffer]:
+        """:param pkgnum:
         :param pkgArray:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def InitializeSecurityContext(
         self,
@@ -16754,9 +11567,7 @@ class SSPISecureChannelType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param targetName:
         :param inFlags:
@@ -16778,9 +11589,7 @@ class SSPISecureChannelType(Object, SSPIInterface):
         outputBuffer: SecurityBuffer,
         outFlags: ContextFlags,
     ) -> int:
-        """
-
-        :param credential:
+        """:param credential:
         :param context:
         :param targetName:
         :param inFlags:
@@ -16791,11 +11600,12 @@ class SSPISecureChannelType(Object, SSPIInterface):
         :return:
         """
     def MakeSignature(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
@@ -16807,10 +11617,8 @@ class SSPISecureChannelType(Object, SSPIInterface):
         buffer: Array[int],
         handleType: Type,
         refHandle: SafeHandle,
-    ) -> Tuple[int, SafeHandle]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeHandle]:
+        """:param phContext:
         :param attribute:
         :param buffer:
         :param handleType:
@@ -16822,44 +11630,39 @@ class SSPISecureChannelType(Object, SSPIInterface):
         phContext: SafeDeleteContext,
         attribute: ContextAttribute,
         refHandle: SafeFreeContextBufferChannelBinding,
-    ) -> Tuple[int, SafeFreeContextBufferChannelBinding]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeFreeContextBufferChannelBinding]:
+        """:param phContext:
         :param attribute:
         :param refHandle:
         :return:
         """
     def QuerySecurityContextToken(
         self, phContext: SafeDeleteContext, phToken: SafeCloseHandle
-    ) -> Tuple[int, SafeCloseHandle]:
-        """
-
-        :param phContext:
+    ) -> tuple[int, SafeCloseHandle]:
+        """:param phContext:
         :param phToken:
         :return:
         """
     def SetContextAttributes(
-        self, phContext: SafeDeleteContext, attribute: ContextAttribute, buffer: Array[int]
+        self,
+        phContext: SafeDeleteContext,
+        attribute: ContextAttribute,
+        buffer: Array[int],
     ) -> int:
-        """
-
-        :param phContext:
+        """:param phContext:
         :param attribute:
         :param buffer:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def VerifySignature(
-        self, context: SafeDeleteContext, inputOutput: SecurityBufferDescriptor, sequenceNumber: int
+        self,
+        context: SafeDeleteContext,
+        inputOutput: SecurityBufferDescriptor,
+        sequenceNumber: int,
     ) -> int:
-        """
-
-        :param context:
+        """:param context:
         :param inputOutput:
         :param sequenceNumber:
         :return:
@@ -16871,11 +11674,13 @@ class SSPIWrapper(ABC, Object):
     @classmethod
     @overload
     def AcquireCredentialsHandle(
-        cls, SecModule: SSPIInterface, package: str, intent: CredentialUse, authdata: AuthIdentity
+        cls,
+        SecModule: SSPIInterface,
+        package: str,
+        intent: CredentialUse,
+        authdata: AuthIdentity,
     ) -> SafeFreeCredentials:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param package:
         :param intent:
         :param authdata:
@@ -16890,9 +11695,7 @@ class SSPIWrapper(ABC, Object):
         intent: CredentialUse,
         authdata: SafeSspiAuthDataHandle,
     ) -> SafeFreeCredentials:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param package:
         :param intent:
         :param authdata:
@@ -16901,11 +11704,13 @@ class SSPIWrapper(ABC, Object):
     @classmethod
     @overload
     def AcquireCredentialsHandle(
-        cls, SecModule: SSPIInterface, package: str, intent: CredentialUse, scc: SecureCredential
+        cls,
+        SecModule: SSPIInterface,
+        package: str,
+        intent: CredentialUse,
+        scc: SecureCredential,
     ) -> SafeFreeCredentials:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param package:
         :param intent:
         :param scc:
@@ -16914,11 +11719,13 @@ class SSPIWrapper(ABC, Object):
     @classmethod
     @overload
     def AcquireCredentialsHandle(
-        cls, SecModule: SSPIInterface, package: str, intent: CredentialUse, scc: SecureCredential2
+        cls,
+        SecModule: SSPIInterface,
+        package: str,
+        intent: CredentialUse,
+        scc: SecureCredential2,
     ) -> SafeFreeCredentials:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param package:
         :param intent:
         :param scc:
@@ -16928,9 +11735,7 @@ class SSPIWrapper(ABC, Object):
     def AcquireDefaultCredential(
         cls, SecModule: SSPIInterface, package: str, intent: CredentialUse
     ) -> SafeFreeCredentials:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param package:
         :param intent:
         :return:
@@ -16944,9 +11749,7 @@ class SSPIWrapper(ABC, Object):
         alertType: TlsAlertType,
         alertMessage: TlsAlertMessage,
     ) -> int:
-        """
-
-        :param secModule:
+        """:param secModule:
         :param credentialsHandle:
         :param securityContext:
         :param alertType:
@@ -16960,9 +11763,7 @@ class SSPIWrapper(ABC, Object):
         credentialsHandle: SafeFreeCredentials,
         securityContext: SafeDeleteContext,
     ) -> int:
-        """
-
-        :param secModule:
+        """:param secModule:
         :param credentialsHandle:
         :param securityContext:
         :return:
@@ -16975,9 +11776,7 @@ class SSPIWrapper(ABC, Object):
         input: Array[SecurityBuffer],
         sequenceNumber: int,
     ) -> int:
-        """
-
-        :param secModule:
+        """:param secModule:
         :param context:
         :param input:
         :param sequenceNumber:
@@ -16991,37 +11790,25 @@ class SSPIWrapper(ABC, Object):
         input: Array[SecurityBuffer],
         sequenceNumber: int,
     ) -> int:
-        """
-
-        :param secModule:
+        """:param secModule:
         :param context:
         :param input:
         :param sequenceNumber:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def ErrorDescription(cls, errorCode: int) -> str:
-        """
-
-        :param errorCode:
+        """:param errorCode:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def QueryContextAttributes(
@@ -17030,9 +11817,7 @@ class SSPIWrapper(ABC, Object):
         securityContext: SafeDeleteContext,
         contextAttribute: ContextAttribute,
     ) -> object:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param securityContext:
         :param contextAttribute:
         :return:
@@ -17045,10 +11830,8 @@ class SSPIWrapper(ABC, Object):
         securityContext: SafeDeleteContext,
         contextAttribute: ContextAttribute,
         errorCode: int,
-    ) -> Tuple[object, int]:
-        """
-
-        :param SecModule:
+    ) -> tuple[object, int]:
+        """:param SecModule:
         :param securityContext:
         :param contextAttribute:
         :param errorCode:
@@ -17061,20 +11844,19 @@ class SSPIWrapper(ABC, Object):
         securityContext: SafeDeleteContext,
         contextAttribute: ContextAttribute,
     ) -> SafeFreeContextBufferChannelBinding:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param securityContext:
         :param contextAttribute:
         :return:
         """
     @classmethod
     def QuerySecurityContextToken(
-        cls, SecModule: SSPIInterface, context: SafeDeleteContext, token: SafeCloseHandle
-    ) -> Tuple[int, SafeCloseHandle]:
-        """
-
-        :param SecModule:
+        cls,
+        SecModule: SSPIInterface,
+        context: SafeDeleteContext,
+        token: SafeCloseHandle,
+    ) -> tuple[int, SafeCloseHandle]:
+        """:param SecModule:
         :param context:
         :param token:
         :return:
@@ -17087,19 +11869,14 @@ class SSPIWrapper(ABC, Object):
         contextAttribute: ContextAttribute,
         value: object,
     ) -> int:
-        """
-
-        :param SecModule:
+        """:param SecModule:
         :param securityContext:
         :param contextAttribute:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def VerifySignature(
         cls,
@@ -17108,9 +11885,7 @@ class SSPIWrapper(ABC, Object):
         input: Array[SecurityBuffer],
         sequenceNumber: int,
     ) -> int:
-        """
-
-        :param secModule:
+        """:param secModule:
         :param context:
         :param input:
         :param sequenceNumber:
@@ -17122,684 +11897,400 @@ class SafeCertSelectCritera(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCloseHandle(CriticalHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCloseIcmpHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCloseSocket(SafeHandleMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCloseSocketAndEvent(SafeCloseSocket, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCredentialReference(CriticalHandleMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeDeleteContext(ABC, SafeHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeDeleteContext_SECURITY(SafeDeleteContext, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeAddrInfo(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeCertChain(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeCertChainList(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeCertContext(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeContextBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def QueryContextAttributes(
         cls,
@@ -17809,9 +12300,7 @@ class SafeFreeContextBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable)
         buffer: int,
         refHandle: SafeHandle,
     ) -> int:
-        """
-
-        :param dll:
+        """:param dll:
         :param phContext:
         :param contextAttribute:
         :param buffer:
@@ -17826,9 +12315,7 @@ class SafeFreeContextBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable)
         contextAttribute: ContextAttribute,
         buffer: Array[int],
     ) -> int:
-        """
-
-        :param dll:
+        """:param dll:
         :param phContext:
         :param contextAttribute:
         :param buffer:
@@ -17837,64 +12324,38 @@ class SafeFreeContextBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable)
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeContextBufferChannelBinding(ABC, ChannelBinding, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def QueryContextChannelBinding(
         cls,
@@ -17904,9 +12365,7 @@ class SafeFreeContextBufferChannelBinding(ABC, ChannelBinding, IDisposable):
         buffer: Bindings,
         refHandle: SafeFreeContextBufferChannelBinding,
     ) -> int:
-        """
-
-        :param dll:
+        """:param dll:
         :param phContext:
         :param contextAttribute:
         :param buffer:
@@ -17916,10 +12375,7 @@ class SafeFreeContextBufferChannelBinding(ABC, ChannelBinding, IDisposable):
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeContextBufferChannelBinding_SECURITY(
     SafeFreeContextBufferChannelBinding, IDisposable
@@ -17930,116 +12386,67 @@ class SafeFreeContextBufferChannelBinding_SECURITY(
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeContextBuffer_SECURITY(SafeFreeContextBuffer, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeCredential_SECURITY(SafeFreeCredentials, IDisposable):
     """"""
@@ -18048,71 +12455,42 @@ class SafeFreeCredential_SECURITY(SafeFreeCredentials, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeCredentials(ABC, SafeHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def AcquireCredentialsHandle(
@@ -18121,10 +12499,8 @@ class SafeFreeCredentials(ABC, SafeHandle, IDisposable):
         intent: CredentialUse,
         authdata: SafeSspiAuthDataHandle,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param package:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param package:
         :param intent:
         :param authdata:
         :param outCredential:
@@ -18139,10 +12515,8 @@ class SafeFreeCredentials(ABC, SafeHandle, IDisposable):
         intent: CredentialUse,
         authdata: AuthIdentity,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param dll:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param dll:
         :param package:
         :param intent:
         :param authdata:
@@ -18158,10 +12532,8 @@ class SafeFreeCredentials(ABC, SafeHandle, IDisposable):
         intent: CredentialUse,
         authdata: SecureCredential,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param dll:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param dll:
         :param package:
         :param intent:
         :param authdata:
@@ -18177,10 +12549,8 @@ class SafeFreeCredentials(ABC, SafeHandle, IDisposable):
         intent: CredentialUse,
         authdata: SecureCredential2,
         outCredential: SafeFreeCredentials,
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param dll:
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param dll:
         :param package:
         :param intent:
         :param authdata:
@@ -18189,11 +12559,13 @@ class SafeFreeCredentials(ABC, SafeHandle, IDisposable):
         """
     @classmethod
     def AcquireDefaultCredential(
-        cls, dll: SecurDll, package: str, intent: CredentialUse, outCredential: SafeFreeCredentials
-    ) -> Tuple[int, SafeFreeCredentials]:
-        """
-
-        :param dll:
+        cls,
+        dll: SecurDll,
+        package: str,
+        intent: CredentialUse,
+        outCredential: SafeFreeCredentials,
+    ) -> tuple[int, SafeFreeCredentials]:
+        """:param dll:
         :param package:
         :param intent:
         :param outCredential:
@@ -18202,97 +12574,57 @@ class SafeFreeCredentials(ABC, SafeHandle, IDisposable):
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeGlobalFree(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeInternetHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
@@ -18301,55 +12633,32 @@ class SafeInternetHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLoadLibrary(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
@@ -18361,68 +12670,41 @@ class SafeLoadLibrary(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def HasFunction(self, functionName: str) -> bool:
-        """
-
-        :param functionName:
+        """:param functionName:
         :return:
         """
     @classmethod
     def LoadLibraryEx(cls, library: str) -> SafeLoadLibrary:
-        """
-
-        :param library:
+        """:param library:
         :return:
         """
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLocalFree(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
@@ -18434,62 +12716,37 @@ class SafeLocalFree(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def LocalAlloc(cls, cb: int) -> SafeLocalFree:
-        """
-
-        :param cb:
+        """:param cb:
         :return:
         """
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeLocalFreeChannelBinding(ChannelBinding, IDisposable):
     """"""
@@ -18498,179 +12755,106 @@ class SafeLocalFreeChannelBinding(ChannelBinding, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def LocalAlloc(cls, cb: int) -> SafeLocalFreeChannelBinding:
-        """
-
-        :param cb:
+        """:param cb:
         :return:
         """
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeNativeOverlapped(SafeHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReinitializeNativeOverlapped(self) -> None:
         """"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeNclNativeMethods(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeOverlappedFree(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Alloc(cls) -> SafeOverlappedFree:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Alloc(cls, socketHandle: SafeCloseSocket) -> SafeOverlappedFree:
-        """
-
-        :param socketHandle:
+        """:param socketHandle:
         :return:
         """
     @overload
@@ -18678,102 +12862,59 @@ class SafeOverlappedFree(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
         """"""
     @overload
     def Close(self, resetOwner: bool) -> None:
-        """
-
-        :param resetOwner:
-        """
+        """:param resetOwner:"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeRegistryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeSspiAuthDataHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
@@ -18782,190 +12923,110 @@ class SafeSspiAuthDataHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeUnlockUrlCacheEntryFile(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeWebSocketHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ScatterGatherBuffers(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SchProtocols(Enum):
     """"""
@@ -19033,26 +13094,15 @@ class SecChannelBindings(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SecSizes(Object):
     """"""
@@ -19083,26 +13133,15 @@ class SecSizes(Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SecurDll(Enum):
     """"""
@@ -19185,35 +13224,22 @@ class SecureCredential(ValueType):
         protocols: SchProtocols,
         policy: EncryptionPolicy,
     ):
-        """
-
-        :param version:
+        """:param version:
         :param certificate:
         :param flags:
         :param protocols:
         :param policy:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Flags(Enum):
         """"""
@@ -19286,35 +13312,25 @@ class SecureCredential2(ValueType):
     :return: 
     """
     def __init__(
-        self, flags: SecureCredential2.Flags, protocols: SchProtocols, policy: EncryptionPolicy
+        self,
+        flags: SecureCredential2.Flags,
+        protocols: SchProtocols,
+        policy: EncryptionPolicy,
     ):
-        """
-
-        :param flags:
+        """:param flags:
         :param protocols:
         :param policy:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Flags(Enum):
         """"""
@@ -19370,54 +13386,34 @@ class SecurityBuffer(Object):
     """
     @overload
     def __init__(self, binding: ChannelBinding):
-        """
-
-        :param binding:
-        """
+        """:param binding:"""
     @overload
     def __init__(self, data: Array[int], tokentype: BufferType):
-        """
-
-        :param data:
+        """:param data:
         :param tokentype:
         """
     @overload
     def __init__(self, size: int, tokentype: BufferType):
-        """
-
-        :param size:
+        """:param size:
         :param tokentype:
         """
     @overload
     def __init__(self, data: Array[int], offset: int, size: int, tokentype: BufferType):
-        """
-
-        :param data:
+        """:param data:
         :param offset:
         :param size:
         :param tokentype:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SecurityBufferDescriptor(Object):
     """"""
@@ -19435,31 +13431,17 @@ class SecurityBufferDescriptor(Object):
     :return: 
     """
     def __init__(self, count: int):
-        """
-
-        :param count:
-        """
+        """:param count:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SecurityBufferStruct(ValueType):
     """"""
@@ -19485,76 +13467,43 @@ class SecurityBufferStruct(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SecurityPackageInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SecurityPackageInfoClass(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SecurityProtocolType(Enum):
     """"""
@@ -19659,94 +13608,58 @@ class Semaphore(WaitHandle, IDisposable):
 
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -19755,26 +13668,15 @@ class ServerCertValidationCallback(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServiceNameStore(Object):
     """"""
@@ -19783,199 +13685,117 @@ class ServiceNameStore(Object):
         """"""
     @property
     def ServiceNames(self) -> ServiceNameCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, uriPrefix: str) -> bool:
-        """
-
-        :param uriPrefix:
+        """:param uriPrefix:
         :return:
         """
     def BuildServiceNames(self, uriPrefix: str) -> Array[str]:
-        """
-
-        :param uriPrefix:
+        """:param uriPrefix:
         :return:
         """
     def BuildSimpleServiceName(self, uriPrefix: str) -> str:
-        """
-
-        :param uriPrefix:
+        """:param uriPrefix:
         :return:
         """
     def Clear(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, uriPrefix: str) -> bool:
-        """
-
-        :param uriPrefix:
+        """:param uriPrefix:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServicePoint(Object):
     """"""
 
     @property
     def Address(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BindIPEndPointDelegate(self) -> BindIPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BindIPEndPointDelegate.setter
     def BindIPEndPointDelegate(self, value: BindIPEndPoint) -> None: ...
     @property
     def Certificate(self) -> X509Certificate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ClientCertificate(self) -> X509Certificate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectionLeaseTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ConnectionLeaseTimeout.setter
     def ConnectionLeaseTimeout(self, value: int) -> None: ...
     @property
     def ConnectionLimit(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ConnectionLimit.setter
     def ConnectionLimit(self, value: int) -> None: ...
     @property
     def ConnectionName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Expect100Continue(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expect100Continue.setter
     def Expect100Continue(self, value: bool) -> None: ...
     @property
     def IdleSince(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaxIdleTime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaxIdleTime.setter
     def MaxIdleTime(self, value: int) -> None: ...
     @property
     def ProtocolVersion(self) -> Version:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceiveBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReceiveBufferSize.setter
     def ReceiveBufferSize(self, value: int) -> None: ...
     @property
     def SupportsPipelining(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UseNagleAlgorithm(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseNagleAlgorithm.setter
     def UseNagleAlgorithm(self, value: bool) -> None: ...
     def CloseConnectionGroup(self, connectionGroupName: str) -> bool:
-        """
-
-        :param connectionGroupName:
+        """:param connectionGroupName:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetTcpKeepAlive(self, enabled: bool, keepAliveTime: int, keepAliveInterval: int) -> None:
-        """
-
-        :param enabled:
+        """:param enabled:
         :param keepAliveTime:
         :param keepAliveInterval:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServicePointManager(Object):
     """"""
@@ -19993,117 +13813,81 @@ class ServicePointManager(Object):
     @classmethod
     @property
     def CertificatePolicy(cls) -> ICertificatePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @CertificatePolicy.setter
     def CertificatePolicy(cls, value: ICertificatePolicy) -> None: ...
     @classmethod
     @property
     def CheckCertificateRevocationList(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @CheckCertificateRevocationList.setter
     def CheckCertificateRevocationList(cls, value: bool) -> None: ...
     @classmethod
     @property
     def DefaultConnectionLimit(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultConnectionLimit.setter
     def DefaultConnectionLimit(cls, value: int) -> None: ...
     @classmethod
     @property
     def DnsRefreshTimeout(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DnsRefreshTimeout.setter
     def DnsRefreshTimeout(cls, value: int) -> None: ...
     @classmethod
     @property
     def EnableDnsRoundRobin(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @EnableDnsRoundRobin.setter
     def EnableDnsRoundRobin(cls, value: bool) -> None: ...
     @classmethod
     @property
     def EncryptionPolicy(cls) -> EncryptionPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Expect100Continue(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @Expect100Continue.setter
     def Expect100Continue(cls, value: bool) -> None: ...
     @classmethod
     @property
     def MaxServicePointIdleTime(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @MaxServicePointIdleTime.setter
     def MaxServicePointIdleTime(cls, value: int) -> None: ...
     @classmethod
     @property
     def MaxServicePoints(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @MaxServicePoints.setter
     def MaxServicePoints(cls, value: int) -> None: ...
     @classmethod
     @property
     def ReusePort(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @ReusePort.setter
     def ReusePort(cls, value: bool) -> None: ...
     @classmethod
     @property
     def SecurityProtocol(cls) -> SecurityProtocolType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @SecurityProtocol.setter
     def SecurityProtocol(cls, value: SecurityProtocolType) -> None: ...
     @classmethod
     @property
     def ServerCertificateValidationCallback(cls) -> RemoteCertificateValidationCallback:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @ServerCertificateValidationCallback.setter
     def ServerCertificateValidationCallback(
@@ -20112,161 +13896,99 @@ class ServicePointManager(Object):
     @classmethod
     @property
     def UseNagleAlgorithm(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @UseNagleAlgorithm.setter
     def UseNagleAlgorithm(cls, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def FindServicePoint(cls, address: Uri) -> ServicePoint:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def FindServicePoint(cls, uriString: str, proxy: IWebProxy) -> ServicePoint:
-        """
-
-        :param uriString:
+        """:param uriString:
         :param proxy:
         :return:
         """
     @classmethod
     @overload
     def FindServicePoint(cls, address: Uri, proxy: IWebProxy) -> ServicePoint:
-        """
-
-        :param address:
+        """:param address:
         :param proxy:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def SetTcpKeepAlive(cls, enabled: bool, keepAliveTime: int, keepAliveInterval: int) -> None:
-        """
-
-        :param enabled:
+        """:param enabled:
         :param keepAliveTime:
         :param keepAliveInterval:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ShellExpression(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketAddress(Object):
     """"""
 
     @overload
     def __init__(self, family: AddressFamily):
-        """
-
-        :param family:
-        """
+        """:param family:"""
     @overload
     def __init__(self, family: AddressFamily, size: int):
-        """
-
-        :param family:
+        """:param family:
         :param size:
         """
     @property
     def Family(self) -> AddressFamily:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: int) -> None: ...
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, offset: int) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :return:
         """
     def __setitem__(self, offset: int, value: int) -> None:
-        """
-
-        :param offset:
+        """:param offset:
         :param value:
         """
 
@@ -20285,7 +14007,11 @@ class SocketConstructorFlags(Enum):
     """"""
 
 class SocketPermission(
-    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+    CodeAccessPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
 ):
     """"""
 
@@ -20296,39 +14022,34 @@ class SocketPermission(
     """
     @overload
     def __init__(self, state: PermissionState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @overload
     def __init__(
-        self, access: NetworkAccess, transport: TransportType, hostName: str, portNumber: int
+        self,
+        access: NetworkAccess,
+        transport: TransportType,
+        hostName: str,
+        portNumber: int,
     ):
-        """
-
-        :param access:
+        """:param access:
         :param transport:
         :param hostName:
         :param portNumber:
         """
     @property
     def AcceptList(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectList(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddPermission(
-        self, access: NetworkAccess, transport: TransportType, hostName: str, portNumber: int
+        self,
+        access: NetworkAccess,
+        transport: TransportType,
+        hostName: str,
+        portNumber: int,
     ) -> None:
-        """
-
-        :param access:
+        """:param access:
         :param transport:
         :param hostName:
         :param portNumber:
@@ -20336,10 +14057,7 @@ class SocketPermission(
     def Assert(self) -> None:
         """"""
     def Copy(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Demand(self) -> None:
         """"""
@@ -20349,59 +14067,33 @@ class SocketPermission(
     def Deny(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FromXml(self, e: SecurityElement) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Intersect(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsSubsetOf(self, target: IPermission) -> bool:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsUnrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PermitOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> SecurityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Union(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
 
@@ -20409,108 +14101,66 @@ class SocketPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
 
     def __init__(self, action: SecurityAction):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @property
     def Access(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Access.setter
     def Access(self, value: str) -> None: ...
     @property
     def Action(self) -> SecurityAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
     def Host(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Host.setter
     def Host(self, value: str) -> None: ...
     @property
     def Port(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Port.setter
     def Port(self, value: str) -> None: ...
     @property
     def Transport(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Transport.setter
     def Transport(self, value: str) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Unrestricted.setter
     def Unrestricted(self, value: bool) -> None: ...
     def CreatePermission(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -20522,9 +14172,7 @@ class SocketPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -20534,160 +14182,91 @@ class SocketPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SplitWritesState(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SpnDictionary(StringDictionary, IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: str) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: str, value: str) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def ContainsKey(self, key: str) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsValue(self, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: str) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: str) -> str:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: str, value: str) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -20695,26 +14274,15 @@ class SpnToken(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SslConnectionInfo(Object):
     """"""
@@ -20755,62 +14323,35 @@ class SslConnectionInfo(Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SslStreamContext(TransportContext):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetChannelBinding(self, kind: ChannelBindingKind) -> ChannelBinding:
-        """
-
-        :param kind:
+        """:param kind:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTlsTokenBindings(self) -> IEnumerable[TokenBinding]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StaticProxy(ProxyChain, IEnumerable[Uri], IEnumerable, IDisposable):
     """"""
@@ -20818,129 +14359,71 @@ class StaticProxy(ProxyChain, IEnumerable[Uri], IEnumerable, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Uri]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StreamFramer(Object):
     """"""
 
     def __init__(self, Transport: Stream):
-        """
-
-        :param Transport:
-        """
+        """:param Transport:"""
     @property
     def ReadHeader(self) -> FrameHeader:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Transport(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriteHeader(self) -> FrameHeader:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginReadMessage(self, asyncCallback: AsyncCallback, stateObject: object) -> IAsyncResult:
-        """
-
-        :param asyncCallback:
+        """:param asyncCallback:
         :param stateObject:
         :return:
         """
     def BeginWriteMessage(
         self, message: Array[int], asyncCallback: AsyncCallback, stateObject: object
     ) -> IAsyncResult:
-        """
-
-        :param message:
+        """:param message:
         :param asyncCallback:
         :param stateObject:
         :return:
         """
     def EndReadMessage(self, asyncResult: IAsyncResult) -> Array[int]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWriteMessage(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadMessage(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteMessage(self, message: Array[int]) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
 
 class StreamSizes(Object):
     """"""
@@ -20976,98 +14459,63 @@ class StreamSizes(Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SyncMemoryStream(MemoryStream, IRequestLifetimeTracker, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -21075,11 +14523,14 @@ class SyncMemoryStream(MemoryStream, IRequestLifetimeTracker, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -21090,29 +14541,20 @@ class SyncMemoryStream(MemoryStream, IRequestLifetimeTracker, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -21120,183 +14562,123 @@ class SyncMemoryStream(MemoryStream, IRequestLifetimeTracker, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetBuffer(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToArray(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
-        """
-
-        :param requestStartTimestamp:
-        """
-    def TryGetBuffer(self, buffer: ArraySegment[int]) -> Tuple[bool, ArraySegment[int]]:
-        """
-
-        :param buffer:
+        """:param requestStartTimestamp:"""
+    def TryGetBuffer(self, buffer: ArraySegment[int]) -> tuple[bool, ArraySegment[int]]:
+        """:param buffer:
         :return:
         """
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def WriteTo(self, stream: Stream) -> None:
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
 
 class SyncRequestContext(RequestContextBase, IDisposable):
     """"""
@@ -21306,100 +14688,62 @@ class SyncRequestContext(RequestContextBase, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemNetworkCredential(NetworkCredential, ICredentials, ICredentialsByHost):
     """"""
 
     @property
     def Domain(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Domain.setter
     def Domain(self, value: str) -> None: ...
     @property
     def Password(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Password.setter
     def Password(self, value: str) -> None: ...
     @property
     def SecurePassword(self) -> SecureString:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurePassword.setter
     def SecurePassword(self, value: SecureString) -> None: ...
     @property
     def UserName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UserName.setter
     def UserName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCredential(self, uri: Uri, authType: str) -> NetworkCredential:
-        """
-
-        :param uri:
+        """:param uri:
         :param authType:
         :return:
         """
     @overload
     def GetCredential(self, host: str, port: int, authenticationType: str) -> NetworkCredential:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param authenticationType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadKinds(Enum):
     """"""
@@ -21441,26 +14785,15 @@ class TimeoutValidator(ConfigurationValidatorBase):
     def CanValidate(self, type: Type) -> bool:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Validate(self, value: object) -> None:
         """"""
 
@@ -21468,26 +14801,15 @@ class TimerThread(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TlsParamaters(ValueType):
     """"""
@@ -21523,31 +14845,17 @@ class TlsParamaters(ValueType):
     :return: 
     """
     def __init__(self, protocols: SchProtocols):
-        """
-
-        :param protocols:
-        """
+        """:param protocols:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Flags(Enum):
         """"""
@@ -21571,9 +14879,7 @@ class TlsStream(NetworkStream, IDisposable):
         initiatingRequest: object,
         executionContext: ExecutionContext,
     ):
-        """
-
-        :param destinationHost:
+        """:param destinationHost:
         :param networkStream:
         :param checkCertificateRevocationList:
         :param sslProtocols:
@@ -21584,76 +14890,49 @@ class TlsStream(NetworkStream, IDisposable):
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ClientCertificate(self) -> X509Certificate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DataAvailable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -21661,11 +14940,14 @@ class TlsStream(NetworkStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -21677,35 +14959,23 @@ class TlsStream(NetworkStream, IDisposable):
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -21713,271 +14983,175 @@ class TlsStream(NetworkStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class TrackingStringDictionary(StringDictionary, IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: str) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: str, value: str) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def ContainsKey(self, key: str) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsValue(self, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: str) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: str) -> str:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: str, value: str) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -21986,114 +15160,64 @@ class TrackingValidationObjectDictionary(StringDictionary, IEnumerable):
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: str) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: str, value: str) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def ContainsKey(self, key: str) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsValue(self, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: str) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: str) -> str:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: str, value: str) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -22103,62 +15227,35 @@ class TransmitFileBuffers(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TransportContext(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetChannelBinding(self, kind: ChannelBindingKind) -> ChannelBinding:
-        """
-
-        :param kind:
+        """:param kind:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTlsTokenBindings(self) -> IEnumerable[TokenBinding]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TransportType(Enum):
     """"""
@@ -22188,26 +15285,15 @@ class TunnelStateObject(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UnlockConnectionDelegate: Callable[[], None] = ...
 """"""
@@ -22218,85 +15304,49 @@ class UnsafeNclNativeMethods(ABC, Object):
     @classmethod
     def CoCreateInstance(
         cls, clsid: Guid, pUnkOuter: IntPtr, context: int, iid: Guid, o: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param clsid:
+    ) -> tuple[None, object]:
+        """:param clsid:
         :param pUnkOuter:
         :param context:
         :param iid:
         :param o:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UploadDataCompletedEventArgs(AsyncCompletedEventArgs):
     """"""
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UploadDataCompletedEventHandler: Callable[[object, UploadDataCompletedEventArgs], None] = ...
 """
@@ -22310,49 +15360,26 @@ class UploadFileCompletedEventArgs(AsyncCompletedEventArgs):
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UploadFileCompletedEventHandler: Callable[[object, UploadFileCompletedEventArgs], None] = ...
 """
@@ -22366,61 +15393,32 @@ class UploadProgressChangedEventArgs(ProgressChangedEventArgs):
 
     @property
     def BytesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BytesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProgressPercentage(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TotalBytesToReceive(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TotalBytesToSend(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UploadProgressChangedEventHandler: Callable[[object, UploadProgressChangedEventArgs], None] = ...
 """
@@ -22434,49 +15432,26 @@ class UploadStringCompletedEventArgs(AsyncCompletedEventArgs):
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UploadStringCompletedEventHandler: Callable[[object, UploadStringCompletedEventArgs], None] = ...
 """
@@ -22490,49 +15465,26 @@ class UploadValuesCompletedEventArgs(AsyncCompletedEventArgs):
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UploadValuesCompletedEventHandler: Callable[[object, UploadValuesCompletedEventArgs], None] = ...
 """
@@ -22550,91 +15502,62 @@ class ValidationHelper(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def ExceptionMessage(cls, exception: Exception) -> str:
-        """
-
-        :param exception:
+        """:param exception:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def HashString(cls, objectValue: object) -> str:
-        """
-
-        :param objectValue:
+        """:param objectValue:
         :return:
         """
     @classmethod
     def IsBlankString(cls, stringValue: str) -> bool:
-        """
-
-        :param stringValue:
+        """:param stringValue:
         :return:
         """
     @classmethod
     def IsInvalidHttpString(cls, stringValue: str) -> bool:
-        """
-
-        :param stringValue:
+        """:param stringValue:
         :return:
         """
     @classmethod
     def MakeEmptyArrayNull(cls, stringArray: Array[str]) -> Array[str]:
-        """
-
-        :param stringArray:
+        """:param stringArray:
         :return:
         """
     @classmethod
     def MakeStringNull(cls, stringValue: str) -> str:
-        """
-
-        :param stringValue:
+        """:param stringValue:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def ToString(cls, objectValue: object) -> str:
-        """
-
-        :param objectValue:
+        """:param objectValue:
         :return:
         """
     @classmethod
     def ValidateRange(cls, actual: int, fromAllowed: int, toAllowed: int) -> bool:
-        """
-
-        :param actual:
+        """:param actual:
         :param fromAllowed:
         :param toAllowed:
         :return:
         """
     @classmethod
     def ValidateTcpPort(cls, port: int) -> bool:
-        """
-
-        :param port:
+        """:param port:
         :return:
         """
 
@@ -22642,51 +15565,29 @@ class WSABuffer(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WSAData(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebClient(Component, IComponent, IDisposable):
     """"""
@@ -22695,446 +15596,299 @@ class WebClient(Component, IComponent, IDisposable):
         """"""
     @property
     def AllowReadStreamBuffering(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AllowReadStreamBuffering.setter
     def AllowReadStreamBuffering(self, value: bool) -> None: ...
     @property
     def AllowWriteStreamBuffering(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AllowWriteStreamBuffering.setter
     def AllowWriteStreamBuffering(self, value: bool) -> None: ...
     @property
     def BaseAddress(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BaseAddress.setter
     def BaseAddress(self, value: str) -> None: ...
     @property
     def CachePolicy(self) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CachePolicy.setter
     def CachePolicy(self, value: RequestCachePolicy) -> None: ...
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     @property
     def Encoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Encoding.setter
     def Encoding(self, value: Encoding) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Headers.setter
     def Headers(self, value: WebHeaderCollection) -> None: ...
     @property
     def IsBusy(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Proxy(self) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Proxy.setter
     def Proxy(self, value: IWebProxy) -> None: ...
     @property
     def QueryString(self) -> NameValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @QueryString.setter
     def QueryString(self, value: NameValueCollection) -> None: ...
     @property
     def ResponseHeaders(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     def CancelAsync(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     @overload
     def DownloadData(self, address: str) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def DownloadData(self, address: Uri) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def DownloadDataAsync(self, address: Uri) -> None:
-        """
-
-        :param address:
-        """
+        """:param address:"""
     @overload
     def DownloadDataAsync(self, address: Uri, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param userToken:
         """
     @overload
     def DownloadDataTaskAsync(self, address: str) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def DownloadDataTaskAsync(self, address: Uri) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def DownloadFile(self, address: str, fileName: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         """
     @overload
     def DownloadFile(self, address: Uri, fileName: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         """
     @overload
     def DownloadFileAsync(self, address: Uri, fileName: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         """
     @overload
     def DownloadFileAsync(self, address: Uri, fileName: str, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         :param userToken:
         """
     @overload
     def DownloadFileTaskAsync(self, address: str, fileName: str) -> Task:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         :return:
         """
     @overload
     def DownloadFileTaskAsync(self, address: Uri, fileName: str) -> Task:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         :return:
         """
     @overload
     def DownloadString(self, address: str) -> str:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def DownloadString(self, address: Uri) -> str:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def DownloadStringAsync(self, address: Uri) -> None:
-        """
-
-        :param address:
-        """
+        """:param address:"""
     @overload
     def DownloadStringAsync(self, address: Uri, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param userToken:
         """
     @overload
     def DownloadStringTaskAsync(self, address: str) -> Task[str]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def DownloadStringTaskAsync(self, address: Uri) -> Task[str]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def OpenRead(self, address: str) -> Stream:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenRead(self, address: Uri) -> Stream:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenReadAsync(self, address: Uri) -> None:
-        """
-
-        :param address:
-        """
+        """:param address:"""
     @overload
     def OpenReadAsync(self, address: Uri, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param userToken:
         """
     @overload
     def OpenReadTaskAsync(self, address: str) -> Task[Stream]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenReadTaskAsync(self, address: Uri) -> Task[Stream]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenWrite(self, address: str) -> Stream:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenWrite(self, address: Uri) -> Stream:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenWrite(self, address: str, method: str) -> Stream:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :return:
         """
     @overload
     def OpenWrite(self, address: Uri, method: str) -> Stream:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :return:
         """
     @overload
     def OpenWriteAsync(self, address: Uri) -> None:
-        """
-
-        :param address:
-        """
+        """:param address:"""
     @overload
     def OpenWriteAsync(self, address: Uri, method: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         """
     @overload
     def OpenWriteAsync(self, address: Uri, method: str, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param userToken:
         """
     @overload
     def OpenWriteTaskAsync(self, address: str) -> Task[Stream]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenWriteTaskAsync(self, address: Uri) -> Task[Stream]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def OpenWriteTaskAsync(self, address: str, method: str) -> Task[Stream]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :return:
         """
     @overload
     def OpenWriteTaskAsync(self, address: Uri, method: str) -> Task[Stream]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def UploadData(self, address: str, data: Array[int]) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadData(self, address: Uri, data: Array[int]) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadData(self, address: str, method: str, data: Array[int]) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadData(self, address: Uri, method: str, data: Array[int]) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadDataAsync(self, address: Uri, data: Array[int]) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         """
     @overload
     def UploadDataAsync(self, address: Uri, method: str, data: Array[int]) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         """
@@ -23142,277 +15896,211 @@ class WebClient(Component, IComponent, IDisposable):
     def UploadDataAsync(
         self, address: Uri, method: str, data: Array[int], userToken: object
     ) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :param userToken:
         """
     @overload
     def UploadDataTaskAsync(self, address: str, data: Array[int]) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadDataTaskAsync(self, address: Uri, data: Array[int]) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadDataTaskAsync(self, address: str, method: str, data: Array[int]) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadDataTaskAsync(self, address: Uri, method: str, data: Array[int]) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadFile(self, address: str, fileName: str) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         :return:
         """
     @overload
     def UploadFile(self, address: Uri, fileName: str) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         :return:
         """
     @overload
     def UploadFile(self, address: str, method: str, fileName: str) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param fileName:
         :return:
         """
     @overload
     def UploadFile(self, address: Uri, method: str, fileName: str) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param fileName:
         :return:
         """
     @overload
     def UploadFileAsync(self, address: Uri, fileName: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         """
     @overload
     def UploadFileAsync(self, address: Uri, method: str, fileName: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param fileName:
         """
     @overload
     def UploadFileAsync(self, address: Uri, method: str, fileName: str, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param fileName:
         :param userToken:
         """
     @overload
     def UploadFileTaskAsync(self, address: str, fileName: str) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         :return:
         """
     @overload
     def UploadFileTaskAsync(self, address: Uri, fileName: str) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param fileName:
         :return:
         """
     @overload
     def UploadFileTaskAsync(self, address: str, method: str, fileName: str) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param fileName:
         :return:
         """
     @overload
     def UploadFileTaskAsync(self, address: Uri, method: str, fileName: str) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param fileName:
         :return:
         """
     @overload
     def UploadString(self, address: str, data: str) -> str:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadString(self, address: Uri, data: str) -> str:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadString(self, address: str, method: str, data: str) -> str:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadString(self, address: Uri, method: str, data: str) -> str:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadStringAsync(self, address: Uri, data: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         """
     @overload
     def UploadStringAsync(self, address: Uri, method: str, data: str) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         """
     @overload
     def UploadStringAsync(self, address: Uri, method: str, data: str, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :param userToken:
         """
     @overload
     def UploadStringTaskAsync(self, address: str, data: str) -> Task[str]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadStringTaskAsync(self, address: Uri, data: str) -> Task[str]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadStringTaskAsync(self, address: str, method: str, data: str) -> Task[str]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadStringTaskAsync(self, address: Uri, method: str, data: str) -> Task[str]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadValues(self, address: str, data: NameValueCollection) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadValues(self, address: Uri, data: NameValueCollection) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadValues(self, address: str, method: str, data: NameValueCollection) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadValues(self, address: Uri, method: str, data: NameValueCollection) -> Array[int]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
         """
     @overload
     def UploadValuesAsync(self, address: Uri, data: NameValueCollection) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         """
     @overload
     def UploadValuesAsync(self, address: Uri, method: str, data: NameValueCollection) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         """
@@ -23420,26 +16108,20 @@ class WebClient(Component, IComponent, IDisposable):
     def UploadValuesAsync(
         self, address: Uri, method: str, data: NameValueCollection, userToken: object
     ) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :param userToken:
         """
     @overload
     def UploadValuesTaskAsync(self, address: str, data: NameValueCollection) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
     @overload
     def UploadValuesTaskAsync(self, address: Uri, data: NameValueCollection) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param data:
         :return:
         """
@@ -23447,9 +16129,7 @@ class WebClient(Component, IComponent, IDisposable):
     def UploadValuesTaskAsync(
         self, address: str, method: str, data: NameValueCollection
     ) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
@@ -23458,9 +16138,7 @@ class WebClient(Component, IComponent, IDisposable):
     def UploadValuesTaskAsync(
         self, address: Uri, method: str, data: NameValueCollection
     ) -> Task[Array[int]]:
-        """
-
-        :param address:
+        """:param address:
         :param method:
         :param data:
         :return:
@@ -23500,22 +16178,15 @@ class WebException(InvalidOperationException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, status: WebExceptionStatus):
-        """
-
-        :param message:
+        """:param message:
         :param status:
         """
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @overload
@@ -23526,146 +16197,85 @@ class WebException(InvalidOperationException, _Exception, ISerializable):
         status: WebExceptionStatus,
         response: WebResponse,
     ):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         :param status:
         :param response:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Response(self) -> WebResponse:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> WebExceptionStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebExceptionInternalStatus(Enum):
     """"""
@@ -23683,26 +16293,15 @@ class WebExceptionMapping(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebExceptionStatus(Enum):
     """"""
@@ -23751,7 +16350,11 @@ class WebExceptionStatus(Enum):
     """"""
 
 class WebHeaderCollection(
-    NameValueCollection, ICollection, IEnumerable, IDeserializationCallback, ISerializable
+    NameValueCollection,
+    ICollection,
+    IEnumerable,
+    IDeserializationCallback,
+    ISerializable,
 ):
     """"""
 
@@ -23759,283 +16362,175 @@ class WebHeaderCollection(
         """"""
     @property
     def AllKeys(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: str) -> None: ...
     @property
     def Keys(self) -> NameObjectCollectionBase.KeysCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, c: NameValueCollection) -> None:
-        """
-
-        :param c:
-        """
+        """:param c:"""
     @overload
     def Add(self, header: str) -> None:
-        """
-
-        :param header:
-        """
+        """:param header:"""
     @overload
     def Add(self, header: HttpRequestHeader, value: str) -> None:
-        """
-
-        :param header:
+        """:param header:
         :param value:
         """
     @overload
     def Add(self, header: HttpResponseHeader, value: str) -> None:
-        """
-
-        :param header:
+        """:param header:
         :param value:
         """
     @overload
     def Add(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Get(self, index: int) -> str:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def Get(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKey(self, index: int) -> str:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetValues(self, index: int) -> Array[str]:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def GetValues(self, name: str) -> Array[str]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def HasKeys(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def IsRestricted(cls, headerName: str) -> bool:
-        """
-
-        :param headerName:
+        """:param headerName:
         :return:
         """
     @classmethod
     @overload
     def IsRestricted(cls, headerName: str, response: bool) -> bool:
-        """
-
-        :param headerName:
+        """:param headerName:
         :param response:
         :return:
         """
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     @overload
     def Remove(self, header: HttpRequestHeader) -> None:
-        """
-
-        :param header:
-        """
+        """:param header:"""
     @overload
     def Remove(self, header: HttpResponseHeader) -> None:
-        """
-
-        :param header:
-        """
+        """:param header:"""
     @overload
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def Set(self, header: HttpRequestHeader, value: str) -> None:
-        """
-
-        :param header:
+        """:param header:
         :param value:
         """
     @overload
     def Set(self, header: HttpResponseHeader, value: str) -> None:
-        """
-
-        :param header:
+        """:param header:
         :param value:
         """
     @overload
     def Set(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     def ToByteArray(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, header: HttpRequestHeader) -> str:
-        """
-
-        :param header:
+        """:param header:
         :return:
         """
     @overload
     def __getitem__(self, header: HttpResponseHeader) -> str:
-        """
-
-        :param header:
+        """:param header:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> str:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, header: HttpRequestHeader, value: str) -> None:
-        """
-
-        :param header:
+        """:param header:
         :param value:
         """
     @overload
     def __setitem__(self, header: HttpResponseHeader, value: str) -> None:
-        """
-
-        :param header:
+        """:param header:
         :param value:
         """
     @overload
     def __setitem__(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
 
@@ -24079,26 +16574,15 @@ class WebParseError(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebParseErrorCode(Enum):
     """"""
@@ -24131,7 +16615,11 @@ class WebParseErrorSection(Enum):
     """"""
 
 class WebPermission(
-    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+    CodeAccessPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
 ):
     """"""
 
@@ -24140,57 +16628,37 @@ class WebPermission(
         """"""
     @overload
     def __init__(self, state: PermissionState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @overload
     def __init__(self, access: NetworkAccess, uriRegex: Regex):
-        """
-
-        :param access:
+        """:param access:
         :param uriRegex:
         """
     @overload
     def __init__(self, access: NetworkAccess, uriString: str):
-        """
-
-        :param access:
+        """:param access:
         :param uriString:
         """
     @property
     def AcceptList(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectList(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AddPermission(self, access: NetworkAccess, uriRegex: Regex) -> None:
-        """
-
-        :param access:
+        """:param access:
         :param uriRegex:
         """
     @overload
     def AddPermission(self, access: NetworkAccess, uriString: str) -> None:
-        """
-
-        :param access:
+        """:param access:
         :param uriString:
         """
     def Assert(self) -> None:
         """"""
     def Copy(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Demand(self) -> None:
         """"""
@@ -24200,59 +16668,33 @@ class WebPermission(
     def Deny(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FromXml(self, e: SecurityElement) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Intersect(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsSubsetOf(self, target: IPermission) -> bool:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsUnrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PermitOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> SecurityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Union(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
 
@@ -24260,108 +16702,66 @@ class WebPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
 
     def __init__(self, action: SecurityAction):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @property
     def Accept(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Accept.setter
     def Accept(self, value: str) -> None: ...
     @property
     def AcceptPattern(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AcceptPattern.setter
     def AcceptPattern(self, value: str) -> None: ...
     @property
     def Action(self) -> SecurityAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
     def Connect(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Connect.setter
     def Connect(self, value: str) -> None: ...
     @property
     def ConnectPattern(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ConnectPattern.setter
     def ConnectPattern(self, value: str) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Unrestricted.setter
     def Unrestricted(self, value: bool) -> None: ...
     def CreatePermission(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -24373,9 +16773,7 @@ class WebPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -24385,21 +16783,13 @@ class WebPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebProxy(Object, IAutoWebProxy, IWebProxy, ISerializable):
     """"""
@@ -24409,172 +16799,120 @@ class WebProxy(Object, IAutoWebProxy, IWebProxy, ISerializable):
         """"""
     @overload
     def __init__(self, Address: str):
-        """
-
-        :param Address:
-        """
+        """:param Address:"""
     @overload
     def __init__(self, Address: Uri):
-        """
-
-        :param Address:
-        """
+        """:param Address:"""
     @overload
     def __init__(self, Address: str, BypassOnLocal: bool):
-        """
-
-        :param Address:
+        """:param Address:
         :param BypassOnLocal:
         """
     @overload
     def __init__(self, Host: str, Port: int):
-        """
-
-        :param Host:
+        """:param Host:
         :param Port:
         """
     @overload
     def __init__(self, Address: Uri, BypassOnLocal: bool):
-        """
-
-        :param Address:
+        """:param Address:
         :param BypassOnLocal:
         """
     @overload
     def __init__(self, Address: str, BypassOnLocal: bool, BypassList: Array[str]):
-        """
-
-        :param Address:
+        """:param Address:
         :param BypassOnLocal:
         :param BypassList:
         """
     @overload
     def __init__(self, Address: Uri, BypassOnLocal: bool, BypassList: Array[str]):
-        """
-
-        :param Address:
+        """:param Address:
         :param BypassOnLocal:
         :param BypassList:
         """
     @overload
     def __init__(
-        self, Address: str, BypassOnLocal: bool, BypassList: Array[str], Credentials: ICredentials
+        self,
+        Address: str,
+        BypassOnLocal: bool,
+        BypassList: Array[str],
+        Credentials: ICredentials,
     ):
-        """
-
-        :param Address:
+        """:param Address:
         :param BypassOnLocal:
         :param BypassList:
         :param Credentials:
         """
     @overload
     def __init__(
-        self, Address: Uri, BypassOnLocal: bool, BypassList: Array[str], Credentials: ICredentials
+        self,
+        Address: Uri,
+        BypassOnLocal: bool,
+        BypassList: Array[str],
+        Credentials: ICredentials,
     ):
-        """
-
-        :param Address:
+        """:param Address:
         :param BypassOnLocal:
         :param BypassList:
         :param Credentials:
         """
     @property
     def Address(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Address.setter
     def Address(self, value: Uri) -> None: ...
     @property
     def BypassArrayList(self) -> ArrayList:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BypassList(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BypassList.setter
     def BypassList(self, value: Array[str]) -> None: ...
     @property
     def BypassProxyOnLocal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BypassProxyOnLocal.setter
     def BypassProxyOnLocal(self, value: bool) -> None: ...
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetDefaultProxy(cls) -> WebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetProxies(self, destination: Uri) -> ProxyChain:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     def GetProxy(self, destination: Uri) -> Uri:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsBypassed(self, host: Uri) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebProxyData(Object):
     """"""
@@ -24582,56 +16920,31 @@ class WebProxyData(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebProxyDataBuilder(ABC, Object):
     """"""
 
     def Build(self) -> WebProxyData:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebProxyScriptHelper(Object, IReflect):
     """"""
@@ -24640,52 +16953,34 @@ class WebProxyScriptHelper(Object, IReflect):
         """"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -24698,9 +16993,7 @@ class WebProxyScriptHelper(Object, IReflect):
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -24708,22 +17001,16 @@ class WebProxyScriptHelper(Object, IReflect):
         :return:
         """
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -24737,9 +17024,7 @@ class WebProxyScriptHelper(Object, IReflect):
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -24748,10 +17033,7 @@ class WebProxyScriptHelper(Object, IReflect):
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InvokeMember(
         self,
         name: str,
@@ -24763,9 +17045,7 @@ class WebProxyScriptHelper(Object, IReflect):
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -24776,107 +17056,69 @@ class WebProxyScriptHelper(Object, IReflect):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def dnsDomainIs(self, host: str, domain: str) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :param domain:
         :return:
         """
     def dnsDomainLevels(self, host: str) -> int:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     def dnsResolve(self, host: str) -> str:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     def dnsResolveEx(self, host: str) -> str:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     def getClientVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def isInNet(self, host: str, pattern: str, mask: str) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :param pattern:
         :param mask:
         :return:
         """
     def isInNetEx(self, ipAddress: str, ipPrefix: str) -> bool:
-        """
-
-        :param ipAddress:
+        """:param ipAddress:
         :param ipPrefix:
         :return:
         """
     def isPlainHostName(self, hostName: str) -> bool:
-        """
-
-        :param hostName:
+        """:param hostName:
         :return:
         """
     def isResolvable(self, host: str) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     def isResolvableEx(self, host: str) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :return:
         """
     def localHostOrDomainIs(self, host: str, hostDom: str) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :param hostDom:
         :return:
         """
     def myIpAddress(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def myIpAddressEx(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def shExpMatch(self, host: str, pattern: str) -> bool:
-        """
-
-        :param host:
+        """:param host:
         :param pattern:
         :return:
         """
     def sortIpAddressList(self, IPAddressList: str) -> str:
-        """
-
-        :param IPAddressList:
+        """:param IPAddressList:
         :return:
         """
     def weekdayRange(self, wd1: str, wd2: object, gmt: object) -> bool:
-        """
-
-        :param wd1:
+        """:param wd1:
         :param wd2:
         :param gmt:
         :return:
@@ -24887,315 +17129,194 @@ class WebRequest(ABC, MarshalByRefObject, ISerializable):
 
     @property
     def AuthenticationLevel(self) -> AuthenticationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AuthenticationLevel.setter
     def AuthenticationLevel(self, value: AuthenticationLevel) -> None: ...
     @property
     def CachePolicy(self) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CachePolicy.setter
     def CachePolicy(self, value: RequestCachePolicy) -> None: ...
     @property
     def ConnectionGroupName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ConnectionGroupName.setter
     def ConnectionGroupName(self, value: str) -> None: ...
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def CreatorInstance(self) -> IWebRequestCreate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     @classmethod
     @property
     def DefaultCachePolicy(cls) -> RequestCachePolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultCachePolicy.setter
     def DefaultCachePolicy(cls, value: RequestCachePolicy) -> None: ...
     @classmethod
     @property
     def DefaultWebProxy(cls) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @DefaultWebProxy.setter
     def DefaultWebProxy(cls, value: IWebProxy) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Headers.setter
     def Headers(self, value: WebHeaderCollection) -> None: ...
     @property
     def ImpersonationLevel(self) -> TokenImpersonationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ImpersonationLevel.setter
     def ImpersonationLevel(self, value: TokenImpersonationLevel) -> None: ...
     @property
     def Method(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Method.setter
     def Method(self, value: str) -> None: ...
     @property
     def PreAuthenticate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PreAuthenticate.setter
     def PreAuthenticate(self, value: bool) -> None: ...
     @property
     def Proxy(self) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Proxy.setter
     def Proxy(self, value: IWebProxy) -> None: ...
     @property
     def RequestUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Timeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Timeout.setter
     def Timeout(self, value: int) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     def Abort(self) -> None:
         """"""
     def BeginGetRequestStream(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def BeginGetResponse(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     @classmethod
     @overload
     def Create(cls, requestUriString: str) -> WebRequest:
-        """
-
-        :param requestUriString:
+        """:param requestUriString:
         :return:
         """
     @classmethod
     @overload
     def Create(cls, requestUri: Uri) -> WebRequest:
-        """
-
-        :param requestUri:
+        """:param requestUri:
         :return:
         """
     @classmethod
     def CreateDefault(cls, requestUri: Uri) -> WebRequest:
-        """
-
-        :param requestUri:
+        """:param requestUri:
         :return:
         """
     @classmethod
     @overload
     def CreateHttp(cls, requestUriString: str) -> HttpWebRequest:
-        """
-
-        :param requestUriString:
+        """:param requestUriString:
         :return:
         """
     @classmethod
     @overload
     def CreateHttp(cls, requestUri: Uri) -> HttpWebRequest:
-        """
-
-        :param requestUri:
+        """:param requestUri:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def EndGetRequestStream(self, asyncResult: IAsyncResult) -> Stream:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndGetResponse(self, asyncResult: IAsyncResult) -> WebResponse:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetRequestStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRequestStreamAsync(self) -> Task[Stream]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponse(self) -> WebResponse:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetResponseAsync(self) -> Task[WebResponse]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetSystemWebProxy(cls) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def RegisterPortableWebRequestCreator(cls, creator: IWebRequestCreate) -> None:
-        """
-
-        :param creator:
-        """
+        """:param creator:"""
     @classmethod
     def RegisterPrefix(cls, prefix: str, creator: IWebRequestCreate) -> bool:
-        """
-
-        :param prefix:
+        """:param prefix:
         :param creator:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebRequestMethods(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class File(ABC, Object):
         """"""
@@ -25205,26 +17326,15 @@ class WebRequestMethods(ABC, Object):
         UploadFile: Final[ClassVar[str]] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class Ftp(ABC, Object):
         """"""
@@ -25256,26 +17366,15 @@ class WebRequestMethods(ABC, Object):
         UploadFileWithUniqueName: Final[ClassVar[str]] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class Http(ABC, Object):
         """"""
@@ -25293,26 +17392,15 @@ class WebRequestMethods(ABC, Object):
         Put: Final[ClassVar[str]] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class WebRequestPrefixElement(Object):
     """"""
@@ -25324,270 +17412,164 @@ class WebRequestPrefixElement(Object):
     """
     @overload
     def __init__(self, P: str, C: IWebRequestCreate):
-        """
-
-        :param P:
+        """:param P:
         :param C:
         """
     @overload
     def __init__(self, P: str, creatorType: Type):
-        """
-
-        :param P:
+        """:param P:
         :param creatorType:
         """
     @property
     def Creator(self) -> IWebRequestCreate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Creator.setter
     def Creator(self, value: IWebRequestCreate) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebResponse(ABC, MarshalByRefObject, ISerializable, IDisposable):
     """"""
 
     @property
     def ContentLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLength.setter
     def ContentLength(self, value: int) -> None: ...
     @property
     def ContentType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: str) -> None: ...
     @property
     def Headers(self) -> WebHeaderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFromCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMutuallyAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResponseUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsHeaders(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetResponseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketHttpRequestCreator(Object, IWebRequestCreate):
     """"""
 
     def __init__(self, usingHttps: bool):
-        """
-
-        :param usingHttps:
-        """
+        """:param usingHttps:"""
     def Create(self, uri: Uri) -> WebRequest:
-        """
-
-        :param uri:
+        """:param uri:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebUtility(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def HtmlDecode(cls, value: str) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     @overload
     def HtmlDecode(cls, value: str, output: TextWriter) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param output:
         """
     @classmethod
     @overload
     def HtmlEncode(cls, value: str) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     @overload
     def HtmlEncode(cls, value: str, output: TextWriter) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param output:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UrlDecode(cls, encodedValue: str) -> str:
-        """
-
-        :param encodedValue:
+        """:param encodedValue:
         :return:
         """
     @classmethod
     def UrlDecodeToBytes(cls, encodedValue: Array[int], offset: int, count: int) -> Array[int]:
-        """
-
-        :param encodedValue:
+        """:param encodedValue:
         :param offset:
         :param count:
         :return:
         """
     @classmethod
     def UrlEncode(cls, value: str) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     def UrlEncodeToBytes(cls, value: Array[int], offset: int, count: int) -> Array[int]:
-        """
-
-        :param value:
+        """:param value:
         :param offset:
         :param count:
         :return:
@@ -25597,26 +17579,15 @@ class Win32(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WinHttpWebProxyBuilder(WebProxyDataBuilder):
     """"""
@@ -25624,86 +17595,50 @@ class WinHttpWebProxyBuilder(WebProxyDataBuilder):
     def __init__(self):
         """"""
     def Build(self) -> WebProxyData:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WinHttpWebProxyFinder(BaseWebProxyFinder, IWebProxyFinder, IDisposable):
     """"""
 
     def __init__(self, engine: AutoWebProxyScriptEngine):
-        """
-
-        :param engine:
-        """
+        """:param engine:"""
     @property
     def IsUnrecognizedScheme(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
-    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> Tuple[bool, IList[str]]:
-        """
-
-        :param destination:
+        """:return:"""
+    def GetProxies(self, destination: Uri, proxyList: IList[str]) -> tuple[bool, IList[str]]:
+        """:param destination:
         :param proxyList:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WindowsInstallationType(Enum):
     """"""
@@ -25766,9 +17701,7 @@ class WorkerAsyncResult(LazyAsyncResult, IAsyncResult):
         offset: int,
         end: int,
     ):
-        """
-
-        :param asyncObject:
+        """:param asyncObject:
         :param asyncState:
         :param savedAsyncCallback:
         :param buffer:
@@ -25777,49 +17710,26 @@ class WorkerAsyncResult(LazyAsyncResult, IAsyncResult):
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WriteBufferState(Enum):
     """"""
@@ -25837,26 +17747,15 @@ class WriteHeadersCallbackState(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WriteStreamClosedEventArgs(EventArgs):
     """"""
@@ -25865,31 +17764,17 @@ class WriteStreamClosedEventArgs(EventArgs):
         """"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 WriteStreamClosedEventHandler: Callable[[object, WriteStreamClosedEventArgs], None] = ...
 """
@@ -25912,26 +17797,15 @@ class _CERT_CHAIN_ELEMENT(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class hostent(ValueType):
     """"""
@@ -25962,23 +17836,12 @@ class hostent(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

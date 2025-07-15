@@ -1,16 +1,12 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
-from Microsoft.Win32.NativeMethods import ShellExecuteInfo
 from Microsoft.Win32.SafeHandles import SafeProcessHandle
 from Microsoft.Win32.SafeHandles import SafeThreadHandle
 from Microsoft.Win32.SafeHandles import SafeWaitHandle
@@ -54,7 +50,6 @@ from System.ComponentModel import ISupportInitialize
 from System.ComponentModel import ISynchronizeInvoke
 from System.ComponentModel import ITypeDescriptorContext
 from System.ComponentModel import PropertyDescriptorCollection
-from System.ComponentModel.TypeConverter import StandardValuesCollection
 from System.Configuration import Configuration
 from System.Configuration import ConfigurationElement
 from System.Configuration import ConfigurationElementCollection
@@ -66,7 +61,6 @@ from System.Configuration import ElementInformation
 from System.Configuration import IConfigurationSectionHandler
 from System.Configuration import SectionInformation
 from System.Diagnostics.DebuggableAttribute import DebuggingModes
-from System.Diagnostics.StackTrace import TraceFormat
 from System.Globalization import CultureInfo
 from System.IO import Stream
 from System.IO import StreamReader
@@ -104,85 +98,62 @@ class AlphabeticalEnumConverter(EnumConverter):
     """"""
 
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -190,18 +161,14 @@ class AlphabeticalEnumConverter(EnumConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -213,9 +180,7 @@ class AlphabeticalEnumConverter(EnumConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -223,31 +188,23 @@ class AlphabeticalEnumConverter(EnumConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -255,186 +212,126 @@ class AlphabeticalEnumConverter(EnumConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Assert(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssertFilter(ABC, Object):
     """"""
@@ -447,9 +344,7 @@ class AssertFilter(ABC, Object):
         stackTraceFormat: StackTrace.TraceFormat,
         windowTitle: str,
     ) -> AssertFilters:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param location:
         :param stackTraceFormat:
@@ -457,26 +352,15 @@ class AssertFilter(ABC, Object):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssertFilters(Enum):
     """"""
@@ -497,10 +381,7 @@ class AssertSection(ConfigurationElement):
         """"""
     @property
     def AssertUIEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -526,286 +407,169 @@ class AssertSection(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def LogFileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssertWrapper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ShowAssert(
         cls, stackTrace: str, frame: StackFrame, message: str, detailMessage: str
     ) -> None:
-        """
-
-        :param stackTrace:
+        """:param stackTrace:
         :param frame:
         :param message:
         :param detailMessage:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsyncStreamReader(Object, IDisposable):
     """"""
 
     @property
     def BaseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BooleanSwitch(Switch):
     """"""
 
     @overload
     def __init__(self, displayName: str, description: str):
-        """
-
-        :param displayName:
+        """:param displayName:
         :param description:
         """
     @overload
     def __init__(self, displayName: str, description: str, defaultSwitchValue: str):
-        """
-
-        :param displayName:
+        """:param displayName:
         :param description:
         :param defaultSwitchValue:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CategoryEntry(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CategorySample(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConditionalAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, conditionString: str):
-        """
-
-        :param conditionString:
-        """
+        """:param conditionString:"""
     @property
     def ConditionString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -817,9 +581,7 @@ class ConditionalAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -829,21 +591,13 @@ class ConditionalAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
     """"""
@@ -853,126 +607,75 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         """"""
     @overload
     def __init__(self, useErrorStream: bool):
-        """
-
-        :param useErrorStream:
-        """
+        """:param useErrorStream:"""
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     @property
     def Writer(self) -> TextWriter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Writer.setter
     def Writer(self, value: TextWriter) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -982,9 +685,7 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -999,9 +700,7 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -1009,11 +708,13 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -1027,9 +728,7 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -1045,9 +744,7 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -1062,9 +759,7 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -1072,54 +767,34 @@ class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
 
@@ -1128,50 +803,30 @@ class CorrelationManager(Object):
 
     @property
     def ActivityId(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ActivityId.setter
     def ActivityId(self, value: Guid) -> None: ...
     @property
     def LogicalOperationStack(self) -> Stack:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def StartLogicalOperation(self) -> None:
         """"""
     @overload
     def StartLogicalOperation(self, operationId: object) -> None:
-        """
-
-        :param operationId:
-        """
+        """:param operationId:"""
     def StopLogicalOperation(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CounterCreationData(Object):
     """"""
@@ -1181,57 +836,35 @@ class CounterCreationData(Object):
         """"""
     @overload
     def __init__(self, counterName: str, counterHelp: str, counterType: PerformanceCounterType):
-        """
-
-        :param counterName:
+        """:param counterName:
         :param counterHelp:
         :param counterType:
         """
     @property
     def CounterHelp(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CounterHelp.setter
     def CounterHelp(self, value: str) -> None: ...
     @property
     def CounterName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CounterName.setter
     def CounterName(self, value: str) -> None: ...
     @property
     def CounterType(self) -> PerformanceCounterType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CounterType.setter
     def CounterType(self, value: PerformanceCounterType) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CounterCreationDataCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -1241,223 +874,133 @@ class CounterCreationDataCollection(CollectionBase, ICollection, IEnumerable, IL
         """"""
     @overload
     def __init__(self, value: CounterCreationDataCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CounterCreationData]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CounterCreationData) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CounterCreationDataCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CounterCreationData]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CounterCreationData) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CounterCreationData], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CounterCreationData) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CounterCreationData) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CounterCreationData) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CounterCreationData) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -1465,26 +1008,15 @@ class CounterDefinitionSample(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CounterSample(ValueType):
     """"""
@@ -1505,9 +1037,7 @@ class CounterSample(ValueType):
         timeStamp100nSec: int,
         counterType: PerformanceCounterType,
     ):
-        """
-
-        :param rawValue:
+        """:param rawValue:
         :param baseValue:
         :param counterFrequency:
         :param systemFrequency:
@@ -1527,9 +1057,7 @@ class CounterSample(ValueType):
         counterType: PerformanceCounterType,
         counterTimeStamp: int,
     ):
-        """
-
-        :param rawValue:
+        """:param rawValue:
         :param baseValue:
         :param counterFrequency:
         :param systemFrequency:
@@ -1540,123 +1068,74 @@ class CounterSample(ValueType):
         """
     @property
     def BaseValue(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterFrequency(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterTimeStamp(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterType(self) -> PerformanceCounterType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RawValue(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SystemFrequency(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeStamp(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeStamp100nSec(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Calculate(cls, counterSample: CounterSample) -> float:
-        """
-
-        :param counterSample:
+        """:param counterSample:
         :return:
         """
     @classmethod
     @overload
     def Calculate(cls, counterSample: CounterSample, nextCounterSample: CounterSample) -> float:
-        """
-
-        :param counterSample:
+        """:param counterSample:
         :param nextCounterSample:
         :return:
         """
     @overload
     def Equals(self, sample: CounterSample) -> bool:
-        """
-
-        :param sample:
+        """:param sample:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: CounterSample) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: CounterSample) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: CounterSample, b: CounterSample) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: CounterSample, b: CounterSample) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -1667,72 +1146,43 @@ class CounterSampleCalculator(ABC, Object):
     @classmethod
     @overload
     def ComputeCounterValue(cls, newSample: CounterSample) -> float:
-        """
-
-        :param newSample:
+        """:param newSample:
         :return:
         """
     @classmethod
     @overload
     def ComputeCounterValue(cls, oldSample: CounterSample, newSample: CounterSample) -> float:
-        """
-
-        :param oldSample:
+        """:param oldSample:
         :param newSample:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataReceivedEventArgs(EventArgs):
     """"""
 
     @property
     def Data(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DataReceivedEventHandler: Callable[[object, DataReceivedEventArgs], None] = ...
 """
@@ -1747,72 +1197,55 @@ class Debug(ABC, Object):
     @classmethod
     @property
     def AutoFlush(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @AutoFlush.setter
     def AutoFlush(cls, value: bool) -> None: ...
     @classmethod
     @property
     def IndentLevel(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @IndentLevel.setter
     def IndentLevel(cls, value: int) -> None: ...
     @classmethod
     @property
     def IndentSize(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @IndentSize.setter
     def IndentSize(cls, value: int) -> None: ...
     @classmethod
     @property
     def Listeners(cls) -> TraceListenerCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Assert(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Assert(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def Assert(cls, condition: bool, message: str, detailMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param detailMessage:
         """
     @classmethod
     @overload
     def Assert(
-        cls, condition: bool, message: str, detailMessageFormat: str, args: Array[object]
+        cls,
+        condition: bool,
+        message: str,
+        detailMessageFormat: str,
+        args: Array[object],
     ) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param detailMessageFormat:
         :param args:
@@ -1821,198 +1254,139 @@ class Debug(ABC, Object):
     def Close(cls) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Fail(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Fail(cls, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     @classmethod
     def Flush(cls) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Indent(cls) -> None:
         """"""
     @classmethod
     @overload
     def Print(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Print(cls, format: str, args: Array[object]) -> None:
-        """
-
-        :param format:
+        """:param format:
         :param args:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Unindent(cls) -> None:
         """"""
     @classmethod
     @overload
     def Write(cls, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @classmethod
     @overload
     def Write(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Write(cls, value: object, category: str) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param category:
         """
     @classmethod
     @overload
     def Write(cls, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, value: object) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, value: object, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, message: str, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteLine(cls, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @classmethod
     @overload
     def WriteLine(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def WriteLine(cls, value: object, category: str) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteLine(cls, format: str, args: Array[object]) -> None:
-        """
-
-        :param format:
+        """:param format:
         :param args:
         """
     @classmethod
     @overload
     def WriteLine(cls, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, value: object) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, value: object, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, message: str, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param category:
         """
@@ -2022,80 +1396,48 @@ class DebuggableAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, modes: DebuggableAttribute.DebuggingModes):
-        """
-
-        :param modes:
-        """
+        """:param modes:"""
     @overload
     def __init__(self, isJITTrackingEnabled: bool, isJITOptimizerDisabled: bool):
-        """
-
-        :param isJITTrackingEnabled:
+        """:param isJITTrackingEnabled:
         :param isJITOptimizerDisabled:
         """
     @property
     def DebuggingFlags(self) -> DebuggableAttribute.DebuggingModes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsJITOptimizerDisabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsJITTrackingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2107,9 +1449,7 @@ class DebuggableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2119,21 +1459,13 @@ class DebuggableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class DebuggingModes(Enum):
         """"""
@@ -2162,46 +1494,27 @@ class Debugger(Object):
     @classmethod
     @property
     def IsAttached(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Break(cls) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsLogging(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Launch(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Log(cls, level: int, category: str, message: str) -> None:
-        """
-
-        :param level:
+        """:param level:
         :param category:
         :param message:
         """
@@ -2209,70 +1522,43 @@ class Debugger(Object):
     def NotifyOfCrossThreadDependency(cls) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerBrowsableAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, state: DebuggerBrowsableState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @property
     def State(self) -> DebuggerBrowsableState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2284,9 +1570,7 @@ class DebuggerBrowsableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2296,21 +1580,13 @@ class DebuggerBrowsableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerBrowsableState(Enum):
     """"""
@@ -2326,93 +1602,57 @@ class DebuggerDisplayAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Target(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Target.setter
     def Target(self, value: Type) -> None: ...
     @property
     def TargetTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetTypeName.setter
     def TargetTypeName(self, value: str) -> None: ...
     @property
     def Type(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: str) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2424,9 +1664,7 @@ class DebuggerDisplayAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2436,21 +1674,13 @@ class DebuggerDisplayAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerHiddenAttribute(Attribute, _Attribute):
     """"""
@@ -2459,49 +1689,31 @@ class DebuggerHiddenAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2513,9 +1725,7 @@ class DebuggerHiddenAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2525,21 +1735,13 @@ class DebuggerHiddenAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerNonUserCodeAttribute(Attribute, _Attribute):
     """"""
@@ -2548,49 +1750,31 @@ class DebuggerNonUserCodeAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2602,9 +1786,7 @@ class DebuggerNonUserCodeAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2614,21 +1796,13 @@ class DebuggerNonUserCodeAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerStepThroughAttribute(Attribute, _Attribute):
     """"""
@@ -2637,49 +1811,31 @@ class DebuggerStepThroughAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2691,9 +1847,7 @@ class DebuggerStepThroughAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2703,21 +1857,13 @@ class DebuggerStepThroughAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerStepperBoundaryAttribute(Attribute, _Attribute):
     """"""
@@ -2726,49 +1872,31 @@ class DebuggerStepperBoundaryAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2780,9 +1908,7 @@ class DebuggerStepperBoundaryAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2792,104 +1918,63 @@ class DebuggerStepperBoundaryAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerTypeProxyAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def ProxyTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Target(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Target.setter
     def Target(self, value: Type) -> None: ...
     @property
     def TargetTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetTypeName.setter
     def TargetTypeName(self, value: str) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2901,9 +1986,7 @@ class DebuggerTypeProxyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2913,146 +1996,91 @@ class DebuggerTypeProxyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DebuggerVisualizerAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, visualizerTypeName: str):
-        """
-
-        :param visualizerTypeName:
-        """
+        """:param visualizerTypeName:"""
     @overload
     def __init__(self, visualizer: Type):
-        """
-
-        :param visualizer:
-        """
+        """:param visualizer:"""
     @overload
     def __init__(self, visualizerTypeName: str, visualizerObjectSourceTypeName: str):
-        """
-
-        :param visualizerTypeName:
+        """:param visualizerTypeName:
         :param visualizerObjectSourceTypeName:
         """
     @overload
     def __init__(self, visualizerTypeName: str, visualizerObjectSource: Type):
-        """
-
-        :param visualizerTypeName:
+        """:param visualizerTypeName:
         :param visualizerObjectSource:
         """
     @overload
     def __init__(self, visualizer: Type, visualizerObjectSourceTypeName: str):
-        """
-
-        :param visualizer:
+        """:param visualizer:
         :param visualizerObjectSourceTypeName:
         """
     @overload
     def __init__(self, visualizer: Type, visualizerObjectSource: Type):
-        """
-
-        :param visualizer:
+        """:param visualizer:
         :param visualizerObjectSource:
         """
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Description.setter
     def Description(self, value: str) -> None: ...
     @property
     def Target(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Target.setter
     def Target(self, value: Type) -> None: ...
     @property
     def TargetTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetTypeName.setter
     def TargetTypeName(self, value: str) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VisualizerObjectSourceTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VisualizerTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3064,9 +2092,7 @@ class DebuggerVisualizerAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3076,21 +2102,13 @@ class DebuggerVisualizerAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultFilter(AssertFilter):
     """"""
@@ -3103,9 +2121,7 @@ class DefaultFilter(AssertFilter):
         stackTraceFormat: StackTrace.TraceFormat,
         windowTitle: str,
     ) -> AssertFilters:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param location:
         :param stackTraceFormat:
@@ -3113,26 +2129,15 @@ class DefaultFilter(AssertFilter):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultTraceListener(TraceListener, IDisposable):
     """"""
@@ -3141,128 +2146,77 @@ class DefaultTraceListener(TraceListener, IDisposable):
         """"""
     @property
     def AssertUiEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AssertUiEnabled.setter
     def AssertUiEnabled(self, value: bool) -> None: ...
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogFileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LogFileName.setter
     def LogFileName(self, value: str) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -3272,9 +2226,7 @@ class DefaultTraceListener(TraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3289,9 +2241,7 @@ class DefaultTraceListener(TraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3299,11 +2249,13 @@ class DefaultTraceListener(TraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3317,9 +2269,7 @@ class DefaultTraceListener(TraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3335,9 +2285,7 @@ class DefaultTraceListener(TraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3352,9 +2300,7 @@ class DefaultTraceListener(TraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -3362,54 +2308,34 @@ class DefaultTraceListener(TraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
 
@@ -3418,167 +2344,101 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
 
     @overload
     def __init__(self, stream: Stream):
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
     @overload
     def __init__(self, writer: TextWriter):
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, stream: Stream, name: str):
-        """
-
-        :param stream:
+        """:param stream:
         :param name:
         """
     @overload
     def __init__(self, writer: TextWriter, name: str):
-        """
-
-        :param writer:
+        """:param writer:
         :param name:
         """
     @overload
     def __init__(self, fileName: str, name: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param name:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Delimiter(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Delimiter.setter
     def Delimiter(self, value: str) -> None: ...
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     @property
     def Writer(self) -> TextWriter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Writer.setter
     def Writer(self, value: TextWriter) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -3588,9 +2448,7 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3605,9 +2463,7 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3615,11 +2471,13 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3633,9 +2491,7 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3651,9 +2507,7 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -3668,9 +2522,7 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -3678,54 +2530,34 @@ class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
 
@@ -3733,26 +2565,15 @@ class DiagnosticsConfiguration(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DiagnosticsConfigurationHandler(Object, IConfigurationSectionHandler):
     """"""
@@ -3760,34 +2581,21 @@ class DiagnosticsConfigurationHandler(Object, IConfigurationSectionHandler):
     def __init__(self):
         """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EditAndContinueHelper(Object):
     """"""
@@ -3795,26 +2603,15 @@ class EditAndContinueHelper(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EntryWrittenEventArgs(EventArgs):
     """"""
@@ -3824,37 +2621,20 @@ class EntryWrittenEventArgs(EventArgs):
         """"""
     @overload
     def __init__(self, entry: EventLogEntry):
-        """
-
-        :param entry:
-        """
+        """:param entry:"""
     @property
     def Entry(self) -> EventLogEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 EntryWrittenEventHandler: Callable[[object, EntryWrittenEventArgs], None] = ...
 """
@@ -3867,98 +2647,61 @@ class EnvironmentBlock(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ToByteArray(cls, sd: StringDictionary, unicode: bool) -> Array[int]:
-        """
-
-        :param sd:
+        """:param sd:
         :param unicode:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventInstance(Object):
     """"""
 
     @overload
     def __init__(self, instanceId: int, categoryId: int):
-        """
-
-        :param instanceId:
+        """:param instanceId:
         :param categoryId:
         """
     @overload
     def __init__(self, instanceId: int, categoryId: int, entryType: EventLogEntryType):
-        """
-
-        :param instanceId:
+        """:param instanceId:
         :param categoryId:
         :param entryType:
         """
     @property
     def CategoryId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CategoryId.setter
     def CategoryId(self, value: int) -> None: ...
     @property
     def EntryType(self) -> EventLogEntryType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EntryType.setter
     def EntryType(self, value: EventLogEntryType) -> None: ...
     @property
     def InstanceId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InstanceId.setter
     def InstanceId(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
     """"""
@@ -3968,109 +2711,66 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
         """"""
     @overload
     def __init__(self, logName: str):
-        """
-
-        :param logName:
-        """
+        """:param logName:"""
     @overload
     def __init__(self, logName: str, machineName: str):
-        """
-
-        :param logName:
+        """:param logName:
         :param machineName:
         """
     @overload
     def __init__(self, logName: str, machineName: str, source: str):
-        """
-
-        :param logName:
+        """:param logName:
         :param machineName:
         :param source:
         """
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EnableRaisingEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableRaisingEvents.setter
     def EnableRaisingEvents(self, value: bool) -> None: ...
     @property
     def Entries(self) -> EventLogEntryCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Log(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Log.setter
     def Log(self, value: str) -> None: ...
     @property
     def LogDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MachineName.setter
     def MachineName(self, value: str) -> None: ...
     @property
     def MaximumKilobytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumKilobytes.setter
     def MaximumKilobytes(self, value: int) -> None: ...
     @property
     def MinimumRetentionDays(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OverflowAction(self) -> OverflowAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def SynchronizingObject(self) -> ISynchronizeInvoke:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SynchronizingObject.setter
     def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
     def BeginInit(self) -> None:
@@ -4082,61 +2782,42 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
     @classmethod
     @overload
     def CreateEventSource(cls, sourceData: EventSourceCreationData) -> None:
-        """
-
-        :param sourceData:
-        """
+        """:param sourceData:"""
     @classmethod
     @overload
     def CreateEventSource(cls, source: str, logName: str) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param logName:
         """
     @classmethod
     @overload
     def CreateEventSource(cls, source: str, logName: str, machineName: str) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param logName:
         :param machineName:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     @classmethod
     @overload
     def Delete(cls, logName: str) -> None:
-        """
-
-        :param logName:
-        """
+        """:param logName:"""
     @classmethod
     @overload
     def Delete(cls, logName: str, machineName: str) -> None:
-        """
-
-        :param logName:
+        """:param logName:
         :param machineName:
         """
     @classmethod
     @overload
     def DeleteEventSource(cls, source: str) -> None:
-        """
-
-        :param source:
-        """
+        """:param source:"""
     @classmethod
     @overload
     def DeleteEventSource(cls, source: str, machineName: str) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param machineName:
         """
     def Dispose(self) -> None:
@@ -4144,140 +2825,93 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
     def EndInit(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Exists(cls, logName: str) -> bool:
-        """
-
-        :param logName:
+        """:param logName:
         :return:
         """
     @classmethod
     @overload
     def Exists(cls, logName: str, machineName: str) -> bool:
-        """
-
-        :param logName:
+        """:param logName:
         :param machineName:
         :return:
         """
     @classmethod
     @overload
     def GetEventLogs(cls) -> Array[EventLog]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetEventLogs(cls, machineName: str) -> Array[EventLog]:
-        """
-
-        :param machineName:
+        """:param machineName:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def LogNameFromSourceName(cls, source: str, machineName: str) -> str:
-        """
-
-        :param source:
+        """:param source:
         :param machineName:
         :return:
         """
     def ModifyOverflowPolicy(self, action: OverflowAction, retentionDays: int) -> None:
-        """
-
-        :param action:
+        """:param action:
         :param retentionDays:
         """
     def RegisterDisplayName(self, resourceFile: str, resourceId: int) -> None:
-        """
-
-        :param resourceFile:
+        """:param resourceFile:
         :param resourceId:
         """
     @classmethod
     @overload
     def SourceExists(cls, source: str) -> bool:
-        """
-
-        :param source:
+        """:param source:
         :return:
         """
     @classmethod
     @overload
     def SourceExists(cls, source: str, machineName: str) -> bool:
-        """
-
-        :param source:
+        """:param source:
         :param machineName:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WriteEntry(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteEntry(self, message: str, type: EventLogEntryType) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         """
     @classmethod
     @overload
     def WriteEntry(cls, source: str, message: str) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param message:
         """
     @overload
     def WriteEntry(self, message: str, type: EventLogEntryType, eventID: int) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         :param eventID:
         """
     @classmethod
     @overload
     def WriteEntry(cls, source: str, message: str, type: EventLogEntryType) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param message:
         :param type:
         """
@@ -4285,9 +2919,7 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
     def WriteEntry(
         self, message: str, type: EventLogEntryType, eventID: int, category: int
     ) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         :param eventID:
         :param category:
@@ -4295,9 +2927,7 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
     @classmethod
     @overload
     def WriteEntry(cls, source: str, message: str, type: EventLogEntryType, eventID: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param message:
         :param type:
         :param eventID:
@@ -4311,9 +2941,7 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
         category: int,
         rawData: Array[int],
     ) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         :param eventID:
         :param category:
@@ -4322,11 +2950,14 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
     @classmethod
     @overload
     def WriteEntry(
-        cls, source: str, message: str, type: EventLogEntryType, eventID: int, category: int
+        cls,
+        source: str,
+        message: str,
+        type: EventLogEntryType,
+        eventID: int,
+        category: int,
     ) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param message:
         :param type:
         :param eventID:
@@ -4343,9 +2974,7 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
         category: int,
         rawData: Array[int],
     ) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param message:
         :param type:
         :param eventID:
@@ -4354,36 +2983,32 @@ class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
         """
     @overload
     def WriteEvent(self, instance: EventInstance, values: Array[object]) -> None:
-        """
-
-        :param instance:
+        """:param instance:
         :param values:
         """
     @overload
     def WriteEvent(self, instance: EventInstance, data: Array[int], values: Array[object]) -> None:
-        """
-
-        :param instance:
+        """:param instance:
         :param data:
         :param values:
         """
     @classmethod
     @overload
     def WriteEvent(cls, source: str, instance: EventInstance, values: Array[object]) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param instance:
         :param values:
         """
     @classmethod
     @overload
     def WriteEvent(
-        cls, source: str, instance: EventInstance, data: Array[int], values: Array[object]
+        cls,
+        source: str,
+        instance: EventInstance,
+        data: Array[int],
+        values: Array[object],
     ) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param instance:
         :param data:
         :param values:
@@ -4398,155 +3023,84 @@ class EventLogEntry(Component, IComponent, ISerializable, IDisposable):
 
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CategoryNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Data(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EntryType(self) -> EventLogEntryType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventID(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InstanceId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReplacementStrings(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeGenerated(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeWritten(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     @overload
     def Equals(self, otherEntry: EventLogEntry) -> bool:
-        """
-
-        :param otherEntry:
+        """:param otherEntry:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
 
@@ -4555,90 +3109,50 @@ class EventLogEntryCollection(Object, ICollection, IEnumerable):
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> EventLogEntry:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, entries: Array[EventLogEntry], index: int) -> None:
-        """
-
-        :param entries:
+        """:param entries:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> EventLogEntry:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogEntryType(Enum):
     """"""
@@ -4662,98 +3176,59 @@ class EventLogInternal(Object, ISupportInitialize, IDisposable):
         """"""
     @overload
     def __init__(self, logName: str):
-        """
-
-        :param logName:
-        """
+        """:param logName:"""
     @overload
     def __init__(self, logName: str, machineName: str):
-        """
-
-        :param logName:
+        """:param logName:
         :param machineName:
         """
     @overload
     def __init__(self, logName: str, machineName: str, source: str):
-        """
-
-        :param logName:
+        """:param logName:
         :param machineName:
         :param source:
         """
     @overload
     def __init__(self, logName: str, machineName: str, source: str, parent: EventLog):
-        """
-
-        :param logName:
+        """:param logName:
         :param machineName:
         :param source:
         :param parent:
         """
     @property
     def EnableRaisingEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableRaisingEvents.setter
     def EnableRaisingEvents(self, value: bool) -> None: ...
     @property
     def Entries(self) -> EventLogEntryCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Log(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumKilobytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumKilobytes.setter
     def MaximumKilobytes(self, value: int) -> None: ...
     @property
     def MinimumRetentionDays(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OverflowAction(self) -> OverflowAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SynchronizingObject(self) -> ISynchronizeInvoke:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SynchronizingObject.setter
     def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
     def BeginInit(self) -> None:
@@ -4767,56 +3242,34 @@ class EventLogInternal(Object, ISupportInitialize, IDisposable):
     def EndInit(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ModifyOverflowPolicy(self, action: OverflowAction, retentionDays: int) -> None:
-        """
-
-        :param action:
+        """:param action:
         :param retentionDays:
         """
     def RegisterDisplayName(self, resourceFile: str, resourceId: int) -> None:
-        """
-
-        :param resourceFile:
+        """:param resourceFile:
         :param resourceId:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WriteEntry(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteEntry(self, message: str, type: EventLogEntryType) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         """
     @overload
     def WriteEntry(self, message: str, type: EventLogEntryType, eventID: int) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         :param eventID:
         """
@@ -4824,9 +3277,7 @@ class EventLogInternal(Object, ISupportInitialize, IDisposable):
     def WriteEntry(
         self, message: str, type: EventLogEntryType, eventID: int, category: int
     ) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         :param eventID:
         :param category:
@@ -4840,9 +3291,7 @@ class EventLogInternal(Object, ISupportInitialize, IDisposable):
         category: int,
         rawData: Array[int],
     ) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param type:
         :param eventID:
         :param category:
@@ -4850,16 +3299,12 @@ class EventLogInternal(Object, ISupportInitialize, IDisposable):
         """
     @overload
     def WriteEvent(self, instance: EventInstance, values: Array[object]) -> None:
-        """
-
-        :param instance:
+        """:param instance:
         :param values:
         """
     @overload
     def WriteEvent(self, instance: EventInstance, data: Array[int], values: Array[object]) -> None:
-        """
-
-        :param instance:
+        """:param instance:
         :param data:
         :param values:
         """
@@ -4867,7 +3312,11 @@ class EventLogInternal(Object, ISupportInitialize, IDisposable):
     """"""
 
 class EventLogPermission(
-    ResourcePermissionBase, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+    ResourcePermissionBase,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
 ):
     """"""
 
@@ -4876,36 +3325,22 @@ class EventLogPermission(
         """"""
     @overload
     def __init__(self, state: PermissionState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @overload
     def __init__(self, permissionAccessEntries: Array[EventLogPermissionEntry]):
-        """
-
-        :param permissionAccessEntries:
-        """
+        """:param permissionAccessEntries:"""
     @overload
     def __init__(self, permissionAccess: EventLogPermissionAccess, machineName: str):
-        """
-
-        :param permissionAccess:
+        """:param permissionAccess:
         :param machineName:
         """
     @property
     def PermissionEntries(self) -> EventLogPermissionEntryCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Assert(self) -> None:
         """"""
     def Copy(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Demand(self) -> None:
         """"""
@@ -4915,59 +3350,33 @@ class EventLogPermission(
     def Deny(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FromXml(self, e: SecurityElement) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Intersect(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsSubsetOf(self, target: IPermission) -> bool:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsUnrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PermitOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> SecurityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Union(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
 
@@ -4991,92 +3400,56 @@ class EventLogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
 
     def __init__(self, action: SecurityAction):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @property
     def Action(self) -> SecurityAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MachineName.setter
     def MachineName(self, value: str) -> None: ...
     @property
     def PermissionAccess(self) -> EventLogPermissionAccess:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PermissionAccess.setter
     def PermissionAccess(self, value: EventLogPermissionAccess) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Unrestricted.setter
     def Unrestricted(self, value: bool) -> None: ...
     def CreatePermission(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5088,9 +3461,7 @@ class EventLogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5100,275 +3471,164 @@ class EventLogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogPermissionEntry(Object):
     """"""
 
     def __init__(self, permissionAccess: EventLogPermissionAccess, machineName: str):
-        """
-
-        :param permissionAccess:
+        """:param permissionAccess:
         :param machineName:
         """
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PermissionAccess(self) -> EventLogPermissionAccess:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogPermissionEntryCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
 
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: EventLogPermissionEntry) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: EventLogPermissionEntryCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[EventLogPermissionEntry]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: EventLogPermissionEntry) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[EventLogPermissionEntry], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: EventLogPermissionEntry) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: EventLogPermissionEntry) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: EventLogPermissionEntry) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: EventLogPermissionEntry) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -5380,132 +3640,78 @@ class EventLogTraceListener(TraceListener, IDisposable):
         """"""
     @overload
     def __init__(self, eventLog: EventLog):
-        """
-
-        :param eventLog:
-        """
+        """:param eventLog:"""
     @overload
     def __init__(self, source: str):
-        """
-
-        :param source:
-        """
+        """:param source:"""
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventLog(self) -> EventLog:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EventLog.setter
     def EventLog(self, value: EventLog) -> None: ...
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -5515,9 +3721,7 @@ class EventLogTraceListener(TraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5532,9 +3736,7 @@ class EventLogTraceListener(TraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5542,11 +3744,13 @@ class EventLogTraceListener(TraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5560,9 +3764,7 @@ class EventLogTraceListener(TraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5578,9 +3780,7 @@ class EventLogTraceListener(TraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5595,9 +3795,7 @@ class EventLogTraceListener(TraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -5605,54 +3803,34 @@ class EventLogTraceListener(TraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
 
@@ -5661,32 +3839,27 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
 
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, fileName: str, name: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param name:
         """
     @overload
     def __init__(self, fileName: str, name: str, bufferSize: int):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param name:
         :param bufferSize:
         """
     @overload
     def __init__(
-        self, fileName: str, name: str, bufferSize: int, logRetentionOption: TraceLogRetentionOption
+        self,
+        fileName: str,
+        name: str,
+        bufferSize: int,
+        logRetentionOption: TraceLogRetentionOption,
     ):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param name:
         :param bufferSize:
         :param logRetentionOption:
@@ -5700,9 +3873,7 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         logRetentionOption: TraceLogRetentionOption,
         maximumFileSize: int,
     ):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param name:
         :param bufferSize:
         :param logRetentionOption:
@@ -5718,9 +3889,7 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         maximumFileSize: int,
         maximumNumberOfFiles: int,
     ):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param name:
         :param bufferSize:
         :param logRetentionOption:
@@ -5729,144 +3898,84 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumFileSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumNumberOfFiles(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceLogRetentionOption(self) -> TraceLogRetentionOption:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     @property
     def Writer(self) -> TextWriter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Writer.setter
     def Writer(self, value: TextWriter) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -5876,9 +3985,7 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5893,9 +4000,7 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5903,11 +4008,13 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5921,9 +4028,7 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5939,9 +4044,7 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -5956,9 +4059,7 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -5966,54 +4067,34 @@ class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
 
@@ -6021,121 +4102,73 @@ class EventSourceCreationData(Object):
     """"""
 
     def __init__(self, source: str, logName: str):
-        """
-
-        :param source:
+        """:param source:
         :param logName:
         """
     @property
     def CategoryCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CategoryCount.setter
     def CategoryCount(self, value: int) -> None: ...
     @property
     def CategoryResourceFile(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CategoryResourceFile.setter
     def CategoryResourceFile(self, value: str) -> None: ...
     @property
     def LogName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LogName.setter
     def LogName(self, value: str) -> None: ...
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MachineName.setter
     def MachineName(self, value: str) -> None: ...
     @property
     def MessageResourceFile(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MessageResourceFile.setter
     def MessageResourceFile(self, value: str) -> None: ...
     @property
     def ParameterResourceFile(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ParameterResourceFile.setter
     def ParameterResourceFile(self, value: str) -> None: ...
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventTypeFilter(TraceFilter):
     """"""
 
     def __init__(self, level: SourceLevels):
-        """
-
-        :param level:
-        """
+        """:param level:"""
     @property
     def EventType(self) -> SourceLevels:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EventType.setter
     def EventType(self, value: SourceLevels) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ShouldTrace(
         self,
         cache: TraceEventCache,
@@ -6147,9 +4180,7 @@ class EventTypeFilter(TraceFilter):
         data1: object,
         data: Array[object],
     ) -> bool:
-        """
-
-        :param cache:
+        """:param cache:
         :param source:
         :param eventType:
         :param id:
@@ -6160,204 +4191,107 @@ class EventTypeFilter(TraceFilter):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FileVersionInfo(Object):
     """"""
 
     @property
     def Comments(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompanyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileBuildPart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileMajorPart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileMinorPart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FilePrivatePart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InternalName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDebug(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPatched(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPreRelease(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivateBuild(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialBuild(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Language(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LegalCopyright(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LegalTrademarks(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OriginalFilename(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateBuild(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProductBuildPart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProductMajorPart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProductMinorPart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProductName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProductPrivatePart(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProductVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SpecialBuild(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetVersionInfo(cls, fileName: str) -> FileVersionInfo:
-        """
-
-        :param fileName:
+        """:param fileName:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FilterElement(TypedElement):
     """"""
@@ -6372,10 +4306,7 @@ class FilterElement(TypedElement):
         """"""
     @property
     def InitData(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitData.setter
     def InitData(self, value: str) -> None: ...
     @property
@@ -6397,40 +4328,23 @@ class FilterElement(TypedElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def TypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TypeName.setter
     def TypeName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRuntimeObject(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICollectData:
     """"""
@@ -6439,10 +4353,8 @@ class ICollectData:
         """"""
     def CollectData(
         self, id: int, valueName: IntPtr, data: IntPtr, totalBytes: int, res: IntPtr
-    ) -> Tuple[None, IntPtr]:
-        """
-
-        :param id:
+    ) -> tuple[None, IntPtr]:
+        """:param id:
         :param valueName:
         :param data:
         :param totalBytes:
@@ -6466,216 +4378,123 @@ class InstanceData(Object):
     """"""
 
     def __init__(self, instanceName: str, sample: CounterSample):
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :param sample:
         """
     @property
     def InstanceName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RawValue(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Sample(self) -> CounterSample:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InstanceDataCollection(DictionaryBase, ICollection, IDictionary, IEnumerable):
     """"""
 
     def __init__(self, counterName: str):
-        """
-
-        :param counterName:
-        """
+        """:param counterName:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     @overload
     def Contains(self, instanceName: str) -> bool:
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, instances: Array[InstanceData], index: int) -> None:
-        """
-
-        :param instances:
+        """:param instances:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     @overload
     def __getitem__(self, instanceName: str) -> InstanceData:
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -6686,155 +4505,90 @@ class InstanceDataCollectionCollection(DictionaryBase, ICollection, IDictionary,
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     @overload
     def Contains(self, counterName: str) -> bool:
-        """
-
-        :param counterName:
+        """:param counterName:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, counters: Array[InstanceDataCollection], index: int) -> None:
-        """
-
-        :param counters:
+        """:param counters:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     @overload
     def __getitem__(self, counterName: str) -> InstanceDataCollection:
-        """
-
-        :param counterName:
+        """:param counterName:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -6842,16 +4596,10 @@ class ListenerElement(TypedElement):
     """"""
 
     def __init__(self, allowReferences: bool):
-        """
-
-        :param allowReferences:
-        """
+        """:param allowReferences:"""
     @property
     def Attributes(self) -> Hashtable:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -6860,16 +4608,10 @@ class ListenerElement(TypedElement):
         """"""
     @property
     def Filter(self) -> FilterElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitData(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitData.setter
     def InitData(self, value: str) -> None: ...
     @property
@@ -6891,56 +4633,33 @@ class ListenerElement(TypedElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     @property
     def TypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TypeName.setter
     def TypeName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRuntimeObject(self) -> TraceListener:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListenerElementsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -6952,10 +4671,7 @@ class ListenerElementsCollection(ConfigurationElementCollection, ICollection, IE
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -6969,16 +4685,10 @@ class ListenerElementsCollection(ConfigurationElementCollection, ICollection, IE
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> ListenerElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -6998,75 +4708,43 @@ class ListenerElementsCollection(ConfigurationElementCollection, ICollection, IE
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRuntimeObject(self) -> TraceListenerCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, name: str) -> ListenerElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Log(ABC, Object):
     """"""
@@ -7079,171 +4757,110 @@ class Log(ABC, Object):
     @classmethod
     @property
     def IsConsoleEnabled(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @IsConsoleEnabled.setter
     def IsConsoleEnabled(cls, value: bool) -> None: ...
     @classmethod
     def AddOnLogMessage(cls, handler: LogMessageEventHandler) -> None:
-        """
-
-        :param handler:
-        """
+        """:param handler:"""
     @classmethod
     def AddOnLogSwitchLevel(cls, handler: LogSwitchLevelHandler) -> None:
-        """
-
-        :param handler:
-        """
+        """:param handler:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Error(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Error(cls, logswitch: LogSwitch, message: str) -> None:
-        """
-
-        :param logswitch:
+        """:param logswitch:
         :param message:
         """
     @classmethod
     @overload
     def Error(cls, switchname: str, message: str) -> None:
-        """
-
-        :param switchname:
+        """:param switchname:
         :param message:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def LogMessage(cls, level: LoggingLevels, message: str) -> None:
-        """
-
-        :param level:
+        """:param level:
         :param message:
         """
     @classmethod
     @overload
     def LogMessage(cls, level: LoggingLevels, logswitch: LogSwitch, message: str) -> None:
-        """
-
-        :param level:
+        """:param level:
         :param logswitch:
         :param message:
         """
     @classmethod
     def Panic(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     def RemoveOnLogMessage(cls, handler: LogMessageEventHandler) -> None:
-        """
-
-        :param handler:
-        """
+        """:param handler:"""
     @classmethod
     def RemoveOnLogSwitchLevel(cls, handler: LogSwitchLevelHandler) -> None:
-        """
-
-        :param handler:
-        """
+        """:param handler:"""
     @classmethod
     @overload
     def Status(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Status(cls, logswitch: LogSwitch, message: str) -> None:
-        """
-
-        :param logswitch:
+        """:param logswitch:
         :param message:
         """
     @classmethod
     @overload
     def Status(cls, switchname: str, message: str) -> None:
-        """
-
-        :param switchname:
+        """:param switchname:
         :param message:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Trace(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Trace(cls, logswitch: LogSwitch, message: str) -> None:
-        """
-
-        :param logswitch:
+        """:param logswitch:
         :param message:
         """
     @classmethod
     @overload
     def Trace(cls, switchname: str, message: str) -> None:
-        """
-
-        :param switchname:
+        """:param switchname:
         :param message:
         """
     @classmethod
     @overload
     def Warning(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Warning(cls, logswitch: LogSwitch, message: str) -> None:
-        """
-
-        :param logswitch:
+        """:param logswitch:
         :param message:
         """
     @classmethod
     @overload
     def Warning(cls, switchname: str, message: str) -> None:
-        """
-
-        :param switchname:
+        """:param switchname:
         :param message:
         """
 
@@ -7260,72 +4877,43 @@ class LogSwitch(Object):
     """"""
 
     def __init__(self, name: str, description: str, parent: LogSwitch):
-        """
-
-        :param name:
+        """:param name:
         :param description:
         :param parent:
         """
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinimumLevel(self) -> LoggingLevels:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MinimumLevel.setter
     def MinimumLevel(self, value: LoggingLevels) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Parent(self) -> LogSwitch:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CheckLevel(self, level: LoggingLevels) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetSwitch(cls, name: str) -> LogSwitch:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 LogSwitchLevelHandler: Callable[[LogSwitch, LoggingLevels], None] = ...
 """
@@ -7370,79 +4958,47 @@ class MainWindowFinder(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FindMainWindow(self, processId: int) -> IntPtr:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MessageBoxPopup(Object):
     """"""
 
     def __init__(self, body: str, title: str, flags: int):
-        """
-
-        :param body:
+        """:param body:
         :param title:
         :param flags:
         """
     @property
     def ReturnValue(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReturnValue.setter
     def ReturnValue(self, value: int) -> None: ...
     def DoPopup(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ShowMessageBox(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ModuleInfo(Object):
     """"""
@@ -7480,86 +5036,51 @@ class ModuleInfo(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MonitoringDescriptionAttribute(DescriptionAttribute, _Attribute):
     """"""
 
     def __init__(self, description: str):
-        """
-
-        :param description:
-        """
+        """:param description:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7571,9 +5092,7 @@ class MonitoringDescriptionAttribute(DescriptionAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7583,123 +5102,78 @@ class MonitoringDescriptionAttribute(DescriptionAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NtProcessInfoHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetProcessInfos(cls, processIdFilter: Predicate[int] = ...) -> Array[ProcessInfo]:
-        """
-
-        :param processIdFilter:
+        """:param processIdFilter:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NtProcessManager(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetFirstModuleInfo(cls, processId: int) -> ModuleInfo:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetModuleInfos(cls, processId: int) -> Array[ModuleInfo]:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     @classmethod
     def GetProcessIdFromHandle(cls, processHandle: SafeProcessHandle) -> int:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :return:
         """
     @classmethod
     @overload
     def GetProcessIds(cls) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetProcessIds(cls, machineName: str, isRemoteMachine: bool) -> Array[int]:
-        """
-
-        :param machineName:
+        """:param machineName:
         :param isRemoteMachine:
         :return:
         """
     @classmethod
     def GetProcessInfos(cls, machineName: str, isRemoteMachine: bool) -> Array[ProcessInfo]:
-        """
-
-        :param machineName:
+        """:param machineName:
         :param isRemoteMachine:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OrdinalCaseInsensitiveComparer(Object, IComparer):
     """"""
@@ -7707,33 +5181,20 @@ class OrdinalCaseInsensitiveComparer(Object, IComparer):
     def __init__(self):
         """"""
     def Compare(self, x: object, y: object) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OverflowAction(Enum):
     """"""
@@ -7758,10 +5219,7 @@ class PerfCounterSection(ConfigurationElement):
         """"""
     @property
     def FileMappingSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -7780,28 +5238,17 @@ class PerfCounterSection(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerformanceCounter(Component, IComponent, ISupportInitialize, IDisposable):
     """"""
@@ -7816,125 +5263,82 @@ class PerformanceCounter(Component, IComponent, ISupportInitialize, IDisposable)
         """"""
     @overload
     def __init__(self, categoryName: str, counterName: str):
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param counterName:
         """
     @overload
     def __init__(self, categoryName: str, counterName: str, readOnly: bool):
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param counterName:
         :param readOnly:
         """
     @overload
     def __init__(self, categoryName: str, counterName: str, instanceName: str):
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param counterName:
         :param instanceName:
         """
     @overload
     def __init__(self, categoryName: str, counterName: str, instanceName: str, readOnly: bool):
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param counterName:
         :param instanceName:
         :param readOnly:
         """
     @overload
     def __init__(self, categoryName: str, counterName: str, instanceName: str, machineName: str):
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param counterName:
         :param instanceName:
         :param machineName:
         """
     @property
     def CategoryName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CategoryName.setter
     def CategoryName(self, value: str) -> None: ...
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterHelp(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CounterName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CounterName.setter
     def CounterName(self, value: str) -> None: ...
     @property
     def CounterType(self) -> PerformanceCounterType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InstanceLifetime(self) -> PerformanceCounterInstanceLifetime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InstanceLifetime.setter
     def InstanceLifetime(self, value: PerformanceCounterInstanceLifetime) -> None: ...
     @property
     def InstanceName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InstanceName.setter
     def InstanceName(self, value: str) -> None: ...
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MachineName.setter
     def MachineName(self, value: str) -> None: ...
     @property
     def RawValue(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawValue.setter
     def RawValue(self, value: int) -> None: ...
     @property
     def ReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadOnly.setter
     def ReadOnly(self, value: bool) -> None: ...
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     def BeginInit(self) -> None:
@@ -7945,74 +5349,41 @@ class PerformanceCounter(Component, IComponent, ISupportInitialize, IDisposable)
     def CloseSharedResources(cls) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Decrement(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def EndInit(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Increment(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IncrementBy(self, value: int) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def NextSample(self) -> CounterSample:
-        """
-
-        :return:
-        """
+        """:return:"""
     def NextValue(self) -> float:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RemoveInstance(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
 
@@ -8024,67 +5395,44 @@ class PerformanceCounterCategory(Object):
         """"""
     @overload
     def __init__(self, categoryName: str):
-        """
-
-        :param categoryName:
-        """
+        """:param categoryName:"""
     @overload
     def __init__(self, categoryName: str, machineName: str):
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param machineName:
         """
     @property
     def CategoryHelp(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CategoryName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CategoryName.setter
     def CategoryName(self, value: str) -> None: ...
     @property
     def CategoryType(self) -> PerformanceCounterCategoryType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MachineName.setter
     def MachineName(self, value: str) -> None: ...
     @overload
     def CounterExists(self, counterName: str) -> bool:
-        """
-
-        :param counterName:
+        """:param counterName:
         :return:
         """
     @classmethod
     @overload
     def CounterExists(cls, counterName: str, categoryName: str) -> bool:
-        """
-
-        :param counterName:
+        """:param counterName:
         :param categoryName:
         :return:
         """
     @classmethod
     @overload
     def CounterExists(cls, counterName: str, categoryName: str, machineName: str) -> bool:
-        """
-
-        :param counterName:
+        """:param counterName:
         :param categoryName:
         :param machineName:
         :return:
@@ -8092,11 +5440,12 @@ class PerformanceCounterCategory(Object):
     @classmethod
     @overload
     def Create(
-        cls, categoryName: str, categoryHelp: str, counterData: CounterCreationDataCollection
+        cls,
+        categoryName: str,
+        categoryHelp: str,
+        counterData: CounterCreationDataCollection,
     ) -> PerformanceCounterCategory:
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param categoryHelp:
         :param counterData:
         :return:
@@ -8110,9 +5459,7 @@ class PerformanceCounterCategory(Object):
         categoryType: PerformanceCounterCategoryType,
         counterData: CounterCreationDataCollection,
     ) -> PerformanceCounterCategory:
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param categoryHelp:
         :param categoryType:
         :param counterData:
@@ -8123,9 +5470,7 @@ class PerformanceCounterCategory(Object):
     def Create(
         cls, categoryName: str, categoryHelp: str, counterName: str, counterHelp: str
     ) -> PerformanceCounterCategory:
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param categoryHelp:
         :param counterName:
         :param counterHelp:
@@ -8141,9 +5486,7 @@ class PerformanceCounterCategory(Object):
         counterName: str,
         counterHelp: str,
     ) -> PerformanceCounterCategory:
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param categoryHelp:
         :param categoryType:
         :param counterName:
@@ -8152,112 +5495,72 @@ class PerformanceCounterCategory(Object):
         """
     @classmethod
     def Delete(cls, categoryName: str) -> None:
-        """
-
-        :param categoryName:
-        """
+        """:param categoryName:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Exists(cls, categoryName: str) -> bool:
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :return:
         """
     @classmethod
     @overload
     def Exists(cls, categoryName: str, machineName: str) -> bool:
-        """
-
-        :param categoryName:
+        """:param categoryName:
         :param machineName:
         :return:
         """
     @classmethod
     @overload
     def GetCategories(cls) -> Array[PerformanceCounterCategory]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetCategories(cls, machineName: str) -> Array[PerformanceCounterCategory]:
-        """
-
-        :param machineName:
+        """:param machineName:
         :return:
         """
     @overload
     def GetCounters(self) -> Array[PerformanceCounter]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCounters(self, instanceName: str) -> Array[PerformanceCounter]:
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetInstanceNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def InstanceExists(self, instanceName: str) -> bool:
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :return:
         """
     @classmethod
     @overload
     def InstanceExists(cls, instanceName: str, categoryName: str) -> bool:
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :param categoryName:
         :return:
         """
     @classmethod
     @overload
     def InstanceExists(cls, instanceName: str, categoryName: str, machineName: str) -> bool:
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :param categoryName:
         :param machineName:
         :return:
         """
     def ReadCategory(self) -> InstanceDataCollectionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerformanceCounterCategoryOptions(Enum):
     """"""
@@ -8289,26 +5592,15 @@ class PerformanceCounterLib(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerformanceCounterManager(Object, ICollectData):
     """"""
@@ -8319,39 +5611,30 @@ class PerformanceCounterManager(Object, ICollectData):
         """"""
     def CollectData(
         self, id: int, valueName: IntPtr, data: IntPtr, totalBytes: int, res: IntPtr
-    ) -> Tuple[None, IntPtr]:
-        """
-
-        :param id:
+    ) -> tuple[None, IntPtr]:
+        """:param id:
         :param valueName:
         :param data:
         :param totalBytes:
         :param res:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerformanceCounterPermission(
-    ResourcePermissionBase, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+    ResourcePermissionBase,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
 ):
     """"""
 
@@ -8360,16 +5643,10 @@ class PerformanceCounterPermission(
         """"""
     @overload
     def __init__(self, state: PermissionState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @overload
     def __init__(self, permissionAccessEntries: Array[PerformanceCounterPermissionEntry]):
-        """
-
-        :param permissionAccessEntries:
-        """
+        """:param permissionAccessEntries:"""
     @overload
     def __init__(
         self,
@@ -8377,25 +5654,17 @@ class PerformanceCounterPermission(
         machineName: str,
         categoryName: str,
     ):
-        """
-
-        :param permissionAccess:
+        """:param permissionAccess:
         :param machineName:
         :param categoryName:
         """
     @property
     def PermissionEntries(self) -> PerformanceCounterPermissionEntryCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Assert(self) -> None:
         """"""
     def Copy(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Demand(self) -> None:
         """"""
@@ -8405,59 +5674,33 @@ class PerformanceCounterPermission(
     def Deny(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FromXml(self, e: SecurityElement) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Intersect(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsSubsetOf(self, target: IPermission) -> bool:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsUnrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PermitOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> SecurityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Union(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
 
@@ -8481,100 +5724,61 @@ class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
     """"""
 
     def __init__(self, action: SecurityAction):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @property
     def Action(self) -> SecurityAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
     def CategoryName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CategoryName.setter
     def CategoryName(self, value: str) -> None: ...
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MachineName.setter
     def MachineName(self, value: str) -> None: ...
     @property
     def PermissionAccess(self) -> PerformanceCounterPermissionAccess:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PermissionAccess.setter
     def PermissionAccess(self, value: PerformanceCounterPermissionAccess) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Unrestricted.setter
     def Unrestricted(self, value: bool) -> None: ...
     def CreatePermission(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -8586,9 +5790,7 @@ class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -8598,21 +5800,13 @@ class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerformanceCounterPermissionEntry(Object):
     """"""
@@ -8623,262 +5817,156 @@ class PerformanceCounterPermissionEntry(Object):
         machineName: str,
         categoryName: str,
     ):
-        """
-
-        :param permissionAccess:
+        """:param permissionAccess:
         :param machineName:
         :param categoryName:
         """
     @property
     def CategoryName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PermissionAccess(self) -> PerformanceCounterPermissionAccess:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerformanceCounterPermissionEntryCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
 
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: PerformanceCounterPermissionEntry) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: PerformanceCounterPermissionEntryCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[PerformanceCounterPermissionEntry]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: PerformanceCounterPermissionEntry) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[PerformanceCounterPermissionEntry], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: PerformanceCounterPermissionEntry) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: PerformanceCounterPermissionEntry) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: PerformanceCounterPermissionEntry) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: PerformanceCounterPermissionEntry) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -8946,26 +6034,15 @@ class PerformanceMonitor(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Process(Component, IComponent, IDisposable):
     """"""
@@ -8974,334 +6051,178 @@ class Process(Component, IComponent, IDisposable):
         """"""
     @property
     def BasePriority(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EnableRaisingEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableRaisingEvents.setter
     def EnableRaisingEvents(self, value: bool) -> None: ...
     @property
     def ExitCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExitTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HandleCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasExited(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MainModule(self) -> ProcessModule:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MainWindowHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MainWindowTitle(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaxWorkingSet(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaxWorkingSet.setter
     def MaxWorkingSet(self, value: IntPtr) -> None: ...
     @property
     def MinWorkingSet(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MinWorkingSet.setter
     def MinWorkingSet(self, value: IntPtr) -> None: ...
     @property
     def Modules(self) -> ProcessModuleCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonpagedSystemMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonpagedSystemMemorySize64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PagedMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PagedMemorySize64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PagedSystemMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PagedSystemMemorySize64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PeakPagedMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PeakPagedMemorySize64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PeakVirtualMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PeakVirtualMemorySize64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PeakWorkingSet(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PeakWorkingSet64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PriorityBoostEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PriorityBoostEnabled.setter
     def PriorityBoostEnabled(self, value: bool) -> None: ...
     @property
     def PriorityClass(self) -> ProcessPriorityClass:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PriorityClass.setter
     def PriorityClass(self, value: ProcessPriorityClass) -> None: ...
     @property
     def PrivateMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateMemorySize64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivilegedProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProcessName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProcessorAffinity(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProcessorAffinity.setter
     def ProcessorAffinity(self, value: IntPtr) -> None: ...
     @property
     def Responding(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SafeHandle(self) -> SafeProcessHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SessionId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def StandardError(self) -> StreamReader:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StandardInput(self) -> StreamWriter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StandardOutput(self) -> StreamReader:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartInfo(self) -> ProcessStartInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StartInfo.setter
     def StartInfo(self, value: ProcessStartInfo) -> None: ...
     @property
     def StartTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SynchronizingObject(self) -> ISynchronizeInvoke:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SynchronizingObject.setter
     def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
     @property
     def Threads(self) -> ProcessThreadCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TotalProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VirtualMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VirtualMemorySize64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WorkingSet(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WorkingSet64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginErrorReadLine(self) -> None:
         """"""
     def BeginOutputReadLine(self) -> None:
@@ -9313,14 +6234,9 @@ class Process(Component, IComponent, IDisposable):
     def Close(self) -> None:
         """"""
     def CloseMainWindow(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
@@ -9329,86 +6245,56 @@ class Process(Component, IComponent, IDisposable):
     def EnterDebugMode(cls) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetCurrentProcess(cls) -> Process:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetProcessById(cls, processId: int) -> Process:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     @classmethod
     @overload
     def GetProcessById(cls, processId: int, machineName: str) -> Process:
-        """
-
-        :param processId:
+        """:param processId:
         :param machineName:
         :return:
         """
     @classmethod
     @overload
     def GetProcesses(cls) -> Array[Process]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetProcesses(cls, machineName: str) -> Array[Process]:
-        """
-
-        :param machineName:
+        """:param machineName:
         :return:
         """
     @classmethod
     @overload
     def GetProcessesByName(cls, processName: str) -> Array[Process]:
-        """
-
-        :param processName:
+        """:param processName:
         :return:
         """
     @classmethod
     @overload
     def GetProcessesByName(cls, processName: str, machineName: str) -> Array[Process]:
-        """
-
-        :param processName:
+        """:param processName:
         :param machineName:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Kill(self) -> None:
         """"""
     @classmethod
@@ -9418,41 +6304,30 @@ class Process(Component, IComponent, IDisposable):
         """"""
     @overload
     def Start(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Start(cls, startInfo: ProcessStartInfo) -> Process:
-        """
-
-        :param startInfo:
+        """:param startInfo:
         :return:
         """
     @classmethod
     @overload
     def Start(cls, fileName: str) -> Process:
-        """
-
-        :param fileName:
+        """:param fileName:
         :return:
         """
     @classmethod
     @overload
     def Start(cls, fileName: str, arguments: str) -> Process:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param arguments:
         :return:
         """
     @classmethod
     @overload
     def Start(cls, fileName: str, userName: str, password: SecureString, domain: str) -> Process:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param userName:
         :param password:
         :param domain:
@@ -9461,11 +6336,14 @@ class Process(Component, IComponent, IDisposable):
     @classmethod
     @overload
     def Start(
-        cls, fileName: str, arguments: str, userName: str, password: SecureString, domain: str
+        cls,
+        fileName: str,
+        arguments: str,
+        userName: str,
+        password: SecureString,
+        domain: str,
     ) -> Process:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param arguments:
         :param userName:
         :param password:
@@ -9473,31 +6351,21 @@ class Process(Component, IComponent, IDisposable):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitForExit(self) -> None:
         """"""
     @overload
     def WaitForExit(self, milliseconds: int) -> bool:
-        """
-
-        :param milliseconds:
+        """:param milliseconds:
         :return:
         """
     @overload
     def WaitForInputIdle(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitForInputIdle(self, milliseconds: int) -> bool:
-        """
-
-        :param milliseconds:
+        """:param milliseconds:
         :return:
         """
     Disposed: EventType[EventHandler] = ...
@@ -9523,32 +6391,19 @@ class ProcessData(Object):
     :return: 
     """
     def __init__(self, pid: int, startTime: int):
-        """
-
-        :param pid:
+        """:param pid:
         :param startTime:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProcessInfo(Object):
     """"""
@@ -9636,26 +6491,15 @@ class ProcessInfo(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProcessManager(ABC, Object):
     """"""
@@ -9663,223 +6507,138 @@ class ProcessManager(ABC, Object):
     @classmethod
     @property
     def IsNt(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def IsOSOlderThanXP(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetMainWindowHandle(cls, processId: int) -> IntPtr:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     @classmethod
     def GetModuleInfos(cls, processId: int) -> Array[ModuleInfo]:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     @classmethod
     def GetProcessIdFromHandle(cls, processHandle: SafeProcessHandle) -> int:
-        """
-
-        :param processHandle:
+        """:param processHandle:
         :return:
         """
     @classmethod
     @overload
     def GetProcessIds(cls) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetProcessIds(cls, machineName: str) -> Array[int]:
-        """
-
-        :param machineName:
+        """:param machineName:
         :return:
         """
     @classmethod
     def GetProcessInfo(cls, processId: int, machineName: str) -> ProcessInfo:
-        """
-
-        :param processId:
+        """:param processId:
         :param machineName:
         :return:
         """
     @classmethod
     def GetProcessInfos(cls, machineName: str) -> Array[ProcessInfo]:
-        """
-
-        :param machineName:
+        """:param machineName:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def IsProcessRunning(cls, processId: int) -> bool:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     @classmethod
     @overload
     def IsProcessRunning(cls, processId: int, machineName: str) -> bool:
-        """
-
-        :param processId:
+        """:param processId:
         :param machineName:
         :return:
         """
     @classmethod
     def IsRemoteMachine(cls, machineName: str) -> bool:
-        """
-
-        :param machineName:
+        """:param machineName:
         :return:
         """
     @classmethod
     def OpenProcess(cls, processId: int, access: int, throwIfExited: bool) -> SafeProcessHandle:
-        """
-
-        :param processId:
+        """:param processId:
         :param access:
         :param throwIfExited:
         :return:
         """
     @classmethod
     def OpenThread(cls, threadId: int, access: int) -> SafeThreadHandle:
-        """
-
-        :param threadId:
+        """:param threadId:
         :param access:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProcessModule(Component, IComponent, IDisposable):
     """"""
 
     @property
     def BaseAddress(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EntryPointAddress(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FileVersionInfo(self) -> FileVersionInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ModuleMemorySize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ModuleName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
 
@@ -9887,108 +6646,61 @@ class ProcessModuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     """"""
 
     def __init__(self, processModules: Array[ProcessModule]):
-        """
-
-        :param processModules:
-        """
+        """:param processModules:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> ProcessModule:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Contains(self, module: ProcessModule) -> bool:
-        """
-
-        :param module:
+        """:param module:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ProcessModule], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, module: ProcessModule) -> int:
-        """
-
-        :param module:
+        """:param module:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> ProcessModule:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProcessPriorityClass(Enum):
     """"""
@@ -10014,359 +6726,210 @@ class ProcessStartInfo(Object):
         """"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, fileName: str, arguments: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param arguments:
         """
     @property
     def Arguments(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Arguments.setter
     def Arguments(self, value: str) -> None: ...
     @property
     def CreateNoWindow(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CreateNoWindow.setter
     def CreateNoWindow(self, value: bool) -> None: ...
     @property
     def Domain(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Domain.setter
     def Domain(self, value: str) -> None: ...
     @property
     def Environment(self) -> IDictionary[str, str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EnvironmentVariables(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorDialog(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ErrorDialog.setter
     def ErrorDialog(self, value: bool) -> None: ...
     @property
     def ErrorDialogParentHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ErrorDialogParentHandle.setter
     def ErrorDialogParentHandle(self, value: IntPtr) -> None: ...
     @property
     def FileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @FileName.setter
     def FileName(self, value: str) -> None: ...
     @property
     def LoadUserProfile(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LoadUserProfile.setter
     def LoadUserProfile(self, value: bool) -> None: ...
     @property
     def Password(self) -> SecureString:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Password.setter
     def Password(self, value: SecureString) -> None: ...
     @property
     def PasswordInClearText(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PasswordInClearText.setter
     def PasswordInClearText(self, value: str) -> None: ...
     @property
     def RedirectStandardError(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RedirectStandardError.setter
     def RedirectStandardError(self, value: bool) -> None: ...
     @property
     def RedirectStandardInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RedirectStandardInput.setter
     def RedirectStandardInput(self, value: bool) -> None: ...
     @property
     def RedirectStandardOutput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RedirectStandardOutput.setter
     def RedirectStandardOutput(self, value: bool) -> None: ...
     @property
     def StandardErrorEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StandardErrorEncoding.setter
     def StandardErrorEncoding(self, value: Encoding) -> None: ...
     @property
     def StandardOutputEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StandardOutputEncoding.setter
     def StandardOutputEncoding(self, value: Encoding) -> None: ...
     @property
     def UseShellExecute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseShellExecute.setter
     def UseShellExecute(self, value: bool) -> None: ...
     @property
     def UserName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UserName.setter
     def UserName(self, value: str) -> None: ...
     @property
     def Verb(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Verb.setter
     def Verb(self, value: str) -> None: ...
     @property
     def Verbs(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WindowStyle(self) -> ProcessWindowStyle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WindowStyle.setter
     def WindowStyle(self, value: ProcessWindowStyle) -> None: ...
     @property
     def WorkingDirectory(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WorkingDirectory.setter
     def WorkingDirectory(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProcessThread(Component, IComponent, IDisposable):
     """"""
 
     @property
     def BasePriority(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentPriority(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdealProcessor(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IdealProcessor.setter
     def IdealProcessor(self, value: int) -> None: ...
     @property
     def PriorityBoostEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PriorityBoostEnabled.setter
     def PriorityBoostEnabled(self, value: bool) -> None: ...
     @property
     def PriorityLevel(self) -> ThreadPriorityLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PriorityLevel.setter
     def PriorityLevel(self, value: ThreadPriorityLevel) -> None: ...
     @property
     def PrivilegedProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProcessorAffinity(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProcessorAffinity.setter
     def ProcessorAffinity(self, value: IntPtr) -> None: ...
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def StartAddress(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ThreadState(self) -> ThreadState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TotalProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitReason(self) -> ThreadWaitReason:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ResetIdealProcessor(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
 
@@ -10374,125 +6937,71 @@ class ProcessThreadCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     """"""
 
     def __init__(self, processThreads: Array[ProcessThread]):
-        """
-
-        :param processThreads:
-        """
+        """:param processThreads:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> ProcessThread:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, thread: ProcessThread) -> int:
-        """
-
-        :param thread:
+        """:param thread:
         :return:
         """
     def Contains(self, thread: ProcessThread) -> bool:
-        """
-
-        :param thread:
+        """:param thread:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ProcessThread], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, thread: ProcessThread) -> int:
-        """
-
-        :param thread:
+        """:param thread:
         :return:
         """
     def Insert(self, index: int, thread: ProcessThread) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param thread:
         """
     def Remove(self, thread: ProcessThread) -> None:
-        """
-
-        :param thread:
-        """
+        """:param thread:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> ProcessThread:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProcessThreadTimes(Object):
     """"""
@@ -10501,149 +7010,87 @@ class ProcessThreadTimes(Object):
         """"""
     @property
     def ExitTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivilegedProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TotalProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserProcessorTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProcessWaitHandle(WaitHandle, IDisposable):
     """"""
 
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -10670,10 +7117,7 @@ class SharedListenerElementsCollection(ListenerElementsCollection, ICollection, 
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -10687,16 +7131,10 @@ class SharedListenerElementsCollection(ListenerElementsCollection, ICollection, 
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> ListenerElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -10716,168 +7154,94 @@ class SharedListenerElementsCollection(ListenerElementsCollection, ICollection, 
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRuntimeObject(self) -> TraceListenerCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, name: str) -> ListenerElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SharedPerformanceCounter(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SharedUtils(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ShellExecuteHelper(Object):
     """"""
 
     def __init__(self, executeInfo: NativeMethods.ShellExecuteInfo):
-        """
-
-        :param executeInfo:
-        """
+        """:param executeInfo:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ShellExecuteFunction(self) -> None:
         """"""
     def ShellExecuteOnSTAThread(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SourceElement(ConfigurationElement):
     """"""
@@ -10886,10 +7250,7 @@ class SourceElement(ConfigurationElement):
         """"""
     @property
     def Attributes(self) -> Hashtable:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -10898,10 +7259,7 @@ class SourceElement(ConfigurationElement):
         """"""
     @property
     def Listeners(self) -> ListenerElementsCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -10921,51 +7279,28 @@ class SourceElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SwitchName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SwitchType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SwitchValue(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SourceElementsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -10977,10 +7312,7 @@ class SourceElementsCollection(ConfigurationElementCollection, ICollection, IEnu
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -10994,16 +7326,10 @@ class SourceElementsCollection(ConfigurationElementCollection, ICollection, IEnu
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> SourceElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -11023,103 +7349,60 @@ class SourceElementsCollection(ConfigurationElementCollection, ICollection, IEnu
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, name: str) -> SourceElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SourceFilter(TraceFilter):
     """"""
 
     def __init__(self, source: str):
-        """
-
-        :param source:
-        """
+        """:param source:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ShouldTrace(
         self,
         cache: TraceEventCache,
@@ -11131,9 +7414,7 @@ class SourceFilter(TraceFilter):
         data1: object,
         data: Array[object],
     ) -> bool:
-        """
-
-        :param cache:
+        """:param cache:
         :param source:
         :param eventType:
         :param id:
@@ -11144,10 +7425,7 @@ class SourceFilter(TraceFilter):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SourceLevels(Enum):
     """"""
@@ -11174,70 +7452,40 @@ class SourceSwitch(Switch):
 
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def __init__(self, displayName: str, defaultSwitchValue: str):
-        """
-
-        :param displayName:
+        """:param displayName:
         :param defaultSwitchValue:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Level(self) -> SourceLevels:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Level.setter
     def Level(self, value: SourceLevels) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ShouldTrace(self, eventType: TraceEventType) -> bool:
-        """
-
-        :param eventType:
+        """:param eventType:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StackFrame(Object):
     """"""
@@ -11252,240 +7500,142 @@ class StackFrame(Object):
         """"""
     @overload
     def __init__(self, fNeedFileInfo: bool):
-        """
-
-        :param fNeedFileInfo:
-        """
+        """:param fNeedFileInfo:"""
     @overload
     def __init__(self, skipFrames: int):
-        """
-
-        :param skipFrames:
-        """
+        """:param skipFrames:"""
     @overload
     def __init__(self, skipFrames: int, fNeedFileInfo: bool):
-        """
-
-        :param skipFrames:
+        """:param skipFrames:
         :param fNeedFileInfo:
         """
     @overload
     def __init__(self, fileName: str, lineNumber: int):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param lineNumber:
         """
     @overload
     def __init__(self, fileName: str, lineNumber: int, colNumber: int):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param lineNumber:
         :param colNumber:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetFileColumnNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetFileLineNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetFileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetILOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetMethod(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNativeOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StackFrameExtensions(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetNativeIP(cls, stackFrame: StackFrame) -> IntPtr:
-        """
-
-        :param stackFrame:
+        """:param stackFrame:
         :return:
         """
     @classmethod
     def GetNativeImageBase(cls, stackFrame: StackFrame) -> IntPtr:
-        """
-
-        :param stackFrame:
+        """:param stackFrame:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def HasILOffset(cls, stackFrame: StackFrame) -> bool:
-        """
-
-        :param stackFrame:
+        """:param stackFrame:
         :return:
         """
     @classmethod
     def HasMethod(cls, stackFrame: StackFrame) -> bool:
-        """
-
-        :param stackFrame:
+        """:param stackFrame:
         :return:
         """
     @classmethod
     def HasNativeImage(cls, stackFrame: StackFrame) -> bool:
-        """
-
-        :param stackFrame:
+        """:param stackFrame:
         :return:
         """
     @classmethod
     def HasSource(cls, stackFrame: StackFrame) -> bool:
-        """
-
-        :param stackFrame:
+        """:param stackFrame:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StackFrameHelper(Object, IDisposable):
     """"""
 
     def __init__(self, target: Thread):
-        """
-
-        :param target:
-        """
+        """:param target:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetColumnNumber(self, i: int) -> int:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def GetFilename(self, i: int) -> str:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetILOffset(self, i: int) -> int:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def GetLineNumber(self, i: int) -> int:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def GetMethodBase(self, i: int) -> MethodBase:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def GetNumberOfFrames(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOffset(self, i: int) -> int:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsLastFrameFromForeignExceptionStackTrace(self, i: int) -> bool:
-        """
-
-        :param i:
+        """:param i:
         :return:
         """
     def SetNumberOfFrames(self, i: int) -> None:
-        """
-
-        :param i:
-        """
+        """:param i:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StackTrace(Object):
     """"""
@@ -11500,102 +7650,61 @@ class StackTrace(Object):
         """"""
     @overload
     def __init__(self, frame: StackFrame):
-        """
-
-        :param frame:
-        """
+        """:param frame:"""
     @overload
     def __init__(self, fNeedFileInfo: bool):
-        """
-
-        :param fNeedFileInfo:
-        """
+        """:param fNeedFileInfo:"""
     @overload
     def __init__(self, e: Exception):
-        """
-
-        :param e:
-        """
+        """:param e:"""
     @overload
     def __init__(self, skipFrames: int):
-        """
-
-        :param skipFrames:
-        """
+        """:param skipFrames:"""
     @overload
     def __init__(self, targetThread: Thread, needFileInfo: bool):
-        """
-
-        :param targetThread:
+        """:param targetThread:
         :param needFileInfo:
         """
     @overload
     def __init__(self, e: Exception, fNeedFileInfo: bool):
-        """
-
-        :param e:
+        """:param e:
         :param fNeedFileInfo:
         """
     @overload
     def __init__(self, e: Exception, skipFrames: int):
-        """
-
-        :param e:
+        """:param e:
         :param skipFrames:
         """
     @overload
     def __init__(self, skipFrames: int, fNeedFileInfo: bool):
-        """
-
-        :param skipFrames:
+        """:param skipFrames:
         :param fNeedFileInfo:
         """
     @overload
     def __init__(self, e: Exception, skipFrames: int, fNeedFileInfo: bool):
-        """
-
-        :param e:
+        """:param e:
         :param skipFrames:
         :param fNeedFileInfo:
         """
     @property
     def FrameCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetFrame(self, index: int) -> StackFrame:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def GetFrames(self) -> Array[StackFrame]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StackTraceSymbols(Object, IDisposable):
     """"""
@@ -11605,16 +7714,11 @@ class StackTraceSymbols(Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSourceLineInfo(
         self,
         assemblyPath: str,
@@ -11627,10 +7731,8 @@ class StackTraceSymbols(Object, IDisposable):
         sourceFile: str,
         sourceLine: int,
         sourceColumn: int,
-    ) -> Tuple[None, str, int, int]:
-        """
-
-        :param assemblyPath:
+    ) -> tuple[None, str, int, int]:
+        """:param assemblyPath:
         :param loadedPeAddress:
         :param loadedPeSize:
         :param inMemoryPdbAddress:
@@ -11653,10 +7755,8 @@ class StackTraceSymbols(Object, IDisposable):
         sourceFile: str,
         sourceLine: int,
         sourceColumn: int,
-    ) -> Tuple[None, str, int, int]:
-        """
-
-        :param assemblyPath:
+    ) -> tuple[None, str, int, int]:
+        """:param assemblyPath:
         :param loadedPeAddress:
         :param loadedPeSize:
         :param inMemoryPdbAddress:
@@ -11668,15 +7768,9 @@ class StackTraceSymbols(Object, IDisposable):
         :param sourceColumn:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Stopwatch(Object):
     """"""
@@ -11695,50 +7789,27 @@ class Stopwatch(Object):
         """"""
     @property
     def Elapsed(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ElapsedMilliseconds(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ElapsedTicks(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsRunning(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetTimestamp(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def Restart(self) -> None:
@@ -11747,146 +7818,89 @@ class Stopwatch(Object):
         """"""
     @classmethod
     def StartNew(cls) -> Stopwatch:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Switch(ABC, Object):
     """"""
 
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SwitchAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, switchName: str, switchType: Type):
-        """
-
-        :param switchName:
+        """:param switchName:
         :param switchType:
         """
     @property
     def SwitchDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SwitchDescription.setter
     def SwitchDescription(self, value: str) -> None: ...
     @property
     def SwitchName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SwitchName.setter
     def SwitchName(self, value: str) -> None: ...
     @property
     def SwitchType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SwitchType.setter
     def SwitchType(self, value: Type) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetAll(cls, assembly: Assembly) -> Array[SwitchAttribute]:
-        """
-
-        :param assembly:
+        """:param assembly:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -11898,9 +7912,7 @@ class SwitchAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11910,21 +7922,13 @@ class SwitchAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SwitchElement(ConfigurationElement):
     """"""
@@ -11933,10 +7937,7 @@ class SwitchElement(ConfigurationElement):
         """"""
     @property
     def Attributes(self) -> Hashtable:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -11962,39 +7963,22 @@ class SwitchElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SwitchElementsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -12006,10 +7990,7 @@ class SwitchElementsCollection(ConfigurationElementCollection, ICollection, IEnu
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -12023,16 +8004,10 @@ class SwitchElementsCollection(ConfigurationElementCollection, ICollection, IEnu
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> SwitchElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -12052,132 +8027,79 @@ class SwitchElementsCollection(ConfigurationElementCollection, ICollection, IEnu
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, name: str) -> SwitchElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SwitchLevelAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, switchLevelType: Type):
-        """
-
-        :param switchLevelType:
-        """
+        """:param switchLevelType:"""
     @property
     def SwitchLevelType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SwitchLevelType.setter
     def SwitchLevelType(self, value: Type) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -12189,9 +8111,7 @@ class SwitchLevelAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -12201,21 +8121,13 @@ class SwitchLevelAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SwitchesDictionarySectionHandler(DictionarySectionHandler, IConfigurationSectionHandler):
     """"""
@@ -12223,34 +8135,21 @@ class SwitchesDictionarySectionHandler(DictionarySectionHandler, IConfigurationS
     def __init__(self):
         """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemDiagnosticsSection(ConfigurationSection):
     """"""
@@ -12259,10 +8158,7 @@ class SystemDiagnosticsSection(ConfigurationSection):
         """"""
     @property
     def Assert(self) -> AssertSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -12288,60 +8184,34 @@ class SystemDiagnosticsSection(ConfigurationSection):
     def LockItem(self, value: bool) -> None: ...
     @property
     def PerfCounters(self) -> PerfCounterSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionInformation(self) -> SectionInformation:
         """"""
     @property
     def SharedListeners(self) -> ListenerElementsCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Sources(self) -> SourceElementsCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Switches(self) -> SwitchElementsCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Trace(self) -> TraceSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TextWriterTraceListener(TraceListener, IDisposable):
     """"""
@@ -12351,159 +8221,96 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         """"""
     @overload
     def __init__(self, stream: Stream):
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
     @overload
     def __init__(self, writer: TextWriter):
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, stream: Stream, name: str):
-        """
-
-        :param stream:
+        """:param stream:
         :param name:
         """
     @overload
     def __init__(self, writer: TextWriter, name: str):
-        """
-
-        :param writer:
+        """:param writer:
         :param name:
         """
     @overload
     def __init__(self, fileName: str, name: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param name:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     @property
     def Writer(self) -> TextWriter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Writer.setter
     def Writer(self, value: TextWriter) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -12513,9 +8320,7 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -12530,9 +8335,7 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -12540,11 +8343,13 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -12558,9 +8363,7 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -12576,9 +8379,7 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -12593,9 +8394,7 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -12603,54 +8402,34 @@ class TextWriterTraceListener(TraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
 
@@ -12695,26 +8474,15 @@ class ThreadInfo(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadPriorityLevel(Enum):
     """"""
@@ -12792,78 +8560,53 @@ class Trace(Object):
     @classmethod
     @property
     def AutoFlush(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @AutoFlush.setter
     def AutoFlush(cls, value: bool) -> None: ...
     @classmethod
     @property
     def CorrelationManager(cls) -> CorrelationManager:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def IndentLevel(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @IndentLevel.setter
     def IndentLevel(cls, value: int) -> None: ...
     @classmethod
     @property
     def IndentSize(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @IndentSize.setter
     def IndentSize(cls, value: int) -> None: ...
     @classmethod
     @property
     def Listeners(cls) -> TraceListenerCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def UseGlobalLock(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @UseGlobalLock.setter
     def UseGlobalLock(cls, value: bool) -> None: ...
     @classmethod
     @overload
     def Assert(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Assert(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def Assert(cls, condition: bool, message: str, detailMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param detailMessage:
         """
@@ -12871,39 +8614,26 @@ class Trace(Object):
     def Close(cls) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Fail(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Fail(cls, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     @classmethod
     def Flush(cls) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Indent(cls) -> None:
         """"""
@@ -12911,53 +8641,35 @@ class Trace(Object):
     def Refresh(cls) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def TraceError(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def TraceError(cls, format: str, args: Array[object]) -> None:
-        """
-
-        :param format:
+        """:param format:
         :param args:
         """
     @classmethod
     @overload
     def TraceInformation(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def TraceInformation(cls, format: str, args: Array[object]) -> None:
-        """
-
-        :param format:
+        """:param format:
         :param args:
         """
     @classmethod
     @overload
     def TraceWarning(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def TraceWarning(cls, format: str, args: Array[object]) -> None:
-        """
-
-        :param format:
+        """:param format:
         :param args:
         """
     @classmethod
@@ -12966,128 +8678,92 @@ class Trace(Object):
     @classmethod
     @overload
     def Write(cls, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @classmethod
     @overload
     def Write(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Write(cls, value: object, category: str) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param category:
         """
     @classmethod
     @overload
     def Write(cls, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, value: object) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, value: object, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, message: str, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteLine(cls, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @classmethod
     @overload
     def WriteLine(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def WriteLine(cls, value: object, category: str) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteLine(cls, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, value: object) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, value: object, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, message: str, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param category:
         """
@@ -13099,61 +8775,32 @@ class TraceEventCache(Object):
         """"""
     @property
     def Callstack(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DateTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogicalOperationStack(self) -> Stack:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProcessId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ThreadId(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Timestamp(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TraceEventType(Enum):
     """"""
@@ -13183,21 +8830,13 @@ class TraceFilter(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ShouldTrace(
         self,
         cache: TraceEventCache,
@@ -13209,9 +8848,7 @@ class TraceFilter(ABC, Object):
         data1: object,
         data: Array[object],
     ) -> bool:
-        """
-
-        :param cache:
+        """:param cache:
         :param source:
         :param eventType:
         :param id:
@@ -13222,10 +8859,7 @@ class TraceFilter(ABC, Object):
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TraceInternal(ABC, Object):
     """"""
@@ -13233,71 +8867,49 @@ class TraceInternal(ABC, Object):
     @classmethod
     @property
     def AutoFlush(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @AutoFlush.setter
     def AutoFlush(cls, value: bool) -> None: ...
     @classmethod
     @property
     def IndentLevel(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @IndentLevel.setter
     def IndentLevel(cls, value: int) -> None: ...
     @classmethod
     @property
     def IndentSize(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @IndentSize.setter
     def IndentSize(cls, value: int) -> None: ...
     @classmethod
     @property
     def Listeners(cls) -> TraceListenerCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def UseGlobalLock(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @UseGlobalLock.setter
     def UseGlobalLock(cls, value: bool) -> None: ...
     @classmethod
     @overload
     def Assert(cls, condition: bool) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def Assert(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def Assert(cls, condition: bool, message: str, detailMessage: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param detailMessage:
         """
@@ -13305,54 +8917,36 @@ class TraceInternal(ABC, Object):
     def Close(cls) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Fail(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Fail(cls, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     @classmethod
     def Flush(cls) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Indent(cls) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def TraceEvent(
         cls, eventType: TraceEventType, id: int, format: str, args: Array[object]
     ) -> None:
-        """
-
-        :param eventType:
+        """:param eventType:
         :param id:
         :param format:
         :param args:
@@ -13363,128 +8957,92 @@ class TraceInternal(ABC, Object):
     @classmethod
     @overload
     def Write(cls, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @classmethod
     @overload
     def Write(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def Write(cls, value: object, category: str) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param category:
         """
     @classmethod
     @overload
     def Write(cls, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, value: object) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, value: object, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteIf(cls, condition: bool, message: str, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteLine(cls, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @classmethod
     @overload
     def WriteLine(cls, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @classmethod
     @overload
     def WriteLine(cls, value: object, category: str) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteLine(cls, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, value: object) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, message: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, value: object, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param value:
         :param category:
         """
     @classmethod
     @overload
     def WriteLineIf(cls, condition: bool, message: str, category: str) -> None:
-        """
-
-        :param condition:
+        """:param condition:
         :param message:
         :param category:
         """
@@ -13508,112 +9066,67 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
 
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -13623,9 +9136,7 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -13640,9 +9151,7 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -13650,11 +9159,13 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -13668,9 +9179,7 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -13686,9 +9195,7 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -13703,9 +9210,7 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -13713,54 +9218,34 @@ class TraceListener(ABC, MarshalByRefObject, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
 
@@ -13769,217 +9254,131 @@ class TraceListenerCollection(Object, ICollection, IEnumerable, IList):
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, listener: TraceListener) -> int:
-        """
-
-        :param listener:
+        """:param listener:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: TraceListenerCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[TraceListener]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, listener: TraceListener) -> bool:
-        """
-
-        :param listener:
+        """:param listener:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, listeners: Array[TraceListener], index: int) -> None:
-        """
-
-        :param listeners:
+        """:param listeners:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, listener: TraceListener) -> int:
-        """
-
-        :param listener:
+        """:param listener:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, listener: TraceListener) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param listener:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, listener: TraceListener) -> None:
-        """
-
-        :param listener:
-        """
+        """:param listener:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> TraceListener:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, i: int, value: TraceListener) -> None:
-        """
-
-        :param i:
+        """:param i:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -14022,10 +9421,7 @@ class TraceSection(ConfigurationElement):
         """"""
     @property
     def AutoFlush(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -14034,16 +9430,10 @@ class TraceSection(ConfigurationElement):
         """"""
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Listeners(self) -> ListenerElementsCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -14063,129 +9453,79 @@ class TraceSection(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def UseGlobalLock(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TraceSource(Object):
     """"""
 
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def __init__(self, name: str, defaultLevel: SourceLevels):
-        """
-
-        :param name:
+        """:param name:
         :param defaultLevel:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Listeners(self) -> TraceListenerCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Switch(self) -> SourceSwitch:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Switch.setter
     def Switch(self, value: SourceSwitch) -> None: ...
     def Close(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(self, eventType: TraceEventType, id: int, data: Array[object]) -> None:
-        """
-
-        :param eventType:
+        """:param eventType:
         :param id:
         :param data:
         """
     @overload
     def TraceData(self, eventType: TraceEventType, id: int, data: object) -> None:
-        """
-
-        :param eventType:
+        """:param eventType:
         :param id:
         :param data:
         """
     @overload
     def TraceEvent(self, eventType: TraceEventType, id: int) -> None:
-        """
-
-        :param eventType:
+        """:param eventType:
         :param id:
         """
     @overload
     def TraceEvent(self, eventType: TraceEventType, id: int, message: str) -> None:
-        """
-
-        :param eventType:
+        """:param eventType:
         :param id:
         :param message:
         """
@@ -14193,30 +9533,21 @@ class TraceSource(Object):
     def TraceEvent(
         self, eventType: TraceEventType, id: int, format: str, args: Array[object]
     ) -> None:
-        """
-
-        :param eventType:
+        """:param eventType:
         :param id:
         :param format:
         :param args:
         """
     @overload
     def TraceInformation(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def TraceInformation(self, format: str, args: Array[object]) -> None:
-        """
-
-        :param format:
+        """:param format:
         :param args:
         """
     def TraceTransfer(self, id: int, message: str, relatedActivityId: Guid) -> None:
-        """
-
-        :param id:
+        """:param id:
         :param message:
         :param relatedActivityId:
         """
@@ -14226,124 +9557,71 @@ class TraceSwitch(Switch):
 
     @overload
     def __init__(self, displayName: str, description: str):
-        """
-
-        :param displayName:
+        """:param displayName:
         :param description:
         """
     @overload
     def __init__(self, displayName: str, description: str, defaultSwitchValue: str):
-        """
-
-        :param displayName:
+        """:param displayName:
         :param description:
         :param defaultSwitchValue:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Level(self) -> TraceLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Level.setter
     def Level(self, value: TraceLevel) -> None: ...
     @property
     def TraceError(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TraceInfo(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TraceVerbose(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TraceWarning(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TraceUtils(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypedElement(ConfigurationElement):
     """"""
 
     def __init__(self, baseType: Type):
-        """
-
-        :param baseType:
-        """
+        """:param baseType:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -14352,10 +9630,7 @@ class TypedElement(ConfigurationElement):
         """"""
     @property
     def InitData(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitData.setter
     def InitData(self, value: str) -> None: ...
     @property
@@ -14377,73 +9652,42 @@ class TypedElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def TypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TypeName.setter
     def TypeName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnescapedXmlDiagnosticData(Object):
     """"""
 
     def __init__(self, xmlPayload: str):
-        """
-
-        :param xmlPayload:
-        """
+        """:param xmlPayload:"""
     @property
     def UnescapedXml(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UnescapedXml.setter
     def UnescapedXml(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 UserCallBack: Callable[[str], None] = ...
 """
@@ -14455,204 +9699,122 @@ class WinProcessManager(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetModuleInfos(cls, processId: int) -> Array[ModuleInfo]:
-        """
-
-        :param processId:
+        """:param processId:
         :return:
         """
     @classmethod
     def GetProcessIds(cls) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetProcessInfos(cls) -> Array[ProcessInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
     """"""
 
     @overload
     def __init__(self, stream: Stream):
-        """
-
-        :param stream:
-        """
+        """:param stream:"""
     @overload
     def __init__(self, writer: TextWriter):
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
     @overload
     def __init__(self, filename: str):
-        """
-
-        :param filename:
-        """
+        """:param filename:"""
     @overload
     def __init__(self, stream: Stream, name: str):
-        """
-
-        :param stream:
+        """:param stream:
         :param name:
         """
     @overload
     def __init__(self, writer: TextWriter, name: str):
-        """
-
-        :param writer:
+        """:param writer:
         :param name:
         """
     @overload
     def __init__(self, filename: str, name: str):
-        """
-
-        :param filename:
+        """:param filename:
         :param name:
         """
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filter(self) -> TraceFilter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
     def IndentLevel(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentLevel.setter
     def IndentLevel(self, value: int) -> None: ...
     @property
     def IndentSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IndentSize.setter
     def IndentSize(self, value: int) -> None: ...
     @property
     def IsThreadSafe(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def TraceOutputOptions(self) -> TraceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     @property
     def Writer(self) -> TextWriter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Writer.setter
     def Writer(self, value: TextWriter) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Fail(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Fail(self, message: str, detailMessage: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param detailMessage:
         """
     def Flush(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TraceData(
         self,
@@ -14662,9 +9824,7 @@ class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -14679,9 +9839,7 @@ class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         data: object,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -14689,11 +9847,13 @@ class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def TraceEvent(
-        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -14707,9 +9867,7 @@ class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
         id: int,
         message: str,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -14725,9 +9883,7 @@ class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
         format: str,
         args: Array[object],
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param eventType:
         :param id:
@@ -14742,9 +9898,7 @@ class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
         message: str,
         relatedActivityId: Guid,
     ) -> None:
-        """
-
-        :param eventCache:
+        """:param eventCache:
         :param source:
         :param id:
         :param message:
@@ -14752,53 +9906,33 @@ class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
         """
     @overload
     def Write(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Write(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Write(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def Write(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """
     @overload
     def WriteLine(self, o: object) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def WriteLine(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def WriteLine(self, o: object, category: str) -> None:
-        """
-
-        :param o:
+        """:param o:
         :param category:
         """
     @overload
     def WriteLine(self, message: str, category: str) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param category:
         """

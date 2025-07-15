@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 
 from System import Object
@@ -12,71 +10,46 @@ class ReflectionExtensions(ABC, Object):
 
     @classmethod
     def Assembly(cls, type: Type) -> Assembly:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def BaseType(cls, type: Type) -> Type:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetTypeCode(cls, type: Type) -> TypeCode:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def IsAbstract(cls, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def IsEnum(cls, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def IsSealed(cls, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def ReflectionOnly(cls, assm: Assembly) -> bool:
-        """
-
-        :param assm:
+        """:param assm:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

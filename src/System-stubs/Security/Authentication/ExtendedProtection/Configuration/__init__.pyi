@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Iterator
+from collections.abc import Iterator
 from typing import overload
 
 from System import Array
@@ -24,26 +22,15 @@ class ExtendedProtectionConfigurationStrings(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExtendedProtectionPolicyElement(ConfigurationElement):
     """"""
@@ -55,10 +42,7 @@ class ExtendedProtectionPolicyElement(ConfigurationElement):
         """"""
     @property
     def CustomServiceNames(self) -> ServiceNameElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ElementInformation(self) -> ElementInformation:
         """"""
@@ -81,48 +65,28 @@ class ExtendedProtectionPolicyElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def PolicyEnforcement(self) -> PolicyEnforcement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PolicyEnforcement.setter
     def PolicyEnforcement(self, value: PolicyEnforcement) -> None: ...
     @property
     def ProtectionScenario(self) -> ProtectionScenario:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProtectionScenario.setter
     def ProtectionScenario(self, value: ProtectionScenario) -> None: ...
     def BuildPolicy(self) -> ExtendedProtectionPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServiceNameElement(ConfigurationElement):
     """"""
@@ -154,35 +118,21 @@ class ServiceNameElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServiceNameElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -194,10 +144,7 @@ class ServiceNameElementCollection(ConfigurationElementCollection, ICollection, 
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -211,16 +158,10 @@ class ServiceNameElementCollection(ConfigurationElementCollection, ICollection, 
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> ServiceNameElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: ServiceNameElement) -> None: ...
     @property
@@ -242,119 +183,70 @@ class ServiceNameElementCollection(ConfigurationElementCollection, ICollection, 
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, element: ServiceNameElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     def Clear(self) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, element: ServiceNameElement) -> int:
-        """
-
-        :param element:
+        """:param element:
         :return:
         """
     def IsReadOnly(self) -> bool:
         """"""
     @overload
     def Remove(self, element: ServiceNameElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     @overload
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> ServiceNameElement:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> ServiceNameElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: ServiceNameElement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, name: str, value: ServiceNameElement) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """

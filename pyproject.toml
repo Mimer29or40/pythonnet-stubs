@@ -1,93 +1,20 @@
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 
 [project]
-# name
-# TOML type: string
-# The name of the project.
 name = "stubgen"
-
-# version
-# TOML type: string
-# The version of the project as supported by PEP 440.
 #version = ""  # Defined by setuptools_scm
-
-# description
-# TOML type: string
-# The summary description of the project.
 description = "A library for generating stubs of .NET libraries"
-
-# readme
-# TOML type: string or table
-# The full description of the project (i.e. the README).
-# The field accepts either a string or a table. If it is a string then it is a path
-#   relative to pyproject.toml to a text file containing the full description. Tools
-#   MUST assume the file’s encoding is UTF-8. If the file path ends in a
-#   case-insensitive .md suffix, then tools MUST assume the content-type is
-#   text/markdown. If the file path ends in a case-insensitive .rst, then tools MUST
-#   assume the content-type is text/x-rst. If a tool recognizes more extensions than
-#   this PEP, they MAY infer the content-type for the user without specifying this field
-#   as dynamic. For all unrecognized suffixes when a content-type is not provided, tools
-#   MUST raise an error.
-# The readme field may also take a table. The file key has a string value representing a
-#   path relative to pyproject.toml to a file containing the full description. The text
-#   key has a string value which is the full description. These keys are
-#   mutually-exclusive, thus tools MUST raise an error if the metadata specifies both
-#   keys.
-# A table specified in the readme field also has a content-type field which takes a
-#   string specifying the content-type of the full description. A tool MUST raise an
-#   error if the metadata does not specify this field in the table. If the metadata does
-#   not specify the charset parameter, then it is assumed to be UTF-8. Tools MAY support
-#   other encodings if they choose to. Tools MAY support alternative content-types which
-#   they can transform to a content-type as supported by the core metadata. Otherwise
-#   tools MUST raise an error for unsupported content-types.
 readme = { file = "README.md", content-type = "text/markdown" }
-
-# license
-# TOML type: table
-# The table may have one of two keys. The file key has a string value that is a file
-#   path relative to pyproject.toml to the file which contains the license for the
-#   project. Tools MUST assume the file’s encoding is UTF-8. The text key has a string
-#   value which is the license of the project. These keys are mutually exclusive, so a
-#   tool MUST raise an error if the metadata specifies both keys.
 #license = { file = "LICENSE" }
-
-# authors/maintainers
-# TOML type: Array of inline tables with string keys and values
-# The people or organizations considered to be the “authors” of the project. The exact
-#   meaning is open to interpretation — it may list the original or primary authors,
-#   current maintainers, or owners of the package.
-# The “maintainers” field is similar to “authors” in that its exact meaning is open to
-#   interpretation.
-# These fields accept an array of tables with 2 keys: name and email. Both values must
-#   be strings. The name value MUST be a valid email name (i.e. whatever can be put as a
-#   name, before an email, in RFC 822) and not contain commas. The email value MUST be a
-#   valid email address. Both keys are optional, but at least one of the keys must be
-#   specified in the table.
-# Using the data to fill in core metadata is as follows:
-#   1. If only name is provided, the value goes in Author or Maintainer as appropriate.
-#   2. If only email is provided, the value goes in Author-email or Maintainer-email as
-#        appropriate.
-#   3. If both email and name are provided, the value goes in Author-email or
-#        Maintainer-email as appropriate, with the format {name} <{email}>.
-#   4. Multiple values should be separated by commas.
 authors = [
     { name = "Ryan Smith", email = "Ryan.Smith1215@gmail.com" },
 ]
 maintainers = []
-
-# keywords
-# TOML type: array of strings
-# The keywords for the project.
 keywords = [
     "pythonnet",
     "generator",
     "code generating code",
 ]
-
-# classifiers
-# TOML type: array of strings
-# Trove classifiers which apply to the project.
-# Complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
@@ -98,9 +25,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Software Development :: Build Tools",
     "Topic :: Software Development :: Code Generators",
@@ -109,54 +34,15 @@ classifiers = [
     "Topic :: Utilities",
     "Typing :: Typed",
 ]
-
-# requires-python
-# TOML type: string
-# The Python version requirements of the project.
-requires-python = ">=3.8"
-
-# dependencies
-# TOML type: Array of PEP 508 strings dependencies
-# Corresponding core metadata field: Requires-Dist and Provides-Extra
-# The dependencies of the project.
-# For dependencies, it is a key whose value is an array of strings. Each string
-#   represents a dependency of the project and MUST be formatted as a valid PEP 508
-#   string. Each string maps directly to a Requires-Dist entry.
+requires-python = ">=3.13"
 dependencies = [
     "pythonnet>=3.0.0",
-    "black",
-    "isort",
+    "black>=25.1.0",
+    "isort>=6.0.1",
+    "ruff>=0.12.3",
 ]
-
-# dynamic
-# TOML type: array of string
-# Specifies which fields listed by this PEP were intentionally unspecified so another
-#   tool can/will provide such metadata dynamically. This clearly delineates which
-#   metadata is purposefully unspecified and expected to stay unspecified compared to
-#   being provided via tooling later on.
-# * A build back-end MUST honour statically-specified metadata (which means the metadata
-#     did not list the field in dynamic).
-# * A build back-end MUST raise an error if the metadata specifies name in dynamic.
-# * If the core metadata specification lists a field as “Required”, then the metadata
-#     MUST specify the field statically or list it in dynamic (build back-ends MUST
-#     raise an error otherwise, i.e. it should not be possible for a required field to
-#     not be listed somehow in the [project] table).
-# * If the core metadata specification lists a field as “Optional”, the metadata MAY
-#     list it in dynamic if the expectation is a build back-end will provide the data
-#     for the field later.
-# * Build back-ends MUST raise an error if the metadata specifies a field statically as
-#     well as being listed in dynamic.
-# * If the metadata does not list a field in dynamic, then a build back-end CANNOT fill
-#     in the requisite metadata on behalf of the user (i.e. dynamic is the only way to
-#     allow a tool to fill in metadata and the user must opt into the filling in).
-# * Build back-ends MUST raise an error if the metadata specifies a field in dynamic but
-#     the build back-end was unable to determine the data for it (omitting the data, if
-#     determined to be the accurate value, is acceptable).
 dynamic = ["version"]
 
-# urls
-# TOML type: table with keys and values of strings
-# A table of URLs where the key is the URL label and the value is the URL itself.
 [project.urls]
 Homepage = "https://github.com/Mimer29or40/pythonnet-stubs"
 Download = "https://github.com/Mimer29or40/pythonnet-stubs/releases"
@@ -164,197 +50,110 @@ Source = "https://github.com/Mimer29or40/pythonnet-stubs"
 Documentation = "https://github.com/Mimer29or40/pythonnet-stubs/wiki"
 "Issue Tracker" = "https://github.com/Mimer29or40/pythonnet-stubs/issues"
 
-# Entry points
-# TOML type: table ([project.scripts], [project.gui-scripts], and [project.entry-points])
-# There are three tables related to entry points. The [project.scripts] table
-#   corresponds to the console_scripts group in the entry points specification. The key
-#   of the table is the name of the entry point and the value is the object reference.
-# The [project.gui-scripts] table corresponds to the gui_scripts group in the entry
-#   points specification. Its format is the same as [project.scripts].
-# The [project.entry-points] table is a collection of tables. Each sub-table’s name is
-#   an entry point group. The key and value semantics are the same as [project.scripts].
-#   Users MUST NOT create nested sub-tables but instead keep the entry point groups to
-#   only one level deep.
-# Build back-ends MUST raise an error if the metadata defines a
-#   [project.entry-points.console_scripts] or [project.entry-points.gui_scripts] table,
-#   as they would be ambiguous in the face of [project.scripts] and
-#   [project.gui-scripts], respectively.
 [project.scripts]
 stubgen = "stubgen.__main__:main"
-#[project.gui-scripts]
-#[project.entry-points]
 
-# optional-dependencies
-# TOML type: A table with values of arrays of PEP 508 strings
-# Corresponding core metadata field: Requires-Dist and Provides-Extra
-# The optional dependencies of the project.
-# For optional-dependencies, it is a table where each key specifies an extra and whose
-#   value is an array of strings. The strings of the arrays must be valid PEP 508
-#   strings. The keys MUST be valid values for Provides-Extra. Each value in the array
-#   thus becomes a corresponding Requires-Dist entry for the matching Provides-Extra
-#   metadata.
 [project.optional-dependencies]
 tests = [
     "tox",
 ]
 
-[tool.setuptools]
-# platforms
-# TOML type: array of strings
-# A list of strings
-#platforms = []
-
-# zip-safe
-# TOML type: boolean (true/false)
-# A boolean (True or False) flag specifying whether the project can be safely installed
-#   and run from a zip file. If this argument is not supplied, the bdist_egg command
-#   will have to analyze all of your project’s contents for possible problems each time
-#   it builds an egg.
-# If not specified, setuptools will try to guess a reasonable default for the package
-#zip-safe = true
-
-# eager-resources
-# TOML type: array of strings
-# A list of strings naming resources that should be extracted together, if any of them
-#   is needed, or if any C extensions included in the project are imported. This
-#   argument is only useful if the project will be installed as a zipfile, and there is
-#   a need to have all of the listed resources be extracted to the filesystem as a unit.
-#   Resources listed here should be ‘/’-separated paths, relative to the source root, so
-#   to list a resource foo.png in package bar.baz, you would include the string
-#   bar/baz/foo.png in this argument.
-# If you only need to obtain resources one at a time, or you don’t have any C extensions
-#   that access other files in the project (such as data files or shared libraries), you
-#   probably do NOT need this argument and shouldn’t mess with it. For more details on
-#   how this argument works, see the section below on Automatic Resource Extraction.
-#eager-resources = []
-
-# py-modules
-# TOML type: array of strings
-# A list of strings specifying the modules that setuptools will manipulate.
-# SEE AUTOMATIC DISCOVERY TIP BELOW
-#py-modules = []
-
-# packages
-# TOML type: array of strings or find directive
-# A list of strings specifying the packages that setuptools will manipulate.
-# SEE AUTOMATIC DISCOVERY TIP BELOW
-#packages = []
-
-# package-dir
-# TOML type: table/inline-table
-# A dictionary that maps package names (as they will be imported by the end-users) into
-#   directory paths (that actually exist in the project’s source tree). This
-#   configuration has two main purposes:
-# 1. To effectively “rename” paths when building your package. For example,
-#      package_dir={"mypkg": "dir1/dir2/code_for_mypkg"} will instruct setuptools to
-#      copy the dir1/dir2/code_for_mypkg/... files as mypkg/... when building the final
-#      wheel distribution.
-#    Attention
-#      While it is possible to specify arbitrary mappings, developers are STRONGLY
-#      ADVISED AGAINST that. They should try as much as possible to keep the directory
-#      names and hierarchy identical to the way they will appear in the final wheel,
-#      only deviating when absolutely necessary.
-# 2. To indicate that the relevant code is entirely contained inside a specific
-#      directory (instead of directly placed under the project’s root). In this case, a
-#      special key is required (the empty string, ""), for example:
-#      package_dir={"": "<name of the container directory>"}. All the directories inside
-#      the container directory will be copied directly into the final wheel
-#      distribution, but the container directory itself will not.
-#    This practice is very common in the community to help separate the package
-#      implementation from auxiliary files (e.g. CI configuration files), and is
-#      referred to as src-layout, because the container directory is commonly named src.
-# All paths in package_dir must be relative to the project root directory and use a
-#   forward slash (/) as path separator regardless of the operating system.
-# Tip
-#   When using package discovery together with setup.cfg or pyproject.toml, it is very
-#   likely that you don’t need to specify a value for package_dir. Please have a look at
-#   the definitions of src-layout and flat-layout to learn common practices on how to
-#   design a project’s directory structure and minimise the amount of configuration that
-#   is needed.
-#package-dir = {}
-
-# package-data
-# TOML type: table/inline-table
-# A dictionary mapping package names to lists of glob patterns. For a complete
-#   description and examples, see the section on Including Data Files. You do not need
-#   to use this option if you are using include_package_data, unless you need to add
-#   e.g. files that are generated by your setup script and build process. (And are
-#   therefore not in source control or are files that you don’t want to include in your
-#   source distribution.)
-#package-data = {}
-
-# include-package-data
-# TOML type: boolean (true/false)
-# If set to True, this tells setuptools to automatically include any data files it finds
-#   inside your package directories that are specified by your MANIFEST.in file. For
-#   more information, see the section on Including Data Files.
-# True by default
-include-package-data = true
-
-# exclude-package
-# TOML type: table/inline-table
-# A dictionary mapping package names to lists of glob patterns that should be excluded
-#   from your package directories. You can use this to trim back any excess files
-#   included by include_package_data. For a complete description and examples, see the
-#   section on Including Data Files.
-#exclude-package-data = {}
-
-# license-files
-# TOML type: array of glob pattern strings
-# A list of glob patterns for license related files that should be included. If neither
-#   license_file nor license_files is specified, this option defaults to
-#   ["LICEN[CS]E*", "COPYING*", "NOTICE*", and "AUTHORS*"].
-#license-files = []
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-# where
-# TOML type: array of strings
-# list of folders that contain the packages (["."] by default)
 where = ["src"]
-
-# include
-# TOML type: array of strings
-# package names should match these glob patterns (["*"] by default)
-include = ["*"]
-
-# exclude
-# TOML type: array of strings
-# exclude packages matching these glob patterns (empty by default)
-exclude = []
-
-# namespaces
-# TOML type: array of strings
-# to disable scanning PEP 420 namespaces (true by default)
-#namespaces = true
 
 [tool.setuptools_scm]
 write_to = "__version__.py"
 local_scheme = "no-local-version"
 
-[tool.black]
+[tool.ruff]
+# https://docs.astral.sh/ruff/settings/
+fix = true
 line-length = 100
-#include = '\.pyi?$'
-#exclude = '\.pyi?$'
-#force-exclude = '\.pyi?$'
-## 'extend-exclude' excludes files or directories in addition to the defaults
-#extend-exclude = '''
-## A regex preceded with ^/ will apply only to files and directories
-## in the root of the project.
-#(
-#  ^/foo.py    # exclude a file named foo.py in the root of the project
-#  | .*_pb2.py  # exclude autogenerated Protocol Buffer files anywhere in the project
-#)
-#'''
-target-version = ["py310"]
 
-[tool.isort]
-# https://pycqa.github.io/isort/docs/configuration/options.html
-profile = "black"
-line_length = 100
-force_single_line = true
-known_third_party = ["System", "Microsoft", "Internal", "Accessibility", "MS"]
-known_first_party = ["stubgen"]
+[tool.ruff.format]
+# https://docs.astral.sh/ruff/settings/#format
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
 
-[build-system]
-requires = ["setuptools", "setuptools_scm"]
-build-backend = "setuptools.build_meta"
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/settings/#lint
+select = [
+    "F", # Pyflakes
+    "E", # pycodestyle
+    "W", # pycodestyle
+    "I", # isort
+    "N", # pep8-naming
+    "D", # pydocstyle
+    "UP", # pyupgrade
+    "ANN", # flake8-annotations
+    "B", # flake8-bugbear
+    "A", # flake8-builtins
+    "COM", # flake8-commas
+    "DTZ", # flake8-datetimez
+    "FA", # flake8-future-annotations
+    "ISC", # flake8-implicit-str-concat
+    "ICN", # flake8-import-conventions
+    "LOG", # flake8-logging
+    "G", # flake8-logging-format
+    "INP", # flake8-no-pep420
+    "PIE", # flake8-pie
+    "T20", # flake8-print
+    "PYI", # flake8-pyi
+    "PT", # flake8-pytest-style
+    "Q", # flake8-quotes
+    "RSE", # flake8-raise
+    "RET", # flake8-return
+    "SLF", # flake8-self
+    "SLOT", # flake8-slots
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    "TC", # flake8-type-checking
+    "INT", # flake8-gettext
+    "ARG", # flake8-unused-arguments
+    "PTH", # flake8-use-pathlib
+    "TD", # flake8-todos
+    "FIX", # flake8-_fixme
+    "ERA", # eradicate
+    "PD", # pandas-vet
+    "PGH", # pygrep-hooks
+    "C", # Pylint PL Convention
+    "E", # Pylint PL Error
+    "R", # Pylint PL Refactor
+    "W", # Pylint PL Warning
+    "TRY", # tryceratops
+    "FLY", # flynt
+    "NPY", # NumPy-specific rules
+    "AIR", # Airflow
+    "PERF", # Perflint
+    "FURB", # refurb
+    "RUF", # Ruff-specific rules
+]
+ignore = [
+    "N999", # pep8-naming: Invalid module name
+    "D203", # pydocstyle: 1 blank line required before class docstring
+    "D213", # pydocstyle: Multi-line docstring summary should start at the second line
+    "COM812", # flake8-commas: missing trailing comma
+    "DTZ001", # flake8-datetimez: `datetime.datetime()` called without a `tzinfo` argument
+    "DTZ005", # flake8-datetimez: `datetime.datetime.now()` called without a `tz` argument
+    "TD003", # flake8-fixmes: Missing issue link for this _TODO
+    "FIX002", # flake8-todos: Line contains _TODO, consider resolving the issue
+    "TRY003", # tryceratops: Avoid specifying long messages outside the exception class
+]
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" = [
+    "T201", # print found
+    "T203", # pprint found
+    "INP001", # flake8-no-pep420 - File is part of an implicit namespace package.
+]
+
+[tool.ruff.lint.isort]
+# https://docs.astral.sh/ruff/settings/#lintisort
+force-single-line = true
+known-third-party = ["System", "Microsoft", "Internal", "Accessibility", "MS"]
+known-first-party = ["stubgen"]
+required-imports = ["from __future__ import annotations"]

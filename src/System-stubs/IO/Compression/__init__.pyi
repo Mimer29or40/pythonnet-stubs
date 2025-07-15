@@ -1,9 +1,6 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import ClassVar
 from typing import Final
-from typing import Tuple
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeHandleMinusOneIsInvalid
@@ -70,57 +67,31 @@ class CompressionTracingSwitch(Switch):
 
     @property
     def Attributes(self) -> StringDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Informational(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Verbose(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompressionTracingSwitchLevel(Enum):
     """"""
@@ -138,63 +109,37 @@ class CopyEncoder(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBlock(self, input: DeflateInput, output: OutputBuffer, isFinal: bool) -> None:
-        """
-
-        :param input:
+        """:param input:
         :param output:
         :param isFinal:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Crc32Helper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UpdateCrc32(cls, crc32: int, buffer: Array[int], offset: int, length: int) -> int:
-        """
-
-        :param crc32:
+        """:param crc32:
         :param buffer:
         :param offset:
         :param length:
@@ -207,126 +152,83 @@ class DeflateInput(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DeflateStream(Stream, IDisposable):
     """"""
 
     @overload
     def __init__(self, stream: Stream, compressionLevel: CompressionLevel):
-        """
-
-        :param stream:
+        """:param stream:
         :param compressionLevel:
         """
     @overload
     def __init__(self, stream: Stream, mode: CompressionMode):
-        """
-
-        :param stream:
+        """:param stream:
         :param mode:
         """
     @overload
     def __init__(self, stream: Stream, compressionLevel: CompressionLevel, leaveOpen: bool):
-        """
-
-        :param stream:
+        """:param stream:
         :param compressionLevel:
         :param leaveOpen:
         """
     @overload
     def __init__(self, stream: Stream, mode: CompressionMode, leaveOpen: bool):
-        """
-
-        :param stream:
+        """:param stream:
         :param mode:
         :param leaveOpen:
         """
     @property
     def BaseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -334,11 +236,14 @@ class DeflateStream(Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -349,29 +254,20 @@ class DeflateStream(Stream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -379,157 +275,111 @@ class DeflateStream(Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class DeflateStreamAsyncResult(Object, IAsyncResult):
     """"""
@@ -563,9 +413,7 @@ class DeflateStreamAsyncResult(Object, IAsyncResult):
         offset: int,
         count: int,
     ):
-        """
-
-        :param asyncObject:
+        """:param asyncObject:
         :param asyncState:
         :param asyncCallback:
         :param buffer:
@@ -574,49 +422,26 @@ class DeflateStreamAsyncResult(Object, IAsyncResult):
         """
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DeflaterManaged(Object, IDeflater, IDisposable):
     """"""
@@ -624,51 +449,31 @@ class DeflaterManaged(Object, IDeflater, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
-    def Finish(self, outputBuffer: Array[int], bytesRead: int) -> Tuple[bool, int]:
-        """
-
-        :param outputBuffer:
+    def Finish(self, outputBuffer: Array[int], bytesRead: int) -> tuple[bool, int]:
+        """:param outputBuffer:
         :param bytesRead:
         :return:
         """
     def GetDeflateOutput(self, outputBuffer: Array[int]) -> int:
-        """
-
-        :param outputBuffer:
+        """:param outputBuffer:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def NeedsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetInput(self, inputBuffer: Array[int], startIndex: int, count: int) -> None:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param startIndex:
         :param count:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DeflaterZLib(Object, IDeflater, IDisposable):
     """"""
@@ -676,51 +481,31 @@ class DeflaterZLib(Object, IDeflater, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
-    def Finish(self, outputBuffer: Array[int], bytesRead: int) -> Tuple[bool, int]:
-        """
-
-        :param outputBuffer:
+    def Finish(self, outputBuffer: Array[int], bytesRead: int) -> tuple[bool, int]:
+        """:param outputBuffer:
         :param bytesRead:
         :return:
         """
     def GetDeflateOutput(self, outputBuffer: Array[int]) -> int:
-        """
-
-        :param outputBuffer:
+        """:param outputBuffer:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def NeedsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetInput(self, inputBuffer: Array[int], startIndex: int, count: int) -> None:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param startIndex:
         :param count:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FastEncoder(Object):
     """"""
@@ -728,59 +513,35 @@ class FastEncoder(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FastEncoderStatics(ABC, Object):
     """"""
 
     @classmethod
     def BitReverse(cls, code: int, length: int) -> int:
-        """
-
-        :param code:
+        """:param code:
         :param length:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FastEncoderWindow(Object):
     """"""
@@ -789,79 +550,46 @@ class FastEncoderWindow(Object):
         """"""
     @property
     def BytesAvailable(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FreeWindowSpace(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnprocessedInput(self) -> DeflateInput:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyBytes(self, inputBuffer: Array[int], startIndex: int, count: int) -> None:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param startIndex:
         :param count:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FlushWindow(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveWindows(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GZipConstants(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GZipDecoder(Object, IFileFormatReader):
     """"""
@@ -869,44 +597,27 @@ class GZipDecoder(Object, IFileFormatReader):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadFooter(self, input: InputBuffer) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     def ReadHeader(self, input: InputBuffer) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UpdateWithBytesRead(self, buffer: Array[int], offset: int, bytesToCopy: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param bytesToCopy:
         """
@@ -917,40 +628,21 @@ class GZipFormatter(Object, IFileFormatWriter):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetFooter(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHeader(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UpdateWithBytesRead(self, buffer: Array[int], offset: int, bytesToCopy: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param bytesToCopy:
         """
@@ -960,100 +652,68 @@ class GZipStream(Stream, IDisposable):
 
     @overload
     def __init__(self, stream: Stream, compressionLevel: CompressionLevel):
-        """
-
-        :param stream:
+        """:param stream:
         :param compressionLevel:
         """
     @overload
     def __init__(self, stream: Stream, mode: CompressionMode):
-        """
-
-        :param stream:
+        """:param stream:
         :param mode:
         """
     @overload
     def __init__(self, stream: Stream, compressionLevel: CompressionLevel, leaveOpen: bool):
-        """
-
-        :param stream:
+        """:param stream:
         :param compressionLevel:
         :param leaveOpen:
         """
     @overload
     def __init__(self, stream: Stream, mode: CompressionMode, leaveOpen: bool):
-        """
-
-        :param stream:
+        """:param stream:
         :param mode:
         :param leaveOpen:
         """
     @property
     def BaseStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1061,11 +721,14 @@ class GZipStream(Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1076,29 +739,20 @@ class GZipStream(Stream, IDisposable):
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1106,235 +760,158 @@ class GZipStream(Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class HuffmanTree(Object):
     """"""
 
     def __init__(self, codeLengths: Array[int]):
-        """
-
-        :param codeLengths:
-        """
+        """:param codeLengths:"""
     @classmethod
     @property
     def StaticDistanceTree(cls) -> HuffmanTree:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def StaticLiteralLengthTree(cls) -> HuffmanTree:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNextSymbol(self, input: InputBuffer) -> int:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDeflater(IDisposable):
     """"""
 
     def Dispose(self) -> None:
         """"""
-    def Finish(self, outputBuffer: Array[int], bytesRead: int) -> Tuple[bool, int]:
-        """
-
-        :param outputBuffer:
+    def Finish(self, outputBuffer: Array[int], bytesRead: int) -> tuple[bool, int]:
+        """:param outputBuffer:
         :param bytesRead:
         :return:
         """
     def GetDeflateOutput(self, outputBuffer: Array[int]) -> int:
-        """
-
-        :param outputBuffer:
+        """:param outputBuffer:
         :return:
         """
     def NeedsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetInput(self, inputBuffer: Array[int], startIndex: int, count: int) -> None:
-        """
-
-        :param inputBuffer:
+        """:param inputBuffer:
         :param startIndex:
         :param count:
         """
@@ -1343,21 +920,15 @@ class IFileFormatReader:
     """"""
 
     def ReadFooter(self, input: InputBuffer) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     def ReadHeader(self, input: InputBuffer) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     def UpdateWithBytesRead(self, buffer: Array[int], offset: int, bytesToCopy: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param bytesToCopy:
         """
@@ -1368,19 +939,11 @@ class IFileFormatWriter:
     """"""
 
     def GetFooter(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHeader(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UpdateWithBytesRead(self, buffer: Array[int], offset: int, bytesToCopy: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param bytesToCopy:
         """
@@ -1390,34 +953,21 @@ class IInflater(IDisposable):
 
     @property
     def AvailableOutput(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Finished(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Inflate(self, bytes: Array[int], offset: int, length: int) -> int:
-        """
-
-        :param bytes:
+        """:param bytes:
         :param offset:
         :param length:
         :return:
         """
     def NeedsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetInput(self, inputBytes: Array[int], offset: int, length: int) -> None:
-        """
-
-        :param inputBytes:
+        """:param inputBytes:
         :param offset:
         :param length:
         """
@@ -1429,58 +979,34 @@ class Inflater(Object, IInflater, IDisposable):
         """"""
     @property
     def AvailableOutput(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Finished(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Inflate(self, bytes: Array[int], offset: int, length: int) -> int:
-        """
-
-        :param bytes:
+        """:param bytes:
         :param offset:
         :param length:
         :return:
         """
     def NeedsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetInput(self, inputBytes: Array[int], offset: int, length: int) -> None:
-        """
-
-        :param inputBytes:
+        """:param inputBytes:
         :param offset:
         :param length:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InflaterState(Enum):
     """"""
@@ -1537,58 +1063,34 @@ class InflaterZlib(Object, IInflater, IDisposable):
 
     @property
     def AvailableOutput(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Finished(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Inflate(self, bytes: Array[int], offset: int, length: int) -> int:
-        """
-
-        :param bytes:
+        """:param bytes:
         :param offset:
         :param length:
         :return:
         """
     def NeedsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetInput(self, inputBytes: Array[int], offset: int, length: int) -> None:
-        """
-
-        :param inputBytes:
+        """:param inputBytes:
         :param offset:
         :param length:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InputBuffer(Object):
     """"""
@@ -1597,81 +1099,47 @@ class InputBuffer(Object):
         """"""
     @property
     def AvailableBits(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AvailableBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, output: Array[int], offset: int, length: int) -> int:
-        """
-
-        :param output:
+        """:param output:
         :param offset:
         :param length:
         :return:
         """
     def EnsureBitsAvailable(self, count: int) -> bool:
-        """
-
-        :param count:
+        """:param count:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBits(self, count: int) -> int:
-        """
-
-        :param count:
+        """:param count:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def NeedsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetInput(self, buffer: Array[int], offset: int, length: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param length:
         """
     def SkipBits(self, n: int) -> None:
-        """
-
-        :param n:
-        """
+        """:param n:"""
     def SkipToByteBoundary(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryLoad16Bits(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Match(Object):
     """"""
@@ -1679,26 +1147,15 @@ class Match(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OutputBuffer(Object):
     """"""
@@ -1706,26 +1163,15 @@ class OutputBuffer(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OutputWindow(Object):
     """"""
@@ -1734,61 +1180,35 @@ class OutputWindow(Object):
         """"""
     @property
     def AvailableBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FreeBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyFrom(self, input: InputBuffer, length: int) -> int:
-        """
-
-        :param input:
+        """:param input:
         :param length:
         :return:
         """
     def CopyTo(self, output: Array[int], offset: int, length: int) -> int:
-        """
-
-        :param output:
+        """:param output:
         :param offset:
         :param length:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, b: int) -> None:
-        """
-
-        :param b:
-        """
+        """:param b:"""
     def WriteLengthDistance(self, length: int, distance: int) -> None:
-        """
-
-        :param length:
+        """:param length:
         :param distance:
         """
 
@@ -1800,167 +1220,102 @@ class ZLibException(IOException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @overload
     def __init__(
-        self, message: str, zlibErrorContext: str, zlibErrorCode: int, zlibErrorMessage: str
+        self,
+        message: str,
+        zlibErrorContext: str,
+        zlibErrorCode: int,
+        zlibErrorMessage: str,
     ):
-        """
-
-        :param message:
+        """:param message:
         :param zlibErrorContext:
         :param zlibErrorCode:
         :param zlibErrorMessage:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ZLibContext(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ZLibErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ZLibErrorMessage(self) -> str:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ZLibNative(ABC, Object):
     """"""
@@ -1989,10 +1344,8 @@ class ZLibNative(ABC, Object):
     @overload
     def CreateZLibStreamForDeflate(
         cls, zLibStreamHandle: ZLibStreamHandle
-    ) -> Tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
-        """
-
-        :param zLibStreamHandle:
+    ) -> tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
+        """:param zLibStreamHandle:
         :return:
         """
     @classmethod
@@ -2004,10 +1357,8 @@ class ZLibNative(ABC, Object):
         windowBits: int,
         memLevel: int,
         strategy: ZLibNative.CompressionStrategy,
-    ) -> Tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
-        """
-
-        :param zLibStreamHandle:
+    ) -> tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
+        """:param zLibStreamHandle:
         :param level:
         :param windowBits:
         :param memLevel:
@@ -2018,50 +1369,32 @@ class ZLibNative(ABC, Object):
     @overload
     def CreateZLibStreamForInflate(
         cls, zLibStreamHandle: ZLibStreamHandle
-    ) -> Tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
-        """
-
-        :param zLibStreamHandle:
+    ) -> tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
+        """:param zLibStreamHandle:
         :return:
         """
     @classmethod
     @overload
     def CreateZLibStreamForInflate(
         cls, zLibStreamHandle: ZLibStreamHandle, windowBits: int
-    ) -> Tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
-        """
-
-        :param zLibStreamHandle:
+    ) -> tuple[ZLibNative.ErrorCode, ZLibStreamHandle]:
+        """:param zLibStreamHandle:
         :param windowBits:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ZLibCompileFlags(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class CompressionLevel(Enum):
         """"""
@@ -2159,16 +1492,10 @@ class ZLibNative(ABC, Object):
             """"""
         @property
         def IsClosed(self) -> bool:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def IsInvalid(self) -> bool:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def NextIn(self) -> IntPtr:
             """"""
@@ -2188,15 +1515,9 @@ class ZLibNative(ABC, Object):
         def Close(self) -> None:
             """"""
         def DangerousAddRef(self, success: bool) -> None:
-            """
-
-            :param success:
-            """
+            """:param success:"""
         def DangerousGetHandle(self) -> IntPtr:
-            """
-
-            :return:
-            """
+            """:return:"""
         def DangerousRelease(self) -> None:
             """"""
         def Deflate(self, flush: ZLibNative.FlushCode) -> ZLibNative.ErrorCode:
@@ -2214,23 +1535,15 @@ class ZLibNative(ABC, Object):
         def Dispose(self) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetErrorMessage(self) -> str:
             """"""
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def Inflate(self, flush: ZLibNative.FlushCode) -> ZLibNative.ErrorCode:
             """"""
         def InflateEnd(self) -> ZLibNative.ErrorCode:
@@ -2240,10 +1553,7 @@ class ZLibNative(ABC, Object):
         def SetHandleAsInvalid(self) -> None:
             """"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
         class State(Enum):
             """"""

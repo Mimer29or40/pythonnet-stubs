@@ -1,11 +1,7 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import Generic
-from typing import Iterator
-from typing import Optional
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -30,7 +26,6 @@ from System.Collections import IEnumerable
 from System.Collections import IEnumerator
 from System.Collections.Generic import Dictionary
 from System.Collections.Specialized import NameValueCollection
-from System.Collections.Specialized.NameObjectCollectionBase import KeysCollection
 from System.ComponentModel import CancelEventArgs
 from System.ComponentModel import INotifyPropertyChanged
 from System.ComponentModel import PropertyChangedEventHandler
@@ -90,33 +85,20 @@ class AppSettingsReader(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetValue(self, key: str, type: Type) -> object:
-        """
-
-        :param key:
+        """:param key:
         :param type:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ApplicationScopedSettingAttribute(SettingAttribute, _Attribute):
     """"""
@@ -125,49 +107,31 @@ class ApplicationScopedSettingAttribute(SettingAttribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -179,9 +143,7 @@ class ApplicationScopedSettingAttribute(SettingAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -191,102 +153,61 @@ class ApplicationScopedSettingAttribute(SettingAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ApplicationSettingsBase(ABC, SettingsBase, INotifyPropertyChanged):
     """"""
 
     @property
     def Context(self) -> SettingsContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Properties(self) -> SettingsPropertyCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyValues(self) -> SettingsPropertyValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Providers(self) -> SettingsProviderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SettingsKey(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SettingsKey.setter
     def SettingsKey(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPreviousVersion(self, propertyName: str) -> object:
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Initialize(
         self,
         context: SettingsContext,
         properties: SettingsPropertyCollection,
         providers: SettingsProviderCollection,
     ) -> None:
-        """
-
-        :param context:
+        """:param context:
         :param properties:
         :param providers:
         """
@@ -297,22 +218,15 @@ class ApplicationSettingsBase(ABC, SettingsBase, INotifyPropertyChanged):
     def Save(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Upgrade(self) -> None:
         """"""
     def __getitem__(self, propertyName: str) -> object:
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :return:
         """
     def __setitem__(self, propertyName: str, value: object) -> None:
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :param value:
         """
     PropertyChanged: EventType[PropertyChangedEventHandler] = ...
@@ -353,9 +267,7 @@ class ApplicationSettingsGroup(ConfigurationSectionGroup):
     @Type.setter
     def Type(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -365,20 +277,11 @@ class ApplicationSettingsGroup(ConfigurationSectionGroup):
     def ForceDeclaration(self, force: bool) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ClientSettingsSection(ConfigurationSection):
     """"""
@@ -413,33 +316,19 @@ class ClientSettingsSection(ConfigurationSection):
         """"""
     @property
     def Settings(self) -> SettingElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ClientSettingsStore(Object):
     """"""
@@ -447,51 +336,29 @@ class ClientSettingsStore(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CommonConfigurationStrings(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigXmlAttribute(XmlAttribute, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
@@ -505,9 +372,7 @@ class ConfigXmlAttribute(XmlAttribute, IEnumerable, IConfigErrorInfo, IXPathNavi
         namespaceUri: str,
         doc: XmlDocument,
     ):
-        """
-
-        :param filename:
+        """:param filename:
         :param line:
         :param prefix:
         :param localName:
@@ -606,39 +471,25 @@ class ConfigXmlAttribute(XmlAttribute, IEnumerable, IConfigErrorInfo, IXPathNavi
     def AppendChild(self, newChild: XmlNode) -> XmlNode:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     def CreateNavigator(self) -> XPathNavigator:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InsertAfter(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
         """"""
     def InsertBefore(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
@@ -668,10 +519,7 @@ class ConfigXmlAttribute(XmlAttribute, IEnumerable, IConfigErrorInfo, IXPathNavi
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteContentTo(self, w: XmlWriter) -> None:
         """"""
     def WriteTo(self, w: XmlWriter) -> None:
@@ -683,10 +531,7 @@ class ConfigXmlAttribute(XmlAttribute, IEnumerable, IConfigErrorInfo, IXPathNavi
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigXmlCDataSection(
     XmlCDataSection, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable
@@ -694,9 +539,7 @@ class ConfigXmlCDataSection(
     """"""
 
     def __init__(self, filename: str, line: int, data: str, doc: XmlDocument):
-        """
-
-        :param filename:
+        """:param filename:
         :param line:
         :param data:
         :param doc:
@@ -797,10 +640,7 @@ class ConfigXmlCDataSection(
     def AppendData(self, strData: str) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     def CreateNavigator(self) -> XPathNavigator:
@@ -808,30 +648,19 @@ class ConfigXmlCDataSection(
     def DeleteData(self, offset: int, count: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InsertAfter(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
         """"""
     def InsertBefore(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
@@ -867,10 +696,7 @@ class ConfigXmlCDataSection(
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteContentTo(self, w: XmlWriter) -> None:
         """"""
     def WriteTo(self, w: XmlWriter) -> None:
@@ -882,18 +708,13 @@ class ConfigXmlCDataSection(
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigXmlComment(XmlComment, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
 
     def __init__(self, filename: str, line: int, comment: str, doc: XmlDocument):
-        """
-
-        :param filename:
+        """:param filename:
         :param line:
         :param comment:
         :param doc:
@@ -994,10 +815,7 @@ class ConfigXmlComment(XmlComment, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def AppendData(self, strData: str) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     def CreateNavigator(self) -> XPathNavigator:
@@ -1005,30 +823,19 @@ class ConfigXmlComment(XmlComment, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def DeleteData(self, offset: int, count: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InsertAfter(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
         """"""
     def InsertBefore(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
@@ -1064,10 +871,7 @@ class ConfigXmlComment(XmlComment, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteContentTo(self, w: XmlWriter) -> None:
         """"""
     def WriteTo(self, w: XmlWriter) -> None:
@@ -1079,10 +883,7 @@ class ConfigXmlComment(XmlComment, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
@@ -1202,10 +1003,7 @@ class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNaviga
     def AppendChild(self, newChild: XmlNode) -> XmlNode:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     @overload
@@ -1260,9 +1058,7 @@ class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNaviga
     def CreateXmlDeclaration(self, version: str, encoding: str, standalone: str) -> XmlDeclaration:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetElementById(self, elementId: str) -> XmlElement:
@@ -1274,24 +1070,15 @@ class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNaviga
     def GetElementsByTagName(self, localName: str, namespaceURI: str) -> XmlNodeList:
         """"""
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ImportNode(self, node: XmlNode, deep: bool) -> XmlNode:
         """"""
     def InsertAfter(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
@@ -1311,9 +1098,7 @@ class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNaviga
     def Load(self, filename: str) -> None:
         """"""
     def LoadSingleElement(self, filename: str, sourceReader: XmlTextReader) -> None:
-        """
-
-        :param filename:
+        """:param filename:
         :param sourceReader:
         """
     def LoadXml(self, xml: str) -> None:
@@ -1357,10 +1142,7 @@ class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNaviga
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Validate(self, validationEventHandler: ValidationEventHandler) -> None:
         """"""
@@ -1380,10 +1162,7 @@ class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNaviga
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     NodeChanged: EventType[XmlNodeChangedEventHandler] = ...
     """"""
     NodeChanging: EventType[XmlNodeChangedEventHandler] = ...
@@ -1409,9 +1188,7 @@ class ConfigXmlElement(XmlElement, IEnumerable, IConfigErrorInfo, IXPathNavigabl
         namespaceUri: str,
         doc: XmlDocument,
     ):
-        """
-
-        :param filename:
+        """:param filename:
         :param line:
         :param prefix:
         :param localName:
@@ -1512,18 +1289,13 @@ class ConfigXmlElement(XmlElement, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def AppendChild(self, newChild: XmlNode) -> XmlNode:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     def CreateNavigator(self) -> XPathNavigator:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -1545,24 +1317,15 @@ class ConfigXmlElement(XmlElement, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def GetElementsByTagName(self, localName: str, namespaceURI: str) -> XmlNodeList:
         """"""
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasAttribute(self, name: str) -> bool:
         """"""
@@ -1626,10 +1389,7 @@ class ConfigXmlElement(XmlElement, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteContentTo(self, w: XmlWriter) -> None:
         """"""
     def WriteTo(self, w: XmlWriter) -> None:
@@ -1641,10 +1401,7 @@ class ConfigXmlElement(XmlElement, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigXmlSignificantWhitespace(
     XmlSignificantWhitespace, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable
@@ -1652,9 +1409,7 @@ class ConfigXmlSignificantWhitespace(
     """"""
 
     def __init__(self, filename: str, line: int, strData: str, doc: XmlDocument):
-        """
-
-        :param filename:
+        """:param filename:
         :param line:
         :param strData:
         :param doc:
@@ -1755,10 +1510,7 @@ class ConfigXmlSignificantWhitespace(
     def AppendData(self, strData: str) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     def CreateNavigator(self) -> XPathNavigator:
@@ -1766,30 +1518,19 @@ class ConfigXmlSignificantWhitespace(
     def DeleteData(self, offset: int, count: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InsertAfter(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
         """"""
     def InsertBefore(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
@@ -1825,10 +1566,7 @@ class ConfigXmlSignificantWhitespace(
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteContentTo(self, w: XmlWriter) -> None:
         """"""
     def WriteTo(self, w: XmlWriter) -> None:
@@ -1840,18 +1578,13 @@ class ConfigXmlSignificantWhitespace(
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigXmlText(XmlText, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
 
     def __init__(self, filename: str, line: int, strData: str, doc: XmlDocument):
-        """
-
-        :param filename:
+        """:param filename:
         :param line:
         :param strData:
         :param doc:
@@ -1952,10 +1685,7 @@ class ConfigXmlText(XmlText, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICl
     def AppendData(self, strData: str) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     def CreateNavigator(self) -> XPathNavigator:
@@ -1963,30 +1693,19 @@ class ConfigXmlText(XmlText, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICl
     def DeleteData(self, offset: int, count: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InsertAfter(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
         """"""
     def InsertBefore(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
@@ -2024,10 +1743,7 @@ class ConfigXmlText(XmlText, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICl
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteContentTo(self, w: XmlWriter) -> None:
         """"""
     def WriteTo(self, w: XmlWriter) -> None:
@@ -2039,10 +1755,7 @@ class ConfigXmlText(XmlText, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICl
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigXmlWhitespace(
     XmlWhitespace, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable
@@ -2050,9 +1763,7 @@ class ConfigXmlWhitespace(
     """"""
 
     def __init__(self, filename: str, line: int, comment: str, doc: XmlDocument):
-        """
-
-        :param filename:
+        """:param filename:
         :param line:
         :param comment:
         :param doc:
@@ -2153,10 +1864,7 @@ class ConfigXmlWhitespace(
     def AppendData(self, strData: str) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CloneNode(self, deep: bool) -> XmlNode:
         """"""
     def CreateNavigator(self) -> XPathNavigator:
@@ -2164,30 +1872,19 @@ class ConfigXmlWhitespace(
     def DeleteData(self, offset: int, count: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNamespaceOfPrefix(self, prefix: str) -> str:
         """"""
     def GetPrefixOfNamespace(self, namespaceURI: str) -> str:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InsertAfter(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
         """"""
     def InsertBefore(self, newChild: XmlNode, refChild: XmlNode) -> XmlNode:
@@ -2223,10 +1920,7 @@ class ConfigXmlWhitespace(
     def Supports(self, feature: str, version: str) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteContentTo(self, w: XmlWriter) -> None:
         """"""
     def WriteTo(self, w: XmlWriter) -> None:
@@ -2238,10 +1932,7 @@ class ConfigXmlWhitespace(
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigurationException(SystemException, _Exception, ISerializable):
     """"""
@@ -2251,227 +1942,137 @@ class ConfigurationException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, node: XmlNode):
-        """
-
-        :param message:
+        """:param message:
         :param node:
         """
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @overload
     def __init__(self, message: str, inner: Exception, node: XmlNode):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         :param node:
         """
     @overload
     def __init__(self, message: str, filename: str, line: int):
-        """
-
-        :param message:
+        """:param message:
         :param filename:
         :param line:
         """
     @overload
     def __init__(self, message: str, inner: Exception, filename: str, line: int):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         :param filename:
         :param line:
         """
     @property
     def BareMessage(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filename(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Line(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetXmlNodeFilename(cls, node: XmlNode) -> str:
-        """
-
-        :param node:
+        """:param node:
         :return:
         """
     @classmethod
     def GetXmlNodeLineNumber(cls, node: XmlNode) -> int:
-        """
-
-        :param node:
+        """:param node:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigurationManagerInternalFactory(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConfigurationSettings(Object):
     """"""
@@ -2479,98 +2080,58 @@ class ConfigurationSettings(Object):
     @classmethod
     @property
     def AppSettings(cls) -> NameValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetConfig(cls, sectionName: str) -> object:
-        """
-
-        :param sectionName:
+        """:param sectionName:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultSettingValueAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2582,9 +2143,7 @@ class DefaultSettingValueAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2594,21 +2153,13 @@ class DefaultSettingValueAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DictionarySectionHandler(Object, IConfigurationSectionHandler):
     """"""
@@ -2616,59 +2167,35 @@ class DictionarySectionHandler(Object, IConfigurationSectionHandler):
     def __init__(self):
         """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HandlerBase(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IApplicationSettingsProvider:
     """"""
@@ -2676,21 +2203,14 @@ class IApplicationSettingsProvider:
     def GetPreviousVersion(
         self, context: SettingsContext, property: SettingsProperty
     ) -> SettingsPropertyValue:
-        """
-
-        :param context:
+        """:param context:
         :param property:
         :return:
         """
     def Reset(self, context: SettingsContext) -> None:
-        """
-
-        :param context:
-        """
+        """:param context:"""
     def Upgrade(self, context: SettingsContext, properties: SettingsPropertyCollection) -> None:
-        """
-
-        :param context:
+        """:param context:
         :param properties:
         """
 
@@ -2698,9 +2218,7 @@ class IConfigurationSectionHandler:
     """"""
 
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
@@ -2710,9 +2228,7 @@ class IConfigurationSystem:
     """"""
 
     def GetConfig(self, configKey: str) -> object:
-        """
-
-        :param configKey:
+        """:param configKey:
         :return:
         """
     def Init(self) -> None:
@@ -2723,18 +2239,12 @@ class IPersistComponentSettings:
 
     @property
     def SaveSettings(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SaveSettings.setter
     def SaveSettings(self, value: bool) -> None: ...
     @property
     def SettingsKey(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SettingsKey.setter
     def SettingsKey(self, value: str) -> None: ...
     def LoadComponentSettings(self) -> None:
@@ -2748,9 +2258,7 @@ class ISettingsProviderService:
     """"""
 
     def GetSettingsProvider(self, property: SettingsProperty) -> SettingsProvider:
-        """
-
-        :param property:
+        """:param property:
         :return:
         """
 
@@ -2767,10 +2275,7 @@ class IdnElement(ConfigurationElement):
         """"""
     @property
     def Enabled(self) -> UriIdnScope:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: UriIdnScope) -> None: ...
     @property
@@ -2791,28 +2296,17 @@ class IdnElement(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IgnoreSectionHandler(Object, IConfigurationSectionHandler):
     """"""
@@ -2820,34 +2314,21 @@ class IgnoreSectionHandler(Object, IConfigurationSectionHandler):
     def __init__(self):
         """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IriParsingElement(ConfigurationElement):
     """"""
@@ -2862,10 +2343,7 @@ class IriParsingElement(ConfigurationElement):
         """"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
@@ -2886,28 +2364,17 @@ class IriParsingElement(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LocalFileSettingsProvider(SettingsProvider, IApplicationSettingsProvider):
     """"""
@@ -2916,10 +2383,7 @@ class LocalFileSettingsProvider(SettingsProvider, IApplicationSettingsProvider):
         """"""
     @property
     def ApplicationName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ApplicationName.setter
     def ApplicationName(self, value: str) -> None: ...
     @property
@@ -2929,63 +2393,41 @@ class LocalFileSettingsProvider(SettingsProvider, IApplicationSettingsProvider):
     def Name(self) -> str:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPreviousVersion(
         self, context: SettingsContext, property: SettingsProperty
     ) -> SettingsPropertyValue:
-        """
-
-        :param context:
+        """:param context:
         :param property:
         :return:
         """
     def GetPropertyValues(
         self, context: SettingsContext, collection: SettingsPropertyCollection
     ) -> SettingsPropertyValueCollection:
-        """
-
-        :param context:
+        """:param context:
         :param collection:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Initialize(self, name: str, config: NameValueCollection) -> None:
         """"""
     def Reset(self, context: SettingsContext) -> None:
-        """
-
-        :param context:
-        """
+        """:param context:"""
     def SetPropertyValues(
         self, context: SettingsContext, collection: SettingsPropertyValueCollection
     ) -> None:
-        """
-
-        :param context:
+        """:param context:
         :param collection:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Upgrade(self, context: SettingsContext, properties: SettingsPropertyCollection) -> None:
-        """
-
-        :param context:
+        """:param context:
         :param properties:
         """
 
@@ -2995,34 +2437,21 @@ class NameValueFileSectionHandler(Object, IConfigurationSectionHandler):
     def __init__(self):
         """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NameValueSectionHandler(Object, IConfigurationSectionHandler):
     """"""
@@ -3030,34 +2459,21 @@ class NameValueSectionHandler(Object, IConfigurationSectionHandler):
     def __init__(self):
         """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NoSettingsVersionUpgradeAttribute(Attribute, _Attribute):
     """"""
@@ -3066,49 +2482,31 @@ class NoSettingsVersionUpgradeAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3120,9 +2518,7 @@ class NoSettingsVersionUpgradeAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3132,230 +2528,139 @@ class NoSettingsVersionUpgradeAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PrivilegedConfigurationManager(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReadOnlyNameValueCollection(
-    NameValueCollection, ICollection, IEnumerable, IDeserializationCallback, ISerializable
+    NameValueCollection,
+    ICollection,
+    IEnumerable,
+    IDeserializationCallback,
+    ISerializable,
 ):
     """"""
 
     @property
     def AllKeys(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Keys(self) -> NameObjectCollectionBase.KeysCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, c: NameValueCollection) -> None:
-        """
-
-        :param c:
-        """
+        """:param c:"""
     @overload
     def Add(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Get(self, index: int) -> str:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def Get(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKey(self, index: int) -> str:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetValues(self, index: int) -> Array[str]:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def GetValues(self, name: str) -> Array[str]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def HasKeys(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def Set(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> str:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, name: str, value: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
 
@@ -3372,10 +2677,7 @@ class SchemeSettingElement(ConfigurationElement):
         """"""
     @property
     def GenericUriParserOptions(self) -> GenericUriParserOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -3395,33 +2697,19 @@ class SchemeSettingElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SchemeSettingElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -3433,10 +2721,7 @@ class SchemeSettingElementCollection(ConfigurationElementCollection, ICollection
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -3450,16 +2735,10 @@ class SchemeSettingElementCollection(ConfigurationElementCollection, ICollection
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> SchemeSettingElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -3479,127 +2758,75 @@ class SchemeSettingElementCollection(ConfigurationElementCollection, ICollection
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, element: SchemeSettingElement) -> int:
-        """
-
-        :param element:
+        """:param element:
         :return:
         """
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> SchemeSettingElement:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> SchemeSettingElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SchemeSettingInternal(Object):
     """"""
 
     def __init__(self, name: str, options: GenericUriParserOptions):
-        """
-
-        :param name:
+        """:param name:
         :param options:
         """
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Options(self) -> GenericUriParserOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingAttribute(Attribute, _Attribute):
     """"""
@@ -3608,49 +2835,31 @@ class SettingAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3662,9 +2871,7 @@ class SettingAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3674,31 +2881,26 @@ class SettingAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingChangingEventArgs(CancelEventArgs):
     """"""
 
     def __init__(
-        self, settingName: str, settingClass: str, settingKey: str, newValue: object, cancel: bool
+        self,
+        settingName: str,
+        settingClass: str,
+        settingKey: str,
+        newValue: object,
+        cancel: bool,
     ):
-        """
-
-        :param settingName:
+        """:param settingName:
         :param settingClass:
         :param settingKey:
         :param newValue:
@@ -3706,57 +2908,31 @@ class SettingChangingEventArgs(CancelEventArgs):
         """
     @property
     def Cancel(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Cancel.setter
     def Cancel(self, value: bool) -> None: ...
     @property
     def NewValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SettingClass(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SettingKey(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SettingName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 SettingChangingEventHandler: Callable[[object, SettingChangingEventArgs], None] = ...
 """
@@ -3773,9 +2949,7 @@ class SettingElement(ConfigurationElement):
         """"""
     @overload
     def __init__(self, name: str, serializeAs: SettingsSerializeAs):
-        """
-
-        :param name:
+        """:param name:
         :param serializeAs:
         """
     @property
@@ -3803,51 +2977,31 @@ class SettingElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def SerializeAs(self) -> SettingsSerializeAs:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SerializeAs.setter
     def SerializeAs(self, value: SettingsSerializeAs) -> None: ...
     @property
     def Value(self) -> SettingValueElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: SettingValueElement) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -3859,10 +3013,7 @@ class SettingElementCollection(ConfigurationElementCollection, ICollection, IEnu
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -3876,10 +3027,7 @@ class SettingElementCollection(ConfigurationElementCollection, ICollection, IEnu
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -3899,82 +3047,47 @@ class SettingElementCollection(ConfigurationElementCollection, ICollection, IEnu
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, element: SettingElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     def Clear(self) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Get(self, elementKey: str) -> SettingElement:
-        """
-
-        :param elementKey:
+        """:param elementKey:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def Remove(self, element: SettingElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingValueElement(ConfigurationElement):
     """"""
@@ -4006,35 +3119,21 @@ class SettingValueElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def ValueXml(self) -> XmlNode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ValueXml.setter
     def ValueXml(self, value: XmlNode) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsAttributeDictionary(
     Hashtable,
@@ -4052,165 +3151,91 @@ class SettingsAttributeDictionary(
         """"""
     @overload
     def __init__(self, attributes: SettingsAttributeDictionary):
-        """
-
-        :param attributes:
-        """
+        """:param attributes:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsKey(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsValue(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -4219,67 +3244,39 @@ class SettingsBase(ABC, Object):
 
     @property
     def Context(self) -> SettingsContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Properties(self) -> SettingsPropertyCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyValues(self) -> SettingsPropertyValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Providers(self) -> SettingsProviderCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Initialize(
         self,
         context: SettingsContext,
         properties: SettingsPropertyCollection,
         providers: SettingsProviderCollection,
     ) -> None:
-        """
-
-        :param context:
+        """:param context:
         :param properties:
         :param providers:
         """
@@ -4287,26 +3284,17 @@ class SettingsBase(ABC, Object):
         """"""
     @classmethod
     def Synchronized(cls, settingsBase: SettingsBase) -> SettingsBase:
-        """
-
-        :param settingsBase:
+        """:param settingsBase:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, propertyName: str) -> object:
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :return:
         """
     def __setitem__(self, propertyName: str, value: object) -> None:
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :param value:
         """
 
@@ -4325,159 +3313,88 @@ class SettingsContext(
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsKey(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsValue(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -4485,61 +3402,37 @@ class SettingsDescriptionAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, description: str):
-        """
-
-        :param description:
-        """
+        """:param description:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4551,9 +3444,7 @@ class SettingsDescriptionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4563,81 +3454,49 @@ class SettingsDescriptionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsGroupDescriptionAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, description: str):
-        """
-
-        :param description:
-        """
+        """:param description:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4649,9 +3508,7 @@ class SettingsGroupDescriptionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4661,81 +3518,49 @@ class SettingsGroupDescriptionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsGroupNameAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, groupName: str):
-        """
-
-        :param groupName:
-        """
+        """:param groupName:"""
     @property
     def GroupName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4747,9 +3572,7 @@ class SettingsGroupNameAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4759,57 +3582,32 @@ class SettingsGroupNameAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsLoadedEventArgs(EventArgs):
     """"""
 
     def __init__(self, provider: SettingsProvider):
-        """
-
-        :param provider:
-        """
+        """:param provider:"""
     @property
     def Provider(self) -> SettingsProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 SettingsLoadedEventHandler: Callable[[object, SettingsLoadedEventArgs], None] = ...
 """
@@ -4828,61 +3626,37 @@ class SettingsManageabilityAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, manageability: SettingsManageability):
-        """
-
-        :param manageability:
-        """
+        """:param manageability:"""
     @property
     def Manageability(self) -> SettingsManageability:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4894,9 +3668,7 @@ class SettingsManageabilityAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4906,37 +3678,23 @@ class SettingsManageabilityAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsProperty(Object):
     """"""
 
     @overload
     def __init__(self, propertyToCopy: SettingsProperty):
-        """
-
-        :param propertyToCopy:
-        """
+        """:param propertyToCopy:"""
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def __init__(
         self,
@@ -4950,9 +3708,7 @@ class SettingsProperty(Object):
         throwOnErrorDeserializing: bool,
         throwOnErrorSerializing: bool,
     ):
-        """
-
-        :param name:
+        """:param name:
         :param propertyType:
         :param provider:
         :param isReadOnly:
@@ -4964,95 +3720,57 @@ class SettingsProperty(Object):
         """
     @property
     def Attributes(self) -> SettingsAttributeDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DefaultValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DefaultValue.setter
     def DefaultValue(self, value: object) -> None: ...
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsReadOnly.setter
     def IsReadOnly(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def PropertyType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PropertyType.setter
     def PropertyType(self, value: Type) -> None: ...
     @property
     def Provider(self) -> SettingsProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Provider.setter
     def Provider(self, value: SettingsProvider) -> None: ...
     @property
     def SerializeAs(self) -> SettingsSerializeAs:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SerializeAs.setter
     def SerializeAs(self, value: SettingsSerializeAs) -> None: ...
     @property
     def ThrowOnErrorDeserializing(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ThrowOnErrorDeserializing.setter
     def ThrowOnErrorDeserializing(self, value: bool) -> None: ...
     @property
     def ThrowOnErrorSerializing(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ThrowOnErrorSerializing.setter
     def ThrowOnErrorSerializing(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsPropertyCollection(Object, ICollection, IEnumerable, ICloneable):
     """"""
@@ -5061,101 +3779,54 @@ class SettingsPropertyCollection(Object, ICollection, IEnumerable, ICloneable):
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> SettingsProperty:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, property: SettingsProperty) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def Clear(self) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def SetReadOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, name: str) -> SettingsProperty:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsPropertyIsReadOnlyException(Exception, _Exception, ISerializable):
     """"""
@@ -5165,138 +3836,80 @@ class SettingsPropertyIsReadOnlyException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsPropertyNotFoundException(Exception, _Exception, ISerializable):
     """"""
@@ -5306,218 +3919,125 @@ class SettingsPropertyNotFoundException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsPropertyValue(Object):
     """"""
 
     def __init__(self, property: SettingsProperty):
-        """
-
-        :param property:
-        """
+        """:param property:"""
     @property
     def Deserialized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Deserialized.setter
     def Deserialized(self, value: bool) -> None: ...
     @property
     def IsDirty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsDirty.setter
     def IsDirty(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Property(self) -> SettingsProperty:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PropertyValue.setter
     def PropertyValue(self, value: object) -> None: ...
     @property
     def SerializedValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SerializedValue.setter
     def SerializedValue(self, value: object) -> None: ...
     @property
     def UsingDefaultValue(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsPropertyValueCollection(Object, ICollection, IEnumerable, ICloneable):
     """"""
@@ -5526,101 +4046,54 @@ class SettingsPropertyValueCollection(Object, ICollection, IEnumerable, ICloneab
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> SettingsPropertyValue:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, property: SettingsPropertyValue) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def Clear(self) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def SetReadOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, name: str) -> SettingsPropertyValue:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsPropertyWrongTypeException(Exception, _Exception, ISerializable):
     """"""
@@ -5630,148 +4103,87 @@ class SettingsPropertyWrongTypeException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsProvider(ABC, ProviderBase):
     """"""
 
     @property
     def ApplicationName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ApplicationName.setter
     def ApplicationName(self, value: str) -> None: ...
     @property
@@ -5781,112 +4193,70 @@ class SettingsProvider(ABC, ProviderBase):
     def Name(self) -> str:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPropertyValues(
         self, context: SettingsContext, collection: SettingsPropertyCollection
     ) -> SettingsPropertyValueCollection:
-        """
-
-        :param context:
+        """:param context:
         :param collection:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Initialize(self, name: str, config: NameValueCollection) -> None:
         """"""
     def SetPropertyValues(
         self, context: SettingsContext, collection: SettingsPropertyValueCollection
     ) -> None:
-        """
-
-        :param context:
+        """:param context:
         :param collection:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsProviderAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, providerTypeName: str):
-        """
-
-        :param providerTypeName:
-        """
+        """:param providerTypeName:"""
     @overload
     def __init__(self, providerType: Type):
-        """
-
-        :param providerType:
-        """
+        """:param providerType:"""
     @property
     def ProviderTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5898,9 +4268,7 @@ class SettingsProviderAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5910,21 +4278,13 @@ class SettingsProviderAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsProviderCollection(ProviderCollection, ICollection, IEnumerable):
     """"""
@@ -5933,87 +4293,54 @@ class SettingsProviderCollection(ProviderCollection, ICollection, IEnumerable):
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> ProviderBase:
         """"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, provider: ProviderBase) -> None:
         """"""
     def Clear(self) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ProviderBase], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, name: str) -> None:
         """"""
     def SetReadOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, name: str) -> ProviderBase:
         """"""
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 SettingsSavingEventHandler: Callable[[object, CancelEventArgs], None] = ...
 """
@@ -6038,61 +4365,37 @@ class SettingsSerializeAsAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, serializeAs: SettingsSerializeAs):
-        """
-
-        :param serializeAs:
-        """
+        """:param serializeAs:"""
     @property
     def SerializeAs(self) -> SettingsSerializeAs:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6104,9 +4407,7 @@ class SettingsSerializeAsAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6116,21 +4417,13 @@ class SettingsSerializeAsAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SingleTagSectionHandler(Object, IConfigurationSectionHandler):
     """"""
@@ -6138,34 +4431,21 @@ class SingleTagSectionHandler(Object, IConfigurationSectionHandler):
     def __init__(self):
         """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
-        """
-
-        :param parent:
+        """:param parent:
         :param configContext:
         :param section:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SpecialSetting(Enum):
     """"""
@@ -6179,61 +4459,37 @@ class SpecialSettingAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, specialSetting: SpecialSetting):
-        """
-
-        :param specialSetting:
-        """
+        """:param specialSetting:"""
     @property
     def SpecialSetting(self) -> SpecialSetting:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6245,9 +4501,7 @@ class SpecialSettingAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6257,71 +4511,41 @@ class SpecialSettingAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoredSetting(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeUtil(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UriSection(ConfigurationSection):
     """"""
@@ -6336,16 +4560,10 @@ class UriSection(ConfigurationSection):
         """"""
     @property
     def Idn(self) -> IdnElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IriParsing(self) -> IriParsingElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -6365,36 +4583,22 @@ class UriSection(ConfigurationSection):
     def LockItem(self, value: bool) -> None: ...
     @property
     def SchemeSettings(self) -> SchemeSettingElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionInformation(self) -> SectionInformation:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UriSectionData(Object):
     """"""
@@ -6402,115 +4606,69 @@ class UriSectionData(Object):
     def __init__(self):
         """"""
     @property
-    def IdnScope(self) -> Optional[UriIdnScope]:
-        """
-
-        :return:
-        """
+    def IdnScope(self) -> UriIdnScope | None:
+        """:return:"""
     @IdnScope.setter
-    def IdnScope(self, value: Optional[UriIdnScope]) -> None: ...
+    def IdnScope(self, value: UriIdnScope | None) -> None: ...
     @property
-    def IriParsing(self) -> Optional[bool]:
-        """
-
-        :return:
-        """
+    def IriParsing(self) -> bool | None:
+        """:return:"""
     @IriParsing.setter
-    def IriParsing(self, value: Optional[bool]) -> None: ...
+    def IriParsing(self, value: bool | None) -> None: ...
     @property
     def SchemeSettings(self) -> Dictionary[str, SchemeSettingInternal]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UriSectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UriSectionReader(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Read(cls, configFilePath: str) -> UriSectionData:
-        """
-
-        :param configFilePath:
+        """:param configFilePath:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, configFilePath: str, parentData: UriSectionData) -> UriSectionData:
-        """
-
-        :param configFilePath:
+        """:param configFilePath:
         :param parentData:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UserScopedSettingAttribute(SettingAttribute, _Attribute):
     """"""
@@ -6519,49 +4677,31 @@ class UserScopedSettingAttribute(SettingAttribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6573,9 +4713,7 @@ class UserScopedSettingAttribute(SettingAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6585,21 +4723,13 @@ class UserScopedSettingAttribute(SettingAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UserSettingsGroup(ConfigurationSectionGroup):
     """"""
@@ -6630,9 +4760,7 @@ class UserSettingsGroup(ConfigurationSectionGroup):
     @Type.setter
     def Type(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -6642,17 +4770,8 @@ class UserSettingsGroup(ConfigurationSectionGroup):
     def ForceDeclaration(self, force: bool) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

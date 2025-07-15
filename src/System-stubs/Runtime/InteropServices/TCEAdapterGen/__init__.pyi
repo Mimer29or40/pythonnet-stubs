@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import ClassVar
 from typing import Final
@@ -21,50 +19,28 @@ class EventItfInfo(Object):
         asmImport: RuntimeAssembly,
         asmSrcItf: RuntimeAssembly,
     ):
-        """
-
-        :param strEventItfName:
+        """:param strEventItfName:
         :param strSrcItfName:
         :param strEventProviderName:
         :param asmImport:
         :param asmSrcItf:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEventItfType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEventProviderName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSrcItfType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventProviderWriter(Object):
     """"""
@@ -77,40 +53,24 @@ class EventProviderWriter(Object):
         SrcItfType: Type,
         SinkHelperType: Type,
     ):
-        """
-
-        :param OutputModule:
+        """:param OutputModule:
         :param strDestTypeName:
         :param EventItfType:
         :param SrcItfType:
         :param SinkHelperType:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Perform(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventSinkHelperWriter(Object):
     """"""
@@ -121,70 +81,41 @@ class EventSinkHelperWriter(Object):
     :return: 
     """
     def __init__(self, OutputModule: ModuleBuilder, InputType: Type, EventItfType: Type):
-        """
-
-        :param OutputModule:
+        """:param OutputModule:
         :param InputType:
         :param EventItfType:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Perform(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NameSpaceExtractor(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def ExtractNameSpace(cls, FullyQualifiedTypeName: str) -> str:
-        """
-
-        :param FullyQualifiedTypeName:
+        """:param FullyQualifiedTypeName:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TCEAdapterGenerator(Object):
     """"""
@@ -192,29 +123,16 @@ class TCEAdapterGenerator(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Process(self, ModBldr: ModuleBuilder, EventItfList: ArrayList) -> None:
-        """
-
-        :param ModBldr:
+        """:param ModBldr:
         :param EventItfList:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

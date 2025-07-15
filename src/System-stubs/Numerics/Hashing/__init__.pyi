@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 
 from System import Object
@@ -10,30 +8,17 @@ class HashHelpers(ABC, Object):
 
     @classmethod
     def Combine(cls, h1: int, h2: int) -> int:
-        """
-
-        :param h1:
+        """:param h1:
         :param h2:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

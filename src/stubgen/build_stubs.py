@@ -4,6 +4,9 @@ import functools
 import itertools
 import json
 import re
+from collections.abc import Callable
+from collections.abc import Mapping
+from collections.abc import Sequence
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -11,17 +14,8 @@ from dataclasses import field
 from pathlib import Path
 from typing import Any
 from typing import AnyStr
-from typing import Callable
-from typing import Dict
 from typing import Final
-from typing import List
-from typing import Mapping
-from typing import Optional
-from typing import Sequence
-from typing import Set
-from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import cast
 
 import black
@@ -63,8 +57,7 @@ def verify_attribute(obj1, obj2, type: str, attribute: str, should_raise: bool =
         message: str = f"{type} have different {attribute} values: {attr1} != {attr2}"
         if should_raise:
             raise AttributeError(message)
-        else:
-            logger.warning(message)
+        logger.warning(message)
 
 
 def merge_mapping(
@@ -73,11 +66,11 @@ def merge_mapping(
     merge_func: Callable[[T, T, bool], T],
     should_raise: bool = True,
 ) -> Mapping[str, T]:
-    key_list: Set[str] = set(mapping1.keys())
+    key_list: set[str] = set(mapping1.keys())
     key_list.update(mapping2.keys())
 
     obj: T
-    merged: Dict[str, T] = {}
+    merged: dict[str, T] = {}
     for key in sorted(key_list):
         if key in mapping1:
             obj = mapping1[key]
@@ -123,17 +116,19 @@ def merge_type_def(
     verify_attribute(type_def1, type_def2, "Type Definitions", "nested", True)
 
     if class1 == "CClass":
-        return merge_class(cast(CClass, type_def1), cast(CClass, type_def2), should_raise)
+        return merge_class(cast("CClass", type_def1), cast("CClass", type_def2), should_raise)
     if class1 == "CStruct":
-        return merge_struct(cast(CStruct, type_def1), cast(CStruct, type_def2), should_raise)
+        return merge_struct(cast("CStruct", type_def1), cast("CStruct", type_def2), should_raise)
     if class1 == "CInterface":
         return merge_interface(
-            cast(CInterface, type_def1), cast(CInterface, type_def2), should_raise
+            cast("CInterface", type_def1), cast("CInterface", type_def2), should_raise
         )
     if class1 == "CEnum":
-        return merge_enum(cast(CEnum, type_def1), cast(CEnum, type_def2), should_raise)
+        return merge_enum(cast("CEnum", type_def1), cast("CEnum", type_def2), should_raise)
     if class1 == "CDelegate":
-        return merge_delegate(cast(CDelegate, type_def1), cast(CDelegate, type_def2), should_raise)
+        return merge_delegate(
+            cast("CDelegate", type_def1), cast("CDelegate", type_def2), should_raise
+        )
 
 
 def merge_class(class1: CClass, class2: CClass, should_raise: bool = True) -> CClass:
@@ -349,7 +344,9 @@ def merge_parameter(
 
 
 def merge_parameters(
-    parameters1: Sequence[CParameter], parameters2: Sequence[CParameter], should_raise: bool = True
+    parameters1: Sequence[CParameter],
+    parameters2: Sequence[CParameter],
+    should_raise: bool = True,
 ) -> Sequence[CParameter]:
     len1: int = len(parameters1)
     len2: int = len(parameters2)
@@ -357,9 +354,11 @@ def merge_parameters(
         message: str = f"Parameters have different length: {len1} != {len2}"
         if should_raise:
             raise AttributeError(message)
-        else:
-            logger.warning(message)
-    return tuple(merge_parameter(p1, p2, should_raise) for p1, p2 in zip(parameters1, parameters2))
+        logger.warning(message)
+    return tuple(
+        merge_parameter(p1, p2, should_raise)
+        for p1, p2 in zip(parameters1, parameters2, strict=False)
+    )
 
 
 def merge_field(field1: CField, field2: CField, should_raise: bool = True) -> CField:
@@ -441,8 +440,8 @@ def merge_event(event1: CEvent, event2: CEvent, should_raise: bool = True) -> CE
 
 @dataclass
 class Imports:
-    types: Final[Set[str]] = field(default_factory=set)
-    type_vars: Final[Set[str]] = field(default_factory=set)
+    types: Final[set[str]] = field(default_factory=set)
+    type_vars: Final[set[str]] = field(default_factory=set)
     include_event_type: bool = False
 
     def add_type(self, type: CType, inner: bool = True) -> None:
@@ -464,7 +463,7 @@ class Imports:
             self.add_type(CType(name="Generic", namespace="typing"))
             self.add_type_var(CType(name="T"))
 
-        lines: List[str] = []
+        lines: list[str] = []
 
         for type in sorted(self.types):
             split: Sequence[str] = type.split(".")
@@ -491,8 +490,8 @@ class Doc:
         self.data = data
 
     @classmethod
-    def split_node_str(cls, node_str: str) -> Tuple[str, Optional[str]]:
-        result: List[str] = []
+    def split_node_str(cls, node_str: str) -> tuple[str, str | None]:
+        result: list[str] = []
         i: int = 0
         n: int = len(node_str)
         bracket_count: int = 0
@@ -512,7 +511,7 @@ class Doc:
     def translate(cls, pattern: str) -> str:
         star: object = object()
 
-        parts: List[Union[str, object]] = []
+        parts: list[str | object] = []
         i: int = 0
         n: int = len(pattern)
         while i < n:
@@ -530,7 +529,7 @@ class Doc:
                 parts.append(re.escape(c))
         assert i == n
 
-        result: List[str] = []
+        result: list[str] = []
         i: int = 0
         n: int = len(parts)
         while i < n and parts[i] is not star:
@@ -545,7 +544,7 @@ class Doc:
                 result.append(".*")
                 break
             assert parts[i] is not star
-            fixed: List[Union[str, object]] = []
+            fixed: list[str | object] = []
             while i < n and parts[i] is not star:
                 fixed.append(parts[i])
                 i += 1
@@ -573,7 +572,7 @@ class Doc:
             result = cls.translate(pattern)
         return re.compile(result)
 
-    def get(self, node_str: str) -> Optional[Doc]:
+    def get(self, node_str: str) -> Doc | None:
         node: str
         search: str = node_str
         data: Mapping[str, Any] = self.data
@@ -594,10 +593,10 @@ class Doc:
     def doc_string(self, indent: int = 0, line_length: int = 100) -> Sequence[str]:
         indent_str: str = "    " * indent
 
-        doc: Optional[str] = self.data.get("doc", None)
+        doc: str | None = self.data.get("doc", None)
         doc_formatted: Mapping[str, Sequence[str]] = self.data.get("doc_formatted", {})
         parameters: Mapping[str, str] = self.data.get("parameters", {})
-        return_str: Optional[str] = self.data.get("return", None)
+        return_str: str | None = self.data.get("return", None)
         exceptions: Mapping[str, str] = self.data.get("exceptions", {})
 
         if len(parameters) == 0 and return_str is None and len(exceptions) == 0:
@@ -607,7 +606,7 @@ class Doc:
                 return (f'{indent_str}"""{doc}"""',)
 
         doc = '"""' + doc.replace("\n", "\n\n")
-        doc_lines: List[str] = list(self.split(doc, indent, line_length))
+        doc_lines: list[str] = list(self.split(doc, indent, line_length))
 
         if len(parameters) > 0 or return_str is not None or len(exceptions) > 0:
             doc_lines.append(indent_str)
@@ -643,9 +642,9 @@ class Doc:
     ) -> Sequence[str]:
         indent_str: str = "    " * indent
 
-        lines: List[str] = []
+        lines: list[str] = []
         for doc_paragraph in text.splitlines():
-            words: List[str] = doc_paragraph.split(" ")
+            words: list[str] = doc_paragraph.split(" ")
             doc_line: str = indent_str + words[0]
             for word in words[1:]:
                 if len(doc_line) + len(word) + 1 > line_length:
@@ -662,7 +661,7 @@ def merge_doc(self, other: Doc) -> Doc:
 
 
 def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str, Any]:
-    new_dict: Dict[str, Any] = dict(**d1)
+    new_dict: dict[str, Any] = dict(**d1)
 
     for k2, v2 in d2.items():
         if k2 not in new_dict:
@@ -673,7 +672,7 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
         if k2 in ("doc", "return"):
             new_dict[k2] = (v1 + "\n" + v2) if v1 != "" and v2 != "" else (v1 + v2)
         elif k2 == "doc_formatted":
-            new: Dict[str, Sequence[str]] = dict(**v1)
+            new: dict[str, Sequence[str]] = dict(**v1)
             for k, v in v2.items():
                 if k in new:
                     new[k] += v
@@ -681,7 +680,7 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
                     new[k] = v
             new_dict[k2] = new
         elif k2 in ("parameters", "exceptions"):
-            new: Dict[str, str] = dict(**v1)
+            new: dict[str, str] = dict(**v1)
             for k, v in v2.items():
                 if k in new:
                     new[k] = (new[k] + "\n" + v) if new[k] != "" and v != "" else (new[k] + v)
@@ -704,7 +703,7 @@ def build_namespace(
     imports = Imports()
     imports.add_type(CType(name="annotations", namespace="__future__"))
 
-    built_types: List[Sequence[str]] = []
+    built_types: list[Sequence[str]] = []
     for type_def in namespace.types.values():
         logger.debug("Building type: %s", type_def)
         built_type: Sequence[str] = build_type_def(
@@ -716,7 +715,7 @@ def build_namespace(
         )
         built_types.append(built_type)
 
-    lines: List[str] = list(imports.build(namespace.name))
+    lines: list[str] = list(imports.build(namespace.name))
     for built_type in built_types:
         lines.extend(built_type)
     return lines
@@ -731,15 +730,15 @@ def build_type_def(
 ) -> Sequence[str]:
     type_name: str = type_def.__class__.__name__
     if type_name == "CClass":
-        return build_class(cast(CClass, type_def), imports, doc, indent, line_length)
+        return build_class(cast("CClass", type_def), imports, doc, indent, line_length)
     if type_name == "CStruct":
-        return build_struct(cast(CStruct, type_def), imports, doc, indent, line_length)
+        return build_struct(cast("CStruct", type_def), imports, doc, indent, line_length)
     if type_name == "CInterface":
-        return build_interface(cast(CInterface, type_def), imports, doc, indent, line_length)
+        return build_interface(cast("CInterface", type_def), imports, doc, indent, line_length)
     if type_name == "CEnum":
-        return build_enum(cast(CEnum, type_def), imports, doc, indent, line_length)
+        return build_enum(cast("CEnum", type_def), imports, doc, indent, line_length)
     if type_name == "CDelegate":
-        return build_delegate(cast(CDelegate, type_def), imports, doc, indent, line_length)
+        return build_delegate(cast("CDelegate", type_def), imports, doc, indent, line_length)
 
 
 def build_class(
@@ -749,14 +748,14 @@ def build_class(
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
-    parents: List[str] = []
+    parents: list[str] = []
     if type_def.abstract:
         imports.add_type(CType(name="ABC", namespace="abc"))
         parents.append("ABC")
 
     if len(type_def.generic_args) > 0:
         imports.add_type(CType(name="Generic", namespace="typing"))
-        args: List[str] = []
+        args: list[str] = []
         for arg in type_def.generic_args:
             args.append(build_type(arg, imports))
         parents.append(f"Generic[{', '.join(args)}]")
@@ -766,7 +765,7 @@ def build_class(
     for interface in type_def.interfaces:
         parents.append(build_type(interface, imports))
 
-    lines: List[str] = []
+    lines: list[str] = []
     if len(parents) > 0:
         par_str: str = ", ".join(parents)
         lines.append(f"{'    ' * indent}class {type_def.name}({par_str}):")
@@ -872,10 +871,10 @@ def build_interface(
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
-    parents: List[str] = []
+    parents: list[str] = []
     if len(type_def.generic_args) > 0:
         imports.add_type(CType(name="Generic", namespace="typing"))
-        args: List[str] = []
+        args: list[str] = []
         for arg in type_def.generic_args:
             args.append(build_type(arg, imports))
         parents.append(f"Generic[{', '.join(args)}]")
@@ -883,7 +882,7 @@ def build_interface(
     for interface in type_def.interfaces:
         parents.append(build_type(interface, imports))
 
-    lines: List[str] = []
+    lines: list[str] = []
     if len(parents) > 0:
         par_str: str = ", ".join(parents)
         lines.append(f"{'    ' * indent}class {type_def.name}({par_str}):")
@@ -962,7 +961,7 @@ def build_enum(
     line_length: int = 100,
 ) -> Sequence[str]:
     imports.add_type(CType(name="Enum", namespace="System"))
-    lines: List[str] = [f"{'    ' * indent}class {type_def.name}(Enum):"]
+    lines: list[str] = [f"{'    ' * indent}class {type_def.name}(Enum):"]
 
     indent_str: str = "    " * (indent + 1)
     doc_str: Sequence[str]
@@ -995,14 +994,14 @@ def build_delegate(
 ) -> Sequence[str]:
     indent_str: str = "    " * indent
 
-    parameters: List[str] = []
+    parameters: list[str] = []
     for parameter in type_def.parameters:
         parameters.append(build_type(parameter.type, imports, convert=True))
 
     return_str: str = build_type(type_def.return_type, imports, convert=True)
 
     imports.add_type(CType(name="Callable", namespace="typing"))
-    lines: List[str] = [
+    lines: list[str] = [
         f"{indent_str}{type_def.name}: Callable[[{', '.join(parameters)}], {return_str}] = ...",
     ]
 
@@ -1051,7 +1050,7 @@ def build_type(
             imports.add_type(type, inner=False)
             type_str = type.name
             if len(type.inner) > 0:
-                children: List[str] = []
+                children: list[str] = []
                 for inner_type in type.inner:
                     children.append(build_type(inner_type, imports, convert=convert))
                 type_str = f"{type_str}[{', '.join(children)}]"
@@ -1107,7 +1106,7 @@ def build_constructor(
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
-    lines: List[str] = []
+    lines: list[str] = []
 
     if overload:
         imports.add_type(CType(name="overload", namespace="typing"))
@@ -1154,7 +1153,7 @@ def build_property(
 
         return f"{indent_str}{property.name}: {type_str} = ...", *doc_str
 
-    lines: List[str] = [f"{indent_str}@property"]
+    lines: list[str] = [f"{indent_str}@property"]
 
     property_type: str = build_type(property.type, imports, convert=True)
     lines.append(f"{indent_str}def {property.name}(self) -> {property_type}:")
@@ -1169,9 +1168,7 @@ def build_property(
 
     if property.setter:
         lines.append(f"{indent_str}@{property.name}.setter")
-        lines.append(
-            f"{indent_str}def {property.name}(self, " f"value: {property_type}) -> None: ..."
-        )
+        lines.append(f"{indent_str}def {property.name}(self, value: {property_type}) -> None: ...")
 
     return tuple(lines)
 
@@ -1184,7 +1181,7 @@ def build_method(
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
-    lines: List[str] = []
+    lines: list[str] = []
 
     self_cls: str = "self"
     if method.static:
@@ -1200,7 +1197,7 @@ def build_method(
     return_str: str
     if len(method.return_types) > 1:
         imports.add_type(CType(name="Tuple", namespace="typing"))
-        return_types: List[str] = []
+        return_types: list[str] = []
         for return_type in method.return_types:
             return_types.append(build_type(return_type, imports, convert=True))
         return_str = f"Tuple[{', '.join(return_types)}]"
@@ -1233,7 +1230,7 @@ def build_event(
 
     imports.include_event_type = True
 
-    lines: List[str] = [
+    lines: list[str] = [
         f"{indent_str}{event.name}: EventType[{build_type(event.type, imports, convert=True)}] = ..."
     ]
 
@@ -1278,12 +1275,12 @@ def build_stubs(
     line_length: int,
     multi_threaded: bool,
     format_files: bool,
-) -> Union[int, str]:
-    namespaces: Dict[str, CNamespace] = {}
+) -> int | str:
+    namespaces: dict[str, CNamespace] = {}
     for skeleton_file in skeleton_files:
         logger.info("Loading skeletons file: '%s'", skeleton_file)
         with skeleton_file.open("r") as file:
-            skeleton_dict: Dict[str, Any] = json.load(file)
+            skeleton_dict: dict[str, Any] = json.load(file)
 
         for namespace_json in skeleton_dict["namespaces"].values():
             namespace: CNamespace = CNamespace.from_json(namespace_json)
@@ -1295,7 +1292,7 @@ def build_stubs(
     for doc_file in doc_files:
         logger.info("Loading Doc File: %r", str(doc_file))
         with doc_file.open("r") as file:
-            loaded_doc_dict_tree: Dict[str, Any] = json.load(file)
+            loaded_doc_dict_tree: dict[str, Any] = json.load(file)
 
         new_doc: Doc = Doc(loaded_doc_dict_tree)
         doc = merge_doc(doc, new_doc)

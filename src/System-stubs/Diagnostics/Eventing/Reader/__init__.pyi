@@ -1,27 +1,11 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import Final
 from typing import Generic
-from typing import Optional
 from typing import TypeVar
 from typing import overload
 
 from Microsoft.Win32 import EvtRpcLogin
 from Microsoft.Win32.SafeHandles import SafeWaitHandle
-from Microsoft.Win32.UnsafeNativeMethods import EvtChannelConfigPropertyId
-from Microsoft.Win32.UnsafeNativeMethods import EvtEventMetadataPropertyId
-from Microsoft.Win32.UnsafeNativeMethods import EvtEventPropertyId
-from Microsoft.Win32.UnsafeNativeMethods import EvtFormatMessageFlags
-from Microsoft.Win32.UnsafeNativeMethods import EvtLoginClass
-from Microsoft.Win32.UnsafeNativeMethods import EvtLogPropertyId
-from Microsoft.Win32.UnsafeNativeMethods import EvtPublisherMetadataPropertyId
-from Microsoft.Win32.UnsafeNativeMethods import EvtQueryPropertyId
-from Microsoft.Win32.UnsafeNativeMethods import EvtRenderContextFlags
-from Microsoft.Win32.UnsafeNativeMethods import EvtRenderFlags
-from Microsoft.Win32.UnsafeNativeMethods import EvtSeekFlags
-from Microsoft.Win32.UnsafeNativeMethods import EvtVariant
-from Microsoft.Win32.UnsafeNativeMethods import EvtVariantType
 from System import Array
 from System import DateTime
 from System import Enum
@@ -39,7 +23,6 @@ from System.Collections import IDictionary
 from System.Collections.Generic import IEnumerable
 from System.Collections.Generic import IList
 from System.Diagnostics import EventLogPermission
-from System.Diagnostics.Eventing.Reader.NativeWrapper import SystemProperties
 from System.Globalization import CultureInfo
 from System.IO import SeekOrigin
 from System.Reflection import MethodBase
@@ -63,405 +46,230 @@ class CoTaskMemSafeHandle(SafeHandle, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Zero(cls) -> CoTaskMemSafeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CoTaskMemUnicodeSafeHandle(SafeHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Zero(cls) -> CoTaskMemUnicodeSafeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventBookmark(Object, ISerializable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventKeyword(Object):
     """"""
 
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLevel(Object):
     """"""
 
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogConfiguration(Object, IDisposable):
     """"""
 
     @overload
     def __init__(self, logName: str):
-        """
-
-        :param logName:
-        """
+        """:param logName:"""
     @overload
     def __init__(self, logName: str, session: EventLogSession):
-        """
-
-        :param logName:
+        """:param logName:
         :param session:
         """
     @property
     def IsClassicLog(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsEnabled.setter
     def IsEnabled(self, value: bool) -> None: ...
     @property
     def LogFilePath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LogFilePath.setter
     def LogFilePath(self, value: str) -> None: ...
     @property
     def LogIsolation(self) -> EventLogIsolation:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogMode(self) -> EventLogMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LogMode.setter
     def LogMode(self, value: EventLogMode) -> None: ...
     @property
     def LogName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogType(self) -> EventLogType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumSizeInBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumSizeInBytes.setter
     def MaximumSizeInBytes(self, value: int) -> None: ...
     @property
     def OwningProviderName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def ProviderBufferSize(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProviderBufferSize(self) -> int | None:
+        """:return:"""
     @property
-    def ProviderControlGuid(self) -> Optional[Guid]:
-        """
-
-        :return:
-        """
+    def ProviderControlGuid(self) -> Guid | None:
+        """:return:"""
     @property
-    def ProviderKeywords(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProviderKeywords(self) -> int | None:
+        """:return:"""
     @ProviderKeywords.setter
-    def ProviderKeywords(self, value: Optional[int]) -> None: ...
+    def ProviderKeywords(self, value: int | None) -> None: ...
     @property
-    def ProviderLatency(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProviderLatency(self) -> int | None:
+        """:return:"""
     @property
-    def ProviderLevel(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProviderLevel(self) -> int | None:
+        """:return:"""
     @ProviderLevel.setter
-    def ProviderLevel(self, value: Optional[int]) -> None: ...
+    def ProviderLevel(self, value: int | None) -> None: ...
     @property
-    def ProviderMaximumNumberOfBuffers(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProviderMaximumNumberOfBuffers(self) -> int | None:
+        """:return:"""
     @property
-    def ProviderMinimumNumberOfBuffers(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProviderMinimumNumberOfBuffers(self) -> int | None:
+        """:return:"""
     @property
     def ProviderNames(self) -> IEnumerable[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityDescriptor(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SecurityDescriptor.setter
     def SecurityDescriptor(self, value: str) -> None: ...
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SaveChanges(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogException(Exception, _Exception, ISerializable):
     """"""
@@ -471,273 +279,154 @@ class EventLogException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogHandle(SafeHandle, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Zero(cls) -> EventLogHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogInformation(Object):
     """"""
 
     @property
-    def Attributes(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Attributes(self) -> int | None:
+        """:return:"""
     @property
-    def CreationTime(self) -> Optional[DateTime]:
-        """
-
-        :return:
-        """
+    def CreationTime(self) -> DateTime | None:
+        """:return:"""
     @property
-    def FileSize(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def FileSize(self) -> int | None:
+        """:return:"""
     @property
-    def IsLogFull(self) -> Optional[bool]:
-        """
-
-        :return:
-        """
+    def IsLogFull(self) -> bool | None:
+        """:return:"""
     @property
-    def LastAccessTime(self) -> Optional[DateTime]:
-        """
-
-        :return:
-        """
+    def LastAccessTime(self) -> DateTime | None:
+        """:return:"""
     @property
-    def LastWriteTime(self) -> Optional[DateTime]:
-        """
-
-        :return:
-        """
+    def LastWriteTime(self) -> DateTime | None:
+        """:return:"""
     @property
-    def OldestRecordNumber(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def OldestRecordNumber(self) -> int | None:
+        """:return:"""
     @property
-    def RecordCount(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def RecordCount(self) -> int | None:
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogInvalidDataException(EventLogException, _Exception, ISerializable):
     """"""
@@ -747,138 +436,80 @@ class EventLogInvalidDataException(EventLogException, _Exception, ISerializable)
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogIsolation(Enum):
     """"""
@@ -895,43 +526,23 @@ class EventLogLink(Object):
 
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsImported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogMode(Enum):
     """"""
@@ -951,138 +562,80 @@ class EventLogNotFoundException(EventLogException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogPermissionHolder(Object):
     """"""
@@ -1090,64 +643,36 @@ class EventLogPermissionHolder(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetEventLogPermission(cls) -> EventLogPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogPropertySelector(Object, IDisposable):
     """"""
 
     def __init__(self, propertyQueries: IEnumerable[str]):
-        """
-
-        :param propertyQueries:
-        """
+        """:param propertyQueries:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogProviderDisabledException(EventLogException, _Exception, ISerializable):
     """"""
@@ -1157,304 +682,183 @@ class EventLogProviderDisabledException(EventLogException, _Exception, ISerializ
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogQuery(Object):
     """"""
 
     @overload
     def __init__(self, path: str, pathType: PathType):
-        """
-
-        :param path:
+        """:param path:
         :param pathType:
         """
     @overload
     def __init__(self, path: str, pathType: PathType, query: str):
-        """
-
-        :param path:
+        """:param path:
         :param pathType:
         :param query:
         """
     @property
     def ReverseDirection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReverseDirection.setter
     def ReverseDirection(self, value: bool) -> None: ...
     @property
     def Session(self) -> EventLogSession:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Session.setter
     def Session(self, value: EventLogSession) -> None: ...
     @property
     def TolerateQueryErrors(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TolerateQueryErrors.setter
     def TolerateQueryErrors(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogReader(Object, IDisposable):
     """"""
 
     @overload
     def __init__(self, eventQuery: EventLogQuery):
-        """
-
-        :param eventQuery:
-        """
+        """:param eventQuery:"""
     @overload
     def __init__(self, path: str):
-        """
-
-        :param path:
-        """
+        """:param path:"""
     @overload
     def __init__(self, eventQuery: EventLogQuery, bookmark: EventBookmark):
-        """
-
-        :param eventQuery:
+        """:param eventQuery:
         :param bookmark:
         """
     @overload
     def __init__(self, path: str, pathType: PathType):
-        """
-
-        :param path:
+        """:param path:
         :param pathType:
         """
     @property
     def BatchSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BatchSize.setter
     def BatchSize(self, value: int) -> None: ...
     @property
     def LogStatus(self) -> IList[EventLogStatus]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CancelReading(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ReadEvent(self) -> EventRecord:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ReadEvent(self, timeout: TimeSpan) -> EventRecord:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Seek(self, bookmark: EventBookmark) -> None:
-        """
-
-        :param bookmark:
-        """
+        """:param bookmark:"""
     @overload
     def Seek(self, bookmark: EventBookmark, offset: int) -> None:
-        """
-
-        :param bookmark:
+        """:param bookmark:
         :param offset:
         """
     @overload
     def Seek(self, origin: SeekOrigin, offset: int) -> None:
-        """
-
-        :param origin:
+        """:param origin:
         :param offset:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogReadingException(EventLogException, _Exception, ISerializable):
     """"""
@@ -1464,345 +868,188 @@ class EventLogReadingException(EventLogException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogRecord(EventRecord, IDisposable):
     """"""
 
     @property
-    def ActivityId(self) -> Optional[Guid]:
-        """
-
-        :return:
-        """
+    def ActivityId(self) -> Guid | None:
+        """:return:"""
     @property
     def Bookmark(self) -> EventBookmark:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainerLog(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Keywords(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Keywords(self) -> int | None:
+        """:return:"""
     @property
     def KeywordsDisplayNames(self) -> IEnumerable[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Level(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Level(self) -> int | None:
+        """:return:"""
     @property
     def LevelDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MatchedQueryIds(self) -> IEnumerable[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Opcode(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Opcode(self) -> int | None:
+        """:return:"""
     @property
     def OpcodeDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def ProcessId(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProcessId(self) -> int | None:
+        """:return:"""
     @property
     def Properties(self) -> IList[EventProperty]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def ProviderId(self) -> Optional[Guid]:
-        """
-
-        :return:
-        """
+    def ProviderId(self) -> Guid | None:
+        """:return:"""
     @property
     def ProviderName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Qualifiers(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Qualifiers(self) -> int | None:
+        """:return:"""
     @property
-    def RecordId(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def RecordId(self) -> int | None:
+        """:return:"""
     @property
-    def RelatedActivityId(self) -> Optional[Guid]:
-        """
-
-        :return:
-        """
+    def RelatedActivityId(self) -> Guid | None:
+        """:return:"""
     @property
-    def Task(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Task(self) -> int | None:
+        """:return:"""
     @property
     def TaskDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def ThreadId(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ThreadId(self) -> int | None:
+        """:return:"""
     @property
-    def TimeCreated(self) -> Optional[DateTime]:
-        """
-
-        :return:
-        """
+    def TimeCreated(self) -> DateTime | None:
+        """:return:"""
     @property
     def UserId(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Version(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Version(self) -> int | None:
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FormatDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FormatDescription(self, values: IEnumerable[object]) -> str:
-        """
-
-        :param values:
+        """:param values:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPropertyValues(self, propertySelector: EventLogPropertySelector) -> IList[object]:
-        """
-
-        :param propertySelector:
+        """:param propertySelector:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogSession(Object, IDisposable):
     """"""
@@ -1812,10 +1059,7 @@ class EventLogSession(Object, IDisposable):
         """"""
     @overload
     def __init__(self, server: str):
-        """
-
-        :param server:
-        """
+        """:param server:"""
     @overload
     def __init__(
         self,
@@ -1825,9 +1069,7 @@ class EventLogSession(Object, IDisposable):
         password: SecureString,
         logOnType: SessionAuthentication,
     ):
-        """
-
-        :param server:
+        """:param server:
         :param domain:
         :param user:
         :param password:
@@ -1836,38 +1078,26 @@ class EventLogSession(Object, IDisposable):
     @classmethod
     @property
     def GlobalSession(cls) -> EventLogSession:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CancelCurrentOperations(self) -> None:
         """"""
     @overload
     def ClearLog(self, logName: str) -> None:
-        """
-
-        :param logName:
-        """
+        """:param logName:"""
     @overload
     def ClearLog(self, logName: str, backupPath: str) -> None:
-        """
-
-        :param logName:
+        """:param logName:
         :param backupPath:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def ExportLog(self, path: str, pathType: PathType, query: str, targetFilePath: str) -> None:
-        """
-
-        :param path:
+        """:param path:
         :param pathType:
         :param query:
         :param targetFilePath:
@@ -1881,9 +1111,7 @@ class EventLogSession(Object, IDisposable):
         targetFilePath: str,
         tolerateQueryErrors: bool,
     ) -> None:
-        """
-
-        :param path:
+        """:param path:
         :param pathType:
         :param query:
         :param targetFilePath:
@@ -1893,9 +1121,7 @@ class EventLogSession(Object, IDisposable):
     def ExportLogAndMessages(
         self, path: str, pathType: PathType, query: str, targetFilePath: str
     ) -> None:
-        """
-
-        :param path:
+        """:param path:
         :param pathType:
         :param query:
         :param targetFilePath:
@@ -1910,9 +1136,7 @@ class EventLogSession(Object, IDisposable):
         tolerateQueryErrors: bool,
         targetCultureInfo: CultureInfo,
     ) -> None:
-        """
-
-        :param path:
+        """:param path:
         :param pathType:
         :param query:
         :param targetFilePath:
@@ -1920,74 +1144,40 @@ class EventLogSession(Object, IDisposable):
         :param targetCultureInfo:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLogInformation(self, logName: str, pathType: PathType) -> EventLogInformation:
-        """
-
-        :param logName:
+        """:param logName:
         :param pathType:
         :return:
         """
     def GetLogNames(self) -> IEnumerable[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetProviderNames(self) -> IEnumerable[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogStatus(Object):
     """"""
 
     @property
     def LogName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventLogType(Enum):
     """"""
@@ -2006,64 +1196,43 @@ class EventLogWatcher(Object, IDisposable):
 
     @overload
     def __init__(self, eventQuery: EventLogQuery):
-        """
-
-        :param eventQuery:
-        """
+        """:param eventQuery:"""
     @overload
     def __init__(self, path: str):
-        """
-
-        :param path:
-        """
+        """:param path:"""
     @overload
     def __init__(self, eventQuery: EventLogQuery, bookmark: EventBookmark):
-        """
-
-        :param eventQuery:
+        """:param eventQuery:
         :param bookmark:
         """
     @overload
     def __init__(
-        self, eventQuery: EventLogQuery, bookmark: EventBookmark, readExistingEvents: bool
+        self,
+        eventQuery: EventLogQuery,
+        bookmark: EventBookmark,
+        readExistingEvents: bool,
     ):
-        """
-
-        :param eventQuery:
+        """:param eventQuery:
         :param bookmark:
         :param readExistingEvents:
         """
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     EventRecordWritten: EventType[EventHandler[EventRecordWrittenEventArgs]] = ...
     """"""
 
@@ -2072,428 +1241,225 @@ class EventMetadata(Object):
 
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Keywords(self) -> IEnumerable[EventKeyword]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Level(self) -> EventLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogLink(self) -> EventLogLink:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Opcode(self) -> EventOpcode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Task(self) -> EventTask:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Template(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Version(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventOpcode(Object):
     """"""
 
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventProperty(Object):
     """"""
 
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventRecord(ABC, Object, IDisposable):
     """"""
 
     @property
-    def ActivityId(self) -> Optional[Guid]:
-        """
-
-        :return:
-        """
+    def ActivityId(self) -> Guid | None:
+        """:return:"""
     @property
     def Bookmark(self) -> EventBookmark:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Keywords(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Keywords(self) -> int | None:
+        """:return:"""
     @property
     def KeywordsDisplayNames(self) -> IEnumerable[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Level(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Level(self) -> int | None:
+        """:return:"""
     @property
     def LevelDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MachineName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Opcode(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Opcode(self) -> int | None:
+        """:return:"""
     @property
     def OpcodeDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def ProcessId(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ProcessId(self) -> int | None:
+        """:return:"""
     @property
     def Properties(self) -> IList[EventProperty]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def ProviderId(self) -> Optional[Guid]:
-        """
-
-        :return:
-        """
+    def ProviderId(self) -> Guid | None:
+        """:return:"""
     @property
     def ProviderName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Qualifiers(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Qualifiers(self) -> int | None:
+        """:return:"""
     @property
-    def RecordId(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def RecordId(self) -> int | None:
+        """:return:"""
     @property
-    def RelatedActivityId(self) -> Optional[Guid]:
-        """
-
-        :return:
-        """
+    def RelatedActivityId(self) -> Guid | None:
+        """:return:"""
     @property
-    def Task(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Task(self) -> int | None:
+        """:return:"""
     @property
     def TaskDisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def ThreadId(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def ThreadId(self) -> int | None:
+        """:return:"""
     @property
-    def TimeCreated(self) -> Optional[DateTime]:
-        """
-
-        :return:
-        """
+    def TimeCreated(self) -> DateTime | None:
+        """:return:"""
     @property
     def UserId(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
-    def Version(self) -> Optional[int]:
-        """
-
-        :return:
-        """
+    def Version(self) -> int | None:
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FormatDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FormatDescription(self, values: IEnumerable[object]) -> str:
-        """
-
-        :param values:
+        """:param values:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventRecordWrittenEventArgs(EventArgs):
     """"""
 
     @property
     def EventException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventRecord(self) -> EventRecord:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventTask(Object):
     """"""
 
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventGuid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NativeWrapper(Object):
     """"""
@@ -2502,118 +1468,88 @@ class NativeWrapper(Object):
         """"""
     @classmethod
     def ConvertToAnsiString(cls, val: UnsafeNativeMethods.EvtVariant) -> str:
-        """
-
-        :param val:
+        """:param val:
         :return:
         """
     @classmethod
     def ConvertToArray(cls, val: UnsafeNativeMethods.EvtVariant, objType: Type, size: int) -> Array:
-        """
-
-        :param val:
+        """:param val:
         :param objType:
         :param size:
         :return:
         """
     @classmethod
     def ConvertToBoolArray(cls, val: UnsafeNativeMethods.EvtVariant) -> Array:
-        """
-
-        :param val:
+        """:param val:
         :return:
         """
     @classmethod
     def ConvertToFileTimeArray(cls, val: UnsafeNativeMethods.EvtVariant) -> Array:
-        """
-
-        :param val:
+        """:param val:
         :return:
         """
     @classmethod
     def ConvertToObject(
-        cls, val: UnsafeNativeMethods.EvtVariant, desiredType: UnsafeNativeMethods.EvtVariantType
+        cls,
+        val: UnsafeNativeMethods.EvtVariant,
+        desiredType: UnsafeNativeMethods.EvtVariantType,
     ) -> object:
-        """
-
-        :param val:
+        """:param val:
         :param desiredType:
         :return:
         """
     @classmethod
     def ConvertToSafeHandle(cls, val: UnsafeNativeMethods.EvtVariant) -> EventLogHandle:
-        """
-
-        :param val:
+        """:param val:
         :return:
         """
     @classmethod
     def ConvertToString(cls, val: UnsafeNativeMethods.EvtVariant) -> str:
-        """
-
-        :param val:
+        """:param val:
         :return:
         """
     @classmethod
     def ConvertToStringArray(cls, val: UnsafeNativeMethods.EvtVariant, ansi: bool) -> Array[str]:
-        """
-
-        :param val:
+        """:param val:
         :param ansi:
         :return:
         """
     @classmethod
     def ConvertToSysTimeArray(cls, val: UnsafeNativeMethods.EvtVariant) -> Array:
-        """
-
-        :param val:
+        """:param val:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def EvtArchiveExportedLog(
         cls, session: EventLogHandle, logFilePath: str, locale: int, flags: int
     ) -> None:
-        """
-
-        :param session:
+        """:param session:
         :param logFilePath:
         :param locale:
         :param flags:
         """
     @classmethod
     def EvtCancel(cls, handle: EventLogHandle) -> None:
-        """
-
-        :param handle:
-        """
+        """:param handle:"""
     @classmethod
     def EvtClearLog(
         cls, session: EventLogHandle, channelPath: str, targetFilePath: str, flags: int
     ) -> None:
-        """
-
-        :param session:
+        """:param session:
         :param channelPath:
         :param targetFilePath:
         :param flags:
         """
     @classmethod
     def EvtClose(cls, handle: IntPtr) -> None:
-        """
-
-        :param handle:
-        """
+        """:param handle:"""
     @classmethod
     def EvtCreateBookmark(cls, bookmarkXml: str) -> EventLogHandle:
-        """
-
-        :param bookmarkXml:
+        """:param bookmarkXml:
         :return:
         """
     @classmethod
@@ -2623,20 +1559,21 @@ class NativeWrapper(Object):
         valuePaths: Array[str],
         flags: UnsafeNativeMethods.EvtRenderContextFlags,
     ) -> EventLogHandle:
-        """
-
-        :param valuePathsCount:
+        """:param valuePathsCount:
         :param valuePaths:
         :param flags:
         :return:
         """
     @classmethod
     def EvtExportLog(
-        cls, session: EventLogHandle, channelPath: str, query: str, targetFilePath: str, flags: int
+        cls,
+        session: EventLogHandle,
+        channelPath: str,
+        query: str,
+        targetFilePath: str,
+        flags: int,
     ) -> None:
-        """
-
-        :param session:
+        """:param session:
         :param channelPath:
         :param query:
         :param targetFilePath:
@@ -2644,9 +1581,7 @@ class NativeWrapper(Object):
         """
     @classmethod
     def EvtFormatMessage(cls, handle: EventLogHandle, msgId: int) -> str:
-        """
-
-        :param handle:
+        """:param handle:
         :param msgId:
         :return:
         """
@@ -2654,9 +1589,7 @@ class NativeWrapper(Object):
     def EvtFormatMessageFormatDescription(
         cls, handle: EventLogHandle, eventHandle: EventLogHandle, values: Array[str]
     ) -> str:
-        """
-
-        :param handle:
+        """:param handle:
         :param eventHandle:
         :param values:
         :return:
@@ -2668,9 +1601,7 @@ class NativeWrapper(Object):
         eventHandle: EventLogHandle,
         flag: UnsafeNativeMethods.EvtFormatMessageFlags,
     ) -> IEnumerable[str]:
-        """
-
-        :param pmHandle:
+        """:param pmHandle:
         :param eventHandle:
         :param flag:
         :return:
@@ -2682,20 +1613,18 @@ class NativeWrapper(Object):
         eventHandle: EventLogHandle,
         flag: UnsafeNativeMethods.EvtFormatMessageFlags,
     ) -> str:
-        """
-
-        :param pmHandle:
+        """:param pmHandle:
         :param eventHandle:
         :param flag:
         :return:
         """
     @classmethod
     def EvtGetChannelConfigProperty(
-        cls, handle: EventLogHandle, enumType: UnsafeNativeMethods.EvtChannelConfigPropertyId
+        cls,
+        handle: EventLogHandle,
+        enumType: UnsafeNativeMethods.EvtChannelConfigPropertyId,
     ) -> object:
-        """
-
-        :param handle:
+        """:param handle:
         :param enumType:
         :return:
         """
@@ -2703,19 +1632,17 @@ class NativeWrapper(Object):
     def EvtGetEventInfo(
         cls, handle: EventLogHandle, enumType: UnsafeNativeMethods.EvtEventPropertyId
     ) -> object:
-        """
-
-        :param handle:
+        """:param handle:
         :param enumType:
         :return:
         """
     @classmethod
     def EvtGetEventMetadataProperty(
-        cls, handle: EventLogHandle, enumType: UnsafeNativeMethods.EvtEventMetadataPropertyId
+        cls,
+        handle: EventLogHandle,
+        enumType: UnsafeNativeMethods.EvtEventMetadataPropertyId,
     ) -> object:
-        """
-
-        :param handle:
+        """:param handle:
         :param enumType:
         :return:
         """
@@ -2723,9 +1650,7 @@ class NativeWrapper(Object):
     def EvtGetLogInfo(
         cls, handle: EventLogHandle, enumType: UnsafeNativeMethods.EvtLogPropertyId
     ) -> object:
-        """
-
-        :param handle:
+        """:param handle:
         :param enumType:
         :return:
         """
@@ -2733,18 +1658,14 @@ class NativeWrapper(Object):
     def EvtGetObjectArrayProperty(
         cls, objArrayHandle: EventLogHandle, index: int, thePropertyId: int
     ) -> object:
-        """
-
-        :param objArrayHandle:
+        """:param objArrayHandle:
         :param index:
         :param thePropertyId:
         :return:
         """
     @classmethod
     def EvtGetObjectArraySize(cls, objectArray: EventLogHandle) -> int:
-        """
-
-        :param objectArray:
+        """:param objectArray:
         :return:
         """
     @classmethod
@@ -2753,9 +1674,7 @@ class NativeWrapper(Object):
         pmHandle: EventLogHandle,
         thePropertyId: UnsafeNativeMethods.EvtPublisherMetadataPropertyId,
     ) -> object:
-        """
-
-        :param pmHandle:
+        """:param pmHandle:
         :param thePropertyId:
         :return:
         """
@@ -2763,9 +1682,7 @@ class NativeWrapper(Object):
     def EvtGetQueryInfo(
         cls, handle: EventLogHandle, enumType: UnsafeNativeMethods.EvtQueryPropertyId
     ) -> object:
-        """
-
-        :param handle:
+        """:param handle:
         :param enumType:
         :return:
         """
@@ -2779,9 +1696,7 @@ class NativeWrapper(Object):
         flags: int,
         returned: int,
     ) -> bool:
-        """
-
-        :param queryHandle:
+        """:param queryHandle:
         :param eventSize:
         :param events:
         :param timeout:
@@ -2791,25 +1706,19 @@ class NativeWrapper(Object):
         """
     @classmethod
     def EvtNextChannelPath(cls, handle: EventLogHandle, finish: bool) -> str:
-        """
-
-        :param handle:
+        """:param handle:
         :param finish:
         :return:
         """
     @classmethod
     def EvtNextEventMetadata(cls, eventMetadataEnum: EventLogHandle, flags: int) -> EventLogHandle:
-        """
-
-        :param eventMetadataEnum:
+        """:param eventMetadataEnum:
         :param flags:
         :return:
         """
     @classmethod
     def EvtNextPublisherId(cls, handle: EventLogHandle, finish: bool) -> str:
-        """
-
-        :param handle:
+        """:param handle:
         :param finish:
         :return:
         """
@@ -2817,18 +1726,14 @@ class NativeWrapper(Object):
     def EvtOpenChannelConfig(
         cls, session: EventLogHandle, channelPath: str, flags: int
     ) -> EventLogHandle:
-        """
-
-        :param session:
+        """:param session:
         :param channelPath:
         :param flags:
         :return:
         """
     @classmethod
     def EvtOpenChannelEnum(cls, session: EventLogHandle, flags: int) -> EventLogHandle:
-        """
-
-        :param session:
+        """:param session:
         :param flags:
         :return:
         """
@@ -2836,36 +1741,33 @@ class NativeWrapper(Object):
     def EvtOpenEventMetadataEnum(
         cls, ProviderMetadata: EventLogHandle, flags: int
     ) -> EventLogHandle:
-        """
-
-        :param ProviderMetadata:
+        """:param ProviderMetadata:
         :param flags:
         :return:
         """
     @classmethod
     def EvtOpenLog(cls, session: EventLogHandle, path: str, flags: PathType) -> EventLogHandle:
-        """
-
-        :param session:
+        """:param session:
         :param path:
         :param flags:
         :return:
         """
     @classmethod
     def EvtOpenProviderEnum(cls, session: EventLogHandle, flags: int) -> EventLogHandle:
-        """
-
-        :param session:
+        """:param session:
         :param flags:
         :return:
         """
     @classmethod
     def EvtOpenProviderMetadata(
-        cls, session: EventLogHandle, ProviderId: str, logFilePath: str, locale: int, flags: int
+        cls,
+        session: EventLogHandle,
+        ProviderId: str,
+        logFilePath: str,
+        locale: int,
+        flags: int,
     ) -> EventLogHandle:
-        """
-
-        :param session:
+        """:param session:
         :param ProviderId:
         :param logFilePath:
         :param locale:
@@ -2880,9 +1782,7 @@ class NativeWrapper(Object):
         timeout: int,
         flags: int,
     ) -> EventLogHandle:
-        """
-
-        :param loginClass:
+        """:param loginClass:
         :param login:
         :param timeout:
         :param flags:
@@ -2890,9 +1790,7 @@ class NativeWrapper(Object):
         """
     @classmethod
     def EvtQuery(cls, session: EventLogHandle, path: str, query: str, flags: int) -> EventLogHandle:
-        """
-
-        :param session:
+        """:param session:
         :param path:
         :param query:
         :param flags:
@@ -2906,18 +1804,14 @@ class NativeWrapper(Object):
         flags: UnsafeNativeMethods.EvtRenderFlags,
         buffer: StringBuilder,
     ) -> None:
-        """
-
-        :param context:
+        """:param context:
         :param eventHandle:
         :param flags:
         :param buffer:
         """
     @classmethod
     def EvtRenderBookmark(cls, eventHandle: EventLogHandle) -> str:
-        """
-
-        :param eventHandle:
+        """:param eventHandle:
         :return:
         """
     @classmethod
@@ -2929,9 +1823,7 @@ class NativeWrapper(Object):
         systemProperties: NativeWrapper.SystemProperties,
         SYSTEM_PROPERTY_COUNT: int,
     ) -> None:
-        """
-
-        :param contextHandle:
+        """:param contextHandle:
         :param eventHandle:
         :param flag:
         :param systemProperties:
@@ -2941,17 +1833,13 @@ class NativeWrapper(Object):
     def EvtRenderBufferWithContextUserOrValues(
         cls, contextHandle: EventLogHandle, eventHandle: EventLogHandle
     ) -> IList[object]:
-        """
-
-        :param contextHandle:
+        """:param contextHandle:
         :param eventHandle:
         :return:
         """
     @classmethod
     def EvtSaveChannelConfig(cls, channelConfig: EventLogHandle, flags: int) -> None:
-        """
-
-        :param channelConfig:
+        """:param channelConfig:
         :param flags:
         """
     @classmethod
@@ -2963,9 +1851,7 @@ class NativeWrapper(Object):
         timeout: int,
         flags: UnsafeNativeMethods.EvtSeekFlags,
     ) -> None:
-        """
-
-        :param resultSet:
+        """:param resultSet:
         :param position:
         :param bookmark:
         :param timeout:
@@ -2978,9 +1864,7 @@ class NativeWrapper(Object):
         enumType: UnsafeNativeMethods.EvtChannelConfigPropertyId,
         val: object,
     ) -> None:
-        """
-
-        :param handle:
+        """:param handle:
         :param enumType:
         :param val:
         """
@@ -2996,9 +1880,7 @@ class NativeWrapper(Object):
         callback: IntPtr,
         flags: int,
     ) -> EventLogHandle:
-        """
-
-        :param session:
+        """:param session:
         :param signalEvent:
         :param path:
         :param query:
@@ -3010,91 +1892,69 @@ class NativeWrapper(Object):
         """
     @classmethod
     def EvtUpdateBookmark(cls, bookmark: EventLogHandle, eventHandle: EventLogHandle) -> None:
-        """
-
-        :param bookmark:
+        """:param bookmark:
         :param eventHandle:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class SystemProperties(Object):
         """"""
 
-        ActivityId: Final[Optional[Guid]] = ...
+        ActivityId: Final[Guid | None] = ...
         """"""
         ChannelName: Final[str] = ...
         """"""
         ComputerName: Final[str] = ...
         """"""
-        Id: Final[Optional[int]] = ...
+        Id: Final[int | None] = ...
         """"""
-        Keywords: Final[Optional[int]] = ...
+        Keywords: Final[int | None] = ...
         """"""
-        Level: Final[Optional[int]] = ...
+        Level: Final[int | None] = ...
         """"""
-        Opcode: Final[Optional[int]] = ...
+        Opcode: Final[int | None] = ...
         """"""
-        ProcessId: Final[Optional[int]] = ...
+        ProcessId: Final[int | None] = ...
         """"""
-        ProviderId: Final[Optional[Guid]] = ...
+        ProviderId: Final[Guid | None] = ...
         """"""
         ProviderName: Final[str] = ...
         """"""
-        Qualifiers: Final[Optional[int]] = ...
+        Qualifiers: Final[int | None] = ...
         """"""
-        RecordId: Final[Optional[int]] = ...
+        RecordId: Final[int | None] = ...
         """"""
-        RelatedActivityId: Final[Optional[Guid]] = ...
+        RelatedActivityId: Final[Guid | None] = ...
         """"""
-        Task: Final[Optional[int]] = ...
+        Task: Final[int | None] = ...
         """"""
-        ThreadId: Final[Optional[int]] = ...
+        ThreadId: Final[int | None] = ...
         """"""
-        TimeCreated: Final[Optional[DateTime]] = ...
+        TimeCreated: Final[DateTime | None] = ...
         """"""
         UserId: Final[SecurityIdentifier] = ...
         """"""
-        Version: Final[Optional[int]] = ...
+        Version: Final[int | None] = ...
         """"""
         filled: Final[bool] = ...
         """"""
         def __init__(self):
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class PathType(Enum):
     """"""
@@ -3109,141 +1969,85 @@ class ProviderMetadata(Object, IDisposable):
 
     @overload
     def __init__(self, providerName: str):
-        """
-
-        :param providerName:
-        """
+        """:param providerName:"""
     @overload
-    def __init__(self, providerName: str, session: EventLogSession, targetCultureInfo: CultureInfo):
-        """
-
-        :param providerName:
+    def __init__(
+        self,
+        providerName: str,
+        session: EventLogSession,
+        targetCultureInfo: CultureInfo,
+    ):
+        """:param providerName:
         :param session:
         :param targetCultureInfo:
         """
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Events(self) -> IEnumerable[EventMetadata]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Keywords(self) -> IList[EventKeyword]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Levels(self) -> IList[EventLevel]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LogLinks(self) -> IList[EventLogLink]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessageFilePath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Opcodes(self) -> IList[EventOpcode]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterFilePath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResourceFilePath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Tasks(self) -> IList[EventTask]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProviderMetadataCachedInformation(Object):
     """"""
 
     def __init__(self, session: EventLogSession, logfile: str, maximumCacheSize: int):
-        """
-
-        :param session:
+        """:param session:
         :param logfile:
         :param maximumCacheSize:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetFormatDescription(self, ProviderName: str, eventHandle: EventLogHandle) -> str:
-        """
-
-        :param ProviderName:
+        """:param ProviderName:
         :param eventHandle:
         :return:
         """
@@ -3251,58 +2055,39 @@ class ProviderMetadataCachedInformation(Object):
     def GetFormatDescription(
         self, ProviderName: str, eventHandle: EventLogHandle, values: Array[str]
     ) -> str:
-        """
-
-        :param ProviderName:
+        """:param ProviderName:
         :param eventHandle:
         :param values:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeywordDisplayNames(
         self, ProviderName: str, eventHandle: EventLogHandle
     ) -> IEnumerable[str]:
-        """
-
-        :param ProviderName:
+        """:param ProviderName:
         :param eventHandle:
         :return:
         """
     def GetLevelDisplayName(self, ProviderName: str, eventHandle: EventLogHandle) -> str:
-        """
-
-        :param ProviderName:
+        """:param ProviderName:
         :param eventHandle:
         :return:
         """
     def GetOpcodeDisplayName(self, ProviderName: str, eventHandle: EventLogHandle) -> str:
-        """
-
-        :param ProviderName:
+        """:param ProviderName:
         :param eventHandle:
         :return:
         """
     def GetTaskDisplayName(self, ProviderName: str, eventHandle: EventLogHandle) -> str:
-        """
-
-        :param ProviderName:
+        """:param ProviderName:
         :param eventHandle:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SessionAuthentication(Enum):
     """"""

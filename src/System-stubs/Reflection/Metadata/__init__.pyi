@@ -1,10 +1,7 @@
-from __future__ import annotations
-
 from abc import ABC
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
-from typing import Iterator
-from typing import Tuple
 from typing import overload
 
 from System import Array
@@ -29,95 +26,57 @@ class BlobContentId(ValueType, IEquatable[BlobContentId]):
 
     @overload
     def __init__(self, id: ImmutableArray[int]):
-        """
-
-        :param id:
-        """
+        """:param id:"""
     @overload
     def __init__(self, id: Array[int]):
-        """
-
-        :param id:
-        """
+        """:param id:"""
     @overload
     def __init__(self, guid: Guid, stamp: int):
-        """
-
-        :param guid:
+        """:param guid:
         :param stamp:
         """
     @property
     def Guid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDefault(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Stamp(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: BlobContentId) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: BlobContentId) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: BlobContentId) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: BlobContentId, right: BlobContentId) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: BlobContentId, right: BlobContentId) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -127,242 +86,127 @@ class BlobHandle(ValueType, IEquatable[BlobHandle]):
 
     @property
     def IsNil(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: BlobHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BlobReader(ValueType):
     """"""
 
     def __init__(self, buffer: int, length: int):
-        """
-
-        :param buffer:
+        """:param buffer:
         :param length:
         """
     @property
     def CurrentPointer(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Offset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Offset.setter
     def Offset(self, value: int) -> None: ...
     @property
     def RemainingBytes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartPointer(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Align(self, alignment: int) -> None:
-        """
-
-        :param alignment:
-        """
+        """:param alignment:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, value: int) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ReadBlobHandle(self) -> BlobHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadBoolean(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ReadBytes(self, byteCount: int) -> Array[int]:
-        """
-
-        :param byteCount:
+        """:param byteCount:
         :return:
         """
     @overload
     def ReadBytes(self, byteCount: int, buffer: Array[int], bufferOffset: int) -> None:
-        """
-
-        :param byteCount:
+        """:param byteCount:
         :param buffer:
         :param bufferOffset:
         """
     def ReadChar(self) -> Char:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadCompressedInteger(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadCompressedSignedInteger(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadDateTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadDecimal(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadDouble(self) -> float:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadGuid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadInt16(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadInt32(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadInt64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadSByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadSingle(self) -> float:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadUInt16(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadUInt32(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadUInt64(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadUTF16(self, byteCount: int) -> str:
-        """
-
-        :param byteCount:
+        """:param byteCount:
         :return:
         """
     def ReadUTF8(self, byteCount: int) -> str:
-        """
-
-        :param byteCount:
+        """:param byteCount:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
+        """:return:"""
+    def TryReadCompressedInteger(self, value: int) -> tuple[bool, int]:
+        """:param value:
         :return:
         """
-    def TryReadCompressedInteger(self, value: int) -> Tuple[bool, int]:
-        """
-
-        :param value:
-        :return:
-        """
-    def TryReadCompressedSignedInteger(self, value: int) -> Tuple[bool, int]:
-        """
-
-        :param value:
+    def TryReadCompressedSignedInteger(self, value: int) -> tuple[bool, int]:
+        """:param value:
         :return:
         """
 
@@ -371,132 +215,77 @@ class DebugMetadataHeader(Object):
 
     @property
     def EntryPoint(self) -> MethodDefinitionHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> ImmutableArray[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Document(ValueType):
     """"""
 
     @property
     def Name(self) -> DocumentNameBlobHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DocumentHandle(ValueType, IEquatable[DocumentHandle]):
     """"""
 
     @property
     def IsNil(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: DocumentHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: DocumentHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: DocumentHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: DocumentHandle, right: DocumentHandle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: DocumentHandle, right: DocumentHandle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -506,78 +295,50 @@ class DocumentNameBlobHandle(ValueType, IEquatable[DocumentNameBlobHandle]):
 
     @property
     def IsNil(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: DocumentNameBlobHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: DocumentNameBlobHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: DocumentNameBlobHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: DocumentNameBlobHandle, right: DocumentNameBlobHandle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Explicit(cls, handle: BlobHandle) -> DocumentNameBlobHandle:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     def op_Implicit(cls, handle: DocumentNameBlobHandle) -> BlobHandle:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: DocumentNameBlobHandle, right: DocumentNameBlobHandle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -587,70 +348,43 @@ class Handle(ValueType, IEquatable[Handle]):
 
     @property
     def IsNil(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Kind(self) -> HandleKind:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: Handle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: Handle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: Handle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: Handle, right: Handle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: Handle, right: Handle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -737,26 +471,15 @@ class HandleKindExtensions(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MetadataKind(Enum):
     """"""
@@ -772,71 +495,43 @@ class MetadataReader(Object):
     """"""
 
     def __init__(self, metadata: int, length: int, options: MetadataReaderOptions):
-        """
-
-        :param metadata:
+        """:param metadata:
         :param length:
         :param options:
         """
     @property
     def DebugMetadataHeader(self) -> DebugMetadataHeader:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Options(self) -> MetadataReaderOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetDocument(self, handle: DocumentHandle) -> Document:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetMethodDebugInformation(
         self, handle: MethodDebugInformationHandle
     ) -> MethodDebugInformation:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     def GetString(self, handle: DocumentNameBlobHandle) -> str:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MetadataReaderOptions(Enum):
     """"""
@@ -854,25 +549,19 @@ class MetadataReaderProvider(Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def FromMetadataImage(cls, image: ImmutableArray[int]) -> MetadataReaderProvider:
-        """
-
-        :param image:
+        """:param image:
         :return:
         """
     @classmethod
     @overload
     def FromMetadataImage(cls, start: int, size: int) -> MetadataReaderProvider:
-        """
-
-        :param start:
+        """:param start:
         :param size:
         :return:
         """
@@ -880,9 +569,7 @@ class MetadataReaderProvider(Object, IDisposable):
     def FromMetadataStream(
         cls, stream: Stream, options: MetadataStreamOptions = ..., size: int = ...
     ) -> MetadataReaderProvider:
-        """
-
-        :param stream:
+        """:param stream:
         :param options:
         :param size:
         :return:
@@ -890,17 +577,13 @@ class MetadataReaderProvider(Object, IDisposable):
     @classmethod
     @overload
     def FromPortablePdbImage(cls, image: ImmutableArray[int]) -> MetadataReaderProvider:
-        """
-
-        :param image:
+        """:param image:
         :return:
         """
     @classmethod
     @overload
     def FromPortablePdbImage(cls, start: int, size: int) -> MetadataReaderProvider:
-        """
-
-        :param start:
+        """:param start:
         :param size:
         :return:
         """
@@ -908,34 +591,21 @@ class MetadataReaderProvider(Object, IDisposable):
     def FromPortablePdbStream(
         cls, stream: Stream, options: MetadataStreamOptions = ..., size: int = ...
     ) -> MetadataReaderProvider:
-        """
-
-        :param stream:
+        """:param stream:
         :param options:
         :param size:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetMetadataReader(self, options: MetadataReaderOptions = ...) -> MetadataReader:
-        """
-
-        :param options:
+        """:param options:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MetadataStreamOptions(Enum):
     """"""
@@ -951,157 +621,96 @@ class MetadataStreamOptionsExtensions(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsValid(cls, options: MetadataStreamOptions) -> bool:
-        """
-
-        :param options:
+        """:param options:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MethodDebugInformation(ValueType):
     """"""
 
     @property
     def Document(self) -> DocumentHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SequencePointsBlob(self) -> BlobHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSequencePoints(self) -> SequencePointCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MethodDebugInformationHandle(ValueType, IEquatable[MethodDebugInformationHandle]):
     """"""
 
     @property
     def IsNil(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: MethodDebugInformationHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: MethodDebugInformationHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: MethodDebugInformationHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(
         cls, left: MethodDebugInformationHandle, right: MethodDebugInformationHandle
     ) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Explicit(cls, handle: Handle) -> MethodDebugInformationHandle:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     def op_Implicit(cls, handle: MethodDebugInformationHandle) -> Handle:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     def op_Inequality(
         cls, left: MethodDebugInformationHandle, right: MethodDebugInformationHandle
     ) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -1111,83 +720,52 @@ class MethodDefinitionHandle(ValueType, IEquatable[MethodDefinitionHandle]):
 
     @property
     def IsNil(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: MethodDefinitionHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToDebugInformationHandle(self) -> MethodDebugInformationHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: MethodDefinitionHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: MethodDefinitionHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: MethodDefinitionHandle, right: MethodDefinitionHandle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Explicit(cls, handle: Handle) -> MethodDefinitionHandle:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     def op_Implicit(cls, handle: MethodDefinitionHandle) -> Handle:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: MethodDefinitionHandle, right: MethodDefinitionHandle) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -1196,51 +774,29 @@ class PathUtilities(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PortablePdbVersions(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SequencePoint(ValueType, IEquatable[SequencePoint]):
     """"""
@@ -1252,114 +808,60 @@ class SequencePoint(ValueType, IEquatable[SequencePoint]):
     """
     @property
     def Document(self) -> DocumentHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EndColumn(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EndLine(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHidden(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Offset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartColumn(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartLine(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: SequencePoint) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SequencePointCollection(ValueType, IEnumerable[SequencePoint], IEnumerable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[SequencePoint]:
-        """
-
-        :return:
-        """
+        """:return:"""

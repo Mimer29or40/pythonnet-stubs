@@ -1,9 +1,6 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import ClassVar
 from typing import Final
-from typing import Tuple
 from typing import overload
 
 from System import Array
@@ -27,7 +24,6 @@ from System.Deployment.Internal.Isolation.Store import EnumCategoriesFlags
 from System.Deployment.Internal.Isolation.Store import EnumCategoryInstancesFlags
 from System.Deployment.Internal.Isolation.Store import EnumSubcategoriesFlags
 from System.Deployment.Internal.Isolation.Store import GetPackagePropertyFlags
-from System.Deployment.Internal.Isolation.Store import IPathLock
 from System.Deployment.Internal.Isolation.StoreApplicationReference import RefFlags
 from System.Deployment.Internal.Isolation.StoreOperationInstallDeployment import OpFlags
 from System.Deployment.Internal.Isolation.StoreOperationPinDeployment import OpFlags
@@ -55,26 +51,15 @@ class BLOB(ValueType, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CATEGORY(ValueType):
     """"""
@@ -85,26 +70,15 @@ class CATEGORY(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CATEGORY_INSTANCE(ValueType):
     """"""
@@ -120,26 +94,15 @@ class CATEGORY_INSTANCE(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CATEGORY_SUBCATEGORY(ValueType):
     """"""
@@ -150,67 +113,53 @@ class CATEGORY_SUBCATEGORY(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS(Enum):
     """"""
 
-    IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS = (
-        ...
-    )
+    IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS = ...
     """"""
 
 class IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS(Enum):
     """"""
 
-    IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS = (
-        ...
-    )
+    IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS = ...
     """"""
 
 class IActContext:
     """"""
 
-    def ApplicationBasePath(self, Flags: int, ApplicationPath: str) -> Tuple[None, str]:
-        """
-
-        :param Flags:
+    def ApplicationBasePath(self, Flags: int, ApplicationPath: str) -> tuple[None, str]:
+        """:param Flags:
         :param ApplicationPath:
         """
     def CreateActContextFromCategoryInstance(
-        self, dwFlags: int, CategoryInstance: CATEGORY_INSTANCE, ppCreatedAppContext: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param dwFlags:
+        self,
+        dwFlags: int,
+        CategoryInstance: CATEGORY_INSTANCE,
+        ppCreatedAppContext: object,
+    ) -> tuple[None, object]:
+        """:param dwFlags:
         :param CategoryInstance:
         :param ppCreatedAppContext:
         """
     def EnumCategories(
-        self, Flags: int, CategoryToMatch: IReferenceIdentity, riid: Guid, EnumOut: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param Flags:
+        self,
+        Flags: int,
+        CategoryToMatch: IReferenceIdentity,
+        riid: Guid,
+        EnumOut: object,
+    ) -> tuple[None, object]:
+        """:param Flags:
         :param CategoryToMatch:
         :param riid:
         :param EnumOut:
@@ -222,19 +171,15 @@ class IActContext:
         Subcategory: str,
         riid: Guid,
         EnumOut: object,
-    ) -> Tuple[None, object]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, object]:
+        """:param Flags:
         :param CategoryId:
         :param Subcategory:
         :param riid:
         :param EnumOut:
         """
-    def EnumComponents(self, dwFlags: int, ppIdentityEnum: object) -> Tuple[None, object]:
-        """
-
-        :param dwFlags:
+    def EnumComponents(self, dwFlags: int, ppIdentityEnum: object) -> tuple[None, object]:
+        """:param dwFlags:
         :param ppIdentityEnum:
         """
     def EnumSubcategories(
@@ -244,10 +189,8 @@ class IActContext:
         SubcategoryPattern: str,
         riid: Guid,
         EnumOut: object,
-    ) -> Tuple[None, object]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, object]:
+        """:param Flags:
         :param CategoryId:
         :param SubcategoryPattern:
         :param riid:
@@ -260,10 +203,8 @@ class IActContext:
         Components: Array[IDefinitionIdentity],
         Indicies: Array[UIntPtr],
         Dispositions: Array[int],
-    ) -> Tuple[None, Array[UIntPtr], Array[int]]:
-        """
-
-        :param dwFlags:
+    ) -> tuple[None, Array[UIntPtr], Array[int]]:
+        """:param dwFlags:
         :param ComponentCount:
         :param Components:
         :param Indicies:
@@ -276,10 +217,8 @@ class IActContext:
         References: Array[IReferenceIdentity],
         Indicies: Array[UIntPtr],
         Dispositions: Array[int],
-    ) -> Tuple[None, Array[UIntPtr], Array[int]]:
-        """
-
-        :param dwFlags:
+    ) -> tuple[None, Array[UIntPtr], Array[int]]:
+        """:param dwFlags:
         :param Components:
         :param References:
         :param Indicies:
@@ -287,18 +226,13 @@ class IActContext:
         """
     def FindReferenceInContext(
         self, dwFlags: int, Reference: IReferenceIdentity, MatchedDefinition: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param dwFlags:
+    ) -> tuple[None, object]:
+        """:param dwFlags:
         :param Reference:
         :param MatchedDefinition:
         """
-    def GetAppId(self, AppId: object) -> Tuple[None, object]:
-        """
-
-        :param AppId:
-        """
+    def GetAppId(self, AppId: object) -> tuple[None, object]:
+        """:param AppId:"""
     def GetApplicationProperties(
         self,
         Flags: int,
@@ -306,10 +240,8 @@ class IActContext:
         PropertyNames: Array[str],
         PropertyValues: str,
         ComponentIndicies: UIntPtr,
-    ) -> Tuple[None, str, UIntPtr]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, str, UIntPtr]:
+        """:param Flags:
         :param cProperties:
         :param PropertyNames:
         :param PropertyValues:
@@ -317,30 +249,28 @@ class IActContext:
         """
     def GetApplicationStateFilesystemLocation(
         self, dwFlags: int, Component: UIntPtr, pCoordinateList: IntPtr, ppszPath: str
-    ) -> Tuple[None, str]:
-        """
-
-        :param dwFlags:
+    ) -> tuple[None, str]:
+        """:param dwFlags:
         :param Component:
         :param pCoordinateList:
         :param ppszPath:
         """
     def GetComponentManifest(
-        self, Flags: int, ComponentId: IDefinitionIdentity, riid: Guid, ManifestInteface: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param Flags:
+        self,
+        Flags: int,
+        ComponentId: IDefinitionIdentity,
+        riid: Guid,
+        ManifestInteface: object,
+    ) -> tuple[None, object]:
+        """:param Flags:
         :param ComponentId:
         :param riid:
         :param ManifestInteface:
         """
     def GetComponentPayloadPath(
         self, Flags: int, ComponentId: IDefinitionIdentity, PayloadPath: str
-    ) -> Tuple[None, str]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, str]:
+        """:param Flags:
         :param ComponentId:
         :param PayloadPath:
         """
@@ -352,10 +282,8 @@ class IActContext:
         SourceStrings: Array[str],
         DestinationStrings: str,
         CultureFallbacks: IntPtr,
-    ) -> Tuple[None, Array[str], str]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, Array[str], str]:
+        """:param Flags:
         :param ComponentIndex:
         :param StringCount:
         :param SourceStrings:
@@ -363,27 +291,21 @@ class IActContext:
         :param CultureFallbacks:
         """
     def PrepareForExecution(self, Inputs: IntPtr, Outputs: IntPtr) -> None:
-        """
-
-        :param Inputs:
+        """:param Inputs:
         :param Outputs:
         """
     def ReplaceStringMacros(
         self, Flags: int, Culture: str, ReplacementPattern: str, Replaced: str
-    ) -> Tuple[None, str]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, str]:
+        """:param Flags:
         :param Culture:
         :param ReplacementPattern:
         :param Replaced:
         """
     def SetApplicationRunningState(
         self, dwFlags: int, ulState: int, ulDisposition: int
-    ) -> Tuple[None, int]:
-        """
-
-        :param dwFlags:
+    ) -> tuple[None, int]:
+        """:param dwFlags:
         :param ulState:
         :param ulDisposition:
         """
@@ -394,9 +316,7 @@ class IAppIdAuthority:
     def AreDefinitionsEqual(
         self, Flags: int, Definition1: IDefinitionAppId, Definition2: IDefinitionAppId
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Definition1:
         :param Definition2:
         :return:
@@ -404,52 +324,39 @@ class IAppIdAuthority:
     def AreReferencesEqual(
         self, Flags: int, Reference1: IReferenceAppId, Reference2: IReferenceAppId
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Reference1:
         :param Reference2:
         :return:
         """
     def AreTextualDefinitionsEqual(self, Flags: int, AppIdLeft: str, AppIdRight: str) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param AppIdLeft:
         :param AppIdRight:
         :return:
         """
     def AreTextualReferencesEqual(self, Flags: int, AppIdLeft: str, AppIdRight: str) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param AppIdLeft:
         :param AppIdRight:
         :return:
         """
     def CreateDefinition(self) -> IDefinitionAppId:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateReference(self) -> IReferenceAppId:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DefinitionToText(self, Flags: int, DefinitionAppId: IDefinitionAppId) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionAppId:
         :return:
         """
     def DoesDefinitionMatchReference(
-        self, Flags: int, DefinitionIdentity: IDefinitionAppId, ReferenceIdentity: IReferenceAppId
+        self,
+        Flags: int,
+        DefinitionIdentity: IDefinitionAppId,
+        ReferenceIdentity: IReferenceAppId,
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :param ReferenceIdentity:
         :return:
@@ -457,59 +364,43 @@ class IAppIdAuthority:
     def DoesTextualDefinitionMatchTextualReference(
         self, Flags: int, Definition: str, Reference: str
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Definition:
         :param Reference:
         :return:
         """
     def GenerateDefinitionKey(self, Flags: int, DefinitionIdentity: IDefinitionAppId) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :return:
         """
     def GenerateReferenceKey(self, Flags: int, ReferenceIdentity: IReferenceAppId) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :return:
         """
     def HashDefinition(self, Flags: int, DefinitionIdentity: IDefinitionAppId) -> int:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :return:
         """
     def HashReference(self, Flags: int, ReferenceIdentity: IReferenceAppId) -> int:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :return:
         """
     def ReferenceToText(self, Flags: int, ReferenceAppId: IReferenceAppId) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceAppId:
         :return:
         """
     def TextToDefinition(self, Flags: int, Identity: str) -> IDefinitionAppId:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Identity:
         :return:
         """
     def TextToReference(self, Flags: int, Identity: str) -> IReferenceAppId:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Identity:
         :return:
         """
@@ -519,32 +410,20 @@ class ICDF:
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def _NewEnum(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetItem(self, SectionId: int) -> object:
-        """
-
-        :param SectionId:
+        """:param SectionId:
         :return:
         """
     def GetRootSection(self, SectionId: int) -> ISection:
-        """
-
-        :param SectionId:
+        """:param SectionId:
         :return:
         """
     def GetRootSectionEntry(self, SectionId: int) -> ISectionEntry:
-        """
-
-        :param SectionId:
+        """:param SectionId:
         :return:
         """
 
@@ -567,80 +446,49 @@ class IDENTITY_ATTRIBUTE(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDefinitionAppId:
     """"""
 
     def EnumAppPath(self) -> IEnumDefinitionIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetAppPath(
         self, cIDefinitionIdentity: int, DefinitionIdentity: Array[IDefinitionIdentity]
     ) -> None:
-        """
-
-        :param cIDefinitionIdentity:
+        """:param cIDefinitionIdentity:
         :param DefinitionIdentity:
         """
     def put_Codebase(self, CodeBase: str) -> None:
-        """
-
-        :param CodeBase:
-        """
+        """:param CodeBase:"""
     def put_SubscriptionId(self, Subscription: str) -> None:
-        """
-
-        :param Subscription:
-        """
+        """:param Subscription:"""
 
 class IDefinitionIdentity:
     """"""
 
     def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IDefinitionIdentity:
-        """
-
-        :param cDeltas:
+        """:param cDeltas:
         :param Deltas:
         :return:
         """
     def EnumAttributes(self) -> IEnumIDENTITY_ATTRIBUTE:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetAttribute(self, Namespace: str, Name: str) -> str:
-        """
-
-        :param Namespace:
+        """:param Namespace:
         :param Name:
         :return:
         """
     def SetAttribute(self, Namespace: str, Name: str, Value: str) -> None:
-        """
-
-        :param Namespace:
+        """:param Namespace:
         :param Name:
         :param Value:
         """
@@ -649,344 +497,240 @@ class IEnumDefinitionIdentity:
     """"""
 
     def Clone(self) -> IEnumDefinitionIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, DefinitionIdentity: Array[IDefinitionIdentity]
-    ) -> Tuple[int, Array[IDefinitionIdentity]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[IDefinitionIdentity]]:
+        """:param celt:
         :param DefinitionIdentity:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumIDENTITY_ATTRIBUTE:
     """"""
 
     def Clone(self) -> IEnumIDENTITY_ATTRIBUTE:
-        """
-
-        :return:
-        """
-    def CurrentIntoBuffer(self, Available: IntPtr, Data: Array[int]) -> Tuple[IntPtr, Array[int]]:
-        """
-
-        :param Available:
+        """:return:"""
+    def CurrentIntoBuffer(self, Available: IntPtr, Data: Array[int]) -> tuple[IntPtr, Array[int]]:
+        """:param Available:
         :param Data:
         :return:
         """
     def Next(
         self, celt: int, rgAttributes: Array[IDENTITY_ATTRIBUTE]
-    ) -> Tuple[int, Array[IDENTITY_ATTRIBUTE]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[IDENTITY_ATTRIBUTE]]:
+        """:param celt:
         :param rgAttributes:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumReferenceIdentity:
     """"""
 
     def Clone(self) -> IEnumReferenceIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, ReferenceIdentity: Array[IReferenceIdentity]
-    ) -> Tuple[int, Array[IReferenceIdentity]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[IReferenceIdentity]]:
+        """:param celt:
         :param ReferenceIdentity:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumSTORE_ASSEMBLY:
     """"""
 
     def Clone(self) -> IEnumSTORE_ASSEMBLY:
-        """
-
-        :return:
-        """
-    def Next(self, celt: int, rgelt: Array[STORE_ASSEMBLY]) -> Tuple[int, Array[STORE_ASSEMBLY]]:
-        """
-
-        :param celt:
+        """:return:"""
+    def Next(self, celt: int, rgelt: Array[STORE_ASSEMBLY]) -> tuple[int, Array[STORE_ASSEMBLY]]:
+        """:param celt:
         :param rgelt:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumSTORE_ASSEMBLY_FILE:
     """"""
 
     def Clone(self) -> IEnumSTORE_ASSEMBLY_FILE:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, rgelt: Array[STORE_ASSEMBLY_FILE]
-    ) -> Tuple[int, Array[STORE_ASSEMBLY_FILE]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[STORE_ASSEMBLY_FILE]]:
+        """:param celt:
         :param rgelt:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
     """"""
 
     def Clone(self) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, rgelt: Array[StoreApplicationReference]
-    ) -> Tuple[int, Array[StoreApplicationReference]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[StoreApplicationReference]]:
+        """:param celt:
         :param rgelt:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumSTORE_CATEGORY:
     """"""
 
     def Clone(self) -> IEnumSTORE_CATEGORY:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, rgElements: Array[STORE_CATEGORY]
-    ) -> Tuple[int, Array[STORE_CATEGORY]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[STORE_CATEGORY]]:
+        """:param celt:
         :param rgElements:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, ulElements: int) -> None:
-        """
-
-        :param ulElements:
-        """
+        """:param ulElements:"""
 
 class IEnumSTORE_CATEGORY_INSTANCE:
     """"""
 
     def Clone(self) -> IEnumSTORE_CATEGORY_INSTANCE:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, ulElements: int, rgInstances: Array[STORE_CATEGORY_INSTANCE]
-    ) -> Tuple[int, Array[STORE_CATEGORY_INSTANCE]]:
-        """
-
-        :param ulElements:
+    ) -> tuple[int, Array[STORE_CATEGORY_INSTANCE]]:
+        """:param ulElements:
         :param rgInstances:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, ulElements: int) -> None:
-        """
-
-        :param ulElements:
-        """
+        """:param ulElements:"""
 
 class IEnumSTORE_CATEGORY_SUBCATEGORY:
     """"""
 
     def Clone(self) -> IEnumSTORE_CATEGORY_SUBCATEGORY:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, rgElements: Array[STORE_CATEGORY_SUBCATEGORY]
-    ) -> Tuple[int, Array[STORE_CATEGORY_SUBCATEGORY]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[STORE_CATEGORY_SUBCATEGORY]]:
+        """:param celt:
         :param rgElements:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, ulElements: int) -> None:
-        """
-
-        :param ulElements:
-        """
+        """:param ulElements:"""
 
 class IEnumSTORE_DEPLOYMENT_METADATA:
     """"""
 
     def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, AppIds: Array[IDefinitionAppId]
-    ) -> Tuple[int, Array[IDefinitionAppId]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[IDefinitionAppId]]:
+        """:param celt:
         :param AppIds:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
     """"""
 
     def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Next(
         self, celt: int, AppIds: Array[StoreOperationMetadataProperty]
-    ) -> Tuple[int, Array[StoreOperationMetadataProperty]]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[StoreOperationMetadataProperty]]:
+        """:param celt:
         :param AppIds:
         :return:
         """
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> None:
-        """
-
-        :param celt:
-        """
+        """:param celt:"""
 
 class IEnumUnknown:
     """"""
 
-    def Clone(self, enumUnknown: IEnumUnknown) -> Tuple[int, IEnumUnknown]:
-        """
-
-        :param enumUnknown:
+    def Clone(self, enumUnknown: IEnumUnknown) -> tuple[int, IEnumUnknown]:
+        """:param enumUnknown:
         :return:
         """
-    def Next(self, celt: int, rgelt: Array[object], celtFetched: int) -> Tuple[int, Array[object]]:
-        """
-
-        :param celt:
+    def Next(self, celt: int, rgelt: Array[object], celtFetched: int) -> tuple[int, Array[object]]:
+        """:param celt:
         :param rgelt:
         :param celtFetched:
         :return:
         """
     def Reset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Skip(self, celt: int) -> int:
-        """
-
-        :param celt:
+        """:param celt:
         :return:
         """
 
 class IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS(Enum):
     """"""
 
-    IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS = (
-        ...
-    )
+    IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS = ...
     """"""
 
 class IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS(Enum):
     """"""
 
-    IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAG_EXACT_MATCH_REQUIRED: IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS = (
-        ...
-    )
+    IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAG_EXACT_MATCH_REQUIRED: IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS = ...
     """"""
 
 class IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS(Enum):
     """"""
 
-    IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS = (
-        ...
-    )
+    IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS = ...
     """"""
 
 class IIdentityAuthority:
     """"""
 
     def AreDefinitionsEqual(
-        self, Flags: int, Definition1: IDefinitionIdentity, Definition2: IDefinitionIdentity
+        self,
+        Flags: int,
+        Definition1: IDefinitionIdentity,
+        Definition2: IDefinitionIdentity,
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Definition1:
         :param Definition2:
         :return:
@@ -994,43 +738,29 @@ class IIdentityAuthority:
     def AreReferencesEqual(
         self, Flags: int, Reference1: IReferenceIdentity, Reference2: IReferenceIdentity
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Reference1:
         :param Reference2:
         :return:
         """
     def AreTextualDefinitionsEqual(self, Flags: int, IdentityLeft: str, IdentityRight: str) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param IdentityLeft:
         :param IdentityRight:
         :return:
         """
     def AreTextualReferencesEqual(self, Flags: int, IdentityLeft: str, IdentityRight: str) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param IdentityLeft:
         :param IdentityRight:
         :return:
         """
     def CreateDefinition(self) -> IDefinitionIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateReference(self) -> IReferenceIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DefinitionToText(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :return:
         """
@@ -1040,10 +770,8 @@ class IIdentityAuthority:
         DefinitionIdentity: IDefinitionIdentity,
         BufferSize: int,
         Buffer: Array[Char],
-    ) -> Tuple[int, Array[Char]]:
-        """
-
-        :param Flags:
+    ) -> tuple[int, Array[Char]]:
+        """:param Flags:
         :param DefinitionIdentity:
         :param BufferSize:
         :param Buffer:
@@ -1055,9 +783,7 @@ class IIdentityAuthority:
         DefinitionIdentity: IDefinitionIdentity,
         ReferenceIdentity: IReferenceIdentity,
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :param ReferenceIdentity:
         :return:
@@ -1065,45 +791,33 @@ class IIdentityAuthority:
     def DoesTextualDefinitionMatchTextualReference(
         self, Flags: int, Definition: str, Reference: str
     ) -> bool:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Definition:
         :param Reference:
         :return:
         """
     def GenerateDefinitionKey(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :return:
         """
     def GenerateReferenceKey(self, Flags: int, ReferenceIdentity: IReferenceIdentity) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :return:
         """
     def HashDefinition(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> int:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :return:
         """
     def HashReference(self, Flags: int, ReferenceIdentity: IReferenceIdentity) -> int:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :return:
         """
     def ReferenceToText(self, Flags: int, ReferenceIdentity: IReferenceIdentity) -> str:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :return:
         """
@@ -1113,26 +827,20 @@ class IIdentityAuthority:
         ReferenceIdentity: IReferenceIdentity,
         BufferSize: int,
         Buffer: Array[Char],
-    ) -> Tuple[int, Array[Char]]:
-        """
-
-        :param Flags:
+    ) -> tuple[int, Array[Char]]:
+        """:param Flags:
         :param ReferenceIdentity:
         :param BufferSize:
         :param Buffer:
         :return:
         """
     def TextToDefinition(self, Flags: int, Identity: str) -> IDefinitionIdentity:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Identity:
         :return:
         """
     def TextToReference(self, Flags: int, Identity: str) -> IReferenceIdentity:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Identity:
         :return:
         """
@@ -1153,9 +861,7 @@ class IManifestParseErrorCallback:
         ParameterCount: int,
         Parameters: Array[str],
     ) -> None:
-        """
-
-        :param StartLine:
+        """:param StartLine:
         :param nStartColumn:
         :param cCharacterCount:
         :param hr:
@@ -1168,47 +874,29 @@ class IReferenceAppId:
     """"""
 
     def EnumAppPath(self) -> IEnumReferenceIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def put_Codebase(self, CodeBase: str) -> None:
-        """
-
-        :param CodeBase:
-        """
+        """:param CodeBase:"""
     def put_SubscriptionId(self, Subscription: str) -> None:
-        """
-
-        :param Subscription:
-        """
+        """:param Subscription:"""
 
 class IReferenceIdentity:
     """"""
 
     def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IReferenceIdentity:
-        """
-
-        :param cDeltas:
+        """:param cDeltas:
         :param Deltas:
         :return:
         """
     def EnumAttributes(self) -> IEnumIDENTITY_ATTRIBUTE:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetAttribute(self, Namespace: str, Name: str) -> str:
-        """
-
-        :param Namespace:
+        """:param Namespace:
         :param Name:
         :return:
         """
     def SetAttribute(self, Namespace: str, Name: str, Value: str) -> None:
-        """
-
-        :param Namespace:
+        """:param Namespace:
         :param Name:
         :param Value:
         """
@@ -1216,9 +904,7 @@ class IReferenceIdentity:
 class ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS(Enum):
     """"""
 
-    ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAG_FORCE_LIBRARY_SEMANTICS: ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS = (
-        ...
-    )
+    ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAG_FORCE_LIBRARY_SEMANTICS: ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS = ...
     """"""
 
 class ISTORE_ENUM_ASSEMBLIES_FLAGS(Enum):
@@ -1244,42 +930,26 @@ class ISection:
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionID(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def _NewEnum(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ISectionEntry:
     """"""
 
     def GetField(self, fieldId: int) -> object:
-        """
-
-        :param fieldId:
+        """:param fieldId:
         :return:
         """
     def GetFieldName(self, fieldId: int) -> str:
-        """
-
-        :param fieldId:
+        """:param fieldId:
         :return:
         """
 
@@ -1288,10 +958,8 @@ class ISectionWithReferenceIdentityKey:
 
     def Lookup(
         self, ReferenceIdentityKey: IReferenceIdentity, ppUnknown: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param ReferenceIdentityKey:
+    ) -> tuple[None, object]:
+        """:param ReferenceIdentityKey:
         :param ppUnknown:
         """
 
@@ -1300,14 +968,9 @@ class ISectionWithStringKey:
 
     @property
     def IsCaseInsensitive(self) -> bool:
-        """
-
-        :return:
-        """
-    def Lookup(self, wzStringKey: str, ppUnknown: object) -> Tuple[None, object]:
-        """
-
-        :param wzStringKey:
+        """:return:"""
+    def Lookup(self, wzStringKey: str, ppUnknown: object) -> tuple[None, object]:
+        """:param wzStringKey:
         :param ppUnknown:
         """
 
@@ -1321,33 +984,25 @@ class IStateManager:
         ComponentIdentity: IDefinitionIdentity,
         Coordinates: UIntPtr,
         Path: str,
-    ) -> Tuple[None, str]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, str]:
+        """:param Flags:
         :param Appidentity:
         :param ComponentIdentity:
         :param Coordinates:
         :param Path:
         """
     def PrepareApplicationState(self, Inputs: UIntPtr, Outputs: UIntPtr) -> None:
-        """
-
-        :param Inputs:
+        """:param Inputs:
         :param Outputs:
         """
-    def Scavenge(self, Flags: int, Disposition: int) -> Tuple[None, int]:
-        """
-
-        :param Flags:
+    def Scavenge(self, Flags: int, Disposition: int) -> tuple[None, int]:
+        """:param Flags:
         :param Disposition:
         """
     def SetApplicationRunningState(
         self, Flags: int, Context: IActContext, RunningState: int, Disposition: int
-    ) -> Tuple[None, int]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, int]:
+        """:param Flags:
         :param Context:
         :param RunningState:
         :param Disposition:
@@ -1364,9 +1019,7 @@ class IStore:
         DeploymentsToIgnore: int,
         DefsToIgnore: Array[IDefinitionIdentity],
     ) -> IntPtr:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Count:
         :param DefsToBind:
         :param DeploymentsToIgnore:
@@ -1381,9 +1034,7 @@ class IStore:
         DefinitionIdentity_DeploymentsToIgnore: Array[IDefinitionIdentity],
         riid: Guid,
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :param cDeploymentsToIgnore:
         :param DefinitionIdentity_DeploymentsToIgnore:
@@ -1400,10 +1051,8 @@ class IStore:
         Delimiter: IntPtr,
         SizeSharedWithExternalDeployment: int,
         SizeConsumedByInputDeploymentArray: int,
-    ) -> Tuple[None, IntPtr, int, int]:
-        """
-
-        :param dwFlags:
+    ) -> tuple[None, IntPtr, int, int]:
+        """:param dwFlags:
         :param cDeployments:
         :param rgpIDefinitionAppId_Deployments:
         :param InstallerReference:
@@ -1415,9 +1064,7 @@ class IStore:
     def EnumAssemblies(
         self, Flags: int, ReferenceIdentity_ToMatch: IReferenceIdentity, riid: Guid
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity_ToMatch:
         :param riid:
         :return:
@@ -1425,28 +1072,26 @@ class IStore:
     def EnumCategories(
         self, Flags: int, ReferenceIdentity_ToMatch: IReferenceIdentity, riid: Guid
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity_ToMatch:
         :param riid:
         :return:
         """
     def EnumCategoryInstances(
-        self, Flags: int, CategoryId: IDefinitionIdentity, SubcategoryPath: str, riid: Guid
+        self,
+        Flags: int,
+        CategoryId: IDefinitionIdentity,
+        SubcategoryPath: str,
+        riid: Guid,
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param CategoryId:
         :param SubcategoryPath:
         :param riid:
         :return:
         """
     def EnumFiles(self, Flags: int, DefinitionIdentity: IDefinitionIdentity, riid: Guid) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :param riid:
         :return:
@@ -1454,30 +1099,32 @@ class IStore:
     def EnumInstallationReferences(
         self, Flags: int, DefinitionIdentity: IDefinitionIdentity, riid: Guid
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :param riid:
         :return:
         """
     def EnumInstallerDeploymentMetadata(
-        self, Flags: int, Reference: StoreApplicationReference, Filter: IReferenceAppId, riid: Guid
+        self,
+        Flags: int,
+        Reference: StoreApplicationReference,
+        Filter: IReferenceAppId,
+        riid: Guid,
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Reference:
         :param Filter:
         :param riid:
         :return:
         """
     def EnumInstallerDeploymentMetadataProperties(
-        self, Flags: int, Reference: StoreApplicationReference, Filter: IDefinitionAppId, riid: Guid
+        self,
+        Flags: int,
+        Reference: StoreApplicationReference,
+        Filter: IDefinitionAppId,
+        riid: Guid,
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Reference:
         :param Filter:
         :param riid:
@@ -1490,20 +1137,20 @@ class IStore:
         DefinitionIdentity: IDefinitionIdentity,
         riid: Guid,
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Application:
         :param DefinitionIdentity:
         :param riid:
         :return:
         """
     def EnumSubcategories(
-        self, Flags: int, CategoryId: IDefinitionIdentity, SubcategoryPathPattern: str, riid: Guid
+        self,
+        Flags: int,
+        CategoryId: IDefinitionIdentity,
+        SubcategoryPathPattern: str,
+        riid: Guid,
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param CategoryId:
         :param SubcategoryPathPattern:
         :param riid:
@@ -1512,9 +1159,7 @@ class IStore:
     def GetAssemblyInformation(
         self, Flags: int, DefinitionIdentity: IDefinitionIdentity, riid: Guid
     ) -> object:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :param riid:
         :return:
@@ -1527,10 +1172,8 @@ class IStore:
         PropertySet: Guid,
         pcwszPropertyName: str,
         blob: BLOB,
-    ) -> Tuple[None, BLOB]:
-        """
-
-        :param Flags:
+    ) -> tuple[None, BLOB]:
+        """:param Flags:
         :param DeploymentInPackage:
         :param Reference:
         :param PropertySet:
@@ -1539,50 +1182,36 @@ class IStore:
         """
     def LockApplicationPath(
         self, Flags: int, ApId: IDefinitionAppId, Cookie: IntPtr
-    ) -> Tuple[str, IntPtr]:
-        """
-
-        :param Flags:
+    ) -> tuple[str, IntPtr]:
+        """:param Flags:
         :param ApId:
         :param Cookie:
         :return:
         """
     def LockAssemblyPath(
         self, Flags: int, DefinitionIdentity: IDefinitionIdentity, Cookie: IntPtr
-    ) -> Tuple[str, IntPtr]:
-        """
-
-        :param Flags:
+    ) -> tuple[str, IntPtr]:
+        """:param Flags:
         :param DefinitionIdentity:
         :param Cookie:
         :return:
         """
     def QueryChangeID(self, DefinitionIdentity: IDefinitionIdentity) -> int:
-        """
-
-        :param DefinitionIdentity:
+        """:param DefinitionIdentity:
         :return:
         """
     def ReleaseApplicationPath(self, Cookie: IntPtr) -> None:
-        """
-
-        :param Cookie:
-        """
+        """:param Cookie:"""
     def ReleaseAssemblyPath(self, Cookie: IntPtr) -> None:
-        """
-
-        :param Cookie:
-        """
+        """:param Cookie:"""
     def Transact(
         self,
         cOperation: IntPtr,
         rgOperations: Array[StoreTransactionOperation],
         rgDispositions: Array[int],
         rgResults: Array[int],
-    ) -> Tuple[None, Array[int], Array[int]]:
-        """
-
-        :param cOperation:
+    ) -> tuple[None, Array[int], Array[int]]:
+        """:param cOperation:
         :param rgOperations:
         :param rgDispositions:
         :param rgResults:
@@ -1617,26 +1246,15 @@ class IStore_BindingResult(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IStore_BindingResult_BoundVersion(ValueType):
     """"""
@@ -1662,26 +1280,15 @@ class IStore_BindingResult_BoundVersion(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IsolationInterop(ABC, Object):
     """"""
@@ -1754,44 +1361,24 @@ class IsolationInterop(ABC, Object):
     @classmethod
     @property
     def AppIdAuthority(cls) -> IAppIdAuthority:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def IdentityAuthority(cls) -> IIdentityAuthority:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetUserStore(cls) -> Store:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class STORE_ASSEMBLY(ValueType):
     """"""
@@ -1822,26 +1409,15 @@ class STORE_ASSEMBLY(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class STORE_ASSEMBLY_FILE(ValueType):
     """"""
@@ -1867,26 +1443,15 @@ class STORE_ASSEMBLY_FILE(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class STORE_ASSEMBLY_FILE_STATUS_FLAGS(Enum):
     """"""
@@ -1913,26 +1478,15 @@ class STORE_CATEGORY(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class STORE_CATEGORY_INSTANCE(ValueType):
     """"""
@@ -1948,26 +1502,15 @@ class STORE_CATEGORY_INSTANCE(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class STORE_CATEGORY_SUBCATEGORY(ValueType):
     """"""
@@ -1978,26 +1521,15 @@ class STORE_CATEGORY_SUBCATEGORY(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StateManager_RunningState(Enum):
     """"""
@@ -2013,16 +1545,10 @@ class Store(Object):
     """"""
 
     def __init__(self, pStore: IStore):
-        """
-
-        :param pStore:
-        """
+        """:param pStore:"""
     @property
     def InternalStore(self) -> IStore:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BindReferenceToAssemblyIdentity(
         self,
         Flags: int,
@@ -2030,9 +1556,7 @@ class Store(Object):
         cDeploymentsToIgnore: int,
         DefinitionIdentity_DeploymentsToIgnore: Array[IDefinitionIdentity],
     ) -> IDefinitionIdentity:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :param cDeploymentsToIgnore:
         :param DefinitionIdentity_DeploymentsToIgnore:
@@ -2045,9 +1569,7 @@ class Store(Object):
         cDeploymentsToIgnore: int,
         DefinitionIdentity_DeploymentsToIgnore: Array[IDefinitionIdentity],
     ) -> ICMS:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param ReferenceIdentity:
         :param cDeploymentsToIgnore:
         :param DefinitionIdentity_DeploymentsToIgnore:
@@ -2064,9 +1586,7 @@ class Store(Object):
         SizeSharedWithExternalDeployment: int,
         SizeConsumedByInputDeploymentArray: int,
     ) -> None:
-        """
-
-        :param dwFlags:
+        """:param dwFlags:
         :param cDeployments:
         :param rgpIDefinitionAppId_Deployments:
         :param InstallerReference:
@@ -2077,36 +1597,31 @@ class Store(Object):
         """
     @overload
     def EnumAssemblies(self, Flags: Store.EnumAssembliesFlags) -> StoreAssemblyEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :return:
         """
     @overload
     def EnumAssemblies(
         self, Flags: Store.EnumAssembliesFlags, refToMatch: IReferenceIdentity
     ) -> StoreAssemblyEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param refToMatch:
         :return:
         """
     def EnumCategories(
         self, Flags: Store.EnumCategoriesFlags, CategoryMatch: IReferenceIdentity
     ) -> StoreCategoryEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param CategoryMatch:
         :return:
         """
     def EnumCategoryInstances(
-        self, Flags: Store.EnumCategoryInstancesFlags, Category: IDefinitionIdentity, SubCat: str
+        self,
+        Flags: Store.EnumCategoryInstancesFlags,
+        Category: IDefinitionIdentity,
+        SubCat: str,
     ) -> StoreCategoryInstanceEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Category:
         :param SubCat:
         :return:
@@ -2114,18 +1629,16 @@ class Store(Object):
     def EnumFiles(
         self, Flags: Store.EnumAssemblyFilesFlags, Assembly: IDefinitionIdentity
     ) -> StoreAssemblyFileEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Assembly:
         :return:
         """
     def EnumInstallationReferences(
-        self, Flags: Store.EnumAssemblyInstallReferenceFlags, Assembly: IDefinitionIdentity
+        self,
+        Flags: Store.EnumAssemblyInstallReferenceFlags,
+        Assembly: IDefinitionIdentity,
     ) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Assembly:
         :return:
         """
@@ -2136,9 +1649,7 @@ class Store(Object):
         InstallerMetadata: str,
         Deployment: IDefinitionAppId,
     ) -> StoreDeploymentMetadataPropertyEnumeration:
-        """
-
-        :param InstallerId:
+        """:param InstallerId:
         :param InstallerName:
         :param InstallerMetadata:
         :param Deployment:
@@ -2151,9 +1662,7 @@ class Store(Object):
         InstallerMetadata: str,
         DeploymentFilter: IReferenceAppId,
     ) -> StoreDeploymentMetadataEnumeration:
-        """
-
-        :param InstallerId:
+        """:param InstallerId:
         :param InstallerName:
         :param InstallerMetadata:
         :param DeploymentFilter:
@@ -2165,9 +1674,7 @@ class Store(Object):
         Application: IDefinitionAppId,
         Assembly: IDefinitionIdentity,
     ) -> StoreAssemblyFileEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Application:
         :param Assembly:
         :return:
@@ -2176,42 +1683,35 @@ class Store(Object):
     def EnumSubcategories(
         self, Flags: Store.EnumSubcategoriesFlags, CategoryMatch: IDefinitionIdentity
     ) -> StoreSubcategoryEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param CategoryMatch:
         :return:
         """
     @overload
     def EnumSubcategories(
-        self, Flags: Store.EnumSubcategoriesFlags, Category: IDefinitionIdentity, SearchPattern: str
+        self,
+        Flags: Store.EnumSubcategoriesFlags,
+        Category: IDefinitionIdentity,
+        SearchPattern: str,
     ) -> StoreSubcategoryEnumeration:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Category:
         :param SearchPattern:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAssemblyIdentity(
         self, Flags: int, DefinitionIdentity: IDefinitionIdentity
     ) -> IDefinitionIdentity:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :return:
         """
     def GetAssemblyManifest(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> ICMS:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param DefinitionIdentity:
         :return:
         """
@@ -2223,9 +1723,7 @@ class Store(Object):
         PropertySet: Guid,
         PropertyName: str,
     ) -> Array[int]:
-        """
-
-        :param Flags:
+        """:param Flags:
         :param Deployment:
         :param Reference:
         :param PropertySet:
@@ -2233,42 +1731,25 @@ class Store(Object):
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def LockApplicationPath(self, app: IDefinitionAppId) -> Store.IPathLock:
-        """
-
-        :param app:
+        """:param app:
         :return:
         """
     def LockAssemblyPath(self, asm: IDefinitionIdentity) -> Store.IPathLock:
-        """
-
-        :param asm:
+        """:param asm:
         :return:
         """
     def QueryChangeID(self, asm: IDefinitionIdentity) -> int:
-        """
-
-        :param asm:
+        """:param asm:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Transact(self, operations: Array[StoreTransactionOperation]) -> Array[int]:
-        """
-
-        :param operations:
+        """:param operations:
         :return:
         """
 
@@ -2372,44 +1853,25 @@ class StoreApplicationReference(ValueType):
     :return: 
     """
     def __init__(self, RefScheme: Guid, Id: str, NcData: str):
-        """
-
-        :param RefScheme:
+        """:param RefScheme:
         :param Id:
         :param NcData:
         """
     @classmethod
     def Destroy(cls, ip: IntPtr) -> None:
-        """
-
-        :param ip:
-        """
+        """:param ip:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToIntPtr(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class RefFlags(Enum):
         """"""
@@ -2421,289 +1883,151 @@ class StoreAssemblyEnumeration(Object, IEnumerator):
     """"""
 
     def __init__(self, pI: IEnumSTORE_ASSEMBLY):
-        """
-
-        :param pI:
-        """
+        """:param pI:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreAssemblyFileEnumeration(Object, IEnumerator):
     """"""
 
     def __init__(self, pI: IEnumSTORE_ASSEMBLY_FILE):
-        """
-
-        :param pI:
-        """
+        """:param pI:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreCategoryEnumeration(Object, IEnumerator):
     """"""
 
     def __init__(self, pI: IEnumSTORE_CATEGORY):
-        """
-
-        :param pI:
-        """
+        """:param pI:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreCategoryInstanceEnumeration(Object, IEnumerator):
     """"""
 
     def __init__(self, pI: IEnumSTORE_CATEGORY_INSTANCE):
-        """
-
-        :param pI:
-        """
+        """:param pI:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreDeploymentMetadataEnumeration(Object, IEnumerator):
     """"""
 
     def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA):
-        """
-
-        :param pI:
-        """
+        """:param pI:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreDeploymentMetadataPropertyEnumeration(Object, IEnumerator):
     """"""
 
     def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY):
-        """
-
-        :param pI:
-        """
+        """:param pI:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreOperationInstallDeployment(ValueType):
     """"""
@@ -2730,44 +2054,32 @@ class StoreOperationInstallDeployment(ValueType):
     """
     @overload
     def __init__(self, App: IDefinitionAppId, reference: StoreApplicationReference):
-        """
-
-        :param App:
+        """:param App:
         :param reference:
         """
     @overload
     def __init__(
-        self, App: IDefinitionAppId, UninstallOthers: bool, reference: StoreApplicationReference
+        self,
+        App: IDefinitionAppId,
+        UninstallOthers: bool,
+        reference: StoreApplicationReference,
     ):
-        """
-
-        :param App:
+        """:param App:
         :param UninstallOthers:
         :param reference:
         """
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Disposition(Enum):
         """"""
@@ -2812,40 +2124,25 @@ class StoreOperationMetadataProperty(ValueType):
     """
     @overload
     def __init__(self, PropertySet: Guid, Name: str):
-        """
-
-        :param PropertySet:
+        """:param PropertySet:
         :param Name:
         """
     @overload
     def __init__(self, PropertySet: Guid, Name: str, Value: str):
-        """
-
-        :param PropertySet:
+        """:param PropertySet:
         :param Name:
         :param Value:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreOperationPinDeployment(ValueType):
     """"""
@@ -2877,42 +2174,27 @@ class StoreOperationPinDeployment(ValueType):
     """
     @overload
     def __init__(self, AppId: IDefinitionAppId, Ref: StoreApplicationReference):
-        """
-
-        :param AppId:
+        """:param AppId:
         :param Ref:
         """
     @overload
     def __init__(self, AppId: IDefinitionAppId, Expiry: DateTime, Ref: StoreApplicationReference):
-        """
-
-        :param AppId:
+        """:param AppId:
         :param Expiry:
         :param Ref:
         """
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Disposition(Enum):
         """"""
@@ -2960,15 +2242,10 @@ class StoreOperationScavenge(ValueType):
     """
     @overload
     def __init__(self, Light: bool):
-        """
-
-        :param Light:
-        """
+        """:param Light:"""
     @overload
     def __init__(self, Light: bool, SizeLimit: int, RunLimit: int, ComponentLimit: int):
-        """
-
-        :param Light:
+        """:param Light:
         :param SizeLimit:
         :param RunLimit:
         :param ComponentLimit:
@@ -2976,26 +2253,15 @@ class StoreOperationScavenge(ValueType):
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class OpFlags(Enum):
         """"""
@@ -3035,34 +2301,21 @@ class StoreOperationSetCanonicalizationContext(ValueType):
     :return: 
     """
     def __init__(self, Bases: str, Exports: str):
-        """
-
-        :param Bases:
+        """:param Bases:
         :param Exports:
         """
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class OpFlags(Enum):
         """"""
@@ -3120,9 +2373,7 @@ class StoreOperationSetDeploymentMetadata(ValueType):
         Reference: StoreApplicationReference,
         SetProperties: Array[StoreOperationMetadataProperty],
     ):
-        """
-
-        :param Deployment:
+        """:param Deployment:
         :param Reference:
         :param SetProperties:
         """
@@ -3134,9 +2385,7 @@ class StoreOperationSetDeploymentMetadata(ValueType):
         SetProperties: Array[StoreOperationMetadataProperty],
         TestProperties: Array[StoreOperationMetadataProperty],
     ):
-        """
-
-        :param Deployment:
+        """:param Deployment:
         :param Reference:
         :param SetProperties:
         :param TestProperties:
@@ -3144,26 +2393,15 @@ class StoreOperationSetDeploymentMetadata(ValueType):
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Disposition(Enum):
         """"""
@@ -3209,42 +2447,27 @@ class StoreOperationStageComponent(ValueType):
     """
     @overload
     def __init__(self, app: IDefinitionAppId, Manifest: str):
-        """
-
-        :param app:
+        """:param app:
         :param Manifest:
         """
     @overload
     def __init__(self, app: IDefinitionAppId, comp: IDefinitionIdentity, Manifest: str):
-        """
-
-        :param app:
+        """:param app:
         :param comp:
         :param Manifest:
         """
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Disposition(Enum):
         """"""
@@ -3299,19 +2522,19 @@ class StoreOperationStageComponentFile(ValueType):
     """
     @overload
     def __init__(self, App: IDefinitionAppId, CompRelPath: str, SrcFile: str):
-        """
-
-        :param App:
+        """:param App:
         :param CompRelPath:
         :param SrcFile:
         """
     @overload
     def __init__(
-        self, App: IDefinitionAppId, Component: IDefinitionIdentity, CompRelPath: str, SrcFile: str
+        self,
+        App: IDefinitionAppId,
+        Component: IDefinitionIdentity,
+        CompRelPath: str,
+        SrcFile: str,
     ):
-        """
-
-        :param App:
+        """:param App:
         :param Component:
         :param CompRelPath:
         :param SrcFile:
@@ -3319,26 +2542,15 @@ class StoreOperationStageComponentFile(ValueType):
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Disposition(Enum):
         """"""
@@ -3382,34 +2594,21 @@ class StoreOperationUninstallDeployment(ValueType):
     :return: 
     """
     def __init__(self, appid: IDefinitionAppId, AppRef: StoreApplicationReference):
-        """
-
-        :param appid:
+        """:param appid:
         :param AppRef:
         """
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Disposition(Enum):
         """"""
@@ -3451,34 +2650,21 @@ class StoreOperationUnpinDeployment(ValueType):
     :return: 
     """
     def __init__(self, app: IDefinitionAppId, reference: StoreApplicationReference):
-        """
-
-        :param app:
+        """:param app:
         :param reference:
         """
     def Destroy(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class Disposition(Enum):
         """"""
@@ -3498,49 +2684,26 @@ class StoreSubcategoryEnumeration(Object, IEnumerator):
     """"""
 
     def __init__(self, pI: IEnumSTORE_CATEGORY_SUBCATEGORY):
-        """
-
-        :param pI:
-        """
+        """:param pI:"""
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreTransaction(Object, IDisposable):
     """"""
@@ -3549,87 +2712,46 @@ class StoreTransaction(Object, IDisposable):
         """"""
     @property
     def Operations(self) -> Array[StoreTransactionOperation]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, o: StoreOperationInstallDeployment) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationPinDeployment) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationScavenge) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationSetCanonicalizationContext) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationSetDeploymentMetadata) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationStageComponent) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationStageComponentFile) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationUninstallDeployment) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     @overload
     def Add(self, o: StoreOperationUnpinDeployment) -> None:
-        """
-
-        :param o:
-        """
+        """:param o:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreTransactionData(ValueType):
     """"""
@@ -3640,26 +2762,15 @@ class StoreTransactionData(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreTransactionOperation(ValueType):
     """"""
@@ -3675,26 +2786,15 @@ class StoreTransactionOperation(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StoreTransactionOperationType(Enum):
     """"""

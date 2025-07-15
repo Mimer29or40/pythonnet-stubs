@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import ClassVar
 from typing import Final
 from typing import Generic
@@ -31,40 +29,24 @@ class BuildInfo(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICommand:
     """"""
 
     def CanExecute(self, parameter: object) -> bool:
-        """
-
-        :param parameter:
+        """:param parameter:
         :return:
         """
     def Execute(self, parameter: object) -> None:
-        """
-
-        :param parameter:
-        """
+        """:param parameter:"""
     CanExecuteChanged: EventType[EventHandler] = ...
     """"""

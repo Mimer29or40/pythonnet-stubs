@@ -1,11 +1,8 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -59,49 +56,26 @@ class AcceptAsyncResult(ContextAwareResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 AcceptExDelegate: Callable[
     [SafeCloseSocket, SafeCloseSocket, IntPtr, int, int, int, int, SafeHandle], bool
@@ -124,49 +98,26 @@ class AcceptOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AddressFamily(Enum):
     """"""
@@ -293,98 +244,52 @@ class BaseOverlappedAsyncResult(ContextAwareResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConnectAsyncResult(ContextAwareResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ConnectExDelegate: Callable[
     [SafeCloseSocket, IntPtr, int, IntPtr, int, int, SafeHandle], bool
@@ -406,49 +311,26 @@ class ConnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DisconnectExDelegate: Callable[[SafeCloseSocket, SafeHandle, int, int], bool] = ...
 """
@@ -474,91 +356,56 @@ class DisconnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DynamicWinsockMethods(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetDelegate(self, socketHandle: SafeCloseSocket) -> T:
-        """
-
-        :param socketHandle:
+        """:param socketHandle:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetMethods(
-        cls, addressFamily: AddressFamily, socketType: SocketType, protocolType: ProtocolType
+        cls,
+        addressFamily: AddressFamily,
+        socketType: SocketType,
+        protocolType: ProtocolType,
     ) -> DynamicWinsockMethods:
-        """
-
-        :param addressFamily:
+        """:param addressFamily:
         :param socketType:
         :param protocolType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 GetAcceptExSockaddrsDelegate: Callable[
     [IntPtr, int, int, int, IntPtr, int, IntPtr, int], None
@@ -652,66 +499,45 @@ class IPPacketInformation(ValueType):
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Interface(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: IPPacketInformation) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: IPPacketInformation) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(
-        cls, packetInformation1: IPPacketInformation, packetInformation2: IPPacketInformation
+        cls,
+        packetInformation1: IPPacketInformation,
+        packetInformation2: IPPacketInformation,
     ) -> bool:
-        """
-
-        :param packetInformation1:
+        """:param packetInformation1:
         :param packetInformation2:
         :return:
         """
     @classmethod
     def op_Inequality(
-        cls, packetInformation1: IPPacketInformation, packetInformation2: IPPacketInformation
+        cls,
+        packetInformation1: IPPacketInformation,
+        packetInformation2: IPPacketInformation,
     ) -> bool:
-        """
-
-        :param packetInformation1:
+        """:param packetInformation1:
         :param packetInformation2:
         :return:
         """
@@ -733,54 +559,32 @@ class IPv6MulticastOption(Object):
 
     @overload
     def __init__(self, group: IPAddress):
-        """
-
-        :param group:
-        """
+        """:param group:"""
     @overload
     def __init__(self, group: IPAddress, ifindex: int):
-        """
-
-        :param group:
+        """:param group:
         :param ifindex:
         """
     @property
     def Group(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Group.setter
     def Group(self, value: IPAddress) -> None: ...
     @property
     def InterfaceIndex(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InterfaceIndex.setter
     def InterfaceIndex(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IoctlSocketConstants(ABC, Object):
     """"""
@@ -806,142 +610,85 @@ class IoctlSocketConstants(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LingerOption(Object):
     """"""
 
     def __init__(self, enable: bool, seconds: int):
-        """
-
-        :param enable:
+        """:param enable:
         :param seconds:
         """
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
     def LingerTime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LingerTime.setter
     def LingerTime(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MulticastOption(Object):
     """"""
 
     @overload
     def __init__(self, group: IPAddress):
-        """
-
-        :param group:
-        """
+        """:param group:"""
     @overload
     def __init__(self, group: IPAddress, mcint: IPAddress):
-        """
-
-        :param group:
+        """:param group:
         :param mcint:
         """
     @overload
     def __init__(self, group: IPAddress, interfaceIndex: int):
-        """
-
-        :param group:
+        """:param group:
         :param interfaceIndex:
         """
     @property
     def Group(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Group.setter
     def Group(self, value: IPAddress) -> None: ...
     @property
     def InterfaceIndex(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InterfaceIndex.setter
     def InterfaceIndex(self, value: int) -> None: ...
     @property
     def LocalAddress(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LocalAddress.setter
     def LocalAddress(self, value: IPAddress) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MultipleConnectAsync(ABC, Object):
     """"""
@@ -949,73 +696,45 @@ class MultipleConnectAsync(ABC, Object):
     def Cancel(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def StartConnectAsync(self, args: SocketAsyncEventArgs, endPoint: DnsEndPoint) -> bool:
-        """
-
-        :param args:
+        """:param args:
         :param endPoint:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MultipleSocketMultipleConnectAsync(MultipleConnectAsync):
     """"""
 
     def __init__(self, socketType: SocketType, protocolType: ProtocolType):
-        """
-
-        :param socketType:
+        """:param socketType:
         :param protocolType:
         """
     def Cancel(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def StartConnectAsync(self, args: SocketAsyncEventArgs, endPoint: DnsEndPoint) -> bool:
-        """
-
-        :param args:
+        """:param args:
         :param endPoint:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkEvents(ValueType):
     """"""
@@ -1031,124 +750,80 @@ class NetworkEvents(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkStream(Stream, IDisposable):
     """"""
 
     @overload
     def __init__(self, socket: Socket):
-        """
-
-        :param socket:
-        """
+        """:param socket:"""
     @overload
     def __init__(self, socket: Socket, access: FileAccess):
-        """
-
-        :param socket:
+        """:param socket:
         :param access:
         """
     @overload
     def __init__(self, socket: Socket, ownsSocket: bool):
-        """
-
-        :param socket:
+        """:param socket:
         :param ownsSocket:
         """
     @overload
     def __init__(self, socket: Socket, access: FileAccess, ownsSocket: bool):
-        """
-
-        :param socket:
+        """:param socket:
         :param access:
         :param ownsSocket:
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DataAvailable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1156,11 +831,14 @@ class NetworkStream(Stream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1172,35 +850,23 @@ class NetworkStream(Stream, IDisposable):
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1208,231 +874,151 @@ class NetworkStream(Stream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class OverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OverlappedCache(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProtocolFamily(Enum):
     """"""
@@ -1559,98 +1145,52 @@ class ReceiveFromOverlappedAsyncResult(OverlappedAsyncResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReceiveMessageOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SelectMode(Enum):
     """"""
@@ -1667,397 +1207,250 @@ class SendPacketsElement(Object):
 
     @overload
     def __init__(self, buffer: Array[int]):
-        """
-
-        :param buffer:
-        """
+        """:param buffer:"""
     @overload
     def __init__(self, filepath: str):
-        """
-
-        :param filepath:
-        """
+        """:param filepath:"""
     @overload
     def __init__(self, buffer: Array[int], offset: int, count: int):
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def __init__(self, filepath: str, offset: int, count: int):
-        """
-
-        :param filepath:
+        """:param filepath:
         :param offset:
         :param count:
         """
     @overload
     def __init__(self, buffer: Array[int], offset: int, count: int, endOfPacket: bool):
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param endOfPacket:
         """
     @overload
     def __init__(self, filepath: str, offset: int, count: int, endOfPacket: bool):
-        """
-
-        :param filepath:
+        """:param filepath:
         :param offset:
         :param count:
         :param endOfPacket:
         """
     @property
     def Buffer(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EndOfPacket(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FilePath(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Offset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SingleSocketMultipleConnectAsync(MultipleConnectAsync):
     """"""
 
     def __init__(self, socket: Socket, userSocket: bool):
-        """
-
-        :param socket:
+        """:param socket:
         :param userSocket:
         """
     def Cancel(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def StartConnectAsync(self, args: SocketAsyncEventArgs, endPoint: DnsEndPoint) -> bool:
-        """
-
-        :param args:
+        """:param args:
         :param endPoint:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Socket(Object, IDisposable):
     """"""
 
     @overload
     def __init__(self, socketInformation: SocketInformation):
-        """
-
-        :param socketInformation:
-        """
+        """:param socketInformation:"""
     @overload
     def __init__(self, socketType: SocketType, protocolType: ProtocolType):
-        """
-
-        :param socketType:
+        """:param socketType:
         :param protocolType:
         """
     @overload
     def __init__(
-        self, addressFamily: AddressFamily, socketType: SocketType, protocolType: ProtocolType
+        self,
+        addressFamily: AddressFamily,
+        socketType: SocketType,
+        protocolType: ProtocolType,
     ):
-        """
-
-        :param addressFamily:
+        """:param addressFamily:
         :param socketType:
         :param protocolType:
         """
     @property
     def AddressFamily(self) -> AddressFamily:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Available(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Blocking(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Blocking.setter
     def Blocking(self, value: bool) -> None: ...
     @property
     def Connected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DontFragment(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DontFragment.setter
     def DontFragment(self, value: bool) -> None: ...
     @property
     def DualMode(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DualMode.setter
     def DualMode(self, value: bool) -> None: ...
     @property
     def EnableBroadcast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableBroadcast.setter
     def EnableBroadcast(self, value: bool) -> None: ...
     @property
     def ExclusiveAddressUse(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ExclusiveAddressUse.setter
     def ExclusiveAddressUse(self, value: bool) -> None: ...
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBound(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LingerState(self) -> LingerOption:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LingerState.setter
     def LingerState(self, value: LingerOption) -> None: ...
     @property
     def LocalEndPoint(self) -> EndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MulticastLoopback(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MulticastLoopback.setter
     def MulticastLoopback(self, value: bool) -> None: ...
     @property
     def NoDelay(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @NoDelay.setter
     def NoDelay(self, value: bool) -> None: ...
     @classmethod
     @property
     def OSSupportsIPv4(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def OSSupportsIPv6(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ProtocolType(self) -> ProtocolType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceiveBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReceiveBufferSize.setter
     def ReceiveBufferSize(self, value: int) -> None: ...
     @property
     def ReceiveTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReceiveTimeout.setter
     def ReceiveTimeout(self, value: int) -> None: ...
     @property
     def RemoteEndPoint(self) -> EndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SendBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendBufferSize.setter
     def SendBufferSize(self, value: int) -> None: ...
     @property
     def SendTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendTimeout.setter
     def SendTimeout(self, value: int) -> None: ...
     @property
     def SocketType(self) -> SocketType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def SupportsIPv4(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def SupportsIPv6(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Ttl(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Ttl.setter
     def Ttl(self, value: int) -> None: ...
     @property
     def UseOnlyOverlappedIO(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseOnlyOverlappedIO.setter
     def UseOnlyOverlappedIO(self, value: bool) -> None: ...
     def Accept(self) -> Socket:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcceptAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @overload
     def BeginAccept(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     @overload
     def BeginAccept(self, receiveSize: int, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param receiveSize:
+        """:param receiveSize:
         :param callback:
         :param state:
         :return:
         """
     @overload
     def BeginAccept(
-        self, acceptSocket: Socket, receiveSize: int, callback: AsyncCallback, state: object
+        self,
+        acceptSocket: Socket,
+        receiveSize: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param acceptSocket:
+        """:param acceptSocket:
         :param receiveSize:
         :param callback:
         :param state:
@@ -2067,20 +1460,20 @@ class Socket(Object, IDisposable):
     def BeginConnect(
         self, remoteEP: EndPoint, callback: AsyncCallback, state: object
     ) -> IAsyncResult:
-        """
-
-        :param remoteEP:
+        """:param remoteEP:
         :param callback:
         :param state:
         :return:
         """
     @overload
     def BeginConnect(
-        self, address: IPAddress, port: int, requestCallback: AsyncCallback, state: object
+        self,
+        address: IPAddress,
+        port: int,
+        requestCallback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param address:
+        """:param address:
         :param port:
         :param requestCallback:
         :param state:
@@ -2088,11 +1481,13 @@ class Socket(Object, IDisposable):
         """
     @overload
     def BeginConnect(
-        self, addresses: Array[IPAddress], port: int, requestCallback: AsyncCallback, state: object
+        self,
+        addresses: Array[IPAddress],
+        port: int,
+        requestCallback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param addresses:
+        """:param addresses:
         :param port:
         :param requestCallback:
         :param state:
@@ -2102,9 +1497,7 @@ class Socket(Object, IDisposable):
     def BeginConnect(
         self, host: str, port: int, requestCallback: AsyncCallback, state: object
     ) -> IAsyncResult:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param requestCallback:
         :param state:
@@ -2113,9 +1506,7 @@ class Socket(Object, IDisposable):
     def BeginDisconnect(
         self, reuseSocket: bool, callback: AsyncCallback, state: object
     ) -> IAsyncResult:
-        """
-
-        :param reuseSocket:
+        """:param reuseSocket:
         :param callback:
         :param state:
         :return:
@@ -2128,9 +1519,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffers:
+        """:param buffers:
         :param socketFlags:
         :param callback:
         :param state:
@@ -2144,10 +1533,8 @@ class Socket(Object, IDisposable):
         errorCode: SocketError,
         callback: AsyncCallback,
         state: object,
-    ) -> Tuple[IAsyncResult, SocketError]:
-        """
-
-        :param buffers:
+    ) -> tuple[IAsyncResult, SocketError]:
+        """:param buffers:
         :param socketFlags:
         :param errorCode:
         :param callback:
@@ -2164,9 +1551,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2184,10 +1569,8 @@ class Socket(Object, IDisposable):
         errorCode: SocketError,
         callback: AsyncCallback,
         state: object,
-    ) -> Tuple[IAsyncResult, SocketError]:
-        """
-
-        :param buffer:
+    ) -> tuple[IAsyncResult, SocketError]:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2206,9 +1589,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2227,9 +1608,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2246,9 +1625,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffers:
+        """:param buffers:
         :param socketFlags:
         :param callback:
         :param state:
@@ -2262,10 +1639,8 @@ class Socket(Object, IDisposable):
         errorCode: SocketError,
         callback: AsyncCallback,
         state: object,
-    ) -> Tuple[IAsyncResult, SocketError]:
-        """
-
-        :param buffers:
+    ) -> tuple[IAsyncResult, SocketError]:
+        """:param buffers:
         :param socketFlags:
         :param errorCode:
         :param callback:
@@ -2282,9 +1657,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2302,10 +1675,8 @@ class Socket(Object, IDisposable):
         errorCode: SocketError,
         callback: AsyncCallback,
         state: object,
-    ) -> Tuple[IAsyncResult, SocketError]:
-        """
-
-        :param buffer:
+    ) -> tuple[IAsyncResult, SocketError]:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2316,9 +1687,7 @@ class Socket(Object, IDisposable):
         """
     @overload
     def BeginSendFile(self, fileName: str, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param callback:
         :param state:
         :return:
@@ -2333,9 +1702,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param preBuffer:
         :param postBuffer:
         :param flags:
@@ -2353,9 +1720,7 @@ class Socket(Object, IDisposable):
         callback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2365,57 +1730,37 @@ class Socket(Object, IDisposable):
         :return:
         """
     def Bind(self, localEP: EndPoint) -> None:
-        """
-
-        :param localEP:
-        """
+        """:param localEP:"""
     @classmethod
     def CancelConnectAsync(cls, e: SocketAsyncEventArgs) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     @overload
     def Close(self) -> None:
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def Connect(self, remoteEP: EndPoint) -> None:
-        """
-
-        :param remoteEP:
-        """
+        """:param remoteEP:"""
     @overload
     def Connect(self, address: IPAddress, port: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param port:
         """
     @overload
     def Connect(self, addresses: Array[IPAddress], port: int) -> None:
-        """
-
-        :param addresses:
+        """:param addresses:
         :param port:
         """
     @overload
     def Connect(self, host: str, port: int) -> None:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         """
     @overload
     def ConnectAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @classmethod
@@ -2423,89 +1768,62 @@ class Socket(Object, IDisposable):
     def ConnectAsync(
         cls, socketType: SocketType, protocolType: ProtocolType, e: SocketAsyncEventArgs
     ) -> bool:
-        """
-
-        :param socketType:
+        """:param socketType:
         :param protocolType:
         :param e:
         :return:
         """
     def Disconnect(self, reuseSocket: bool) -> None:
-        """
-
-        :param reuseSocket:
-        """
+        """:param reuseSocket:"""
     def DisconnectAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def DuplicateAndClose(self, targetProcessId: int) -> SocketInformation:
-        """
-
-        :param targetProcessId:
+        """:param targetProcessId:
         :return:
         """
     @overload
     def EndAccept(self, asyncResult: IAsyncResult) -> Socket:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     @overload
-    def EndAccept(self, buffer: int, asyncResult: IAsyncResult) -> Tuple[Socket, int]:
-        """
-
-        :param buffer:
+    def EndAccept(self, buffer: int, asyncResult: IAsyncResult) -> tuple[Socket, int]:
+        """:param buffer:
         :param asyncResult:
         :return:
         """
     @overload
     def EndAccept(
         self, buffer: int, bytesTransferred: int, asyncResult: IAsyncResult
-    ) -> Tuple[Socket, int, int]:
-        """
-
-        :param buffer:
+    ) -> tuple[Socket, int, int]:
+        """:param buffer:
         :param bytesTransferred:
         :param asyncResult:
         :return:
         """
     def EndConnect(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def EndDisconnect(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     @overload
     def EndReceive(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     @overload
     def EndReceive(
         self, asyncResult: IAsyncResult, errorCode: SocketError
-    ) -> Tuple[int, SocketError]:
-        """
-
-        :param asyncResult:
+    ) -> tuple[int, SocketError]:
+        """:param asyncResult:
         :param errorCode:
         :return:
         """
     def EndReceiveFrom(self, asyncResult: IAsyncResult, endPoint: EndPoint) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param endPoint:
         :return:
         """
@@ -2515,10 +1833,8 @@ class Socket(Object, IDisposable):
         socketFlags: SocketFlags,
         endPoint: EndPoint,
         ipPacketInformation: IPPacketInformation,
-    ) -> Tuple[int, IPPacketInformation]:
-        """
-
-        :param asyncResult:
+    ) -> tuple[int, IPPacketInformation]:
+        """:param asyncResult:
         :param socketFlags:
         :param endPoint:
         :param ipPacketInformation:
@@ -2526,84 +1842,68 @@ class Socket(Object, IDisposable):
         """
     @overload
     def EndSend(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     @overload
-    def EndSend(self, asyncResult: IAsyncResult, errorCode: SocketError) -> Tuple[int, SocketError]:
-        """
-
-        :param asyncResult:
+    def EndSend(self, asyncResult: IAsyncResult, errorCode: SocketError) -> tuple[int, SocketError]:
+        """:param asyncResult:
         :param errorCode:
         :return:
         """
     def EndSendFile(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def EndSendTo(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSocketOption(
         self, optionLevel: SocketOptionLevel, optionName: SocketOptionName
     ) -> object:
-        """
-
-        :param optionLevel:
+        """:param optionLevel:
         :param optionName:
         :return:
         """
     @overload
     def GetSocketOption(
-        self, optionLevel: SocketOptionLevel, optionName: SocketOptionName, optionValue: Array[int]
+        self,
+        optionLevel: SocketOptionLevel,
+        optionName: SocketOptionName,
+        optionValue: Array[int],
     ) -> None:
-        """
-
-        :param optionLevel:
+        """:param optionLevel:
         :param optionName:
         :param optionValue:
         """
     @overload
     def GetSocketOption(
-        self, optionLevel: SocketOptionLevel, optionName: SocketOptionName, optionLength: int
+        self,
+        optionLevel: SocketOptionLevel,
+        optionName: SocketOptionName,
+        optionLength: int,
     ) -> Array[int]:
-        """
-
-        :param optionLevel:
+        """:param optionLevel:
         :param optionName:
         :param optionLength:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IOControl(
-        self, ioControlCode: IOControlCode, optionInValue: Array[int], optionOutValue: Array[int]
+        self,
+        ioControlCode: IOControlCode,
+        optionInValue: Array[int],
+        optionOutValue: Array[int],
     ) -> int:
-        """
-
-        :param ioControlCode:
+        """:param ioControlCode:
         :param optionInValue:
         :param optionOutValue:
         :return:
@@ -2612,80 +1912,62 @@ class Socket(Object, IDisposable):
     def IOControl(
         self, ioControlCode: int, optionInValue: Array[int], optionOutValue: Array[int]
     ) -> int:
-        """
-
-        :param ioControlCode:
+        """:param ioControlCode:
         :param optionInValue:
         :param optionOutValue:
         :return:
         """
     def Listen(self, backlog: int) -> None:
-        """
-
-        :param backlog:
-        """
+        """:param backlog:"""
     def Poll(self, microSeconds: int, mode: SelectMode) -> bool:
-        """
-
-        :param microSeconds:
+        """:param microSeconds:
         :param mode:
         :return:
         """
     @overload
     def Receive(self, buffers: IList[ArraySegment[int]]) -> int:
-        """
-
-        :param buffers:
+        """:param buffers:
         :return:
         """
     @overload
     def Receive(self, buffer: Array[int]) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :return:
         """
     @overload
     def Receive(self, buffers: IList[ArraySegment[int]], socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffers:
+        """:param buffers:
         :param socketFlags:
         :return:
         """
     @overload
     def Receive(self, buffer: Array[int], socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param socketFlags:
         :return:
         """
     @overload
     def Receive(
-        self, buffers: IList[ArraySegment[int]], socketFlags: SocketFlags, errorCode: SocketError
-    ) -> Tuple[int, SocketError]:
-        """
-
-        :param buffers:
+        self,
+        buffers: IList[ArraySegment[int]],
+        socketFlags: SocketFlags,
+        errorCode: SocketError,
+    ) -> tuple[int, SocketError]:
+        """:param buffers:
         :param socketFlags:
         :param errorCode:
         :return:
         """
     @overload
     def Receive(self, buffer: Array[int], size: int, socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param size:
         :param socketFlags:
         :return:
         """
     @overload
     def Receive(self, buffer: Array[int], offset: int, size: int, socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2699,10 +1981,8 @@ class Socket(Object, IDisposable):
         size: int,
         socketFlags: SocketFlags,
         errorCode: SocketError,
-    ) -> Tuple[int, SocketError]:
-        """
-
-        :param buffer:
+    ) -> tuple[int, SocketError]:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2710,35 +1990,31 @@ class Socket(Object, IDisposable):
         :return:
         """
     def ReceiveAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @overload
     def ReceiveFrom(self, buffer: Array[int], remoteEP: EndPoint) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param remoteEP:
         :return:
         """
     @overload
     def ReceiveFrom(self, buffer: Array[int], socketFlags: SocketFlags, remoteEP: EndPoint) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param socketFlags:
         :param remoteEP:
         :return:
         """
     @overload
     def ReceiveFrom(
-        self, buffer: Array[int], size: int, socketFlags: SocketFlags, remoteEP: EndPoint
+        self,
+        buffer: Array[int],
+        size: int,
+        socketFlags: SocketFlags,
+        remoteEP: EndPoint,
     ) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param size:
         :param socketFlags:
         :param remoteEP:
@@ -2753,9 +2029,7 @@ class Socket(Object, IDisposable):
         socketFlags: SocketFlags,
         remoteEP: EndPoint,
     ) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2763,9 +2037,7 @@ class Socket(Object, IDisposable):
         :return:
         """
     def ReceiveFromAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     def ReceiveMessageFrom(
@@ -2776,10 +2048,8 @@ class Socket(Object, IDisposable):
         socketFlags: SocketFlags,
         remoteEP: EndPoint,
         ipPacketInformation: IPPacketInformation,
-    ) -> Tuple[int, IPPacketInformation]:
-        """
-
-        :param buffer:
+    ) -> tuple[int, IPPacketInformation]:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2788,77 +2058,62 @@ class Socket(Object, IDisposable):
         :return:
         """
     def ReceiveMessageFromAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @classmethod
     def Select(
         cls, checkRead: IList, checkWrite: IList, checkError: IList, microSeconds: int
     ) -> None:
-        """
-
-        :param checkRead:
+        """:param checkRead:
         :param checkWrite:
         :param checkError:
         :param microSeconds:
         """
     @overload
     def Send(self, buffers: IList[ArraySegment[int]]) -> int:
-        """
-
-        :param buffers:
+        """:param buffers:
         :return:
         """
     @overload
     def Send(self, buffer: Array[int]) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :return:
         """
     @overload
     def Send(self, buffers: IList[ArraySegment[int]], socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffers:
+        """:param buffers:
         :param socketFlags:
         :return:
         """
     @overload
     def Send(self, buffer: Array[int], socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param socketFlags:
         :return:
         """
     @overload
     def Send(
-        self, buffers: IList[ArraySegment[int]], socketFlags: SocketFlags, errorCode: SocketError
-    ) -> Tuple[int, SocketError]:
-        """
-
-        :param buffers:
+        self,
+        buffers: IList[ArraySegment[int]],
+        socketFlags: SocketFlags,
+        errorCode: SocketError,
+    ) -> tuple[int, SocketError]:
+        """:param buffers:
         :param socketFlags:
         :param errorCode:
         :return:
         """
     @overload
     def Send(self, buffer: Array[int], size: int, socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param size:
         :param socketFlags:
         :return:
         """
     @overload
     def Send(self, buffer: Array[int], offset: int, size: int, socketFlags: SocketFlags) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2872,10 +2127,8 @@ class Socket(Object, IDisposable):
         size: int,
         socketFlags: SocketFlags,
         errorCode: SocketError,
-    ) -> Tuple[int, SocketError]:
-        """
-
-        :param buffer:
+    ) -> tuple[int, SocketError]:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2883,17 +2136,12 @@ class Socket(Object, IDisposable):
         :return:
         """
     def SendAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @overload
     def SendFile(self, fileName: str) -> None:
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def SendFile(
         self,
@@ -2902,43 +2150,37 @@ class Socket(Object, IDisposable):
         postBuffer: Array[int],
         flags: TransmitFileOptions,
     ) -> None:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param preBuffer:
         :param postBuffer:
         :param flags:
         """
     def SendPacketsAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @overload
     def SendTo(self, buffer: Array[int], remoteEP: EndPoint) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param remoteEP:
         :return:
         """
     @overload
     def SendTo(self, buffer: Array[int], socketFlags: SocketFlags, remoteEP: EndPoint) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param socketFlags:
         :param remoteEP:
         :return:
         """
     @overload
     def SendTo(
-        self, buffer: Array[int], size: int, socketFlags: SocketFlags, remoteEP: EndPoint
+        self,
+        buffer: Array[int],
+        size: int,
+        socketFlags: SocketFlags,
+        remoteEP: EndPoint,
     ) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param size:
         :param socketFlags:
         :param remoteEP:
@@ -2953,9 +2195,7 @@ class Socket(Object, IDisposable):
         socketFlags: SocketFlags,
         remoteEP: EndPoint,
     ) -> int:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param size:
         :param socketFlags:
@@ -2963,66 +2203,59 @@ class Socket(Object, IDisposable):
         :return:
         """
     def SendToAsync(self, e: SocketAsyncEventArgs) -> bool:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     def SetIPProtectionLevel(self, level: IPProtectionLevel) -> None:
-        """
-
-        :param level:
-        """
+        """:param level:"""
     @overload
     def SetSocketOption(
-        self, optionLevel: SocketOptionLevel, optionName: SocketOptionName, optionValue: Array[int]
+        self,
+        optionLevel: SocketOptionLevel,
+        optionName: SocketOptionName,
+        optionValue: Array[int],
     ) -> None:
-        """
-
-        :param optionLevel:
+        """:param optionLevel:
         :param optionName:
         :param optionValue:
         """
     @overload
     def SetSocketOption(
-        self, optionLevel: SocketOptionLevel, optionName: SocketOptionName, optionValue: bool
+        self,
+        optionLevel: SocketOptionLevel,
+        optionName: SocketOptionName,
+        optionValue: bool,
     ) -> None:
-        """
-
-        :param optionLevel:
+        """:param optionLevel:
         :param optionName:
         :param optionValue:
         """
     @overload
     def SetSocketOption(
-        self, optionLevel: SocketOptionLevel, optionName: SocketOptionName, optionValue: int
+        self,
+        optionLevel: SocketOptionLevel,
+        optionName: SocketOptionName,
+        optionValue: int,
     ) -> None:
-        """
-
-        :param optionLevel:
+        """:param optionLevel:
         :param optionName:
         :param optionValue:
         """
     @overload
     def SetSocketOption(
-        self, optionLevel: SocketOptionLevel, optionName: SocketOptionName, optionValue: object
+        self,
+        optionLevel: SocketOptionLevel,
+        optionName: SocketOptionName,
+        optionValue: object,
     ) -> None:
-        """
-
-        :param optionLevel:
+        """:param optionLevel:
         :param optionName:
         :param optionValue:
         """
     def Shutdown(self, how: SocketShutdown) -> None:
-        """
-
-        :param how:
-        """
+        """:param how:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketAsyncEventArgs(EventArgs, IDisposable):
     """"""
@@ -3031,178 +2264,106 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         """"""
     @property
     def AcceptSocket(self) -> Socket:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AcceptSocket.setter
     def AcceptSocket(self, value: Socket) -> None: ...
     @property
     def Buffer(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BufferList(self) -> IList[ArraySegment[int]]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BufferList.setter
     def BufferList(self, value: IList[ArraySegment[int]]) -> None: ...
     @property
     def BytesTransferred(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectByNameError(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectSocket(self) -> Socket:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisconnectReuseSocket(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DisconnectReuseSocket.setter
     def DisconnectReuseSocket(self, value: bool) -> None: ...
     @property
     def LastOperation(self) -> SocketAsyncOperation:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Offset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceiveMessageFromPacketInfo(self) -> IPPacketInformation:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RemoteEndPoint(self) -> EndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RemoteEndPoint.setter
     def RemoteEndPoint(self, value: EndPoint) -> None: ...
     @property
     def SendPacketsElements(self) -> Array[SendPacketsElement]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendPacketsElements.setter
     def SendPacketsElements(self, value: Array[SendPacketsElement]) -> None: ...
     @property
     def SendPacketsFlags(self) -> TransmitFileOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendPacketsFlags.setter
     def SendPacketsFlags(self, value: TransmitFileOptions) -> None: ...
     @property
     def SendPacketsSendSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendPacketsSendSize.setter
     def SendPacketsSendSize(self, value: int) -> None: ...
     @property
     def SocketClientAccessPolicyProtocol(self) -> SocketClientAccessPolicyProtocol:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SocketClientAccessPolicyProtocol.setter
     def SocketClientAccessPolicyProtocol(self, value: SocketClientAccessPolicyProtocol) -> None: ...
     @property
     def SocketError(self) -> SocketError:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SocketError.setter
     def SocketError(self, value: SocketError) -> None: ...
     @property
     def SocketFlags(self) -> SocketFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SocketFlags.setter
     def SocketFlags(self, value: SocketFlags) -> None: ...
     @property
     def UserToken(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UserToken.setter
     def UserToken(self, value: object) -> None: ...
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def SetBuffer(self, offset: int, count: int) -> None:
-        """
-
-        :param offset:
+        """:param offset:
         :param count:
         """
     @overload
     def SetBuffer(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Completed: EventType[EventHandler[SocketAsyncEventArgs]] = ...
     """"""
 
@@ -3344,149 +2505,84 @@ class SocketException(Win32Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, errorCode: int):
-        """
-
-        :param errorCode:
-        """
+        """:param errorCode:"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NativeErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SocketErrorCode(self) -> SocketError:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketFlags(Enum):
     """"""
@@ -3517,41 +2613,24 @@ class SocketInformation(ValueType):
 
     @property
     def Options(self) -> SocketInformationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Options.setter
     def Options(self, value: SocketInformationOptions) -> None: ...
     @property
     def ProtocolInformation(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProtocolInformation.setter
     def ProtocolInformation(self, value: Array[int]) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketInformationOptions(Enum):
     """"""
@@ -3689,26 +2768,15 @@ class SocketReceiveFromResult(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketReceiveMessageFromResult(ValueType):
     """"""
@@ -3734,26 +2802,15 @@ class SocketReceiveMessageFromResult(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketShutdown(Enum):
     """"""
@@ -3771,35 +2828,27 @@ class SocketTaskExtensions(ABC, Object):
     @classmethod
     @overload
     def AcceptAsync(cls, socket: Socket) -> Task[Socket]:
-        """
-
-        :param socket:
+        """:param socket:
         :return:
         """
     @classmethod
     @overload
     def AcceptAsync(cls, socket: Socket, acceptSocket: Socket) -> Task[Socket]:
-        """
-
-        :param socket:
+        """:param socket:
         :param acceptSocket:
         :return:
         """
     @classmethod
     @overload
     def ConnectAsync(cls, socket: Socket, remoteEP: EndPoint) -> Task:
-        """
-
-        :param socket:
+        """:param socket:
         :param remoteEP:
         :return:
         """
     @classmethod
     @overload
     def ConnectAsync(cls, socket: Socket, address: IPAddress, port: int) -> Task:
-        """
-
-        :param socket:
+        """:param socket:
         :param address:
         :param port:
         :return:
@@ -3807,9 +2856,7 @@ class SocketTaskExtensions(ABC, Object):
     @classmethod
     @overload
     def ConnectAsync(cls, socket: Socket, addresses: Array[IPAddress], port: int) -> Task:
-        """
-
-        :param socket:
+        """:param socket:
         :param addresses:
         :param port:
         :return:
@@ -3817,37 +2864,25 @@ class SocketTaskExtensions(ABC, Object):
     @classmethod
     @overload
     def ConnectAsync(cls, socket: Socket, host: str, port: int) -> Task:
-        """
-
-        :param socket:
+        """:param socket:
         :param host:
         :param port:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def ReceiveAsync(
         cls, socket: Socket, buffers: IList[ArraySegment[int]], socketFlags: SocketFlags
     ) -> Task[int]:
-        """
-
-        :param socket:
+        """:param socket:
         :param buffers:
         :param socketFlags:
         :return:
@@ -3857,9 +2892,7 @@ class SocketTaskExtensions(ABC, Object):
     def ReceiveAsync(
         cls, socket: Socket, buffer: ArraySegment[int], socketFlags: SocketFlags
     ) -> Task[int]:
-        """
-
-        :param socket:
+        """:param socket:
         :param buffer:
         :param socketFlags:
         :return:
@@ -3872,9 +2905,7 @@ class SocketTaskExtensions(ABC, Object):
         socketFlags: SocketFlags,
         remoteEndPoint: EndPoint,
     ) -> Task[SocketReceiveFromResult]:
-        """
-
-        :param socket:
+        """:param socket:
         :param buffer:
         :param socketFlags:
         :param remoteEndPoint:
@@ -3888,9 +2919,7 @@ class SocketTaskExtensions(ABC, Object):
         socketFlags: SocketFlags,
         remoteEndPoint: EndPoint,
     ) -> Task[SocketReceiveMessageFromResult]:
-        """
-
-        :param socket:
+        """:param socket:
         :param buffer:
         :param socketFlags:
         :param remoteEndPoint:
@@ -3901,9 +2930,7 @@ class SocketTaskExtensions(ABC, Object):
     def SendAsync(
         cls, socket: Socket, buffers: IList[ArraySegment[int]], socketFlags: SocketFlags
     ) -> Task[int]:
-        """
-
-        :param socket:
+        """:param socket:
         :param buffers:
         :param socketFlags:
         :return:
@@ -3913,30 +2940,27 @@ class SocketTaskExtensions(ABC, Object):
     def SendAsync(
         cls, socket: Socket, buffer: ArraySegment[int], socketFlags: SocketFlags
     ) -> Task[int]:
-        """
-
-        :param socket:
+        """:param socket:
         :param buffer:
         :param socketFlags:
         :return:
         """
     @classmethod
     def SendToAsync(
-        cls, socket: Socket, buffer: ArraySegment[int], socketFlags: SocketFlags, remoteEP: EndPoint
+        cls,
+        socket: Socket,
+        buffer: ArraySegment[int],
+        socketFlags: SocketFlags,
+        remoteEP: EndPoint,
     ) -> Task[int]:
-        """
-
-        :param socket:
+        """:param socket:
         :param buffer:
         :param socketFlags:
         :param remoteEP:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketType(Enum):
     """"""
@@ -3962,106 +2986,70 @@ class TcpClient(Object, IDisposable):
         """"""
     @overload
     def __init__(self, family: AddressFamily):
-        """
-
-        :param family:
-        """
+        """:param family:"""
     @overload
     def __init__(self, localEP: IPEndPoint):
-        """
-
-        :param localEP:
-        """
+        """:param localEP:"""
     @overload
     def __init__(self, hostname: str, port: int):
-        """
-
-        :param hostname:
+        """:param hostname:
         :param port:
         """
     @property
     def Available(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Client(self) -> Socket:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Client.setter
     def Client(self, value: Socket) -> None: ...
     @property
     def Connected(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExclusiveAddressUse(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ExclusiveAddressUse.setter
     def ExclusiveAddressUse(self, value: bool) -> None: ...
     @property
     def LingerState(self) -> LingerOption:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LingerState.setter
     def LingerState(self, value: LingerOption) -> None: ...
     @property
     def NoDelay(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @NoDelay.setter
     def NoDelay(self, value: bool) -> None: ...
     @property
     def ReceiveBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReceiveBufferSize.setter
     def ReceiveBufferSize(self, value: int) -> None: ...
     @property
     def ReceiveTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReceiveTimeout.setter
     def ReceiveTimeout(self, value: int) -> None: ...
     @property
     def SendBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendBufferSize.setter
     def SendBufferSize(self, value: int) -> None: ...
     @property
     def SendTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SendTimeout.setter
     def SendTimeout(self, value: int) -> None: ...
     @overload
     def BeginConnect(
-        self, address: IPAddress, port: int, requestCallback: AsyncCallback, state: object
+        self,
+        address: IPAddress,
+        port: int,
+        requestCallback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param address:
+        """:param address:
         :param port:
         :param requestCallback:
         :param state:
@@ -4069,11 +3057,13 @@ class TcpClient(Object, IDisposable):
         """
     @overload
     def BeginConnect(
-        self, addresses: Array[IPAddress], port: int, requestCallback: AsyncCallback, state: object
+        self,
+        addresses: Array[IPAddress],
+        port: int,
+        requestCallback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param addresses:
+        """:param addresses:
         :param port:
         :param requestCallback:
         :param state:
@@ -4083,9 +3073,7 @@ class TcpClient(Object, IDisposable):
     def BeginConnect(
         self, host: str, port: int, requestCallback: AsyncCallback, state: object
     ) -> IAsyncResult:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :param requestCallback:
         :param state:
@@ -4095,226 +3083,135 @@ class TcpClient(Object, IDisposable):
         """"""
     @overload
     def Connect(self, remoteEP: IPEndPoint) -> None:
-        """
-
-        :param remoteEP:
-        """
+        """:param remoteEP:"""
     @overload
     def Connect(self, address: IPAddress, port: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param port:
         """
     @overload
     def Connect(self, ipAddresses: Array[IPAddress], port: int) -> None:
-        """
-
-        :param ipAddresses:
+        """:param ipAddresses:
         :param port:
         """
     @overload
     def Connect(self, hostname: str, port: int) -> None:
-        """
-
-        :param hostname:
+        """:param hostname:
         :param port:
         """
     @overload
     def ConnectAsync(self, address: IPAddress, port: int) -> Task:
-        """
-
-        :param address:
+        """:param address:
         :param port:
         :return:
         """
     @overload
     def ConnectAsync(self, addresses: Array[IPAddress], port: int) -> Task:
-        """
-
-        :param addresses:
+        """:param addresses:
         :param port:
         :return:
         """
     @overload
     def ConnectAsync(self, host: str, port: int) -> Task:
-        """
-
-        :param host:
+        """:param host:
         :param port:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndConnect(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetStream(self) -> NetworkStream:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TcpListener(Object):
     """"""
 
     @overload
     def __init__(self, localEP: IPEndPoint):
-        """
-
-        :param localEP:
-        """
+        """:param localEP:"""
     @overload
     def __init__(self, port: int):
-        """
-
-        :param port:
-        """
+        """:param port:"""
     @overload
     def __init__(self, localaddr: IPAddress, port: int):
-        """
-
-        :param localaddr:
+        """:param localaddr:
         :param port:
         """
     @property
     def ExclusiveAddressUse(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ExclusiveAddressUse.setter
     def ExclusiveAddressUse(self, value: bool) -> None: ...
     @property
     def LocalEndpoint(self) -> EndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Server(self) -> Socket:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcceptSocket(self) -> Socket:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcceptSocketAsync(self) -> Task[Socket]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcceptTcpClient(self) -> TcpClient:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcceptTcpClientAsync(self) -> Task[TcpClient]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AllowNatTraversal(self, allowed: bool) -> None:
-        """
-
-        :param allowed:
-        """
+        """:param allowed:"""
     def BeginAcceptSocket(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def BeginAcceptTcpClient(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     @classmethod
     def Create(cls, port: int) -> TcpListener:
-        """
-
-        :param port:
+        """:param port:
         :return:
         """
     def EndAcceptSocket(self, asyncResult: IAsyncResult) -> Socket:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndAcceptTcpClient(self, asyncResult: IAsyncResult) -> TcpClient:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Pending(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, backlog: int) -> None:
-        """
-
-        :param backlog:
-        """
+        """:param backlog:"""
     def Stop(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TimeValue(ValueType):
     """"""
@@ -4330,26 +3227,15 @@ class TimeValue(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TransmitFileOptions(Enum):
     """"""
@@ -4372,49 +3258,26 @@ class TransmitFileOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult)
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 TransmitPacketsDelegate: Callable[
     [SafeCloseSocket, IntPtr, int, int, SafeNativeOverlapped, TransmitFileOptions], bool
@@ -4438,109 +3301,72 @@ class UdpClient(Object, IDisposable):
         """"""
     @overload
     def __init__(self, family: AddressFamily):
-        """
-
-        :param family:
-        """
+        """:param family:"""
     @overload
     def __init__(self, localEP: IPEndPoint):
-        """
-
-        :param localEP:
-        """
+        """:param localEP:"""
     @overload
     def __init__(self, port: int):
-        """
-
-        :param port:
-        """
+        """:param port:"""
     @overload
     def __init__(self, port: int, family: AddressFamily):
-        """
-
-        :param port:
+        """:param port:
         :param family:
         """
     @overload
     def __init__(self, hostname: str, port: int):
-        """
-
-        :param hostname:
+        """:param hostname:
         :param port:
         """
     @property
     def Available(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Client(self) -> Socket:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Client.setter
     def Client(self, value: Socket) -> None: ...
     @property
     def DontFragment(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DontFragment.setter
     def DontFragment(self, value: bool) -> None: ...
     @property
     def EnableBroadcast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableBroadcast.setter
     def EnableBroadcast(self, value: bool) -> None: ...
     @property
     def ExclusiveAddressUse(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ExclusiveAddressUse.setter
     def ExclusiveAddressUse(self, value: bool) -> None: ...
     @property
     def MulticastLoopback(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MulticastLoopback.setter
     def MulticastLoopback(self, value: bool) -> None: ...
     @property
     def Ttl(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Ttl.setter
     def Ttl(self, value: int) -> None: ...
     def AllowNatTraversal(self, allowed: bool) -> None:
-        """
-
-        :param allowed:
-        """
+        """:param allowed:"""
     def BeginReceive(self, requestCallback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param requestCallback:
+        """:param requestCallback:
         :param state:
         :return:
         """
     @overload
     def BeginSend(
-        self, datagram: Array[int], bytes: int, requestCallback: AsyncCallback, state: object
+        self,
+        datagram: Array[int],
+        bytes: int,
+        requestCallback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param datagram:
+        """:param datagram:
         :param bytes:
         :param requestCallback:
         :param state:
@@ -4555,9 +3381,7 @@ class UdpClient(Object, IDisposable):
         requestCallback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param datagram:
+        """:param datagram:
         :param bytes:
         :param endPoint:
         :param requestCallback:
@@ -4574,9 +3398,7 @@ class UdpClient(Object, IDisposable):
         requestCallback: AsyncCallback,
         state: object,
     ) -> IAsyncResult:
-        """
-
-        :param datagram:
+        """:param datagram:
         :param bytes:
         :param hostname:
         :param port:
@@ -4588,128 +3410,84 @@ class UdpClient(Object, IDisposable):
         """"""
     @overload
     def Connect(self, endPoint: IPEndPoint) -> None:
-        """
-
-        :param endPoint:
-        """
+        """:param endPoint:"""
     @overload
     def Connect(self, addr: IPAddress, port: int) -> None:
-        """
-
-        :param addr:
+        """:param addr:
         :param port:
         """
     @overload
     def Connect(self, hostname: str, port: int) -> None:
-        """
-
-        :param hostname:
+        """:param hostname:
         :param port:
         """
     def Dispose(self) -> None:
         """"""
     @overload
     def DropMulticastGroup(self, multicastAddr: IPAddress) -> None:
-        """
-
-        :param multicastAddr:
-        """
+        """:param multicastAddr:"""
     @overload
     def DropMulticastGroup(self, multicastAddr: IPAddress, ifindex: int) -> None:
-        """
-
-        :param multicastAddr:
+        """:param multicastAddr:
         :param ifindex:
         """
     def EndReceive(self, asyncResult: IAsyncResult, remoteEP: IPEndPoint) -> Array[int]:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :param remoteEP:
         :return:
         """
     def EndSend(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def JoinMulticastGroup(self, multicastAddr: IPAddress) -> None:
-        """
-
-        :param multicastAddr:
-        """
+        """:param multicastAddr:"""
     @overload
     def JoinMulticastGroup(self, multicastAddr: IPAddress, localAddress: IPAddress) -> None:
-        """
-
-        :param multicastAddr:
+        """:param multicastAddr:
         :param localAddress:
         """
     @overload
     def JoinMulticastGroup(self, multicastAddr: IPAddress, timeToLive: int) -> None:
-        """
-
-        :param multicastAddr:
+        """:param multicastAddr:
         :param timeToLive:
         """
     @overload
     def JoinMulticastGroup(self, ifindex: int, multicastAddr: IPAddress) -> None:
-        """
-
-        :param ifindex:
+        """:param ifindex:
         :param multicastAddr:
         """
     def Receive(self, remoteEP: IPEndPoint) -> Array[int]:
-        """
-
-        :param remoteEP:
+        """:param remoteEP:
         :return:
         """
     def ReceiveAsync(self) -> Task[UdpReceiveResult]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Send(self, dgram: Array[int], bytes: int) -> int:
-        """
-
-        :param dgram:
+        """:param dgram:
         :param bytes:
         :return:
         """
     @overload
     def Send(self, dgram: Array[int], bytes: int, endPoint: IPEndPoint) -> int:
-        """
-
-        :param dgram:
+        """:param dgram:
         :param bytes:
         :param endPoint:
         :return:
         """
     @overload
     def Send(self, dgram: Array[int], bytes: int, hostname: str, port: int) -> int:
-        """
-
-        :param dgram:
+        """:param dgram:
         :param bytes:
         :param hostname:
         :param port:
@@ -4717,112 +3495,74 @@ class UdpClient(Object, IDisposable):
         """
     @overload
     def SendAsync(self, datagram: Array[int], bytes: int) -> Task[int]:
-        """
-
-        :param datagram:
+        """:param datagram:
         :param bytes:
         :return:
         """
     @overload
     def SendAsync(self, datagram: Array[int], bytes: int, endPoint: IPEndPoint) -> Task[int]:
-        """
-
-        :param datagram:
+        """:param datagram:
         :param bytes:
         :param endPoint:
         :return:
         """
     @overload
     def SendAsync(self, datagram: Array[int], bytes: int, hostname: str, port: int) -> Task[int]:
-        """
-
-        :param datagram:
+        """:param datagram:
         :param bytes:
         :param hostname:
         :param port:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UdpReceiveResult(ValueType, IEquatable[UdpReceiveResult]):
     """"""
 
     def __init__(self, buffer: Array[int], remoteEndPoint: IPEndPoint):
-        """
-
-        :param buffer:
+        """:param buffer:
         :param remoteEndPoint:
         """
     @property
     def Buffer(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RemoteEndPoint(self) -> IPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: UdpReceiveResult) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: UdpReceiveResult) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: UdpReceiveResult) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: UdpReceiveResult, right: UdpReceiveResult) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: UdpReceiveResult, right: UdpReceiveResult) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """

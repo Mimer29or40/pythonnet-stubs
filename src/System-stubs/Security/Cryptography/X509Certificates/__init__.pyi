@@ -1,12 +1,8 @@
-from __future__ import annotations
-
 from abc import ABC
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Optional
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -54,7 +50,6 @@ from System.Security.Cryptography import Oid
 from System.Security.Cryptography import OidCollection
 from System.Security.Cryptography import RSASignaturePadding
 from System.Security.Cryptography import SignatureVerificationResult
-from System.Security.Cryptography.CapiNative import AlgorithmId
 from System.Security.Cryptography.X509Certificates.X509Native import AxlVerificationFlags
 from System.Text import Encoding
 
@@ -67,26 +62,15 @@ class AlgorithmIdentifierAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Asn1Tag(ValueType, IEquatable[Asn1Tag]):
     """"""
@@ -138,128 +122,83 @@ class Asn1Tag(ValueType, IEquatable[Asn1Tag]):
     """
     @overload
     def __init__(self, tagClass: TagClass, tagValue: int):
-        """
-
-        :param tagClass:
+        """:param tagClass:
         :param tagValue:
         """
     @overload
     def __init__(self, universalTagNumber: UniversalTagNumber, isConstructed: bool):
-        """
-
-        :param universalTagNumber:
+        """:param universalTagNumber:
         :param isConstructed:
         """
     @overload
     def __init__(self, tagClass: TagClass, tagValue: int, isConstructed: bool):
-        """
-
-        :param tagClass:
+        """:param tagClass:
         :param tagValue:
         :param isConstructed:
         """
     @property
     def IsConstructed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TagClass(self) -> TagClass:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TagValue(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsConstructed(self) -> Asn1Tag:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
-    def Decode(cls, source: ReadOnlySpan[int], bytesConsumed: int) -> Tuple[Asn1Tag, int]:
-        """
-
-        :param source:
+    def Decode(cls, source: ReadOnlySpan[int], bytesConsumed: int) -> tuple[Asn1Tag, int]:
+        """:param source:
         :param bytesConsumed:
         :return:
         """
     @overload
     def Equals(self, other: Asn1Tag) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def HasSameClassAndValue(self, other: Asn1Tag) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def TryDecode(
         cls, source: ReadOnlySpan[int], tag: Asn1Tag, bytesConsumed: int
-    ) -> Tuple[bool, Asn1Tag, int]:
-        """
-
-        :param source:
+    ) -> tuple[bool, Asn1Tag, int]:
+        """:param source:
         :param tag:
         :param bytesConsumed:
         :return:
         """
     def __eq__(self, other: Asn1Tag) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: Asn1Tag) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: Asn1Tag, right: Asn1Tag) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: Asn1Tag, right: Asn1Tag) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -268,21 +207,13 @@ class AsnDecoder(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ReadBitString(
         cls,
@@ -290,11 +221,9 @@ class AsnDecoder(ABC, Object):
         ruleSet: AsnEncodingRules,
         unusedBitCount: int,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[Array[int], int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[Array[int], int, int]:
+        """:param source:
         :param ruleSet:
         :param unusedBitCount:
         :param bytesConsumed:
@@ -309,10 +238,8 @@ class AsnDecoder(ABC, Object):
         contentOffset: int,
         contentLength: int,
         bytesConsumed: int,
-    ) -> Tuple[Asn1Tag, int, int, int]:
-        """
-
-        :param source:
+    ) -> tuple[Asn1Tag, int, int, int]:
+        """:param source:
         :param ruleSet:
         :param contentOffset:
         :param contentLength:
@@ -325,11 +252,9 @@ class AsnDecoder(ABC, Object):
         source: ReadOnlySpan[int],
         ruleSet: AsnEncodingRules,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[ReadOnlySpan[int], int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[ReadOnlySpan[int], int]:
+        """:param source:
         :param ruleSet:
         :param bytesConsumed:
         :param expectedTag:
@@ -341,11 +266,9 @@ class AsnDecoder(ABC, Object):
         source: ReadOnlySpan[int],
         ruleSet: AsnEncodingRules,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[None, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[None, int]:
+        """:param source:
         :param ruleSet:
         :param bytesConsumed:
         :param expectedTag:
@@ -356,11 +279,9 @@ class AsnDecoder(ABC, Object):
         source: ReadOnlySpan[int],
         ruleSet: AsnEncodingRules,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[Array[int], int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[Array[int], int]:
+        """:param source:
         :param ruleSet:
         :param bytesConsumed:
         :param expectedTag:
@@ -372,11 +293,9 @@ class AsnDecoder(ABC, Object):
         source: ReadOnlySpan[int],
         ruleSet: AsnEncodingRules,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[Array[int], int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[Array[int], int]:
+        """:param source:
         :param ruleSet:
         :param bytesConsumed:
         :param expectedTag:
@@ -390,11 +309,9 @@ class AsnDecoder(ABC, Object):
         contentOffset: int,
         contentLength: int,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[None, int, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[None, int, int, int]:
+        """:param source:
         :param ruleSet:
         :param contentOffset:
         :param contentLength:
@@ -410,11 +327,9 @@ class AsnDecoder(ABC, Object):
         contentLength: int,
         bytesConsumed: int,
         skipSortOrderValidation: bool,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[None, int, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[None, int, int, int]:
+        """:param source:
         :param ruleSet:
         :param contentOffset:
         :param contentLength:
@@ -423,10 +338,7 @@ class AsnDecoder(ABC, Object):
         :param expectedTag:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def TryReadBitString(
         cls,
@@ -436,11 +348,9 @@ class AsnDecoder(ABC, Object):
         unusedBitCount: int,
         bytesConsumed: int,
         bytesWritten: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, int, int]:
+        """:param source:
         :param destination:
         :param ruleSet:
         :param unusedBitCount:
@@ -458,10 +368,8 @@ class AsnDecoder(ABC, Object):
         contentOffset: int,
         contentLength: int,
         bytesConsumed: int,
-    ) -> Tuple[bool, Asn1Tag, int, int, int]:
-        """
-
-        :param source:
+    ) -> tuple[bool, Asn1Tag, int, int, int]:
+        """:param source:
         :param ruleSet:
         :param tag:
         :param contentOffset:
@@ -476,11 +384,9 @@ class AsnDecoder(ABC, Object):
         ruleSet: AsnEncodingRules,
         value: int,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, int]:
+        """:param source:
         :param ruleSet:
         :param value:
         :param bytesConsumed:
@@ -494,11 +400,9 @@ class AsnDecoder(ABC, Object):
         ruleSet: AsnEncodingRules,
         value: int,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, int]:
+        """:param source:
         :param ruleSet:
         :param value:
         :param bytesConsumed:
@@ -513,11 +417,9 @@ class AsnDecoder(ABC, Object):
         ruleSet: AsnEncodingRules,
         bytesConsumed: int,
         bytesWritten: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, int]:
+        """:param source:
         :param destination:
         :param ruleSet:
         :param bytesConsumed:
@@ -533,11 +435,9 @@ class AsnDecoder(ABC, Object):
         unusedBitCount: int,
         value: ReadOnlySpan[int],
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, ReadOnlySpan[int], int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, ReadOnlySpan[int], int]:
+        """:param source:
         :param ruleSet:
         :param unusedBitCount:
         :param value:
@@ -552,11 +452,9 @@ class AsnDecoder(ABC, Object):
         ruleSet: AsnEncodingRules,
         value: ReadOnlySpan[int],
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, ReadOnlySpan[int], int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, ReadOnlySpan[int], int]:
+        """:param source:
         :param ruleSet:
         :param value:
         :param bytesConsumed:
@@ -570,11 +468,9 @@ class AsnDecoder(ABC, Object):
         ruleSet: AsnEncodingRules,
         value: int,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, int]:
+        """:param source:
         :param ruleSet:
         :param value:
         :param bytesConsumed:
@@ -588,11 +484,9 @@ class AsnDecoder(ABC, Object):
         ruleSet: AsnEncodingRules,
         value: int,
         bytesConsumed: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, int]:
-        """
-
-        :param source:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, int]:
+        """:param source:
         :param ruleSet:
         :param value:
         :param bytesConsumed:
@@ -615,198 +509,138 @@ class AsnReader(Object):
 
     @overload
     def __init__(self, data: ReadOnlyMemory[int], ruleSet: AsnEncodingRules):
-        """
-
-        :param data:
+        """:param data:
         :param ruleSet:
         """
     @overload
     def __init__(
-        self, data: ReadOnlyMemory[int], ruleSet: AsnEncodingRules, options: AsnReaderOptions
+        self,
+        data: ReadOnlyMemory[int],
+        ruleSet: AsnEncodingRules,
+        options: AsnReaderOptions,
     ):
-        """
-
-        :param data:
+        """:param data:
         :param ruleSet:
         :param options:
         """
     @property
     def HasData(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RuleSet(self) -> AsnEncodingRules:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PeekContentBytes(self) -> ReadOnlyMemory[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PeekEncodedValue(self) -> ReadOnlyMemory[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PeekTag(self) -> Asn1Tag:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReadBitString(
-        self, unusedBitCount: int, expectedTag: Optional[Asn1Tag]
-    ) -> Tuple[Array[int], int]:
-        """
-
-        :param unusedBitCount:
+        self, unusedBitCount: int, expectedTag: Asn1Tag | None
+    ) -> tuple[Array[int], int]:
+        """:param unusedBitCount:
         :param expectedTag:
         :return:
         """
     def ReadEncodedValue(self) -> ReadOnlyMemory[int]:
-        """
-
+        """:return:"""
+    def ReadIntegerBytes(self, expectedTag: Asn1Tag | None) -> ReadOnlyMemory[int]:
+        """:param expectedTag:
         :return:
         """
-    def ReadIntegerBytes(self, expectedTag: Optional[Asn1Tag]) -> ReadOnlyMemory[int]:
-        """
-
-        :param expectedTag:
+    def ReadNull(self, expectedTag: Asn1Tag | None) -> None:
+        """:param expectedTag:"""
+    def ReadObjectIdentifier(self, expectedTag: Asn1Tag | None) -> Array[int]:
+        """:param expectedTag:
         :return:
         """
-    def ReadNull(self, expectedTag: Optional[Asn1Tag]) -> None:
-        """
-
-        :param expectedTag:
-        """
-    def ReadObjectIdentifier(self, expectedTag: Optional[Asn1Tag]) -> Array[int]:
-        """
-
-        :param expectedTag:
+    def ReadOctetString(self, expectedTag: Asn1Tag | None) -> Array[int]:
+        """:param expectedTag:
         :return:
         """
-    def ReadOctetString(self, expectedTag: Optional[Asn1Tag]) -> Array[int]:
-        """
-
-        :param expectedTag:
-        :return:
-        """
-    def ReadSequence(self, expectedTag: Optional[Asn1Tag]) -> AsnReader:
-        """
-
-        :param expectedTag:
+    def ReadSequence(self, expectedTag: Asn1Tag | None) -> AsnReader:
+        """:param expectedTag:
         :return:
         """
     @overload
-    def ReadSetOf(self, expectedTag: Optional[Asn1Tag]) -> AsnReader:
-        """
-
-        :param expectedTag:
+    def ReadSetOf(self, expectedTag: Asn1Tag | None) -> AsnReader:
+        """:param expectedTag:
         :return:
         """
     @overload
-    def ReadSetOf(self, skipSortOrderValidation: bool, expectedTag: Optional[Asn1Tag]) -> AsnReader:
-        """
-
-        :param skipSortOrderValidation:
+    def ReadSetOf(self, skipSortOrderValidation: bool, expectedTag: Asn1Tag | None) -> AsnReader:
+        """:param skipSortOrderValidation:
         :param expectedTag:
         :return:
         """
     def ThrowIfNotEmpty(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryReadBitString(
         self,
         destination: Span[int],
         unusedBitCount: int,
         bytesWritten: int,
-        expectedTag: Optional[Asn1Tag],
-    ) -> Tuple[bool, int, int]:
-        """
-
-        :param destination:
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, int]:
+        """:param destination:
         :param unusedBitCount:
         :param bytesWritten:
         :param expectedTag:
         :return:
         """
-    def TryReadInt32(self, value: int, expectedTag: Optional[Asn1Tag]) -> Tuple[bool, int]:
-        """
-
-        :param value:
+    def TryReadInt32(self, value: int, expectedTag: Asn1Tag | None) -> tuple[bool, int]:
+        """:param value:
         :param expectedTag:
         :return:
         """
-    def TryReadInt64(self, value: int, expectedTag: Optional[Asn1Tag]) -> Tuple[bool, int]:
-        """
-
-        :param value:
+    def TryReadInt64(self, value: int, expectedTag: Asn1Tag | None) -> tuple[bool, int]:
+        """:param value:
         :param expectedTag:
         :return:
         """
     def TryReadOctetString(
-        self, destination: Span[int], bytesWritten: int, expectedTag: Optional[Asn1Tag]
-    ) -> Tuple[bool, int]:
-        """
-
-        :param destination:
+        self, destination: Span[int], bytesWritten: int, expectedTag: Asn1Tag | None
+    ) -> tuple[bool, int]:
+        """:param destination:
         :param bytesWritten:
         :param expectedTag:
         :return:
         """
     def TryReadPrimitiveBitString(
-        self, unusedBitCount: int, value: ReadOnlyMemory[int], expectedTag: Optional[Asn1Tag]
-    ) -> Tuple[bool, int, ReadOnlyMemory[int]]:
-        """
-
-        :param unusedBitCount:
+        self,
+        unusedBitCount: int,
+        value: ReadOnlyMemory[int],
+        expectedTag: Asn1Tag | None,
+    ) -> tuple[bool, int, ReadOnlyMemory[int]]:
+        """:param unusedBitCount:
         :param value:
         :param expectedTag:
         :return:
         """
     def TryReadPrimitiveOctetString(
-        self, contents: ReadOnlyMemory[int], expectedTag: Optional[Asn1Tag]
-    ) -> Tuple[bool, ReadOnlyMemory[int]]:
-        """
-
-        :param contents:
+        self, contents: ReadOnlyMemory[int], expectedTag: Asn1Tag | None
+    ) -> tuple[bool, ReadOnlyMemory[int]]:
+        """:param contents:
         :param expectedTag:
         :return:
         """
-    def TryReadUInt32(self, value: int, expectedTag: Optional[Asn1Tag]) -> Tuple[bool, int]:
-        """
-
-        :param value:
+    def TryReadUInt32(self, value: int, expectedTag: Asn1Tag | None) -> tuple[bool, int]:
+        """:param value:
         :param expectedTag:
         :return:
         """
-    def TryReadUInt64(self, value: int, expectedTag: Optional[Asn1Tag]) -> Tuple[bool, int]:
-        """
-
-        :param value:
+    def TryReadUInt64(self, value: int, expectedTag: Asn1Tag | None) -> tuple[bool, int]:
+        """:param value:
         :param expectedTag:
         :return:
         """
@@ -816,207 +650,115 @@ class AsnReaderOptions(ValueType):
 
     @property
     def SkipSetSortOrderVerification(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SkipSetSortOrderVerification.setter
     def SkipSetSortOrderVerification(self, value: bool) -> None: ...
     @property
     def UtcTimeTwoDigitYearMax(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UtcTimeTwoDigitYearMax.setter
     def UtcTimeTwoDigitYearMax(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsnValueReader(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AttributeAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuthenticodeSignatureInformation(Object):
     """"""
 
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DescriptionUrl(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashAlgorithm(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SignatureChain(self) -> X509Chain:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SigningCertificate(self) -> X509Certificate2:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Timestamp(self) -> TimestampInformation:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TrustStatus(self) -> TrustStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VerificationResult(self) -> SignatureVerificationResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BinaryPrimitives(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ReadInt16BigEndian(cls, bytes: ReadOnlySpan[int]) -> int:
-        """
-
-        :param bytes:
+        """:param bytes:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
-    def TryReadUInt16BigEndian(cls, bytes: ReadOnlySpan[int], value: int) -> Tuple[bool, int]:
-        """
-
-        :param bytes:
+    def TryReadUInt16BigEndian(cls, bytes: ReadOnlySpan[int], value: int) -> tuple[bool, int]:
+        """:param bytes:
         :param value:
         :return:
         """
@@ -1025,51 +767,29 @@ class CRYPT_OID_INFO(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CertificateExtensionsCommon(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CertificateRequest(Object):
     """"""
@@ -1081,27 +801,24 @@ class CertificateRequest(Object):
         publicKey: PublicKey,
         hashAlgorithm: HashAlgorithmName,
     ):
-        """
-
-        :param subjectName:
+        """:param subjectName:
         :param publicKey:
         :param hashAlgorithm:
         """
     @overload
     def __init__(
-        self, subjectName: X500DistinguishedName, key: ECDsa, hashAlgorithm: HashAlgorithmName
+        self,
+        subjectName: X500DistinguishedName,
+        key: ECDsa,
+        hashAlgorithm: HashAlgorithmName,
     ):
-        """
-
-        :param subjectName:
+        """:param subjectName:
         :param key:
         :param hashAlgorithm:
         """
     @overload
     def __init__(self, subjectName: str, key: ECDsa, hashAlgorithm: HashAlgorithmName):
-        """
-
-        :param subjectName:
+        """:param subjectName:
         :param key:
         :param hashAlgorithm:
         """
@@ -1113,9 +830,7 @@ class CertificateRequest(Object):
         hashAlgorithm: HashAlgorithmName,
         padding: RSASignaturePadding,
     ):
-        """
-
-        :param subjectName:
+        """:param subjectName:
         :param key:
         :param hashAlgorithm:
         :param padding:
@@ -1128,37 +843,23 @@ class CertificateRequest(Object):
         hashAlgorithm: HashAlgorithmName,
         padding: RSASignaturePadding,
     ):
-        """
-
-        :param subjectName:
+        """:param subjectName:
         :param key:
         :param hashAlgorithm:
         :param padding:
         """
     @property
     def CertificateExtensions(self) -> Collection[X509Extension]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashAlgorithm(self) -> HashAlgorithmName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PublicKey(self) -> PublicKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubjectName(self) -> X500DistinguishedName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Create(
         self,
@@ -1167,9 +868,7 @@ class CertificateRequest(Object):
         notAfter: DateTimeOffset,
         serialNumber: Array[int],
     ) -> X509Certificate2:
-        """
-
-        :param issuerCertificate:
+        """:param issuerCertificate:
         :param notBefore:
         :param notAfter:
         :param serialNumber:
@@ -1184,9 +883,7 @@ class CertificateRequest(Object):
         notAfter: DateTimeOffset,
         serialNumber: Array[int],
     ) -> X509Certificate2:
-        """
-
-        :param issuerName:
+        """:param issuerName:
         :param generator:
         :param notBefore:
         :param notAfter:
@@ -1196,286 +893,170 @@ class CertificateRequest(Object):
     def CreateSelfSigned(
         self, notBefore: DateTimeOffset, notAfter: DateTimeOffset
     ) -> X509Certificate2:
-        """
-
-        :param notBefore:
+        """:param notBefore:
         :param notAfter:
         :return:
         """
     @overload
     def CreateSigningRequest(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateSigningRequest(self, signatureGenerator: X509SignatureGenerator) -> Array[int]:
-        """
-
-        :param signatureGenerator:
+        """:param signatureGenerator:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContentInfoAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CryptoPool(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Rent(cls, size: int) -> Array[int]:
-        """
-
-        :param size:
+        """:param size:
         :return:
         """
     @classmethod
     @overload
     def Return(cls, segment: ArraySegment[int]) -> None:
-        """
-
-        :param segment:
-        """
+        """:param segment:"""
     @classmethod
     @overload
     def Return(cls, array: Array[int]) -> None:
-        """
-
-        :param array:
-        """
+        """:param array:"""
     @classmethod
     @overload
     def Return(cls, segment: ArraySegment[int], clearSize: int) -> None:
-        """
-
-        :param segment:
+        """:param segment:
         :param clearSize:
         """
     @classmethod
     @overload
     def Return(cls, array: Array[int], clearSize: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param clearSize:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CryptographicOperations(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ZeroMemory(cls, buffer: Span[int]) -> None:
-        """
-
-        :param buffer:
-        """
+        """:param buffer:"""
 
 class DSACertificateExtensions(ABC, Object):
     """"""
 
     @classmethod
     def CopyWithPrivateKey(cls, certificate: X509Certificate2, privateKey: DSA) -> X509Certificate2:
-        """
-
-        :param certificate:
+        """:param certificate:
         :param privateKey:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetDSAPrivateKey(cls, certificate: X509Certificate2) -> DSA:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     @classmethod
     def GetDSAPublicKey(cls, certificate: X509Certificate2) -> DSA:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DerEncoder(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DerSequenceReader(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DigestInfoAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ECDsaCertificateExtensions(ABC, Object):
     """"""
@@ -1484,191 +1065,112 @@ class ECDsaCertificateExtensions(ABC, Object):
     def CopyWithPrivateKey(
         cls, certificate: X509Certificate2, privateKey: ECDsa
     ) -> X509Certificate2:
-        """
-
-        :param certificate:
+        """:param certificate:
         :param privateKey:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetECDsaPrivateKey(cls, certificate: X509Certificate2) -> ECDsa:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     @classmethod
     def GetECDsaPublicKey(cls, certificate: X509Certificate2) -> ECDsa:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ECDsaX509SignatureGenerator(X509SignatureGenerator):
     """"""
 
     @property
     def PublicKey(self) -> PublicKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSignatureAlgorithmIdentifier(self, hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SignData(self, data: Array[int], hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param data:
+        """:param data:
         :param hashAlgorithm:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EncodingHelpers(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EncryptedContentInfoAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EncryptedDataAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EncryptedPrivateKeyInfoAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GeneralNameEncoder(Object):
     """"""
@@ -1676,94 +1178,54 @@ class GeneralNameEncoder(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Helpers(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IncrementalHash(Object, IDisposable):
     """"""
 
     def AppendData(self, data: ReadOnlySpan[int]) -> None:
-        """
-
-        :param data:
-        """
+        """:param data:"""
     @classmethod
     def CreateHash(cls, hashAlgorithm: HashAlgorithmName) -> IncrementalHash:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
-    def TryGetHashAndReset(self, destination: Span[int], bytesWritten: int) -> Tuple[bool, int]:
-        """
-
-        :param destination:
+        """:return:"""
+    def TryGetHashAndReset(self, destination: Span[int], bytesWritten: int) -> tuple[bool, int]:
+        """:param destination:
         :param bytesWritten:
         :return:
         """
@@ -1772,76 +1234,43 @@ class IterationCountLimitEnforcer(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class KdfWorkLimiter(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MacData(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OidGroup(Enum):
     """"""
@@ -2096,26 +1525,15 @@ class Oids(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OpenAlgorithmProviderFlags(Enum):
     """"""
@@ -2143,176 +1561,99 @@ class PBEParameter(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PBES2Params(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PasswordBasedEncryption(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Pbkdf2(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Pbkdf2Params(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Pbkdf2SaltChoice(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PfxAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PinAndClear(ValueType, IDisposable):
     """"""
@@ -2320,449 +1661,264 @@ class PinAndClear(ValueType, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Pkcs10CertificationRequestInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Pkcs12Kdf(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Pkcs9ExtensionRequest(X501Attribute):
     """"""
 
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PublicKey(Object):
     """"""
 
     def __init__(self, oid: Oid, parameters: AsnEncodedData, keyValue: AsnEncodedData):
-        """
-
-        :param oid:
+        """:param oid:
         :param parameters:
         :param keyValue:
         """
     @property
     def EncodedKeyValue(self) -> AsnEncodedData:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EncodedParameters(self) -> AsnEncodedData:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Key(self) -> AsymmetricAlgorithm:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RSACertificateExtensions(ABC, Object):
     """"""
 
     @classmethod
     def CopyWithPrivateKey(cls, certificate: X509Certificate2, privateKey: RSA) -> X509Certificate2:
-        """
-
-        :param certificate:
+        """:param certificate:
         :param privateKey:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetRSAPrivateKey(cls, certificate: X509Certificate2) -> RSA:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     @classmethod
     def GetRSAPublicKey(cls, certificate: X509Certificate2) -> RSA:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RSAPkcs1X509SignatureGenerator(X509SignatureGenerator):
     """"""
 
     @property
     def PublicKey(self) -> PublicKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSignatureAlgorithmIdentifier(self, hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SignData(self, data: Array[int], hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param data:
+        """:param data:
         :param hashAlgorithm:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RSAPssX509SignatureGenerator(X509SignatureGenerator):
     """"""
 
     @property
     def PublicKey(self) -> PublicKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSignatureAlgorithmIdentifier(self, hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SignData(self, data: Array[int], hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param data:
+        """:param data:
         :param hashAlgorithm:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Rc2CbcParameters(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReadOnlyMemory(Generic[T], ValueType):
     """"""
 
     @overload
     def __init__(self, segment: ArraySegment[T]):
-        """
-
-        :param segment:
-        """
+        """:param segment:"""
     @overload
     def __init__(self, array: Array[T]):
-        """
-
-        :param array:
-        """
+        """:param array:"""
     @overload
     def __init__(self, array: Array[T], offset: int, count: int):
-        """
-
-        :param array:
+        """:param array:
         :param offset:
         :param count:
         """
     @property
     def IsEmpty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Span(self) -> ReadOnlySpan[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, destination: Span[T]) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Slice(self, start: int) -> ReadOnlyMemory[T]:
-        """
-
-        :param start:
+        """:param start:
         :return:
         """
     @overload
     def Slice(self, start: int, length: int) -> ReadOnlyMemory[T]:
-        """
-
-        :param start:
+        """:param start:
         :param length:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def op_Implicit(cls, memory: ReadOnlyMemory[T]) -> ArraySegment[T]:
-        """
-
-        :param memory:
+        """:param memory:
         :return:
         """
     @classmethod
     @overload
     def op_Implicit(cls, segment: ArraySegment[T]) -> ReadOnlyMemory[T]:
-        """
-
-        :param segment:
+        """:param segment:
         :return:
         """
     @classmethod
     @overload
     def op_Implicit(cls, array: Array[T]) -> ReadOnlyMemory[T]:
-        """
-
-        :param array:
+        """:param array:
         :return:
         """
 
@@ -2776,125 +1932,73 @@ class ReadOnlySpan(Generic[T], ValueType):
     """
     @overload
     def __init__(self, segment: ArraySegment[T]):
-        """
-
-        :param segment:
-        """
+        """:param segment:"""
     @overload
     def __init__(self, array: Array[T]):
-        """
-
-        :param array:
-        """
+        """:param array:"""
     @overload
     def __init__(self, array: Array[T], offset: int, count: int):
-        """
-
-        :param array:
+        """:param array:
         :param offset:
         :param count:
         """
     @property
     def IsEmpty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNull(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyTo(self, destination: Span[T]) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     def DangerousGetArraySegment(self) -> ArraySegment[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Overlaps(self, destination: ReadOnlySpan[T]) -> bool:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
-    def Overlaps(self, destination: ReadOnlySpan[T], elementOffset: int) -> Tuple[bool, int]:
-        """
-
-        :param destination:
+    def Overlaps(self, destination: ReadOnlySpan[T], elementOffset: int) -> tuple[bool, int]:
+        """:param destination:
         :param elementOffset:
         :return:
         """
     @overload
     def Slice(self, start: int) -> ReadOnlySpan[T]:
-        """
-
-        :param start:
+        """:param start:
         :return:
         """
     @overload
     def Slice(self, start: int, length: int) -> ReadOnlySpan[T]:
-        """
-
-        :param start:
+        """:param start:
         :param length:
         :return:
         """
     def ToArray(self) -> Array[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, index: int) -> T:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @classmethod
     def op_Implicit(cls, array: Array[T]) -> ReadOnlySpan[T]:
-        """
-
-        :param array:
+        """:param array:
         :return:
         """
 
@@ -2902,26 +2006,15 @@ class SR(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeBCryptAlgorithmHandle(SafeHandle, IDisposable):
     """"""
@@ -2930,108 +2023,62 @@ class SafeBCryptAlgorithmHandle(SafeHandle, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeBagAsn(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCertContextHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def SetHandleAsInvalid(self) -> None:
@@ -3039,81 +2086,47 @@ class SafeCertContextHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCertStoreHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SetOfValueComparer(Object, IComparer[ReadOnlyMemory[Byte]]):
     """"""
@@ -3121,33 +2134,20 @@ class SetOfValueComparer(Object, IComparer[ReadOnlyMemory[Byte]]):
     def __init__(self):
         """"""
     def Compare(self, x: ReadOnlyMemory[int], y: ReadOnlyMemory[int]) -> int:
-        """
-
-        :param x:
+        """:param x:
         :param y:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Span(Generic[T], ValueType):
     """"""
@@ -3159,140 +2159,83 @@ class Span(Generic[T], ValueType):
     """
     @overload
     def __init__(self, segment: ArraySegment[T]):
-        """
-
-        :param segment:
-        """
+        """:param segment:"""
     @overload
     def __init__(self, array: Array[T]):
-        """
-
-        :param array:
-        """
+        """:param array:"""
     @overload
     def __init__(self, array: Array[T], offset: int, count: int):
-        """
-
-        :param array:
+        """:param array:
         :param offset:
         :param count:
         """
     @property
     def IsEmpty(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: T) -> None: ...
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Clear(self) -> None:
         """"""
     def CopyTo(self, destination: Span[T]) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     def DangerousGetArrayForPinning(self) -> Array[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousGetArraySegment(self) -> ArraySegment[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Fill(self, value: T) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
-    def Overlaps(self, destination: ReadOnlySpan[T], elementOffset: int) -> Tuple[bool, int]:
-        """
-
-        :param destination:
+        """:return:"""
+    def Overlaps(self, destination: ReadOnlySpan[T], elementOffset: int) -> tuple[bool, int]:
+        """:param destination:
         :param elementOffset:
         :return:
         """
     @overload
     def Slice(self, start: int) -> Span[T]:
-        """
-
-        :param start:
+        """:param start:
         :return:
         """
     @overload
     def Slice(self, start: int, length: int) -> Span[T]:
-        """
-
-        :param start:
+        """:param start:
         :param length:
         :return:
         """
     def ToArray(self) -> Array[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, index: int) -> T:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __setitem__(self, index: int, value: T) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @classmethod
     @overload
     def op_Implicit(cls, span: Span[T]) -> ReadOnlySpan[T]:
-        """
-
-        :param span:
+        """:param span:
         :return:
         """
     @classmethod
     @overload
     def op_Implicit(cls, array: Array[T]) -> Span[T]:
-        """
-
-        :param array:
+        """:param array:
         :return:
         """
 
@@ -3330,57 +2273,29 @@ class SubjectAlternativeNameBuilder(Object):
     def __init__(self):
         """"""
     def AddDnsName(self, dnsName: str) -> None:
-        """
-
-        :param dnsName:
-        """
+        """:param dnsName:"""
     def AddEmailAddress(self, emailAddress: str) -> None:
-        """
-
-        :param emailAddress:
-        """
+        """:param emailAddress:"""
     def AddIpAddress(self, ipAddress: IPAddress) -> None:
-        """
-
-        :param ipAddress:
-        """
+        """:param ipAddress:"""
     def AddUri(self, uri: Uri) -> None:
-        """
-
-        :param uri:
-        """
+        """:param uri:"""
     def AddUserPrincipalName(self, upn: str) -> None:
-        """
-
-        :param upn:
-        """
+        """:param upn:"""
     def Build(self, critical: bool = ...) -> X509Extension:
-        """
-
-        :param critical:
+        """:param critical:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TagClass(Enum):
     """"""
@@ -3401,205 +2316,115 @@ class TbsCertificate(Object):
         """"""
     @property
     def Extensions(self) -> Collection[X509Extension]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Issuer(self) -> X500DistinguishedName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Issuer.setter
     def Issuer(self, value: X500DistinguishedName) -> None: ...
     @property
     def NotAfter(self) -> DateTimeOffset:
-        """
-
-        :return:
-        """
+        """:return:"""
     @NotAfter.setter
     def NotAfter(self, value: DateTimeOffset) -> None: ...
     @property
     def NotBefore(self) -> DateTimeOffset:
-        """
-
-        :return:
-        """
+        """:return:"""
     @NotBefore.setter
     def NotBefore(self, value: DateTimeOffset) -> None: ...
     @property
     def PublicKey(self) -> PublicKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PublicKey.setter
     def PublicKey(self, value: PublicKey) -> None: ...
     @property
     def SerialNumber(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SerialNumber.setter
     def SerialNumber(self, value: Array[int]) -> None: ...
     @property
     def SignatureAlgorithm(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SignatureAlgorithm.setter
     def SignatureAlgorithm(self, value: Array[int]) -> None: ...
     @property
     def Subject(self) -> X500DistinguishedName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Subject.setter
     def Subject(self, value: X500DistinguishedName) -> None: ...
     @property
     def Version(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Version.setter
     def Version(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TimestampInformation(Object):
     """"""
 
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HashAlgorithm(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SignatureChain(self) -> X509Chain:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SigningCertificate(self) -> X509Certificate2:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Timestamp(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VerificationResult(self) -> SignatureVerificationResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Triple(Generic[T1, T2, T3], ValueType):
     """"""
 
     @property
     def Item1(self) -> T1:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item2(self) -> T2:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item3(self) -> T3:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TrustStatus(Enum):
     """"""
@@ -3704,9 +2529,7 @@ class Utility(ABC, Object):
 
     @classmethod
     def EncodingGetByteCount(cls, encoding: Encoding, input: ReadOnlySpan[Char]) -> int:
-        """
-
-        :param encoding:
+        """:param encoding:
         :param input:
         :return:
         """
@@ -3715,9 +2538,7 @@ class Utility(ABC, Object):
     def EncodingGetBytes(
         cls, encoding: Encoding, input: ReadOnlySpan[Char], destination: Span[int]
     ) -> int:
-        """
-
-        :param encoding:
+        """:param encoding:
         :param input:
         :param destination:
         :return:
@@ -3727,148 +2548,90 @@ class Utility(ABC, Object):
     def EncodingGetBytes(
         cls, encoding: Encoding, input: Array[Char], destination: Span[int]
     ) -> int:
-        """
-
-        :param encoding:
+        """:param encoding:
         :param input:
         :param destination:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetSpanForArray(cls, array: Array[T], offset: int) -> Span[T]:
-        """
-
-        :param array:
+        """:param array:
         :param offset:
         :return:
         """
     @classmethod
     @overload
     def GetSpanForArray(cls, array: Array[T], offset: int, count: int) -> Span[T]:
-        """
-
-        :param array:
+        """:param array:
         :param offset:
         :param count:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X500DistinguishedName(AsnEncodedData):
     """"""
 
     @overload
     def __init__(self, distinguishedName: X500DistinguishedName):
-        """
-
-        :param distinguishedName:
-        """
+        """:param distinguishedName:"""
     @overload
     def __init__(self, encodedDistinguishedName: AsnEncodedData):
-        """
-
-        :param encodedDistinguishedName:
-        """
+        """:param encodedDistinguishedName:"""
     @overload
     def __init__(self, encodedDistinguishedName: Array[int]):
-        """
-
-        :param encodedDistinguishedName:
-        """
+        """:param encodedDistinguishedName:"""
     @overload
     def __init__(self, distinguishedName: str):
-        """
-
-        :param distinguishedName:
-        """
+        """:param distinguishedName:"""
     @overload
     def __init__(self, distinguishedName: str, flag: X500DistinguishedNameFlags):
-        """
-
-        :param distinguishedName:
+        """:param distinguishedName:
         :param flag:
         """
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Decode(self, flag: X500DistinguishedNameFlags) -> str:
-        """
-
-        :param flag:
+        """:param flag:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X500DistinguishedNameFlags(Enum):
     """"""
@@ -3899,52 +2662,30 @@ class X501Attribute(AsnEncodedData):
 
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509BasicConstraintsExtension(X509Extension):
     """"""
@@ -3954,9 +2695,7 @@ class X509BasicConstraintsExtension(X509Extension):
         """"""
     @overload
     def __init__(self, encodedBasicConstraints: AsnEncodedData, critical: bool):
-        """
-
-        :param encodedBasicConstraints:
+        """:param encodedBasicConstraints:
         :param critical:
         """
     @overload
@@ -3967,87 +2706,51 @@ class X509BasicConstraintsExtension(X509Extension):
         pathLengthConstraint: int,
         critical: bool,
     ):
-        """
-
-        :param certificateAuthority:
+        """:param certificateAuthority:
         :param hasPathLengthConstraint:
         :param pathLengthConstraint:
         :param critical:
         """
     @property
     def CertificateAuthority(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Critical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Critical.setter
     def Critical(self, value: bool) -> None: ...
     @property
     def HasPathLengthConstraint(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def PathLengthConstraint(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509Certificate(Object, IDeserializationCallback, ISerializable, IDisposable):
     """"""
@@ -4057,299 +2760,189 @@ class X509Certificate(Object, IDeserializationCallback, ISerializable, IDisposab
         """"""
     @overload
     def __init__(self, cert: X509Certificate):
-        """
-
-        :param cert:
-        """
+        """:param cert:"""
     @overload
     def __init__(self, data: Array[int]):
-        """
-
-        :param data:
-        """
+        """:param data:"""
     @overload
     def __init__(self, handle: IntPtr):
-        """
-
-        :param handle:
-        """
+        """:param handle:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, info: SerializationInfo, context: StreamingContext):
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def __init__(self, rawData: Array[int], password: SecureString):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         """
     @overload
     def __init__(self, rawData: Array[int], password: str):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         """
     @overload
     def __init__(self, fileName: str, password: SecureString):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         """
     @overload
     def __init__(self, fileName: str, password: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         """
     @overload
     def __init__(
-        self, rawData: Array[int], password: SecureString, keyStorageFlags: X509KeyStorageFlags
+        self,
+        rawData: Array[int],
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
     ):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def __init__(self, rawData: Array[int], password: str, keyStorageFlags: X509KeyStorageFlags):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
     @overload
-    def __init__(self, fileName: str, password: SecureString, keyStorageFlags: X509KeyStorageFlags):
-        """
-
-        :param fileName:
+    def __init__(
+        self,
+        fileName: str,
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
+    ):
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def __init__(self, fileName: str, password: str, keyStorageFlags: X509KeyStorageFlags):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Issuer(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Subject(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def CreateFromCertFile(cls, filename: str) -> X509Certificate:
-        """
-
-        :param filename:
+        """:param filename:
         :return:
         """
     @classmethod
     def CreateFromSignedFile(cls, filename: str) -> X509Certificate:
-        """
-
-        :param filename:
+        """:param filename:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     @overload
     def Equals(self, other: X509Certificate) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType, password: SecureString) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :param password:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType, password: str) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :param password:
         :return:
         """
     @overload
     def GetCertHash(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCertHash(self, hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     @overload
     def GetCertHashString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCertHashString(self, hashAlgorithm: HashAlgorithmName) -> str:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     def GetEffectiveDateString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetExpirationDateString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetFormat(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIssuerName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeyAlgorithm(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeyAlgorithmParameters(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeyAlgorithmParametersString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetPublicKey(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPublicKeyString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawCertData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawCertDataString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSerialNumber(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSerialNumberString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Import(self, rawData: Array[int]) -> None:
-        """
-
-        :param rawData:
-        """
+        """:param rawData:"""
     @overload
     def Import(self, fileName: str) -> None:
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def Import(
-        self, rawData: Array[int], password: SecureString, keyStorageFlags: X509KeyStorageFlags
+        self,
+        rawData: Array[int],
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
     ) -> None:
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
@@ -4357,48 +2950,37 @@ class X509Certificate(Object, IDeserializationCallback, ISerializable, IDisposab
     def Import(
         self, rawData: Array[int], password: str, keyStorageFlags: X509KeyStorageFlags
     ) -> None:
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def Import(
-        self, fileName: str, password: SecureString, keyStorageFlags: X509KeyStorageFlags
+        self,
+        fileName: str,
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
     ) -> None:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def Import(self, fileName: str, password: str, keyStorageFlags: X509KeyStorageFlags) -> None:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def Reset(self) -> None:
         """"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self, fVerbose: bool) -> str:
-        """
-
-        :param fVerbose:
+        """:param fVerbose:
         :return:
         """
 
@@ -4410,397 +2992,242 @@ class X509Certificate2(X509Certificate, IDeserializationCallback, ISerializable,
         """"""
     @overload
     def __init__(self, certificate: X509Certificate):
-        """
-
-        :param certificate:
-        """
+        """:param certificate:"""
     @overload
     def __init__(self, rawData: Array[int]):
-        """
-
-        :param rawData:
-        """
+        """:param rawData:"""
     @overload
     def __init__(self, handle: IntPtr):
-        """
-
-        :param handle:
-        """
+        """:param handle:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, rawData: Array[int], password: SecureString):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         """
     @overload
     def __init__(self, rawData: Array[int], password: str):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         """
     @overload
     def __init__(self, fileName: str, password: SecureString):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         """
     @overload
     def __init__(self, fileName: str, password: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         """
     @overload
     def __init__(
-        self, rawData: Array[int], password: SecureString, keyStorageFlags: X509KeyStorageFlags
+        self,
+        rawData: Array[int],
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
     ):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def __init__(self, rawData: Array[int], password: str, keyStorageFlags: X509KeyStorageFlags):
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
     @overload
-    def __init__(self, fileName: str, password: SecureString, keyStorageFlags: X509KeyStorageFlags):
-        """
-
-        :param fileName:
+    def __init__(
+        self,
+        fileName: str,
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
+    ):
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def __init__(self, fileName: str, password: str, keyStorageFlags: X509KeyStorageFlags):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     @property
     def Archived(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Archived.setter
     def Archived(self, value: bool) -> None: ...
     @property
     def Extensions(self) -> X509ExtensionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FriendlyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @FriendlyName.setter
     def FriendlyName(self, value: str) -> None: ...
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasPrivateKey(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Issuer(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IssuerName(self) -> X500DistinguishedName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NotAfter(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NotBefore(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateKey(self) -> AsymmetricAlgorithm:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PrivateKey.setter
     def PrivateKey(self, value: AsymmetricAlgorithm) -> None: ...
     @property
     def PublicKey(self) -> PublicKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SerialNumber(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SignatureAlgorithm(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Subject(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubjectName(self) -> X500DistinguishedName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Thumbprint(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Version(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     @overload
     def Equals(self, other: X509Certificate) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType, password: SecureString) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :param password:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType, password: str) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :param password:
         :return:
         """
     @classmethod
     @overload
     def GetCertContentType(cls, rawData: Array[int]) -> X509ContentType:
-        """
-
-        :param rawData:
+        """:param rawData:
         :return:
         """
     @classmethod
     @overload
     def GetCertContentType(cls, fileName: str) -> X509ContentType:
-        """
-
-        :param fileName:
+        """:param fileName:
         :return:
         """
     @overload
     def GetCertHash(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCertHash(self, hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     @overload
     def GetCertHashString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCertHashString(self, hashAlgorithm: HashAlgorithmName) -> str:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     def GetEffectiveDateString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetExpirationDateString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetFormat(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIssuerName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeyAlgorithm(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeyAlgorithmParameters(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetKeyAlgorithmParametersString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNameInfo(self, nameType: X509NameType, forIssuer: bool) -> str:
-        """
-
-        :param nameType:
+        """:param nameType:
         :param forIssuer:
         :return:
         """
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetPublicKey(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPublicKeyString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawCertData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawCertDataString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSerialNumber(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSerialNumberString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Import(self, rawData: Array[int]) -> None:
-        """
-
-        :param rawData:
-        """
+        """:param rawData:"""
     @overload
     def Import(self, fileName: str) -> None:
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def Import(
-        self, rawData: Array[int], password: SecureString, keyStorageFlags: X509KeyStorageFlags
+        self,
+        rawData: Array[int],
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
     ) -> None:
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
@@ -4808,55 +3235,41 @@ class X509Certificate2(X509Certificate, IDeserializationCallback, ISerializable,
     def Import(
         self, rawData: Array[int], password: str, keyStorageFlags: X509KeyStorageFlags
     ) -> None:
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def Import(
-        self, fileName: str, password: SecureString, keyStorageFlags: X509KeyStorageFlags
+        self,
+        fileName: str,
+        password: SecureString,
+        keyStorageFlags: X509KeyStorageFlags,
     ) -> None:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def Import(self, fileName: str, password: str, keyStorageFlags: X509KeyStorageFlags) -> None:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def Reset(self) -> None:
         """"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self, fVerbose: bool) -> str:
-        """
-
-        :param fVerbose:
+        """:param fVerbose:
         :return:
         """
     def Verify(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509Certificate2Collection(X509CertificateCollection, ICollection, IEnumerable, IList):
     """"""
@@ -4866,342 +3279,210 @@ class X509Certificate2Collection(X509CertificateCollection, ICollection, IEnumer
         """"""
     @overload
     def __init__(self, certificate: X509Certificate2):
-        """
-
-        :param certificate:
-        """
+        """:param certificate:"""
     @overload
     def __init__(self, certificates: X509Certificate2Collection):
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     @overload
     def __init__(self, certificates: Array[X509Certificate2]):
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: X509Certificate) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, certificate: X509Certificate2) -> int:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, certificates: X509Certificate2Collection) -> None:
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     @overload
     def AddRange(self, value: X509CertificateCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, certificates: Array[X509Certificate2]) -> None:
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     @overload
     def AddRange(self, value: Array[X509Certificate]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: X509Certificate) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, certificate: X509Certificate2) -> bool:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[X509Certificate], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :return:
         """
     @overload
     def Export(self, contentType: X509ContentType, password: str) -> Array[int]:
-        """
-
-        :param contentType:
+        """:param contentType:
         :param password:
         :return:
         """
     def Find(
         self, findType: X509FindType, findValue: object, validOnly: bool
     ) -> X509Certificate2Collection:
-        """
-
-        :param findType:
+        """:param findType:
         :param findValue:
         :param validOnly:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Import(self, rawData: Array[int]) -> None:
-        """
-
-        :param rawData:
-        """
+        """:param rawData:"""
     @overload
     def Import(self, fileName: str) -> None:
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def Import(
         self, rawData: Array[int], password: str, keyStorageFlags: X509KeyStorageFlags
     ) -> None:
-        """
-
-        :param rawData:
+        """:param rawData:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def Import(self, fileName: str, password: str, keyStorageFlags: X509KeyStorageFlags) -> None:
-        """
-
-        :param fileName:
+        """:param fileName:
         :param password:
         :param keyStorageFlags:
         """
     @overload
     def IndexOf(self, value: X509Certificate) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: X509Certificate) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, certificate: X509Certificate2) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param certificate:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: X509Certificate) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, certificate: X509Certificate2) -> None:
-        """
-
-        :param certificate:
-        """
+        """:param certificate:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def RemoveRange(self, certificates: X509Certificate2Collection) -> None:
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     @overload
     def RemoveRange(self, certificates: Array[X509Certificate2]) -> None:
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: X509Certificate) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: X509Certificate2) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -5210,38 +3491,21 @@ class X509Certificate2Enumerator(Object, IEnumerator):
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509CertificateCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -5251,223 +3515,133 @@ class X509CertificateCollection(CollectionBase, ICollection, IEnumerable, IList)
         """"""
     @overload
     def __init__(self, value: X509CertificateCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[X509Certificate]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: X509Certificate) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: X509CertificateCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[X509Certificate]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: X509Certificate) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[X509Certificate], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: X509Certificate) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: X509Certificate) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: X509Certificate) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: X509Certificate) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -5478,38 +3652,21 @@ class X509CertificateCollection(CollectionBase, ICollection, IEnumerable, IList)
             """"""
         @property
         def Current(self) -> object:
-            """
-
-            :return:
-            """
+            """:return:"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def MoveNext(self) -> bool:
-            """
-
-            :return:
-            """
+            """:return:"""
         def Reset(self) -> None:
             """"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class X509Chain(Object, IDisposable):
     """"""
@@ -5519,256 +3676,142 @@ class X509Chain(Object, IDisposable):
         """"""
     @overload
     def __init__(self, useMachineContext: bool):
-        """
-
-        :param useMachineContext:
-        """
+        """:param useMachineContext:"""
     @overload
     def __init__(self, chainContext: IntPtr):
-        """
-
-        :param chainContext:
-        """
+        """:param chainContext:"""
     @property
     def ChainContext(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChainElements(self) -> X509ChainElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChainPolicy(self) -> X509ChainPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ChainPolicy.setter
     def ChainPolicy(self, value: X509ChainPolicy) -> None: ...
     @property
     def ChainStatus(self) -> Array[X509ChainStatus]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SafeHandle(self) -> SafeX509ChainHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Build(self, certificate: X509Certificate2) -> bool:
-        """
-
-        :param certificate:
+        """:param certificate:
         :return:
         """
     @classmethod
     def Create(cls) -> X509Chain:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ChainElement(Object):
     """"""
 
     @property
     def Certificate(self) -> X509Certificate2:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChainElementStatus(self) -> Array[X509ChainStatus]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Information(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ChainElementCollection(Object, ICollection, IEnumerable):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> X509ChainElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[X509ChainElement], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> X509ChainElement:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ChainElementEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ChainPolicy(Object):
     """"""
@@ -5777,126 +3820,74 @@ class X509ChainPolicy(Object):
         """"""
     @property
     def ApplicationPolicy(self) -> OidCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CertificatePolicy(self) -> OidCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExtraStore(self) -> X509Certificate2Collection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RevocationFlag(self) -> X509RevocationFlag:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RevocationFlag.setter
     def RevocationFlag(self, value: X509RevocationFlag) -> None: ...
     @property
     def RevocationMode(self) -> X509RevocationMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RevocationMode.setter
     def RevocationMode(self, value: X509RevocationMode) -> None: ...
     @property
     def UrlRetrievalTimeout(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UrlRetrievalTimeout.setter
     def UrlRetrievalTimeout(self, value: TimeSpan) -> None: ...
     @property
     def VerificationFlags(self) -> X509VerificationFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @VerificationFlags.setter
     def VerificationFlags(self, value: X509VerificationFlags) -> None: ...
     @property
     def VerificationTime(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @VerificationTime.setter
     def VerificationTime(self, value: DateTime) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ChainStatus(ValueType):
     """"""
 
     @property
     def Status(self) -> X509ChainStatusFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Status.setter
     def Status(self, value: X509ChainStatusFlags) -> None: ...
     @property
     def StatusInformation(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StatusInformation.setter
     def StatusInformation(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ChainStatusFlags(Enum):
     """"""
@@ -5958,26 +3949,15 @@ class X509Constants(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ContentType(Enum):
     """"""
@@ -6007,163 +3987,100 @@ class X509EnhancedKeyUsageExtension(X509Extension):
         """"""
     @overload
     def __init__(self, encodedEnhancedKeyUsages: AsnEncodedData, critical: bool):
-        """
-
-        :param encodedEnhancedKeyUsages:
+        """:param encodedEnhancedKeyUsages:
         :param critical:
         """
     @overload
     def __init__(self, enhancedKeyUsages: OidCollection, critical: bool):
-        """
-
-        :param enhancedKeyUsages:
+        """:param enhancedKeyUsages:
         :param critical:
         """
     @property
     def Critical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Critical.setter
     def Critical(self, value: bool) -> None: ...
     @property
     def EnhancedKeyUsages(self) -> OidCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509Extension(AsnEncodedData):
     """"""
 
     @overload
     def __init__(self, encodedExtension: AsnEncodedData, critical: bool):
-        """
-
-        :param encodedExtension:
+        """:param encodedExtension:
         :param critical:
         """
     @overload
     def __init__(self, oid: Oid, rawData: Array[int], critical: bool):
-        """
-
-        :param oid:
+        """:param oid:
         :param rawData:
         :param critical:
         """
     @overload
     def __init__(self, oid: str, rawData: Array[int], critical: bool):
-        """
-
-        :param oid:
+        """:param oid:
         :param rawData:
         :param critical:
         """
     @property
     def Critical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Critical.setter
     def Critical(self, value: bool) -> None: ...
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ExtensionCollection(Object, ICollection, IEnumerable):
     """"""
@@ -6172,142 +4089,81 @@ class X509ExtensionCollection(Object, ICollection, IEnumerable):
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> X509Extension:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, extension: X509Extension) -> int:
-        """
-
-        :param extension:
+        """:param extension:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[X509Extension], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> X509Extension:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, oid: str) -> X509Extension:
-        """
-
-        :param oid:
+        """:param oid:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509ExtensionEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509FindType(Enum):
     """"""
@@ -6381,80 +4237,48 @@ class X509KeyUsageExtension(X509Extension):
         """"""
     @overload
     def __init__(self, keyUsages: X509KeyUsageFlags, critical: bool):
-        """
-
-        :param keyUsages:
+        """:param keyUsages:
         :param critical:
         """
     @overload
     def __init__(self, encodedKeyUsage: AsnEncodedData, critical: bool):
-        """
-
-        :param encodedKeyUsage:
+        """:param encodedKeyUsage:
         :param critical:
         """
     @property
     def Critical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Critical.setter
     def Critical(self, value: bool) -> None: ...
     @property
     def KeyUsages(self) -> X509KeyUsageFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509KeyUsageFlags(Enum):
     """"""
@@ -6500,26 +4324,15 @@ class X509Native(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class AXL_AUTHENTICODE_SIGNER_INFO(ValueType):
         """"""
@@ -6539,26 +4352,15 @@ class X509Native(ABC, Object):
         pwszHash: Final[IntPtr] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class AXL_AUTHENTICODE_TIMESTAMPER_INFO(ValueType):
         """"""
@@ -6574,26 +4376,15 @@ class X509Native(ABC, Object):
         pChainContext: Final[IntPtr] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
     class AxlVerificationFlags(Enum):
         """"""
@@ -6631,33 +4422,22 @@ class X509Native(ABC, Object):
             dwFlags: X509Native.AxlVerificationFlags,
             pSignerInfo: AXL_AUTHENTICODE_SIGNER_INFO,
             pTimestamperInfo: AXL_AUTHENTICODE_TIMESTAMPER_INFO,
-        ) -> Tuple[int, AXL_AUTHENTICODE_SIGNER_INFO, AXL_AUTHENTICODE_TIMESTAMPER_INFO]:
+        ) -> tuple[int, AXL_AUTHENTICODE_SIGNER_INFO, AXL_AUTHENTICODE_TIMESTAMPER_INFO]:
             """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
         @classmethod
         def _AxlGetIssuerPublicKeyHash(
             cls, pCertContext: IntPtr, ppwszPublicKeyHash: SafeAxlBufferHandle
-        ) -> Tuple[int, SafeAxlBufferHandle]:
+        ) -> tuple[int, SafeAxlBufferHandle]:
             """"""
 
 class X509RevocationFlag(Enum):
@@ -6685,61 +4465,39 @@ class X509SignatureGenerator(ABC, Object):
 
     @property
     def PublicKey(self) -> PublicKey:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def CreateForECDsa(cls, key: ECDsa) -> X509SignatureGenerator:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     @classmethod
     def CreateForRSA(
         cls, key: RSA, signaturePadding: RSASignaturePadding
     ) -> X509SignatureGenerator:
-        """
-
-        :param key:
+        """:param key:
         :param signaturePadding:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSignatureAlgorithmIdentifier(self, hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param hashAlgorithm:
+        """:param hashAlgorithm:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SignData(self, data: Array[int], hashAlgorithm: HashAlgorithmName) -> Array[int]:
-        """
-
-        :param data:
+        """:param data:
         :param hashAlgorithm:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509Store(Object, IDisposable):
     """"""
@@ -6749,116 +4507,62 @@ class X509Store(Object, IDisposable):
         """"""
     @overload
     def __init__(self, storeLocation: StoreLocation):
-        """
-
-        :param storeLocation:
-        """
+        """:param storeLocation:"""
     @overload
     def __init__(self, storeName: StoreName):
-        """
-
-        :param storeName:
-        """
+        """:param storeName:"""
     @overload
     def __init__(self, storeHandle: IntPtr):
-        """
-
-        :param storeHandle:
-        """
+        """:param storeHandle:"""
     @overload
     def __init__(self, storeName: str):
-        """
-
-        :param storeName:
-        """
+        """:param storeName:"""
     @overload
     def __init__(self, storeName: StoreName, storeLocation: StoreLocation):
-        """
-
-        :param storeName:
+        """:param storeName:
         :param storeLocation:
         """
     @overload
     def __init__(self, storeName: str, storeLocation: StoreLocation):
-        """
-
-        :param storeName:
+        """:param storeName:
         :param storeLocation:
         """
     @property
     def Certificates(self) -> X509Certificate2Collection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Location(self) -> StoreLocation:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StoreHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, certificate: X509Certificate2) -> None:
-        """
-
-        :param certificate:
-        """
+        """:param certificate:"""
     def AddRange(self, certificates: X509Certificate2Collection) -> None:
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Open(self, flags: OpenFlags) -> None:
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     def Remove(self, certificate: X509Certificate2) -> None:
-        """
-
-        :param certificate:
-        """
+        """:param certificate:"""
     def RemoveRange(self, certificates: X509Certificate2Collection) -> None:
-        """
-
-        :param certificates:
-        """
+        """:param certificates:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509SubjectKeyIdentifierExtension(X509Extension):
     """"""
@@ -6868,104 +4572,69 @@ class X509SubjectKeyIdentifierExtension(X509Extension):
         """"""
     @overload
     def __init__(self, key: PublicKey, critical: bool):
-        """
-
-        :param key:
+        """:param key:
         :param critical:
         """
     @overload
     def __init__(self, encodedSubjectKeyIdentifier: AsnEncodedData, critical: bool):
-        """
-
-        :param encodedSubjectKeyIdentifier:
+        """:param encodedSubjectKeyIdentifier:
         :param critical:
         """
     @overload
     def __init__(self, subjectKeyIdentifier: Array[int], critical: bool):
-        """
-
-        :param subjectKeyIdentifier:
+        """:param subjectKeyIdentifier:
         :param critical:
         """
     @overload
     def __init__(self, subjectKeyIdentifier: str, critical: bool):
-        """
-
-        :param subjectKeyIdentifier:
+        """:param subjectKeyIdentifier:
         :param critical:
         """
     @overload
     def __init__(
-        self, key: PublicKey, algorithm: X509SubjectKeyIdentifierHashAlgorithm, critical: bool
+        self,
+        key: PublicKey,
+        algorithm: X509SubjectKeyIdentifierHashAlgorithm,
+        critical: bool,
     ):
-        """
-
-        :param key:
+        """:param key:
         :param algorithm:
         :param critical:
         """
     @property
     def Critical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Critical.setter
     def Critical(self, value: bool) -> None: ...
     @property
     def Oid(self) -> Oid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Oid.setter
     def Oid(self, value: Oid) -> None: ...
     @property
     def RawData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawData.setter
     def RawData(self, value: Array[int]) -> None: ...
     @property
     def SubjectKeyIdentifier(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CopyFrom(self, asnEncodedData: AsnEncodedData) -> None:
-        """
-
-        :param asnEncodedData:
-        """
+        """:param asnEncodedData:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Format(self, multiLine: bool) -> str:
-        """
-
-        :param multiLine:
+        """:param multiLine:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509SubjectKeyIdentifierHashAlgorithm(Enum):
     """"""
@@ -6981,26 +4650,15 @@ class X509Utils(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class X509VerificationFlags(Enum):
     """"""

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Iterator
+from collections.abc import Iterator
 from typing import overload
 
 from System import Array
@@ -42,10 +40,7 @@ class AuthenticationModuleElement(ConfigurationElement):
         """"""
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -71,35 +66,21 @@ class AuthenticationModuleElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Type(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuthenticationModuleElementCollection(
     ConfigurationElementCollection, ICollection, IEnumerable
@@ -113,10 +94,7 @@ class AuthenticationModuleElementCollection(
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -130,16 +108,10 @@ class AuthenticationModuleElementCollection(
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> AuthenticationModuleElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: AuthenticationModuleElement) -> None: ...
     @property
@@ -161,120 +133,71 @@ class AuthenticationModuleElementCollection(
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, element: AuthenticationModuleElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     def Clear(self) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, element: AuthenticationModuleElement) -> int:
-        """
-
-        :param element:
+        """:param element:
         :return:
         """
     def IsReadOnly(self) -> bool:
         """"""
     @overload
     def Remove(self, element: AuthenticationModuleElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     @overload
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> AuthenticationModuleElement:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> AuthenticationModuleElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: AuthenticationModuleElement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, name: str, value: AuthenticationModuleElement) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
 
@@ -285,10 +208,7 @@ class AuthenticationModulesSection(ConfigurationSection):
         """"""
     @property
     def AuthenticationModules(self) -> AuthenticationModuleElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -316,53 +236,31 @@ class AuthenticationModulesSection(ConfigurationSection):
     def SectionInformation(self) -> SectionInformation:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AuthenticationModulesSectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BypassElement(ConfigurationElement):
     """"""
@@ -372,16 +270,10 @@ class BypassElement(ConfigurationElement):
         """"""
     @overload
     def __init__(self, address: str):
-        """
-
-        :param address:
-        """
+        """:param address:"""
     @property
     def Address(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Address.setter
     def Address(self, value: str) -> None: ...
     @property
@@ -408,28 +300,17 @@ class BypassElement(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BypassElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -441,10 +322,7 @@ class BypassElementCollection(ConfigurationElementCollection, ICollection, IEnum
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -458,16 +336,10 @@ class BypassElementCollection(ConfigurationElementCollection, ICollection, IEnum
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> BypassElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: BypassElement) -> None: ...
     @property
@@ -489,120 +361,71 @@ class BypassElementCollection(ConfigurationElementCollection, ICollection, IEnum
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, element: BypassElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     def Clear(self) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, element: BypassElement) -> int:
-        """
-
-        :param element:
+        """:param element:
         :return:
         """
     def IsReadOnly(self) -> bool:
         """"""
     @overload
     def Remove(self, element: BypassElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     @overload
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> BypassElement:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> BypassElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: BypassElement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, name: str, value: BypassElement) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
 
@@ -610,26 +433,15 @@ class ConfigurationStrings(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConnectionManagementElement(ConfigurationElement):
     """"""
@@ -639,17 +451,12 @@ class ConnectionManagementElement(ConfigurationElement):
         """"""
     @overload
     def __init__(self, address: str, maxConnection: int):
-        """
-
-        :param address:
+        """:param address:
         :param maxConnection:
         """
     @property
     def Address(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Address.setter
     def Address(self, value: str) -> None: ...
     @property
@@ -677,35 +484,21 @@ class ConnectionManagementElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def MaxConnection(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaxConnection.setter
     def MaxConnection(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConnectionManagementElementCollection(
     ConfigurationElementCollection, ICollection, IEnumerable
@@ -719,10 +512,7 @@ class ConnectionManagementElementCollection(
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -736,16 +526,10 @@ class ConnectionManagementElementCollection(
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> ConnectionManagementElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: ConnectionManagementElement) -> None: ...
     @property
@@ -767,120 +551,71 @@ class ConnectionManagementElementCollection(
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, element: ConnectionManagementElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     def Clear(self) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, element: ConnectionManagementElement) -> int:
-        """
-
-        :param element:
+        """:param element:
         :return:
         """
     def IsReadOnly(self) -> bool:
         """"""
     @overload
     def Remove(self, element: ConnectionManagementElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     @overload
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> ConnectionManagementElement:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> ConnectionManagementElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: ConnectionManagementElement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, name: str, value: ConnectionManagementElement) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
 
@@ -891,10 +626,7 @@ class ConnectionManagementSection(ConfigurationSection):
         """"""
     @property
     def ConnectionManagement(self) -> ConnectionManagementElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -922,53 +654,31 @@ class ConnectionManagementSection(ConfigurationSection):
     def SectionInformation(self) -> SectionInformation:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConnectionManagementSectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultProxySection(ConfigurationSection):
     """"""
@@ -977,10 +687,7 @@ class DefaultProxySection(ConfigurationSection):
         """"""
     @property
     def BypassList(self) -> BypassElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -989,10 +696,7 @@ class DefaultProxySection(ConfigurationSection):
         """"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
@@ -1014,75 +718,44 @@ class DefaultProxySection(ConfigurationSection):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Module(self) -> ModuleElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Proxy(self) -> ProxyElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionInformation(self) -> SectionInformation:
         """"""
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultProxySectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FtpCachePolicyElement(ConfigurationElement):
     """"""
@@ -1114,35 +787,21 @@ class FtpCachePolicyElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def PolicyLevel(self) -> RequestCacheLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PolicyLevel.setter
     def PolicyLevel(self, value: RequestCacheLevel) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpCachePolicyElement(ConfigurationElement):
     """"""
@@ -1174,59 +833,36 @@ class HttpCachePolicyElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def MaximumAge(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumAge.setter
     def MaximumAge(self, value: TimeSpan) -> None: ...
     @property
     def MaximumStale(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumStale.setter
     def MaximumStale(self, value: TimeSpan) -> None: ...
     @property
     def MinimumFresh(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MinimumFresh.setter
     def MinimumFresh(self, value: TimeSpan) -> None: ...
     @property
     def PolicyLevel(self) -> HttpRequestCacheLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PolicyLevel.setter
     def PolicyLevel(self, value: HttpRequestCacheLevel) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerElement(ConfigurationElement):
     """"""
@@ -1258,39 +894,22 @@ class HttpListenerElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Timeouts(self) -> HttpListenerTimeoutsElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnescapeRequestUrl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerTimeoutsElement(ConfigurationElement):
     """"""
@@ -1302,31 +921,19 @@ class HttpListenerTimeoutsElement(ConfigurationElement):
         """"""
     @property
     def DrainEntityBody(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ElementInformation(self) -> ElementInformation:
         """"""
     @property
     def EntityBody(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HeaderWait(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IdleConnection(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -1346,39 +953,22 @@ class HttpListenerTimeoutsElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def MinSendBytesPerSecond(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RequestQueue(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpWebRequestElement(ConfigurationElement):
     """"""
@@ -1410,59 +1000,36 @@ class HttpWebRequestElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def MaximumErrorResponseLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumErrorResponseLength.setter
     def MaximumErrorResponseLength(self, value: int) -> None: ...
     @property
     def MaximumResponseHeadersLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumResponseHeadersLength.setter
     def MaximumResponseHeadersLength(self, value: int) -> None: ...
     @property
     def MaximumUnauthorizedUploadLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MaximumUnauthorizedUploadLength.setter
     def MaximumUnauthorizedUploadLength(self, value: int) -> None: ...
     @property
     def UseUnsafeHeaderParsing(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseUnsafeHeaderParsing.setter
     def UseUnsafeHeaderParsing(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Ipv6Element(ConfigurationElement):
     """"""
@@ -1477,10 +1044,7 @@ class Ipv6Element(ConfigurationElement):
         """"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
@@ -1501,28 +1065,17 @@ class Ipv6Element(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailSettingsSectionGroup(ConfigurationSectionGroup):
     """"""
@@ -1549,19 +1102,14 @@ class MailSettingsSectionGroup(ConfigurationSectionGroup):
         """"""
     @property
     def Smtp(self) -> SmtpSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Type(self) -> str:
         """"""
     @Type.setter
     def Type(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -1571,45 +1119,25 @@ class MailSettingsSectionGroup(ConfigurationSectionGroup):
     def ForceDeclaration(self, force: bool) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailSettingsSectionGroupInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ModuleElement(ConfigurationElement):
     """"""
@@ -1641,35 +1169,21 @@ class ModuleElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Type(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetSectionGroup(ConfigurationSectionGroup):
     """"""
@@ -1678,22 +1192,13 @@ class NetSectionGroup(ConfigurationSectionGroup):
         """"""
     @property
     def AuthenticationModules(self) -> AuthenticationModulesSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectionManagement(self) -> ConnectionManagementSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DefaultProxy(self) -> DefaultProxySection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDeclarationRequired(self) -> bool:
         """"""
@@ -1702,19 +1207,13 @@ class NetSectionGroup(ConfigurationSectionGroup):
         """"""
     @property
     def MailSettings(self) -> MailSettingsSectionGroup:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
         """"""
     @property
     def RequestCaching(self) -> RequestCachingSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionGroupName(self) -> str:
         """"""
@@ -1726,10 +1225,7 @@ class NetSectionGroup(ConfigurationSectionGroup):
         """"""
     @property
     def Settings(self) -> SettingsSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Type(self) -> str:
         """"""
@@ -1737,14 +1233,9 @@ class NetSectionGroup(ConfigurationSectionGroup):
     def Type(self, value: str) -> None: ...
     @property
     def WebRequestModules(self) -> WebRequestModulesSection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -1754,27 +1245,16 @@ class NetSectionGroup(ConfigurationSectionGroup):
     def ForceDeclaration(self, force: bool) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetSectionGroup(cls, config: Configuration) -> NetSectionGroup:
-        """
-
-        :param config:
+        """:param config:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerformanceCountersElement(ConfigurationElement):
     """"""
@@ -1789,10 +1269,7 @@ class PerformanceCountersElement(ConfigurationElement):
         """"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Enabled.setter
     def Enabled(self, value: bool) -> None: ...
     @property
@@ -1813,28 +1290,17 @@ class PerformanceCountersElement(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProxyElement(ConfigurationElement):
     """"""
@@ -1843,18 +1309,12 @@ class ProxyElement(ConfigurationElement):
         """"""
     @property
     def AutoDetect(self) -> ProxyElement.AutoDetectValues:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AutoDetect.setter
     def AutoDetect(self, value: ProxyElement.AutoDetectValues) -> None: ...
     @property
     def BypassOnLocal(self) -> ProxyElement.BypassOnLocalValues:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BypassOnLocal.setter
     def BypassOnLocal(self, value: ProxyElement.BypassOnLocalValues) -> None: ...
     @property
@@ -1882,51 +1342,31 @@ class ProxyElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def ProxyAddress(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ProxyAddress.setter
     def ProxyAddress(self, value: Uri) -> None: ...
     @property
     def ScriptLocation(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ScriptLocation.setter
     def ScriptLocation(self, value: Uri) -> None: ...
     @property
     def UseSystemDefault(self) -> ProxyElement.UseSystemDefaultValues:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseSystemDefault.setter
     def UseSystemDefault(self, value: ProxyElement.UseSystemDefaultValues) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class AutoDetectValues(Enum):
         """"""
@@ -1968,30 +1408,18 @@ class RequestCachingSection(ConfigurationSection):
         """"""
     @property
     def DefaultFtpCachePolicy(self) -> FtpCachePolicyElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DefaultHttpCachePolicy(self) -> HttpCachePolicyElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DefaultPolicyLevel(self) -> RequestCacheLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DefaultPolicyLevel.setter
     def DefaultPolicyLevel(self, value: RequestCacheLevel) -> None: ...
     @property
     def DisableAllCaching(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DisableAllCaching.setter
     def DisableAllCaching(self, value: bool) -> None: ...
     @property
@@ -1999,10 +1427,7 @@ class RequestCachingSection(ConfigurationSection):
         """"""
     @property
     def IsPrivateCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsPrivateCache.setter
     def IsPrivateCache(self, value: bool) -> None: ...
     @property
@@ -2027,60 +1452,35 @@ class RequestCachingSection(ConfigurationSection):
         """"""
     @property
     def UnspecifiedMaximumAge(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UnspecifiedMaximumAge.setter
     def UnspecifiedMaximumAge(self, value: TimeSpan) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RequestCachingSectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServicePointManagerElement(ConfigurationElement):
     """"""
@@ -2089,18 +1489,12 @@ class ServicePointManagerElement(ConfigurationElement):
         """"""
     @property
     def CheckCertificateName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CheckCertificateName.setter
     def CheckCertificateName(self, value: bool) -> None: ...
     @property
     def CheckCertificateRevocationList(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CheckCertificateRevocationList.setter
     def CheckCertificateRevocationList(self, value: bool) -> None: ...
     @property
@@ -2108,10 +1502,7 @@ class ServicePointManagerElement(ConfigurationElement):
         """"""
     @property
     def DnsRefreshTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DnsRefreshTimeout.setter
     def DnsRefreshTimeout(self, value: int) -> None: ...
     @property
@@ -2119,26 +1510,17 @@ class ServicePointManagerElement(ConfigurationElement):
         """"""
     @property
     def EnableDnsRoundRobin(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableDnsRoundRobin.setter
     def EnableDnsRoundRobin(self, value: bool) -> None: ...
     @property
     def EncryptionPolicy(self) -> EncryptionPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EncryptionPolicy.setter
     def EncryptionPolicy(self, value: EncryptionPolicy) -> None: ...
     @property
     def Expect100Continue(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expect100Continue.setter
     def Expect100Continue(self, value: bool) -> None: ...
     @property
@@ -2160,35 +1542,21 @@ class ServicePointManagerElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def UseNagleAlgorithm(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseNagleAlgorithm.setter
     def UseNagleAlgorithm(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsSection(ConfigurationSection):
     """"""
@@ -2203,22 +1571,13 @@ class SettingsSection(ConfigurationSection):
         """"""
     @property
     def HttpListener(self) -> HttpListenerElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HttpWebRequest(self) -> HttpWebRequestElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Ipv6(self) -> Ipv6Element:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
         """"""
@@ -2238,91 +1597,51 @@ class SettingsSection(ConfigurationSection):
     def LockItem(self, value: bool) -> None: ...
     @property
     def PerformanceCounters(self) -> PerformanceCountersElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionInformation(self) -> SectionInformation:
         """"""
     @property
     def ServicePointManager(self) -> ServicePointManagerElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Socket(self) -> SocketElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WebProxyScript(self) -> WebProxyScriptElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WebUtility(self) -> WebUtilityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WindowsAuthentication(self) -> WindowsAuthenticationElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsSectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpNetworkElement(ConfigurationElement):
     """"""
@@ -2331,10 +1650,7 @@ class SmtpNetworkElement(ConfigurationElement):
         """"""
     @property
     def ClientDomain(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ClientDomain.setter
     def ClientDomain(self, value: str) -> None: ...
     @property
@@ -2342,10 +1658,7 @@ class SmtpNetworkElement(ConfigurationElement):
         """"""
     @property
     def DefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DefaultCredentials.setter
     def DefaultCredentials(self, value: bool) -> None: ...
     @property
@@ -2353,18 +1666,12 @@ class SmtpNetworkElement(ConfigurationElement):
         """"""
     @property
     def EnableSsl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableSsl.setter
     def EnableSsl(self, value: bool) -> None: ...
     @property
     def Host(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Host.setter
     def Host(self, value: str) -> None: ...
     @property
@@ -2386,84 +1693,50 @@ class SmtpNetworkElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Password(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Password.setter
     def Password(self, value: str) -> None: ...
     @property
     def Port(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Port.setter
     def Port(self, value: int) -> None: ...
     @property
     def TargetName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetName.setter
     def TargetName(self, value: str) -> None: ...
     @property
     def UserName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UserName.setter
     def UserName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpNetworkElementInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpSection(ConfigurationSection):
     """"""
@@ -2475,18 +1748,12 @@ class SmtpSection(ConfigurationSection):
         """"""
     @property
     def DeliveryFormat(self) -> SmtpDeliveryFormat:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DeliveryFormat.setter
     def DeliveryFormat(self, value: SmtpDeliveryFormat) -> None: ...
     @property
     def DeliveryMethod(self) -> SmtpDeliveryMethod:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DeliveryMethod.setter
     def DeliveryMethod(self, value: SmtpDeliveryMethod) -> None: ...
     @property
@@ -2494,10 +1761,7 @@ class SmtpSection(ConfigurationSection):
         """"""
     @property
     def From(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @From.setter
     def From(self, value: str) -> None: ...
     @property
@@ -2519,67 +1783,39 @@ class SmtpSection(ConfigurationSection):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Network(self) -> SmtpNetworkElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SectionInformation(self) -> SectionInformation:
         """"""
     @property
     def SpecifiedPickupDirectory(self) -> SmtpSpecifiedPickupDirectoryElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpSectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpSpecifiedPickupDirectoryElement(ConfigurationElement):
     """"""
@@ -2611,60 +1847,35 @@ class SmtpSpecifiedPickupDirectoryElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def PickupDirectoryLocation(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PickupDirectoryLocation.setter
     def PickupDirectoryLocation(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpSpecifiedPickupDirectoryElementInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SocketElement(ConfigurationElement):
     """"""
@@ -2673,18 +1884,12 @@ class SocketElement(ConfigurationElement):
         """"""
     @property
     def AlwaysUseCompletionPortsForAccept(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AlwaysUseCompletionPortsForAccept.setter
     def AlwaysUseCompletionPortsForAccept(self, value: bool) -> None: ...
     @property
     def AlwaysUseCompletionPortsForConnect(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AlwaysUseCompletionPortsForConnect.setter
     def AlwaysUseCompletionPortsForConnect(self, value: bool) -> None: ...
     @property
@@ -2695,10 +1900,7 @@ class SocketElement(ConfigurationElement):
         """"""
     @property
     def IPProtectionLevel(self) -> IPProtectionLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IPProtectionLevel.setter
     def IPProtectionLevel(self, value: IPProtectionLevel) -> None: ...
     @property
@@ -2719,28 +1921,17 @@ class SocketElement(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnicodeDecodingConformance(Enum):
     """"""
@@ -2771,10 +1962,7 @@ class WebProxyScriptElement(ConfigurationElement):
         """"""
     @property
     def AutoConfigUrlRetryInterval(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AutoConfigUrlRetryInterval.setter
     def AutoConfigUrlRetryInterval(self, value: int) -> None: ...
     @property
@@ -2782,10 +1970,7 @@ class WebProxyScriptElement(ConfigurationElement):
         """"""
     @property
     def DownloadTimeout(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DownloadTimeout.setter
     def DownloadTimeout(self, value: TimeSpan) -> None: ...
     @property
@@ -2809,28 +1994,17 @@ class WebProxyScriptElement(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebRequestModuleElement(ConfigurationElement):
     """"""
@@ -2840,16 +2014,12 @@ class WebRequestModuleElement(ConfigurationElement):
         """"""
     @overload
     def __init__(self, prefix: str, type: str):
-        """
-
-        :param prefix:
+        """:param prefix:
         :param type:
         """
     @overload
     def __init__(self, prefix: str, type: Type):
-        """
-
-        :param prefix:
+        """:param prefix:
         :param type:
         """
     @property
@@ -2877,43 +2047,26 @@ class WebRequestModuleElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def Prefix(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Prefix.setter
     def Prefix(self, value: str) -> None: ...
     @property
     def Type(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: Type) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebRequestModuleElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
@@ -2925,10 +2078,7 @@ class WebRequestModuleElementCollection(ConfigurationElementCollection, ICollect
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConfiguration(self) -> Configuration:
         """"""
@@ -2942,16 +2092,10 @@ class WebRequestModuleElementCollection(ConfigurationElementCollection, ICollect
     def EmitClear(self, value: bool) -> None: ...
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> WebRequestModuleElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: WebRequestModuleElement) -> None: ...
     @property
@@ -2973,120 +2117,71 @@ class WebRequestModuleElementCollection(ConfigurationElementCollection, ICollect
     def LockItem(self, value: bool) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, element: WebRequestModuleElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     def Clear(self) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, element: WebRequestModuleElement) -> int:
-        """
-
-        :param element:
+        """:param element:
         :return:
         """
     def IsReadOnly(self) -> bool:
         """"""
     @overload
     def Remove(self, element: WebRequestModuleElement) -> None:
-        """
-
-        :param element:
-        """
+        """:param element:"""
     @overload
     def Remove(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> WebRequestModuleElement:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> WebRequestModuleElement:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: WebRequestModuleElement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, name: str, value: WebRequestModuleElement) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
 
@@ -3123,58 +2218,33 @@ class WebRequestModulesSection(ConfigurationSection):
         """"""
     @property
     def WebRequestModules(self) -> WebRequestModuleElementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebRequestModulesSectionInternal(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebUtilityElement(ConfigurationElement):
     """"""
@@ -3206,43 +2276,26 @@ class WebUtilityElement(ConfigurationElement):
     def LockItem(self, value: bool) -> None: ...
     @property
     def UnicodeDecodingConformance(self) -> UnicodeDecodingConformance:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UnicodeDecodingConformance.setter
     def UnicodeDecodingConformance(self, value: UnicodeDecodingConformance) -> None: ...
     @property
     def UnicodeEncodingConformance(self) -> UnicodeEncodingConformance:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UnicodeEncodingConformance.setter
     def UnicodeEncodingConformance(self, value: UnicodeEncodingConformance) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WindowsAuthenticationElement(ConfigurationElement):
     """"""
@@ -3254,10 +2307,7 @@ class WindowsAuthenticationElement(ConfigurationElement):
         """"""
     @property
     def DefaultCredentialsHandleCacheSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DefaultCredentialsHandleCacheSize.setter
     def DefaultCredentialsHandleCacheSize(self, value: int) -> None: ...
     @property
@@ -3281,25 +2331,14 @@ class WindowsAuthenticationElement(ConfigurationElement):
     @LockItem.setter
     def LockItem(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsReadOnly(self) -> bool:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

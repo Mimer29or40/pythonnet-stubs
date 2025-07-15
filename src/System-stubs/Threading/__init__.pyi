@@ -1,11 +1,8 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -63,7 +60,6 @@ from System.Security.AccessControl import SemaphoreRights
 from System.Security.AccessControl import SemaphoreSecurity
 from System.Security.Principal import IPrincipal
 from System.Threading.Tasks import Task
-from System.Threading.ThreadPoolWorkQueue import WorkStealingQueue
 
 T = TypeVar("T")
 
@@ -79,174 +75,104 @@ class AbandonedMutexException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, location: int, handle: WaitHandle):
-        """
-
-        :param location:
+        """:param location:
         :param handle:
         """
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @overload
     def __init__(self, message: str, location: int, handle: WaitHandle):
-        """
-
-        :param message:
+        """:param message:
         :param location:
         :param handle:
         """
     @overload
     def __init__(self, message: str, inner: Exception, location: int, handle: WaitHandle):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         :param location:
         :param handle:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Mutex(self) -> Mutex:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MutexIndex(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ApartmentState(Enum):
     """"""
@@ -265,60 +191,39 @@ class AsyncFlowControl(ValueType, IDisposable):
         """"""
     @overload
     def Equals(self, obj: AsyncFlowControl) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Undo(self) -> None:
         """"""
     def __eq__(self, other: AsyncFlowControl) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: AsyncFlowControl) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: AsyncFlowControl, b: AsyncFlowControl) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: AsyncFlowControl, b: AsyncFlowControl) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -328,43 +233,23 @@ class AsyncLocalValueChangedArgs(Generic[T], ValueType):
 
     @property
     def CurrentValue(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PreviousValue(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ThreadContextChanged(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsyncLocalValueMap(ABC, Object):
     """"""
@@ -372,49 +257,31 @@ class AsyncLocalValueMap(ABC, Object):
     @classmethod
     @property
     def Empty(cls) -> IAsyncLocalValueMap:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Create(
         cls, key: IAsyncLocal, value: object, treatNullValueAsNonexistent: bool
     ) -> IAsyncLocalValueMap:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         :param treatNullValueAsNonexistent:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsEmpty(cls, asyncLocalValueMap: IAsyncLocalValueMap) -> bool:
-        """
-
-        :param asyncLocalValueMap:
+        """:param asyncLocalValueMap:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsyncLocal(Generic[T], Object, IAsyncLocal):
     """"""
@@ -424,167 +291,97 @@ class AsyncLocal(Generic[T], Object, IAsyncLocal):
         """"""
     @overload
     def __init__(self, valueChangedHandler: Action[AsyncLocalValueChangedArgs[T]]):
-        """
-
-        :param valueChangedHandler:
-        """
+        """:param valueChangedHandler:"""
     @property
     def Value(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: T) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnValueChanged(
         self, previousValue: object, currentValue: object, contextChanged: bool
     ) -> None:
-        """
-
-        :param previousValue:
+        """:param previousValue:
         :param currentValue:
         :param contextChanged:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AutoResetEvent(EventWaitHandle, IDisposable):
     """"""
 
     def __init__(self, initialState: bool):
-        """
-
-        :param initialState:
-        """
+        """:param initialState:"""
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessControl(self) -> EventWaitHandleSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Set(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetAccessControl(self, eventSecurity: EventWaitHandleSecurity) -> None:
-        """
-
-        :param eventSecurity:
-        """
+        """:param eventSecurity:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -594,115 +391,71 @@ class Barrier(Object, IDisposable):
 
     @overload
     def __init__(self, participantCount: int):
-        """
-
-        :param participantCount:
-        """
+        """:param participantCount:"""
     @overload
     def __init__(self, participantCount: int, postPhaseAction: Action[Barrier]):
-        """
-
-        :param participantCount:
+        """:param participantCount:
         :param postPhaseAction:
         """
     @property
     def CurrentPhaseNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParticipantCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParticipantsRemaining(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddParticipant(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddParticipants(self, participantCount: int) -> int:
-        """
-
-        :param participantCount:
+        """:param participantCount:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RemoveParticipant(self) -> None:
         """"""
     def RemoveParticipants(self, participantCount: int) -> None:
-        """
-
-        :param participantCount:
-        """
+        """:param participantCount:"""
     @overload
     def SignalAndWait(self) -> None:
         """"""
     @overload
     def SignalAndWait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def SignalAndWait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def SignalAndWait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def SignalAndWait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def SignalAndWait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param cancellationToken:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BarrierPostPhaseException(Exception, _Exception, ISerializable):
     """"""
@@ -712,144 +465,83 @@ class BarrierPostPhaseException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, innerException: Exception):
-        """
-
-        :param innerException:
-        """
+        """:param innerException:"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CancellationCallbackCoreWorkArguments(ValueType):
     """"""
@@ -859,137 +551,82 @@ class CancellationCallbackCoreWorkArguments(ValueType):
         currArrayFragment: SparselyPopulatedArrayFragment[CancellationCallbackInfo],
         currArrayIndex: int,
     ):
-        """
-
-        :param currArrayFragment:
+        """:param currArrayFragment:
         :param currArrayIndex:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CancellationCallbackInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CancellationToken(ValueType):
     """"""
 
     def __init__(self, canceled: bool):
-        """
-
-        :param canceled:
-        """
+        """:param canceled:"""
     @property
     def CanBeCanceled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCancellationRequested(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def _None(cls) -> CancellationToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: CancellationToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Register(self, callback: Action) -> CancellationTokenRegistration:
-        """
-
-        :param callback:
+        """:param callback:
         :return:
         """
     @overload
     def Register(
         self, callback: Action, useSynchronizationContext: bool
     ) -> CancellationTokenRegistration:
-        """
-
-        :param callback:
+        """:param callback:
         :param useSynchronizationContext:
         :return:
         """
     @overload
     def Register(self, callback: Action[object], state: object) -> CancellationTokenRegistration:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
@@ -997,9 +634,7 @@ class CancellationToken(ValueType):
     def Register(
         self, callback: Action[object], state: object, useSynchronizationContext: bool
     ) -> CancellationTokenRegistration:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :param useSynchronizationContext:
         :return:
@@ -1007,35 +642,24 @@ class CancellationToken(ValueType):
     def ThrowIfCancellationRequested(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: CancellationToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: CancellationToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: CancellationToken, right: CancellationToken) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: CancellationToken, right: CancellationToken) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -1049,52 +673,33 @@ class CancellationTokenRegistration(
         """"""
     @overload
     def Equals(self, other: CancellationTokenRegistration) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: CancellationTokenRegistration) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: CancellationTokenRegistration) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(
         cls, left: CancellationTokenRegistration, right: CancellationTokenRegistration
     ) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -1102,9 +707,7 @@ class CancellationTokenRegistration(
     def op_Inequality(
         cls, left: CancellationTokenRegistration, right: CancellationTokenRegistration
     ) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -1117,55 +720,32 @@ class CancellationTokenSource(Object, IDisposable):
         """"""
     @overload
     def __init__(self, millisecondsDelay: int):
-        """
-
-        :param millisecondsDelay:
-        """
+        """:param millisecondsDelay:"""
     @overload
     def __init__(self, delay: TimeSpan):
-        """
-
-        :param delay:
-        """
+        """:param delay:"""
     @property
     def IsCancellationRequested(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Token(self) -> CancellationToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Cancel(self) -> None:
         """"""
     @overload
     def Cancel(self, throwOnFirstException: bool) -> None:
-        """
-
-        :param throwOnFirstException:
-        """
+        """:param throwOnFirstException:"""
     @overload
     def CancelAfter(self, millisecondsDelay: int) -> None:
-        """
-
-        :param millisecondsDelay:
-        """
+        """:param millisecondsDelay:"""
     @overload
     def CancelAfter(self, delay: TimeSpan) -> None:
-        """
-
-        :param delay:
-        """
+        """:param delay:"""
     @classmethod
     @overload
     def CreateLinkedTokenSource(cls, tokens: Array[CancellationToken]) -> CancellationTokenSource:
-        """
-
-        :param tokens:
+        """:param tokens:
         :return:
         """
     @classmethod
@@ -1173,35 +753,22 @@ class CancellationTokenSource(Object, IDisposable):
     def CreateLinkedTokenSource(
         cls, token1: CancellationToken, token2: CancellationToken
     ) -> CancellationTokenSource:
-        """
-
-        :param token1:
+        """:param token1:
         :param token2:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CdsSyncEtwBCLProvider(EventSource, IDisposable):
     """"""
@@ -1213,133 +780,82 @@ class CdsSyncEtwBCLProvider(EventSource, IDisposable):
     """
     @property
     def ConstructionException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CurrentThreadActivityId(cls) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Guid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Settings(self) -> EventSourceSettings:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Barrier_PhaseFinished(self, currentSense: bool, phaseNum: int) -> None:
-        """
-
-        :param currentSense:
+        """:param currentSense:
         :param phaseNum:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTrait(self, key: str) -> str:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :return:
         """
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :param channel:
         :return:
         """
     def SpinLock_FastPathFailed(self, ownerID: int) -> None:
-        """
-
-        :param ownerID:
-        """
+        """:param ownerID:"""
     def SpinWait_NextSpinWillYield(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Write(self, eventName: str) -> None:
-        """
-
-        :param eventName:
-        """
+        """:param eventName:"""
     @overload
     def Write(self, eventName: str, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
@@ -1352,9 +868,7 @@ class CdsSyncEtwBCLProvider(EventSource, IDisposable):
         relatedActivityId: Guid,
         data: T,
     ) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param activityId:
         :param relatedActivityId:
@@ -1368,58 +882,34 @@ class CompressedStack(Object, ISerializable):
 
     @classmethod
     def Capture(cls) -> CompressedStack:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateCopy(self) -> CompressedStack:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetCompressedStack(cls) -> CompressedStack:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Run(
         cls, compressedStack: CompressedStack, callback: ContextCallback, state: object
     ) -> None:
-        """
-
-        :param compressedStack:
+        """:param compressedStack:
         :param callback:
         :param state:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompressedStackSwitcher(ValueType, IDisposable):
     """"""
@@ -1427,53 +917,34 @@ class CompressedStackSwitcher(ValueType, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Undo(self) -> None:
         """"""
     def __eq__(self, other: CompressedStackSwitcher) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: CompressedStackSwitcher) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, c1: CompressedStackSwitcher, c2: CompressedStackSwitcher) -> bool:
-        """
-
-        :param c1:
+        """:param c1:
         :param c2:
         :return:
         """
     @classmethod
     def op_Inequality(cls, c1: CompressedStackSwitcher, c2: CompressedStackSwitcher) -> bool:
-        """
-
-        :param c1:
+        """:param c1:
         :param c2:
         :return:
         """
@@ -1488,99 +959,57 @@ class CountdownEvent(Object, IDisposable):
     """"""
 
     def __init__(self, initialCount: int):
-        """
-
-        :param initialCount:
-        """
+        """:param initialCount:"""
     @property
     def CurrentCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitialCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSet(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AddCount(self) -> None:
         """"""
     @overload
     def AddCount(self, signalCount: int) -> None:
-        """
-
-        :param signalCount:
-        """
+        """:param signalCount:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Reset(self) -> None:
         """"""
     @overload
     def Reset(self, count: int) -> None:
-        """
-
-        :param count:
-        """
+        """:param count:"""
     @overload
     def Signal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Signal(self, signalCount: int) -> bool:
-        """
-
-        :param signalCount:
+        """:param signalCount:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TryAddCount(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TryAddCount(self, signalCount: int) -> bool:
-        """
-
-        :param signalCount:
+        """:param signalCount:
         :return:
         """
     @overload
@@ -1588,37 +1017,26 @@ class CountdownEvent(Object, IDisposable):
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param cancellationToken:
         :return:
         """
@@ -1627,42 +1045,23 @@ class DeferredDisposableLifetime(Generic[T], ValueType):
     """"""
 
     def AddRef(self, obj: T) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Dispose(self, obj: T) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Release(self, obj: T) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DomainCompressedStack(Object):
     """"""
@@ -1670,26 +1069,15 @@ class DomainCompressedStack(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventResetMode(Enum):
     """"""
@@ -1704,24 +1092,18 @@ class EventWaitHandle(WaitHandle, IDisposable):
 
     @overload
     def __init__(self, initialState: bool, mode: EventResetMode):
-        """
-
-        :param initialState:
+        """:param initialState:
         :param mode:
         """
     @overload
     def __init__(self, initialState: bool, mode: EventResetMode, name: str):
-        """
-
-        :param initialState:
+        """:param initialState:
         :param mode:
         :param name:
         """
     @overload
     def __init__(self, initialState: bool, mode: EventResetMode, name: str, createdNew: bool):
-        """
-
-        :param initialState:
+        """:param initialState:
         :param mode:
         :param name:
         :param createdNew:
@@ -1735,9 +1117,7 @@ class EventWaitHandle(WaitHandle, IDisposable):
         createdNew: bool,
         eventSecurity: EventWaitHandleSecurity,
     ):
-        """
-
-        :param initialState:
+        """:param initialState:
         :param mode:
         :param name:
         :param createdNew:
@@ -1745,104 +1125,61 @@ class EventWaitHandle(WaitHandle, IDisposable):
         """
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessControl(self) -> EventWaitHandleSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def OpenExisting(cls, name: str) -> EventWaitHandle:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @classmethod
     @overload
     def OpenExisting(cls, name: str, rights: EventWaitHandleRights) -> EventWaitHandle:
-        """
-
-        :param name:
+        """:param name:
         :param rights:
         :return:
         """
     def Reset(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Set(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetAccessControl(self, eventSecurity: EventWaitHandleSecurity) -> None:
-        """
-
-        :param eventSecurity:
-        """
+        """:param eventSecurity:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
-    def TryOpenExisting(cls, name: str, result: EventWaitHandle) -> Tuple[bool, EventWaitHandle]:
-        """
-
-        :param name:
+    def TryOpenExisting(cls, name: str, result: EventWaitHandle) -> tuple[bool, EventWaitHandle]:
+        """:param name:
         :param result:
         :return:
         """
@@ -1850,47 +1187,34 @@ class EventWaitHandle(WaitHandle, IDisposable):
     @overload
     def TryOpenExisting(
         cls, name: str, rights: EventWaitHandleRights, result: EventWaitHandle
-    ) -> Tuple[bool, EventWaitHandle]:
-        """
-
-        :param name:
+    ) -> tuple[bool, EventWaitHandle]:
+        """:param name:
         :param rights:
         :param result:
         :return:
         """
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -1900,94 +1224,59 @@ class ExecutionContext(Object, ISerializable, IDisposable):
 
     @classmethod
     def Capture(cls) -> ExecutionContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateCopy(self) -> ExecutionContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsFlowSuppressed(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def RestoreFlow(cls) -> None:
         """"""
     @classmethod
     def Run(
-        cls, executionContext: ExecutionContext, callback: ContextCallback, state: object
+        cls,
+        executionContext: ExecutionContext,
+        callback: ContextCallback,
+        state: object,
     ) -> None:
-        """
-
-        :param executionContext:
+        """:param executionContext:
         :param callback:
         :param state:
         """
     @classmethod
     def SuppressFlow(cls) -> AsyncFlowControl:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExecutionContextSwitcher(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Gen2GcCallback(CriticalFinalizerObject):
     """"""
@@ -1995,33 +1284,20 @@ class Gen2GcCallback(CriticalFinalizerObject):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Register(cls, callback: Func[object, bool], targetObj: object) -> None:
-        """
-
-        :param callback:
+        """:param callback:
         :param targetObj:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HostExecutionContext(Object, IDisposable):
     """"""
@@ -2031,45 +1307,25 @@ class HostExecutionContext(Object, IDisposable):
         """"""
     @overload
     def __init__(self, state: object):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     def CreateCopy(self) -> HostExecutionContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Dispose(self) -> None:
         """"""
     @overload
     def Dispose(self, disposing: bool) -> None:
-        """
-
-        :param disposing:
-        """
+        """:param disposing:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HostExecutionContextManager(Object):
     """"""
@@ -2077,42 +1333,23 @@ class HostExecutionContextManager(Object):
     def __init__(self):
         """"""
     def Capture(self) -> HostExecutionContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Revert(self, previousState: object) -> None:
-        """
-
-        :param previousState:
-        """
+        """:param previousState:"""
     def SetHostExecutionContext(self, hostExecutionContext: HostExecutionContext) -> object:
-        """
-
-        :param hostExecutionContext:
+        """:param hostExecutionContext:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HostExecutionContextSwitcher(Object):
     """"""
@@ -2120,32 +1357,18 @@ class HostExecutionContextSwitcher(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Undo(cls, switcherObject: object) -> None:
-        """
-
-        :param switcherObject:
-        """
+        """:param switcherObject:"""
 
 class IAsyncLocal:
     """"""
@@ -2153,9 +1376,7 @@ class IAsyncLocal:
     def OnValueChanged(
         self, previousValue: object, currentValue: object, contextChanged: bool
     ) -> None:
-        """
-
-        :param previousValue:
+        """:param previousValue:
         :param currentValue:
         :param contextChanged:
         """
@@ -2166,17 +1387,13 @@ class IAsyncLocalValueMap:
     def Set(
         self, key: IAsyncLocal, value: object, treatNullValueAsNonexistent: bool
     ) -> IAsyncLocalValueMap:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         :param treatNullValueAsNonexistent:
         :return:
         """
-    def TryGetValue(self, key: IAsyncLocal, value: object) -> Tuple[bool, object]:
-        """
-
-        :param key:
+    def TryGetValue(self, key: IAsyncLocal, value: object) -> tuple[bool, object]:
+        """:param key:
         :param value:
         :return:
         """
@@ -2185,10 +1402,7 @@ class IDeferredDisposable:
     """"""
 
     def OnFinalRelease(self, disposed: bool) -> None:
-        """
-
-        :param disposed:
-        """
+        """:param disposed:"""
 
 IOCompletionCallback: Callable[[int, int, NativeOverlapped], None] = ...
 """
@@ -2204,10 +1418,7 @@ class IThreadPoolWorkItem:
     def ExecuteWorkItem(self) -> None:
         """"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
 
 class IUnknownSafeHandle(SafeHandle, IDisposable):
     """"""
@@ -2216,55 +1427,32 @@ class IUnknownSafeHandle(SafeHandle, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Interlocked(ABC, Object):
     """"""
@@ -2272,27 +1460,21 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def Add(cls, location1: int, value: int) -> int:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def Add(cls, location1: int, value: int) -> int:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def CompareExchange(cls, location1: T, value: T, comparand: T) -> T:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :param comparand:
         :return:
@@ -2300,9 +1482,7 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def CompareExchange(cls, location1: float, value: float, comparand: float) -> float:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :param comparand:
         :return:
@@ -2310,9 +1490,7 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def CompareExchange(cls, location1: int, value: int, comparand: int) -> int:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :param comparand:
         :return:
@@ -2320,9 +1498,7 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def CompareExchange(cls, location1: int, value: int, comparand: int) -> int:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :param comparand:
         :return:
@@ -2330,9 +1506,7 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def CompareExchange(cls, location1: IntPtr, value: IntPtr, comparand: IntPtr) -> IntPtr:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :param comparand:
         :return:
@@ -2340,9 +1514,7 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def CompareExchange(cls, location1: object, value: object, comparand: object) -> object:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :param comparand:
         :return:
@@ -2350,9 +1522,7 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def CompareExchange(cls, location1: float, value: float, comparand: float) -> float:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :param comparand:
         :return:
@@ -2360,112 +1530,82 @@ class Interlocked(ABC, Object):
     @classmethod
     @overload
     def Decrement(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Decrement(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Exchange(cls, location1: T, value: T) -> T:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def Exchange(cls, location1: float, value: float) -> float:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def Exchange(cls, location1: int, value: int) -> int:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def Exchange(cls, location1: int, value: int) -> int:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def Exchange(cls, location1: IntPtr, value: IntPtr) -> IntPtr:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def Exchange(cls, location1: object, value: object) -> object:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     @classmethod
     @overload
     def Exchange(cls, location1: float, value: float) -> float:
-        """
-
-        :param location1:
+        """:param location1:
         :param value:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
+        """:return:"""
+    @classmethod
+    @overload
+    def Increment(cls, location: int) -> int:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Increment(cls, location: int) -> int:
-        """
-
-        :param location:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Increment(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
@@ -2473,19 +1613,14 @@ class Interlocked(ABC, Object):
         """"""
     @classmethod
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     def SpeculationBarrier(cls) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 InternalCrossContextDelegate: Callable[[Array[object]], object] = ...
 """
@@ -2498,26 +1633,15 @@ class LazyHelpers(ABC, Generic[T], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LazyInitializer(ABC, Object):
     """"""
@@ -2525,26 +1649,20 @@ class LazyInitializer(ABC, Object):
     @classmethod
     @overload
     def EnsureInitialized(cls, target: T) -> T:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     @classmethod
     @overload
     def EnsureInitialized(cls, target: T, valueFactory: Func[T]) -> T:
-        """
-
-        :param target:
+        """:param target:
         :param valueFactory:
         :return:
         """
     @classmethod
     @overload
     def EnsureInitialized(cls, target: T, initialized: bool, syncLock: object) -> T:
-        """
-
-        :param target:
+        """:param target:
         :param initialized:
         :param syncLock:
         :return:
@@ -2554,35 +1672,22 @@ class LazyInitializer(ABC, Object):
     def EnsureInitialized(
         cls, target: T, initialized: bool, syncLock: object, valueFactory: Func[T]
     ) -> T:
-        """
-
-        :param target:
+        """:param target:
         :param initialized:
         :param syncLock:
         :param valueFactory:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LazyThreadSafetyMode(Enum):
     """"""
@@ -2599,58 +1704,37 @@ class LockCookie(ValueType):
 
     @overload
     def Equals(self, obj: LockCookie) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: LockCookie) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: LockCookie) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: LockCookie, b: LockCookie) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: LockCookie, b: LockCookie) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -2663,138 +1747,80 @@ class LockRecursionException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LockRecursionPolicy(Enum):
     """"""
@@ -2808,120 +1834,69 @@ class ManualResetEvent(EventWaitHandle, IDisposable):
     """"""
 
     def __init__(self, initialState: bool):
-        """
-
-        :param initialState:
-        """
+        """:param initialState:"""
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessControl(self) -> EventWaitHandleSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Set(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetAccessControl(self, eventSecurity: EventWaitHandleSecurity) -> None:
-        """
-
-        :param eventSecurity:
-        """
+        """:param eventSecurity:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -2934,98 +1909,62 @@ class ManualResetEventSlim(Object, IDisposable):
         """"""
     @overload
     def __init__(self, initialState: bool):
-        """
-
-        :param initialState:
-        """
+        """:param initialState:"""
     @overload
     def __init__(self, initialState: bool, spinCount: int):
-        """
-
-        :param initialState:
+        """:param initialState:
         :param spinCount:
         """
     @property
     def IsSet(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SpinCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def Set(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param cancellationToken:
         :return:
         """
@@ -3036,148 +1975,101 @@ class Monitor(ABC, Object):
     @classmethod
     @overload
     def Enter(cls, obj: object) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @classmethod
     @overload
     def Enter(cls, obj: object, lockTaken: bool) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param lockTaken:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def Exit(cls, obj: object) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsEntered(cls, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def Pulse(cls, obj: object) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @classmethod
     def PulseAll(cls, obj: object) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def TryEnter(cls, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def TryEnter(cls, obj: object, lockTaken: bool) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param lockTaken:
         """
     @classmethod
     @overload
     def TryEnter(cls, obj: object, millisecondsTimeout: int) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :param millisecondsTimeout:
         :return:
         """
     @classmethod
     @overload
     def TryEnter(cls, obj: object, timeout: TimeSpan) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :param timeout:
         :return:
         """
     @classmethod
     @overload
     def TryEnter(cls, obj: object, millisecondsTimeout: int, lockTaken: bool) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param millisecondsTimeout:
         :param lockTaken:
         """
     @classmethod
     @overload
     def TryEnter(cls, obj: object, timeout: TimeSpan, lockTaken: bool) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param timeout:
         :param lockTaken:
         """
     @classmethod
     @overload
     def Wait(cls, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     @overload
     def Wait(cls, obj: object, millisecondsTimeout: int) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :param millisecondsTimeout:
         :return:
         """
     @classmethod
     @overload
     def Wait(cls, obj: object, timeout: TimeSpan) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :param timeout:
         :return:
         """
     @classmethod
     @overload
     def Wait(cls, obj: object, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :param millisecondsTimeout:
         :param exitContext:
         :return:
@@ -3185,9 +2077,7 @@ class Monitor(ABC, Object):
     @classmethod
     @overload
     def Wait(cls, obj: object, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :param timeout:
         :param exitContext:
         :return:
@@ -3201,174 +2091,119 @@ class Mutex(WaitHandle, IDisposable):
         """"""
     @overload
     def __init__(self, initiallyOwned: bool):
-        """
-
-        :param initiallyOwned:
-        """
+        """:param initiallyOwned:"""
     @overload
     def __init__(self, initiallyOwned: bool, name: str):
-        """
-
-        :param initiallyOwned:
+        """:param initiallyOwned:
         :param name:
         """
     @overload
     def __init__(self, initiallyOwned: bool, name: str, createdNew: bool):
-        """
-
-        :param initiallyOwned:
+        """:param initiallyOwned:
         :param name:
         :param createdNew:
         """
     @overload
     def __init__(
-        self, initiallyOwned: bool, name: str, createdNew: bool, mutexSecurity: MutexSecurity
+        self,
+        initiallyOwned: bool,
+        name: str,
+        createdNew: bool,
+        mutexSecurity: MutexSecurity,
     ):
-        """
-
-        :param initiallyOwned:
+        """:param initiallyOwned:
         :param name:
         :param createdNew:
         :param mutexSecurity:
         """
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessControl(self) -> MutexSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def OpenExisting(cls, name: str) -> Mutex:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @classmethod
     @overload
     def OpenExisting(cls, name: str, rights: MutexRights) -> Mutex:
-        """
-
-        :param name:
+        """:param name:
         :param rights:
         :return:
         """
     def ReleaseMutex(self) -> None:
         """"""
     def SetAccessControl(self, mutexSecurity: MutexSecurity) -> None:
-        """
-
-        :param mutexSecurity:
-        """
+        """:param mutexSecurity:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
-    def TryOpenExisting(cls, name: str, result: Mutex) -> Tuple[bool, Mutex]:
-        """
-
-        :param name:
+    def TryOpenExisting(cls, name: str, result: Mutex) -> tuple[bool, Mutex]:
+        """:param name:
         :param result:
         :return:
         """
     @classmethod
     @overload
-    def TryOpenExisting(cls, name: str, rights: MutexRights, result: Mutex) -> Tuple[bool, Mutex]:
-        """
-
-        :param name:
+    def TryOpenExisting(cls, name: str, rights: MutexRights, result: Mutex) -> tuple[bool, Mutex]:
+        """:param name:
         :param rights:
         :param result:
         :return:
         """
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -3402,26 +2237,15 @@ class NativeOverlapped(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Overlapped(Object):
     """"""
@@ -3431,123 +2255,80 @@ class Overlapped(Object):
         """"""
     @overload
     def __init__(self, offsetLo: int, offsetHi: int, hEvent: int, ar: IAsyncResult):
-        """
-
-        :param offsetLo:
+        """:param offsetLo:
         :param offsetHi:
         :param hEvent:
         :param ar:
         """
     @overload
     def __init__(self, offsetLo: int, offsetHi: int, hEvent: IntPtr, ar: IAsyncResult):
-        """
-
-        :param offsetLo:
+        """:param offsetLo:
         :param offsetHi:
         :param hEvent:
         :param ar:
         """
     @property
     def AsyncResult(self) -> IAsyncResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsyncResult.setter
     def AsyncResult(self, value: IAsyncResult) -> None: ...
     @property
     def EventHandle(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EventHandle.setter
     def EventHandle(self, value: int) -> None: ...
     @property
     def EventHandleIntPtr(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EventHandleIntPtr.setter
     def EventHandleIntPtr(self, value: IntPtr) -> None: ...
     @property
     def OffsetHigh(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @OffsetHigh.setter
     def OffsetHigh(self, value: int) -> None: ...
     @property
     def OffsetLow(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @OffsetLow.setter
     def OffsetLow(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def Free(cls, nativeOverlappedPtr: NativeOverlapped) -> None:
-        """
-
-        :param nativeOverlappedPtr:
-        """
+        """:param nativeOverlappedPtr:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Pack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :return:
         """
     @overload
     def Pack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :param userData:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Unpack(cls, nativeOverlappedPtr: NativeOverlapped) -> Overlapped:
-        """
-
-        :param nativeOverlappedPtr:
+        """:param nativeOverlappedPtr:
         :return:
         """
     @overload
     def UnsafePack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :return:
         """
     @overload
     def UnsafePack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :param userData:
         :return:
         """
@@ -3558,26 +2339,15 @@ class OverlappedData(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ParameterizedThreadStart: Callable[[object], None] = ...
 """
@@ -3589,42 +2359,23 @@ class PinnableBufferCache(Object):
     """"""
 
     def __init__(self, cacheName: str, numberOfElements: int):
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param numberOfElements:
         """
     def AllocateBuffer(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FreeBuffer(self, buffer: Array[int]) -> None:
-        """
-
-        :param buffer:
-        """
+        """:param buffer:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PinnableBufferCacheEventSource(EventSource, IDisposable):
     """"""
@@ -3638,109 +2389,75 @@ class PinnableBufferCacheEventSource(EventSource, IDisposable):
         """"""
     @property
     def ConstructionException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def CurrentThreadActivityId(cls) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Guid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Settings(self) -> EventSourceSettings:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AgePendingBuffersResults(
         self, cacheName: str, promotedToFreeListCount: int, heldBackCount: int
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param promotedToFreeListCount:
         :param heldBackCount:
         """
     def AllocateBuffer(
-        self, cacheName: str, objectId: int, objectHash: int, objectGen: int, freeCountAfter: int
+        self,
+        cacheName: str,
+        objectId: int,
+        objectHash: int,
+        objectGen: int,
+        freeCountAfter: int,
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param objectId:
         :param objectHash:
         :param objectGen:
         :param freeCountAfter:
         """
     def AllocateBufferAged(self, cacheName: str, agedCount: int) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param agedCount:
         """
     def AllocateBufferCreatingNewBuffers(
         self, cacheName: str, totalBuffsBefore: int, objectCount: int
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param totalBuffsBefore:
         :param objectCount:
         """
     def AllocateBufferFreeListEmpty(self, cacheName: str, notGen2CountBefore: int) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param notGen2CountBefore:
         """
     def AllocateBufferFromNotGen2(self, cacheName: str, notGen2CountAfter: int) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param notGen2CountAfter:
         """
     def Create(self, cacheName: str) -> None:
-        """
-
-        :param cacheName:
-        """
+        """:param cacheName:"""
     def DebugMessage(self, message: str) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     def DebugMessage1(self, message: str, value: int) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param value:
         """
     def DebugMessage2(self, message: str, value1: int, value2: int) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param value1:
         :param value2:
         """
     def DebugMessage3(self, message: str, value1: int, value2: int, value3: int) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param value1:
         :param value2:
         :param value3:
@@ -3748,83 +2465,59 @@ class PinnableBufferCacheEventSource(EventSource, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FreeBuffer(
         self, cacheName: str, objectId: int, objectHash: int, freeCountBefore: int
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param objectId:
         :param objectHash:
         :param freeCountBefore:
         """
     def FreeBufferNull(self, cacheName: str, freeCountBefore: int) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param freeCountBefore:
         """
     def FreeBufferStillTooYoung(self, cacheName: str, notGen2CountBefore: int) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param notGen2CountBefore:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTrait(self, key: str) -> str:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :return:
         """
     @overload
     def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
-        """
-
-        :param level:
+        """:param level:
         :param keywords:
         :param channel:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrimCheck(
-        self, cacheName: str, totalBuffs: int, neededMoreThanFreeList: bool, deltaMSec: int
+        self,
+        cacheName: str,
+        totalBuffs: int,
+        neededMoreThanFreeList: bool,
+        deltaMSec: int,
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param totalBuffs:
         :param neededMoreThanFreeList:
         :param deltaMSec:
@@ -3832,80 +2525,63 @@ class PinnableBufferCacheEventSource(EventSource, IDisposable):
     def TrimExperiment(
         self, cacheName: str, totalBuffs: int, freeListCount: int, numTrimTrial: int
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param totalBuffs:
         :param freeListCount:
         :param numTrimTrial:
         """
     def TrimFlush(
-        self, cacheName: str, totalBuffs: int, freeListCount: int, notGen2CountBefore: int
+        self,
+        cacheName: str,
+        totalBuffs: int,
+        freeListCount: int,
+        notGen2CountBefore: int,
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param totalBuffs:
         :param freeListCount:
         :param notGen2CountBefore:
         """
     def TrimFree(self, cacheName: str, totalBuffs: int, freeListCount: int, toBeFreed: int) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param totalBuffs:
         :param freeListCount:
         :param toBeFreed:
         """
     def TrimFreeSizeOK(self, cacheName: str, totalBuffs: int, freeListCount: int) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param totalBuffs:
         :param freeListCount:
         """
     def WalkFreeListResult(
         self, cacheName: str, freeListCount: int, gen0BuffersInFreeList: int
     ) -> None:
-        """
-
-        :param cacheName:
+        """:param cacheName:
         :param freeListCount:
         :param gen0BuffersInFreeList:
         """
     @overload
     def Write(self, eventName: str) -> None:
-        """
-
-        :param eventName:
-        """
+        """:param eventName:"""
     @overload
     def Write(self, eventName: str, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
     @overload
     def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param data:
         """
@@ -3918,9 +2594,7 @@ class PinnableBufferCacheEventSource(EventSource, IDisposable):
         relatedActivityId: Guid,
         data: T,
     ) -> None:
-        """
-
-        :param eventName:
+        """:param eventName:
         :param options:
         :param activityId:
         :param relatedActivityId:
@@ -3933,97 +2607,56 @@ class PlatformHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PreAllocatedOverlapped(Object, IDeferredDisposable, IDisposable):
     """"""
 
     def __init__(self, callback: IOCompletionCallback, state: object, pinData: object):
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :param pinData:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnFinalRelease(self, disposed: bool) -> None:
-        """
-
-        :param disposed:
-        """
+        """:param disposed:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QueueUserWorkItemCallback(Object, IThreadPoolWorkItem):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExecuteWorkItem(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarkAborted(self, tae: ThreadAbortException) -> None:
-        """
-
-        :param tae:
-        """
+        """:param tae:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReaderWriterCount(Object):
     """"""
@@ -4056,26 +2689,15 @@ class ReaderWriterCount(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReaderWriterLock(CriticalFinalizerObject):
     """"""
@@ -4084,104 +2706,57 @@ class ReaderWriterLock(CriticalFinalizerObject):
         """"""
     @property
     def IsReaderLockHeld(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsWriterLockHeld(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WriterSeqNum(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AcquireReaderLock(self, millisecondsTimeout: int) -> None:
-        """
-
-        :param millisecondsTimeout:
-        """
+        """:param millisecondsTimeout:"""
     @overload
     def AcquireReaderLock(self, timeout: TimeSpan) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def AcquireWriterLock(self, millisecondsTimeout: int) -> None:
-        """
-
-        :param millisecondsTimeout:
-        """
+        """:param millisecondsTimeout:"""
     @overload
     def AcquireWriterLock(self, timeout: TimeSpan) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     def AnyWritersSince(self, seqNum: int) -> bool:
-        """
-
-        :param seqNum:
+        """:param seqNum:
         :return:
         """
     def DowngradeFromWriterLock(self, lockCookie: LockCookie) -> None:
-        """
-
-        :param lockCookie:
-        """
+        """:param lockCookie:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReleaseLock(self) -> LockCookie:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReleaseReaderLock(self) -> None:
         """"""
     def ReleaseWriterLock(self) -> None:
         """"""
     def RestoreLock(self, lockCookie: LockCookie) -> None:
-        """
-
-        :param lockCookie:
-        """
+        """:param lockCookie:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def UpgradeToWriterLock(self, millisecondsTimeout: int) -> LockCookie:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def UpgradeToWriterLock(self, timeout: TimeSpan) -> LockCookie:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
 
@@ -4193,76 +2768,40 @@ class ReaderWriterLockSlim(Object, IDisposable):
         """"""
     @overload
     def __init__(self, recursionPolicy: LockRecursionPolicy):
-        """
-
-        :param recursionPolicy:
-        """
+        """:param recursionPolicy:"""
     @property
     def CurrentReadCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadLockHeld(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsUpgradeableReadLockHeld(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsWriteLockHeld(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RecursionPolicy(self) -> LockRecursionPolicy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RecursiveReadCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RecursiveUpgradeCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RecursiveWriteCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitingReadCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitingUpgradeCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WaitingWriteCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def EnterReadLock(self) -> None:
@@ -4272,9 +2811,7 @@ class ReaderWriterLockSlim(Object, IDisposable):
     def EnterWriteLock(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ExitReadLock(self) -> None:
@@ -4284,60 +2821,39 @@ class ReaderWriterLockSlim(Object, IDisposable):
     def ExitWriteLock(self) -> None:
         """"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TryEnterReadLock(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def TryEnterReadLock(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def TryEnterUpgradeableReadLock(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def TryEnterUpgradeableReadLock(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def TryEnterWriteLock(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def TryEnterWriteLock(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
 
@@ -4345,46 +2861,25 @@ class RegisteredWaitHandle(MarshalByRefObject):
     """"""
 
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Unregister(self, waitObject: WaitHandle) -> bool:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :return:
         """
 
@@ -4392,26 +2887,15 @@ class RegisteredWaitHandleSafe(CriticalFinalizerObject):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeCompressedStackHandle(SafeHandle, IDisposable):
     """"""
@@ -4420,79 +2904,50 @@ class SafeCompressedStackHandle(SafeHandle, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Semaphore(WaitHandle, IDisposable):
     """"""
 
     @overload
     def __init__(self, initialCount: int, maximumCount: int):
-        """
-
-        :param initialCount:
+        """:param initialCount:
         :param maximumCount:
         """
     @overload
     def __init__(self, initialCount: int, maximumCount: int, name: str):
-        """
-
-        :param initialCount:
+        """:param initialCount:
         :param maximumCount:
         :param name:
         """
     @overload
     def __init__(self, initialCount: int, maximumCount: int, name: str, createdNew: bool):
-        """
-
-        :param initialCount:
+        """:param initialCount:
         :param maximumCount:
         :param name:
         :param createdNew:
@@ -4506,9 +2961,7 @@ class Semaphore(WaitHandle, IDisposable):
         createdNew: bool,
         semaphoreSecurity: SemaphoreSecurity,
     ):
-        """
-
-        :param initialCount:
+        """:param initialCount:
         :param maximumCount:
         :param name:
         :param createdNew:
@@ -4516,107 +2969,65 @@ class Semaphore(WaitHandle, IDisposable):
         """
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAccessControl(self) -> SemaphoreSecurity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def OpenExisting(cls, name: str) -> Semaphore:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @classmethod
     @overload
     def OpenExisting(cls, name: str, rights: SemaphoreRights) -> Semaphore:
-        """
-
-        :param name:
+        """:param name:
         :param rights:
         :return:
         """
     @overload
     def Release(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Release(self, releaseCount: int) -> int:
-        """
-
-        :param releaseCount:
+        """:param releaseCount:
         :return:
         """
     def SetAccessControl(self, semaphoreSecurity: SemaphoreSecurity) -> None:
-        """
-
-        :param semaphoreSecurity:
-        """
+        """:param semaphoreSecurity:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
-    def TryOpenExisting(cls, name: str, result: Semaphore) -> Tuple[bool, Semaphore]:
-        """
-
-        :param name:
+    def TryOpenExisting(cls, name: str, result: Semaphore) -> tuple[bool, Semaphore]:
+        """:param name:
         :param result:
         :return:
         """
@@ -4624,47 +3035,34 @@ class Semaphore(WaitHandle, IDisposable):
     @overload
     def TryOpenExisting(
         cls, name: str, rights: SemaphoreRights, result: Semaphore
-    ) -> Tuple[bool, Semaphore]:
-        """
-
-        :param name:
+    ) -> tuple[bool, Semaphore]:
+        """:param name:
         :param rights:
         :param result:
         :return:
         """
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -4677,284 +3075,175 @@ class SemaphoreFullException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SemaphoreSlim(Object, IDisposable):
     """"""
 
     @overload
     def __init__(self, initialCount: int):
-        """
-
-        :param initialCount:
-        """
+        """:param initialCount:"""
     @overload
     def __init__(self, initialCount: int, maxCount: int):
-        """
-
-        :param initialCount:
+        """:param initialCount:
         :param maxCount:
         """
     @property
     def AvailableWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Release(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Release(self, releaseCount: int) -> int:
-        """
-
-        :param releaseCount:
+        """:param releaseCount:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Wait(self) -> None:
         """"""
     @overload
     def Wait(self, cancellationToken: CancellationToken) -> None:
-        """
-
-        :param cancellationToken:
-        """
+        """:param cancellationToken:"""
     @overload
     def Wait(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def WaitAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     @overload
     def WaitAsync(self, millisecondsTimeout: int) -> Task[bool]:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitAsync(self, timeout: TimeSpan) -> Task[bool]:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitAsync(
         self, millisecondsTimeout: int, cancellationToken: CancellationToken
     ) -> Task[bool]:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param cancellationToken:
         :return:
         """
     @overload
     def WaitAsync(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> Task[bool]:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param cancellationToken:
         :return:
         """
@@ -4969,112 +3258,62 @@ class SparselyPopulatedArrayAddInfo(Generic[T], ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SparselyPopulatedArrayFragment(Generic[T], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SparselyPopulatedArray(Generic[T], Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SpinLock(ValueType):
     """"""
 
     def __init__(self, enableThreadOwnerTracking: bool):
-        """
-
-        :param enableThreadOwnerTracking:
-        """
+        """:param enableThreadOwnerTracking:"""
     @property
     def IsHeld(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHeldByCurrentThread(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsThreadOwnerTrackingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Enter(self, lockTaken: bool) -> None:
-        """
-
-        :param lockTaken:
-        """
+        """:param lockTaken:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -5082,43 +3321,24 @@ class SpinLock(ValueType):
         """"""
     @overload
     def Exit(self, useMemoryBarrier: bool) -> None:
-        """
-
-        :param useMemoryBarrier:
-        """
+        """:param useMemoryBarrier:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def TryEnter(self, lockTaken: bool) -> None:
-        """
-
-        :param lockTaken:
-        """
+        """:param lockTaken:"""
     @overload
     def TryEnter(self, millisecondsTimeout: int, lockTaken: bool) -> None:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param lockTaken:
         """
     @overload
     def TryEnter(self, timeout: TimeSpan, lockTaken: bool) -> None:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param lockTaken:
         """
 
@@ -5127,32 +3347,18 @@ class SpinWait(ValueType):
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NextSpinWillYield(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def SpinOnce(self) -> None:
@@ -5160,33 +3366,23 @@ class SpinWait(ValueType):
     @classmethod
     @overload
     def SpinUntil(cls, condition: Func[bool]) -> None:
-        """
-
-        :param condition:
-        """
+        """:param condition:"""
     @classmethod
     @overload
     def SpinUntil(cls, condition: Func[bool], millisecondsTimeout: int) -> bool:
-        """
-
-        :param condition:
+        """:param condition:
         :param millisecondsTimeout:
         :return:
         """
     @classmethod
     @overload
     def SpinUntil(cls, condition: Func[bool], timeout: TimeSpan) -> bool:
-        """
-
-        :param condition:
+        """:param condition:
         :param timeout:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StackCrawlMark(Enum):
     """"""
@@ -5208,67 +3404,38 @@ class SynchronizationContext(Object):
     @classmethod
     @property
     def Current(cls) -> SynchronizationContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateCopy(self) -> SynchronizationContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsWaitNotificationRequired(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OperationCompleted(self) -> None:
         """"""
     def OperationStarted(self) -> None:
         """"""
     def Post(self, d: SendOrPostCallback, state: object) -> None:
-        """
-
-        :param d:
+        """:param d:
         :param state:
         """
     def Send(self, d: SendOrPostCallback, state: object) -> None:
-        """
-
-        :param d:
+        """:param d:
         :param state:
         """
     @classmethod
     def SetSynchronizationContext(cls, syncContext: SynchronizationContext) -> None:
-        """
-
-        :param syncContext:
-        """
+        """:param syncContext:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Wait(self, waitHandles: Array[IntPtr], waitAll: bool, millisecondsTimeout: int) -> int:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param waitAll:
         :param millisecondsTimeout:
         :return:
@@ -5290,338 +3457,197 @@ class SynchronizationLockException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemThreading_ThreadLocalDebugView(Generic[T], Object):
     """"""
 
     def __init__(self, tlocal: ThreadLocal[T]):
-        """
-
-        :param tlocal:
-        """
+        """:param tlocal:"""
     @property
     def IsValueCreated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> List[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Thread(CriticalFinalizerObject, _Thread):
     """"""
 
     @overload
     def __init__(self, start: ParameterizedThreadStart):
-        """
-
-        :param start:
-        """
+        """:param start:"""
     @overload
     def __init__(self, start: ThreadStart):
-        """
-
-        :param start:
-        """
+        """:param start:"""
     @overload
     def __init__(self, start: ParameterizedThreadStart, maxStackSize: int):
-        """
-
-        :param start:
+        """:param start:
         :param maxStackSize:
         """
     @overload
     def __init__(self, start: ThreadStart, maxStackSize: int):
-        """
-
-        :param start:
+        """:param start:
         :param maxStackSize:
         """
     @property
     def ApartmentState(self) -> ApartmentState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ApartmentState.setter
     def ApartmentState(self, value: ApartmentState) -> None: ...
     @classmethod
     @property
     def CurrentContext(cls) -> Context:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentCulture(self) -> CultureInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CurrentCulture.setter
     def CurrentCulture(self, value: CultureInfo) -> None: ...
     @classmethod
     @property
     def CurrentPrincipal(cls) -> IPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @CurrentPrincipal.setter
     def CurrentPrincipal(cls, value: IPrincipal) -> None: ...
     @classmethod
     @property
     def CurrentThread(cls) -> Thread:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentUICulture(self) -> CultureInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CurrentUICulture.setter
     def CurrentUICulture(self, value: CultureInfo) -> None: ...
     @property
     def ExecutionContext(self) -> ExecutionContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAlive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBackground(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsBackground.setter
     def IsBackground(self, value: bool) -> None: ...
     @property
     def IsThreadPoolThread(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ManagedThreadId(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Priority(self) -> ThreadPriority:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Priority.setter
     def Priority(self, value: ThreadPriority) -> None: ...
     @property
     def ThreadState(self) -> ThreadState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Abort(self) -> None:
         """"""
     @overload
     def Abort(self, stateInfo: object) -> None:
-        """
-
-        :param stateInfo:
-        """
+        """:param stateInfo:"""
     @classmethod
     def AllocateDataSlot(cls) -> LocalDataStoreSlot:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def AllocateNamedDataSlot(cls, name: str) -> LocalDataStoreSlot:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @classmethod
@@ -5639,57 +3665,33 @@ class Thread(CriticalFinalizerObject, _Thread):
     def EndThreadAffinity(cls) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def FreeNamedDataSlot(cls, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     def GetApartmentState(self) -> ApartmentState:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetCompressedStack(self) -> CompressedStack:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetData(cls, slot: LocalDataStoreSlot) -> object:
-        """
-
-        :param slot:
+        """:param slot:
         :return:
         """
     @classmethod
     def GetDomain(cls) -> AppDomain:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetDomainID(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -5697,28 +3699,18 @@ class Thread(CriticalFinalizerObject, _Thread):
         """
     @classmethod
     def GetNamedDataSlot(cls, name: str) -> LocalDataStoreSlot:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Interrupt(self) -> None:
         """"""
     def Invoke(
@@ -5732,9 +3724,7 @@ class Thread(CriticalFinalizerObject, _Thread):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5748,16 +3738,12 @@ class Thread(CriticalFinalizerObject, _Thread):
         """"""
     @overload
     def Join(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def Join(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @classmethod
@@ -5769,445 +3755,292 @@ class Thread(CriticalFinalizerObject, _Thread):
     def Resume(self) -> None:
         """"""
     def SetApartmentState(self, state: ApartmentState) -> None:
-        """
-
-        :param state:
-        """
+        """:param state:"""
     def SetCompressedStack(self, stack: CompressedStack) -> None:
-        """
-
-        :param stack:
-        """
+        """:param stack:"""
     @classmethod
     def SetData(cls, slot: LocalDataStoreSlot, data: object) -> None:
-        """
-
-        :param slot:
+        """:param slot:
         :param data:
         """
     @classmethod
     @overload
     def Sleep(cls, millisecondsTimeout: int) -> None:
-        """
-
-        :param millisecondsTimeout:
-        """
+        """:param millisecondsTimeout:"""
     @classmethod
     @overload
     def Sleep(cls, timeout: TimeSpan) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @classmethod
     def SpinWait(cls, iterations: int) -> None:
-        """
-
-        :param iterations:
-        """
+        """:param iterations:"""
     @overload
     def Start(self) -> None:
         """"""
     @overload
     def Start(self, parameter: object) -> None:
-        """
-
-        :param parameter:
-        """
+        """:param parameter:"""
     def Suspend(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrySetApartmentState(self, state: ApartmentState) -> bool:
-        """
-
-        :param state:
+        """:param state:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: float) -> float:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: IntPtr) -> IntPtr:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: object) -> object:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: float) -> float:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: int) -> int:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileRead(cls, address: UIntPtr) -> UIntPtr:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: float, value: float) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: IntPtr, value: IntPtr) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: object, value: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: float, value: float) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: int, value: int) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     @overload
     def VolatileWrite(cls, address: UIntPtr, value: UIntPtr) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param value:
         """
     @classmethod
     def Yield(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadAbortException(SystemException, _Exception, ISerializable):
     """"""
 
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExceptionState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadExceptionEventArgs(EventArgs):
     """"""
 
     def __init__(self, t: Exception):
-        """
-
-        :param t:
-        """
+        """:param t:"""
     @property
     def Exception(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ThreadExceptionEventHandler: Callable[[object, ThreadExceptionEventArgs], None] = ...
 """
@@ -6220,51 +4053,29 @@ class ThreadHandle(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadHelper(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadInterruptedException(SystemException, _Exception, ISerializable):
     """"""
@@ -6274,138 +4085,80 @@ class ThreadInterruptedException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadLocal(Generic[T], Object, IDisposable):
     """"""
@@ -6415,66 +4168,38 @@ class ThreadLocal(Generic[T], Object, IDisposable):
         """"""
     @overload
     def __init__(self, trackAllValues: bool):
-        """
-
-        :param trackAllValues:
-        """
+        """:param trackAllValues:"""
     @overload
     def __init__(self, valueFactory: Func[T]):
-        """
-
-        :param valueFactory:
-        """
+        """:param valueFactory:"""
     @overload
     def __init__(self, valueFactory: Func[T], trackAllValues: bool):
-        """
-
-        :param valueFactory:
+        """:param valueFactory:
         :param trackAllValues:
         """
     @property
     def IsValueCreated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: T) -> None: ...
     @property
     def Values(self) -> IList[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadPool(ABC, Object):
     """"""
@@ -6482,72 +4207,50 @@ class ThreadPool(ABC, Object):
     @classmethod
     @overload
     def BindHandle(cls, osHandle: SafeHandle) -> bool:
-        """
-
-        :param osHandle:
+        """:param osHandle:
         :return:
         """
     @classmethod
     @overload
     def BindHandle(cls, osHandle: IntPtr) -> bool:
-        """
-
-        :param osHandle:
+        """:param osHandle:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetAvailableThreads(
         cls, workerThreads: int, completionPortThreads: int
-    ) -> Tuple[None, int, int]:
-        """
-
-        :param workerThreads:
+    ) -> tuple[None, int, int]:
+        """:param workerThreads:
         :param completionPortThreads:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
-    def GetMaxThreads(cls, workerThreads: int, completionPortThreads: int) -> Tuple[None, int, int]:
-        """
-
-        :param workerThreads:
+    def GetMaxThreads(cls, workerThreads: int, completionPortThreads: int) -> tuple[None, int, int]:
+        """:param workerThreads:
         :param completionPortThreads:
         """
     @classmethod
-    def GetMinThreads(cls, workerThreads: int, completionPortThreads: int) -> Tuple[None, int, int]:
-        """
-
-        :param workerThreads:
+    def GetMinThreads(cls, workerThreads: int, completionPortThreads: int) -> tuple[None, int, int]:
+        """:param workerThreads:
         :param completionPortThreads:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def QueueUserWorkItem(cls, callBack: WaitCallback) -> bool:
-        """
-
-        :param callBack:
+        """:param callBack:
         :return:
         """
     @classmethod
     @overload
     def QueueUserWorkItem(cls, callBack: WaitCallback, state: object) -> bool:
-        """
-
-        :param callBack:
+        """:param callBack:
         :param state:
         :return:
         """
@@ -6561,9 +4264,7 @@ class ThreadPool(ABC, Object):
         millisecondsTimeOutInterval: int,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param millisecondsTimeOutInterval:
@@ -6580,9 +4281,7 @@ class ThreadPool(ABC, Object):
         millisecondsTimeOutInterval: int,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param millisecondsTimeOutInterval:
@@ -6599,9 +4298,7 @@ class ThreadPool(ABC, Object):
         timeout: TimeSpan,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param timeout:
@@ -6618,9 +4315,7 @@ class ThreadPool(ABC, Object):
         millisecondsTimeOutInterval: int,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param millisecondsTimeOutInterval:
@@ -6629,37 +4324,26 @@ class ThreadPool(ABC, Object):
         """
     @classmethod
     def SetMaxThreads(cls, workerThreads: int, completionPortThreads: int) -> bool:
-        """
-
-        :param workerThreads:
+        """:param workerThreads:
         :param completionPortThreads:
         :return:
         """
     @classmethod
     def SetMinThreads(cls, workerThreads: int, completionPortThreads: int) -> bool:
-        """
-
-        :param workerThreads:
+        """:param workerThreads:
         :param completionPortThreads:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UnsafeQueueNativeOverlapped(cls, overlapped: NativeOverlapped) -> bool:
-        """
-
-        :param overlapped:
+        """:param overlapped:
         :return:
         """
     @classmethod
     def UnsafeQueueUserWorkItem(cls, callBack: WaitCallback, state: object) -> bool:
-        """
-
-        :param callBack:
+        """:param callBack:
         :param state:
         :return:
         """
@@ -6673,9 +4357,7 @@ class ThreadPool(ABC, Object):
         millisecondsTimeOutInterval: int,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param millisecondsTimeOutInterval:
@@ -6692,9 +4374,7 @@ class ThreadPool(ABC, Object):
         millisecondsTimeOutInterval: int,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param millisecondsTimeOutInterval:
@@ -6711,9 +4391,7 @@ class ThreadPool(ABC, Object):
         timeout: TimeSpan,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param timeout:
@@ -6730,9 +4408,7 @@ class ThreadPool(ABC, Object):
         millisecondsTimeOutInterval: int,
         executeOnlyOnce: bool,
     ) -> RegisteredWaitHandle:
-        """
-
-        :param waitObject:
+        """:param waitObject:
         :param callBack:
         :param state:
         :param millisecondsTimeOutInterval:
@@ -6745,70 +4421,45 @@ class ThreadPoolBoundHandle(Object, IDisposable):
 
     @property
     def Handle(self) -> SafeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AllocateNativeOverlapped(self, preAllocated: PreAllocatedOverlapped) -> NativeOverlapped:
-        """
-
-        :param preAllocated:
+        """:param preAllocated:
         :return:
         """
     @overload
     def AllocateNativeOverlapped(
         self, callback: IOCompletionCallback, state: object, pinData: object
     ) -> NativeOverlapped:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :param pinData:
         :return:
         """
     @classmethod
     def BindHandle(cls, handle: SafeHandle) -> ThreadPoolBoundHandle:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FreeNativeOverlapped(self, overlapped: NativeOverlapped) -> None:
-        """
-
-        :param overlapped:
-        """
+        """:param overlapped:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetNativeOverlappedState(cls, overlapped: NativeOverlapped) -> object:
-        """
-
-        :param overlapped:
+        """:param overlapped:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadPoolBoundHandleOverlapped(Overlapped):
     """"""
@@ -6820,101 +4471,65 @@ class ThreadPoolBoundHandleOverlapped(Overlapped):
         pinData: object,
         preAllocated: PreAllocatedOverlapped,
     ):
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :param pinData:
         :param preAllocated:
         """
     @property
     def AsyncResult(self) -> IAsyncResult:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsyncResult.setter
     def AsyncResult(self, value: IAsyncResult) -> None: ...
     @property
     def EventHandle(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EventHandle.setter
     def EventHandle(self, value: int) -> None: ...
     @property
     def EventHandleIntPtr(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EventHandleIntPtr.setter
     def EventHandleIntPtr(self, value: IntPtr) -> None: ...
     @property
     def OffsetHigh(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @OffsetHigh.setter
     def OffsetHigh(self, value: int) -> None: ...
     @property
     def OffsetLow(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @OffsetLow.setter
     def OffsetLow(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Pack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :return:
         """
     @overload
     def Pack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :param userData:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def UnsafePack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :return:
         """
     @overload
     def UnsafePack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
-        """
-
-        :param iocb:
+        """:param iocb:
         :param userData:
         :return:
         """
@@ -6953,26 +4568,15 @@ class ThreadPoolGlobals(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadPoolWorkQueue(Object):
     """"""
@@ -6980,46 +4584,31 @@ class ThreadPoolWorkQueue(Object):
     def __init__(self):
         """"""
     def Dequeue(
-        self, tl: ThreadPoolWorkQueueThreadLocals, callback: IThreadPoolWorkItem, missedSteal: bool
-    ) -> Tuple[None, IThreadPoolWorkItem, bool]:
-        """
-
-        :param tl:
+        self,
+        tl: ThreadPoolWorkQueueThreadLocals,
+        callback: IThreadPoolWorkItem,
+        missedSteal: bool,
+    ) -> tuple[None, IThreadPoolWorkItem, bool]:
+        """:param tl:
         :param callback:
         :param missedSteal:
         """
     def Enqueue(self, callback: IThreadPoolWorkItem, forceGlobal: bool) -> None:
-        """
-
-        :param callback:
+        """:param callback:
         :param forceGlobal:
         """
     def EnsureCurrentThreadHasQueue(self) -> ThreadPoolWorkQueueThreadLocals:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadPoolWorkQueueThreadLocals(Object):
     """"""
@@ -7045,31 +4634,17 @@ class ThreadPoolWorkQueueThreadLocals(Object):
     :return: 
     """
     def __init__(self, tpq: ThreadPoolWorkQueue):
-        """
-
-        :param tpq:
-        """
+        """:param tpq:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadPriority(Enum):
     """"""
@@ -7093,125 +4668,72 @@ class ThreadStartException(SystemException, _Exception, ISerializable):
 
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ThreadState(Enum):
     """"""
@@ -7245,138 +4767,80 @@ class ThreadStateException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Timeout(ABC, Object):
     """"""
@@ -7392,62 +4856,35 @@ class Timeout(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TimeoutHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetTime(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UpdateTimeOut(cls, startTime: int, originalWaitMillisecondsTimeout: int) -> int:
-        """
-
-        :param startTime:
+        """:param startTime:
         :param originalWaitMillisecondsTimeout:
         :return:
         """
@@ -7457,82 +4894,67 @@ class Timer(MarshalByRefObject, IDisposable):
 
     @overload
     def __init__(self, callback: TimerCallback):
-        """
-
-        :param callback:
-        """
+        """:param callback:"""
     @overload
     def __init__(self, callback: TimerCallback, state: object, dueTime: int, period: int):
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :param dueTime:
         :param period:
         """
     @overload
     def __init__(self, callback: TimerCallback, state: object, dueTime: int, period: int):
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :param dueTime:
         :param period:
         """
     @overload
-    def __init__(self, callback: TimerCallback, state: object, dueTime: TimeSpan, period: TimeSpan):
-        """
-
-        :param callback:
+    def __init__(
+        self,
+        callback: TimerCallback,
+        state: object,
+        dueTime: TimeSpan,
+        period: TimeSpan,
+    ):
+        """:param callback:
         :param state:
         :param dueTime:
         :param period:
         """
     @overload
     def __init__(self, callback: TimerCallback, state: object, dueTime: int, period: int):
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :param dueTime:
         :param period:
         """
     @overload
     def Change(self, dueTime: int, period: int) -> bool:
-        """
-
-        :param dueTime:
+        """:param dueTime:
         :param period:
         :return:
         """
     @overload
     def Change(self, dueTime: int, period: int) -> bool:
-        """
-
-        :param dueTime:
+        """:param dueTime:
         :param period:
         :return:
         """
     @overload
     def Change(self, dueTime: TimeSpan, period: TimeSpan) -> bool:
-        """
-
-        :param dueTime:
+        """:param dueTime:
         :param period:
         :return:
         """
     @overload
     def Change(self, dueTime: int, period: int) -> bool:
-        """
-
-        :param dueTime:
+        """:param dueTime:
         :param period:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     @overload
@@ -7540,42 +4962,23 @@ class Timer(MarshalByRefObject, IDisposable):
         """"""
     @overload
     def Dispose(self, notifyObject: WaitHandle) -> bool:
-        """
-
-        :param notifyObject:
+        """:param notifyObject:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 TimerCallback: Callable[[object], None] = ...
 """
@@ -7587,14 +4990,9 @@ class TimerHolder(Object):
     """"""
 
     def __init__(self, timer: object):
-        """
-
-        :param timer:
-        """
+        """:param timer:"""
     def Change(self, dueTime: int, period: int) -> bool:
-        """
-
-        :param dueTime:
+        """:param dueTime:
         :param period:
         :return:
         """
@@ -7603,32 +5001,19 @@ class TimerHolder(Object):
         """"""
     @overload
     def Close(self, notifyObject: WaitHandle) -> bool:
-        """
-
-        :param notifyObject:
+        """:param notifyObject:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TimerQueue(Object):
     """"""
@@ -7636,40 +5021,21 @@ class TimerQueue(Object):
     @classmethod
     @property
     def Instance(cls) -> TimerQueue:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DeleteTimer(self, timer: TimerQueueTimer) -> None:
-        """
-
-        :param timer:
-        """
+        """:param timer:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UpdateTimer(self, timer: TimerQueueTimer, dueTime: int, period: int) -> bool:
-        """
-
-        :param timer:
+        """:param timer:
         :param dueTime:
         :param period:
         :return:
@@ -7683,279 +5049,199 @@ class TimerQueueTimer(Object):
         """"""
     @overload
     def Close(self, toSignal: WaitHandle) -> bool:
-        """
-
-        :param toSignal:
+        """:param toSignal:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Volatile(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Read(cls, location: T) -> T:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: bool) -> bool:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: float) -> float:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: IntPtr) -> IntPtr:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: float) -> float:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: int) -> int:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     @classmethod
     @overload
     def Read(cls, location: UIntPtr) -> UIntPtr:
-        """
-
-        :param location:
+        """:param location:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Write(cls, location: T, value: T) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: bool, value: bool) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: float, value: float) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: IntPtr, value: IntPtr) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: float, value: float) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: int, value: int) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
     @classmethod
     @overload
     def Write(cls, location: UIntPtr, value: UIntPtr) -> None:
-        """
-
-        :param location:
+        """:param location:
         :param value:
         """
 
@@ -7975,73 +5261,51 @@ class WaitHandle(ABC, MarshalByRefObject, IDisposable):
     """
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handle.setter
     def Handle(self, value: IntPtr) -> None: ...
     @property
     def SafeWaitHandle(self) -> SafeWaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SafeWaitHandle.setter
     def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def SignalAndWait(cls, toSignal: WaitHandle, toWaitOn: WaitHandle) -> bool:
-        """
-
-        :param toSignal:
+        """:param toSignal:
         :param toWaitOn:
         :return:
         """
     @classmethod
     @overload
     def SignalAndWait(
-        cls, toSignal: WaitHandle, toWaitOn: WaitHandle, millisecondsTimeout: int, exitContext: bool
+        cls,
+        toSignal: WaitHandle,
+        toWaitOn: WaitHandle,
+        millisecondsTimeout: int,
+        exitContext: bool,
     ) -> bool:
-        """
-
-        :param toSignal:
+        """:param toSignal:
         :param toWaitOn:
         :param millisecondsTimeout:
         :param exitContext:
@@ -8050,44 +5314,37 @@ class WaitHandle(ABC, MarshalByRefObject, IDisposable):
     @classmethod
     @overload
     def SignalAndWait(
-        cls, toSignal: WaitHandle, toWaitOn: WaitHandle, timeout: TimeSpan, exitContext: bool
+        cls,
+        toSignal: WaitHandle,
+        toWaitOn: WaitHandle,
+        timeout: TimeSpan,
+        exitContext: bool,
     ) -> bool:
-        """
-
-        :param toSignal:
+        """:param toSignal:
         :param toWaitOn:
         :param timeout:
         :param exitContext:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def WaitAll(cls, waitHandles: Array[WaitHandle]) -> bool:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :return:
         """
     @classmethod
     @overload
     def WaitAll(cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int) -> bool:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param millisecondsTimeout:
         :return:
         """
     @classmethod
     @overload
     def WaitAll(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan) -> bool:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param timeout:
         :return:
         """
@@ -8096,9 +5353,7 @@ class WaitHandle(ABC, MarshalByRefObject, IDisposable):
     def WaitAll(
         cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int, exitContext: bool
     ) -> bool:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param millisecondsTimeout:
         :param exitContext:
         :return:
@@ -8106,9 +5361,7 @@ class WaitHandle(ABC, MarshalByRefObject, IDisposable):
     @classmethod
     @overload
     def WaitAll(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param timeout:
         :param exitContext:
         :return:
@@ -8116,26 +5369,20 @@ class WaitHandle(ABC, MarshalByRefObject, IDisposable):
     @classmethod
     @overload
     def WaitAny(cls, waitHandles: Array[WaitHandle]) -> int:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :return:
         """
     @classmethod
     @overload
     def WaitAny(cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int) -> int:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param millisecondsTimeout:
         :return:
         """
     @classmethod
     @overload
     def WaitAny(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan) -> int:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param timeout:
         :return:
         """
@@ -8144,9 +5391,7 @@ class WaitHandle(ABC, MarshalByRefObject, IDisposable):
     def WaitAny(
         cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int, exitContext: bool
     ) -> int:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param millisecondsTimeout:
         :param exitContext:
         :return:
@@ -8154,46 +5399,33 @@ class WaitHandle(ABC, MarshalByRefObject, IDisposable):
     @classmethod
     @overload
     def WaitAny(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan, exitContext: bool) -> int:
-        """
-
-        :param waitHandles:
+        """:param waitHandles:
         :param timeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def WaitOne(self, millisecondsTimeout: int) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :return:
         """
     @overload
     def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
-        """
-
-        :param millisecondsTimeout:
+        """:param millisecondsTimeout:
         :param exitContext:
         :return:
         """
     @overload
     def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
-        """
-
-        :param timeout:
+        """:param timeout:
         :param exitContext:
         :return:
         """
@@ -8206,177 +5438,104 @@ class WaitHandleCannotBeOpenedException(ApplicationException, _Exception, ISeria
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WaitHandleExtensions(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetSafeWaitHandle(cls, waitHandle: WaitHandle) -> SafeWaitHandle:
-        """
-
-        :param waitHandle:
+        """:param waitHandle:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def SetSafeWaitHandle(cls, waitHandle: WaitHandle, value: SafeWaitHandle) -> None:
-        """
-
-        :param waitHandle:
+        """:param waitHandle:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 WaitOrTimerCallback: Callable[[object, bool], None] = ...
 """
@@ -8391,104 +5550,58 @@ class WinRTSynchronizationContextFactoryBase(Object):
     def __init__(self):
         """"""
     def Create(self, coreDispatcher: object) -> SynchronizationContext:
-        """
-
-        :param coreDispatcher:
+        """:param coreDispatcher:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _IOCompletionCallback(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _ThreadPoolWaitCallback(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _ThreadPoolWaitOrTimerCallback(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

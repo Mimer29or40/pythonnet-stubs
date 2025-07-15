@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 import json
+from collections.abc import Mapping
+from collections.abc import MutableSequence
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
-from typing import Dict
-from typing import Mapping
-from typing import MutableSequence
-from typing import Sequence
 
 from stubgen.build_stubs import Doc
 from stubgen.build_stubs import merge_doc
@@ -28,7 +29,7 @@ def main() -> None:
         print(f"Using doc file: {str(file_path)!r}")
 
     namespace: CNamespace
-    namespaces: Dict[str, CNamespace] = {}
+    namespaces: dict[str, CNamespace] = {}
     for skeleton_file in skeleton_files:
         print(f"Loading skeleton file: {str(skeleton_file)!r}")
         with skeleton_file.open("r") as file:
@@ -57,7 +58,7 @@ def main() -> None:
             return name != namespace_name and name.startswith(namespace_name)
 
         doc: Doc = global_doc.get(namespace_name)
-        raw_data: Dict[str, Any] = {k: doc.data[k] for k in sorted(doc.data.keys())}
+        raw_data: dict[str, Any] = {k: doc.data[k] for k in sorted(doc.data.keys())}
         sub_namespaces: Sequence[str] = list(filter(func, namespace_names))
         for sub_namespace in sub_namespaces:
             sub_namespace = sub_namespace.replace(namespace_name + ".", "").split(".")[0]
@@ -68,8 +69,8 @@ def main() -> None:
         raw_data = {"doc": doc_str, **raw_data}
 
         namespace_name_split: Sequence[str] = namespace_name.split(".")
-        data: Dict[str, Any] = {}
-        data_dict: Dict[str, Any] = data
+        data: dict[str, Any] = {}
+        data_dict: dict[str, Any] = data
         for name in namespace_name_split[:-1]:
             data_dict[name] = {}
             data_dict = data_dict[name]

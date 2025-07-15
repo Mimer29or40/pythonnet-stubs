@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 from typing import overload
 
@@ -14,185 +12,117 @@ class CounterData(Object):
 
     @property
     def RawValue(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RawValue.setter
     def RawValue(self, value: int) -> None: ...
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: int) -> None: ...
     def Decrement(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Increment(self) -> None:
         """"""
     def IncrementBy(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CounterSet(Object, IDisposable):
     """"""
 
     def __init__(
-        self, providerGuid: Guid, counterSetGuid: Guid, instanceType: CounterSetInstanceType
+        self,
+        providerGuid: Guid,
+        counterSetGuid: Guid,
+        instanceType: CounterSetInstanceType,
     ):
-        """
-
-        :param providerGuid:
+        """:param providerGuid:
         :param counterSetGuid:
         :param instanceType:
         """
     @overload
     def AddCounter(self, counterId: int, counterType: CounterType) -> None:
-        """
-
-        :param counterId:
+        """:param counterId:
         :param counterType:
         """
     @overload
     def AddCounter(self, counterId: int, counterType: CounterType, counterName: str) -> None:
-        """
-
-        :param counterId:
+        """:param counterId:
         :param counterType:
         :param counterName:
         """
     def CreateCounterSetInstance(self, instanceName: str) -> CounterSetInstance:
-        """
-
-        :param instanceName:
+        """:param instanceName:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CounterSetInstance(Object, IDisposable):
     """"""
 
     @property
     def Counters(self) -> CounterSetInstanceCounterDataSet:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CounterSetInstanceCounterDataSet(Object, IDisposable):
     """"""
 
     @property
     def Item(self) -> CounterData:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __getitem__(self, counterId: int) -> CounterData:
-        """
-
-        :param counterId:
+        """:param counterId:
         :return:
         """
     @overload
     def __getitem__(self, counterName: str) -> CounterData:
-        """
-
-        :param counterName:
+        """:param counterName:
         :return:
         """
 
@@ -292,48 +222,26 @@ class PerfProvider(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PerfProviderCollection(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

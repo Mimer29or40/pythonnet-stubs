@@ -1,9 +1,7 @@
-from __future__ import annotations
-
 from abc import ABC
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
-from typing import Iterator
 from typing import TypeVar
 from typing import overload
 
@@ -44,355 +42,214 @@ class GenericIdentity(ClaimsIdentity, IIdentity):
 
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def __init__(self, name: str, type: str):
-        """
-
-        :param name:
+        """:param name:
         :param type:
         """
     @property
     def Actor(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Actor.setter
     def Actor(self, value: ClaimsIdentity) -> None: ...
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BootstrapContext(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BootstrapContext.setter
     def BootstrapContext(self, value: object) -> None: ...
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Label(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Label.setter
     def Label(self, value: str) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NameClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RoleClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     def AddClaims(self, claims: IEnumerable[Claim]) -> None:
-        """
-
-        :param claims:
-        """
+        """:param claims:"""
     def Clone(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindAll(self, type: str) -> IEnumerable[Claim]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def FindFirst(self, match: Predicate[Claim]) -> Claim:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindFirst(self, type: str) -> Claim:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasClaim(self, match: Predicate[Claim]) -> bool:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def HasClaim(self, type: str, value: str) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :return:
         """
     def RemoveClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryRemoveClaim(self, claim: Claim) -> bool:
-        """
-
-        :param claim:
+        """:param claim:
         :return:
         """
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
 
 class GenericPrincipal(ClaimsPrincipal, IPrincipal):
     """"""
 
     def __init__(self, identity: IIdentity, roles: Array[str]):
-        """
-
-        :param identity:
+        """:param identity:
         :param roles:
         """
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def ClaimsPrincipalSelector(cls) -> Func[ClaimsPrincipal]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @ClaimsPrincipalSelector.setter
     def ClaimsPrincipalSelector(cls, value: Func[ClaimsPrincipal]) -> None: ...
     @classmethod
     @property
     def Current(cls) -> ClaimsPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identities(self) -> IEnumerable[ClaimsIdentity]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identity(self) -> IIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def PrimaryIdentitySelector(cls) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
-        """
-
-        :return:
-        """
+    def PrimaryIdentitySelector(
+        cls,
+    ) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
+        """:return:"""
     @classmethod
     @PrimaryIdentitySelector.setter
     def PrimaryIdentitySelector(
         cls, value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]
     ) -> None: ...
     def AddIdentities(self, identities: IEnumerable[ClaimsIdentity]) -> None:
-        """
-
-        :param identities:
-        """
+        """:param identities:"""
     def AddIdentity(self, identity: ClaimsIdentity) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def Clone(self) -> ClaimsPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindAll(self, type: str) -> IEnumerable[Claim]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def FindFirst(self, match: Predicate[Claim]) -> Claim:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindFirst(self, type: str) -> Claim:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasClaim(self, match: Predicate[Claim]) -> bool:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def HasClaim(self, type: str, value: str) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :return:
         """
     def IsInRole(self, role: str) -> bool:
-        """
-
-        :param role:
+        """:param role:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
 
 class IIdentity:
     """"""
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPrincipal:
     """"""
 
     @property
     def Identity(self) -> IIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsInRole(self, role: str) -> bool:
-        """
-
-        :param role:
+        """:param role:
         :return:
         """
 
@@ -428,212 +285,125 @@ class IdentityNotMappedException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnmappedIdentities(self) -> IdentityReferenceCollection:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IdentityReference(ABC, Object):
     """"""
 
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsValidTargetType(self, targetType: Type) -> bool:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Translate(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def __eq__(self, other: IdentityReference) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: IdentityReference) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: IdentityReference, right: IdentityReference) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: IdentityReference, right: IdentityReference) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -648,125 +418,73 @@ class IdentityReferenceCollection(
         """"""
     @overload
     def __init__(self, capacity: int):
-        """
-
-        :param capacity:
-        """
+        """:param capacity:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> IdentityReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: IdentityReference) -> None: ...
     def Add(self, item: IdentityReference) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: IdentityReference) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[IdentityReference], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, item: IdentityReference) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Translate(self, targetType: Type) -> IdentityReferenceCollection:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     @overload
     def Translate(self, targetType: Type, forceSuccess: bool) -> IdentityReferenceCollection:
-        """
-
-        :param targetType:
+        """:param targetType:
         :param forceSuccess:
         :return:
         """
     def __contains__(self, value: IdentityReference) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> IdentityReference:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[IdentityReference]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: IdentityReference) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -775,40 +493,23 @@ class IdentityReferenceEnumerator(Object, IEnumerator[IdentityReference], IEnume
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ImpersonationQueryResult(Enum):
     """"""
@@ -845,81 +546,50 @@ class NTAccount(IdentityReference):
 
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def __init__(self, domainName: str, accountName: str):
-        """
-
-        :param domainName:
+        """:param domainName:
         :param accountName:
         """
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsValidTargetType(self, targetType: Type) -> bool:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Translate(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def __eq__(self, other: NTAccount) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: NTAccount) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: NTAccount, right: NTAccount) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: NTAccount, right: NTAccount) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -979,143 +649,88 @@ class SecurityIdentifier(IdentityReference, IComparable[SecurityIdentifier]):
     """
     @overload
     def __init__(self, binaryForm: IntPtr):
-        """
-
-        :param binaryForm:
-        """
+        """:param binaryForm:"""
     @overload
     def __init__(self, sddlForm: str):
-        """
-
-        :param sddlForm:
-        """
+        """:param sddlForm:"""
     @overload
     def __init__(self, sidType: WellKnownSidType, domainSid: SecurityIdentifier):
-        """
-
-        :param sidType:
+        """:param sidType:
         :param domainSid:
         """
     @overload
     def __init__(self, binaryForm: Array[int], offset: int):
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     @property
     def AccountDomainSid(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BinaryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CompareTo(self, other: SecurityIdentifier) -> int:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, sid: SecurityIdentifier) -> bool:
-        """
-
-        :param sid:
+        """:param sid:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
-        """
-
-        :param binaryForm:
+        """:param binaryForm:
         :param offset:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsAccountSid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsEqualDomainSid(self, sid: SecurityIdentifier) -> bool:
-        """
-
-        :param sid:
+        """:param sid:
         :return:
         """
     def IsValidTargetType(self, targetType: Type) -> bool:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def IsWellKnown(self, type: WellKnownSidType) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Translate(self, targetType: Type) -> IdentityReference:
-        """
-
-        :param targetType:
+        """:param targetType:
         :return:
         """
     def __eq__(self, other: SecurityIdentifier) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: SecurityIdentifier) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: SecurityIdentifier, right: SecurityIdentifier) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: SecurityIdentifier, right: SecurityIdentifier) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -1424,26 +1039,15 @@ class Win32(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WinSecurityContext(Enum):
     """"""
@@ -1501,350 +1105,214 @@ class WindowsIdentity(
     """
     @overload
     def __init__(self, userToken: IntPtr):
-        """
-
-        :param userToken:
-        """
+        """:param userToken:"""
     @overload
     def __init__(self, sUserPrincipalName: str):
-        """
-
-        :param sUserPrincipalName:
-        """
+        """:param sUserPrincipalName:"""
     @overload
     def __init__(self, info: SerializationInfo, context: StreamingContext):
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def __init__(self, userToken: IntPtr, type: str):
-        """
-
-        :param userToken:
+        """:param userToken:
         :param type:
         """
     @overload
     def __init__(self, sUserPrincipalName: str, type: str):
-        """
-
-        :param sUserPrincipalName:
+        """:param sUserPrincipalName:
         :param type:
         """
     @overload
     def __init__(self, userToken: IntPtr, type: str, acctType: WindowsAccountType):
-        """
-
-        :param userToken:
+        """:param userToken:
         :param type:
         :param acctType:
         """
     @overload
     def __init__(
-        self, userToken: IntPtr, type: str, acctType: WindowsAccountType, isAuthenticated: bool
+        self,
+        userToken: IntPtr,
+        type: str,
+        acctType: WindowsAccountType,
+        isAuthenticated: bool,
     ):
-        """
-
-        :param userToken:
+        """:param userToken:
         :param type:
         :param acctType:
         :param isAuthenticated:
         """
     @property
     def AccessToken(self) -> SafeAccessTokenHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Actor(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Actor.setter
     def Actor(self, value: ClaimsIdentity) -> None: ...
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BootstrapContext(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BootstrapContext.setter
     def BootstrapContext(self, value: object) -> None: ...
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeviceClaims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Groups(self) -> IdentityReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImpersonationLevel(self) -> TokenImpersonationLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAnonymous(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGuest(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSystem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Label(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Label.setter
     def Label(self, value: str) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NameClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Owner(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RoleClaimType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Token(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def User(self) -> SecurityIdentifier:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserClaims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     def AddClaims(self, claims: IEnumerable[Claim]) -> None:
-        """
-
-        :param claims:
-        """
+        """:param claims:"""
     def Clone(self) -> ClaimsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindAll(self, type: str) -> IEnumerable[Claim]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def FindFirst(self, match: Predicate[Claim]) -> Claim:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindFirst(self, type: str) -> Claim:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def GetAnonymous(cls) -> WindowsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetCurrent(cls) -> WindowsIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetCurrent(cls, desiredAccess: TokenAccessLevels) -> WindowsIdentity:
-        """
-
-        :param desiredAccess:
+        """:param desiredAccess:
         :return:
         """
     @classmethod
     @overload
     def GetCurrent(cls, ifImpersonating: bool) -> WindowsIdentity:
-        """
-
-        :param ifImpersonating:
+        """:param ifImpersonating:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasClaim(self, match: Predicate[Claim]) -> bool:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def HasClaim(self, type: str, value: str) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :return:
         """
     @overload
     def Impersonate(self) -> WindowsImpersonationContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Impersonate(cls, userToken: IntPtr) -> WindowsImpersonationContext:
-        """
-
-        :param userToken:
+        """:param userToken:
         :return:
         """
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def RemoveClaim(self, claim: Claim) -> None:
-        """
-
-        :param claim:
-        """
+        """:param claim:"""
     @classmethod
     @overload
     def RunImpersonated(cls, safeAccessTokenHandle: SafeAccessTokenHandle, action: Action) -> None:
-        """
-
-        :param safeAccessTokenHandle:
+        """:param safeAccessTokenHandle:
         :param action:
         """
     @classmethod
     @overload
     def RunImpersonated(cls, safeAccessTokenHandle: SafeAccessTokenHandle, func: Func[T]) -> T:
-        """
-
-        :param safeAccessTokenHandle:
+        """:param safeAccessTokenHandle:
         :param func:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TryRemoveClaim(self, claim: Claim) -> bool:
-        """
-
-        :param claim:
+        """:param claim:
         :return:
         """
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""
 
 class WindowsImpersonationContext(Object, IDisposable):
     """"""
@@ -1852,26 +1320,15 @@ class WindowsImpersonationContext(Object, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Undo(self) -> None:
         """"""
 
@@ -1879,58 +1336,36 @@ class WindowsPrincipal(ClaimsPrincipal, IPrincipal):
     """"""
 
     def __init__(self, ntIdentity: WindowsIdentity):
-        """
-
-        :param ntIdentity:
-        """
+        """:param ntIdentity:"""
     @property
     def Claims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def ClaimsPrincipalSelector(cls) -> Func[ClaimsPrincipal]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @ClaimsPrincipalSelector.setter
     def ClaimsPrincipalSelector(cls, value: Func[ClaimsPrincipal]) -> None: ...
     @classmethod
     @property
     def Current(cls) -> ClaimsPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeviceClaims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identities(self) -> IEnumerable[ClaimsIdentity]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Identity(self) -> IIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
-    def PrimaryIdentitySelector(cls) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
-        """
-
-        :return:
-        """
+    def PrimaryIdentitySelector(
+        cls,
+    ) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
+        """:return:"""
     @classmethod
     @PrimaryIdentitySelector.setter
     def PrimaryIdentitySelector(
@@ -1938,119 +1373,73 @@ class WindowsPrincipal(ClaimsPrincipal, IPrincipal):
     ) -> None: ...
     @property
     def UserClaims(self) -> IEnumerable[Claim]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddIdentities(self, identities: IEnumerable[ClaimsIdentity]) -> None:
-        """
-
-        :param identities:
-        """
+        """:param identities:"""
     def AddIdentity(self, identity: ClaimsIdentity) -> None:
-        """
-
-        :param identity:
-        """
+        """:param identity:"""
     def Clone(self) -> ClaimsPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindAll(self, type: str) -> IEnumerable[Claim]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def FindFirst(self, match: Predicate[Claim]) -> Claim:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def FindFirst(self, type: str) -> Claim:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def HasClaim(self, match: Predicate[Claim]) -> bool:
-        """
-
-        :param match:
+        """:param match:
         :return:
         """
     @overload
     def HasClaim(self, type: str, value: str) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :param value:
         :return:
         """
     @overload
     def IsInRole(self, sid: SecurityIdentifier) -> bool:
-        """
-
-        :param sid:
+        """:param sid:
         :return:
         """
     @overload
     def IsInRole(self, role: WindowsBuiltInRole) -> bool:
-        """
-
-        :param role:
+        """:param role:
         :return:
         """
     @overload
     def IsInRole(self, rid: int) -> bool:
-        """
-
-        :param rid:
+        """:param rid:
         :return:
         """
     @overload
     def IsInRole(self, role: str) -> bool:
-        """
-
-        :param role:
+        """:param role:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def WriteTo(self, writer: BinaryWriter) -> None:
-        """
-
-        :param writer:
-        """
+        """:param writer:"""

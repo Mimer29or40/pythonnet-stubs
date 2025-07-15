@@ -1,7 +1,4 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Tuple
 
 from System import Attribute
 from System import Enum
@@ -15,126 +12,71 @@ class RemotingCachedData(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RemotingFieldCachedData(RemotingCachedData):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RemotingMethodCachedData(RemotingCachedData):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RemotingParameterCachedData(RemotingCachedData):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RemotingTypeCachedData(RemotingCachedData):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapAttribute(Attribute, _Attribute):
     """"""
@@ -143,73 +85,46 @@ class SoapAttribute(Attribute, _Attribute):
         """"""
     @property
     def Embedded(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Embedded.setter
     def Embedded(self, value: bool) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UseAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseAttribute.setter
     def UseAttribute(self, value: bool) -> None: ...
     @property
     def XmlNamespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlNamespace.setter
     def XmlNamespace(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -221,9 +136,7 @@ class SoapAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -233,21 +146,13 @@ class SoapAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapFieldAttribute(SoapAttribute, _Attribute):
     """"""
@@ -256,89 +161,56 @@ class SoapFieldAttribute(SoapAttribute, _Attribute):
         """"""
     @property
     def Embedded(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Embedded.setter
     def Embedded(self, value: bool) -> None: ...
     @property
     def Order(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Order.setter
     def Order(self, value: int) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UseAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseAttribute.setter
     def UseAttribute(self, value: bool) -> None: ...
     @property
     def XmlElementName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlElementName.setter
     def XmlElementName(self, value: str) -> None: ...
     @property
     def XmlNamespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlNamespace.setter
     def XmlNamespace(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -350,9 +222,7 @@ class SoapFieldAttribute(SoapAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -362,26 +232,15 @@ class SoapFieldAttribute(SoapAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsInteropXmlElement(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapMethodAttribute(SoapAttribute, _Attribute):
     """"""
@@ -390,105 +249,66 @@ class SoapMethodAttribute(SoapAttribute, _Attribute):
         """"""
     @property
     def Embedded(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Embedded.setter
     def Embedded(self, value: bool) -> None: ...
     @property
     def ResponseXmlElementName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ResponseXmlElementName.setter
     def ResponseXmlElementName(self, value: str) -> None: ...
     @property
     def ResponseXmlNamespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ResponseXmlNamespace.setter
     def ResponseXmlNamespace(self, value: str) -> None: ...
     @property
     def ReturnXmlElementName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReturnXmlElementName.setter
     def ReturnXmlElementName(self, value: str) -> None: ...
     @property
     def SoapAction(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SoapAction.setter
     def SoapAction(self, value: str) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UseAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseAttribute.setter
     def UseAttribute(self, value: bool) -> None: ...
     @property
     def XmlNamespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlNamespace.setter
     def XmlNamespace(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -500,9 +320,7 @@ class SoapMethodAttribute(SoapAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -512,21 +330,13 @@ class SoapMethodAttribute(SoapAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapOption(Enum):
     """"""
@@ -551,73 +361,46 @@ class SoapParameterAttribute(SoapAttribute, _Attribute):
         """"""
     @property
     def Embedded(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Embedded.setter
     def Embedded(self, value: bool) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UseAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseAttribute.setter
     def UseAttribute(self, value: bool) -> None: ...
     @property
     def XmlNamespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlNamespace.setter
     def XmlNamespace(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -629,9 +412,7 @@ class SoapParameterAttribute(SoapAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -641,21 +422,13 @@ class SoapParameterAttribute(SoapAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SoapTypeAttribute(SoapAttribute, _Attribute):
     """"""
@@ -664,113 +437,71 @@ class SoapTypeAttribute(SoapAttribute, _Attribute):
         """"""
     @property
     def Embedded(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Embedded.setter
     def Embedded(self, value: bool) -> None: ...
     @property
     def SoapOptions(self) -> SoapOption:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SoapOptions.setter
     def SoapOptions(self, value: SoapOption) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UseAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseAttribute.setter
     def UseAttribute(self, value: bool) -> None: ...
     @property
     def XmlElementName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlElementName.setter
     def XmlElementName(self, value: str) -> None: ...
     @property
     def XmlFieldOrder(self) -> XmlFieldOrderOption:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlFieldOrder.setter
     def XmlFieldOrder(self, value: XmlFieldOrderOption) -> None: ...
     @property
     def XmlNamespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlNamespace.setter
     def XmlNamespace(self, value: str) -> None: ...
     @property
     def XmlTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlTypeName.setter
     def XmlTypeName(self, value: str) -> None: ...
     @property
     def XmlTypeNamespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @XmlTypeNamespace.setter
     def XmlTypeNamespace(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -782,9 +513,7 @@ class SoapTypeAttribute(SoapAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -794,21 +523,13 @@ class SoapTypeAttribute(SoapAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class XmlFieldOrderOption(Enum):
     """"""

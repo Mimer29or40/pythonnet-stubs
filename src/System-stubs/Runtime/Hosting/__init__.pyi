@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import overload
 
 from System import ActivationContext
@@ -15,74 +13,41 @@ class ActivationArguments(EvidenceBase):
 
     @overload
     def __init__(self, activationData: ActivationContext):
-        """
-
-        :param activationData:
-        """
+        """:param activationData:"""
     @overload
     def __init__(self, applicationIdentity: ApplicationIdentity):
-        """
-
-        :param applicationIdentity:
-        """
+        """:param applicationIdentity:"""
     @overload
     def __init__(self, activationContext: ActivationContext, activationData: Array[str]):
-        """
-
-        :param activationContext:
+        """:param activationContext:
         :param activationData:
         """
     @overload
     def __init__(self, applicationIdentity: ApplicationIdentity, activationData: Array[str]):
-        """
-
-        :param applicationIdentity:
+        """:param applicationIdentity:
         :param activationData:
         """
     @property
     def ActivationContext(self) -> ActivationContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ActivationData(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ApplicationIdentity(self) -> ApplicationIdentity:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Clone(self) -> EvidenceBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ApplicationActivator(Object):
     """"""
@@ -91,64 +56,38 @@ class ApplicationActivator(Object):
         """"""
     @overload
     def CreateInstance(self, activationContext: ActivationContext) -> ObjectHandle:
-        """
-
-        :param activationContext:
+        """:param activationContext:
         :return:
         """
     @overload
     def CreateInstance(
         self, activationContext: ActivationContext, activationCustomData: Array[str]
     ) -> ObjectHandle:
-        """
-
-        :param activationContext:
+        """:param activationContext:
         :param activationCustomData:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ManifestRunner(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

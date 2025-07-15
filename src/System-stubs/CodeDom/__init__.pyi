@@ -1,7 +1,5 @@
-from __future__ import annotations
-
+from collections.abc import Iterator
 from typing import Generic
-from typing import Iterator
 from typing import TypeVar
 from typing import overload
 
@@ -34,45 +32,25 @@ class CodeArgumentReferenceExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, parameterName: str):
-        """
-
-        :param parameterName:
-        """
+        """:param parameterName:"""
     @property
     def ParameterName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ParameterName.setter
     def ParameterName(self, value: str) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeArrayCreateExpression(CodeExpression):
     """"""
@@ -82,124 +60,80 @@ class CodeArrayCreateExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, createType: CodeTypeReference, size: CodeExpression):
-        """
-
-        :param createType:
+        """:param createType:
         :param size:
         """
     @overload
     def __init__(self, createType: CodeTypeReference, initializers: Array[CodeExpression]):
-        """
-
-        :param createType:
+        """:param createType:
         :param initializers:
         """
     @overload
     def __init__(self, createType: CodeTypeReference, size: int):
-        """
-
-        :param createType:
+        """:param createType:
         :param size:
         """
     @overload
     def __init__(self, createType: str, size: CodeExpression):
-        """
-
-        :param createType:
+        """:param createType:
         :param size:
         """
     @overload
     def __init__(self, createType: str, initializers: Array[CodeExpression]):
-        """
-
-        :param createType:
+        """:param createType:
         :param initializers:
         """
     @overload
     def __init__(self, createType: str, size: int):
-        """
-
-        :param createType:
+        """:param createType:
         :param size:
         """
     @overload
     def __init__(self, createType: Type, size: CodeExpression):
-        """
-
-        :param createType:
+        """:param createType:
         :param size:
         """
     @overload
     def __init__(self, createType: Type, initializers: Array[CodeExpression]):
-        """
-
-        :param createType:
+        """:param createType:
         :param initializers:
         """
     @overload
     def __init__(self, createType: Type, size: int):
-        """
-
-        :param createType:
+        """:param createType:
         :param size:
         """
     @property
     def CreateType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CreateType.setter
     def CreateType(self, value: CodeTypeReference) -> None: ...
     @property
     def Initializers(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Size.setter
     def Size(self, value: int) -> None: ...
     @property
     def SizeExpression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SizeExpression.setter
     def SizeExpression(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeArrayIndexerExpression(CodeExpression):
     """"""
@@ -209,52 +143,30 @@ class CodeArrayIndexerExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetObject: CodeExpression, indices: Array[CodeExpression]):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param indices:
         """
     @property
     def Indices(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeAssignStatement(CodeStatement):
     """"""
@@ -264,74 +176,43 @@ class CodeAssignStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, left: CodeExpression, right: CodeExpression):
-        """
-
-        :param left:
+        """:param left:
         :param right:
         """
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Left(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Left.setter
     def Left(self, value: CodeExpression) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Right(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Right.setter
     def Right(self, value: CodeExpression) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeAttachEventStatement(CodeStatement):
     """"""
@@ -341,82 +222,49 @@ class CodeAttachEventStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, eventRef: CodeEventReferenceExpression, listener: CodeExpression):
-        """
-
-        :param eventRef:
+        """:param eventRef:
         :param listener:
         """
     @overload
     def __init__(self, targetObject: CodeExpression, eventName: str, listener: CodeExpression):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param eventName:
         :param listener:
         """
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Event(self) -> CodeEventReferenceExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Event.setter
     def Event(self, value: CodeEventReferenceExpression) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Listener(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Listener.setter
     def Listener(self, value: CodeExpression) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeAttributeArgument(Object):
     """"""
@@ -426,54 +274,32 @@ class CodeAttributeArgument(Object):
         """"""
     @overload
     def __init__(self, value: CodeExpression):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, name: str, value: CodeExpression):
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Value(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: CodeExpression) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeAttributeArgumentCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -483,223 +309,133 @@ class CodeAttributeArgumentCollection(CollectionBase, ICollection, IEnumerable, 
         """"""
     @overload
     def __init__(self, value: CodeAttributeArgumentCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeAttributeArgument]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeAttributeArgument) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeAttributeArgumentCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeAttributeArgument]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeAttributeArgument) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeAttributeArgument], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeAttributeArgument) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeAttributeArgument) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeAttributeArgument) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeAttributeArgument) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -711,71 +447,41 @@ class CodeAttributeDeclaration(Object):
         """"""
     @overload
     def __init__(self, attributeType: CodeTypeReference):
-        """
-
-        :param attributeType:
-        """
+        """:param attributeType:"""
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def __init__(self, attributeType: CodeTypeReference, arguments: Array[CodeAttributeArgument]):
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param arguments:
         """
     @overload
     def __init__(self, name: str, arguments: Array[CodeAttributeArgument]):
-        """
-
-        :param name:
+        """:param name:
         :param arguments:
         """
     @property
     def Arguments(self) -> CodeAttributeArgumentCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AttributeType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeAttributeDeclarationCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -785,223 +491,133 @@ class CodeAttributeDeclarationCollection(CollectionBase, ICollection, IEnumerabl
         """"""
     @overload
     def __init__(self, value: CodeAttributeDeclarationCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeAttributeDeclaration]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeAttributeDeclaration) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeAttributeDeclarationCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeAttributeDeclaration]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeAttributeDeclaration) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeAttributeDeclaration], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeAttributeDeclaration) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeAttributeDeclaration) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeAttributeDeclaration) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeAttributeDeclaration) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -1012,31 +628,17 @@ class CodeBaseReferenceExpression(CodeExpression):
         """"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeBinaryOperatorExpression(CodeExpression):
     """"""
@@ -1046,63 +648,38 @@ class CodeBinaryOperatorExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, left: CodeExpression, op: CodeBinaryOperatorType, right: CodeExpression):
-        """
-
-        :param left:
+        """:param left:
         :param op:
         :param right:
         """
     @property
     def Left(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Left.setter
     def Left(self, value: CodeExpression) -> None: ...
     @property
     def Operator(self) -> CodeBinaryOperatorType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Operator.setter
     def Operator(self, value: CodeBinaryOperatorType) -> None: ...
     @property
     def Right(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Right.setter
     def Right(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeBinaryOperatorType(Enum):
     """"""
@@ -1150,68 +727,42 @@ class CodeCastExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetType: CodeTypeReference, expression: CodeExpression):
-        """
-
-        :param targetType:
+        """:param targetType:
         :param expression:
         """
     @overload
     def __init__(self, targetType: str, expression: CodeExpression):
-        """
-
-        :param targetType:
+        """:param targetType:
         :param expression:
         """
     @overload
     def __init__(self, targetType: Type, expression: CodeExpression):
-        """
-
-        :param targetType:
+        """:param targetType:
         :param expression:
         """
     @property
     def Expression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expression.setter
     def Expression(self, value: CodeExpression) -> None: ...
     @property
     def TargetType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetType.setter
     def TargetType(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeCatchClause(Object):
     """"""
@@ -1221,15 +772,10 @@ class CodeCatchClause(Object):
         """"""
     @overload
     def __init__(self, localName: str):
-        """
-
-        :param localName:
-        """
+        """:param localName:"""
     @overload
     def __init__(self, localName: str, catchExceptionType: CodeTypeReference):
-        """
-
-        :param localName:
+        """:param localName:
         :param catchExceptionType:
         """
     @overload
@@ -1239,55 +785,33 @@ class CodeCatchClause(Object):
         catchExceptionType: CodeTypeReference,
         statements: Array[CodeStatement],
     ):
-        """
-
-        :param localName:
+        """:param localName:
         :param catchExceptionType:
         :param statements:
         """
     @property
     def CatchExceptionType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CatchExceptionType.setter
     def CatchExceptionType(self, value: CodeTypeReference) -> None: ...
     @property
     def LocalName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LocalName.setter
     def LocalName(self, value: str) -> None: ...
     @property
     def Statements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeCatchClauseCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -1297,223 +821,133 @@ class CodeCatchClauseCollection(CollectionBase, ICollection, IEnumerable, IList)
         """"""
     @overload
     def __init__(self, value: CodeCatchClauseCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeCatchClause]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeCatchClause) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeCatchClauseCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeCatchClause]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeCatchClause) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeCatchClause], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeCatchClause) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeCatchClause) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeCatchClause) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeCatchClause) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -1525,63 +959,38 @@ class CodeChecksumPragma(CodeDirective):
         """"""
     @overload
     def __init__(self, fileName: str, checksumAlgorithmId: Guid, checksumData: Array[int]):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param checksumAlgorithmId:
         :param checksumData:
         """
     @property
     def ChecksumAlgorithmId(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ChecksumAlgorithmId.setter
     def ChecksumAlgorithmId(self, value: Guid) -> None: ...
     @property
     def ChecksumData(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ChecksumData.setter
     def ChecksumData(self, value: Array[int]) -> None: ...
     @property
     def FileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @FileName.setter
     def FileName(self, value: str) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeComment(CodeObject):
     """"""
@@ -1591,60 +1000,35 @@ class CodeComment(CodeObject):
         """"""
     @overload
     def __init__(self, text: str):
-        """
-
-        :param text:
-        """
+        """:param text:"""
     @overload
     def __init__(self, text: str, docComment: bool):
-        """
-
-        :param text:
+        """:param text:
         :param docComment:
         """
     @property
     def DocComment(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DocComment.setter
     def DocComment(self, value: bool) -> None: ...
     @property
     def Text(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Text.setter
     def Text(self, value: str) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeCommentStatement(CodeStatement):
     """"""
@@ -1654,78 +1038,44 @@ class CodeCommentStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, comment: CodeComment):
-        """
-
-        :param comment:
-        """
+        """:param comment:"""
     @overload
     def __init__(self, text: str):
-        """
-
-        :param text:
-        """
+        """:param text:"""
     @overload
     def __init__(self, text: str, docComment: bool):
-        """
-
-        :param text:
+        """:param text:
         :param docComment:
         """
     @property
     def Comment(self) -> CodeComment:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Comment.setter
     def Comment(self, value: CodeComment) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeCommentStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -1735,223 +1085,133 @@ class CodeCommentStatementCollection(CollectionBase, ICollection, IEnumerable, I
         """"""
     @overload
     def __init__(self, value: CodeCommentStatementCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeCommentStatement]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeCommentStatement) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeCommentStatementCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeCommentStatement]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeCommentStatement) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeCommentStatement], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeCommentStatement) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeCommentStatement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeCommentStatement) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeCommentStatement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -1962,61 +1222,32 @@ class CodeCompileUnit(CodeObject):
         """"""
     @property
     def AssemblyCustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Namespaces(self) -> CodeNamespaceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReferencedAssemblies(self) -> StringCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeConditionStatement(CodeStatement):
     """"""
@@ -2026,9 +1257,7 @@ class CodeConditionStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, condition: CodeExpression, trueStatements: Array[CodeStatement]):
-        """
-
-        :param condition:
+        """:param condition:
         :param trueStatements:
         """
     @overload
@@ -2038,79 +1267,45 @@ class CodeConditionStatement(CodeStatement):
         trueStatements: Array[CodeStatement],
         falseStatements: Array[CodeStatement],
     ):
-        """
-
-        :param condition:
+        """:param condition:
         :param trueStatements:
         :param falseStatements:
         """
     @property
     def Condition(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Condition.setter
     def Condition(self, value: CodeExpression) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FalseStatements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TrueStatements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeConstructor(CodeMemberMethod):
     """"""
@@ -2119,139 +1314,77 @@ class CodeConstructor(CodeMemberMethod):
         """"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def BaseConstructorArgs(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ChainedConstructorArgs(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementationTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateImplementationType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PrivateImplementationType.setter
     def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReturnType.setter
     def ReturnType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Statements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeParameters(self) -> CodeTypeParameterCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     PopulateImplementationTypes: EventType[EventHandler] = ...
     """"""
     PopulateParameters: EventType[EventHandler] = ...
@@ -2267,45 +1400,25 @@ class CodeDefaultValueExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, type: CodeTypeReference):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeDelegateCreateExpression(CodeExpression):
     """"""
@@ -2315,65 +1428,43 @@ class CodeDelegateCreateExpression(CodeExpression):
         """"""
     @overload
     def __init__(
-        self, delegateType: CodeTypeReference, targetObject: CodeExpression, methodName: str
+        self,
+        delegateType: CodeTypeReference,
+        targetObject: CodeExpression,
+        methodName: str,
     ):
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :param targetObject:
         :param methodName:
         """
     @property
     def DelegateType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DelegateType.setter
     def DelegateType(self, value: CodeTypeReference) -> None: ...
     @property
     def MethodName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MethodName.setter
     def MethodName(self, value: str) -> None: ...
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeDelegateInvokeExpression(CodeExpression):
     """"""
@@ -2383,58 +1474,33 @@ class CodeDelegateInvokeExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetObject: CodeExpression):
-        """
-
-        :param targetObject:
-        """
+        """:param targetObject:"""
     @overload
     def __init__(self, targetObject: CodeExpression, parameters: Array[CodeExpression]):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param parameters:
         """
     @property
     def Parameters(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeDirectionExpression(CodeExpression):
     """"""
@@ -2444,54 +1510,32 @@ class CodeDirectionExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, direction: FieldDirection, expression: CodeExpression):
-        """
-
-        :param direction:
+        """:param direction:
         :param expression:
         """
     @property
     def Direction(self) -> FieldDirection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Direction.setter
     def Direction(self, value: FieldDirection) -> None: ...
     @property
     def Expression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expression.setter
     def Expression(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeDirective(CodeObject):
     """"""
@@ -2500,31 +1544,17 @@ class CodeDirective(CodeObject):
         """"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeDirectiveCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -2534,223 +1564,133 @@ class CodeDirectiveCollection(CollectionBase, ICollection, IEnumerable, IList):
         """"""
     @overload
     def __init__(self, value: CodeDirectiveCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeDirective]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeDirective) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeDirectiveCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeDirective]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeDirective) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeDirective], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeDirective) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeDirective) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeDirective) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeDirective) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -2761,127 +1701,71 @@ class CodeEntryPointMethod(CodeMemberMethod):
         """"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementationTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateImplementationType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PrivateImplementationType.setter
     def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReturnType.setter
     def ReturnType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Statements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeParameters(self) -> CodeTypeParameterCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     PopulateImplementationTypes: EventType[EventHandler] = ...
     """"""
     PopulateParameters: EventType[EventHandler] = ...
@@ -2897,54 +1781,32 @@ class CodeEventReferenceExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetObject: CodeExpression, eventName: str):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param eventName:
         """
     @property
     def EventName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EventName.setter
     def EventName(self, value: str) -> None: ...
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeExpression(CodeObject):
     """"""
@@ -2953,31 +1815,17 @@ class CodeExpression(CodeObject):
         """"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -2987,223 +1835,133 @@ class CodeExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
         """"""
     @overload
     def __init__(self, value: CodeExpressionCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeExpression]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeExpression) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeExpressionCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeExpression]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeExpression) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeExpression], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeExpression) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeExpression) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeExpression) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeExpression) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -3215,65 +1973,36 @@ class CodeExpressionStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, expression: CodeExpression):
-        """
-
-        :param expression:
-        """
+        """:param expression:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Expression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expression.setter
     def Expression(self, value: CodeExpression) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeFieldReferenceExpression(CodeExpression):
     """"""
@@ -3283,54 +2012,32 @@ class CodeFieldReferenceExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetObject: CodeExpression, fieldName: str):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param fieldName:
         """
     @property
     def FieldName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @FieldName.setter
     def FieldName(self, value: str) -> None: ...
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeGotoStatement(CodeStatement):
     """"""
@@ -3340,65 +2047,36 @@ class CodeGotoStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, label: str):
-        """
-
-        :param label:
-        """
+        """:param label:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Label(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Label.setter
     def Label(self, value: str) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeIndexerExpression(CodeExpression):
     """"""
@@ -3408,52 +2086,30 @@ class CodeIndexerExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetObject: CodeExpression, indices: Array[CodeExpression]):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param indices:
         """
     @property
     def Indices(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeIterationStatement(CodeStatement):
     """"""
@@ -3469,90 +2125,53 @@ class CodeIterationStatement(CodeStatement):
         incrementStatement: CodeStatement,
         statements: Array[CodeStatement],
     ):
-        """
-
-        :param initStatement:
+        """:param initStatement:
         :param testExpression:
         :param incrementStatement:
         :param statements:
         """
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncrementStatement(self) -> CodeStatement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IncrementStatement.setter
     def IncrementStatement(self, value: CodeStatement) -> None: ...
     @property
     def InitStatement(self) -> CodeStatement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitStatement.setter
     def InitStatement(self, value: CodeStatement) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Statements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TestExpression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TestExpression.setter
     def TestExpression(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeLabeledStatement(CodeStatement):
     """"""
@@ -3562,80 +2181,46 @@ class CodeLabeledStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, label: str):
-        """
-
-        :param label:
-        """
+        """:param label:"""
     @overload
     def __init__(self, label: str, statement: CodeStatement):
-        """
-
-        :param label:
+        """:param label:
         :param statement:
         """
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Label(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Label.setter
     def Label(self, value: str) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Statement(self) -> CodeStatement:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Statement.setter
     def Statement(self, value: CodeStatement) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeLinePragma(Object):
     """"""
@@ -3645,48 +2230,29 @@ class CodeLinePragma(Object):
         """"""
     @overload
     def __init__(self, fileName: str, lineNumber: int):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param lineNumber:
         """
     @property
     def FileName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @FileName.setter
     def FileName(self, value: str) -> None: ...
     @property
     def LineNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LineNumber.setter
     def LineNumber(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeMemberEvent(CodeTypeMember):
     """"""
@@ -3695,103 +2261,59 @@ class CodeMemberEvent(CodeTypeMember):
         """"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementationTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def PrivateImplementationType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PrivateImplementationType.setter
     def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeMemberField(CodeTypeMember):
     """"""
@@ -3801,118 +2323,71 @@ class CodeMemberField(CodeTypeMember):
         """"""
     @overload
     def __init__(self, type: CodeTypeReference, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @overload
     def __init__(self, type: str, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @overload
     def __init__(self, type: Type, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitExpression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitExpression.setter
     def InitExpression(self, value: CodeExpression) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeMemberMethod(CodeTypeMember):
     """"""
@@ -3921,127 +2396,71 @@ class CodeMemberMethod(CodeTypeMember):
         """"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementationTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateImplementationType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PrivateImplementationType.setter
     def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReturnType.setter
     def ReturnType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Statements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeParameters(self) -> CodeTypeParameterCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     PopulateImplementationTypes: EventType[EventHandler] = ...
     """"""
     PopulateParameters: EventType[EventHandler] = ...
@@ -4056,137 +2475,78 @@ class CodeMemberProperty(CodeTypeMember):
         """"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GetStatements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasGet(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HasGet.setter
     def HasGet(self, value: bool) -> None: ...
     @property
     def HasSet(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HasSet.setter
     def HasSet(self, value: bool) -> None: ...
     @property
     def ImplementationTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateImplementationType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PrivateImplementationType.setter
     def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
     @property
     def SetStatements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeMethodInvokeExpression(CodeExpression):
     """"""
@@ -4196,62 +2556,41 @@ class CodeMethodInvokeExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, method: CodeMethodReferenceExpression, parameters: Array[CodeExpression]):
-        """
-
-        :param method:
+        """:param method:
         :param parameters:
         """
     @overload
     def __init__(
-        self, targetObject: CodeExpression, methodName: str, parameters: Array[CodeExpression]
+        self,
+        targetObject: CodeExpression,
+        methodName: str,
+        parameters: Array[CodeExpression],
     ):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param methodName:
         :param parameters:
         """
     @property
     def Method(self) -> CodeMethodReferenceExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Method.setter
     def Method(self, value: CodeMethodReferenceExpression) -> None: ...
     @property
     def Parameters(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeMethodReferenceExpression(CodeExpression):
     """"""
@@ -4261,9 +2600,7 @@ class CodeMethodReferenceExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetObject: CodeExpression, methodName: str):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param methodName:
         """
     @overload
@@ -4273,61 +2610,36 @@ class CodeMethodReferenceExpression(CodeExpression):
         methodName: str,
         typeParameters: Array[CodeTypeReference],
     ):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param methodName:
         :param typeParameters:
         """
     @property
     def MethodName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @MethodName.setter
     def MethodName(self, value: str) -> None: ...
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def TypeArguments(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeMethodReturnStatement(CodeStatement):
     """"""
@@ -4337,65 +2649,36 @@ class CodeMethodReturnStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, expression: CodeExpression):
-        """
-
-        :param expression:
-        """
+        """:param expression:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Expression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Expression.setter
     def Expression(self, value: CodeExpression) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeNamespace(CodeObject):
     """"""
@@ -4405,63 +2688,34 @@ class CodeNamespace(CodeObject):
         """"""
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Imports(self) -> CodeNamespaceImportCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Types(self) -> CodeTypeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     PopulateComments: EventType[EventHandler] = ...
     """"""
     PopulateImports: EventType[EventHandler] = ...
@@ -4477,223 +2731,133 @@ class CodeNamespaceCollection(CollectionBase, ICollection, IEnumerable, IList):
         """"""
     @overload
     def __init__(self, value: CodeNamespaceCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeNamespace]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeNamespace) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeNamespaceCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeNamespace]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeNamespace) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeNamespace], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeNamespace) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeNamespace) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeNamespace) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeNamespace) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -4705,53 +2869,30 @@ class CodeNamespaceImport(CodeObject):
         """"""
     @overload
     def __init__(self, nameSpace: str):
-        """
-
-        :param nameSpace:
-        """
+        """:param nameSpace:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Namespace.setter
     def Namespace(self, value: str) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeNamespaceImportCollection(Object, ICollection, IEnumerable, IList):
     """"""
@@ -4760,156 +2901,88 @@ class CodeNamespaceImportCollection(Object, ICollection, IEnumerable, IList):
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeNamespaceImport) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def AddRange(self, value: Array[CodeNamespaceImport]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeNamespaceImport) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -4920,31 +2993,17 @@ class CodeObject(Object):
         """"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeObjectCreateExpression(CodeExpression):
     """"""
@@ -4954,66 +3013,40 @@ class CodeObjectCreateExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, createType: CodeTypeReference, parameters: Array[CodeExpression]):
-        """
-
-        :param createType:
+        """:param createType:
         :param parameters:
         """
     @overload
     def __init__(self, createType: str, parameters: Array[CodeExpression]):
-        """
-
-        :param createType:
+        """:param createType:
         :param parameters:
         """
     @overload
     def __init__(self, createType: Type, parameters: Array[CodeExpression]):
-        """
-
-        :param createType:
+        """:param createType:
         :param parameters:
         """
     @property
     def CreateType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CreateType.setter
     def CreateType(self, value: CodeTypeReference) -> None: ...
     @property
     def Parameters(self) -> CodeExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeParameterDeclarationExpression(CodeExpression):
     """"""
@@ -5023,84 +3056,52 @@ class CodeParameterDeclarationExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, type: CodeTypeReference, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @overload
     def __init__(self, type: str, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @overload
     def __init__(self, type: Type, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def Direction(self) -> FieldDirection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Direction.setter
     def Direction(self, value: FieldDirection) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeParameterDeclarationExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -5110,223 +3111,133 @@ class CodeParameterDeclarationExpressionCollection(CollectionBase, ICollection, 
         """"""
     @overload
     def __init__(self, value: CodeParameterDeclarationExpressionCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeParameterDeclarationExpression]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeParameterDeclarationExpression) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeParameterDeclarationExpressionCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeParameterDeclarationExpression]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeParameterDeclarationExpression) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeParameterDeclarationExpression], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeParameterDeclarationExpression) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeParameterDeclarationExpression) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeParameterDeclarationExpression) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeParameterDeclarationExpression) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -5338,45 +3249,25 @@ class CodePrimitiveExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, value: object):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: object) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodePropertyReferenceExpression(CodeExpression):
     """"""
@@ -5386,54 +3277,32 @@ class CodePropertyReferenceExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, targetObject: CodeExpression, propertyName: str):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param propertyName:
         """
     @property
     def PropertyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PropertyName.setter
     def PropertyName(self, value: str) -> None: ...
     @property
     def TargetObject(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodePropertySetValueReferenceExpression(CodeExpression):
     """"""
@@ -5442,31 +3311,17 @@ class CodePropertySetValueReferenceExpression(CodeExpression):
         """"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeRegionDirective(CodeDirective):
     """"""
@@ -5476,54 +3331,32 @@ class CodeRegionDirective(CodeDirective):
         """"""
     @overload
     def __init__(self, regionMode: CodeRegionMode, regionText: str):
-        """
-
-        :param regionMode:
+        """:param regionMode:
         :param regionText:
         """
     @property
     def RegionMode(self) -> CodeRegionMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RegionMode.setter
     def RegionMode(self, value: CodeRegionMode) -> None: ...
     @property
     def RegionText(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RegionText.setter
     def RegionText(self, value: str) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeRegionMode(Enum):
     """"""
@@ -5543,82 +3376,49 @@ class CodeRemoveEventStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, eventRef: CodeEventReferenceExpression, listener: CodeExpression):
-        """
-
-        :param eventRef:
+        """:param eventRef:
         :param listener:
         """
     @overload
     def __init__(self, targetObject: CodeExpression, eventName: str, listener: CodeExpression):
-        """
-
-        :param targetObject:
+        """:param targetObject:
         :param eventName:
         :param listener:
         """
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Event(self) -> CodeEventReferenceExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Event.setter
     def Event(self, value: CodeEventReferenceExpression) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Listener(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Listener.setter
     def Listener(self, value: CodeExpression) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeSnippetCompileUnit(CodeCompileUnit):
     """"""
@@ -5628,83 +3428,45 @@ class CodeSnippetCompileUnit(CodeCompileUnit):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def AssemblyCustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Namespaces(self) -> CodeNamespaceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReferencedAssemblies(self) -> StringCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeSnippetExpression(CodeExpression):
     """"""
@@ -5714,45 +3476,25 @@ class CodeSnippetExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeSnippetStatement(CodeStatement):
     """"""
@@ -5762,65 +3504,36 @@ class CodeSnippetStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Value.setter
     def Value(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeSnippetTypeMember(CodeTypeMember):
     """"""
@@ -5830,95 +3543,54 @@ class CodeSnippetTypeMember(CodeTypeMember):
         """"""
     @overload
     def __init__(self, text: str):
-        """
-
-        :param text:
-        """
+        """:param text:"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Text(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Text.setter
     def Text(self, value: str) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeStatement(CodeObject):
     """"""
@@ -5927,51 +3599,28 @@ class CodeStatement(CodeObject):
         """"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -5981,230 +3630,138 @@ class CodeStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
         """"""
     @overload
     def __init__(self, value: CodeStatementCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeStatement]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeExpression) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: CodeStatement) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeStatementCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeStatement]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeStatement) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeStatement], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeStatement) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeStatement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeStatement) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeStatement) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -6215,31 +3772,17 @@ class CodeThisReferenceExpression(CodeExpression):
         """"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeThrowExceptionStatement(CodeStatement):
     """"""
@@ -6249,65 +3792,36 @@ class CodeThrowExceptionStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, toThrow: CodeExpression):
-        """
-
-        :param toThrow:
-        """
+        """:param toThrow:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ToThrow(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ToThrow.setter
     def ToThrow(self, value: CodeExpression) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeTryCatchFinallyStatement(CodeStatement):
     """"""
@@ -6317,9 +3831,7 @@ class CodeTryCatchFinallyStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, tryStatements: Array[CodeStatement], catchClauses: Array[CodeCatchClause]):
-        """
-
-        :param tryStatements:
+        """:param tryStatements:
         :param catchClauses:
         """
     @overload
@@ -6329,77 +3841,43 @@ class CodeTryCatchFinallyStatement(CodeStatement):
         catchClauses: Array[CodeCatchClause],
         finallyStatements: Array[CodeStatement],
     ):
-        """
-
-        :param tryStatements:
+        """:param tryStatements:
         :param catchClauses:
         :param finallyStatements:
         """
     @property
     def CatchClauses(self) -> CodeCatchClauseCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FinallyStatements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TryStatements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeTypeConstructor(CodeMemberMethod):
     """"""
@@ -6408,127 +3886,71 @@ class CodeTypeConstructor(CodeMemberMethod):
         """"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementationTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrivateImplementationType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PrivateImplementationType.setter
     def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReturnType.setter
     def ReturnType(self, value: CodeTypeReference) -> None: ...
     @property
     def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Statements(self) -> CodeStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeParameters(self) -> CodeTypeParameterCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     PopulateImplementationTypes: EventType[EventHandler] = ...
     """"""
     PopulateParameters: EventType[EventHandler] = ...
@@ -6544,153 +3966,88 @@ class CodeTypeDeclaration(CodeTypeMember):
         """"""
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def BaseTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsClass.setter
     def IsClass(self, value: bool) -> None: ...
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsEnum.setter
     def IsEnum(self, value: bool) -> None: ...
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsInterface.setter
     def IsInterface(self, value: bool) -> None: ...
     @property
     def IsPartial(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsPartial.setter
     def IsPartial(self, value: bool) -> None: ...
     @property
     def IsStruct(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsStruct.setter
     def IsStruct(self, value: bool) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Members(self) -> CodeTypeMemberCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeAttributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TypeAttributes.setter
     def TypeAttributes(self, value: TypeAttributes) -> None: ...
     @property
     def TypeParameters(self) -> CodeTypeParameterCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     PopulateBaseTypes: EventType[EventHandler] = ...
     """"""
     PopulateMembers: EventType[EventHandler] = ...
@@ -6704,223 +4061,133 @@ class CodeTypeDeclarationCollection(CollectionBase, ICollection, IEnumerable, IL
         """"""
     @overload
     def __init__(self, value: CodeTypeDeclarationCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeTypeDeclaration]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeTypeDeclaration) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeTypeDeclarationCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeTypeDeclaration]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeTypeDeclaration) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeTypeDeclaration], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeTypeDeclaration) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeTypeDeclaration) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeTypeDeclaration) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeTypeDeclaration) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -6932,167 +4199,96 @@ class CodeTypeDelegate(CodeTypeDeclaration):
         """"""
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def BaseTypes(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsClass.setter
     def IsClass(self, value: bool) -> None: ...
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsEnum.setter
     def IsEnum(self, value: bool) -> None: ...
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsInterface.setter
     def IsInterface(self, value: bool) -> None: ...
     @property
     def IsPartial(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsPartial.setter
     def IsPartial(self, value: bool) -> None: ...
     @property
     def IsStruct(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsStruct.setter
     def IsStruct(self, value: bool) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Members(self) -> CodeTypeMemberCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReturnType.setter
     def ReturnType(self, value: CodeTypeReference) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeAttributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TypeAttributes.setter
     def TypeAttributes(self, value: TypeAttributes) -> None: ...
     @property
     def TypeParameters(self) -> CodeTypeParameterCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     PopulateBaseTypes: EventType[EventHandler] = ...
     """"""
     PopulateMembers: EventType[EventHandler] = ...
@@ -7105,81 +4301,46 @@ class CodeTypeMember(CodeObject):
         """"""
     @property
     def Attributes(self) -> MemberAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
     def Comments(self) -> CodeCommentStatementCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeTypeMemberCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -7189,223 +4350,133 @@ class CodeTypeMemberCollection(CollectionBase, ICollection, IEnumerable, IList):
         """"""
     @overload
     def __init__(self, value: CodeTypeMemberCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeTypeMember]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeTypeMember) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def AddRange(self, value: CodeTypeMemberCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeTypeMember]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeTypeMember) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeTypeMember], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeTypeMember) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeTypeMember) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeTypeMember) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeTypeMember) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -7417,57 +4488,31 @@ class CodeTypeOfExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, type: CodeTypeReference):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def __init__(self, type: str):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeTypeParameter(CodeObject):
     """"""
@@ -7477,65 +4522,36 @@ class CodeTypeParameter(CodeObject):
         """"""
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Constraints(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasConstructorConstraint(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HasConstructorConstraint.setter
     def HasConstructorConstraint(self, value: bool) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeTypeParameterCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -7545,229 +4561,136 @@ class CodeTypeParameterCollection(CollectionBase, ICollection, IEnumerable, ILis
         """"""
     @overload
     def __init__(self, value: CodeTypeParameterCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeTypeParameter]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeTypeParameter) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: str) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: CodeTypeParameterCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeTypeParameter]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeTypeParameter) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeTypeParameter], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeTypeParameter) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeTypeParameter) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeTypeParameter) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeTypeParameter) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -7779,122 +4702,74 @@ class CodeTypeReference(CodeObject):
         """"""
     @overload
     def __init__(self, typeParameter: CodeTypeParameter):
-        """
-
-        :param typeParameter:
-        """
+        """:param typeParameter:"""
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def __init__(self, arrayType: CodeTypeReference, rank: int):
-        """
-
-        :param arrayType:
+        """:param arrayType:
         :param rank:
         """
     @overload
     def __init__(self, typeName: str, codeTypeReferenceOption: CodeTypeReferenceOptions):
-        """
-
-        :param typeName:
+        """:param typeName:
         :param codeTypeReferenceOption:
         """
     @overload
     def __init__(self, typeName: str, typeArguments: Array[CodeTypeReference]):
-        """
-
-        :param typeName:
+        """:param typeName:
         :param typeArguments:
         """
     @overload
     def __init__(self, baseType: str, rank: int):
-        """
-
-        :param baseType:
+        """:param baseType:
         :param rank:
         """
     @overload
     def __init__(self, type: Type, codeTypeReferenceOption: CodeTypeReferenceOptions):
-        """
-
-        :param type:
+        """:param type:
         :param codeTypeReferenceOption:
         """
     @property
     def ArrayElementType(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ArrayElementType.setter
     def ArrayElementType(self, value: CodeTypeReference) -> None: ...
     @property
     def ArrayRank(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ArrayRank.setter
     def ArrayRank(self, value: int) -> None: ...
     @property
     def BaseType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BaseType.setter
     def BaseType(self, value: str) -> None: ...
     @property
     def Options(self) -> CodeTypeReferenceOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Options.setter
     def Options(self, value: CodeTypeReferenceOptions) -> None: ...
     @property
     def TypeArguments(self) -> CodeTypeReferenceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeTypeReferenceCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
@@ -7904,235 +4779,139 @@ class CodeTypeReferenceCollection(CollectionBase, ICollection, IEnumerable, ILis
         """"""
     @overload
     def __init__(self, value: CodeTypeReferenceCollection):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Array[CodeTypeReference]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def Capacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Capacity.setter
     def Capacity(self, value: int) -> None: ...
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: CodeTypeReference) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: str) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Add(self, value: Type) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: CodeTypeReferenceCollection) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def AddRange(self, value: Array[CodeTypeReference]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: CodeTypeReference) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[CodeTypeReference], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: CodeTypeReference) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: CodeTypeReference) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: CodeTypeReference) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: CodeTypeReference) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -8144,57 +4923,31 @@ class CodeTypeReferenceExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, type: CodeTypeReference):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def __init__(self, type: str):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeTypeReferenceOptions(Enum):
     """"""
@@ -8212,120 +4965,76 @@ class CodeVariableDeclarationStatement(CodeStatement):
         """"""
     @overload
     def __init__(self, type: CodeTypeReference, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @overload
     def __init__(self, type: str, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @overload
     def __init__(self, type: Type, name: str):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         """
     @overload
     def __init__(self, type: CodeTypeReference, name: str, initExpression: CodeExpression):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         :param initExpression:
         """
     @overload
     def __init__(self, type: str, name: str, initExpression: CodeExpression):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         :param initExpression:
         """
     @overload
     def __init__(self, type: Type, name: str, initExpression: CodeExpression):
-        """
-
-        :param type:
+        """:param type:
         :param name:
         :param initExpression:
         """
     @property
     def EndDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitExpression(self) -> CodeExpression:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitExpression.setter
     def InitExpression(self, value: CodeExpression) -> None: ...
     @property
     def LinePragma(self) -> CodeLinePragma:
-        """
-
-        :return:
-        """
+        """:return:"""
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def StartDirectives(self) -> CodeDirectiveCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Type(self) -> CodeTypeReference:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CodeVariableReferenceExpression(CodeExpression):
     """"""
@@ -8335,45 +5044,25 @@ class CodeVariableReferenceExpression(CodeExpression):
         """"""
     @overload
     def __init__(self, variableName: str):
-        """
-
-        :param variableName:
-        """
+        """:param variableName:"""
     @property
     def UserData(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VariableName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @VariableName.setter
     def VariableName(self, value: str) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FieldDirection(Enum):
     """"""

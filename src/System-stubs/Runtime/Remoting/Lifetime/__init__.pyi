@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import overload
 
 from System import Enum
@@ -23,146 +21,87 @@ class ClientSponsor(MarshalByRefObject, ISponsor):
         """"""
     @overload
     def __init__(self, renewalTime: TimeSpan):
-        """
-
-        :param renewalTime:
-        """
+        """:param renewalTime:"""
     @property
     def RenewalTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RenewalTime.setter
     def RenewalTime(self, value: TimeSpan) -> None: ...
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Register(self, obj: MarshalByRefObject) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Renewal(self, lease: ILease) -> TimeSpan:
-        """
-
-        :param lease:
+        """:param lease:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Unregister(self, obj: MarshalByRefObject) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
 
 class ILease:
     """"""
 
     @property
     def CurrentLeaseTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentState(self) -> LeaseState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitialLeaseTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitialLeaseTime.setter
     def InitialLeaseTime(self, value: TimeSpan) -> None: ...
     @property
     def RenewOnCallTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RenewOnCallTime.setter
     def RenewOnCallTime(self, value: TimeSpan) -> None: ...
     @property
     def SponsorshipTimeout(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SponsorshipTimeout.setter
     def SponsorshipTimeout(self, value: TimeSpan) -> None: ...
     @overload
     def Register(self, obj: ISponsor) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @overload
     def Register(self, obj: ISponsor, renewalTime: TimeSpan) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param renewalTime:
         """
     def Renew(self, renewalTime: TimeSpan) -> TimeSpan:
-        """
-
-        :param renewalTime:
+        """:param renewalTime:
         :return:
         """
     def Unregister(self, obj: ISponsor) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
 
 class ISponsor:
     """"""
 
     def Renewal(self, lease: ILease) -> TimeSpan:
-        """
-
-        :param lease:
+        """:param lease:
         :return:
         """
 
@@ -171,101 +110,57 @@ class Lease(MarshalByRefObject, ILease):
 
     @property
     def CurrentLeaseTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentState(self) -> LeaseState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitialLeaseTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitialLeaseTime.setter
     def InitialLeaseTime(self, value: TimeSpan) -> None: ...
     @property
     def RenewOnCallTime(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RenewOnCallTime.setter
     def RenewOnCallTime(self, value: TimeSpan) -> None: ...
     @property
     def SponsorshipTimeout(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SponsorshipTimeout.setter
     def SponsorshipTimeout(self, value: TimeSpan) -> None: ...
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Register(self, obj: ISponsor) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @overload
     def Register(self, obj: ISponsor, renewalTime: TimeSpan) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param renewalTime:
         """
     def Renew(self, renewalTime: TimeSpan) -> TimeSpan:
-        """
-
-        :param renewalTime:
+        """:param renewalTime:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Unregister(self, obj: ISponsor) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
 
 class LeaseLifeTimeServiceProperty(Object, IContextProperty, IContributeObjectSink):
     """"""
@@ -274,124 +169,72 @@ class LeaseLifeTimeServiceProperty(Object, IContextProperty, IContributeObjectSi
         """"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Freeze(self, newContext: Context) -> None:
-        """
-
-        :param newContext:
-        """
+        """:param newContext:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectSink(self, obj: MarshalByRefObject, nextSink: IMessageSink) -> IMessageSink:
-        """
-
-        :param obj:
+        """:param obj:
         :param nextSink:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsNewContextOK(self, newCtx: Context) -> bool:
-        """
-
-        :param newCtx:
+        """:param newCtx:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LeaseManager(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LeaseSink(Object, IMessageSink):
     """"""
 
     def __init__(self, lease: Lease, nextSink: IMessageSink):
-        """
-
-        :param lease:
+        """:param lease:
         :param nextSink:
         """
     @property
     def NextSink(self) -> IMessageSink:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
-        """
-
-        :param msg:
+        """:param msg:
         :param replySink:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
-        """
-
-        :param msg:
+        """:param msg:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LeaseState(Enum):
     """"""
@@ -415,61 +258,38 @@ class LifetimeServices(Object):
     @classmethod
     @property
     def LeaseManagerPollTime(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @LeaseManagerPollTime.setter
     def LeaseManagerPollTime(cls, value: TimeSpan) -> None: ...
     @classmethod
     @property
     def LeaseTime(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @LeaseTime.setter
     def LeaseTime(cls, value: TimeSpan) -> None: ...
     @classmethod
     @property
     def RenewOnCallTime(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @RenewOnCallTime.setter
     def RenewOnCallTime(cls, value: TimeSpan) -> None: ...
     @classmethod
     @property
     def SponsorshipTimeout(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @SponsorshipTimeout.setter
     def SponsorshipTimeout(cls, value: TimeSpan) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

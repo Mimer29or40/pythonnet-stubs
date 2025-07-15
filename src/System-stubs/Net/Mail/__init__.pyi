@@ -1,10 +1,7 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import Generic
-from typing import Iterator
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -83,102 +80,66 @@ class AlternateView(AttachmentBase, IDisposable):
 
     @overload
     def __init__(self, contentStream: Stream):
-        """
-
-        :param contentStream:
-        """
+        """:param contentStream:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, contentStream: Stream, contentType: ContentType):
-        """
-
-        :param contentStream:
+        """:param contentStream:
         :param contentType:
         """
     @overload
     def __init__(self, contentStream: Stream, mediaType: str):
-        """
-
-        :param contentStream:
+        """:param contentStream:
         :param mediaType:
         """
     @overload
     def __init__(self, fileName: str, contentType: ContentType):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param contentType:
         """
     @overload
     def __init__(self, fileName: str, mediaType: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param mediaType:
         """
     @property
     def BaseUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BaseUri.setter
     def BaseUri(self, value: Uri) -> None: ...
     @property
     def ContentId(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentId.setter
     def ContentId(self, value: str) -> None: ...
     @property
     def ContentStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentType(self) -> ContentType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: ContentType) -> None: ...
     @property
     def LinkedResources(self) -> LinkedResourceCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TransferEncoding(self) -> TransferEncoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TransferEncoding.setter
     def TransferEncoding(self, value: TransferEncoding) -> None: ...
     @classmethod
     @overload
     def CreateAlternateViewFromString(cls, content: str) -> AlternateView:
-        """
-
-        :param content:
+        """:param content:
         :return:
         """
     @classmethod
     @overload
     def CreateAlternateViewFromString(cls, content: str, contentType: ContentType) -> AlternateView:
-        """
-
-        :param content:
+        """:param content:
         :param contentType:
         :return:
         """
@@ -187,9 +148,7 @@ class AlternateView(AttachmentBase, IDisposable):
     def CreateAlternateViewFromString(
         cls, content: str, contentEncoding: Encoding, mediaType: str
     ) -> AlternateView:
-        """
-
-        :param content:
+        """:param content:
         :param contentEncoding:
         :param mediaType:
         :return:
@@ -197,26 +156,15 @@ class AlternateView(AttachmentBase, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AlternateViewCollection(
     Collection[AlternateView],
@@ -234,85 +182,47 @@ class AlternateViewCollection(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> AlternateView:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: AlternateView) -> None: ...
     @property
     def Item(self) -> AlternateView:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, item: AlternateView) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
@@ -323,23 +233,17 @@ class AlternateViewCollection(
         """"""
     @overload
     def Contains(self, item: AlternateView) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
@@ -348,155 +252,96 @@ class AlternateViewCollection(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, item: AlternateView) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, item: AlternateView) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, item: AlternateView) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __contains__(self, value: AlternateView) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> AlternateView:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> AlternateView:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[AlternateView]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: AlternateView) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -505,113 +350,75 @@ class Attachment(AttachmentBase, IDisposable):
 
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, contentStream: Stream, contentType: ContentType):
-        """
-
-        :param contentStream:
+        """:param contentStream:
         :param contentType:
         """
     @overload
     def __init__(self, contentStream: Stream, name: str):
-        """
-
-        :param contentStream:
+        """:param contentStream:
         :param name:
         """
     @overload
     def __init__(self, fileName: str, contentType: ContentType):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param contentType:
         """
     @overload
     def __init__(self, fileName: str, mediaType: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param mediaType:
         """
     @overload
     def __init__(self, contentStream: Stream, name: str, mediaType: str):
-        """
-
-        :param contentStream:
+        """:param contentStream:
         :param name:
         :param mediaType:
         """
     @property
     def ContentDisposition(self) -> ContentDisposition:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentId(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentId.setter
     def ContentId(self, value: str) -> None: ...
     @property
     def ContentStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentType(self) -> ContentType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: ContentType) -> None: ...
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     @property
     def NameEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @NameEncoding.setter
     def NameEncoding(self, value: Encoding) -> None: ...
     @property
     def TransferEncoding(self) -> TransferEncoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TransferEncoding.setter
     def TransferEncoding(self, value: TransferEncoding) -> None: ...
     @classmethod
     @overload
     def CreateAttachmentFromString(cls, content: str, contentType: ContentType) -> Attachment:
-        """
-
-        :param content:
+        """:param content:
         :param contentType:
         :return:
         """
     @classmethod
     @overload
     def CreateAttachmentFromString(cls, content: str, name: str) -> Attachment:
-        """
-
-        :param content:
+        """:param content:
         :param name:
         :return:
         """
@@ -620,9 +427,7 @@ class Attachment(AttachmentBase, IDisposable):
     def CreateAttachmentFromString(
         cls, content: str, name: str, contentEncoding: Encoding, mediaType: str
     ) -> Attachment:
-        """
-
-        :param content:
+        """:param content:
         :param name:
         :param contentEncoding:
         :param mediaType:
@@ -631,83 +436,49 @@ class Attachment(AttachmentBase, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AttachmentBase(ABC, Object, IDisposable):
     """"""
 
     @property
     def ContentId(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentId.setter
     def ContentId(self, value: str) -> None: ...
     @property
     def ContentStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentType(self) -> ContentType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: ContentType) -> None: ...
     @property
     def TransferEncoding(self) -> TransferEncoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TransferEncoding.setter
     def TransferEncoding(self, value: TransferEncoding) -> None: ...
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AttachmentCollection(
     Collection[Attachment],
@@ -725,85 +496,47 @@ class AttachmentCollection(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> Attachment:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: Attachment) -> None: ...
     @property
     def Item(self) -> Attachment:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, item: Attachment) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
@@ -814,23 +547,17 @@ class AttachmentCollection(
         """"""
     @overload
     def Contains(self, item: Attachment) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
@@ -839,155 +566,96 @@ class AttachmentCollection(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, item: Attachment) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, item: Attachment) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, item: Attachment) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __contains__(self, value: Attachment) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> Attachment:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> Attachment:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[Attachment]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: Attachment) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -995,126 +663,71 @@ class AuthCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BufferBuilder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CheckCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataStopCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DeliveryNotificationOptions(Enum):
     """"""
@@ -1134,131 +747,79 @@ class DomainLiteralReader(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DotAtomReader(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EHelloCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HelloCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IMSAdminBase:
     """"""
 
     def AddKey(self, handle: IntPtr, Path: str) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :param Path:
         :return:
         """
     def Backup(self, Location: str, Version: int, Flags: int) -> int:
-        """
-
-        :param Location:
+        """:param Location:
         :param Version:
         :param Flags:
         :return:
         """
     def ChangePermissions(self, handle: IntPtr, TimeOut: int, AccessRequested: MBKeyAccess) -> None:
-        """
-
-        :param handle:
+        """:param handle:
         :param TimeOut:
         :param AccessRequested:
         """
     def CloseKey(self, handle: IntPtr) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :return:
         """
     def CopyData(
@@ -1272,9 +833,7 @@ class IMSAdminBase:
         DataType: int,
         CopyFlag: bool,
     ) -> int:
-        """
-
-        :param sourcehandle:
+        """:param sourcehandle:
         :param SourcePath:
         :param desthandle:
         :param DestPath:
@@ -1293,9 +852,7 @@ class IMSAdminBase:
         OverwriteFlag: bool,
         CopyFlag: bool,
     ) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param SourcePath:
         :param dest:
         :param DestPath:
@@ -1303,57 +860,48 @@ class IMSAdminBase:
         :param CopyFlag:
         """
     def DeleteAllData(self, handle: IntPtr, Path: str, UserType: int, DataType: int) -> None:
-        """
-
-        :param handle:
+        """:param handle:
         :param Path:
         :param UserType:
         :param DataType:
         """
     def DeleteBackup(self, Location: str, Version: int) -> None:
-        """
-
-        :param Location:
+        """:param Location:
         :param Version:
         """
     def DeleteChildKeys(self, handle: IntPtr, Path: str) -> None:
-        """
-
-        :param handle:
+        """:param handle:
         :param Path:
         """
     def DeleteData(self, key: IntPtr, path: str, Identifier: int, DataType: int) -> int:
-        """
-
-        :param key:
+        """:param key:
         :param path:
         :param Identifier:
         :param DataType:
         :return:
         """
     def DeleteKey(self, handle: IntPtr, Path: str) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :param Path:
         :return:
         """
     def EnumBackups(
         self, Location: str, Version: int, BackupTime: FILETIME, EnumIndex: int
-    ) -> Tuple[None, str, int, FILETIME]:
-        """
-
-        :param Location:
+    ) -> tuple[None, str, int, FILETIME]:
+        """:param Location:
         :param Version:
         :param BackupTime:
         :param EnumIndex:
         """
     def EnumData(
-        self, key: IntPtr, path: str, data: MetadataRecord, EnumDataIndex: int, RequiredDataLen: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param key:
+        self,
+        key: IntPtr,
+        path: str,
+        data: MetadataRecord,
+        EnumDataIndex: int,
+        RequiredDataLen: int,
+    ) -> tuple[int, int]:
+        """:param key:
         :param path:
         :param data:
         :param EnumDataIndex:
@@ -1361,9 +909,7 @@ class IMSAdminBase:
         :return:
         """
     def EnumKeys(self, handle: IntPtr, Path: str, Buffer: StringBuilder, EnumKeyIndex: int) -> int:
-        """
-
-        :param handle:
+        """:param handle:
         :param Path:
         :param Buffer:
         :param EnumKeyIndex:
@@ -1381,10 +927,8 @@ class IMSAdminBase:
         BufferSize: int,
         buffer: IntPtr,
         RequiredBufferSize: int,
-    ) -> Tuple[int, int, int, int]:
-        """
-
-        :param handle:
+    ) -> tuple[int, int, int, int]:
+        """:param handle:
         :param Path:
         :param Attributes:
         :param UserType:
@@ -1398,10 +942,8 @@ class IMSAdminBase:
         """
     def GetData(
         self, key: IntPtr, path: str, data: MetadataRecord, RequiredDataLen: int
-    ) -> Tuple[int, int]:
-        """
-
-        :param key:
+    ) -> tuple[int, int]:
+        """:param key:
         :param path:
         :param data:
         :param RequiredDataLen:
@@ -1416,10 +958,8 @@ class IMSAdminBase:
         BufferSize: int,
         Buffer: Char,
         RequiredBufferSize: int,
-    ) -> Tuple[None, Char, int]:
-        """
-
-        :param handle:
+    ) -> tuple[None, Char, int]:
+        """:param handle:
         :param Path:
         :param Identifier:
         :param DataType:
@@ -1427,52 +967,34 @@ class IMSAdminBase:
         :param Buffer:
         :param RequiredBufferSize:
         """
-    def GetDataSetNumber(self, handle: IntPtr, Path: str, DataSetNumber: int) -> Tuple[None, int]:
-        """
-
-        :param handle:
+    def GetDataSetNumber(self, handle: IntPtr, Path: str, DataSetNumber: int) -> tuple[None, int]:
+        """:param handle:
         :param Path:
         :param DataSetNumber:
         """
     def GetHandleInfo(
         self, handle: IntPtr, Info: _METADATA_HANDLE_INFO
-    ) -> Tuple[None, _METADATA_HANDLE_INFO]:
-        """
-
-        :param handle:
+    ) -> tuple[None, _METADATA_HANDLE_INFO]:
+        """:param handle:
         :param Info:
         """
     def GetLastChangeTime(
         self, handle: IntPtr, Path: str, LastChangeTime: FILETIME, LocalTime: bool
-    ) -> Tuple[int, FILETIME]:
-        """
-
-        :param handle:
+    ) -> tuple[int, FILETIME]:
+        """:param handle:
         :param Path:
         :param LastChangeTime:
         :param LocalTime:
         :return:
         """
     def GetServerGuid(self) -> int:
-        """
-
-        :return:
-        """
-    def GetSystemChangeNumber(self, SystemChangeNumber: int) -> Tuple[None, int]:
-        """
-
-        :param SystemChangeNumber:
-        """
+        """:return:"""
+    def GetSystemChangeNumber(self, SystemChangeNumber: int) -> tuple[None, int]:
+        """:param SystemChangeNumber:"""
     def KeyExchangePhase1(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def KeyExchangePhase2(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OpenKey(
         self,
         handle: IntPtr,
@@ -1480,10 +1002,8 @@ class IMSAdminBase:
         AccessRequested: MBKeyAccess,
         TimeOut: int,
         NewHandle: IntPtr,
-    ) -> Tuple[int, IntPtr]:
-        """
-
-        :param handle:
+    ) -> tuple[int, IntPtr]:
+        """:param handle:
         :param Path:
         :param AccessRequested:
         :param TimeOut:
@@ -1491,16 +1011,12 @@ class IMSAdminBase:
         :return:
         """
     def RenameKey(self, key: IntPtr, path: str, newName: str) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param path:
         :param newName:
         """
     def Restore(self, Location: str, Version: int, Flags: int) -> int:
-        """
-
-        :param Location:
+        """:param Location:
         :param Version:
         :param Flags:
         :return:
@@ -1508,27 +1024,21 @@ class IMSAdminBase:
     def SaveData(self) -> None:
         """"""
     def SetData(self, key: IntPtr, path: str, data: MetadataRecord) -> int:
-        """
-
-        :param key:
+        """:param key:
         :param path:
         :param data:
         :return:
         """
     def SetLastChangeTime(
         self, handle: IntPtr, Path: str, LastChangeTime: FILETIME, LocalTime: bool
-    ) -> Tuple[None, FILETIME]:
-        """
-
-        :param handle:
+    ) -> tuple[None, FILETIME]:
+        """:param handle:
         :param Path:
         :param LastChangeTime:
         :param LocalTime:
         """
-    def UnmarshalInterface(self, interf: IMSAdminBase) -> Tuple[int, IMSAdminBase]:
-        """
-
-        :param interf:
+    def UnmarshalInterface(self, interf: IMSAdminBase) -> tuple[int, IMSAdminBase]:
+        """:param interf:
         :return:
         """
 
@@ -1537,10 +1047,7 @@ class ISmtpAuthenticationModule:
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self,
         challenge: str,
@@ -1549,9 +1056,7 @@ class ISmtpAuthenticationModule:
         spn: str,
         channelBindingToken: ChannelBinding,
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param credentials:
         :param sessionCookie:
         :param spn:
@@ -1559,148 +1064,92 @@ class ISmtpAuthenticationModule:
         :return:
         """
     def CloseContext(self, sessionCookie: object) -> None:
-        """
-
-        :param sessionCookie:
-        """
+        """:param sessionCookie:"""
 
 class IisPickupDirectory(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LineInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LinkedResource(AttachmentBase, IDisposable):
     """"""
 
     @overload
     def __init__(self, contentStream: Stream):
-        """
-
-        :param contentStream:
-        """
+        """:param contentStream:"""
     @overload
     def __init__(self, fileName: str):
-        """
-
-        :param fileName:
-        """
+        """:param fileName:"""
     @overload
     def __init__(self, contentStream: Stream, contentType: ContentType):
-        """
-
-        :param contentStream:
+        """:param contentStream:
         :param contentType:
         """
     @overload
     def __init__(self, contentStream: Stream, mediaType: str):
-        """
-
-        :param contentStream:
+        """:param contentStream:
         :param mediaType:
         """
     @overload
     def __init__(self, fileName: str, contentType: ContentType):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param contentType:
         """
     @overload
     def __init__(self, fileName: str, mediaType: str):
-        """
-
-        :param fileName:
+        """:param fileName:
         :param mediaType:
         """
     @property
     def ContentId(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentId.setter
     def ContentId(self, value: str) -> None: ...
     @property
     def ContentLink(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentLink.setter
     def ContentLink(self, value: Uri) -> None: ...
     @property
     def ContentStream(self) -> Stream:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContentType(self) -> ContentType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ContentType.setter
     def ContentType(self, value: ContentType) -> None: ...
     @property
     def TransferEncoding(self) -> TransferEncoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TransferEncoding.setter
     def TransferEncoding(self, value: TransferEncoding) -> None: ...
     @classmethod
     @overload
     def CreateLinkedResourceFromString(cls, content: str) -> LinkedResource:
-        """
-
-        :param content:
+        """:param content:
         :return:
         """
     @classmethod
@@ -1708,9 +1157,7 @@ class LinkedResource(AttachmentBase, IDisposable):
     def CreateLinkedResourceFromString(
         cls, content: str, contentType: ContentType
     ) -> LinkedResource:
-        """
-
-        :param content:
+        """:param content:
         :param contentType:
         :return:
         """
@@ -1719,9 +1166,7 @@ class LinkedResource(AttachmentBase, IDisposable):
     def CreateLinkedResourceFromString(
         cls, content: str, contentEncoding: Encoding, mediaType: str
     ) -> LinkedResource:
-        """
-
-        :param content:
+        """:param content:
         :param contentEncoding:
         :param mediaType:
         :return:
@@ -1729,26 +1174,15 @@ class LinkedResource(AttachmentBase, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LinkedResourceCollection(
     Collection[LinkedResource],
@@ -1766,85 +1200,47 @@ class LinkedResourceCollection(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> LinkedResource:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: LinkedResource) -> None: ...
     @property
     def Item(self) -> LinkedResource:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, item: LinkedResource) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
@@ -1855,23 +1251,17 @@ class LinkedResourceCollection(
         """"""
     @overload
     def Contains(self, item: LinkedResource) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
@@ -1880,155 +1270,96 @@ class LinkedResourceCollection(
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, item: LinkedResource) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, item: LinkedResource) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, item: LinkedResource) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __contains__(self, value: LinkedResource) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> LinkedResource:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> LinkedResource:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[LinkedResource]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: LinkedResource) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -2102,112 +1433,63 @@ class MSAdminBase(__ComObject):
     def __init__(self):
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailAddress(Object):
     """"""
 
     @overload
     def __init__(self, address: str):
-        """
-
-        :param address:
-        """
+        """:param address:"""
     @overload
     def __init__(self, address: str, displayName: str):
-        """
-
-        :param address:
+        """:param address:
         :param displayName:
         """
     @overload
     def __init__(self, address: str, displayName: str, displayNameEncoding: Encoding):
-        """
-
-        :param address:
+        """:param address:
         :param displayName:
         :param displayNameEncoding:
         """
     @property
     def Address(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Host(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def User(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailAddressCollection(
     Collection[MailAddress],
@@ -2226,93 +1508,52 @@ class MailAddressCollection(
         """"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> MailAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: MailAddress) -> None: ...
     @property
     def Item(self) -> MailAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, item: MailAddress) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, addresses: str) -> None:
-        """
-
-        :param addresses:
-        """
+        """:param addresses:"""
     @overload
     def Clear(self) -> None:
         """"""
@@ -2321,178 +1562,113 @@ class MailAddressCollection(
         """"""
     @overload
     def Contains(self, item: MailAddress) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[MailAddress], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, item: MailAddress) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, item: MailAddress) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, item: MailAddress) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __contains__(self, value: MailAddress) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> MailAddress:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> MailAddress:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[MailAddress]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: MailAddress) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -2500,51 +1676,29 @@ class MailAddressParser(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailHeaderID(Enum):
     """"""
@@ -2624,26 +1778,15 @@ class MailHeaderInfo(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailMessage(Object, IDisposable):
     """"""
@@ -2653,188 +1796,114 @@ class MailMessage(Object, IDisposable):
         """"""
     @overload
     def __init__(self, _from: MailAddress, to: MailAddress):
-        """
-
-        :param _from:
+        """:param _from:
         :param to:
         """
     @overload
     def __init__(self, _from: str, to: str):
-        """
-
-        :param _from:
+        """:param _from:
         :param to:
         """
     @overload
     def __init__(self, _from: str, to: str, subject: str, body: str):
-        """
-
-        :param _from:
+        """:param _from:
         :param to:
         :param subject:
         :param body:
         """
     @property
     def AlternateViews(self) -> AlternateViewCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attachments(self) -> AttachmentCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Bcc(self) -> MailAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Body(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Body.setter
     def Body(self, value: str) -> None: ...
     @property
     def BodyEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BodyEncoding.setter
     def BodyEncoding(self, value: Encoding) -> None: ...
     @property
     def BodyTransferEncoding(self) -> TransferEncoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @BodyTransferEncoding.setter
     def BodyTransferEncoding(self, value: TransferEncoding) -> None: ...
     @property
     def CC(self) -> MailAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeliveryNotificationOptions(self) -> DeliveryNotificationOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DeliveryNotificationOptions.setter
     def DeliveryNotificationOptions(self, value: DeliveryNotificationOptions) -> None: ...
     @property
     def From(self) -> MailAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @From.setter
     def From(self, value: MailAddress) -> None: ...
     @property
     def Headers(self) -> NameValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HeadersEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HeadersEncoding.setter
     def HeadersEncoding(self, value: Encoding) -> None: ...
     @property
     def IsBodyHtml(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsBodyHtml.setter
     def IsBodyHtml(self, value: bool) -> None: ...
     @property
     def Priority(self) -> MailPriority:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Priority.setter
     def Priority(self, value: MailPriority) -> None: ...
     @property
     def ReplyTo(self) -> MailAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReplyTo.setter
     def ReplyTo(self, value: MailAddress) -> None: ...
     @property
     def ReplyToList(self) -> MailAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Sender(self) -> MailAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Sender.setter
     def Sender(self, value: MailAddress) -> None: ...
     @property
     def Subject(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Subject.setter
     def Subject(self, value: str) -> None: ...
     @property
     def SubjectEncoding(self) -> Encoding:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SubjectEncoding.setter
     def SubjectEncoding(self, value: Encoding) -> None: ...
     @property
     def To(self) -> MailAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MailPriority(Enum):
     """"""
@@ -2850,84 +1919,48 @@ class MailWriter(BaseWriter):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Message(Object):
     """"""
 
     @property
     def Priority(self) -> MailPriority:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Priority.setter
     def Priority(self, value: MailPriority) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MetadataRecord(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PropertyName(Enum):
     """"""
@@ -2943,101 +1976,57 @@ class QuotedPairReader(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class QuotedStringFormatReader(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReadLinesCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RecipientCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RecipientLocationType(Enum):
     """"""
@@ -3065,49 +2054,26 @@ class SendMailAsyncResult(LazyAsyncResult, IAsyncResult):
 
     @property
     def AsyncState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsyncWaitHandle(self) -> WaitHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CompletedSynchronously(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServerState(Enum):
     """"""
@@ -3141,26 +2107,15 @@ class SmtpAuthenticationManager(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpClient(Object, IDisposable):
     """"""
@@ -3170,156 +2125,98 @@ class SmtpClient(Object, IDisposable):
         """"""
     @overload
     def __init__(self, host: str):
-        """
-
-        :param host:
-        """
+        """:param host:"""
     @overload
     def __init__(self, host: str, port: int):
-        """
-
-        :param host:
+        """:param host:
         :param port:
         """
     @property
     def ClientCertificates(self) -> X509CertificateCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Credentials(self) -> ICredentialsByHost:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentialsByHost) -> None: ...
     @property
     def DeliveryFormat(self) -> SmtpDeliveryFormat:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DeliveryFormat.setter
     def DeliveryFormat(self, value: SmtpDeliveryFormat) -> None: ...
     @property
     def DeliveryMethod(self) -> SmtpDeliveryMethod:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DeliveryMethod.setter
     def DeliveryMethod(self, value: SmtpDeliveryMethod) -> None: ...
     @property
     def EnableSsl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @EnableSsl.setter
     def EnableSsl(self, value: bool) -> None: ...
     @property
     def Host(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Host.setter
     def Host(self, value: str) -> None: ...
     @property
     def PickupDirectoryLocation(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PickupDirectoryLocation.setter
     def PickupDirectoryLocation(self, value: str) -> None: ...
     @property
     def Port(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Port.setter
     def Port(self, value: int) -> None: ...
     @property
     def ServicePoint(self) -> ServicePoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @TargetName.setter
     def TargetName(self, value: str) -> None: ...
     @property
     def Timeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Timeout.setter
     def Timeout(self, value: int) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Send(self, message: MailMessage) -> None:
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def Send(self, _from: str, recipients: str, subject: str, body: str) -> None:
-        """
-
-        :param _from:
+        """:param _from:
         :param recipients:
         :param subject:
         :param body:
         """
     @overload
     def SendAsync(self, message: MailMessage, userToken: object) -> None:
-        """
-
-        :param message:
+        """:param message:
         :param userToken:
         """
     @overload
     def SendAsync(
         self, _from: str, recipients: str, subject: str, body: str, userToken: object
     ) -> None:
-        """
-
-        :param _from:
+        """:param _from:
         :param recipients:
         :param subject:
         :param body:
@@ -3329,26 +2226,19 @@ class SmtpClient(Object, IDisposable):
         """"""
     @overload
     def SendMailAsync(self, message: MailMessage) -> Task:
-        """
-
-        :param message:
+        """:param message:
         :return:
         """
     @overload
     def SendMailAsync(self, _from: str, recipients: str, subject: str, body: str) -> Task:
-        """
-
-        :param _from:
+        """:param _from:
         :param recipients:
         :param subject:
         :param body:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     SendCompleted: EventType[SendCompletedEventHandler] = ...
     """"""
 
@@ -3356,51 +2246,29 @@ class SmtpCommands(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpConnection(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpDeliveryFormat(Enum):
     """"""
@@ -3425,10 +2293,7 @@ class SmtpDigestAuthenticationModule(Object, ISmtpAuthenticationModule):
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self,
         challenge: str,
@@ -3437,9 +2302,7 @@ class SmtpDigestAuthenticationModule(Object, ISmtpAuthenticationModule):
         spn: str,
         channelBindingToken: ChannelBinding,
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param credentials:
         :param sessionCookie:
         :param spn:
@@ -3447,31 +2310,17 @@ class SmtpDigestAuthenticationModule(Object, ISmtpAuthenticationModule):
         :return:
         """
     def CloseContext(self, sessionCookie: object) -> None:
-        """
-
-        :param sessionCookie:
-        """
+        """:param sessionCookie:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpException(Exception, _Exception, ISerializable):
     """"""
@@ -3481,159 +2330,93 @@ class SmtpException(Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, statusCode: SmtpStatusCode):
-        """
-
-        :param statusCode:
-        """
+        """:param statusCode:"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, statusCode: SmtpStatusCode, message: str):
-        """
-
-        :param statusCode:
+        """:param statusCode:
         :param message:
         """
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusCode(self) -> SmtpStatusCode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StatusCode.setter
     def StatusCode(self, value: SmtpStatusCode) -> None: ...
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpFailedRecipientException(SmtpException, _Exception, ISerializable):
     """"""
@@ -3643,175 +2426,105 @@ class SmtpFailedRecipientException(SmtpException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, statusCode: SmtpStatusCode, failedRecipient: str):
-        """
-
-        :param statusCode:
+        """:param statusCode:
         :param failedRecipient:
         """
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @overload
     def __init__(self, statusCode: SmtpStatusCode, failedRecipient: str, serverResponse: str):
-        """
-
-        :param statusCode:
+        """:param statusCode:
         :param failedRecipient:
         :param serverResponse:
         """
     @overload
     def __init__(self, message: str, failedRecipient: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param failedRecipient:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FailedRecipient(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusCode(self) -> SmtpStatusCode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StatusCode.setter
     def StatusCode(self, value: SmtpStatusCode) -> None: ...
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpFailedRecipientsException(SmtpFailedRecipientException, _Exception, ISerializable):
     """"""
@@ -3821,175 +2534,103 @@ class SmtpFailedRecipientsException(SmtpFailedRecipientException, _Exception, IS
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerExceptions: Array[SmtpFailedRecipientException]):
-        """
-
-        :param message:
+        """:param message:
         :param innerExceptions:
         """
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FailedRecipient(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InnerExceptions(self) -> Array[SmtpFailedRecipientException]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StatusCode(self) -> SmtpStatusCode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @StatusCode.setter
     def StatusCode(self, value: SmtpStatusCode) -> None: ...
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpLoginAuthenticationModule(Object, ISmtpAuthenticationModule):
     """"""
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self,
         challenge: str,
@@ -3998,9 +2639,7 @@ class SmtpLoginAuthenticationModule(Object, ISmtpAuthenticationModule):
         spn: str,
         channelBindingToken: ChannelBinding,
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param credentials:
         :param sessionCookie:
         :param spn:
@@ -4008,41 +2647,24 @@ class SmtpLoginAuthenticationModule(Object, ISmtpAuthenticationModule):
         :return:
         """
     def CloseContext(self, sessionCookie: object) -> None:
-        """
-
-        :param sessionCookie:
-        """
+        """:param sessionCookie:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpNegotiateAuthenticationModule(Object, ISmtpAuthenticationModule):
     """"""
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self,
         challenge: str,
@@ -4051,9 +2673,7 @@ class SmtpNegotiateAuthenticationModule(Object, ISmtpAuthenticationModule):
         spn: str,
         channelBindingToken: ChannelBinding,
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param credentials:
         :param sessionCookie:
         :param spn:
@@ -4061,41 +2681,24 @@ class SmtpNegotiateAuthenticationModule(Object, ISmtpAuthenticationModule):
         :return:
         """
     def CloseContext(self, sessionCookie: object) -> None:
-        """
-
-        :param sessionCookie:
-        """
+        """:param sessionCookie:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpNtlmAuthenticationModule(Object, ISmtpAuthenticationModule):
     """"""
 
     @property
     def AuthenticationType(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Authenticate(
         self,
         challenge: str,
@@ -4104,9 +2707,7 @@ class SmtpNtlmAuthenticationModule(Object, ISmtpAuthenticationModule):
         spn: str,
         channelBindingToken: ChannelBinding,
     ) -> Authorization:
-        """
-
-        :param challenge:
+        """:param challenge:
         :param credentials:
         :param sessionCookie:
         :param spn:
@@ -4114,73 +2715,45 @@ class SmtpNtlmAuthenticationModule(Object, ISmtpAuthenticationModule):
         :return:
         """
     def CloseContext(self, sessionCookie: object) -> None:
-        """
-
-        :param sessionCookie:
-        """
+        """:param sessionCookie:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpPermission(
-    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+    CodeAccessPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
 ):
     """"""
 
     @overload
     def __init__(self, access: SmtpAccess):
-        """
-
-        :param access:
-        """
+        """:param access:"""
     @overload
     def __init__(self, state: PermissionState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @overload
     def __init__(self, unrestricted: bool):
-        """
-
-        :param unrestricted:
-        """
+        """:param unrestricted:"""
     @property
     def Access(self) -> SmtpAccess:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddPermission(self, access: SmtpAccess) -> None:
-        """
-
-        :param access:
-        """
+        """:param access:"""
     def Assert(self) -> None:
         """"""
     def Copy(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Demand(self) -> None:
         """"""
@@ -4190,59 +2763,33 @@ class SmtpPermission(
     def Deny(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FromXml(self, e: SecurityElement) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Intersect(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsSubsetOf(self, target: IPermission) -> bool:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsUnrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PermitOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> SecurityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Union(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
 
@@ -4250,84 +2797,51 @@ class SmtpPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
 
     def __init__(self, action: SecurityAction):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @property
     def Access(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Access.setter
     def Access(self, value: str) -> None: ...
     @property
     def Action(self) -> SecurityAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Unrestricted.setter
     def Unrestricted(self, value: bool) -> None: ...
     def CreatePermission(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4339,9 +2853,7 @@ class SmtpPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4351,85 +2863,56 @@ class SmtpPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpPooledStream(PooledStream, IDisposable):
     """"""
 
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -4437,11 +2920,14 @@ class SmtpPooledStream(PooledStream, IDisposable):
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -4453,35 +2939,23 @@ class SmtpPooledStream(PooledStream, IDisposable):
         """"""
     @overload
     def Close(self, timeout: int) -> None:
-        """
-
-        :param timeout:
-        """
+        """:param timeout:"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -4489,157 +2963,111 @@ class SmtpPooledStream(PooledStream, IDisposable):
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+        """:return:"""
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class SmtpReplyReader(Object):
     """"""
@@ -4647,51 +3075,29 @@ class SmtpReplyReader(Object):
     def Close(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpReplyReaderFactory(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SmtpStatusCode(Enum):
     """"""
@@ -4751,51 +3157,29 @@ class SmtpTransport(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StartTlsCommand(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SupportedAuth(Enum):
     """"""
@@ -4815,48 +3199,26 @@ class WhitespaceReader(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _METADATA_HANDLE_INFO(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

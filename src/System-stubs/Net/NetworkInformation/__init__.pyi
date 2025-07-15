@@ -1,12 +1,9 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -113,82 +110,46 @@ class FIXED_INFO(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FixedInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GatewayIPAddressInformation(ABC, Object):
     """"""
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GatewayIPAddressInformationCollection(
     Object,
@@ -200,98 +161,55 @@ class GatewayIPAddressInformationCollection(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> GatewayIPAddressInformation:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, item: GatewayIPAddressInformation) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: GatewayIPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[GatewayIPAddressInformation], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, item: GatewayIPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: GatewayIPAddressInformation) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> GatewayIPAddressInformation:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[GatewayIPAddressInformation]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GetAdaptersAddressesFlags(Enum):
     """"""
@@ -324,756 +242,399 @@ class IPAddressCollection(Object, ICollection[IPAddress], IEnumerable[IPAddress]
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, item: IPAddress) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: IPAddress) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[IPAddress], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, item: IPAddress) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: IPAddress) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> IPAddress:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[IPAddress]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPAddressInformation(ABC, Object):
     """"""
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEligible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsTransient(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPAddressInformationCollection(
-    Object, ICollection[IPAddressInformation], IEnumerable[IPAddressInformation], IEnumerable
+    Object,
+    ICollection[IPAddressInformation],
+    IEnumerable[IPAddressInformation],
+    IEnumerable,
 ):
     """"""
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> IPAddressInformation:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, item: IPAddressInformation) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: IPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[IPAddressInformation], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, item: IPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: IPAddressInformation) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> IPAddressInformation:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[IPAddressInformation]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPGlobalProperties(ABC, Object):
     """"""
 
     @property
     def DhcpScopeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DomainName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HostName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsWinsProxy(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NodeType(self) -> NetBiosNodeType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginGetUnicastAddresses(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def EndGetUnicastAddresses(
         self, asyncResult: IAsyncResult
     ) -> UnicastIPAddressInformationCollection:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetActiveTcpConnections(self) -> Array[TcpConnectionInformation]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetActiveTcpListeners(self) -> Array[IPEndPoint]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetActiveUdpListeners(self) -> Array[IPEndPoint]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetIPGlobalProperties(cls) -> IPGlobalProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv4GlobalStatistics(self) -> IPGlobalStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv6GlobalStatistics(self) -> IPGlobalStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIcmpV4Statistics(self) -> IcmpV4Statistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIcmpV6Statistics(self) -> IcmpV6Statistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTcpIPv4Statistics(self) -> TcpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTcpIPv6Statistics(self) -> TcpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUdpIPv4Statistics(self) -> UdpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUdpIPv6Statistics(self) -> UdpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUnicastAddresses(self) -> UnicastIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUnicastAddressesAsync(self) -> Task[UnicastIPAddressInformationCollection]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPGlobalStatistics(ABC, Object):
     """"""
 
     @property
     def DefaultTtl(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ForwardingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NumberOfIPAddresses(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NumberOfInterfaces(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NumberOfRoutes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketRequests(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketRoutingDiscards(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketsWithNoRoute(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketFragmentFailures(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketReassembliesRequired(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketReassemblyFailures(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketReassemblyTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketsFragmented(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketsReassembled(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPackets(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsDelivered(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsForwarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsWithAddressErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsWithHeadersErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsWithUnknownProtocol(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPInterfaceProperties(ABC, Object):
     """"""
 
     @property
     def AnycastAddresses(self) -> IPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DhcpServerAddresses(self) -> IPAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DnsAddresses(self) -> IPAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DnsSuffix(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GatewayAddresses(self) -> GatewayIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDynamicDnsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MulticastAddresses(self) -> MulticastIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastAddresses(self) -> UnicastIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WinsServersAddresses(self) -> IPAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv4Properties(self) -> IPv4InterfaceProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv6Properties(self) -> IPv6InterfaceProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPInterfaceStatistics(ABC, Object):
     """"""
 
     @property
     def BytesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BytesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingUnknownProtocolPackets(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputQueueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPOptions(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPStatus(Enum):
     """"""
@@ -1132,257 +693,137 @@ class IPv4InterfaceProperties(ABC, Object):
 
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutomaticPrivateAddressingActive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutomaticPrivateAddressingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDhcpEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsForwardingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Mtu(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UsesWins(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPv4InterfaceStatistics(ABC, Object):
     """"""
 
     @property
     def BytesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BytesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingUnknownProtocolPackets(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputQueueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IPv6InterfaceProperties(ABC, Object):
     """"""
 
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Mtu(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetScopeId(self, scopeLevel: ScopeLevel) -> int:
-        """
-
-        :param scopeLevel:
+        """:param scopeLevel:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Icmp6EchoReply(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IcmpEchoReply(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IcmpV4Code(Enum):
     """"""
@@ -1421,181 +862,92 @@ class IcmpV4Statistics(ABC, Object):
 
     @property
     def AddressMaskRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressMaskRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressMaskRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressMaskRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DestinationUnreachableMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DestinationUnreachableMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SourceQuenchesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SourceQuenchesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IcmpV4Type(Enum):
     """"""
@@ -1664,217 +1016,110 @@ class IcmpV6Statistics(ABC, Object):
 
     @property
     def DestinationUnreachableMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DestinationUnreachableMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipQueriesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipQueriesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReductionsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReductionsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReportsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReportsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborAdvertisementsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborAdvertisementsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborSolicitsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborSolicitsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketTooBigMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketTooBigMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterAdvertisementsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterAdvertisementsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterSolicitsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterSolicitsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InterfaceConnectionType(Enum):
     """"""
@@ -1910,101 +1155,57 @@ class IpAdapterAddress(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IpAdapterAddresses(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IpAdapterUnicastAddress(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IpAddrString(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IpHelperErrors(Object):
     """"""
@@ -2012,580 +1213,322 @@ class IpHelperErrors(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IpPerAdapterInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IpSocketAddress(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Ipv6Address(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibIcmpInfo(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibIcmpInfoEx(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibIcmpStats(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibIcmpStatsEx(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibIfRow2(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibIpStats(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibTcp6RowOwnerPid(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibTcp6TableOwnerPid(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibTcpRow(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibTcpStats(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibTcpTable(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibUdp6RowOwnerPid(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibUdp6TableOwnerPid(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibUdpRow(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibUdpStats(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MibUdpTable(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MulticastIPAddressInformation(ABC, IPAddressInformation):
     """"""
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressPreferredLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressValidLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DhcpLeaseLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DuplicateAddressDetectionState(self) -> DuplicateAddressDetectionState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEligible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsTransient(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrefixOrigin(self) -> PrefixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SuffixOrigin(self) -> SuffixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MulticastIPAddressInformationCollection(
     Object,
@@ -2597,98 +1540,55 @@ class MulticastIPAddressInformationCollection(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> MulticastIPAddressInformation:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, item: MulticastIPAddressInformation) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: MulticastIPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[MulticastIPAddressInformation], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, item: MulticastIPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: MulticastIPAddressInformation) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> MulticastIPAddressInformation:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[MulticastIPAddressInformation]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetBiosNodeType(Enum):
     """"""
@@ -2722,31 +1622,17 @@ class NetworkAvailabilityEventArgs(EventArgs):
 
     @property
     def IsAvailable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkChange(Object):
     """"""
@@ -2754,32 +1640,18 @@ class NetworkChange(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def RegisterNetworkChange(cls, nc: NetworkChange) -> None:
-        """
-
-        :param nc:
-        """
+        """:param nc:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     NetworkAddressChanged: EventType[NetworkAddressChangedEventHandler] = ...
     """"""
     NetworkAvailabilityChanged: EventType[NetworkAvailabilityChangedEventHandler] = ...
@@ -2803,179 +1675,106 @@ class NetworkInformationException(Win32Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, errorCode: int):
-        """
-
-        :param errorCode:
-        """
+        """:param errorCode:"""
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NativeErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkInformationPermission(
-    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+    CodeAccessPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
 ):
     """"""
 
     @overload
     def __init__(self, access: NetworkInformationAccess):
-        """
-
-        :param access:
-        """
+        """:param access:"""
     @overload
     def __init__(self, state: PermissionState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @property
     def Access(self) -> NetworkInformationAccess:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddPermission(self, access: NetworkInformationAccess) -> None:
-        """
-
-        :param access:
-        """
+        """:param access:"""
     def Assert(self) -> None:
         """"""
     def Copy(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Demand(self) -> None:
         """"""
@@ -2985,59 +1784,33 @@ class NetworkInformationPermission(
     def Deny(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FromXml(self, e: SecurityElement) -> None:
-        """
-
-        :param e:
-        """
+        """:param e:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Intersect(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsSubsetOf(self, target: IPermission) -> bool:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
     def IsUnrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def PermitOnly(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToXml(self) -> SecurityElement:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Union(self, target: IPermission) -> IPermission:
-        """
-
-        :param target:
+        """:param target:
         :return:
         """
 
@@ -3045,84 +1818,51 @@ class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
     """"""
 
     def __init__(self, action: SecurityAction):
-        """
-
-        :param action:
-        """
+        """:param action:"""
     @property
     def Access(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Access.setter
     def Access(self, value: str) -> None: ...
     @property
     def Action(self) -> SecurityAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Unrestricted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Unrestricted.setter
     def Unrestricted(self, value: bool) -> None: ...
     def CreatePermission(self) -> IPermission:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3134,9 +1874,7 @@ class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3146,146 +1884,77 @@ class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkInterface(ABC, Object):
     """"""
 
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def IPv6LoopbackInterfaceIndex(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReceiveOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def LoopbackInterfaceIndex(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NetworkInterfaceType(self) -> NetworkInterfaceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OperationalStatus(self) -> OperationalStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Speed(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsMulticast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetAllNetworkInterfaces(cls) -> Array[NetworkInterface]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPProperties(self) -> IPInterfaceProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPStatistics(self) -> IPInterfaceStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv4Statistics(self) -> IPv4InterfaceStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetIsNetworkAvailable(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPhysicalAddress(self) -> PhysicalAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Supports(self, networkInterfaceComponent: NetworkInterfaceComponent) -> bool:
-        """
-
-        :param networkInterfaceComponent:
+        """:param networkInterfaceComponent:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NetworkInterfaceComponent(Enum):
     """"""
@@ -3398,43 +2067,24 @@ class PhysicalAddress(Object):
     :return: 
     """
     def __init__(self, address: Array[int]):
-        """
-
-        :param address:
-        """
+        """:param address:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAddressBytes(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Parse(cls, address: str) -> PhysicalAddress:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Ping(Component, IComponent, IDisposable):
     """"""
@@ -3443,96 +2093,62 @@ class Ping(Component, IComponent, IDisposable):
         """"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Send(self, address: IPAddress) -> PingReply:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def Send(self, hostNameOrAddress: str) -> PingReply:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :return:
         """
     @overload
     def Send(self, address: IPAddress, timeout: int) -> PingReply:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :return:
         """
     @overload
     def Send(self, hostNameOrAddress: str, timeout: int) -> PingReply:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :return:
         """
     @overload
     def Send(self, address: IPAddress, timeout: int, buffer: Array[int]) -> PingReply:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :param buffer:
         :return:
         """
     @overload
     def Send(self, hostNameOrAddress: str, timeout: int, buffer: Array[int]) -> PingReply:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :param buffer:
         :return:
@@ -3541,9 +2157,7 @@ class Ping(Component, IComponent, IDisposable):
     def Send(
         self, address: IPAddress, timeout: int, buffer: Array[int], options: PingOptions
     ) -> PingReply:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :param buffer:
         :param options:
@@ -3551,11 +2165,13 @@ class Ping(Component, IComponent, IDisposable):
         """
     @overload
     def Send(
-        self, hostNameOrAddress: str, timeout: int, buffer: Array[int], options: PingOptions
+        self,
+        hostNameOrAddress: str,
+        timeout: int,
+        buffer: Array[int],
+        options: PingOptions,
     ) -> PingReply:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :param buffer:
         :param options:
@@ -3563,31 +2179,23 @@ class Ping(Component, IComponent, IDisposable):
         """
     @overload
     def SendAsync(self, address: IPAddress, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param userToken:
         """
     @overload
     def SendAsync(self, hostNameOrAddress: str, userToken: object) -> None:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param userToken:
         """
     @overload
     def SendAsync(self, address: IPAddress, timeout: int, userToken: object) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :param userToken:
         """
     @overload
     def SendAsync(self, hostNameOrAddress: str, timeout: int, userToken: object) -> None:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :param userToken:
         """
@@ -3595,20 +2203,20 @@ class Ping(Component, IComponent, IDisposable):
     def SendAsync(
         self, address: IPAddress, timeout: int, buffer: Array[int], userToken: object
     ) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :param buffer:
         :param userToken:
         """
     @overload
     def SendAsync(
-        self, hostNameOrAddress: str, timeout: int, buffer: Array[int], userToken: object
+        self,
+        hostNameOrAddress: str,
+        timeout: int,
+        buffer: Array[int],
+        userToken: object,
     ) -> None:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :param buffer:
         :param userToken:
@@ -3622,9 +2230,7 @@ class Ping(Component, IComponent, IDisposable):
         options: PingOptions,
         userToken: object,
     ) -> None:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :param buffer:
         :param options:
@@ -3639,9 +2245,7 @@ class Ping(Component, IComponent, IDisposable):
         options: PingOptions,
         userToken: object,
     ) -> None:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :param buffer:
         :param options:
@@ -3651,31 +2255,23 @@ class Ping(Component, IComponent, IDisposable):
         """"""
     @overload
     def SendPingAsync(self, address: IPAddress) -> Task[PingReply]:
-        """
-
-        :param address:
+        """:param address:
         :return:
         """
     @overload
     def SendPingAsync(self, hostNameOrAddress: str) -> Task[PingReply]:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :return:
         """
     @overload
     def SendPingAsync(self, address: IPAddress, timeout: int) -> Task[PingReply]:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :return:
         """
     @overload
     def SendPingAsync(self, hostNameOrAddress: str, timeout: int) -> Task[PingReply]:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :return:
         """
@@ -3683,9 +2279,7 @@ class Ping(Component, IComponent, IDisposable):
     def SendPingAsync(
         self, address: IPAddress, timeout: int, buffer: Array[int]
     ) -> Task[PingReply]:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :param buffer:
         :return:
@@ -3694,9 +2288,7 @@ class Ping(Component, IComponent, IDisposable):
     def SendPingAsync(
         self, hostNameOrAddress: str, timeout: int, buffer: Array[int]
     ) -> Task[PingReply]:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :param buffer:
         :return:
@@ -3705,9 +2297,7 @@ class Ping(Component, IComponent, IDisposable):
     def SendPingAsync(
         self, address: IPAddress, timeout: int, buffer: Array[int], options: PingOptions
     ) -> Task[PingReply]:
-        """
-
-        :param address:
+        """:param address:
         :param timeout:
         :param buffer:
         :param options:
@@ -3715,21 +2305,20 @@ class Ping(Component, IComponent, IDisposable):
         """
     @overload
     def SendPingAsync(
-        self, hostNameOrAddress: str, timeout: int, buffer: Array[int], options: PingOptions
+        self,
+        hostNameOrAddress: str,
+        timeout: int,
+        buffer: Array[int],
+        options: PingOptions,
     ) -> Task[PingReply]:
-        """
-
-        :param hostNameOrAddress:
+        """:param hostNameOrAddress:
         :param timeout:
         :param buffer:
         :param options:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
     PingCompleted: EventType[PingCompletedEventHandler] = ...
@@ -3740,49 +2329,26 @@ class PingCompletedEventArgs(AsyncCompletedEventArgs):
 
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Reply(self) -> PingReply:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 PingCompletedEventHandler: Callable[[object, PingCompletedEventArgs], None] = ...
 """
@@ -3796,138 +2362,80 @@ class PingException(InvalidOperationException, _Exception, ISerializable):
 
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PingOptions(Object):
     """"""
@@ -3937,103 +2445,58 @@ class PingOptions(Object):
         """"""
     @overload
     def __init__(self, ttl: int, dontFragment: bool):
-        """
-
-        :param ttl:
+        """:param ttl:
         :param dontFragment:
         """
     @property
     def DontFragment(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @DontFragment.setter
     def DontFragment(self, value: bool) -> None: ...
     @property
     def Ttl(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Ttl.setter
     def Ttl(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PingReply(Object):
     """"""
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Buffer(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Options(self) -> PingOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RoundtripTime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Status(self) -> IPStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PrefixOrigin(Enum):
     """"""
@@ -4056,55 +2519,32 @@ class SafeCancelMibChangeNotify(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeFreeMibTable(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
@@ -4113,55 +2553,32 @@ class SafeFreeMibTable(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
         """"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ScopeLevel(Enum):
     """"""
@@ -4223,1701 +2640,874 @@ class SystemGatewayIPAddressInformation(GatewayIPAddressInformation):
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPAddressInformation(IPAddressInformation):
     """"""
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEligible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsTransient(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPGlobalProperties(IPGlobalProperties):
     """"""
 
     @property
     def DhcpScopeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DomainName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HostName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsWinsProxy(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NodeType(self) -> NetBiosNodeType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginGetUnicastAddresses(self, callback: AsyncCallback, state: object) -> IAsyncResult:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
     def EndGetUnicastAddresses(
         self, asyncResult: IAsyncResult
     ) -> UnicastIPAddressInformationCollection:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetActiveTcpConnections(self) -> Array[TcpConnectionInformation]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetActiveTcpListeners(self) -> Array[IPEndPoint]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetActiveUdpListeners(self) -> Array[IPEndPoint]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv4GlobalStatistics(self) -> IPGlobalStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv6GlobalStatistics(self) -> IPGlobalStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIcmpV4Statistics(self) -> IcmpV4Statistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIcmpV6Statistics(self) -> IcmpV6Statistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTcpIPv4Statistics(self) -> TcpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTcpIPv6Statistics(self) -> TcpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUdpIPv4Statistics(self) -> UdpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUdpIPv6Statistics(self) -> UdpStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUnicastAddresses(self) -> UnicastIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUnicastAddressesAsync(self) -> Task[UnicastIPAddressInformationCollection]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPGlobalStatistics(IPGlobalStatistics):
     """"""
 
     @property
     def DefaultTtl(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ForwardingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NumberOfIPAddresses(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NumberOfInterfaces(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NumberOfRoutes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketRequests(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketRoutingDiscards(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputPacketsWithNoRoute(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketFragmentFailures(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketReassembliesRequired(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketReassemblyFailures(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketReassemblyTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketsFragmented(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketsReassembled(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPackets(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsDelivered(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsForwarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsWithAddressErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsWithHeadersErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceivedPacketsWithUnknownProtocol(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPInterfaceProperties(IPInterfaceProperties):
     """"""
 
     @property
     def AnycastAddresses(self) -> IPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DhcpServerAddresses(self) -> IPAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DnsAddresses(self) -> IPAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DnsSuffix(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GatewayAddresses(self) -> GatewayIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDynamicDnsEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MulticastAddresses(self) -> MulticastIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastAddresses(self) -> UnicastIPAddressInformationCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WinsServersAddresses(self) -> IPAddressCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv4Properties(self) -> IPv4InterfaceProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv6Properties(self) -> IPv6InterfaceProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPInterfaceStatistics(IPInterfaceStatistics):
     """"""
 
     @property
     def BytesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BytesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingUnknownProtocolPackets(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputQueueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPv4InterfaceProperties(IPv4InterfaceProperties):
     """"""
 
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutomaticPrivateAddressingActive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutomaticPrivateAddressingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDhcpEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsForwardingEnabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Mtu(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UsesWins(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPv4InterfaceStatistics(IPv4InterfaceStatistics):
     """"""
 
     @property
     def BytesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BytesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingUnknownProtocolPackets(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NonUnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutgoingPacketsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OutputQueueLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnicastPacketsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIPv6InterfaceProperties(IPv6InterfaceProperties):
     """"""
 
     @property
     def Index(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Mtu(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetScopeId(self, scopeLevel: ScopeLevel) -> int:
-        """
-
-        :param scopeLevel:
+        """:param scopeLevel:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIcmpV4Statistics(IcmpV4Statistics):
     """"""
 
     @property
     def AddressMaskRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressMaskRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressMaskRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressMaskRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DestinationUnreachableMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DestinationUnreachableMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SourceQuenchesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SourceQuenchesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimestampRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemIcmpV6Statistics(IcmpV6Statistics):
     """"""
 
     @property
     def DestinationUnreachableMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DestinationUnreachableMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRepliesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EchoRequestsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipQueriesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipQueriesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReductionsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReductionsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReportsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MembershipReportsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborAdvertisementsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborAdvertisementsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborSolicitsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NeighborSolicitsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketTooBigMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PacketTooBigMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParameterProblemsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RedirectsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterAdvertisementsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterAdvertisementsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterSolicitsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RouterSolicitsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TimeExceededMessagesSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemMulticastIPAddressInformation(MulticastIPAddressInformation):
     """"""
 
     def __init__(self, addressInfo: SystemIPAddressInformation):
-        """
-
-        :param addressInfo:
-        """
+        """:param addressInfo:"""
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressPreferredLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressValidLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DhcpLeaseLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DuplicateAddressDetectionState(self) -> DuplicateAddressDetectionState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEligible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsTransient(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrefixOrigin(self) -> PrefixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SuffixOrigin(self) -> SuffixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemNetworkInterface(NetworkInterface):
     """"""
 
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def IPv6LoopbackInterfaceIndex(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Id(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReceiveOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def LoopbackInterfaceIndex(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NetworkInterfaceType(self) -> NetworkInterfaceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OperationalStatus(self) -> OperationalStatus:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Speed(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsMulticast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPProperties(self) -> IPInterfaceProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPStatistics(self) -> IPInterfaceStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIPv4Statistics(self) -> IPv4InterfaceStatistics:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPhysicalAddress(self) -> PhysicalAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Supports(self, networkInterfaceComponent: NetworkInterfaceComponent) -> bool:
-        """
-
-        :param networkInterfaceComponent:
+        """:param networkInterfaceComponent:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemTcpConnectionInformation(TcpConnectionInformation):
     """"""
 
     @property
     def LocalEndPoint(self) -> IPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RemoteEndPoint(self) -> IPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> TcpState:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemTcpStatistics(TcpStatistics):
     """"""
 
     @property
     def ConnectionsAccepted(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectionsInitiated(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CumulativeConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FailedConnectionAttempts(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumTransmissionTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinimumTransmissionTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResetConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResetsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SegmentsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SegmentsResent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SegmentsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemUdpStatistics(UdpStatistics):
     """"""
 
     @property
     def DatagramsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DatagramsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingDatagramsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingDatagramsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UdpListeners(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SystemUnicastIPAddressInformation(UnicastIPAddressInformation):
     """"""
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressPreferredLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressValidLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DhcpLeaseLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DuplicateAddressDetectionState(self) -> DuplicateAddressDetectionState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IPv4Mask(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEligible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsTransient(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrefixLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrefixOrigin(self) -> PrefixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SuffixOrigin(self) -> SuffixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TcpConnectionInformation(ABC, Object):
     """"""
 
     @property
     def LocalEndPoint(self) -> IPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RemoteEndPoint(self) -> IPEndPoint:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> TcpState:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TcpState(Enum):
     """"""
@@ -5954,109 +3544,56 @@ class TcpStatistics(ABC, Object):
 
     @property
     def ConnectionsAccepted(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ConnectionsInitiated(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CumulativeConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CurrentConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FailedConnectionAttempts(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumTransmissionTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinimumTransmissionTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResetConnections(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ResetsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SegmentsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SegmentsResent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SegmentsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TcpTableClass(Enum):
     """"""
@@ -6084,33 +3621,20 @@ class TeredoHelper(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UnsafeNotifyStableUnicastIpAddressTable(
         cls, callback: Action[object], state: object
     ) -> bool:
-        """
-
-        :param callback:
+        """:param callback:
         :param state:
         :return:
         """
@@ -6120,55 +3644,29 @@ class UdpStatistics(ABC, Object):
 
     @property
     def DatagramsReceived(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DatagramsSent(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingDatagramsDiscarded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncomingDatagramsWithErrors(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UdpListeners(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UdpTableClass(Enum):
     """"""
@@ -6185,91 +3683,47 @@ class UnicastIPAddressInformation(ABC, IPAddressInformation):
 
     @property
     def Address(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressPreferredLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AddressValidLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DhcpLeaseLifetime(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DuplicateAddressDetectionState(self) -> DuplicateAddressDetectionState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IPv4Mask(self) -> IPAddress:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDnsEligible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsTransient(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrefixLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrefixOrigin(self) -> PrefixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SuffixOrigin(self) -> SuffixOrigin:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnicastIPAddressInformationCollection(
     Object,
@@ -6281,120 +3735,66 @@ class UnicastIPAddressInformationCollection(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> UnicastIPAddressInformation:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, item: UnicastIPAddressInformation) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     def Clear(self) -> None:
         """"""
     def Contains(self, item: UnicastIPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def CopyTo(self, array: Array[UnicastIPAddressInformation], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, item: UnicastIPAddressInformation) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: UnicastIPAddressInformation) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> UnicastIPAddressInformation:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[UnicastIPAddressInformation]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnsafeNetInfoNativeMethods(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

@@ -1,13 +1,13 @@
+from __future__ import annotations
+
 import logging
 import sys
 from argparse import ZERO_OR_MORE
 from argparse import ArgumentParser
 from argparse import Namespace
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
-from typing import List
-from typing import Sequence
-from typing import Union
 
 import stubgen
 from stubgen.defaults import ASSEMBLIES
@@ -20,7 +20,7 @@ from stubgen.log import get_logger
 logger = get_logger(__name__)
 
 
-def main(*args: Any) -> Union[int, str]:
+def main(*args: Any) -> int | str:
     parser: ArgumentParser = ArgumentParser(
         prog=stubgen.__name__,
         description=stubgen.__description__,
@@ -35,7 +35,7 @@ def main(*args: Any) -> Union[int, str]:
         dest="output_dir",
         action="store",
         type=Path,
-        default=Path("."),
+        default=Path(),
         help="path to output directory [default: .]",
     )
     parser.add_argument(
@@ -130,13 +130,11 @@ def main(*args: Any) -> Union[int, str]:
     multi_threaded: bool = parsed_args.multi_threaded
     logger.debug("Using multi threading flag: %s", multi_threaded)
 
-    exit_code: Union[int, str] = 0
+    exit_code: int | str = 0
     try:
         command: str = parsed_args.command
         logger.debug("Using command: %s", command)
         if command == "extract":
-            from stubgen.extract_stubs import extract_assembly
-
             use_all: bool = parsed_args.all
             use_built_in: bool = parsed_args.built_in
             use_core: bool = parsed_args.core
@@ -155,7 +153,7 @@ def main(*args: Any) -> Union[int, str]:
             overwrite: bool = parsed_args.overwrite
             logger.debug("Using overwrite flag: %s", skip_failed)
 
-            assembly_names: List[str] = list()
+            assembly_names: list[str] = list()
             if use_all:
                 logger.debug("Adding all assemblies")
                 assembly_names.extend(ASSEMBLIES)
@@ -188,13 +186,13 @@ def main(*args: Any) -> Union[int, str]:
             logger.debug("Using format files flag: %s", format_files)
 
             skeleton_glob: str = parsed_args.skeletons
-            skeleton_files: List[Path] = []
+            skeleton_files: list[Path] = []
             for file_path in Path().glob(skeleton_glob):
                 skeleton_files.append(file_path)
                 logger.debug("Using skeleton file: %r", str(file_path))
 
             doc_glob: str = parsed_args.docs
-            doc_files: List[Path] = []
+            doc_files: list[Path] = []
             for file_path in Path().glob(doc_glob):
                 doc_files.append(file_path)
                 logger.debug("Using doc file: %r", str(file_path))
@@ -218,6 +216,6 @@ def main(*args: Any) -> Union[int, str]:
 if __name__ == "__main__":
     args: Sequence[str] = sys.argv[1:]
 
-    result: Union[int, str] = main(*args)
+    result: int | str = main(*args)
 
     sys.exit(result)

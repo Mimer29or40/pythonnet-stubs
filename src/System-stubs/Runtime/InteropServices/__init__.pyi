@@ -1,16 +1,12 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
-from Microsoft.Win32.UnsafeNativeMethods import IMarshal
 from System import Array
 from System import Attribute
 from System import Char
@@ -76,8 +72,6 @@ from System.Runtime.InteropServices.ComTypes import DISPPARAMS
 from System.Runtime.InteropServices.ComTypes import INVOKEKIND
 from System.Runtime.InteropServices.ComTypes import ITypeInfo
 from System.Runtime.InteropServices.ComTypes import ITypeLib
-from System.Runtime.InteropServices.ELEMDESC import DESCUNION
-from System.Runtime.InteropServices.NativeMethods import IDispatch
 from System.Runtime.Remoting import ObjRef
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
@@ -101,49 +95,31 @@ class AllowReversePInvokeCallsAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -155,9 +131,7 @@ class AllowReversePInvokeCallsAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -167,21 +141,13 @@ class AllowReversePInvokeCallsAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Architecture(Enum):
     """"""
@@ -199,75 +165,46 @@ class ArrayWithOffset(ValueType):
     """"""
 
     def __init__(self, array: object, offset: int):
-        """
-
-        :param array:
+        """:param array:
         :param offset:
         """
     @overload
     def Equals(self, obj: ArrayWithOffset) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetArray(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: ArrayWithOffset) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: ArrayWithOffset) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: ArrayWithOffset, b: ArrayWithOffset) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: ArrayWithOffset, b: ArrayWithOffset) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -284,61 +221,37 @@ class AutomationProxyAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, val: bool):
-        """
-
-        :param val:
-        """
+        """:param val:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -350,9 +263,7 @@ class AutomationProxyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -362,21 +273,13 @@ class AutomationProxyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BINDPTR(ValueType):
     """"""
@@ -397,26 +300,15 @@ class BINDPTR(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BIND_OPTS(ValueType):
     """"""
@@ -442,69 +334,38 @@ class BIND_OPTS(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BStrWrapper(Object):
     """"""
 
     @overload
     def __init__(self, value: object):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def WrappedObject(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BestFitMappingAttribute(Attribute, _Attribute):
     """"""
@@ -515,61 +376,37 @@ class BestFitMappingAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, BestFitMapping: bool):
-        """
-
-        :param BestFitMapping:
-        """
+        """:param BestFitMapping:"""
     @property
     def BestFitMapping(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -581,9 +418,7 @@ class BestFitMappingAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -593,21 +428,13 @@ class BestFitMappingAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CALLCONV(Enum):
     """"""
@@ -641,151 +468,88 @@ class COMException(ExternalException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @overload
     def __init__(self, message: str, errorCode: int):
-        """
-
-        :param message:
+        """:param message:
         :param errorCode:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CONNECTDATA(ValueType):
     """"""
@@ -801,26 +565,15 @@ class CONNECTDATA(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CallingConvention(Enum):
     """"""
@@ -853,67 +606,40 @@ class ClassInterfaceAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, classInterfaceType: ClassInterfaceType):
-        """
-
-        :param classInterfaceType:
-        """
+        """:param classInterfaceType:"""
     @overload
     def __init__(self, classInterfaceType: int):
-        """
-
-        :param classInterfaceType:
-        """
+        """:param classInterfaceType:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> ClassInterfaceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -925,9 +651,7 @@ class ClassInterfaceAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -937,21 +661,13 @@ class ClassInterfaceAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ClassInterfaceType(Enum):
     """"""
@@ -967,61 +683,37 @@ class CoClassAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, coClass: Type):
-        """
-
-        :param coClass:
-        """
+        """:param coClass:"""
     @property
     def CoClass(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1033,9 +725,7 @@ class CoClassAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1045,81 +735,49 @@ class CoClassAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComAliasNameAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, alias: str):
-        """
-
-        :param alias:
-        """
+        """:param alias:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1131,9 +789,7 @@ class ComAliasNameAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1143,254 +799,151 @@ class ComAliasNameAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _MemberInfo):
     """"""
 
     def __init__(self, type: Type, eventName: str):
-        """
-
-        :param type:
+        """:param type:
         :param eventName:
         """
     @property
     def AddMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> EventAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventHandlerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMulticast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RaiseMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RemoveMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddEventHandler(self, target: object, handler: Delegate) -> None:
-        """
-
-        :param target:
+        """:param target:
         :param handler:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetAddMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetAddMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -1400,9 +953,7 @@ class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _Member
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -1410,89 +961,55 @@ class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _Member
         """
     @overload
     def GetOtherMethods(self) -> Array[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetOtherMethods(self, nonPublic: bool) -> Array[MethodInfo]:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetRaiseMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetRaiseMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetRemoveMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetRemoveMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(
         self,
@@ -1505,9 +1022,7 @@ class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _Member
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1528,9 +1043,7 @@ class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _Member
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1541,133 +1054,84 @@ class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _Member
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def RemoveEventHandler(self, target: object, handler: Delegate) -> None:
-        """
-
-        :param target:
+        """:param target:
         :param handler:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComCompatibleVersionAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, major: int, minor: int, build: int, revision: int):
-        """
-
-        :param major:
+        """:param major:
         :param minor:
         :param build:
         :param revision:
         """
     @property
     def BuildNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MajorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RevisionNumber(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1679,9 +1143,7 @@ class ComCompatibleVersionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1691,21 +1153,13 @@ class ComCompatibleVersionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComConversionLossAttribute(Attribute, _Attribute):
     """"""
@@ -1714,49 +1168,31 @@ class ComConversionLossAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1768,9 +1204,7 @@ class ComConversionLossAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1780,81 +1214,49 @@ class ComConversionLossAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComDefaultInterfaceAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, defaultInterface: Type):
-        """
-
-        :param defaultInterface:
-        """
+        """:param defaultInterface:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1866,9 +1268,7 @@ class ComDefaultInterfaceAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1878,88 +1278,54 @@ class ComDefaultInterfaceAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComEventInterfaceAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, SourceInterface: Type, EventProvider: Type):
-        """
-
-        :param SourceInterface:
+        """:param SourceInterface:
         :param EventProvider:
         """
     @property
     def EventProvider(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SourceInterface(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1971,9 +1337,7 @@ class ComEventInterfaceAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1983,161 +1347,102 @@ class ComEventInterfaceAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComEventsHelper(ABC, Object):
     """"""
 
     @classmethod
     def Combine(cls, rcw: object, iid: Guid, dispid: int, d: Delegate) -> None:
-        """
-
-        :param rcw:
+        """:param rcw:
         :param iid:
         :param dispid:
         :param d:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Remove(cls, rcw: object, iid: Guid, dispid: int, d: Delegate) -> Delegate:
-        """
-
-        :param rcw:
+        """:param rcw:
         :param iid:
         :param dispid:
         :param d:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComEventsInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComEventsMethod(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComEventsSink(Object, ICustomQueryInterface, NativeMethods.IDispatch):
     """"""
 
     def AddMethod(self, dispid: int) -> ComEventsMethod:
-        """
-
-        :param dispid:
+        """:param dispid:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FindMethod(self, dispid: int) -> ComEventsMethod:
-        """
-
-        :param dispid:
+        """:param dispid:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, iid: Guid, names: Array[str], cNames: int, lcid: int, rgDispId: Array[int]
-    ) -> Tuple[None, Array[int]]:
+    ) -> tuple[None, Array[int]]:
         """"""
-    def GetInterface(self, iid: Guid, ppv: IntPtr) -> Tuple[CustomQueryInterfaceResult, IntPtr]:
-        """
-
-        :param iid:
+    def GetInterface(self, iid: Guid, ppv: IntPtr) -> tuple[CustomQueryInterfaceResult, IntPtr]:
+        """:param iid:
         :param ppv:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
-    def GetTypeInfo(self, iTInfo: int, lcid: int, info: IntPtr) -> Tuple[None, IntPtr]:
+        """:return:"""
+    def GetTypeInfo(self, iTInfo: int, lcid: int, info: IntPtr) -> tuple[None, IntPtr]:
         """"""
-    def GetTypeInfoCount(self, pctinfo: int) -> Tuple[None, int]:
+    def GetTypeInfoCount(self, pctinfo: int) -> tuple[None, int]:
         """"""
     def Invoke(
         self,
@@ -2152,16 +1457,11 @@ class ComEventsSink(Object, ICustomQueryInterface, NativeMethods.IDispatch):
     ) -> None:
         """"""
     def RemoveMethod(self, method: ComEventsMethod) -> ComEventsMethod:
-        """
-
-        :param method:
+        """:param method:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComImportAttribute(Attribute, _Attribute):
     """"""
@@ -2170,49 +1470,31 @@ class ComImportAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2224,9 +1506,7 @@ class ComImportAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2236,21 +1516,13 @@ class ComImportAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComInterfaceType(Enum):
     """"""
@@ -2281,49 +1553,31 @@ class ComRegisterFunctionAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2335,9 +1589,7 @@ class ComRegisterFunctionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2347,49 +1599,31 @@ class ComRegisterFunctionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComSourceInterfacesAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, sourceInterfaces: str):
-        """
-
-        :param sourceInterfaces:
-        """
+        """:param sourceInterfaces:"""
     @overload
     def __init__(self, sourceInterface: Type):
-        """
-
-        :param sourceInterface:
-        """
+        """:param sourceInterface:"""
     @overload
     def __init__(self, sourceInterface1: Type, sourceInterface2: Type):
-        """
-
-        :param sourceInterface1:
+        """:param sourceInterface1:
         :param sourceInterface2:
         """
     @overload
     def __init__(self, sourceInterface1: Type, sourceInterface2: Type, sourceInterface3: Type):
-        """
-
-        :param sourceInterface1:
+        """:param sourceInterface1:
         :param sourceInterface2:
         :param sourceInterface3:
         """
@@ -2401,64 +1635,41 @@ class ComSourceInterfacesAttribute(Attribute, _Attribute):
         sourceInterface3: Type,
         sourceInterface4: Type,
     ):
-        """
-
-        :param sourceInterface1:
+        """:param sourceInterface1:
         :param sourceInterface2:
         :param sourceInterface3:
         :param sourceInterface4:
         """
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2470,9 +1681,7 @@ class ComSourceInterfacesAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2482,21 +1691,13 @@ class ComSourceInterfacesAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComUnregisterFunctionAttribute(Attribute, _Attribute):
     """"""
@@ -2505,49 +1706,31 @@ class ComUnregisterFunctionAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2559,9 +1742,7 @@ class ComUnregisterFunctionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2571,81 +1752,49 @@ class ComUnregisterFunctionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComVisibleAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, visibility: bool):
-        """
-
-        :param visibility:
-        """
+        """:param visibility:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2657,9 +1806,7 @@ class ComVisibleAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2669,107 +1816,62 @@ class ComVisibleAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CriticalHandle(ABC, CriticalFinalizerObject, IDisposable):
     """"""
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CurrencyWrapper(Object):
     """"""
 
     @overload
     def __init__(self, obj: Decimal):
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @overload
     def __init__(self, obj: object):
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @property
     def WrappedObject(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CustomQueryInterfaceMode(Enum):
     """"""
@@ -2829,86 +1931,51 @@ class DISPPARAMS(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultCharSetAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, charSet: CharSet):
-        """
-
-        :param charSet:
-        """
+        """:param charSet:"""
     @property
     def CharSet(self) -> CharSet:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2920,9 +1987,7 @@ class DefaultCharSetAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2932,81 +1997,49 @@ class DefaultCharSetAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultDllImportSearchPathsAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, paths: DllImportSearchPath):
-        """
-
-        :param paths:
-        """
+        """:param paths:"""
     @property
     def Paths(self) -> DllImportSearchPath:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3018,9 +2051,7 @@ class DefaultDllImportSearchPathsAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3030,81 +2061,49 @@ class DefaultDllImportSearchPathsAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultParameterValueAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, value: object):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3116,9 +2115,7 @@ class DefaultParameterValueAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3128,81 +2125,49 @@ class DefaultParameterValueAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DispIdAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, dispId: int):
-        """
-
-        :param dispId:
-        """
+        """:param dispId:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3214,9 +2179,7 @@ class DispIdAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3226,57 +2189,32 @@ class DispIdAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DispatchWrapper(Object):
     """"""
 
     def __init__(self, obj: object):
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @property
     def WrappedObject(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DllImportAttribute(Attribute, _Attribute):
     """"""
@@ -3322,61 +2260,37 @@ class DllImportAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, dllName: str):
-        """
-
-        :param dllName:
-        """
+        """:param dllName:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3388,9 +2302,7 @@ class DllImportAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3400,21 +2312,13 @@ class DllImportAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DllImportSearchPath(Enum):
     """"""
@@ -3448,26 +2352,15 @@ class ELEMDESC(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class DESCUNION(ValueType):
         """"""
@@ -3477,26 +2370,15 @@ class ELEMDESC(ValueType):
         paramdesc: Final[PARAMDESC] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class EXCEPINFO(ValueType):
     """"""
@@ -3542,75 +2424,41 @@ class EXCEPINFO(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ErrorWrapper(Object):
     """"""
 
     @overload
     def __init__(self, e: Exception):
-        """
-
-        :param e:
-        """
+        """:param e:"""
     @overload
     def __init__(self, errorCode: int):
-        """
-
-        :param errorCode:
-        """
+        """:param errorCode:"""
     @overload
     def __init__(self, errorCode: object):
-        """
-
-        :param errorCode:
-        """
+        """:param errorCode:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExporterEventKind(Enum):
     """"""
@@ -3626,32 +2474,18 @@ class ExtensibleClassFactory(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def RegisterObjectCreationCallback(cls, callback: ObjectCreationDelegate) -> None:
-        """
-
-        :param callback:
-        """
+        """:param callback:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExternalException(SystemException, _Exception, ISerializable):
     """"""
@@ -3661,151 +2495,88 @@ class ExternalException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @overload
     def __init__(self, message: str, errorCode: int):
-        """
-
-        :param message:
+        """:param message:
         :param errorCode:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FILETIME(ValueType):
     """"""
@@ -3821,26 +2592,15 @@ class FILETIME(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FUNCDESC(ValueType):
     """"""
@@ -3906,26 +2666,15 @@ class FUNCDESC(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FUNCFLAGS(Enum):
     """"""
@@ -3975,61 +2724,37 @@ class FieldOffsetAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, offset: int):
-        """
-
-        :param offset:
-        """
+        """:param offset:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4041,9 +2766,7 @@ class FieldOffsetAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4053,139 +2776,91 @@ class FieldOffsetAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GCHandle(ValueType):
     """"""
 
     @property
     def IsAllocated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Target(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Target.setter
     def Target(self, value: object) -> None: ...
     def AddrOfPinnedObject(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Alloc(cls, value: object) -> GCHandle:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     @overload
     def Alloc(cls, value: object, type: GCHandleType) -> GCHandle:
-        """
-
-        :param value:
+        """:param value:
         :param type:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Free(self) -> None:
         """"""
     @classmethod
     def FromIntPtr(cls, value: IntPtr) -> GCHandle:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ToIntPtr(cls, value: GCHandle) -> IntPtr:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: GCHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: GCHandle) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: GCHandle, b: GCHandle) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     @overload
     def op_Explicit(cls, value: GCHandle) -> IntPtr:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     @overload
     def op_Explicit(cls, value: IntPtr) -> GCHandle:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: GCHandle, b: GCHandle) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -4194,26 +2869,15 @@ class GCHandleCookieTable(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GCHandleType(Enum):
     """"""
@@ -4231,61 +2895,37 @@ class GuidAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, guid: str):
-        """
-
-        :param guid:
-        """
+        """:param guid:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4297,9 +2937,7 @@ class GuidAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4309,144 +2947,86 @@ class GuidAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HandleCollector(Object):
     """"""
 
     @overload
     def __init__(self, name: str, initialThreshold: int):
-        """
-
-        :param name:
+        """:param name:
         :param initialThreshold:
         """
     @overload
     def __init__(self, name: str, initialThreshold: int, maximumThreshold: int):
-        """
-
-        :param name:
+        """:param name:
         :param initialThreshold:
         :param maximumThreshold:
         """
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitialThreshold(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaximumThreshold(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HandleRef(ValueType):
     """"""
 
     def __init__(self, wrapper: object, handle: IntPtr):
-        """
-
-        :param wrapper:
+        """:param wrapper:
         :param handle:
         """
     @property
     def Handle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Wrapper(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def ToIntPtr(cls, value: HandleRef) -> IntPtr:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def op_Explicit(cls, value: HandleRef) -> IntPtr:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
 
@@ -4454,18 +3034,13 @@ class ICustomAdapter:
     """"""
 
     def GetUnderlyingObject(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ICustomFactory:
     """"""
 
     def CreateInstance(self, serverType: Type) -> MarshalByRefObject:
-        """
-
-        :param serverType:
+        """:param serverType:
         :return:
         """
 
@@ -4473,40 +3048,25 @@ class ICustomMarshaler:
     """"""
 
     def CleanUpManagedData(self, ManagedObj: object) -> None:
-        """
-
-        :param ManagedObj:
-        """
+        """:param ManagedObj:"""
     def CleanUpNativeData(self, pNativeData: IntPtr) -> None:
-        """
-
-        :param pNativeData:
-        """
+        """:param pNativeData:"""
     def GetNativeDataSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarshalManagedToNative(self, ManagedObj: object) -> IntPtr:
-        """
-
-        :param ManagedObj:
+        """:param ManagedObj:
         :return:
         """
     def MarshalNativeToManaged(self, pNativeData: IntPtr) -> object:
-        """
-
-        :param pNativeData:
+        """:param pNativeData:
         :return:
         """
 
 class ICustomQueryInterface:
     """"""
 
-    def GetInterface(self, iid: Guid, ppv: IntPtr) -> Tuple[CustomQueryInterfaceResult, IntPtr]:
-        """
-
-        :param iid:
+    def GetInterface(self, iid: Guid, ppv: IntPtr) -> tuple[CustomQueryInterfaceResult, IntPtr]:
+        """:param iid:
         :param ppv:
         :return:
         """
@@ -4525,26 +3085,15 @@ class IDLDESC(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDLFLAG(Enum):
     """"""
@@ -4565,67 +3114,40 @@ class IDispatchImplAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, implType: IDispatchImplType):
-        """
-
-        :param implType:
-        """
+        """:param implType:"""
     @overload
     def __init__(self, implType: int):
-        """
-
-        :param implType:
-        """
+        """:param implType:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> IDispatchImplType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4637,9 +3159,7 @@ class IDispatchImplAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4649,21 +3169,13 @@ class IDispatchImplAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDispatchImplType(Enum):
     """"""
@@ -4703,51 +3215,34 @@ class IRegistrationServices:
     """"""
 
     def GetManagedCategoryGuid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetProgIdForType(self, type: Type) -> str:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetRegistrableTypesInAssembly(self, assembly: Assembly) -> Array[Type]:
-        """
-
-        :param assembly:
+        """:param assembly:
         :return:
         """
     def RegisterAssembly(self, assembly: Assembly, flags: AssemblyRegistrationFlags) -> bool:
-        """
-
-        :param assembly:
+        """:param assembly:
         :param flags:
         :return:
         """
     def RegisterTypeForComClients(self, type: Type, g: Guid) -> None:
-        """
-
-        :param type:
+        """:param type:
         :param g:
         """
     def TypeRepresentsComType(self, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def TypeRequiresRegistration(self, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def UnregisterAssembly(self, assembly: Assembly) -> bool:
-        """
-
-        :param assembly:
+        """:param assembly:
         :return:
         """
 
@@ -4761,9 +3256,7 @@ class ITypeLibConverter:
         flags: TypeLibExporterFlags,
         notifySink: ITypeLibExporterNotifySink,
     ) -> object:
-        """
-
-        :param assembly:
+        """:param assembly:
         :param typeLibName:
         :param flags:
         :param notifySink:
@@ -4780,9 +3273,7 @@ class ITypeLibConverter:
         keyPair: StrongNameKeyPair,
         unsafeInterfaces: bool,
     ) -> AssemblyBuilder:
-        """
-
-        :param typeLib:
+        """:param typeLib:
         :param asmFileName:
         :param flags:
         :param notifySink:
@@ -4803,9 +3294,7 @@ class ITypeLibConverter:
         asmNamespace: str,
         asmVersion: Version,
     ) -> AssemblyBuilder:
-        """
-
-        :param typeLib:
+        """:param typeLib:
         :param asmFileName:
         :param flags:
         :param notifySink:
@@ -4817,10 +3306,8 @@ class ITypeLibConverter:
         """
     def GetPrimaryInteropAssembly(
         self, g: Guid, major: int, minor: int, lcid: int, asmName: str, asmCodeBase: str
-    ) -> Tuple[bool, str, str]:
-        """
-
-        :param g:
+    ) -> tuple[bool, str, str]:
+        """:param g:
         :param major:
         :param minor:
         :param lcid:
@@ -4833,25 +3320,18 @@ class ITypeLibExporterNameProvider:
     """"""
 
     def GetNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ITypeLibExporterNotifySink:
     """"""
 
     def ReportEvent(self, eventKind: ExporterEventKind, eventCode: int, eventMsg: str) -> None:
-        """
-
-        :param eventKind:
+        """:param eventKind:
         :param eventCode:
         :param eventMsg:
         """
     def ResolveRef(self, assembly: Assembly) -> object:
-        """
-
-        :param assembly:
+        """:param assembly:
         :return:
         """
 
@@ -4859,16 +3339,12 @@ class ITypeLibImporterNotifySink:
     """"""
 
     def ReportEvent(self, eventKind: ImporterEventKind, eventCode: int, eventMsg: str) -> None:
-        """
-
-        :param eventKind:
+        """:param eventKind:
         :param eventCode:
         :param eventMsg:
         """
     def ResolveRef(self, typeLib: object) -> Assembly:
-        """
-
-        :param typeLib:
+        """:param typeLib:
         :return:
         """
 
@@ -4876,61 +3352,37 @@ class ImportedFromTypeLibAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, tlbFile: str):
-        """
-
-        :param tlbFile:
-        """
+        """:param tlbFile:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -4942,9 +3394,7 @@ class ImportedFromTypeLibAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4954,21 +3404,13 @@ class ImportedFromTypeLibAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ImporterCallback(Object, ITypeLibImporterNotifySink):
     """"""
@@ -4976,39 +3418,24 @@ class ImporterCallback(Object, ITypeLibImporterNotifySink):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReportEvent(self, eventKind: ImporterEventKind, eventCode: int, eventMsg: str) -> None:
-        """
-
-        :param eventKind:
+        """:param eventKind:
         :param eventCode:
         :param eventMsg:
         """
     def ResolveRef(self, typeLib: object) -> Assembly:
-        """
-
-        :param typeLib:
+        """:param typeLib:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ImporterEventKind(Enum):
     """"""
@@ -5027,49 +3454,31 @@ class InAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5081,9 +3490,7 @@ class InAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5093,88 +3500,53 @@ class InAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InterfaceTypeAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, interfaceType: ComInterfaceType):
-        """
-
-        :param interfaceType:
-        """
+        """:param interfaceType:"""
     @overload
     def __init__(self, interfaceType: int):
-        """
-
-        :param interfaceType:
-        """
+        """:param interfaceType:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> ComInterfaceType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5186,9 +3558,7 @@ class InterfaceTypeAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5198,21 +3568,13 @@ class InterfaceTypeAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InvalidComObjectException(SystemException, _Exception, ISerializable):
     """"""
@@ -5222,138 +3584,80 @@ class InvalidComObjectException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InvalidOleVariantTypeException(SystemException, _Exception, ISerializable):
     """"""
@@ -5363,198 +3667,116 @@ class InvalidOleVariantTypeException(SystemException, _Exception, ISerializable)
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LCIDConversionAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, lcid: int):
-        """
-
-        :param lcid:
-        """
+        """:param lcid:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5566,9 +3788,7 @@ class LCIDConversionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5578,21 +3798,13 @@ class LCIDConversionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LIBFLAGS(Enum):
     """"""
@@ -5620,68 +3832,42 @@ class ManagedToNativeComInteropStubAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, classType: Type, methodName: str):
-        """
-
-        :param classType:
+        """:param classType:
         :param methodName:
         """
     @property
     def ClassType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5693,9 +3879,7 @@ class ManagedToNativeComInteropStubAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5705,21 +3889,13 @@ class ManagedToNativeComInteropStubAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Marshal(ABC, Object):
     """"""
@@ -5736,52 +3912,37 @@ class Marshal(ABC, Object):
     """
     @classmethod
     def AddRef(cls, pUnk: IntPtr) -> int:
-        """
-
-        :param pUnk:
+        """:param pUnk:
         :return:
         """
     @classmethod
     def AllocCoTaskMem(cls, cb: int) -> IntPtr:
-        """
-
-        :param cb:
+        """:param cb:
         :return:
         """
     @classmethod
     @overload
     def AllocHGlobal(cls, cb: int) -> IntPtr:
-        """
-
-        :param cb:
+        """:param cb:
         :return:
         """
     @classmethod
     @overload
     def AllocHGlobal(cls, cb: IntPtr) -> IntPtr:
-        """
-
-        :param cb:
+        """:param cb:
         :return:
         """
     @classmethod
     def AreComObjectsAvailableForCleanup(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def BindToMoniker(cls, monikerName: str) -> object:
-        """
-
-        :param monikerName:
+        """:param monikerName:
         :return:
         """
     @classmethod
     def ChangeWrapperHandleStrength(cls, otp: object, fIsWeak: bool) -> None:
-        """
-
-        :param otp:
+        """:param otp:
         :param fIsWeak:
         """
     @classmethod
@@ -5790,9 +3951,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[int], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5800,9 +3959,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[Char], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5810,9 +3967,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[float], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5820,9 +3975,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[int], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5830,9 +3983,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[int], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5840,9 +3991,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[int], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5850,9 +3999,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[IntPtr], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5860,9 +4007,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: Array[float], startIndex: int, destination: IntPtr, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param startIndex:
         :param destination:
         :param length:
@@ -5870,9 +4015,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[int], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5880,9 +4023,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[Char], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5890,9 +4031,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[float], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5900,9 +4039,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[int], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5910,9 +4047,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[int], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5920,9 +4055,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[int], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5930,9 +4063,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[IntPtr], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5940,9 +4071,7 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def Copy(cls, source: IntPtr, destination: Array[float], startIndex: int, length: int) -> None:
-        """
-
-        :param source:
+        """:param source:
         :param destination:
         :param startIndex:
         :param length:
@@ -5950,306 +4079,215 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def CreateAggregatedObject(cls, pOuter: IntPtr, o: T) -> IntPtr:
-        """
-
-        :param pOuter:
+        """:param pOuter:
         :param o:
         :return:
         """
     @classmethod
     @overload
     def CreateAggregatedObject(cls, pOuter: IntPtr, o: object) -> IntPtr:
-        """
-
-        :param pOuter:
+        """:param pOuter:
         :param o:
         :return:
         """
     @classmethod
     @overload
     def CreateWrapperOfType(cls, o: T) -> TWrapper:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     @overload
     def CreateWrapperOfType(cls, o: object, t: Type) -> object:
-        """
-
-        :param o:
+        """:param o:
         :param t:
         :return:
         """
     @classmethod
     @overload
     def DestroyStructure(cls, ptr: IntPtr) -> None:
-        """
-
-        :param ptr:
-        """
+        """:param ptr:"""
     @classmethod
     @overload
     def DestroyStructure(cls, ptr: IntPtr, structuretype: Type) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param structuretype:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def FinalReleaseComObject(cls, o: object) -> int:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     def FreeBSTR(cls, ptr: IntPtr) -> None:
-        """
-
-        :param ptr:
-        """
+        """:param ptr:"""
     @classmethod
     def FreeCoTaskMem(cls, ptr: IntPtr) -> None:
-        """
-
-        :param ptr:
-        """
+        """:param ptr:"""
     @classmethod
     def FreeHGlobal(cls, hglobal: IntPtr) -> None:
-        """
-
-        :param hglobal:
-        """
+        """:param hglobal:"""
     @classmethod
     def GenerateGuidForType(cls, type: Type) -> Guid:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def GenerateProgIdForType(cls, type: Type) -> str:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def GetActiveObject(cls, progID: str) -> object:
-        """
-
-        :param progID:
+        """:param progID:
         :return:
         """
     @classmethod
     @overload
     def GetComInterfaceForObject(cls, o: T) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     @overload
     def GetComInterfaceForObject(cls, o: object, T: Type) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :param T:
         :return:
         """
     @classmethod
     @overload
     def GetComInterfaceForObject(cls, o: object, T: Type, mode: CustomQueryInterfaceMode) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :param T:
         :param mode:
         :return:
         """
     @classmethod
     def GetComInterfaceForObjectInContext(cls, o: object, t: Type) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :param t:
         :return:
         """
     @classmethod
     def GetComObjectData(cls, obj: object, key: object) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param key:
         :return:
         """
     @classmethod
     def GetComSlotForMethodInfo(cls, m: MemberInfo) -> int:
-        """
-
-        :param m:
+        """:param m:
         :return:
         """
     @classmethod
     @overload
     def GetDelegateForFunctionPointer(cls, ptr: IntPtr) -> TDelegate:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def GetDelegateForFunctionPointer(cls, ptr: IntPtr, t: Type) -> Delegate:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param t:
         :return:
         """
     @classmethod
     def GetEndComSlot(cls, t: Type) -> int:
-        """
-
-        :param t:
+        """:param t:
         :return:
         """
     @classmethod
     def GetExceptionCode(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetExceptionForHR(cls, errorCode: int) -> Exception:
-        """
-
-        :param errorCode:
+        """:param errorCode:
         :return:
         """
     @classmethod
     @overload
     def GetExceptionForHR(cls, errorCode: int, errorInfo: IntPtr) -> Exception:
-        """
-
-        :param errorCode:
+        """:param errorCode:
         :param errorInfo:
         :return:
         """
     @classmethod
     def GetExceptionPointers(cls) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetFunctionPointerForDelegate(cls, d: TDelegate) -> IntPtr:
-        """
-
-        :param d:
+        """:param d:
         :return:
         """
     @classmethod
     @overload
     def GetFunctionPointerForDelegate(cls, d: Delegate) -> IntPtr:
-        """
-
-        :param d:
+        """:param d:
         :return:
         """
     @classmethod
     def GetHINSTANCE(cls, m: Module) -> IntPtr:
-        """
-
-        :param m:
+        """:param m:
         :return:
         """
     @classmethod
     def GetHRForException(cls, e: Exception) -> int:
-        """
-
-        :param e:
+        """:param e:
         :return:
         """
     @classmethod
     def GetHRForLastWin32Error(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetIDispatchForObject(cls, o: object) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     def GetIDispatchForObjectInContext(cls, o: object) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     def GetITypeInfoForType(cls, t: Type) -> IntPtr:
-        """
-
-        :param t:
+        """:param t:
         :return:
         """
     @classmethod
     def GetIUnknownForObject(cls, o: object) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     def GetIUnknownForObjectInContext(cls, o: object) -> IntPtr:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     def GetLastWin32Error(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetManagedThunkForUnmanagedMethodPtr(
         cls, pfnMethodToWrap: IntPtr, pbSignature: IntPtr, cbSignature: int
     ) -> IntPtr:
-        """
-
-        :param pfnMethodToWrap:
+        """:param pfnMethodToWrap:
         :param pbSignature:
         :param cbSignature:
         :return:
         """
     @classmethod
     def GetMethodInfoForComSlot(cls, t: Type, slot: int, memberType: ComMemberType) -> MemberInfo:
-        """
-
-        :param t:
+        """:param t:
         :param slot:
         :param memberType:
         :return:
@@ -6257,489 +4295,364 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def GetNativeVariantForObject(cls, obj: T, pDstNativeVariant: IntPtr) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param pDstNativeVariant:
         """
     @classmethod
     @overload
     def GetNativeVariantForObject(cls, obj: object, pDstNativeVariant: IntPtr) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param pDstNativeVariant:
         """
     @classmethod
     def GetObjectForIUnknown(cls, pUnk: IntPtr) -> object:
-        """
-
-        :param pUnk:
+        """:param pUnk:
         :return:
         """
     @classmethod
     def GetObjectForNativeVariant(cls, pSrcNativeVariant: IntPtr) -> T:
-        """
-
-        :param pSrcNativeVariant:
+        """:param pSrcNativeVariant:
         :return:
         """
     @classmethod
     def GetObjectsForNativeVariants(cls, aSrcNativeVariant: IntPtr, cVars: int) -> Array[T]:
-        """
-
-        :param aSrcNativeVariant:
+        """:param aSrcNativeVariant:
         :param cVars:
         :return:
         """
     @classmethod
     def GetStartComSlot(cls, t: Type) -> int:
-        """
-
-        :param t:
+        """:param t:
         :return:
         """
     @classmethod
     def GetThreadFromFiberCookie(cls, cookie: int) -> Thread:
-        """
-
-        :param cookie:
+        """:param cookie:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetTypeForITypeInfo(cls, piTypeInfo: IntPtr) -> Type:
-        """
-
-        :param piTypeInfo:
+        """:param piTypeInfo:
         :return:
         """
     @classmethod
     def GetTypeFromCLSID(cls, clsid: Guid) -> Type:
-        """
-
-        :param clsid:
+        """:param clsid:
         :return:
         """
     @classmethod
     @overload
     def GetTypeInfoName(cls, typeInfo: ITypeInfo) -> str:
-        """
-
-        :param typeInfo:
+        """:param typeInfo:
         :return:
         """
     @classmethod
     @overload
     def GetTypeInfoName(cls, pTI: UCOMITypeInfo) -> str:
-        """
-
-        :param pTI:
+        """:param pTI:
         :return:
         """
     @classmethod
     @overload
     def GetTypeLibGuid(cls, typelib: ITypeLib) -> Guid:
-        """
-
-        :param typelib:
+        """:param typelib:
         :return:
         """
     @classmethod
     @overload
     def GetTypeLibGuid(cls, pTLB: UCOMITypeLib) -> Guid:
-        """
-
-        :param pTLB:
+        """:param pTLB:
         :return:
         """
     @classmethod
     def GetTypeLibGuidForAssembly(cls, asm: Assembly) -> Guid:
-        """
-
-        :param asm:
+        """:param asm:
         :return:
         """
     @classmethod
     @overload
     def GetTypeLibLcid(cls, typelib: ITypeLib) -> int:
-        """
-
-        :param typelib:
+        """:param typelib:
         :return:
         """
     @classmethod
     @overload
     def GetTypeLibLcid(cls, pTLB: UCOMITypeLib) -> int:
-        """
-
-        :param pTLB:
+        """:param pTLB:
         :return:
         """
     @classmethod
     @overload
     def GetTypeLibName(cls, typelib: ITypeLib) -> str:
-        """
-
-        :param typelib:
+        """:param typelib:
         :return:
         """
     @classmethod
     @overload
     def GetTypeLibName(cls, pTLB: UCOMITypeLib) -> str:
-        """
-
-        :param pTLB:
+        """:param pTLB:
         :return:
         """
     @classmethod
     def GetTypeLibVersionForAssembly(
         cls, inputAssembly: Assembly, majorVersion: int, minorVersion: int
-    ) -> Tuple[None, int, int]:
-        """
-
-        :param inputAssembly:
+    ) -> tuple[None, int, int]:
+        """:param inputAssembly:
         :param majorVersion:
         :param minorVersion:
         """
     @classmethod
     def GetTypedObjectForIUnknown(cls, pUnk: IntPtr, t: Type) -> object:
-        """
-
-        :param pUnk:
+        """:param pUnk:
         :param t:
         :return:
         """
     @classmethod
     def GetUniqueObjectForIUnknown(cls, unknown: IntPtr) -> object:
-        """
-
-        :param unknown:
+        """:param unknown:
         :return:
         """
     @classmethod
     def GetUnmanagedThunkForManagedMethodPtr(
         cls, pfnMethodToWrap: IntPtr, pbSignature: IntPtr, cbSignature: int
     ) -> IntPtr:
-        """
-
-        :param pfnMethodToWrap:
+        """:param pfnMethodToWrap:
         :param pbSignature:
         :param cbSignature:
         :return:
         """
     @classmethod
     def IsComObject(cls, o: object) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
     def IsTypeVisibleFromCom(cls, t: Type) -> bool:
-        """
-
-        :param t:
+        """:param t:
         :return:
         """
     @classmethod
     def NumParamBytes(cls, m: MethodInfo) -> int:
-        """
-
-        :param m:
+        """:param m:
         :return:
         """
     @classmethod
     @overload
     def OffsetOf(cls, fieldName: str) -> IntPtr:
-        """
-
-        :param fieldName:
+        """:param fieldName:
         :return:
         """
     @classmethod
     @overload
     def OffsetOf(cls, t: Type, fieldName: str) -> IntPtr:
-        """
-
-        :param t:
+        """:param t:
         :param fieldName:
         :return:
         """
     @classmethod
     def Prelink(cls, m: MethodInfo) -> None:
-        """
-
-        :param m:
-        """
+        """:param m:"""
     @classmethod
     def PrelinkAll(cls, c: Type) -> None:
-        """
-
-        :param c:
-        """
+        """:param c:"""
     @classmethod
     @overload
     def PtrToStringAnsi(cls, ptr: IntPtr) -> str:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def PtrToStringAnsi(cls, ptr: IntPtr, len: int) -> str:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param len:
         :return:
         """
     @classmethod
     @overload
     def PtrToStringAuto(cls, ptr: IntPtr) -> str:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def PtrToStringAuto(cls, ptr: IntPtr, len: int) -> str:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param len:
         :return:
         """
     @classmethod
     def PtrToStringBSTR(cls, ptr: IntPtr) -> str:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def PtrToStringUni(cls, ptr: IntPtr) -> str:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def PtrToStringUni(cls, ptr: IntPtr, len: int) -> str:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param len:
         :return:
         """
     @classmethod
     @overload
     def PtrToStructure(cls, ptr: IntPtr) -> T:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def PtrToStructure(cls, ptr: IntPtr, structure: T) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param structure:
         """
     @classmethod
     @overload
     def PtrToStructure(cls, ptr: IntPtr, structure: object) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param structure:
         """
     @classmethod
     @overload
     def PtrToStructure(cls, ptr: IntPtr, structureType: Type) -> object:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param structureType:
         :return:
         """
     @classmethod
-    def QueryInterface(cls, pUnk: IntPtr, iid: Guid, ppv: IntPtr) -> Tuple[int, IntPtr]:
-        """
-
-        :param pUnk:
+    def QueryInterface(cls, pUnk: IntPtr, iid: Guid, ppv: IntPtr) -> tuple[int, IntPtr]:
+        """:param pUnk:
         :param iid:
         :param ppv:
         :return:
         """
     @classmethod
     def ReAllocCoTaskMem(cls, pv: IntPtr, cb: int) -> IntPtr:
-        """
-
-        :param pv:
+        """:param pv:
         :param cb:
         :return:
         """
     @classmethod
     def ReAllocHGlobal(cls, pv: IntPtr, cb: IntPtr) -> IntPtr:
-        """
-
-        :param pv:
+        """:param pv:
         :param cb:
         :return:
         """
     @classmethod
     @overload
     def ReadByte(cls, ptr: IntPtr) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def ReadByte(cls, ptr: IntPtr, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadByte(cls, ptr: object, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadInt16(cls, ptr: IntPtr) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def ReadInt16(cls, ptr: IntPtr, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadInt16(cls, ptr: object, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadInt32(cls, ptr: IntPtr) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def ReadInt32(cls, ptr: IntPtr, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadInt32(cls, ptr: object, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadInt64(cls, ptr: IntPtr) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def ReadInt64(cls, ptr: IntPtr, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadInt64(cls, ptr: object, ofs: int) -> int:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadIntPtr(cls, ptr: IntPtr) -> IntPtr:
-        """
-
-        :param ptr:
+        """:param ptr:
         :return:
         """
     @classmethod
     @overload
     def ReadIntPtr(cls, ptr: IntPtr, ofs: int) -> IntPtr:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     @overload
     def ReadIntPtr(cls, ptr: object, ofs: int) -> IntPtr:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :return:
         """
     @classmethod
     def Release(cls, pUnk: IntPtr) -> int:
-        """
-
-        :param pUnk:
+        """:param pUnk:
         :return:
         """
     @classmethod
     def ReleaseComObject(cls, o: object) -> int:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     @classmethod
@@ -6747,44 +4660,32 @@ class Marshal(ABC, Object):
         """"""
     @classmethod
     def SecureStringToBSTR(cls, s: SecureString) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def SecureStringToCoTaskMemAnsi(cls, s: SecureString) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def SecureStringToCoTaskMemUnicode(cls, s: SecureString) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def SecureStringToGlobalAllocAnsi(cls, s: SecureString) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def SecureStringToGlobalAllocUnicode(cls, s: SecureString) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def SetComObjectData(cls, obj: object, key: object, data: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :param key:
         :param data:
         :return:
@@ -6792,325 +4693,235 @@ class Marshal(ABC, Object):
     @classmethod
     @overload
     def SizeOf(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def SizeOf(cls, structure: T) -> int:
-        """
-
-        :param structure:
+        """:param structure:
         :return:
         """
     @classmethod
     @overload
     def SizeOf(cls, structure: object) -> int:
-        """
-
-        :param structure:
+        """:param structure:
         :return:
         """
     @classmethod
     @overload
     def SizeOf(cls, t: Type) -> int:
-        """
-
-        :param t:
+        """:param t:
         :return:
         """
     @classmethod
     def StringToBSTR(cls, s: str) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def StringToCoTaskMemAnsi(cls, s: str) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def StringToCoTaskMemAuto(cls, s: str) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def StringToCoTaskMemUni(cls, s: str) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def StringToHGlobalAnsi(cls, s: str) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def StringToHGlobalAuto(cls, s: str) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     def StringToHGlobalUni(cls, s: str) -> IntPtr:
-        """
-
-        :param s:
+        """:param s:
         :return:
         """
     @classmethod
     @overload
     def StructureToPtr(cls, structure: T, ptr: IntPtr, fDeleteOld: bool) -> None:
-        """
-
-        :param structure:
+        """:param structure:
         :param ptr:
         :param fDeleteOld:
         """
     @classmethod
     @overload
     def StructureToPtr(cls, structure: object, ptr: IntPtr, fDeleteOld: bool) -> None:
-        """
-
-        :param structure:
+        """:param structure:
         :param ptr:
         :param fDeleteOld:
         """
     @classmethod
     @overload
     def ThrowExceptionForHR(cls, errorCode: int) -> None:
-        """
-
-        :param errorCode:
-        """
+        """:param errorCode:"""
     @classmethod
     @overload
     def ThrowExceptionForHR(cls, errorCode: int, errorInfo: IntPtr) -> None:
-        """
-
-        :param errorCode:
+        """:param errorCode:
         :param errorInfo:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def UnsafeAddrOfPinnedArrayElement(cls, arr: Array, index: int) -> IntPtr:
-        """
-
-        :param arr:
+        """:param arr:
         :param index:
         :return:
         """
     @classmethod
     @overload
     def UnsafeAddrOfPinnedArrayElement(cls, arr: Array[T], index: int) -> IntPtr:
-        """
-
-        :param arr:
+        """:param arr:
         :param index:
         :return:
         """
     @classmethod
     @overload
     def WriteByte(cls, ptr: IntPtr, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param val:
         """
     @classmethod
     @overload
     def WriteByte(cls, ptr: IntPtr, ofs: int, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
-    def WriteByte(cls, ptr: object, ofs: int, val: int) -> Tuple[None, object]:
-        """
-
-        :param ptr:
+    def WriteByte(cls, ptr: object, ofs: int, val: int) -> tuple[None, object]:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt16(cls, ptr: IntPtr, val: Char) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt16(cls, ptr: IntPtr, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt16(cls, ptr: IntPtr, ofs: int, val: Char) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt16(cls, ptr: IntPtr, ofs: int, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
-    def WriteInt16(cls, ptr: object, ofs: int, val: Char) -> Tuple[None, object]:
-        """
-
-        :param ptr:
+    def WriteInt16(cls, ptr: object, ofs: int, val: Char) -> tuple[None, object]:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
-    def WriteInt16(cls, ptr: object, ofs: int, val: int) -> Tuple[None, object]:
-        """
-
-        :param ptr:
+    def WriteInt16(cls, ptr: object, ofs: int, val: int) -> tuple[None, object]:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt32(cls, ptr: IntPtr, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt32(cls, ptr: IntPtr, ofs: int, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
-    def WriteInt32(cls, ptr: object, ofs: int, val: int) -> Tuple[None, object]:
-        """
-
-        :param ptr:
+    def WriteInt32(cls, ptr: object, ofs: int, val: int) -> tuple[None, object]:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt64(cls, ptr: IntPtr, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param val:
         """
     @classmethod
     @overload
     def WriteInt64(cls, ptr: IntPtr, ofs: int, val: int) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
-    def WriteInt64(cls, ptr: object, ofs: int, val: int) -> Tuple[None, object]:
-        """
-
-        :param ptr:
+    def WriteInt64(cls, ptr: object, ofs: int, val: int) -> tuple[None, object]:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
     def WriteIntPtr(cls, ptr: IntPtr, val: IntPtr) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param val:
         """
     @classmethod
     @overload
     def WriteIntPtr(cls, ptr: IntPtr, ofs: int, val: IntPtr) -> None:
-        """
-
-        :param ptr:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     @overload
-    def WriteIntPtr(cls, ptr: object, ofs: int, val: IntPtr) -> Tuple[None, object]:
-        """
-
-        :param ptr:
+    def WriteIntPtr(cls, ptr: object, ofs: int, val: IntPtr) -> tuple[None, object]:
+        """:param ptr:
         :param ofs:
         :param val:
         """
     @classmethod
     def ZeroFreeBSTR(cls, s: IntPtr) -> None:
-        """
-
-        :param s:
-        """
+        """:param s:"""
     @classmethod
     def ZeroFreeCoTaskMemAnsi(cls, s: IntPtr) -> None:
-        """
-
-        :param s:
-        """
+        """:param s:"""
     @classmethod
     def ZeroFreeCoTaskMemUnicode(cls, s: IntPtr) -> None:
-        """
-
-        :param s:
-        """
+        """:param s:"""
     @classmethod
     def ZeroFreeGlobalAllocAnsi(cls, s: IntPtr) -> None:
-        """
-
-        :param s:
-        """
+        """:param s:"""
     @classmethod
     def ZeroFreeGlobalAllocUnicode(cls, s: IntPtr) -> None:
-        """
-
-        :param s:
-        """
+        """:param s:"""
 
 class MarshalAsAttribute(Attribute, _Attribute):
     """"""
@@ -7162,67 +4973,40 @@ class MarshalAsAttribute(Attribute, _Attribute):
     """
     @overload
     def __init__(self, unmanagedType: UnmanagedType):
-        """
-
-        :param unmanagedType:
-        """
+        """:param unmanagedType:"""
     @overload
     def __init__(self, unmanagedType: int):
-        """
-
-        :param unmanagedType:
-        """
+        """:param unmanagedType:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> UnmanagedType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7234,9 +5018,7 @@ class MarshalAsAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7246,21 +5028,13 @@ class MarshalAsAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MarshalDirectiveException(SystemException, _Exception, ISerializable):
     """"""
@@ -7270,206 +5044,118 @@ class MarshalDirectiveException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NativeBuffer(Object, IDisposable):
     """"""
 
     def __init__(self, initialMinCapacity: int = ...):
-        """
-
-        :param initialMinCapacity:
-        """
+        """:param initialMinCapacity:"""
     @property
     def ByteCapacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: int) -> None: ...
     def Dispose(self) -> None:
         """"""
     def EnsureByteCapacity(self, minCapacity: int) -> None:
-        """
-
-        :param minCapacity:
-        """
+        """:param minCapacity:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Free(self) -> None:
         """"""
     def GetHandle(self) -> SafeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, index: int) -> int:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __setitem__(self, index: int, value: int) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -7477,26 +5163,15 @@ class NativeMethods(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OSPlatform(ValueType, IEquatable[OSPlatform]):
     """"""
@@ -7504,85 +5179,53 @@ class OSPlatform(ValueType, IEquatable[OSPlatform]):
     @classmethod
     @property
     def Linux(cls) -> OSPlatform:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def OSX(cls) -> OSPlatform:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Windows(cls) -> OSPlatform:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Create(cls, osPlatform: str) -> OSPlatform:
-        """
-
-        :param osPlatform:
+        """:param osPlatform:
         :return:
         """
     @overload
     def Equals(self, other: OSPlatform) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: OSPlatform) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: OSPlatform) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: OSPlatform, right: OSPlatform) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: OSPlatform, right: OSPlatform) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -7601,49 +5244,31 @@ class OptionalAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7655,9 +5280,7 @@ class OptionalAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7667,21 +5290,13 @@ class OptionalAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OutAttribute(Attribute, _Attribute):
     """"""
@@ -7690,49 +5305,31 @@ class OutAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7744,9 +5341,7 @@ class OutAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7756,21 +5351,13 @@ class OutAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PARAMDESC(ValueType):
     """"""
@@ -7786,26 +5373,15 @@ class PARAMDESC(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PARAMFLAG(Enum):
     """"""
@@ -7882,49 +5458,31 @@ class PreserveSigAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7936,9 +5494,7 @@ class PreserveSigAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7948,88 +5504,54 @@ class PreserveSigAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PrimaryInteropAssemblyAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, major: int, minor: int):
-        """
-
-        :param major:
+        """:param major:
         :param minor:
         """
     @property
     def MajorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -8041,9 +5563,7 @@ class PrimaryInteropAssemblyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -8053,81 +5573,49 @@ class PrimaryInteropAssemblyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProgIdAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, progId: str):
-        """
-
-        :param progId:
-        """
+        """:param progId:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -8139,9 +5627,7 @@ class ProgIdAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -8151,21 +5637,13 @@ class ProgIdAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RegistrationClassContext(Enum):
     """"""
@@ -8227,91 +5705,61 @@ class RegistrationServices(Object, IRegistrationServices):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetManagedCategoryGuid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetProgIdForType(self, type: Type) -> str:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetRegistrableTypesInAssembly(self, assembly: Assembly) -> Array[Type]:
-        """
-
-        :param assembly:
+        """:param assembly:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RegisterAssembly(self, assembly: Assembly, flags: AssemblyRegistrationFlags) -> bool:
-        """
-
-        :param assembly:
+        """:param assembly:
         :param flags:
         :return:
         """
     @overload
     def RegisterTypeForComClients(self, type: Type, g: Guid) -> None:
-        """
-
-        :param type:
+        """:param type:
         :param g:
         """
     @overload
     def RegisterTypeForComClients(
-        self, type: Type, classContext: RegistrationClassContext, flags: RegistrationConnectionType
+        self,
+        type: Type,
+        classContext: RegistrationClassContext,
+        flags: RegistrationConnectionType,
     ) -> int:
-        """
-
-        :param type:
+        """:param type:
         :param classContext:
         :param flags:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TypeRepresentsComType(self, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def TypeRequiresRegistration(self, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def UnregisterAssembly(self, assembly: Assembly) -> bool:
-        """
-
-        :param assembly:
+        """:param assembly:
         :return:
         """
     def UnregisterTypeForComClients(self, cookie: int) -> None:
-        """
-
-        :param cookie:
-        """
+        """:param cookie:"""
 
 class RuntimeEnvironment(Object):
     """"""
@@ -8321,66 +5769,40 @@ class RuntimeEnvironment(Object):
     @classmethod
     @property
     def SystemConfigurationFile(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def FromGlobalAccessCache(cls, a: Assembly) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetRuntimeDirectory(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetRuntimeInterfaceAsIntPtr(cls, clsid: Guid, riid: Guid) -> IntPtr:
-        """
-
-        :param clsid:
+        """:param clsid:
         :param riid:
         :return:
         """
     @classmethod
     def GetRuntimeInterfaceAsObject(cls, clsid: Guid, riid: Guid) -> object:
-        """
-
-        :param clsid:
+        """:param clsid:
         :param riid:
         :return:
         """
     @classmethod
     def GetSystemVersion(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RuntimeInformation(ABC, Object):
     """"""
@@ -8388,59 +5810,34 @@ class RuntimeInformation(ABC, Object):
     @classmethod
     @property
     def FrameworkDescription(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def OSArchitecture(cls) -> Architecture:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def OSDescription(cls) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def ProcessArchitecture(cls) -> Architecture:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsOSPlatform(cls, osPlatform: OSPlatform) -> bool:
-        """
-
-        :param osPlatform:
+        """:param osPlatform:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SEHException(ExternalException, _Exception, ISerializable):
     """"""
@@ -8450,149 +5847,85 @@ class SEHException(ExternalException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CanResume(self) -> bool:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class STATSTG(ValueType):
     """"""
@@ -8653,26 +5986,15 @@ class STATSTG(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SYSKIND(Enum):
     """"""
@@ -8692,138 +6014,80 @@ class SafeArrayRankMismatchException(SystemException, _Exception, ISerializable)
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeArrayTypeMismatchException(SystemException, _Exception, ISerializable):
     """"""
@@ -8833,226 +6097,130 @@ class SafeArrayTypeMismatchException(SystemException, _Exception, ISerializable)
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, inner: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param inner:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
     @property
     def ByteLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcquirePointer(self, pointer: int) -> None:
-        """
-
-        :param pointer:
-        """
+        """:param pointer:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Initialize(self, numElements: int) -> None:
-        """
-
-        :param numElements:
-        """
+        """:param numElements:"""
     @overload
     def Initialize(self, numBytes: int) -> None:
-        """
-
-        :param numBytes:
-        """
+        """:param numBytes:"""
     @overload
     def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
-        """
-
-        :param numElements:
+        """:param numElements:
         :param sizeOfEachElement:
         """
     def Read(self, byteOffset: int) -> T:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :return:
         """
     def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -9062,20 +6230,13 @@ class SafeBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, byteOffset: int, value: T) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param value:
         """
     def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -9086,148 +6247,84 @@ class SafeHandle(ABC, CriticalFinalizerObject, IDisposable):
 
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeHeapHandle(SafeBuffer, IDisposable):
     """"""
 
     def __init__(self, byteLength: int):
-        """
-
-        :param byteLength:
-        """
+        """:param byteLength:"""
     @property
     def ByteLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClosed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInvalid(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcquirePointer(self, pointer: int) -> None:
-        """
-
-        :param pointer:
-        """
+        """:param pointer:"""
     def Close(self) -> None:
         """"""
     def DangerousAddRef(self, success: bool) -> None:
-        """
-
-        :param success:
-        """
+        """:param success:"""
     def DangerousGetHandle(self) -> IntPtr:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Initialize(self, numElements: int) -> None:
-        """
-
-        :param numElements:
-        """
+        """:param numElements:"""
     @overload
     def Initialize(self, numBytes: int) -> None:
-        """
-
-        :param numBytes:
-        """
+        """:param numBytes:"""
     @overload
     def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
-        """
-
-        :param numElements:
+        """:param numElements:
         :param sizeOfEachElement:
         """
     def Read(self, byteOffset: int) -> T:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :return:
         """
     def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -9235,27 +6332,17 @@ class SafeHeapHandle(SafeBuffer, IDisposable):
     def ReleasePointer(self) -> None:
         """"""
     def Resize(self, byteLength: int) -> None:
-        """
-
-        :param byteLength:
-        """
+        """:param byteLength:"""
     def SetHandleAsInvalid(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, byteOffset: int, value: T) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param value:
         """
     def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
-        """
-
-        :param byteOffset:
+        """:param byteOffset:
         :param array:
         :param index:
         :param count:
@@ -9265,46 +6352,28 @@ class SafeHeapHandleCache(Object, IDisposable):
     """"""
 
     def __init__(self, minSize: int = ..., maxSize: int = ..., maxHandles: int = ...):
-        """
-
-        :param minSize:
+        """:param minSize:
         :param maxSize:
         :param maxHandles:
         """
     def Acquire(self, minSize: int = ...) -> SafeHeapHandle:
-        """
-
-        :param minSize:
+        """:param minSize:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Release(self, handle: SafeHeapHandle) -> None:
-        """
-
-        :param handle:
-        """
+        """:param handle:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SetWin32ContextInIDispatchAttribute(Attribute, _Attribute):
     """"""
@@ -9313,49 +6382,31 @@ class SetWin32ContextInIDispatchAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -9367,9 +6418,7 @@ class SetWin32ContextInIDispatchAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -9379,49 +6428,31 @@ class SetWin32ContextInIDispatchAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StandardOleMarshalObject(MarshalByRefObject, UnsafeNativeMethods.IMarshal):
     """"""
 
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def DisconnectObject(self, dwReserved: int) -> int:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetMarshalSizeMax(
         self,
         riid: Guid,
@@ -9430,13 +6461,10 @@ class StandardOleMarshalObject(MarshalByRefObject, UnsafeNativeMethods.IMarshal)
         pvDestContext: IntPtr,
         mshlflags: int,
         pSize: int,
-    ) -> Tuple[int, int]:
+    ) -> tuple[int, int]:
         """"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUnmarshalClass(
         self,
         riid: Guid,
@@ -9445,13 +6473,10 @@ class StandardOleMarshalObject(MarshalByRefObject, UnsafeNativeMethods.IMarshal)
         pvDestContext: IntPtr,
         mshlflags: int,
         pCid: Guid,
-    ) -> Tuple[int, Guid]:
+    ) -> tuple[int, Guid]:
         """"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MarshalInterface(
         self,
         pStm: IntPtr,
@@ -9465,11 +6490,8 @@ class StandardOleMarshalObject(MarshalByRefObject, UnsafeNativeMethods.IMarshal)
     def ReleaseMarshalData(self, pStm: IntPtr) -> int:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
-    def UnmarshalInterface(self, pStm: IntPtr, riid: Guid, ppv: IntPtr) -> Tuple[int, IntPtr]:
+        """:return:"""
+    def UnmarshalInterface(self, pStm: IntPtr, riid: Guid, ppv: IntPtr) -> tuple[int, IntPtr]:
         """"""
 
 class StringBuffer(NativeBuffer, IDisposable):
@@ -9477,95 +6499,66 @@ class StringBuffer(NativeBuffer, IDisposable):
 
     @overload
     def __init__(self, initialContents: StringBuffer):
-        """
-
-        :param initialContents:
-        """
+        """:param initialContents:"""
     @overload
     def __init__(self, initialContents: str):
-        """
-
-        :param initialContents:
-        """
+        """:param initialContents:"""
     @overload
     def __init__(self, initialCapacity: int = ...):
-        """
-
-        :param initialCapacity:
-        """
+        """:param initialCapacity:"""
     @property
     def ByteCapacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CharCapacity(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: int) -> None: ...
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Length.setter
     def Length(self, value: int) -> None: ...
     @overload
     def Append(self, value: StringBuffer, startIndex: int = ...) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param startIndex:
         """
     @overload
     def Append(self, value: StringBuffer, startIndex: int, count: int) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param startIndex:
         :param count:
         """
     @overload
     def Append(self, value: str, startIndex: int = ..., count: int = ...) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param startIndex:
         :param count:
         """
     def Contains(self, value: Char) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyFrom(
         self, bufferIndex: int, source: str, sourceIndex: int = ..., count: int = ...
     ) -> None:
-        """
-
-        :param bufferIndex:
+        """:param bufferIndex:
         :param source:
         :param sourceIndex:
         :param count:
         """
     def CopyTo(
-        self, bufferIndex: int, destination: StringBuffer, destinationIndex: int, count: int
+        self,
+        bufferIndex: int,
+        destination: StringBuffer,
+        destinationIndex: int,
+        count: int,
     ) -> None:
-        """
-
-        :param bufferIndex:
+        """:param bufferIndex:
         :param destination:
         :param destinationIndex:
         :param count:
@@ -9573,97 +6566,60 @@ class StringBuffer(NativeBuffer, IDisposable):
     def Dispose(self) -> None:
         """"""
     def EnsureByteCapacity(self, minCapacity: int) -> None:
-        """
-
-        :param minCapacity:
-        """
+        """:param minCapacity:"""
     def EnsureCharCapacity(self, minCapacity: int) -> None:
-        """
-
-        :param minCapacity:
-        """
+        """:param minCapacity:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Free(self) -> None:
         """"""
     def GetHandle(self) -> SafeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetLengthToFirstNull(self) -> None:
         """"""
     def StartsWith(self, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Substring(self, startIndex: int, count: int = ...) -> str:
-        """
-
-        :param startIndex:
+        """:param startIndex:
         :param count:
         :return:
         """
     def SubstringEquals(self, value: str, startIndex: int = ..., count: int = ...) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :param startIndex:
         :param count:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def TrimEnd(self, values: Array[Char]) -> None:
-        """
-
-        :param values:
-        """
+        """:param values:"""
     @overload
     def __getitem__(self, index: int) -> Char:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> int:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __setitem__(self, index: int, value: Char) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: int) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -9687,67 +6643,40 @@ class StructLayoutAttribute(Attribute, _Attribute):
     """
     @overload
     def __init__(self, layoutKind: LayoutKind):
-        """
-
-        :param layoutKind:
-        """
+        """:param layoutKind:"""
     @overload
     def __init__(self, layoutKind: int):
-        """
-
-        :param layoutKind:
-        """
+        """:param layoutKind:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> LayoutKind:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -9759,9 +6688,7 @@ class StructLayoutAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -9771,21 +6698,13 @@ class StructLayoutAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TYPEATTR(ValueType):
     """"""
@@ -9886,26 +6805,15 @@ class TYPEATTR(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TYPEDESC(ValueType):
     """"""
@@ -9921,26 +6829,15 @@ class TYPEDESC(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TYPEFLAGS(Enum):
     """"""
@@ -10032,26 +6929,15 @@ class TYPELIBATTR(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeIdentifierAttribute(Attribute, _Attribute):
     """"""
@@ -10061,68 +6947,42 @@ class TypeIdentifierAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, scope: str, identifier: str):
-        """
-
-        :param scope:
+        """:param scope:
         :param identifier:
         """
     @property
     def Identifier(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Scope(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -10134,9 +6994,7 @@ class TypeIdentifierAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10146,21 +7004,13 @@ class TypeIdentifierAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeLibConverter(Object, ITypeLibConverter):
     """"""
@@ -10174,9 +7024,7 @@ class TypeLibConverter(Object, ITypeLibConverter):
         flags: TypeLibExporterFlags,
         notifySink: ITypeLibExporterNotifySink,
     ) -> object:
-        """
-
-        :param assembly:
+        """:param assembly:
         :param typeLibName:
         :param flags:
         :param notifySink:
@@ -10193,9 +7041,7 @@ class TypeLibConverter(Object, ITypeLibConverter):
         keyPair: StrongNameKeyPair,
         unsafeInterfaces: bool,
     ) -> AssemblyBuilder:
-        """
-
-        :param typeLib:
+        """:param typeLib:
         :param asmFileName:
         :param flags:
         :param notifySink:
@@ -10216,9 +7062,7 @@ class TypeLibConverter(Object, ITypeLibConverter):
         asmNamespace: str,
         asmVersion: Version,
     ) -> AssemblyBuilder:
-        """
-
-        :param typeLib:
+        """:param typeLib:
         :param asmFileName:
         :param flags:
         :param notifySink:
@@ -10229,22 +7073,15 @@ class TypeLibConverter(Object, ITypeLibConverter):
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetPrimaryInteropAssembly(
         self, g: Guid, major: int, minor: int, lcid: int, asmName: str, asmCodeBase: str
-    ) -> Tuple[bool, str, str]:
-        """
-
-        :param g:
+    ) -> tuple[bool, str, str]:
+        """:param g:
         :param major:
         :param minor:
         :param lcid:
@@ -10253,15 +7090,9 @@ class TypeLibConverter(Object, ITypeLibConverter):
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeLibExporterFlags(Enum):
     """"""
@@ -10284,67 +7115,40 @@ class TypeLibFuncAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, flags: TypeLibFuncFlags):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @overload
     def __init__(self, flags: int):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> TypeLibFuncFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -10356,9 +7160,7 @@ class TypeLibFuncAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10368,21 +7170,13 @@ class TypeLibFuncAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeLibFuncFlags(Enum):
     """"""
@@ -10418,61 +7212,37 @@ class TypeLibImportClassAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, importClass: Type):
-        """
-
-        :param importClass:
-        """
+        """:param importClass:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -10484,9 +7254,7 @@ class TypeLibImportClassAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10496,21 +7264,13 @@ class TypeLibImportClassAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeLibImporterFlags(Enum):
     """"""
@@ -10549,67 +7309,40 @@ class TypeLibTypeAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, flags: TypeLibTypeFlags):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @overload
     def __init__(self, flags: int):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> TypeLibTypeFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -10621,9 +7354,7 @@ class TypeLibTypeAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10633,21 +7364,13 @@ class TypeLibTypeAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeLibTypeFlags(Enum):
     """"""
@@ -10686,67 +7409,40 @@ class TypeLibVarAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, flags: TypeLibVarFlags):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @overload
     def __init__(self, flags: int):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> TypeLibVarFlags:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -10758,9 +7454,7 @@ class TypeLibVarAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10770,21 +7464,13 @@ class TypeLibVarAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeLibVarFlags(Enum):
     """"""
@@ -10820,68 +7506,42 @@ class TypeLibVersionAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, major: int, minor: int):
-        """
-
-        :param major:
+        """:param major:
         :param minor:
         """
     @property
     def MajorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MinorVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -10893,9 +7553,7 @@ class TypeLibVersionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10905,172 +7563,105 @@ class TypeLibVersionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UCOMIBindCtx:
     """"""
 
-    def EnumObjectParam(self, ppenum: UCOMIEnumString) -> Tuple[None, UCOMIEnumString]:
-        """
-
-        :param ppenum:
-        """
+    def EnumObjectParam(self, ppenum: UCOMIEnumString) -> tuple[None, UCOMIEnumString]:
+        """:param ppenum:"""
     def GetBindOptions(self, pbindopts: BIND_OPTS) -> None:
-        """
-
-        :param pbindopts:
-        """
-    def GetObjectParam(self, pszKey: str, ppunk: object) -> Tuple[None, object]:
-        """
-
-        :param pszKey:
+        """:param pbindopts:"""
+    def GetObjectParam(self, pszKey: str, ppunk: object) -> tuple[None, object]:
+        """:param pszKey:
         :param ppunk:
         """
     def GetRunningObjectTable(
         self, pprot: UCOMIRunningObjectTable
-    ) -> Tuple[None, UCOMIRunningObjectTable]:
-        """
-
-        :param pprot:
-        """
+    ) -> tuple[None, UCOMIRunningObjectTable]:
+        """:param pprot:"""
     def RegisterObjectBound(self, punk: object) -> None:
-        """
-
-        :param punk:
-        """
+        """:param punk:"""
     def RegisterObjectParam(self, pszKey: str, punk: object) -> None:
-        """
-
-        :param pszKey:
+        """:param pszKey:
         :param punk:
         """
     def ReleaseBoundObjects(self) -> None:
         """"""
     def RevokeObjectBound(self, punk: object) -> None:
-        """
-
-        :param punk:
-        """
+        """:param punk:"""
     def RevokeObjectParam(self, pszKey: str) -> None:
-        """
-
-        :param pszKey:
-        """
+        """:param pszKey:"""
     def SetBindOptions(self, pbindopts: BIND_OPTS) -> None:
-        """
-
-        :param pbindopts:
-        """
+        """:param pbindopts:"""
 
 class UCOMIConnectionPoint:
     """"""
 
-    def Advise(self, pUnkSink: object, pdwCookie: int) -> Tuple[None, int]:
-        """
-
-        :param pUnkSink:
+    def Advise(self, pUnkSink: object, pdwCookie: int) -> tuple[None, int]:
+        """:param pUnkSink:
         :param pdwCookie:
         """
-    def EnumConnections(self, ppEnum: UCOMIEnumConnections) -> Tuple[None, UCOMIEnumConnections]:
-        """
-
-        :param ppEnum:
-        """
-    def GetConnectionInterface(self, pIID: Guid) -> Tuple[None, Guid]:
-        """
-
-        :param pIID:
-        """
+    def EnumConnections(self, ppEnum: UCOMIEnumConnections) -> tuple[None, UCOMIEnumConnections]:
+        """:param ppEnum:"""
+    def GetConnectionInterface(self, pIID: Guid) -> tuple[None, Guid]:
+        """:param pIID:"""
     def GetConnectionPointContainer(
         self, ppCPC: UCOMIConnectionPointContainer
-    ) -> Tuple[None, UCOMIConnectionPointContainer]:
-        """
-
-        :param ppCPC:
-        """
+    ) -> tuple[None, UCOMIConnectionPointContainer]:
+        """:param ppCPC:"""
     def Unadvise(self, dwCookie: int) -> None:
-        """
-
-        :param dwCookie:
-        """
+        """:param dwCookie:"""
 
 class UCOMIConnectionPointContainer:
     """"""
 
     def EnumConnectionPoints(
         self, ppEnum: UCOMIEnumConnectionPoints
-    ) -> Tuple[None, UCOMIEnumConnectionPoints]:
-        """
-
-        :param ppEnum:
-        """
+    ) -> tuple[None, UCOMIEnumConnectionPoints]:
+        """:param ppEnum:"""
     def FindConnectionPoint(
         self, riid: Guid, ppCP: UCOMIConnectionPoint
-    ) -> Tuple[None, UCOMIConnectionPoint]:
-        """
-
-        :param riid:
+    ) -> tuple[None, UCOMIConnectionPoint]:
+        """:param riid:
         :param ppCP:
         """
 
 class UCOMIEnumConnectionPoints:
     """"""
 
-    def Clone(self, ppenum: UCOMIEnumConnectionPoints) -> Tuple[None, UCOMIEnumConnectionPoints]:
-        """
-
-        :param ppenum:
-        """
+    def Clone(self, ppenum: UCOMIEnumConnectionPoints) -> tuple[None, UCOMIEnumConnectionPoints]:
+        """:param ppenum:"""
     def Next(
         self, celt: int, rgelt: Array[UCOMIConnectionPoint], pceltFetched: int
-    ) -> Tuple[int, Array[UCOMIConnectionPoint], int]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[UCOMIConnectionPoint], int]:
+        """:param celt:
         :param rgelt:
         :param pceltFetched:
         :return:
         """
     def Reset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Skip(self, celt: int) -> int:
-        """
-
-        :param celt:
+        """:param celt:
         :return:
         """
 
 class UCOMIEnumConnections:
     """"""
 
-    def Clone(self, ppenum: UCOMIEnumConnections) -> Tuple[None, UCOMIEnumConnections]:
-        """
-
-        :param ppenum:
-        """
+    def Clone(self, ppenum: UCOMIEnumConnections) -> tuple[None, UCOMIEnumConnections]:
+        """:param ppenum:"""
     def Next(
         self, celt: int, rgelt: Array[CONNECTDATA], pceltFetched: int
-    ) -> Tuple[int, Array[CONNECTDATA], int]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[CONNECTDATA], int]:
+        """:param celt:
         :param rgelt:
         :param pceltFetched:
         :return:
@@ -11078,67 +7669,45 @@ class UCOMIEnumConnections:
     def Reset(self) -> None:
         """"""
     def Skip(self, celt: int) -> int:
-        """
-
-        :param celt:
+        """:param celt:
         :return:
         """
 
 class UCOMIEnumMoniker:
     """"""
 
-    def Clone(self, ppenum: UCOMIEnumMoniker) -> Tuple[None, UCOMIEnumMoniker]:
-        """
-
-        :param ppenum:
-        """
+    def Clone(self, ppenum: UCOMIEnumMoniker) -> tuple[None, UCOMIEnumMoniker]:
+        """:param ppenum:"""
     def Next(
         self, celt: int, rgelt: Array[UCOMIMoniker], pceltFetched: int
-    ) -> Tuple[int, Array[UCOMIMoniker], int]:
-        """
-
-        :param celt:
+    ) -> tuple[int, Array[UCOMIMoniker], int]:
+        """:param celt:
         :param rgelt:
         :param pceltFetched:
         :return:
         """
     def Reset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Skip(self, celt: int) -> int:
-        """
-
-        :param celt:
+        """:param celt:
         :return:
         """
 
 class UCOMIEnumString:
     """"""
 
-    def Clone(self, ppenum: UCOMIEnumString) -> Tuple[None, UCOMIEnumString]:
-        """
-
-        :param ppenum:
-        """
-    def Next(self, celt: int, rgelt: Array[str], pceltFetched: int) -> Tuple[int, Array[str], int]:
-        """
-
-        :param celt:
+    def Clone(self, ppenum: UCOMIEnumString) -> tuple[None, UCOMIEnumString]:
+        """:param ppenum:"""
+    def Next(self, celt: int, rgelt: Array[str], pceltFetched: int) -> tuple[int, Array[str], int]:
+        """:param celt:
         :param rgelt:
         :param pceltFetched:
         :return:
         """
     def Reset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Skip(self, celt: int) -> int:
-        """
-
-        :param celt:
+        """:param celt:
         :return:
         """
 
@@ -11146,27 +7715,17 @@ class UCOMIEnumVARIANT:
     """"""
 
     def Clone(self, ppenum: int) -> None:
-        """
-
-        :param ppenum:
-        """
+        """:param ppenum:"""
     def Next(self, celt: int, rgvar: int, pceltFetched: int) -> int:
-        """
-
-        :param celt:
+        """:param celt:
         :param rgvar:
         :param pceltFetched:
         :return:
         """
     def Reset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Skip(self, celt: int) -> int:
-        """
-
-        :param celt:
+        """:param celt:
         :return:
         """
 
@@ -11174,25 +7733,16 @@ class UCOMIEnumerable:
     """"""
 
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UCOMIEnumerator:
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
 
@@ -11201,60 +7751,41 @@ class UCOMIExpando(UCOMIReflect):
 
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def AddMethod(self, name: str, method: Delegate) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param method:
         :return:
         """
     def AddProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -11267,9 +7798,7 @@ class UCOMIExpando(UCOMIReflect):
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -11277,22 +7806,16 @@ class UCOMIExpando(UCOMIReflect):
         :return:
         """
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -11306,9 +7829,7 @@ class UCOMIExpando(UCOMIReflect):
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -11327,9 +7848,7 @@ class UCOMIExpando(UCOMIReflect):
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -11340,126 +7859,90 @@ class UCOMIExpando(UCOMIReflect):
         :return:
         """
     def RemoveMember(self, m: MemberInfo) -> None:
-        """
-
-        :param m:
-        """
+        """:param m:"""
 
 class UCOMIMoniker:
     """"""
 
     def BindToObject(
-        self, pbc: UCOMIBindCtx, pmkToLeft: UCOMIMoniker, riidResult: Guid, ppvResult: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param pbc:
+        self,
+        pbc: UCOMIBindCtx,
+        pmkToLeft: UCOMIMoniker,
+        riidResult: Guid,
+        ppvResult: object,
+    ) -> tuple[None, object]:
+        """:param pbc:
         :param pmkToLeft:
         :param riidResult:
         :param ppvResult:
         """
     def BindToStorage(
         self, pbc: UCOMIBindCtx, pmkToLeft: UCOMIMoniker, riid: Guid, ppvObj: object
-    ) -> Tuple[None, object]:
-        """
-
-        :param pbc:
+    ) -> tuple[None, object]:
+        """:param pbc:
         :param pmkToLeft:
         :param riid:
         :param ppvObj:
         """
     def CommonPrefixWith(
         self, pmkOther: UCOMIMoniker, ppmkPrefix: UCOMIMoniker
-    ) -> Tuple[None, UCOMIMoniker]:
-        """
-
-        :param pmkOther:
+    ) -> tuple[None, UCOMIMoniker]:
+        """:param pmkOther:
         :param ppmkPrefix:
         """
     def ComposeWith(
-        self, pmkRight: UCOMIMoniker, fOnlyIfNotGeneric: bool, ppmkComposite: UCOMIMoniker
-    ) -> Tuple[None, UCOMIMoniker]:
-        """
-
-        :param pmkRight:
+        self,
+        pmkRight: UCOMIMoniker,
+        fOnlyIfNotGeneric: bool,
+        ppmkComposite: UCOMIMoniker,
+    ) -> tuple[None, UCOMIMoniker]:
+        """:param pmkRight:
         :param fOnlyIfNotGeneric:
         :param ppmkComposite:
         """
     def Enum(
         self, fForward: bool, ppenumMoniker: UCOMIEnumMoniker
-    ) -> Tuple[None, UCOMIEnumMoniker]:
-        """
-
-        :param fForward:
+    ) -> tuple[None, UCOMIEnumMoniker]:
+        """:param fForward:
         :param ppenumMoniker:
         """
-    def GetClassID(self, pClassID: Guid) -> Tuple[None, Guid]:
-        """
-
-        :param pClassID:
-        """
+    def GetClassID(self, pClassID: Guid) -> tuple[None, Guid]:
+        """:param pClassID:"""
     def GetDisplayName(
         self, pbc: UCOMIBindCtx, pmkToLeft: UCOMIMoniker, ppszDisplayName: str
-    ) -> Tuple[None, str]:
-        """
-
-        :param pbc:
+    ) -> tuple[None, str]:
+        """:param pbc:
         :param pmkToLeft:
         :param ppszDisplayName:
         """
-    def GetSizeMax(self, pcbSize: int) -> Tuple[None, int]:
-        """
-
-        :param pcbSize:
-        """
+    def GetSizeMax(self, pcbSize: int) -> tuple[None, int]:
+        """:param pcbSize:"""
     def GetTimeOfLastChange(
         self, pbc: UCOMIBindCtx, pmkToLeft: UCOMIMoniker, pFileTime: FILETIME
-    ) -> Tuple[None, FILETIME]:
-        """
-
-        :param pbc:
+    ) -> tuple[None, FILETIME]:
+        """:param pbc:
         :param pmkToLeft:
         :param pFileTime:
         """
-    def Hash(self, pdwHash: int) -> Tuple[None, int]:
-        """
-
-        :param pdwHash:
-        """
-    def Inverse(self, ppmk: UCOMIMoniker) -> Tuple[None, UCOMIMoniker]:
-        """
-
-        :param ppmk:
-        """
+    def Hash(self, pdwHash: int) -> tuple[None, int]:
+        """:param pdwHash:"""
+    def Inverse(self, ppmk: UCOMIMoniker) -> tuple[None, UCOMIMoniker]:
+        """:param ppmk:"""
     def IsDirty(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsEqual(self, pmkOtherMoniker: UCOMIMoniker) -> None:
-        """
-
-        :param pmkOtherMoniker:
-        """
+        """:param pmkOtherMoniker:"""
     def IsRunning(
         self, pbc: UCOMIBindCtx, pmkToLeft: UCOMIMoniker, pmkNewlyRunning: UCOMIMoniker
     ) -> None:
-        """
-
-        :param pbc:
+        """:param pbc:
         :param pmkToLeft:
         :param pmkNewlyRunning:
         """
-    def IsSystemMoniker(self, pdwMksys: int) -> Tuple[None, int]:
-        """
-
-        :param pdwMksys:
-        """
+    def IsSystemMoniker(self, pdwMksys: int) -> tuple[None, int]:
+        """:param pdwMksys:"""
     def Load(self, pStm: UCOMIStream) -> None:
-        """
-
-        :param pStm:
-        """
+        """:param pStm:"""
     def ParseDisplayName(
         self,
         pbc: UCOMIBindCtx,
@@ -11467,10 +7950,8 @@ class UCOMIMoniker:
         pszDisplayName: str,
         pchEaten: int,
         ppmkOut: UCOMIMoniker,
-    ) -> Tuple[None, int, UCOMIMoniker]:
-        """
-
-        :param pbc:
+    ) -> tuple[None, int, UCOMIMoniker]:
+        """:param pbc:
         :param pmkToLeft:
         :param pszDisplayName:
         :param pchEaten:
@@ -11482,105 +7963,70 @@ class UCOMIMoniker:
         dwReduceHowFar: int,
         ppmkToLeft: UCOMIMoniker,
         ppmkReduced: UCOMIMoniker,
-    ) -> Tuple[None, UCOMIMoniker]:
-        """
-
-        :param pbc:
+    ) -> tuple[None, UCOMIMoniker]:
+        """:param pbc:
         :param dwReduceHowFar:
         :param ppmkToLeft:
         :param ppmkReduced:
         """
     def RelativePathTo(
         self, pmkOther: UCOMIMoniker, ppmkRelPath: UCOMIMoniker
-    ) -> Tuple[None, UCOMIMoniker]:
-        """
-
-        :param pmkOther:
+    ) -> tuple[None, UCOMIMoniker]:
+        """:param pmkOther:
         :param ppmkRelPath:
         """
     def Save(self, pStm: UCOMIStream, fClearDirty: bool) -> None:
-        """
-
-        :param pStm:
+        """:param pStm:
         :param fClearDirty:
         """
 
 class UCOMIPersistFile:
     """"""
 
-    def GetClassID(self, pClassID: Guid) -> Tuple[None, Guid]:
-        """
-
-        :param pClassID:
-        """
-    def GetCurFile(self, ppszFileName: str) -> Tuple[None, str]:
-        """
-
-        :param ppszFileName:
-        """
+    def GetClassID(self, pClassID: Guid) -> tuple[None, Guid]:
+        """:param pClassID:"""
+    def GetCurFile(self, ppszFileName: str) -> tuple[None, str]:
+        """:param ppszFileName:"""
     def IsDirty(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Load(self, pszFileName: str, dwMode: int) -> None:
-        """
-
-        :param pszFileName:
+        """:param pszFileName:
         :param dwMode:
         """
     def Save(self, pszFileName: str, fRemember: bool) -> None:
-        """
-
-        :param pszFileName:
+        """:param pszFileName:
         :param fRemember:
         """
     def SaveCompleted(self, pszFileName: str) -> None:
-        """
-
-        :param pszFileName:
-        """
+        """:param pszFileName:"""
 
 class UCOMIReflect:
     """"""
 
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -11593,9 +8039,7 @@ class UCOMIReflect:
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -11603,22 +8047,16 @@ class UCOMIReflect:
         :return:
         """
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -11632,9 +8070,7 @@ class UCOMIReflect:
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -11653,9 +8089,7 @@ class UCOMIReflect:
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -11669,118 +8103,82 @@ class UCOMIReflect:
 class UCOMIRunningObjectTable:
     """"""
 
-    def EnumRunning(self, ppenumMoniker: UCOMIEnumMoniker) -> Tuple[None, UCOMIEnumMoniker]:
-        """
-
-        :param ppenumMoniker:
-        """
-    def GetObject(self, pmkObjectName: UCOMIMoniker, ppunkObject: object) -> Tuple[None, object]:
-        """
-
-        :param pmkObjectName:
+    def EnumRunning(self, ppenumMoniker: UCOMIEnumMoniker) -> tuple[None, UCOMIEnumMoniker]:
+        """:param ppenumMoniker:"""
+    def GetObject(self, pmkObjectName: UCOMIMoniker, ppunkObject: object) -> tuple[None, object]:
+        """:param pmkObjectName:
         :param ppunkObject:
         """
     def GetTimeOfLastChange(
         self, pmkObjectName: UCOMIMoniker, pfiletime: FILETIME
-    ) -> Tuple[None, FILETIME]:
-        """
-
-        :param pmkObjectName:
+    ) -> tuple[None, FILETIME]:
+        """:param pmkObjectName:
         :param pfiletime:
         """
     def IsRunning(self, pmkObjectName: UCOMIMoniker) -> None:
-        """
-
-        :param pmkObjectName:
-        """
+        """:param pmkObjectName:"""
     def NoteChangeTime(self, dwRegister: int, pfiletime: FILETIME) -> None:
-        """
-
-        :param dwRegister:
+        """:param dwRegister:
         :param pfiletime:
         """
     def Register(
-        self, grfFlags: int, punkObject: object, pmkObjectName: UCOMIMoniker, pdwRegister: int
-    ) -> Tuple[None, int]:
-        """
-
-        :param grfFlags:
+        self,
+        grfFlags: int,
+        punkObject: object,
+        pmkObjectName: UCOMIMoniker,
+        pdwRegister: int,
+    ) -> tuple[None, int]:
+        """:param grfFlags:
         :param punkObject:
         :param pmkObjectName:
         :param pdwRegister:
         """
     def Revoke(self, dwRegister: int) -> None:
-        """
-
-        :param dwRegister:
-        """
+        """:param dwRegister:"""
 
 class UCOMIStream:
     """"""
 
-    def Clone(self, ppstm: UCOMIStream) -> Tuple[None, UCOMIStream]:
-        """
-
-        :param ppstm:
-        """
+    def Clone(self, ppstm: UCOMIStream) -> tuple[None, UCOMIStream]:
+        """:param ppstm:"""
     def Commit(self, grfCommitFlags: int) -> None:
-        """
-
-        :param grfCommitFlags:
-        """
+        """:param grfCommitFlags:"""
     def CopyTo(self, pstm: UCOMIStream, cb: int, pcbRead: IntPtr, pcbWritten: IntPtr) -> None:
-        """
-
-        :param pstm:
+        """:param pstm:
         :param cb:
         :param pcbRead:
         :param pcbWritten:
         """
     def LockRegion(self, libOffset: int, cb: int, dwLockType: int) -> None:
-        """
-
-        :param libOffset:
+        """:param libOffset:
         :param cb:
         :param dwLockType:
         """
-    def Read(self, pv: Array[int], cb: int, pcbRead: IntPtr) -> Tuple[None, Array[int]]:
-        """
-
-        :param pv:
+    def Read(self, pv: Array[int], cb: int, pcbRead: IntPtr) -> tuple[None, Array[int]]:
+        """:param pv:
         :param cb:
         :param pcbRead:
         """
     def Revert(self) -> None:
         """"""
     def Seek(self, dlibMove: int, dwOrigin: int, plibNewPosition: IntPtr) -> None:
-        """
-
-        :param dlibMove:
+        """:param dlibMove:
         :param dwOrigin:
         :param plibNewPosition:
         """
     def SetSize(self, libNewSize: int) -> None:
-        """
-
-        :param libNewSize:
-        """
-    def Stat(self, pstatstg: STATSTG, grfStatFlag: int) -> Tuple[None, STATSTG]:
-        """
-
-        :param pstatstg:
+        """:param libNewSize:"""
+    def Stat(self, pstatstg: STATSTG, grfStatFlag: int) -> tuple[None, STATSTG]:
+        """:param pstatstg:
         :param grfStatFlag:
         """
     def UnlockRegion(self, libOffset: int, cb: int, dwLockType: int) -> None:
-        """
-
-        :param libOffset:
+        """:param libOffset:
         :param cb:
         :param dwLockType:
         """
     def Write(self, pv: Array[int], cb: int, pcbWritten: IntPtr) -> None:
-        """
-
-        :param pv:
+        """:param pv:
         :param cb:
         :param pcbWritten:
         """
@@ -11796,10 +8194,8 @@ class UCOMITypeComp:
         ppTInfo: UCOMITypeInfo,
         pDescKind: DESCKIND,
         pBindPtr: BINDPTR,
-    ) -> Tuple[None, UCOMITypeInfo, DESCKIND, BINDPTR]:
-        """
-
-        :param szName:
+    ) -> tuple[None, UCOMITypeInfo, DESCKIND, BINDPTR]:
+        """:param szName:
         :param lHashVal:
         :param wFlags:
         :param ppTInfo:
@@ -11808,10 +8204,8 @@ class UCOMITypeComp:
         """
     def BindType(
         self, szName: str, lHashVal: int, ppTInfo: UCOMITypeInfo, ppTComp: UCOMITypeComp
-    ) -> Tuple[None, UCOMITypeInfo, UCOMITypeComp]:
-        """
-
-        :param szName:
+    ) -> tuple[None, UCOMITypeInfo, UCOMITypeComp]:
+        """:param szName:
         :param lHashVal:
         :param ppTInfo:
         :param ppTComp:
@@ -11820,113 +8214,91 @@ class UCOMITypeComp:
 class UCOMITypeInfo:
     """"""
 
-    def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> Tuple[None, IntPtr]:
-        """
-
-        :param memid:
+    def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> tuple[None, IntPtr]:
+        """:param memid:
         :param invKind:
         :param ppv:
         """
-    def CreateInstance(self, pUnkOuter: object, riid: Guid, ppvObj: object) -> Tuple[None, object]:
-        """
-
-        :param pUnkOuter:
+    def CreateInstance(self, pUnkOuter: object, riid: Guid, ppvObj: object) -> tuple[None, object]:
+        """:param pUnkOuter:
         :param riid:
         :param ppvObj:
         """
     def GetContainingTypeLib(
         self, ppTLB: UCOMITypeLib, pIndex: int
-    ) -> Tuple[None, UCOMITypeLib, int]:
-        """
-
-        :param ppTLB:
+    ) -> tuple[None, UCOMITypeLib, int]:
+        """:param ppTLB:
         :param pIndex:
         """
     def GetDllEntry(
-        self, memid: int, invKind: INVOKEKIND, pBstrDllName: str, pBstrName: str, pwOrdinal: int
-    ) -> Tuple[None, str, str, int]:
-        """
-
-        :param memid:
+        self,
+        memid: int,
+        invKind: INVOKEKIND,
+        pBstrDllName: str,
+        pBstrName: str,
+        pwOrdinal: int,
+    ) -> tuple[None, str, str, int]:
+        """:param memid:
         :param invKind:
         :param pBstrDllName:
         :param pBstrName:
         :param pwOrdinal:
         """
     def GetDocumentation(
-        self, index: int, strName: str, strDocString: str, dwHelpContext: int, strHelpFile: str
-    ) -> Tuple[None, str, str, int, str]:
-        """
-
-        :param index:
+        self,
+        index: int,
+        strName: str,
+        strDocString: str,
+        dwHelpContext: int,
+        strHelpFile: str,
+    ) -> tuple[None, str, str, int, str]:
+        """:param index:
         :param strName:
         :param strDocString:
         :param dwHelpContext:
         :param strHelpFile:
         """
-    def GetFuncDesc(self, index: int, ppFuncDesc: IntPtr) -> Tuple[None, IntPtr]:
-        """
-
-        :param index:
+    def GetFuncDesc(self, index: int, ppFuncDesc: IntPtr) -> tuple[None, IntPtr]:
+        """:param index:
         :param ppFuncDesc:
         """
     def GetIDsOfNames(
         self, rgszNames: Array[str], cNames: int, pMemId: Array[int]
-    ) -> Tuple[None, Array[int]]:
-        """
-
-        :param rgszNames:
+    ) -> tuple[None, Array[int]]:
+        """:param rgszNames:
         :param cNames:
         :param pMemId:
         """
-    def GetImplTypeFlags(self, index: int, pImplTypeFlags: int) -> Tuple[None, int]:
-        """
-
-        :param index:
+    def GetImplTypeFlags(self, index: int, pImplTypeFlags: int) -> tuple[None, int]:
+        """:param index:
         :param pImplTypeFlags:
         """
-    def GetMops(self, memid: int, pBstrMops: str) -> Tuple[None, str]:
-        """
-
-        :param memid:
+    def GetMops(self, memid: int, pBstrMops: str) -> tuple[None, str]:
+        """:param memid:
         :param pBstrMops:
         """
     def GetNames(
         self, memid: int, rgBstrNames: Array[str], cMaxNames: int, pcNames: int
-    ) -> Tuple[None, Array[str], int]:
-        """
-
-        :param memid:
+    ) -> tuple[None, Array[str], int]:
+        """:param memid:
         :param rgBstrNames:
         :param cMaxNames:
         :param pcNames:
         """
-    def GetRefTypeInfo(self, hRef: int, ppTI: UCOMITypeInfo) -> Tuple[None, UCOMITypeInfo]:
-        """
-
-        :param hRef:
+    def GetRefTypeInfo(self, hRef: int, ppTI: UCOMITypeInfo) -> tuple[None, UCOMITypeInfo]:
+        """:param hRef:
         :param ppTI:
         """
-    def GetRefTypeOfImplType(self, index: int, href: int) -> Tuple[None, int]:
-        """
-
-        :param index:
+    def GetRefTypeOfImplType(self, index: int, href: int) -> tuple[None, int]:
+        """:param index:
         :param href:
         """
-    def GetTypeAttr(self, ppTypeAttr: IntPtr) -> Tuple[None, IntPtr]:
-        """
-
-        :param ppTypeAttr:
-        """
-    def GetTypeComp(self, ppTComp: UCOMITypeComp) -> Tuple[None, UCOMITypeComp]:
-        """
-
-        :param ppTComp:
-        """
-    def GetVarDesc(self, index: int, ppVarDesc: IntPtr) -> Tuple[None, IntPtr]:
-        """
-
-        :param index:
+    def GetTypeAttr(self, ppTypeAttr: IntPtr) -> tuple[None, IntPtr]:
+        """:param ppTypeAttr:"""
+    def GetTypeComp(self, ppTComp: UCOMITypeComp) -> tuple[None, UCOMITypeComp]:
+        """:param ppTComp:"""
+    def GetVarDesc(self, index: int, ppVarDesc: IntPtr) -> tuple[None, IntPtr]:
+        """:param index:
         :param ppVarDesc:
         """
     def Invoke(
@@ -11938,10 +8310,8 @@ class UCOMITypeInfo:
         pVarResult: object,
         pExcepInfo: EXCEPINFO,
         puArgErr: int,
-    ) -> Tuple[None, object, EXCEPINFO, int]:
-        """
-
-        :param pvInstance:
+    ) -> tuple[None, object, EXCEPINFO, int]:
+        """:param pvInstance:
         :param memid:
         :param wFlags:
         :param pDispParams:
@@ -11950,20 +8320,11 @@ class UCOMITypeInfo:
         :param puArgErr:
         """
     def ReleaseFuncDesc(self, pFuncDesc: IntPtr) -> None:
-        """
-
-        :param pFuncDesc:
-        """
+        """:param pFuncDesc:"""
     def ReleaseTypeAttr(self, pTypeAttr: IntPtr) -> None:
-        """
-
-        :param pTypeAttr:
-        """
+        """:param pTypeAttr:"""
     def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
-        """
-
-        :param pVarDesc:
-        """
+        """:param pVarDesc:"""
 
 class UCOMITypeLib:
     """"""
@@ -11975,107 +8336,71 @@ class UCOMITypeLib:
         ppTInfo: Array[UCOMITypeInfo],
         rgMemId: Array[int],
         pcFound: int,
-    ) -> Tuple[None, Array[UCOMITypeInfo], Array[int]]:
-        """
-
-        :param szNameBuf:
+    ) -> tuple[None, Array[UCOMITypeInfo], Array[int]]:
+        """:param szNameBuf:
         :param lHashVal:
         :param ppTInfo:
         :param rgMemId:
         :param pcFound:
         """
     def GetDocumentation(
-        self, index: int, strName: str, strDocString: str, dwHelpContext: int, strHelpFile: str
-    ) -> Tuple[None, str, str, int, str]:
-        """
-
-        :param index:
+        self,
+        index: int,
+        strName: str,
+        strDocString: str,
+        dwHelpContext: int,
+        strHelpFile: str,
+    ) -> tuple[None, str, str, int, str]:
+        """:param index:
         :param strName:
         :param strDocString:
         :param dwHelpContext:
         :param strHelpFile:
         """
-    def GetLibAttr(self, ppTLibAttr: IntPtr) -> Tuple[None, IntPtr]:
-        """
-
-        :param ppTLibAttr:
-        """
-    def GetTypeComp(self, ppTComp: UCOMITypeComp) -> Tuple[None, UCOMITypeComp]:
-        """
-
-        :param ppTComp:
-        """
-    def GetTypeInfo(self, index: int, ppTI: UCOMITypeInfo) -> Tuple[None, UCOMITypeInfo]:
-        """
-
-        :param index:
+    def GetLibAttr(self, ppTLibAttr: IntPtr) -> tuple[None, IntPtr]:
+        """:param ppTLibAttr:"""
+    def GetTypeComp(self, ppTComp: UCOMITypeComp) -> tuple[None, UCOMITypeComp]:
+        """:param ppTComp:"""
+    def GetTypeInfo(self, index: int, ppTI: UCOMITypeInfo) -> tuple[None, UCOMITypeInfo]:
+        """:param index:
         :param ppTI:
         """
     def GetTypeInfoCount(self) -> int:
-        """
-
-        :return:
-        """
-    def GetTypeInfoOfGuid(self, guid: Guid, ppTInfo: UCOMITypeInfo) -> Tuple[None, UCOMITypeInfo]:
-        """
-
-        :param guid:
+        """:return:"""
+    def GetTypeInfoOfGuid(self, guid: Guid, ppTInfo: UCOMITypeInfo) -> tuple[None, UCOMITypeInfo]:
+        """:param guid:
         :param ppTInfo:
         """
-    def GetTypeInfoType(self, index: int, pTKind: TYPEKIND) -> Tuple[None, TYPEKIND]:
-        """
-
-        :param index:
+    def GetTypeInfoType(self, index: int, pTKind: TYPEKIND) -> tuple[None, TYPEKIND]:
+        """:param index:
         :param pTKind:
         """
     def IsName(self, szNameBuf: str, lHashVal: int) -> bool:
-        """
-
-        :param szNameBuf:
+        """:param szNameBuf:
         :param lHashVal:
         :return:
         """
     def ReleaseTLibAttr(self, pTLibAttr: IntPtr) -> None:
-        """
-
-        :param pTLibAttr:
-        """
+        """:param pTLibAttr:"""
 
 class UnknownWrapper(Object):
     """"""
 
     def __init__(self, obj: object):
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @property
     def WrappedObject(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnmanagedFunctionPointerAttribute(Attribute, _Attribute):
     """"""
@@ -12101,61 +8426,37 @@ class UnmanagedFunctionPointerAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, callingConvention: CallingConvention):
-        """
-
-        :param callingConvention:
-        """
+        """:param callingConvention:"""
     @property
     def CallingConvention(self) -> CallingConvention:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -12167,9 +8468,7 @@ class UnmanagedFunctionPointerAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -12179,21 +8478,13 @@ class UnmanagedFunctionPointerAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UnmanagedType(Enum):
     """"""
@@ -12304,26 +8595,15 @@ class VARDESC(ValueType):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class DESCUNION(ValueType):
         """"""
@@ -12333,26 +8613,15 @@ class VARDESC(ValueType):
         oInst: Final[int] = ...
         """"""
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class VARFLAGS(Enum):
     """"""
@@ -12481,243 +8750,146 @@ class Variant(ValueType):
 
     @property
     def AsBool(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsBool.setter
     def AsBool(self, value: bool) -> None: ...
     @property
     def AsBstr(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsBstr.setter
     def AsBstr(self, value: str) -> None: ...
     @property
     def AsCy(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsCy.setter
     def AsCy(self, value: Decimal) -> None: ...
     @property
     def AsDate(self) -> DateTime:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsDate.setter
     def AsDate(self, value: DateTime) -> None: ...
     @property
     def AsDecimal(self) -> Decimal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsDecimal.setter
     def AsDecimal(self, value: Decimal) -> None: ...
     @property
     def AsDispatch(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsDispatch.setter
     def AsDispatch(self, value: object) -> None: ...
     @property
     def AsError(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsError.setter
     def AsError(self, value: int) -> None: ...
     @property
     def AsI1(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsI1.setter
     def AsI1(self, value: int) -> None: ...
     @property
     def AsI2(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsI2.setter
     def AsI2(self, value: int) -> None: ...
     @property
     def AsI4(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsI4.setter
     def AsI4(self, value: int) -> None: ...
     @property
     def AsI8(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsI8.setter
     def AsI8(self, value: int) -> None: ...
     @property
     def AsInt(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsInt.setter
     def AsInt(self, value: int) -> None: ...
     @property
     def AsR4(self) -> float:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsR4.setter
     def AsR4(self, value: float) -> None: ...
     @property
     def AsR8(self) -> float:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsR8.setter
     def AsR8(self, value: float) -> None: ...
     @property
     def AsUi1(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsUi1.setter
     def AsUi1(self, value: int) -> None: ...
     @property
     def AsUi2(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsUi2.setter
     def AsUi2(self, value: int) -> None: ...
     @property
     def AsUi4(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsUi4.setter
     def AsUi4(self, value: int) -> None: ...
     @property
     def AsUi8(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsUi8.setter
     def AsUi8(self, value: int) -> None: ...
     @property
     def AsUint(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsUint.setter
     def AsUint(self, value: int) -> None: ...
     @property
     def AsUnknown(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AsUnknown.setter
     def AsUnknown(self, value: object) -> None: ...
     @property
     def VariantType(self) -> VarEnum:
-        """
-
-        :return:
-        """
+        """:return:"""
     @VariantType.setter
     def VariantType(self, value: VarEnum) -> None: ...
     def Clear(self) -> None:
         """"""
     def CopyFromIndirect(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetAsNULL(self) -> None:
         """"""
     def ToObject(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class VariantWrapper(Object):
     """"""
 
     def __init__(self, obj: object):
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @property
     def WrappedObject(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _Activator:
     """"""
@@ -12725,26 +8897,19 @@ class _Activator:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -12756,9 +8921,7 @@ class _Activator:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -12773,58 +8936,33 @@ class _Assembly:
 
     @property
     def CodeBase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EntryPoint(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EscapedCodeBase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Evidence(self) -> Evidence:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GlobalAssemblyCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Location(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateInstance(self, typeName: str) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :return:
         """
     @overload
     def CreateInstance(self, typeName: str, ignoreCase: bool) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :param ignoreCase:
         :return:
         """
@@ -12839,9 +8977,7 @@ class _Assembly:
         culture: CultureInfo,
         activationAttributes: Array[object],
     ) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :param ignoreCase:
         :param bindingAttr:
         :param binder:
@@ -12851,199 +8987,129 @@ class _Assembly:
         :return:
         """
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetExportedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetFile(self, name: str) -> FileStream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetFiles(self) -> Array[FileStream]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetFiles(self, getResourceModules: bool) -> Array[FileStream]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetLoadedModules(self) -> Array[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetLoadedModules(self, getResourceModules: bool) -> Array[Module]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     def GetManifestResourceInfo(self, resourceName: str) -> ManifestResourceInfo:
-        """
-
-        :param resourceName:
+        """:param resourceName:
         :return:
         """
     def GetManifestResourceNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetManifestResourceStream(self, name: str) -> Stream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetManifestResourceStream(self, type: Type, name: str) -> Stream:
-        """
-
-        :param type:
+        """:param type:
         :param name:
         :return:
         """
     def GetModule(self, name: str) -> Module:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetModules(self) -> Array[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetModules(self, getResourceModules: bool) -> Array[Module]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     @overload
     def GetName(self) -> AssemblyName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetName(self, copiedName: bool) -> AssemblyName:
-        """
-
-        :param copiedName:
+        """:param copiedName:
         :return:
         """
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetReferencedAssemblies(self) -> Array[AssemblyName]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSatelliteAssembly(self, culture: CultureInfo) -> Assembly:
-        """
-
-        :param culture:
+        """:param culture:
         :return:
         """
     @overload
     def GetSatelliteAssembly(self, culture: CultureInfo, version: Version) -> Assembly:
-        """
-
-        :param culture:
+        """:param culture:
         :param version:
         :return:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :param ignoreCase:
         :return:
         """
     def GetTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def LoadModule(self, moduleName: str, rawModule: Array[int]) -> Module:
-        """
-
-        :param moduleName:
+        """:param moduleName:
         :param rawModule:
         :return:
         """
@@ -13051,18 +9117,13 @@ class _Assembly:
     def LoadModule(
         self, moduleName: str, rawModule: Array[int], rawSymbolStore: Array[int]
     ) -> Module:
-        """
-
-        :param moduleName:
+        """:param moduleName:
         :param rawModule:
         :param rawSymbolStore:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     ModuleResolve: EventType[ModuleResolveEventHandler] = ...
     """"""
 
@@ -13072,26 +9133,19 @@ class _AssemblyBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13103,9 +9157,7 @@ class _AssemblyBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13121,26 +9173,19 @@ class _AssemblyName:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13152,9 +9197,7 @@ class _AssemblyName:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13170,26 +9213,19 @@ class _Attribute:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13201,9 +9237,7 @@ class _Attribute:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13219,26 +9253,19 @@ class _ConstructorBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13250,9 +9277,7 @@ class _ConstructorBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13267,188 +9292,103 @@ class _ConstructorInfo:
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13460,9 +9400,7 @@ class _ConstructorInfo:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13479,9 +9417,7 @@ class _ConstructorInfo:
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -13489,9 +9425,7 @@ class _ConstructorInfo:
         :return:
         """
     def Invoke_3(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -13502,32 +9436,23 @@ class _ConstructorInfo:
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param invokeAttr:
+        """:param invokeAttr:
         :param binder:
         :param parameters:
         :param culture:
         :return:
         """
     def Invoke_5(self, parameters: Array[object]) -> object:
-        """
-
-        :param parameters:
+        """:param parameters:
         :return:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _CustomAttributeBuilder:
     """"""
@@ -13535,26 +9460,19 @@ class _CustomAttributeBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13566,9 +9484,7 @@ class _CustomAttributeBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13584,26 +9500,19 @@ class _EnumBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13615,9 +9524,7 @@ class _EnumBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13633,26 +9540,19 @@ class _EventBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13664,9 +9564,7 @@ class _EventBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13681,103 +9579,61 @@ class _EventInfo:
 
     @property
     def Attributes(self) -> EventAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventHandlerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMulticast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddEventHandler(self, target: object, handler: Delegate) -> None:
-        """
-
-        :param target:
+        """:param target:
         :param handler:
         """
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetAddMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetAddMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -13785,47 +9641,29 @@ class _EventInfo:
         """
     @overload
     def GetRaiseMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetRaiseMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetRemoveMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetRemoveMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13837,9 +9675,7 @@ class _EventInfo:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13849,99 +9685,58 @@ class _EventInfo:
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def RemoveEventHandler(self, target: object, handler: Delegate) -> None:
-        """
-
-        :param target:
+        """:param target:
         :param handler:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _Exception:
     """"""
 
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _FieldBuilder:
     """"""
@@ -13949,26 +9744,19 @@ class _FieldBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13980,9 +9768,7 @@ class _FieldBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13997,182 +9783,102 @@ class _FieldInfo:
 
     @property
     def Attributes(self) -> FieldAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldHandle(self) -> RuntimeFieldHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInitOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLiteral(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotSerialized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPinvokeImpl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def GetValue(self, obj: object) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetValueDirect(self, obj: TypedReference) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Invoke(
@@ -14186,9 +9892,7 @@ class _FieldInfo:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14198,17 +9902,13 @@ class _FieldInfo:
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def SetValue(self, obj: object, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
@@ -14220,25 +9920,18 @@ class _FieldInfo:
         binder: Binder,
         culture: CultureInfo,
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param invokeAttr:
         :param binder:
         :param culture:
         """
     def SetValueDirect(self, obj: TypedReference, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _ILGenerator:
     """"""
@@ -14246,26 +9939,19 @@ class _ILGenerator:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -14277,9 +9963,7 @@ class _ILGenerator:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14295,26 +9979,19 @@ class _LocalBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -14326,9 +10003,7 @@ class _LocalBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14343,82 +10018,51 @@ class _MemberInfo:
 
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -14430,9 +10074,7 @@ class _MemberInfo:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14442,210 +10084,118 @@ class _MemberInfo:
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _MethodBase:
     """"""
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -14658,9 +10208,7 @@ class _MethodBase:
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -14679,9 +10227,7 @@ class _MethodBase:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14691,17 +10237,12 @@ class _MethodBase:
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _MethodBuilder:
     """"""
@@ -14709,26 +10250,19 @@ class _MethodBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -14740,9 +10274,7 @@ class _MethodBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14757,210 +10289,114 @@ class _MethodInfo:
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnTypeCustomAttributes(self) -> ICustomAttributeProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def GetBaseDefinition(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -14973,9 +10409,7 @@ class _MethodInfo:
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -14994,9 +10428,7 @@ class _MethodInfo:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15006,17 +10438,12 @@ class _MethodInfo:
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _MethodRental:
     """"""
@@ -15024,26 +10451,19 @@ class _MethodRental:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15055,9 +10475,7 @@ class _MethodRental:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15073,26 +10491,19 @@ class _Module:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15104,9 +10515,7 @@ class _Module:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15122,26 +10531,19 @@ class _ModuleBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15153,9 +10555,7 @@ class _ModuleBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15171,26 +10571,19 @@ class _ParameterBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15202,9 +10595,7 @@ class _ParameterBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15220,26 +10611,19 @@ class _ParameterInfo:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15251,9 +10635,7 @@ class _ParameterInfo:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15269,26 +10651,19 @@ class _PropertyBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15300,9 +10675,7 @@ class _PropertyBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15317,161 +10690,95 @@ class _PropertyInfo:
 
     @property
     def Attributes(self) -> PropertyAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetAccessors(self) -> Array[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetAccessors(self, nonPublic: bool) -> Array[MethodInfo]:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetGetMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetGetMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetIndexParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSetMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSetMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def GetValue(self, obj: object, index: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param index:
         :return:
         """
@@ -15484,9 +10791,7 @@ class _PropertyInfo:
         index: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param index:
@@ -15504,9 +10809,7 @@ class _PropertyInfo:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15516,17 +10819,13 @@ class _PropertyInfo:
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def SetValue(self, obj: object, value: object, index: Array[object]) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param index:
         """
@@ -15540,9 +10839,7 @@ class _PropertyInfo:
         index: Array[object],
         culture: CultureInfo,
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param invokeAttr:
         :param binder:
@@ -15550,10 +10847,7 @@ class _PropertyInfo:
         :param culture:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _SignatureHelper:
     """"""
@@ -15561,26 +10855,19 @@ class _SignatureHelper:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15592,9 +10879,7 @@ class _SignatureHelper:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15610,26 +10895,19 @@ class _Thread:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15641,9 +10919,7 @@ class _Thread:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15658,298 +10934,154 @@ class _Type:
 
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BaseType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GUID(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasElementType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAnsiClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsArray(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCOMObject(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContextful(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsExplicitLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsImport(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLayoutSequential(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMarshalByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamANDAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamORAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPointer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrimitive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSealed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSerializable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsUnicodeClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValueType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeHandle(self) -> RuntimeTypeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeInitializer(self) -> ConstructorInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, o: Type) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def FindInterfaces(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
@@ -15960,24 +11092,17 @@ class _Type:
         filter: MemberFilter,
         filterCriteria: object,
     ) -> Array[MemberInfo]:
-        """
-
-        :param memberType:
+        """:param memberType:
         :param bindingAttr:
         :param filter:
         :param filterCriteria:
         :return:
         """
     def GetArrayRank(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructor(self, types: Array[Type]) -> ConstructorInfo:
-        """
-
-        :param types:
+        """:param types:
         :return:
         """
     @overload
@@ -15988,9 +11113,7 @@ class _Type:
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param types:
         :param modifiers:
@@ -16005,9 +11128,7 @@ class _Type:
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param callConvention:
         :param types:
@@ -16016,109 +11137,71 @@ class _Type:
         """
     @overload
     def GetConstructors(self) -> Array[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructors(self, bindingAttr: BindingFlags) -> Array[ConstructorInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetDefaultMembers(self) -> Array[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetElementType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetEvent(self, name: str, bindingAttr: BindingFlags) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetEvents(self) -> Array[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, bindingAttr: BindingFlags) -> Array[EventInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -16126,42 +11209,29 @@ class _Type:
         """
     @overload
     def GetInterface(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetInterface(self, name: str, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetInterfaceMap(self, interfaceType: Type) -> InterfaceMapping:
-        """
-
-        :param interfaceType:
+        """:param interfaceType:
         :return:
         """
     def GetInterfaces(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMember(self, name: str) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -16169,46 +11239,33 @@ class _Type:
     def GetMember(
         self, name: str, type: MemberTypes, bindingAttr: BindingFlags
     ) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param type:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self) -> Array[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
@@ -16216,9 +11273,7 @@ class _Type:
     def GetMethod(
         self, name: str, types: Array[Type], modifiers: Array[ParameterModifier]
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :param modifiers:
         :return:
@@ -16232,9 +11287,7 @@ class _Type:
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -16251,9 +11304,7 @@ class _Type:
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -16263,105 +11314,78 @@ class _Type:
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetNestedType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetNestedType(self, name: str, bindingAttr: BindingFlags) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetNestedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetNestedTypes(self, bindingAttr: BindingFlags) -> Array[Type]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self) -> Array[PropertyInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :return:
         """
     @overload
     def GetProperty(
-        self, name: str, returnType: Type, types: Array[Type], modifiers: Array[ParameterModifier]
+        self,
+        name: str,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :param modifiers:
@@ -16377,9 +11401,7 @@ class _Type:
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -16388,22 +11410,14 @@ class _Type:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -16415,9 +11429,7 @@ class _Type:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16435,9 +11447,7 @@ class _Type:
         target: object,
         args: Array[object],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -16454,9 +11464,7 @@ class _Type:
         args: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -16476,9 +11484,7 @@ class _Type:
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -16489,35 +11495,24 @@ class _Type:
         :return:
         """
     def IsAssignableFrom(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsInstanceOfType(self, o: object) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def IsSubclassOf(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class _TypeBuilder:
     """"""
@@ -16525,26 +11520,19 @@ class _TypeBuilder:
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -16556,9 +11544,7 @@ class _TypeBuilder:
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:

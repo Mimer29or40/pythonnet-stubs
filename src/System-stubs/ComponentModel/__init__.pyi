@@ -1,12 +1,9 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Iterator
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -44,7 +41,6 @@ from System.Collections.Generic import IReadOnlyCollection
 from System.Collections.Generic import IReadOnlyList
 from System.Collections.ObjectModel import Collection
 from System.ComponentModel.Design import IDesigner
-from System.ComponentModel.TypeConverter import StandardValuesCollection
 from System.Diagnostics import BooleanSwitch
 from System.Diagnostics import TraceSwitch
 from System.Globalization import CultureInfo
@@ -83,39 +79,22 @@ class AddingNewEventArgs(EventArgs):
         """"""
     @overload
     def __init__(self, newObject: object):
-        """
-
-        :param newObject:
-        """
+        """:param newObject:"""
     @property
     def NewObject(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @NewObject.setter
     def NewObject(self, value: object) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 AddingNewEventHandler: Callable[[object, AddingNewEventArgs], None] = ...
 """
@@ -129,122 +108,69 @@ class AmbientValueAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, value: bool):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Char):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: float):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: object):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: float):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, type: Type, value: str):
-        """
-
-        :param type:
+        """:param type:
         :param value:
         """
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -256,9 +182,7 @@ class AmbientValueAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -268,21 +192,13 @@ class AmbientValueAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ArrayConverter(CollectionConverter):
     """"""
@@ -291,79 +207,59 @@ class ArrayConverter(CollectionConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -371,18 +267,14 @@ class ArrayConverter(CollectionConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -394,9 +286,7 @@ class ArrayConverter(CollectionConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -404,31 +294,23 @@ class ArrayConverter(CollectionConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -436,205 +318,137 @@ class ArrayConverter(CollectionConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ArraySubsetEnumerator(Object, IEnumerator):
     """"""
 
     def __init__(self, array: Array, count: int):
-        """
-
-        :param array:
+        """:param array:
         :param count:
         """
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsyncCompletedEventArgs(EventArgs):
     """"""
@@ -644,51 +458,29 @@ class AsyncCompletedEventArgs(EventArgs):
         """"""
     @overload
     def __init__(self, error: Exception, cancelled: bool, userState: object):
-        """
-
-        :param error:
+        """:param error:
         :param cancelled:
         :param userState:
         """
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 AsyncCompletedEventHandler: Callable[[object, AsyncCompletedEventArgs], None] = ...
 """
@@ -702,51 +494,30 @@ class AsyncOperation(Object):
 
     @property
     def SynchronizationContext(self) -> SynchronizationContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserSuppliedState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OperationCompleted(self) -> None:
         """"""
     def Post(self, d: SendOrPostCallback, arg: object) -> None:
-        """
-
-        :param d:
+        """:param d:
         :param arg:
         """
     def PostOperationCompleted(self, d: SendOrPostCallback, arg: object) -> None:
-        """
-
-        :param d:
+        """:param d:
         :param arg:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AsyncOperationManager(ABC, Object):
     """"""
@@ -754,41 +525,25 @@ class AsyncOperationManager(ABC, Object):
     @classmethod
     @property
     def SynchronizationContext(cls) -> SynchronizationContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @SynchronizationContext.setter
     def SynchronizationContext(cls, value: SynchronizationContext) -> None: ...
     @classmethod
     def CreateOperation(cls, userSuppliedState: object) -> AsyncOperation:
-        """
-
-        :param userSuppliedState:
+        """:param userSuppliedState:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AttributeCollection(Object, ICollection, IEnumerable):
     """"""
@@ -799,214 +554,129 @@ class AttributeCollection(Object, ICollection, IEnumerable):
     :return: 
     """
     def __init__(self, attributes: Array[Attribute]):
-        """
-
-        :param attributes:
-        """
+        """:param attributes:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> Attribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Contains(self, attributes: Array[Attribute]) -> bool:
-        """
-
-        :param attributes:
+        """:param attributes:
         :return:
         """
     @overload
     def Contains(self, attribute: Attribute) -> bool:
-        """
-
-        :param attribute:
+        """:param attribute:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def FromExisting(
         cls, existing: AttributeCollection, newAttributes: Array[Attribute]
     ) -> AttributeCollection:
-        """
-
-        :param existing:
+        """:param existing:
         :param newAttributes:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Matches(self, attributes: Array[Attribute]) -> bool:
-        """
-
-        :param attributes:
+        """:param attributes:
         :return:
         """
     @overload
     def Matches(self, attribute: Attribute) -> bool:
-        """
-
-        :param attribute:
+        """:param attribute:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> Attribute:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, attributeType: Type) -> Attribute:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AttributeProviderAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def __init__(self, typeName: str, propertyName: str):
-        """
-
-        :param typeName:
+        """:param typeName:
         :param propertyName:
         """
     @property
     def PropertyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1018,9 +688,7 @@ class AttributeProviderAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1030,21 +698,13 @@ class AttributeProviderAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BackgroundWorker(Component, IComponent, IDisposable):
     """"""
@@ -1053,93 +713,54 @@ class BackgroundWorker(Component, IComponent, IDisposable):
         """"""
     @property
     def CancellationPending(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBusy(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
     def WorkerReportsProgress(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WorkerReportsProgress.setter
     def WorkerReportsProgress(self, value: bool) -> None: ...
     @property
     def WorkerSupportsCancellation(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WorkerSupportsCancellation.setter
     def WorkerSupportsCancellation(self, value: bool) -> None: ...
     def CancelAsync(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ReportProgress(self, percentProgress: int) -> None:
-        """
-
-        :param percentProgress:
-        """
+        """:param percentProgress:"""
     @overload
     def ReportProgress(self, percentProgress: int, userState: object) -> None:
-        """
-
-        :param percentProgress:
+        """:param percentProgress:
         :param userState:
         """
     @overload
@@ -1147,15 +768,9 @@ class BackgroundWorker(Component, IComponent, IDisposable):
         """"""
     @overload
     def RunWorkerAsync(self, argument: object) -> None:
-        """
-
-        :param argument:
-        """
+        """:param argument:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
     DoWork: EventType[DoWorkEventHandler] = ...
@@ -1170,79 +785,59 @@ class BaseNumberConverter(ABC, TypeConverter):
 
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -1250,18 +845,14 @@ class BaseNumberConverter(ABC, TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -1273,9 +864,7 @@ class BaseNumberConverter(ABC, TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -1283,31 +872,23 @@ class BaseNumberConverter(ABC, TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -1315,161 +896,112 @@ class BaseNumberConverter(ABC, TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BindableAttribute(Attribute, _Attribute):
     """"""
@@ -1491,87 +1023,53 @@ class BindableAttribute(Attribute, _Attribute):
     """
     @overload
     def __init__(self, flags: BindableSupport):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @overload
     def __init__(self, bindable: bool):
-        """
-
-        :param bindable:
-        """
+        """:param bindable:"""
     @overload
     def __init__(self, flags: BindableSupport, direction: BindingDirection):
-        """
-
-        :param flags:
+        """:param flags:
         :param direction:
         """
     @overload
     def __init__(self, bindable: bool, direction: BindingDirection):
-        """
-
-        :param bindable:
+        """:param bindable:
         :param direction:
         """
     @property
     def Bindable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Direction(self) -> BindingDirection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1583,9 +1081,7 @@ class BindableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1595,21 +1091,13 @@ class BindableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BindableSupport(Enum):
     """"""
@@ -1651,182 +1139,97 @@ class BindingList(
         """"""
     @overload
     def __init__(self, list: IList[T]):
-        """
-
-        :param list:
-        """
+        """:param list:"""
     @property
     def AllowEdit(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AllowNew(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AllowRemove(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSorted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Item(self) -> T:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: T) -> None: ...
     @property
     def RaiseListChangedEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @RaiseListChangedEvents.setter
     def RaiseListChangedEvents(self, value: bool) -> None: ...
     @property
     def RaisesItemChangedEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SortDirection(self) -> ListSortDirection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SortProperty(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsChangeNotification(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsSearching(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsSorting(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, item: T) -> None:
-        """
-
-        :param item:
-        """
+        """:param item:"""
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def AddIndex(self, property: PropertyDescriptor) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def AddNew(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ApplySort(self, property: PropertyDescriptor, direction: ListSortDirection) -> None:
-        """
-
-        :param property:
+        """:param property:
         :param direction:
         """
     def CancelNew(self, itemIndex: int) -> None:
-        """
-
-        :param itemIndex:
-        """
+        """:param itemIndex:"""
     @overload
     def Clear(self) -> None:
         """"""
@@ -1835,204 +1238,128 @@ class BindingList(
         """"""
     @overload
     def Contains(self, item: T) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
     def EndNew(self, itemIndex: int) -> None:
-        """
-
-        :param itemIndex:
-        """
+        """:param itemIndex:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Find(self, property: PropertyDescriptor, key: object) -> int:
-        """
-
-        :param property:
+        """:param property:
         :param key:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, item: T) -> int:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, item: T) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param item:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, item: T) -> bool:
-        """
-
-        :param item:
+        """:param item:
         :return:
         """
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def RemoveIndex(self, property: PropertyDescriptor) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def RemoveSort(self) -> None:
         """"""
     def ResetBindings(self) -> None:
         """"""
     def ResetItem(self, position: int) -> None:
-        """
-
-        :param position:
-        """
+        """:param position:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __contains__(self, value: T) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> T:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> T:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __iter__(self) -> Iterator[T]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: T) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     AddingNew: EventType[AddingNewEventHandler] = ...
@@ -2047,79 +1374,59 @@ class BooleanConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -2127,18 +1434,14 @@ class BooleanConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -2150,9 +1453,7 @@ class BooleanConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -2160,31 +1461,23 @@ class BooleanConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -2192,161 +1485,112 @@ class BooleanConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class BrowsableAttribute(Attribute, _Attribute):
     """"""
@@ -2367,61 +1611,37 @@ class BrowsableAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, browsable: bool):
-        """
-
-        :param browsable:
-        """
+        """:param browsable:"""
     @property
     def Browsable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2433,9 +1653,7 @@ class BrowsableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2445,21 +1663,13 @@ class BrowsableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ByteConverter(BaseNumberConverter):
     """"""
@@ -2468,79 +1678,59 @@ class ByteConverter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -2548,18 +1738,14 @@ class ByteConverter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -2571,9 +1757,7 @@ class ByteConverter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -2581,31 +1765,23 @@ class ByteConverter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -2613,161 +1789,112 @@ class ByteConverter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CancelEventArgs(EventArgs):
     """"""
@@ -2777,39 +1904,22 @@ class CancelEventArgs(EventArgs):
         """"""
     @overload
     def __init__(self, cancel: bool):
-        """
-
-        :param cancel:
-        """
+        """:param cancel:"""
     @property
     def Cancel(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Cancel.setter
     def Cancel(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 CancelEventHandler: Callable[[object, CancelEventArgs], None] = ...
 """
@@ -2826,159 +1936,93 @@ class CategoryAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, category: str):
-        """
-
-        :param category:
-        """
+        """:param category:"""
     @classmethod
     @property
     def Action(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Appearance(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Asynchronous(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Behavior(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Data(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Default(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Design(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DragDrop(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Focus(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Format(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Key(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Layout(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def Mouse(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def WindowStyle(cls) -> CategoryAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2990,9 +2034,7 @@ class CategoryAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3002,21 +2044,13 @@ class CategoryAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CharConverter(TypeConverter):
     """"""
@@ -3025,79 +2059,59 @@ class CharConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -3105,18 +2119,14 @@ class CharConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -3128,9 +2138,7 @@ class CharConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -3138,31 +2146,23 @@ class CharConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -3170,161 +2170,112 @@ class CharConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CollectionChangeAction(Enum):
     """"""
@@ -3340,44 +2291,25 @@ class CollectionChangeEventArgs(EventArgs):
     """"""
 
     def __init__(self, action: CollectionChangeAction, element: object):
-        """
-
-        :param action:
+        """:param action:
         :param element:
         """
     @property
     def Action(self) -> CollectionChangeAction:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Element(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 CollectionChangeEventHandler: Callable[[object, CollectionChangeEventArgs], None] = ...
 """
@@ -3393,79 +2325,59 @@ class CollectionConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -3473,18 +2385,14 @@ class CollectionConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -3496,9 +2404,7 @@ class CollectionConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -3506,31 +2412,23 @@ class CollectionConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -3538,161 +2436,112 @@ class CollectionConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CompModSwitches(ABC, Object):
     """"""
@@ -3700,38 +2549,21 @@ class CompModSwitches(ABC, Object):
     @classmethod
     @property
     def CommonDesignerServices(cls) -> BooleanSwitch:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def EventLog(cls) -> TraceSwitch:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComplexBindingPropertiesAttribute(Attribute, _Attribute):
     """"""
@@ -3746,74 +2578,45 @@ class ComplexBindingPropertiesAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, dataSource: str):
-        """
-
-        :param dataSource:
-        """
+        """:param dataSource:"""
     @overload
     def __init__(self, dataSource: str, dataMember: str):
-        """
-
-        :param dataSource:
+        """:param dataSource:
         :param dataMember:
         """
     @property
     def DataMember(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DataSource(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -3825,9 +2628,7 @@ class ComplexBindingPropertiesAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3837,21 +2638,13 @@ class ComplexBindingPropertiesAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Component(MarshalByRefObject, IComponent, IDisposable):
     """"""
@@ -3860,57 +2653,32 @@ class Component(MarshalByRefObject, IComponent, IDisposable):
         """"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
 
@@ -3918,188 +2686,120 @@ class ComponentCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     """"""
 
     def __init__(self, components: Array[IComponent]):
-        """
-
-        :param components:
-        """
+        """:param components:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     @overload
     def CopyTo(self, array: Array[IComponent], index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> IComponent:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> IComponent:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComponentConverter(ReferenceConverter):
     """"""
 
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -4107,18 +2807,14 @@ class ComponentConverter(ReferenceConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -4130,9 +2826,7 @@ class ComponentConverter(ReferenceConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -4140,31 +2834,23 @@ class ComponentConverter(ReferenceConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -4172,201 +2858,137 @@ class ComponentConverter(ReferenceConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComponentEditor(ABC, Object):
     """"""
 
     @overload
     def EditComponent(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @overload
     def EditComponent(self, context: ITypeDescriptorContext, component: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param component:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ComponentResourceManager(ResourceManager):
     """"""
@@ -4376,123 +2998,82 @@ class ComponentResourceManager(ResourceManager):
         """"""
     @overload
     def __init__(self, t: Type):
-        """
-
-        :param t:
-        """
+        """:param t:"""
     @property
     def BaseName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IgnoreCase(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IgnoreCase.setter
     def IgnoreCase(self, value: bool) -> None: ...
     @property
     def ResourceSetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ApplyResources(self, value: object, objectName: str) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param objectName:
         """
     @overload
     def ApplyResources(self, value: object, objectName: str, culture: CultureInfo) -> None:
-        """
-
-        :param value:
+        """:param value:
         :param objectName:
         :param culture:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObject(self, name: str) -> object:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetObject(self, name: str, culture: CultureInfo) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param culture:
         :return:
         """
     def GetResourceSet(
         self, culture: CultureInfo, createIfNotExists: bool, tryParents: bool
     ) -> ResourceSet:
-        """
-
-        :param culture:
+        """:param culture:
         :param createIfNotExists:
         :param tryParents:
         :return:
         """
     @overload
     def GetStream(self, name: str) -> UnmanagedMemoryStream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetStream(self, name: str, culture: CultureInfo) -> UnmanagedMemoryStream:
-        """
-
-        :param name:
+        """:param name:
         :param culture:
         :return:
         """
     @overload
     def GetString(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetString(self, name: str, culture: CultureInfo) -> str:
-        """
-
-        :param name:
+        """:param name:
         :param culture:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReleaseAllResources(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Container(Object, IContainer, IDisposable):
     """"""
@@ -4501,82 +3082,47 @@ class Container(Object, IContainer, IDisposable):
         """"""
     @property
     def Components(self) -> ComponentCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     @overload
     def Add(self, component: IComponent, name: str) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param name:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ContainerFilterService(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FilterComponents(self, components: ComponentCollection) -> ComponentCollection:
-        """
-
-        :param components:
+        """:param components:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CultureInfoConverter(TypeConverter):
     """"""
@@ -4585,79 +3131,59 @@ class CultureInfoConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -4665,18 +3191,14 @@ class CultureInfoConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -4688,9 +3210,7 @@ class CultureInfoConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -4698,31 +3218,23 @@ class CultureInfoConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -4730,290 +3242,181 @@ class CultureInfoConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CustomTypeDescriptor(ABC, Object, ICustomTypeDescriptor):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetAttributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetClassName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetComponentName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetConverter(self) -> TypeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDefaultEvent(self) -> EventDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDefaultProperty(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEditor(self, editorBaseType: Type) -> object:
-        """
-
-        :param editorBaseType:
+        """:param editorBaseType:
         :return:
         """
     @overload
     def GetEvents(self) -> EventDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, attributes: Array[Attribute]) -> EventDescriptorCollection:
-        """
-
-        :param attributes:
+        """:param attributes:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self) -> PropertyDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, attributes: Array[Attribute]) -> PropertyDescriptorCollection:
-        """
-
-        :param attributes:
+        """:param attributes:
         :return:
         """
     def GetPropertyOwner(self, pd: PropertyDescriptor) -> object:
-        """
-
-        :param pd:
+        """:param pd:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataErrorsChangedEventArgs(EventArgs):
     """"""
 
     def __init__(self, propertyName: str):
-        """
-
-        :param propertyName:
-        """
+        """:param propertyName:"""
     @property
     def PropertyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataObjectAttribute(Attribute, _Attribute):
     """"""
@@ -5038,61 +3441,37 @@ class DataObjectAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, isDataObject: bool):
-        """
-
-        :param isDataObject:
-        """
+        """:param isDataObject:"""
     @property
     def IsDataObject(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5104,9 +3483,7 @@ class DataObjectAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5116,124 +3493,77 @@ class DataObjectAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataObjectFieldAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, primaryKey: bool):
-        """
-
-        :param primaryKey:
-        """
+        """:param primaryKey:"""
     @overload
     def __init__(self, primaryKey: bool, isIdentity: bool):
-        """
-
-        :param primaryKey:
+        """:param primaryKey:
         :param isIdentity:
         """
     @overload
     def __init__(self, primaryKey: bool, isIdentity: bool, isNullable: bool):
-        """
-
-        :param primaryKey:
+        """:param primaryKey:
         :param isIdentity:
         :param isNullable:
         """
     @overload
     def __init__(self, primaryKey: bool, isIdentity: bool, isNullable: bool, length: int):
-        """
-
-        :param primaryKey:
+        """:param primaryKey:
         :param isIdentity:
         :param isNullable:
         :param length:
         """
     @property
     def IsIdentity(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNullable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PrimaryKey(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5245,9 +3575,7 @@ class DataObjectFieldAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5257,95 +3585,58 @@ class DataObjectFieldAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataObjectMethodAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, methodType: DataObjectMethodType):
-        """
-
-        :param methodType:
-        """
+        """:param methodType:"""
     @overload
     def __init__(self, methodType: DataObjectMethodType, isDefault: bool):
-        """
-
-        :param methodType:
+        """:param methodType:
         :param isDefault:
         """
     @property
     def IsDefault(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodType(self) -> DataObjectMethodType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5357,9 +3648,7 @@ class DataObjectMethodAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5369,21 +3658,13 @@ class DataObjectMethodAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DataObjectMethodType(Enum):
     """"""
@@ -5406,79 +3687,59 @@ class DateTimeConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -5486,18 +3747,14 @@ class DateTimeConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -5509,9 +3766,7 @@ class DateTimeConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -5519,31 +3774,23 @@ class DateTimeConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -5551,161 +3798,112 @@ class DateTimeConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DateTimeOffsetConverter(TypeConverter):
     """"""
@@ -5714,79 +3912,59 @@ class DateTimeOffsetConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -5794,18 +3972,14 @@ class DateTimeOffsetConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -5817,9 +3991,7 @@ class DateTimeOffsetConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -5827,31 +3999,23 @@ class DateTimeOffsetConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -5859,161 +4023,112 @@ class DateTimeOffsetConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DecimalConverter(BaseNumberConverter):
     """"""
@@ -6022,79 +4137,59 @@ class DecimalConverter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -6102,18 +4197,14 @@ class DecimalConverter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -6125,9 +4216,7 @@ class DecimalConverter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -6135,31 +4224,23 @@ class DecimalConverter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -6167,161 +4248,112 @@ class DecimalConverter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultBindingPropertyAttribute(Attribute, _Attribute):
     """"""
@@ -6336,61 +4368,37 @@ class DefaultBindingPropertyAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6402,9 +4410,7 @@ class DefaultBindingPropertyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6414,21 +4420,13 @@ class DefaultBindingPropertyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultEventAttribute(Attribute, _Attribute):
     """"""
@@ -6439,61 +4437,37 @@ class DefaultEventAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6505,9 +4479,7 @@ class DefaultEventAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6517,21 +4489,13 @@ class DefaultEventAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultPropertyAttribute(Attribute, _Attribute):
     """"""
@@ -6542,61 +4506,37 @@ class DefaultPropertyAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, name: str):
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6608,9 +4548,7 @@ class DefaultPropertyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6620,143 +4558,82 @@ class DefaultPropertyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DefaultValueAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, value: bool):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: Char):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: float):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: int):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: object):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: float):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, value: str):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, type: Type, value: str):
-        """
-
-        :param type:
+        """:param type:
         :param value:
         """
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6768,9 +4645,7 @@ class DefaultValueAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6780,21 +4655,13 @@ class DefaultValueAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DelegatingTypeDescriptionProvider(TypeDescriptionProvider):
     """"""
@@ -6806,109 +4673,74 @@ class DelegatingTypeDescriptionProvider(TypeDescriptionProvider):
         argTypes: Array[Type],
         args: Array[object],
     ) -> object:
-        """
-
-        :param provider:
+        """:param provider:
         :param objectType:
         :param argTypes:
         :param args:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCache(self, instance: object) -> IDictionary:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     def GetExtendedTypeDescriptor(self, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     def GetFullComponentName(self, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetReflectionType(self, instance: object) -> Type:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetReflectionType(self, objectType: Type) -> Type:
-        """
-
-        :param objectType:
+        """:param objectType:
         :return:
         """
     @overload
     def GetReflectionType(self, objectType: Type, instance: object) -> Type:
-        """
-
-        :param objectType:
+        """:param objectType:
         :param instance:
         :return:
         """
     def GetRuntimeType(self, reflectionType: Type) -> Type:
-        """
-
-        :param reflectionType:
+        """:param reflectionType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeDescriptor(self, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetTypeDescriptor(self, objectType: Type) -> ICustomTypeDescriptor:
-        """
-
-        :param objectType:
+        """:param objectType:
         :return:
         """
     @overload
     def GetTypeDescriptor(self, objectType: Type, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param objectType:
+        """:param objectType:
         :param instance:
         :return:
         """
     def IsSupportedType(self, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DescriptionAttribute(Attribute, _Attribute):
     """"""
@@ -6923,61 +4755,37 @@ class DescriptionAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, description: str):
-        """
-
-        :param description:
-        """
+        """:param description:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -6989,9 +4797,7 @@ class DescriptionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7001,21 +4807,13 @@ class DescriptionAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesignOnlyAttribute(Attribute, _Attribute):
     """"""
@@ -7036,61 +4834,37 @@ class DesignOnlyAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, isDesignOnly: bool):
-        """
-
-        :param isDesignOnly:
-        """
+        """:param isDesignOnly:"""
     @property
     def IsDesignOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7102,9 +4876,7 @@ class DesignOnlyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7114,21 +4886,13 @@ class DesignOnlyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesignTimeVisibleAttribute(Attribute, _Attribute):
     """"""
@@ -7153,61 +4917,37 @@ class DesignTimeVisibleAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, visible: bool):
-        """
-
-        :param visible:
-        """
+        """:param visible:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Visible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7219,9 +4959,7 @@ class DesignTimeVisibleAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7231,115 +4969,71 @@ class DesignTimeVisibleAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesignerAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, designerTypeName: str):
-        """
-
-        :param designerTypeName:
-        """
+        """:param designerTypeName:"""
     @overload
     def __init__(self, designerType: Type):
-        """
-
-        :param designerType:
-        """
+        """:param designerType:"""
     @overload
     def __init__(self, designerTypeName: str, designerBaseTypeName: str):
-        """
-
-        :param designerTypeName:
+        """:param designerTypeName:
         :param designerBaseTypeName:
         """
     @overload
     def __init__(self, designerTypeName: str, designerBaseType: Type):
-        """
-
-        :param designerTypeName:
+        """:param designerTypeName:
         :param designerBaseType:
         """
     @overload
     def __init__(self, designerType: Type, designerBaseType: Type):
-        """
-
-        :param designerType:
+        """:param designerType:
         :param designerBaseType:
         """
     @property
     def DesignerBaseTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignerTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7351,9 +5045,7 @@ class DesignerAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7363,21 +5055,13 @@ class DesignerAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesignerCategoryAttribute(Attribute, _Attribute):
     """"""
@@ -7407,61 +5091,37 @@ class DesignerCategoryAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, category: str):
-        """
-
-        :param category:
-        """
+        """:param category:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7473,9 +5133,7 @@ class DesignerCategoryAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7485,21 +5143,13 @@ class DesignerCategoryAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DesignerSerializationVisibility(Enum):
     """"""
@@ -7535,61 +5185,37 @@ class DesignerSerializationVisibilityAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, visibility: DesignerSerializationVisibility):
-        """
-
-        :param visibility:
-        """
+        """:param visibility:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Visibility(self) -> DesignerSerializationVisibility:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7601,9 +5227,7 @@ class DesignerSerializationVisibilityAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7613,21 +5237,13 @@ class DesignerSerializationVisibilityAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DisplayNameAttribute(Attribute, _Attribute):
     """"""
@@ -7642,61 +5258,37 @@ class DisplayNameAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, displayName: str):
-        """
-
-        :param displayName:
-        """
+        """:param displayName:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -7708,9 +5300,7 @@ class DisplayNameAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7720,73 +5310,42 @@ class DisplayNameAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DoWorkEventArgs(CancelEventArgs):
     """"""
 
     def __init__(self, argument: object):
-        """
-
-        :param argument:
-        """
+        """:param argument:"""
     @property
     def Argument(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Cancel(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Cancel.setter
     def Cancel(self, value: bool) -> None: ...
     @property
     def Result(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Result.setter
     def Result(self, value: object) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 DoWorkEventHandler: Callable[[object, DoWorkEventArgs], None] = ...
 """
@@ -7802,79 +5361,59 @@ class DoubleConverter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -7882,18 +5421,14 @@ class DoubleConverter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -7905,9 +5440,7 @@ class DoubleConverter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -7915,31 +5448,23 @@ class DoubleConverter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -7947,161 +5472,112 @@ class DoubleConverter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EditorAttribute(Attribute, _Attribute):
     """"""
@@ -8111,82 +5587,52 @@ class EditorAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, typeName: str, baseTypeName: str):
-        """
-
-        :param typeName:
+        """:param typeName:
         :param baseTypeName:
         """
     @overload
     def __init__(self, typeName: str, baseType: Type):
-        """
-
-        :param typeName:
+        """:param typeName:
         :param baseType:
         """
     @overload
     def __init__(self, type: Type, baseType: Type):
-        """
-
-        :param type:
+        """:param type:
         :param baseType:
         """
     @property
     def EditorBaseTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EditorTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -8198,9 +5644,7 @@ class EditorAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -8210,21 +5654,13 @@ class EditorAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EditorBrowsableAttribute(Attribute, _Attribute):
     """"""
@@ -8234,61 +5670,37 @@ class EditorBrowsableAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, state: EditorBrowsableState):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @property
     def State(self) -> EditorBrowsableState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -8300,9 +5712,7 @@ class EditorBrowsableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -8312,21 +5722,13 @@ class EditorBrowsableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EditorBrowsableState(Enum):
     """"""
@@ -8342,85 +5744,62 @@ class EnumConverter(TypeConverter):
     """"""
 
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -8428,18 +5807,14 @@ class EnumConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -8451,9 +5826,7 @@ class EnumConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -8461,31 +5834,23 @@ class EnumConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -8493,258 +5858,164 @@ class EnumConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventDescriptor(ABC, MemberDescriptor):
     """"""
 
     @property
     def Attributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ComponentType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignTimeOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBrowsable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMulticast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddEventHandler(self, component: object, value: Delegate) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param value:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RemoveEventHandler(self, component: object, value: Delegate) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventDescriptorCollection(Object, ICollection, IEnumerable, IList):
     """"""
@@ -8756,231 +6027,142 @@ class EventDescriptorCollection(Object, ICollection, IEnumerable, IList):
     """
     @overload
     def __init__(self, events: Array[EventDescriptor]):
-        """
-
-        :param events:
-        """
+        """:param events:"""
     @overload
     def __init__(self, events: Array[EventDescriptor], readOnly: bool):
-        """
-
-        :param events:
+        """:param events:
         :param readOnly:
         """
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: EventDescriptor) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Clear(self) -> None:
         """"""
     @overload
     def Contains(self, value: EventDescriptor) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Find(self, name: str, ignoreCase: bool) -> EventDescriptor:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: EventDescriptor) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: EventDescriptor) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: EventDescriptor) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def Sort(self) -> EventDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Sort(self, comparer: IComparer) -> EventDescriptorCollection:
-        """
-
-        :param comparer:
+        """:param comparer:
         :return:
         """
     @overload
     def Sort(self, names: Array[str]) -> EventDescriptorCollection:
-        """
-
-        :param names:
+        """:param names:
         :return:
         """
     @overload
     def Sort(self, names: Array[str], comparer: IComparer) -> EventDescriptorCollection:
-        """
-
-        :param names:
+        """:param names:
         :param comparer:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> EventDescriptor:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -8991,62 +6173,37 @@ class EventHandlerList(Object, IDisposable):
         """"""
     @property
     def Item(self) -> Delegate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: Delegate) -> None: ...
     def AddHandler(self, key: object, value: Delegate) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def AddHandlers(self, listToAddFrom: EventHandlerList) -> None:
-        """
-
-        :param listToAddFrom:
-        """
+        """:param listToAddFrom:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RemoveHandler(self, key: object, value: Delegate) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, key: object) -> Delegate:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __setitem__(self, key: object, value: Delegate) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -9057,79 +6214,59 @@ class ExpandableObjectConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -9137,18 +6274,14 @@ class ExpandableObjectConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -9160,9 +6293,7 @@ class ExpandableObjectConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -9170,31 +6301,23 @@ class ExpandableObjectConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -9202,170 +6325,119 @@ class ExpandableObjectConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExtendedPropertyDescriptor(PropertyDescriptor):
     """"""
 
     @overload
     def __init__(self, extender: PropertyDescriptor, attributes: Array[Attribute]):
-        """
-
-        :param extender:
+        """:param extender:
         :param attributes:
         """
     @overload
@@ -9376,195 +6448,114 @@ class ExtendedPropertyDescriptor(PropertyDescriptor):
         provider: IExtenderProvider,
         attributes: Array[Attribute],
     ):
-        """
-
-        :param extenderInfo:
+        """:param extenderInfo:
         :param receiverType:
         :param provider:
         :param attributes:
         """
     @property
     def Attributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ComponentType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Converter(self) -> TypeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignTimeOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBrowsable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLocalizable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SerializationVisibility(self) -> DesignerSerializationVisibility:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsChangeEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddValueChanged(self, component: object, handler: EventHandler) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param handler:
         """
     def CanResetValue(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetChildProperties(self) -> PropertyDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetChildProperties(self, filter: Array[Attribute]) -> PropertyDescriptorCollection:
-        """
-
-        :param filter:
+        """:param filter:
         :return:
         """
     @overload
     def GetChildProperties(self, instance: object) -> PropertyDescriptorCollection:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetChildProperties(
         self, instance: object, filter: Array[Attribute]
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param instance:
+        """:param instance:
         :param filter:
         :return:
         """
     def GetEditor(self, editorBaseType: Type) -> object:
-        """
-
-        :param editorBaseType:
+        """:param editorBaseType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetValue(self, component: object) -> object:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def RemoveValueChanged(self, component: object, handler: EventHandler) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param handler:
         """
     def ResetValue(self, component: object) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     def SetValue(self, component: object, value: object) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param value:
         """
     def ShouldSerializeValue(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ExtenderProvidedPropertyAttribute(Attribute, _Attribute):
     """"""
@@ -9573,67 +6564,40 @@ class ExtenderProvidedPropertyAttribute(Attribute, _Attribute):
         """"""
     @property
     def ExtenderProperty(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Provider(self) -> IExtenderProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceiverType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -9645,9 +6609,7 @@ class ExtenderProvidedPropertyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -9657,21 +6619,13 @@ class ExtenderProvidedPropertyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GuidConverter(TypeConverter):
     """"""
@@ -9680,79 +6634,59 @@ class GuidConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -9760,18 +6694,14 @@ class GuidConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -9783,9 +6713,7 @@ class GuidConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -9793,31 +6721,23 @@ class GuidConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -9825,161 +6745,112 @@ class GuidConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HandledEventArgs(EventArgs):
     """"""
@@ -9989,39 +6860,22 @@ class HandledEventArgs(EventArgs):
         """"""
     @overload
     def __init__(self, defaultHandledValue: bool):
-        """
-
-        :param defaultHandledValue:
-        """
+        """:param defaultHandledValue:"""
     @property
     def Handled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Handled.setter
     def Handled(self, value: bool) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 HandledEventHandler: Callable[[object, HandledEventArgs], None] = ...
 """
@@ -10035,199 +6889,110 @@ class IBindingList(ICollection, IEnumerable, IList):
 
     @property
     def AllowEdit(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AllowNew(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AllowRemove(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSorted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SortDirection(self) -> ListSortDirection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SortProperty(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsChangeNotification(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsSearching(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsSorting(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def AddIndex(self, property: PropertyDescriptor) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def AddNew(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ApplySort(self, property: PropertyDescriptor, direction: ListSortDirection) -> None:
-        """
-
-        :param property:
+        """:param property:
         :param direction:
         """
     def Clear(self) -> None:
         """"""
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Find(self, property: PropertyDescriptor, key: object) -> int:
-        """
-
-        :param property:
+        """:param property:
         :param key:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def RemoveIndex(self, property: PropertyDescriptor) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def RemoveSort(self) -> None:
         """"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     ListChanged: EventType[ListChangedEventHandler] = ...
@@ -10238,234 +7003,130 @@ class IBindingListView(ICollection, IEnumerable, IList, IBindingList):
 
     @property
     def AllowEdit(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AllowNew(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AllowRemove(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Filter(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Filter.setter
     def Filter(self, value: str) -> None: ...
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSorted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SortDescriptions(self) -> ListSortDescriptionCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SortDirection(self) -> ListSortDirection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SortProperty(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsAdvancedSorting(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsChangeNotification(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsFiltering(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsSearching(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsSorting(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def AddIndex(self, property: PropertyDescriptor) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def AddNew(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ApplySort(self, sorts: ListSortDescriptionCollection) -> None:
-        """
-
-        :param sorts:
-        """
+        """:param sorts:"""
     @overload
     def ApplySort(self, property: PropertyDescriptor, direction: ListSortDirection) -> None:
-        """
-
-        :param property:
+        """:param property:
         :param direction:
         """
     def Clear(self) -> None:
         """"""
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Find(self, property: PropertyDescriptor, key: object) -> int:
-        """
-
-        :param property:
+        """:param property:
         :param key:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def RemoveFilter(self) -> None:
         """"""
     def RemoveIndex(self, property: PropertyDescriptor) -> None:
-        """
-
-        :param property:
-        """
+        """:param property:"""
     def RemoveSort(self) -> None:
         """"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     ListChanged: EventType[ListChangedEventHandler] = ...
@@ -10475,25 +7136,16 @@ class ICancelAddNew:
     """"""
 
     def CancelNew(self, itemIndex: int) -> None:
-        """
-
-        :param itemIndex:
-        """
+        """:param itemIndex:"""
     def EndNew(self, itemIndex: int) -> None:
-        """
-
-        :param itemIndex:
-        """
+        """:param itemIndex:"""
 
 class IChangeTracking:
     """"""
 
     @property
     def IsChanged(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcceptChanges(self) -> None:
         """"""
 
@@ -10501,88 +7153,64 @@ class IComNativeDescriptorHandler:
     """"""
 
     def GetAttributes(self, component: object) -> AttributeCollection:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetClassName(self, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetConverter(self, component: object) -> TypeConverter:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetDefaultEvent(self, component: object) -> EventDescriptor:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetDefaultProperty(self, component: object) -> PropertyDescriptor:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetEditor(self, component: object, baseEditorType: Type) -> object:
-        """
-
-        :param component:
+        """:param component:
         :param baseEditorType:
         :return:
         """
     @overload
     def GetEvents(self, component: object) -> EventDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @overload
     def GetEvents(
         self, component: object, attributes: Array[Attribute]
     ) -> EventDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param attributes:
         :return:
         """
     def GetName(self, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetProperties(
         self, component: object, attributes: Array[Attribute]
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertyValue(self, component: object, dispid: int, success: bool) -> object:
-        """
-
-        :param component:
+        """:param component:
         :param dispid:
         :param success:
         :return:
         """
     @overload
     def GetPropertyValue(self, component: object, propertyName: str, success: bool) -> object:
-        """
-
-        :param component:
+        """:param component:
         :param propertyName:
         :param success:
         :return:
@@ -10593,10 +7221,7 @@ class IComponent(IDisposable):
 
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     def Dispose(self) -> None:
@@ -10609,100 +7234,57 @@ class IContainer(IDisposable):
 
     @property
     def Components(self) -> ComponentCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     @overload
     def Add(self, component: IComponent, name: str) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param name:
         """
     def Dispose(self) -> None:
         """"""
     def Remove(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
 
 class ICustomTypeDescriptor:
     """"""
 
     def GetAttributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetClassName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetComponentName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetConverter(self) -> TypeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDefaultEvent(self) -> EventDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDefaultProperty(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEditor(self, editorBaseType: Type) -> object:
-        """
-
-        :param editorBaseType:
+        """:param editorBaseType:
         :return:
         """
     @overload
     def GetEvents(self) -> EventDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, attributes: Array[Attribute]) -> EventDescriptorCollection:
-        """
-
-        :param attributes:
+        """:param attributes:
         :return:
         """
     @overload
     def GetProperties(self) -> PropertyDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, attributes: Array[Attribute]) -> PropertyDescriptorCollection:
-        """
-
-        :param attributes:
+        """:param attributes:
         :return:
         """
     def GetPropertyOwner(self, pd: PropertyDescriptor) -> object:
-        """
-
-        :param pd:
+        """:param pd:
         :return:
         """
 
@@ -10711,20 +7293,12 @@ class IDataErrorInfo:
 
     @property
     def Error(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __getitem__(self, columnName: str) -> str:
-        """
-
-        :param columnName:
+        """:param columnName:
         :return:
         """
 
@@ -10742,9 +7316,7 @@ class IExtenderProvider:
     """"""
 
     def CanExtend(self, extendee: object) -> bool:
-        """
-
-        :param extendee:
+        """:param extendee:
         :return:
         """
 
@@ -10753,14 +7325,9 @@ class IIntellisenseBuilder:
 
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Show(self, language: str, value: str, newValue: str) -> bool:
-        """
-
-        :param language:
+        """:param language:
         :param value:
         :param newValue:
         :return:
@@ -10771,91 +7338,54 @@ class IListSource:
 
     @property
     def ContainsListCollection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetList(self) -> IList:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class INestedContainer(IContainer, IDisposable):
     """"""
 
     @property
     def Components(self) -> ComponentCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Owner(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     @overload
     def Add(self, component: IComponent, name: str) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param name:
         """
     def Dispose(self) -> None:
         """"""
     def Remove(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
 
 class INestedSite(ISite, IServiceProvider):
     """"""
 
     @property
     def Component(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignMode(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
 
@@ -10864,14 +7394,9 @@ class INotifyDataErrorInfo:
 
     @property
     def HasErrors(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetErrors(self, propertyName: str) -> IEnumerable:
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :return:
         """
     ErrorsChanged: EventType[EventHandler[DataErrorsChangedEventArgs]] = ...
@@ -10894,20 +7419,14 @@ class IRaiseItemChangedEvents:
 
     @property
     def RaisesItemChangedEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IRevertibleChangeTracking(IChangeTracking):
     """"""
 
     @property
     def IsChanged(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AcceptChanges(self) -> None:
         """"""
     def RejectChanges(self) -> None:
@@ -10918,34 +7437,20 @@ class ISite(IServiceProvider):
 
     @property
     def Component(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignMode(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Name.setter
     def Name(self, value: str) -> None: ...
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
 
@@ -10962,10 +7467,7 @@ class ISupportInitializeNotification(ISupportInitialize):
 
     @property
     def IsInitialized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginInit(self) -> None:
         """"""
     def EndInit(self) -> None:
@@ -10978,27 +7480,18 @@ class ISynchronizeInvoke:
 
     @property
     def InvokeRequired(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginInvoke(self, method: Delegate, args: Array[object]) -> IAsyncResult:
-        """
-
-        :param method:
+        """:param method:
         :param args:
         :return:
         """
     def EndInvoke(self, result: IAsyncResult) -> object:
-        """
-
-        :param result:
+        """:param result:
         :return:
         """
     def Invoke(self, method: Delegate, args: Array[object]) -> object:
-        """
-
-        :param method:
+        """:param method:
         :param args:
         :return:
         """
@@ -11008,35 +7501,21 @@ class ITypeDescriptorContext(IServiceProvider):
 
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Instance(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyDescriptor(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     def OnComponentChanged(self) -> None:
         """"""
     def OnComponentChanging(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ITypedList:
     """"""
@@ -11044,15 +7523,11 @@ class ITypedList:
     def GetItemProperties(
         self, listAccessors: Array[PropertyDescriptor]
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param listAccessors:
+        """:param listAccessors:
         :return:
         """
     def GetListName(self, listAccessors: Array[PropertyDescriptor]) -> str:
-        """
-
-        :param listAccessors:
+        """:param listAccessors:
         :return:
         """
 
@@ -11075,61 +7550,37 @@ class ImmutableObjectAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, immutable: bool):
-        """
-
-        :param immutable:
-        """
+        """:param immutable:"""
     @property
     def Immutable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -11141,9 +7592,7 @@ class ImmutableObjectAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11153,21 +7602,13 @@ class ImmutableObjectAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InheritanceAttribute(Attribute, _Attribute):
     """"""
@@ -11197,61 +7638,37 @@ class InheritanceAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, inheritanceLevel: InheritanceLevel):
-        """
-
-        :param inheritanceLevel:
-        """
+        """:param inheritanceLevel:"""
     @property
     def InheritanceLevel(self) -> InheritanceLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -11263,9 +7680,7 @@ class InheritanceAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11275,21 +7690,13 @@ class InheritanceAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InheritanceLevel(Enum):
     """"""
@@ -11305,61 +7712,37 @@ class InitializationEventAttribute(Attribute, _Attribute):
     """"""
 
     def __init__(self, eventName: str):
-        """
-
-        :param eventName:
-        """
+        """:param eventName:"""
     @property
     def EventName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -11371,9 +7754,7 @@ class InitializationEventAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11383,88 +7764,53 @@ class InitializationEventAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InstallerTypeAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @overload
     def __init__(self, installerType: Type):
-        """
-
-        :param installerType:
-        """
+        """:param installerType:"""
     @property
     def InstallerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -11476,9 +7822,7 @@ class InstallerTypeAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11488,59 +7832,35 @@ class InstallerTypeAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InstanceCreationEditor(ABC, Object):
     """"""
 
     @property
     def Text(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateInstance(self, context: ITypeDescriptorContext, instanceType: Type) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param instanceType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Int16Converter(BaseNumberConverter):
     """"""
@@ -11549,79 +7869,59 @@ class Int16Converter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -11629,18 +7929,14 @@ class Int16Converter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -11652,9 +7948,7 @@ class Int16Converter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -11662,31 +7956,23 @@ class Int16Converter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -11694,161 +7980,112 @@ class Int16Converter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Int32Converter(BaseNumberConverter):
     """"""
@@ -11857,79 +8094,59 @@ class Int32Converter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -11937,18 +8154,14 @@ class Int32Converter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -11960,9 +8173,7 @@ class Int32Converter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -11970,31 +8181,23 @@ class Int32Converter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -12002,161 +8205,112 @@ class Int32Converter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Int64Converter(BaseNumberConverter):
     """"""
@@ -12165,79 +8319,59 @@ class Int64Converter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -12245,18 +8379,14 @@ class Int64Converter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -12268,9 +8398,7 @@ class Int64Converter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -12278,31 +8406,23 @@ class Int64Converter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -12310,161 +8430,112 @@ class Int64Converter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IntSecurity(ABC, Object):
     """"""
@@ -12480,31 +8551,18 @@ class IntSecurity(ABC, Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UnsafeGetFullPath(cls, fileName: str) -> str:
-        """
-
-        :param fileName:
+        """:param fileName:
         :return:
         """
 
@@ -12516,144 +8574,83 @@ class InvalidAsynchronousStateException(ArgumentException, _Exception, ISerializ
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParamName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InvalidEnumArgumentException(ArgumentException, _Exception, ISerializable):
     """"""
@@ -12663,152 +8660,89 @@ class InvalidEnumArgumentException(ArgumentException, _Exception, ISerializable)
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @overload
     def __init__(self, argumentName: str, invalidValue: int, enumClass: Type):
-        """
-
-        :param argumentName:
+        """:param argumentName:
         :param invalidValue:
         :param enumClass:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParamName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LicFileLicenseProvider(LicenseProvider):
     """"""
@@ -12816,70 +8750,47 @@ class LicFileLicenseProvider(LicenseProvider):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLicense(
-        self, context: LicenseContext, type: Type, instance: object, allowExceptions: bool
+        self,
+        context: LicenseContext,
+        type: Type,
+        instance: object,
+        allowExceptions: bool,
     ) -> License:
-        """
-
-        :param context:
+        """:param context:
         :param type:
         :param instance:
         :param allowExceptions:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class License(ABC, Object, IDisposable):
     """"""
 
     @property
     def LicenseKey(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LicenseContext(Object, IServiceProvider):
     """"""
@@ -12888,211 +8799,126 @@ class LicenseContext(Object, IServiceProvider):
         """"""
     @property
     def UsageMode(self) -> LicenseUsageMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSavedLicenseKey(self, type: Type, resourceAssembly: Assembly) -> str:
-        """
-
-        :param type:
+        """:param type:
         :param resourceAssembly:
         :return:
         """
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetSavedLicenseKey(self, type: Type, key: str) -> None:
-        """
-
-        :param type:
+        """:param type:
         :param key:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LicenseException(SystemException, _Exception, ISerializable):
     """"""
 
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def __init__(self, type: Type, instance: object):
-        """
-
-        :param type:
+        """:param type:
         :param instance:
         """
     @overload
     def __init__(self, type: Type, instance: object, message: str):
-        """
-
-        :param type:
+        """:param type:
         :param instance:
         :param message:
         """
     @overload
     def __init__(self, type: Type, instance: object, message: str, innerException: Exception):
-        """
-
-        :param type:
+        """:param type:
         :param instance:
         :param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LicensedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LicenseManager(Object):
     """"""
@@ -13100,26 +8926,18 @@ class LicenseManager(Object):
     @classmethod
     @property
     def CurrentContext(cls) -> LicenseContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @CurrentContext.setter
     def CurrentContext(cls, value: LicenseContext) -> None: ...
     @classmethod
     @property
     def UsageMode(cls) -> LicenseUsageMode:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def CreateWithContext(cls, type: Type, creationContext: LicenseContext) -> object:
-        """
-
-        :param type:
+        """:param type:
         :param creationContext:
         :return:
         """
@@ -13128,84 +8946,54 @@ class LicenseManager(Object):
     def CreateWithContext(
         cls, type: Type, creationContext: LicenseContext, args: Array[object]
     ) -> object:
-        """
-
-        :param type:
+        """:param type:
         :param creationContext:
         :param args:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsLicensed(cls, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     @overload
     def IsValid(cls, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     @overload
-    def IsValid(cls, type: Type, instance: object, license: License) -> Tuple[bool, License]:
-        """
-
-        :param type:
+    def IsValid(cls, type: Type, instance: object, license: License) -> tuple[bool, License]:
+        """:param type:
         :param instance:
         :param license:
         :return:
         """
     @classmethod
     def LockContext(cls, contextUser: object) -> None:
-        """
-
-        :param contextUser:
-        """
+        """:param contextUser:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def UnlockContext(cls, contextUser: object) -> None:
-        """
-
-        :param contextUser:
-        """
+        """:param contextUser:"""
     @classmethod
     @overload
     def Validate(cls, type: Type) -> None:
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @classmethod
     @overload
     def Validate(cls, type: Type, instance: object) -> License:
-        """
-
-        :param type:
+        """:param type:
         :param instance:
         :return:
         """
@@ -13214,37 +9002,28 @@ class LicenseProvider(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLicense(
-        self, context: LicenseContext, type: Type, instance: object, allowExceptions: bool
+        self,
+        context: LicenseContext,
+        type: Type,
+        instance: object,
+        allowExceptions: bool,
     ) -> License:
-        """
-
-        :param context:
+        """:param context:
         :param type:
         :param instance:
         :param allowExceptions:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LicenseProviderAttribute(Attribute, _Attribute):
     """"""
@@ -13259,67 +9038,40 @@ class LicenseProviderAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def LicenseProvider(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13331,9 +9083,7 @@ class LicenseProviderAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13343,21 +9093,13 @@ class LicenseProviderAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LicenseUsageMode(Enum):
     """"""
@@ -13387,67 +9129,40 @@ class ListBindableAttribute(Attribute, _Attribute):
     """
     @overload
     def __init__(self, flags: BindableSupport):
-        """
-
-        :param flags:
-        """
+        """:param flags:"""
     @overload
     def __init__(self, listBindable: bool):
-        """
-
-        :param listBindable:
-        """
+        """:param listBindable:"""
     @property
     def ListBindable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13459,9 +9174,7 @@ class ListBindableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13471,102 +9184,66 @@ class ListBindableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListChangedEventArgs(EventArgs):
     """"""
 
     @overload
     def __init__(self, listChangedType: ListChangedType, propDesc: PropertyDescriptor):
-        """
-
-        :param listChangedType:
+        """:param listChangedType:
         :param propDesc:
         """
     @overload
     def __init__(self, listChangedType: ListChangedType, newIndex: int):
-        """
-
-        :param listChangedType:
+        """:param listChangedType:
         :param newIndex:
         """
     @overload
     def __init__(
-        self, listChangedType: ListChangedType, newIndex: int, propDesc: PropertyDescriptor
+        self,
+        listChangedType: ListChangedType,
+        newIndex: int,
+        propDesc: PropertyDescriptor,
     ):
-        """
-
-        :param listChangedType:
+        """:param listChangedType:
         :param newIndex:
         :param propDesc:
         """
     @overload
     def __init__(self, listChangedType: ListChangedType, newIndex: int, oldIndex: int):
-        """
-
-        :param listChangedType:
+        """:param listChangedType:
         :param newIndex:
         :param oldIndex:
         """
     @property
     def ListChangedType(self) -> ListChangedType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NewIndex(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OldIndex(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyDescriptor(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ListChangedEventHandler: Callable[[object, ListChangedEventArgs], None] = ...
 """
@@ -13599,48 +9276,29 @@ class ListSortDescription(Object):
     """"""
 
     def __init__(self, property: PropertyDescriptor, direction: ListSortDirection):
-        """
-
-        :param property:
+        """:param property:
         :param direction:
         """
     @property
     def PropertyDescriptor(self) -> PropertyDescriptor:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PropertyDescriptor.setter
     def PropertyDescriptor(self, value: PropertyDescriptor) -> None: ...
     @property
     def SortDirection(self) -> ListSortDirection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SortDirection.setter
     def SortDirection(self, value: ListSortDirection) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ListSortDescriptionCollection(Object, ICollection, IEnumerable, IList):
     """"""
@@ -13650,150 +9308,85 @@ class ListSortDescriptionCollection(Object, ICollection, IEnumerable, IList):
         """"""
     @overload
     def __init__(self, sorts: Array[ListSortDescription]):
-        """
-
-        :param sorts:
-        """
+        """:param sorts:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Clear(self) -> None:
         """"""
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: ListSortDescription) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
 
@@ -13824,61 +9417,37 @@ class LocalizableAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, isLocalizable: bool):
-        """
-
-        :param isLocalizable:
-        """
+        """:param isLocalizable:"""
     @property
     def IsLocalizable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -13890,9 +9459,7 @@ class LocalizableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13902,21 +9469,13 @@ class LocalizableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LookupBindingPropertiesAttribute(Attribute, _Attribute):
     """"""
@@ -13931,82 +9490,50 @@ class LookupBindingPropertiesAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, dataSource: str, displayMember: str, valueMember: str, lookupMember: str):
-        """
-
-        :param dataSource:
+        """:param dataSource:
         :param displayMember:
         :param valueMember:
         :param lookupMember:
         """
     @property
     def DataSource(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayMember(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LookupMember(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ValueMember(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -14018,9 +9545,7 @@ class LookupBindingPropertiesAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14030,21 +9555,13 @@ class LookupBindingPropertiesAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MarshalByValueComponent(Object, IComponent, IDisposable, IServiceProvider):
     """"""
@@ -14053,53 +9570,31 @@ class MarshalByValueComponent(Object, IComponent, IDisposable, IServiceProvider)
         """"""
     @property
     def Container(self) -> IContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignMode(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Site(self) -> ISite:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetService(self, serviceType: Type) -> object:
-        """
-
-        :param serviceType:
+        """:param serviceType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Disposed: EventType[EventHandler] = ...
     """"""
 
@@ -14108,47 +9603,38 @@ class MaskedTextProvider(Object, ICloneable):
 
     @overload
     def __init__(self, mask: str):
-        """
-
-        :param mask:
-        """
+        """:param mask:"""
     @overload
     def __init__(self, mask: str, culture: CultureInfo):
-        """
-
-        :param mask:
+        """:param mask:
         :param culture:
         """
     @overload
     def __init__(self, mask: str, restrictToAscii: bool):
-        """
-
-        :param mask:
+        """:param mask:
         :param restrictToAscii:
         """
     @overload
     def __init__(self, mask: str, culture: CultureInfo, restrictToAscii: bool):
-        """
-
-        :param mask:
+        """:param mask:
         :param culture:
         :param restrictToAscii:
         """
     @overload
     def __init__(self, mask: str, passwordChar: Char, allowPromptAsInput: bool):
-        """
-
-        :param mask:
+        """:param mask:
         :param passwordChar:
         :param allowPromptAsInput:
         """
     @overload
     def __init__(
-        self, mask: str, culture: CultureInfo, passwordChar: Char, allowPromptAsInput: bool
+        self,
+        mask: str,
+        culture: CultureInfo,
+        passwordChar: Char,
+        allowPromptAsInput: bool,
     ):
-        """
-
-        :param mask:
+        """:param mask:
         :param culture:
         :param passwordChar:
         :param allowPromptAsInput:
@@ -14163,9 +9649,7 @@ class MaskedTextProvider(Object, ICloneable):
         passwordChar: Char,
         restrictToAscii: bool,
     ):
-        """
-
-        :param mask:
+        """:param mask:
         :param culture:
         :param allowPromptAsInput:
         :param promptChar:
@@ -14174,181 +9658,106 @@ class MaskedTextProvider(Object, ICloneable):
         """
     @property
     def AllowPromptAsInput(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AsciiOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssignedEditPositionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AvailableEditPositionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Culture(self) -> CultureInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultPasswordChar(cls) -> Char:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EditPositionCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EditPositions(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IncludeLiterals(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IncludeLiterals.setter
     def IncludeLiterals(self, value: bool) -> None: ...
     @property
     def IncludePrompt(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IncludePrompt.setter
     def IncludePrompt(self, value: bool) -> None: ...
     @classmethod
     @property
     def InvalidIndex(cls) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPassword(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @IsPassword.setter
     def IsPassword(self, value: bool) -> None: ...
     @property
     def Item(self) -> Char:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LastAssignedPosition(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Mask(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaskCompleted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MaskFull(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PasswordChar(self) -> Char:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PasswordChar.setter
     def PasswordChar(self, value: Char) -> None: ...
     @property
     def PromptChar(self) -> Char:
-        """
-
-        :return:
-        """
+        """:return:"""
     @PromptChar.setter
     def PromptChar(self, value: Char) -> None: ...
     @property
     def ResetOnPrompt(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ResetOnPrompt.setter
     def ResetOnPrompt(self, value: bool) -> None: ...
     @property
     def ResetOnSpace(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ResetOnSpace.setter
     def ResetOnSpace(self, value: bool) -> None: ...
     @property
     def SkipLiterals(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SkipLiterals.setter
     def SkipLiterals(self, value: bool) -> None: ...
     @overload
     def Add(self, input: Char) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def Add(self, input: str) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def Add(
         self, input: Char, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param testPosition:
         :param resultHint:
         :return:
@@ -14356,10 +9765,8 @@ class MaskedTextProvider(Object, ICloneable):
     @overload
     def Add(
         self, input: str, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param testPosition:
         :param resultHint:
         :return:
@@ -14368,128 +9775,94 @@ class MaskedTextProvider(Object, ICloneable):
     def Clear(self) -> None:
         """"""
     @overload
-    def Clear(self, resultHint: MaskedTextResultHint) -> Tuple[None, MaskedTextResultHint]:
-        """
-
-        :param resultHint:
-        """
+    def Clear(self, resultHint: MaskedTextResultHint) -> tuple[None, MaskedTextResultHint]:
+        """:param resultHint:"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FindAssignedEditPositionFrom(self, position: int, direction: bool) -> int:
-        """
-
-        :param position:
+        """:param position:
         :param direction:
         :return:
         """
     def FindAssignedEditPositionInRange(
         self, startPosition: int, endPosition: int, direction: bool
     ) -> int:
-        """
-
-        :param startPosition:
+        """:param startPosition:
         :param endPosition:
         :param direction:
         :return:
         """
     def FindEditPositionFrom(self, position: int, direction: bool) -> int:
-        """
-
-        :param position:
+        """:param position:
         :param direction:
         :return:
         """
     def FindEditPositionInRange(self, startPosition: int, endPosition: int, direction: bool) -> int:
-        """
-
-        :param startPosition:
+        """:param startPosition:
         :param endPosition:
         :param direction:
         :return:
         """
     def FindNonEditPositionFrom(self, position: int, direction: bool) -> int:
-        """
-
-        :param position:
+        """:param position:
         :param direction:
         :return:
         """
     def FindNonEditPositionInRange(
         self, startPosition: int, endPosition: int, direction: bool
     ) -> int:
-        """
-
-        :param startPosition:
+        """:param startPosition:
         :param endPosition:
         :param direction:
         :return:
         """
     def FindUnassignedEditPositionFrom(self, position: int, direction: bool) -> int:
-        """
-
-        :param position:
+        """:param position:
         :param direction:
         :return:
         """
     def FindUnassignedEditPositionInRange(
         self, startPosition: int, endPosition: int, direction: bool
     ) -> int:
-        """
-
-        :param startPosition:
+        """:param startPosition:
         :param endPosition:
         :param direction:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetOperationResultFromHint(cls, hint: MaskedTextResultHint) -> bool:
-        """
-
-        :param hint:
+        """:param hint:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def InsertAt(self, input: Char, position: int) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param position:
         :return:
         """
     @overload
     def InsertAt(self, input: str, position: int) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param position:
         :return:
         """
     @overload
     def InsertAt(
-        self, input: Char, position: int, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+        self,
+        input: Char,
+        position: int,
+        testPosition: int,
+        resultHint: MaskedTextResultHint,
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param position:
         :param testPosition:
         :param resultHint:
@@ -14497,77 +9870,60 @@ class MaskedTextProvider(Object, ICloneable):
         """
     @overload
     def InsertAt(
-        self, input: str, position: int, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+        self,
+        input: str,
+        position: int,
+        testPosition: int,
+        resultHint: MaskedTextResultHint,
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param position:
         :param testPosition:
         :param resultHint:
         :return:
         """
     def IsAvailablePosition(self, position: int) -> bool:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     def IsEditPosition(self, position: int) -> bool:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     @classmethod
     def IsValidInputChar(cls, c: Char) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @classmethod
     def IsValidMaskChar(cls, c: Char) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @classmethod
     def IsValidPasswordChar(cls, c: Char) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def Remove(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Remove(
         self, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param testPosition:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param testPosition:
         :param resultHint:
         :return:
         """
     @overload
     def RemoveAt(self, position: int) -> bool:
-        """
-
-        :param position:
+        """:param position:
         :return:
         """
     @overload
     def RemoveAt(self, startPosition: int, endPosition: int) -> bool:
-        """
-
-        :param startPosition:
+        """:param startPosition:
         :param endPosition:
         :return:
         """
@@ -14578,10 +9934,8 @@ class MaskedTextProvider(Object, ICloneable):
         endPosition: int,
         testPosition: int,
         resultHint: MaskedTextResultHint,
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param startPosition:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param startPosition:
         :param endPosition:
         :param testPosition:
         :param resultHint:
@@ -14589,27 +9943,25 @@ class MaskedTextProvider(Object, ICloneable):
         """
     @overload
     def Replace(self, input: Char, position: int) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param position:
         :return:
         """
     @overload
     def Replace(self, input: str, position: int) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param position:
         :return:
         """
     @overload
     def Replace(
-        self, input: Char, position: int, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+        self,
+        input: Char,
+        position: int,
+        testPosition: int,
+        resultHint: MaskedTextResultHint,
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param position:
         :param testPosition:
         :param resultHint:
@@ -14617,11 +9969,13 @@ class MaskedTextProvider(Object, ICloneable):
         """
     @overload
     def Replace(
-        self, input: str, position: int, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+        self,
+        input: str,
+        position: int,
+        testPosition: int,
+        resultHint: MaskedTextResultHint,
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param position:
         :param testPosition:
         :param resultHint:
@@ -14635,10 +9989,8 @@ class MaskedTextProvider(Object, ICloneable):
         endPosition: int,
         testPosition: int,
         resultHint: MaskedTextResultHint,
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param startPosition:
         :param endPosition:
         :param testPosition:
@@ -14653,10 +10005,8 @@ class MaskedTextProvider(Object, ICloneable):
         endPosition: int,
         testPosition: int,
         resultHint: MaskedTextResultHint,
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param startPosition:
         :param endPosition:
         :param testPosition:
@@ -14665,72 +10015,56 @@ class MaskedTextProvider(Object, ICloneable):
         """
     @overload
     def Set(self, input: str) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def Set(
         self, input: str, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param testPosition:
         :param resultHint:
         :return:
         """
     def ToDisplayString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self, ignorePasswordChar: bool) -> str:
-        """
-
-        :param ignorePasswordChar:
+        """:param ignorePasswordChar:
         :return:
         """
     @overload
     def ToString(self, includePrompt: bool, includeLiterals: bool) -> str:
-        """
-
-        :param includePrompt:
+        """:param includePrompt:
         :param includeLiterals:
         :return:
         """
     @overload
     def ToString(self, startPosition: int, length: int) -> str:
-        """
-
-        :param startPosition:
+        """:param startPosition:
         :param length:
         :return:
         """
     @overload
     def ToString(self, ignorePasswordChar: bool, startPosition: int, length: int) -> str:
-        """
-
-        :param ignorePasswordChar:
+        """:param ignorePasswordChar:
         :param startPosition:
         :param length:
         :return:
         """
     @overload
     def ToString(
-        self, includePrompt: bool, includeLiterals: bool, startPosition: int, length: int
+        self,
+        includePrompt: bool,
+        includeLiterals: bool,
+        startPosition: int,
+        length: int,
     ) -> str:
-        """
-
-        :param includePrompt:
+        """:param includePrompt:
         :param includeLiterals:
         :param startPosition:
         :param length:
@@ -14745,9 +10079,7 @@ class MaskedTextProvider(Object, ICloneable):
         startPosition: int,
         length: int,
     ) -> str:
-        """
-
-        :param ignorePasswordChar:
+        """:param ignorePasswordChar:
         :param includePrompt:
         :param includeLiterals:
         :param startPosition:
@@ -14756,43 +10088,33 @@ class MaskedTextProvider(Object, ICloneable):
         """
     def VerifyChar(
         self, input: Char, position: int, hint: MaskedTextResultHint
-    ) -> Tuple[bool, MaskedTextResultHint]:
-        """
-
-        :param input:
+    ) -> tuple[bool, MaskedTextResultHint]:
+        """:param input:
         :param position:
         :param hint:
         :return:
         """
     def VerifyEscapeChar(self, input: Char, position: int) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :param position:
         :return:
         """
     @overload
     def VerifyString(self, input: str) -> bool:
-        """
-
-        :param input:
+        """:param input:
         :return:
         """
     @overload
     def VerifyString(
         self, input: str, testPosition: int, resultHint: MaskedTextResultHint
-    ) -> Tuple[bool, int, MaskedTextResultHint]:
-        """
-
-        :param input:
+    ) -> tuple[bool, int, MaskedTextResultHint]:
+        """:param input:
         :param testPosition:
         :param resultHint:
         :return:
         """
     def __getitem__(self, index: int) -> Char:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
 
@@ -14835,67 +10157,35 @@ class MemberDescriptor(ABC, Object):
 
     @property
     def Attributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignTimeOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBrowsable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MergablePropertyAttribute(Attribute, _Attribute):
     """"""
@@ -14916,61 +10206,37 @@ class MergablePropertyAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, allowMerge: bool):
-        """
-
-        :param allowMerge:
-        """
+        """:param allowMerge:"""
     @property
     def AllowMerge(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -14982,9 +10248,7 @@ class MergablePropertyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -14994,21 +10258,13 @@ class MergablePropertyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MultilineStringConverter(TypeConverter):
     """"""
@@ -15017,79 +10273,59 @@ class MultilineStringConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -15097,18 +10333,14 @@ class MultilineStringConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -15120,9 +10352,7 @@ class MultilineStringConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -15130,31 +10360,23 @@ class MultilineStringConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -15162,223 +10384,146 @@ class MultilineStringConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NestedContainer(Container, IContainer, INestedContainer, IDisposable):
     """"""
 
     def __init__(self, owner: IComponent):
-        """
-
-        :param owner:
-        """
+        """:param owner:"""
     @property
     def Components(self) -> ComponentCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Owner(self) -> IComponent:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     @overload
     def Add(self, component: IComponent, name: str) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param name:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Remove(self, component: IComponent) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NotifyParentPropertyAttribute(Attribute, _Attribute):
     """"""
@@ -15399,61 +10544,37 @@ class NotifyParentPropertyAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, notifyParent: bool):
-        """
-
-        :param notifyParent:
-        """
+        """:param notifyParent:"""
     @property
     def NotifyParent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15465,9 +10586,7 @@ class NotifyParentPropertyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15477,123 +10596,83 @@ class NotifyParentPropertyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NullableConverter(TypeConverter):
     """"""
 
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def NullableType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingTypeConverter(self) -> TypeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -15601,18 +10680,14 @@ class NullableConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -15624,9 +10699,7 @@ class NullableConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -15634,31 +10707,23 @@ class NullableConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -15666,161 +10731,112 @@ class NullableConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParenthesizePropertyNameAttribute(Attribute, _Attribute):
     """"""
@@ -15835,61 +10851,37 @@ class ParenthesizePropertyNameAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, needParenthesis: bool):
-        """
-
-        :param needParenthesis:
-        """
+        """:param needParenthesis:"""
     @property
     def NeedParenthesis(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15901,9 +10893,7 @@ class ParenthesizePropertyNameAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15913,21 +10903,13 @@ class ParenthesizePropertyNameAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PasswordPropertyTextAttribute(Attribute, _Attribute):
     """"""
@@ -15952,61 +10934,37 @@ class PasswordPropertyTextAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, password: bool):
-        """
-
-        :param password:
-        """
+        """:param password:"""
     @property
     def Password(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -16018,9 +10976,7 @@ class PasswordPropertyTextAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16030,64 +10986,37 @@ class PasswordPropertyTextAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ProgressChangedEventArgs(EventArgs):
     """"""
 
     def __init__(self, progressPercentage: int, userState: object):
-        """
-
-        :param progressPercentage:
+        """:param progressPercentage:
         :param userState:
         """
     @property
     def ProgressPercentage(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 ProgressChangedEventHandler: Callable[[object, ProgressChangedEventArgs], None] = ...
 """
@@ -16100,37 +11029,20 @@ class PropertyChangedEventArgs(EventArgs):
     """"""
 
     def __init__(self, propertyName: str):
-        """
-
-        :param propertyName:
-        """
+        """:param propertyName:"""
     @property
     def PropertyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 PropertyChangedEventHandler: Callable[[object, PropertyChangedEventArgs], None] = ...
 """
@@ -16143,37 +11055,20 @@ class PropertyChangingEventArgs(EventArgs):
     """"""
 
     def __init__(self, propertyName: str):
-        """
-
-        :param propertyName:
-        """
+        """:param propertyName:"""
     @property
     def PropertyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 PropertyChangingEventHandler: Callable[[object, PropertyChangingEventArgs], None] = ...
 """
@@ -16187,186 +11082,107 @@ class PropertyDescriptor(ABC, MemberDescriptor):
 
     @property
     def Attributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ComponentType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Converter(self) -> TypeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignTimeOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBrowsable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLocalizable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SerializationVisibility(self) -> DesignerSerializationVisibility:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsChangeEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddValueChanged(self, component: object, handler: EventHandler) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param handler:
         """
     def CanResetValue(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetChildProperties(self) -> PropertyDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetChildProperties(self, filter: Array[Attribute]) -> PropertyDescriptorCollection:
-        """
-
-        :param filter:
+        """:param filter:
         :return:
         """
     @overload
     def GetChildProperties(self, instance: object) -> PropertyDescriptorCollection:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetChildProperties(
         self, instance: object, filter: Array[Attribute]
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param instance:
+        """:param instance:
         :param filter:
         :return:
         """
     def GetEditor(self, editorBaseType: Type) -> object:
-        """
-
-        :param editorBaseType:
+        """:param editorBaseType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetValue(self, component: object) -> object:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def RemoveValueChanged(self, component: object, handler: EventHandler) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param handler:
         """
     def ResetValue(self, component: object) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     def SetValue(self, component: object, value: object) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param value:
         """
     def ShouldSerializeValue(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PropertyDescriptorCollection(Object, ICollection, IDictionary, IEnumerable, IList):
     """"""
@@ -16378,106 +11194,62 @@ class PropertyDescriptorCollection(Object, ICollection, IDictionary, IEnumerable
     """
     @overload
     def __init__(self, properties: Array[PropertyDescriptor]):
-        """
-
-        :param properties:
-        """
+        """:param properties:"""
     @overload
     def __init__(self, properties: Array[PropertyDescriptor], readOnly: bool):
-        """
-
-        :param properties:
+        """:param properties:
         :param readOnly:
         """
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Add(self, value: PropertyDescriptor) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     @overload
@@ -16488,192 +11260,121 @@ class PropertyDescriptorCollection(Object, ICollection, IDictionary, IEnumerable
         """"""
     @overload
     def Contains(self, value: PropertyDescriptor) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Find(self, name: str, ignoreCase: bool) -> PropertyDescriptor:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IndexOf(self, value: PropertyDescriptor) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IndexOf(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def Insert(self, index: int, value: PropertyDescriptor) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Insert(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def Remove(self, value: PropertyDescriptor) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, value: object) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def RemoveAt(self, index: int) -> None:
-        """
-
-        :param index:
-        """
+        """:param index:"""
     @overload
     def Sort(self) -> PropertyDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Sort(self, comparer: IComparer) -> PropertyDescriptorCollection:
-        """
-
-        :param comparer:
+        """:param comparer:
         :return:
         """
     @overload
     def Sort(self, names: Array[str]) -> PropertyDescriptorCollection:
-        """
-
-        :param names:
+        """:param names:
         :return:
         """
     @overload
     def Sort(self, names: Array[str], comparer: IComparer) -> PropertyDescriptorCollection:
-        """
-
-        :param names:
+        """:param names:
         :param comparer:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def __getitem__(self, index: int) -> object:
-        """
-
-        :param index:
+        """:param index:
         :return:
         """
     @overload
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     @overload
     def __getitem__(self, name: str) -> PropertyDescriptor:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def __setitem__(self, index: int, value: object) -> None:
-        """
-
-        :param index:
+        """:param index:
         :param value:
         """
     @overload
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -16685,95 +11386,59 @@ class PropertyTabAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, tabClassName: str):
-        """
-
-        :param tabClassName:
-        """
+        """:param tabClassName:"""
     @overload
     def __init__(self, tabClass: Type):
-        """
-
-        :param tabClass:
-        """
+        """:param tabClass:"""
     @overload
     def __init__(self, tabClassName: str, tabScope: PropertyTabScope):
-        """
-
-        :param tabClassName:
+        """:param tabClassName:
         :param tabScope:
         """
     @overload
     def __init__(self, tabClass: Type, tabScope: PropertyTabScope):
-        """
-
-        :param tabClass:
+        """:param tabClass:
         :param tabScope:
         """
     @property
     def TabClasses(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TabScopes(self) -> Array[PropertyTabScope]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: PropertyTabAttribute) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -16785,9 +11450,7 @@ class PropertyTabAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16797,21 +11460,13 @@ class PropertyTabAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PropertyTabScope(Enum):
     """"""
@@ -16830,75 +11485,47 @@ class ProvidePropertyAttribute(Attribute, _Attribute):
 
     @overload
     def __init__(self, propertyName: str, receiverTypeName: str):
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :param receiverTypeName:
         """
     @overload
     def __init__(self, propertyName: str, receiverType: Type):
-        """
-
-        :param propertyName:
+        """:param propertyName:
         :param receiverType:
         """
     @property
     def PropertyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReceiverTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -16910,9 +11537,7 @@ class ProvidePropertyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16922,21 +11547,13 @@ class ProvidePropertyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReadOnlyAttribute(Attribute, _Attribute):
     """"""
@@ -16957,61 +11574,37 @@ class ReadOnlyAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, isReadOnly: bool):
-        """
-
-        :param isReadOnly:
-        """
+        """:param isReadOnly:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -17023,9 +11616,7 @@ class ReadOnlyAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -17035,21 +11626,13 @@ class ReadOnlyAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RecommendedAsConfigurableAttribute(Attribute, _Attribute):
     """"""
@@ -17070,61 +11653,37 @@ class RecommendedAsConfigurableAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, recommendedAsConfigurable: bool):
-        """
-
-        :param recommendedAsConfigurable:
-        """
+        """:param recommendedAsConfigurable:"""
     @property
     def RecommendedAsConfigurable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -17136,9 +11695,7 @@ class RecommendedAsConfigurableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -17148,105 +11705,74 @@ class RecommendedAsConfigurableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReferenceConverter(TypeConverter):
     """"""
 
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -17254,18 +11780,14 @@ class ReferenceConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -17277,9 +11799,7 @@ class ReferenceConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -17287,31 +11807,23 @@ class ReferenceConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -17319,170 +11831,119 @@ class ReferenceConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReflectEventDescriptor(EventDescriptor):
     """"""
 
     @overload
     def __init__(self, componentClass: Type, eventInfo: EventInfo):
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :param eventInfo:
         """
     @overload
@@ -17492,114 +11953,65 @@ class ReflectEventDescriptor(EventDescriptor):
         oldReflectEventDescriptor: EventDescriptor,
         attributes: Array[Attribute],
     ):
-        """
-
-        :param componentType:
+        """:param componentType:
         :param oldReflectEventDescriptor:
         :param attributes:
         """
     @overload
     def __init__(self, componentClass: Type, name: str, type: Type, attributes: Array[Attribute]):
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :param name:
         :param type:
         :param attributes:
         """
     @property
     def Attributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ComponentType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignTimeOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EventType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBrowsable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMulticast(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddEventHandler(self, component: object, value: Delegate) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param value:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RemoveEventHandler(self, component: object, value: Delegate) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReflectPropertyDescriptor(PropertyDescriptor):
     """"""
@@ -17611,17 +12023,13 @@ class ReflectPropertyDescriptor(PropertyDescriptor):
         oldReflectPropertyDescriptor: PropertyDescriptor,
         attributes: Array[Attribute],
     ):
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :param oldReflectPropertyDescriptor:
         :param attributes:
         """
     @overload
     def __init__(self, componentClass: Type, name: str, type: Type, attributes: Array[Attribute]):
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :param name:
         :param type:
         :param attributes:
@@ -17637,9 +12045,7 @@ class ReflectPropertyDescriptor(PropertyDescriptor):
         setMethod: MethodInfo,
         attrs: Array[Attribute],
     ):
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :param name:
         :param type:
         :param propInfo:
@@ -17658,9 +12064,7 @@ class ReflectPropertyDescriptor(PropertyDescriptor):
         setMethod: MethodInfo,
         attrs: Array[Attribute],
     ):
-        """
-
-        :param componentClass:
+        """:param componentClass:
         :param name:
         :param type:
         :param receiverType:
@@ -17670,186 +12074,107 @@ class ReflectPropertyDescriptor(PropertyDescriptor):
         """
     @property
     def Attributes(self) -> AttributeCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Category(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ComponentType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Converter(self) -> TypeConverter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Description(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DesignTimeOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DisplayName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsBrowsable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLocalizable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SerializationVisibility(self) -> DesignerSerializationVisibility:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SupportsChangeEvents(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddValueChanged(self, component: object, handler: EventHandler) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param handler:
         """
     def CanResetValue(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetChildProperties(self) -> PropertyDescriptorCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetChildProperties(self, filter: Array[Attribute]) -> PropertyDescriptorCollection:
-        """
-
-        :param filter:
+        """:param filter:
         :return:
         """
     @overload
     def GetChildProperties(self, instance: object) -> PropertyDescriptorCollection:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetChildProperties(
         self, instance: object, filter: Array[Attribute]
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param instance:
+        """:param instance:
         :param filter:
         :return:
         """
     def GetEditor(self, editorBaseType: Type) -> object:
-        """
-
-        :param editorBaseType:
+        """:param editorBaseType:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetValue(self, component: object) -> object:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def RemoveValueChanged(self, component: object, handler: EventHandler) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param handler:
         """
     def ResetValue(self, component: object) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     def SetValue(self, component: object, value: object) -> None:
-        """
-
-        :param component:
+        """:param component:
         :param value:
         """
     def ShouldSerializeValue(self, component: object) -> bool:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ReflectTypeDescriptionProvider(TypeDescriptionProvider):
     """"""
@@ -17861,158 +12186,100 @@ class ReflectTypeDescriptionProvider(TypeDescriptionProvider):
         argTypes: Array[Type],
         args: Array[object],
     ) -> object:
-        """
-
-        :param provider:
+        """:param provider:
         :param objectType:
         :param argTypes:
         :param args:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCache(self, instance: object) -> IDictionary:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     def GetExtendedTypeDescriptor(self, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     def GetFullComponentName(self, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetReflectionType(self, instance: object) -> Type:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetReflectionType(self, objectType: Type) -> Type:
-        """
-
-        :param objectType:
+        """:param objectType:
         :return:
         """
     @overload
     def GetReflectionType(self, objectType: Type, instance: object) -> Type:
-        """
-
-        :param objectType:
+        """:param objectType:
         :param instance:
         :return:
         """
     def GetRuntimeType(self, reflectionType: Type) -> Type:
-        """
-
-        :param reflectionType:
+        """:param reflectionType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeDescriptor(self, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetTypeDescriptor(self, objectType: Type) -> ICustomTypeDescriptor:
-        """
-
-        :param objectType:
+        """:param objectType:
         :return:
         """
     @overload
     def GetTypeDescriptor(self, objectType: Type, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param objectType:
+        """:param objectType:
         :param instance:
         :return:
         """
     def IsSupportedType(self, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RefreshEventArgs(EventArgs):
     """"""
 
     @overload
     def __init__(self, componentChanged: object):
-        """
-
-        :param componentChanged:
-        """
+        """:param componentChanged:"""
     @overload
     def __init__(self, typeChanged: Type):
-        """
-
-        :param typeChanged:
-        """
+        """:param typeChanged:"""
     @property
     def ComponentChanged(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeChanged(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 RefreshEventHandler: Callable[[RefreshEventArgs], None] = ...
 """
@@ -18049,61 +12316,37 @@ class RefreshPropertiesAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, refresh: RefreshProperties):
-        """
-
-        :param refresh:
-        """
+        """:param refresh:"""
     @property
     def RefreshProperties(self) -> RefreshProperties:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -18115,9 +12358,7 @@ class RefreshPropertiesAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -18127,21 +12368,13 @@ class RefreshPropertiesAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RunInstallerAttribute(Attribute, _Attribute):
     """"""
@@ -18162,61 +12395,37 @@ class RunInstallerAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, runInstaller: bool):
-        """
-
-        :param runInstaller:
-        """
+        """:param runInstaller:"""
     @property
     def RunInstaller(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -18228,9 +12437,7 @@ class RunInstallerAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -18240,77 +12447,44 @@ class RunInstallerAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class RunWorkerCompletedEventArgs(AsyncCompletedEventArgs):
     """"""
 
     def __init__(self, result: object, error: Exception, cancelled: bool):
-        """
-
-        :param result:
+        """:param result:
         :param error:
         :param cancelled:
         """
     @property
     def Cancelled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Error(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Result(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UserState(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 RunWorkerCompletedEventHandler: Callable[[object, RunWorkerCompletedEventArgs], None] = ...
 """
@@ -18326,79 +12500,59 @@ class SByteConverter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -18406,18 +12560,14 @@ class SByteConverter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -18429,9 +12579,7 @@ class SByteConverter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -18439,31 +12587,23 @@ class SByteConverter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -18471,161 +12611,112 @@ class SByteConverter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SettingsBindableAttribute(Attribute, _Attribute):
     """"""
@@ -18641,61 +12732,37 @@ class SettingsBindableAttribute(Attribute, _Attribute):
     :return: 
     """
     def __init__(self, bindable: bool):
-        """
-
-        :param bindable:
-        """
+        """:param bindable:"""
     @property
     def Bindable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -18707,9 +12774,7 @@ class SettingsBindableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -18719,21 +12784,13 @@ class SettingsBindableAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SingleConverter(BaseNumberConverter):
     """"""
@@ -18742,79 +12799,59 @@ class SingleConverter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -18822,18 +12859,14 @@ class SingleConverter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -18845,9 +12878,7 @@ class SingleConverter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -18855,31 +12886,23 @@ class SingleConverter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -18887,161 +12910,112 @@ class SingleConverter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StringConverter(TypeConverter):
     """"""
@@ -19050,79 +13024,59 @@ class StringConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -19130,18 +13084,14 @@ class StringConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -19153,9 +13103,7 @@ class StringConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -19163,31 +13111,23 @@ class StringConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -19195,207 +13135,141 @@ class StringConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SyntaxCheck(ABC, Object):
     """"""
 
     @classmethod
     def CheckMachineName(cls, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     def CheckPath(cls, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @classmethod
     def CheckRootedPath(cls, value: str) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TimeSpanConverter(TypeConverter):
     """"""
@@ -19404,79 +13278,59 @@ class TimeSpanConverter(TypeConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -19484,18 +13338,14 @@ class TimeSpanConverter(TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -19507,9 +13357,7 @@ class TimeSpanConverter(TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -19517,31 +13365,23 @@ class TimeSpanConverter(TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -19549,161 +13389,112 @@ class TimeSpanConverter(TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ToolboxItemAttribute(Attribute, _Attribute):
     """"""
@@ -19720,79 +13511,46 @@ class ToolboxItemAttribute(Attribute, _Attribute):
     """
     @overload
     def __init__(self, defaultType: bool):
-        """
-
-        :param defaultType:
-        """
+        """:param defaultType:"""
     @overload
     def __init__(self, toolboxItemTypeName: str):
-        """
-
-        :param toolboxItemTypeName:
-        """
+        """:param toolboxItemTypeName:"""
     @overload
     def __init__(self, toolboxItemType: Type):
-        """
-
-        :param toolboxItemType:
-        """
+        """:param toolboxItemType:"""
     @property
     def ToolboxItemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ToolboxItemTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -19804,9 +13562,7 @@ class ToolboxItemAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -19816,95 +13572,58 @@ class ToolboxItemAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ToolboxItemFilterAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, filterString: str):
-        """
-
-        :param filterString:
-        """
+        """:param filterString:"""
     @overload
     def __init__(self, filterString: str, filterType: ToolboxItemFilterType):
-        """
-
-        :param filterString:
+        """:param filterString:
         :param filterType:
         """
     @property
     def FilterString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FilterType(self) -> ToolboxItemFilterType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -19916,9 +13635,7 @@ class ToolboxItemFilterAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -19928,21 +13645,13 @@ class ToolboxItemFilterAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ToolboxItemFilterType(Enum):
     """"""
@@ -19963,79 +13672,59 @@ class TypeConverter(Object):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -20043,18 +13732,14 @@ class TypeConverter(Object):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -20066,9 +13751,7 @@ class TypeConverter(Object):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -20076,31 +13759,23 @@ class TypeConverter(Object):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -20108,161 +13783,112 @@ class TypeConverter(Object):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
@@ -20271,75 +13897,42 @@ class TypeConverter(Object):
             """"""
         @property
         def Count(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def IsSynchronized(self) -> bool:
-            """
-
-            :return:
-            """
+            """:return:"""
         @property
         def Item(self) -> object:
             """"""
         @property
         def SyncRoot(self) -> object:
-            """
-
-            :return:
-            """
+            """:return:"""
         def CopyTo(self, array: Array, index: int) -> None:
-            """
-
-            :param array:
+            """:param array:
             :param index:
             """
         def Equals(self, obj: object) -> bool:
-            """
-
-            :param obj:
+            """:param obj:
             :return:
             """
         def GetEnumerator(self) -> IEnumerator:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetHashCode(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
         def GetType(self) -> Type:
-            """
-
-            :return:
-            """
+            """:return:"""
         def ToString(self) -> str:
-            """
-
-            :return:
-            """
+            """:return:"""
         def __contains__(self, value: object) -> bool:
-            """
-
-            :param value:
+            """:param value:
             :return:
             """
         def __getitem__(self, index: int) -> object:
             """"""
         def __iter__(self) -> Iterator[object]:
-            """
-
-            :return:
-            """
+            """:return:"""
         def __len__(self) -> int:
-            """
-
-            :return:
-            """
+            """:return:"""
 
 class TypeConverterAttribute(Attribute, _Attribute):
     """"""
@@ -20354,67 +13947,40 @@ class TypeConverterAttribute(Attribute, _Attribute):
         """"""
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def ConverterTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -20426,9 +13992,7 @@ class TypeConverterAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -20438,21 +14002,13 @@ class TypeConverterAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeDescriptionProvider(ABC, Object):
     """"""
@@ -20464,176 +14020,114 @@ class TypeDescriptionProvider(ABC, Object):
         argTypes: Array[Type],
         args: Array[object],
     ) -> object:
-        """
-
-        :param provider:
+        """:param provider:
         :param objectType:
         :param argTypes:
         :param args:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetCache(self, instance: object) -> IDictionary:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     def GetExtendedTypeDescriptor(self, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     def GetFullComponentName(self, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetReflectionType(self, instance: object) -> Type:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetReflectionType(self, objectType: Type) -> Type:
-        """
-
-        :param objectType:
+        """:param objectType:
         :return:
         """
     @overload
     def GetReflectionType(self, objectType: Type, instance: object) -> Type:
-        """
-
-        :param objectType:
+        """:param objectType:
         :param instance:
         :return:
         """
     def GetRuntimeType(self, reflectionType: Type) -> Type:
-        """
-
-        :param reflectionType:
+        """:param reflectionType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeDescriptor(self, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @overload
     def GetTypeDescriptor(self, objectType: Type) -> ICustomTypeDescriptor:
-        """
-
-        :param objectType:
+        """:param objectType:
         :return:
         """
     @overload
     def GetTypeDescriptor(self, objectType: Type, instance: object) -> ICustomTypeDescriptor:
-        """
-
-        :param objectType:
+        """:param objectType:
         :param instance:
         :return:
         """
     def IsSupportedType(self, type: Type) -> bool:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeDescriptionProviderAttribute(Attribute, _Attribute):
     """"""
 
     @overload
     def __init__(self, typeName: str):
-        """
-
-        :param typeName:
-        """
+        """:param typeName:"""
     @overload
     def __init__(self, type: Type):
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -20645,9 +14139,7 @@ class TypeDescriptionProviderAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -20657,21 +14149,13 @@ class TypeDescriptionProviderAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeDescriptor(Object):
     """"""
@@ -20679,109 +14163,83 @@ class TypeDescriptor(Object):
     @classmethod
     @property
     def ComNativeDescriptorHandler(cls) -> IComNativeDescriptorHandler:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @ComNativeDescriptorHandler.setter
     def ComNativeDescriptorHandler(cls, value: IComNativeDescriptorHandler) -> None: ...
     @classmethod
     @property
     def ComObjectType(cls) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def InterfaceType(cls) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def AddAttributes(
         cls, instance: object, attributes: Array[Attribute]
     ) -> TypeDescriptionProvider:
-        """
-
-        :param instance:
+        """:param instance:
         :param attributes:
         :return:
         """
     @classmethod
     @overload
     def AddAttributes(cls, type: Type, attributes: Array[Attribute]) -> TypeDescriptionProvider:
-        """
-
-        :param type:
+        """:param type:
         :param attributes:
         :return:
         """
     @classmethod
     def AddEditorTable(cls, editorBaseType: Type, table: Hashtable) -> None:
-        """
-
-        :param editorBaseType:
+        """:param editorBaseType:
         :param table:
         """
     @classmethod
     @overload
     def AddProvider(cls, provider: TypeDescriptionProvider, instance: object) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param instance:
         """
     @classmethod
     @overload
     def AddProvider(cls, provider: TypeDescriptionProvider, type: Type) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param type:
         """
     @classmethod
     @overload
     def AddProviderTransparent(cls, provider: TypeDescriptionProvider, instance: object) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param instance:
         """
     @classmethod
     @overload
     def AddProviderTransparent(cls, provider: TypeDescriptionProvider, type: Type) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param type:
         """
     @classmethod
     def CreateAssociation(cls, primary: object, secondary: object) -> None:
-        """
-
-        :param primary:
+        """:param primary:
         :param secondary:
         """
     @classmethod
     def CreateDesigner(cls, component: IComponent, designerBaseType: Type) -> IDesigner:
-        """
-
-        :param component:
+        """:param component:
         :param designerBaseType:
         :return:
         """
     @classmethod
     @overload
     def CreateEvent(
-        cls, componentType: Type, oldEventDescriptor: EventDescriptor, attributes: Array[Attribute]
+        cls,
+        componentType: Type,
+        oldEventDescriptor: EventDescriptor,
+        attributes: Array[Attribute],
     ) -> EventDescriptor:
-        """
-
-        :param componentType:
+        """:param componentType:
         :param oldEventDescriptor:
         :param attributes:
         :return:
@@ -20791,9 +14249,7 @@ class TypeDescriptor(Object):
     def CreateEvent(
         cls, componentType: Type, name: str, type: Type, attributes: Array[Attribute]
     ) -> EventDescriptor:
-        """
-
-        :param componentType:
+        """:param componentType:
         :param name:
         :param type:
         :param attributes:
@@ -20807,9 +14263,7 @@ class TypeDescriptor(Object):
         argTypes: Array[Type],
         args: Array[object],
     ) -> object:
-        """
-
-        :param provider:
+        """:param provider:
         :param objectType:
         :param argTypes:
         :param args:
@@ -20823,9 +14277,7 @@ class TypeDescriptor(Object):
         oldPropertyDescriptor: PropertyDescriptor,
         attributes: Array[Attribute],
     ) -> PropertyDescriptor:
-        """
-
-        :param componentType:
+        """:param componentType:
         :param oldPropertyDescriptor:
         :param attributes:
         :return:
@@ -20835,194 +14287,148 @@ class TypeDescriptor(Object):
     def CreateProperty(
         cls, componentType: Type, name: str, type: Type, attributes: Array[Attribute]
     ) -> PropertyDescriptor:
-        """
-
-        :param componentType:
+        """:param componentType:
         :param name:
         :param type:
         :param attributes:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetAssociation(cls, type: Type, primary: object) -> object:
-        """
-
-        :param type:
+        """:param type:
         :param primary:
         :return:
         """
     @classmethod
     @overload
     def GetAttributes(cls, component: object) -> AttributeCollection:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetAttributes(cls, componentType: Type) -> AttributeCollection:
-        """
-
-        :param componentType:
+        """:param componentType:
         :return:
         """
     @classmethod
     @overload
     def GetAttributes(cls, component: object, noCustomTypeDesc: bool) -> AttributeCollection:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
     @classmethod
     @overload
     def GetClassName(cls, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetClassName(cls, componentType: Type) -> str:
-        """
-
-        :param componentType:
+        """:param componentType:
         :return:
         """
     @classmethod
     @overload
     def GetClassName(cls, component: object, noCustomTypeDesc: bool) -> str:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
     @classmethod
     @overload
     def GetComponentName(cls, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetComponentName(cls, component: object, noCustomTypeDesc: bool) -> str:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
     @classmethod
     @overload
     def GetConverter(cls, component: object) -> TypeConverter:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetConverter(cls, type: Type) -> TypeConverter:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     @overload
     def GetConverter(cls, component: object, noCustomTypeDesc: bool) -> TypeConverter:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
     @classmethod
     @overload
     def GetDefaultEvent(cls, component: object) -> EventDescriptor:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetDefaultEvent(cls, componentType: Type) -> EventDescriptor:
-        """
-
-        :param componentType:
+        """:param componentType:
         :return:
         """
     @classmethod
     @overload
     def GetDefaultEvent(cls, component: object, noCustomTypeDesc: bool) -> EventDescriptor:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
     @classmethod
     @overload
     def GetDefaultProperty(cls, component: object) -> PropertyDescriptor:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetDefaultProperty(cls, componentType: Type) -> PropertyDescriptor:
-        """
-
-        :param componentType:
+        """:param componentType:
         :return:
         """
     @classmethod
     @overload
     def GetDefaultProperty(cls, component: object, noCustomTypeDesc: bool) -> PropertyDescriptor:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
     @classmethod
     @overload
     def GetEditor(cls, component: object, editorBaseType: Type) -> object:
-        """
-
-        :param component:
+        """:param component:
         :param editorBaseType:
         :return:
         """
     @classmethod
     @overload
     def GetEditor(cls, type: Type, editorBaseType: Type) -> object:
-        """
-
-        :param type:
+        """:param type:
         :param editorBaseType:
         :return:
         """
     @classmethod
     @overload
     def GetEditor(cls, component: object, editorBaseType: Type, noCustomTypeDesc: bool) -> object:
-        """
-
-        :param component:
+        """:param component:
         :param editorBaseType:
         :param noCustomTypeDesc:
         :return:
@@ -21030,17 +14436,13 @@ class TypeDescriptor(Object):
     @classmethod
     @overload
     def GetEvents(cls, component: object) -> EventDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetEvents(cls, componentType: Type) -> EventDescriptorCollection:
-        """
-
-        :param componentType:
+        """:param componentType:
         :return:
         """
     @classmethod
@@ -21048,18 +14450,14 @@ class TypeDescriptor(Object):
     def GetEvents(
         cls, component: object, attributes: Array[Attribute]
     ) -> EventDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param attributes:
         :return:
         """
     @classmethod
     @overload
     def GetEvents(cls, component: object, noCustomTypeDesc: bool) -> EventDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
@@ -21068,9 +14466,7 @@ class TypeDescriptor(Object):
     def GetEvents(
         cls, componentType: Type, attributes: Array[Attribute]
     ) -> EventDescriptorCollection:
-        """
-
-        :param componentType:
+        """:param componentType:
         :param attributes:
         :return:
         """
@@ -21079,39 +14475,28 @@ class TypeDescriptor(Object):
     def GetEvents(
         cls, component: object, attributes: Array[Attribute], noCustomTypeDesc: bool
     ) -> EventDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param attributes:
         :param noCustomTypeDesc:
         :return:
         """
     @classmethod
     def GetFullComponentName(cls, component: object) -> str:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetProperties(cls, component: object) -> PropertyDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :return:
         """
     @classmethod
     @overload
     def GetProperties(cls, componentType: Type) -> PropertyDescriptorCollection:
-        """
-
-        :param componentType:
+        """:param componentType:
         :return:
         """
     @classmethod
@@ -21119,9 +14504,7 @@ class TypeDescriptor(Object):
     def GetProperties(
         cls, component: object, attributes: Array[Attribute]
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param attributes:
         :return:
         """
@@ -21130,9 +14513,7 @@ class TypeDescriptor(Object):
     def GetProperties(
         cls, component: object, noCustomTypeDesc: bool
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param noCustomTypeDesc:
         :return:
         """
@@ -21141,9 +14522,7 @@ class TypeDescriptor(Object):
     def GetProperties(
         cls, componentType: Type, attributes: Array[Attribute]
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param componentType:
+        """:param componentType:
         :param attributes:
         :return:
         """
@@ -21152,9 +14531,7 @@ class TypeDescriptor(Object):
     def GetProperties(
         cls, component: object, attributes: Array[Attribute], noCustomTypeDesc: bool
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param component:
+        """:param component:
         :param attributes:
         :param noCustomTypeDesc:
         :return:
@@ -21162,124 +14539,82 @@ class TypeDescriptor(Object):
     @classmethod
     @overload
     def GetProvider(cls, instance: object) -> TypeDescriptionProvider:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @classmethod
     @overload
     def GetProvider(cls, type: Type) -> TypeDescriptionProvider:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     @overload
     def GetReflectionType(cls, instance: object) -> Type:
-        """
-
-        :param instance:
+        """:param instance:
         :return:
         """
     @classmethod
     @overload
     def GetReflectionType(cls, type: Type) -> Type:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def Refresh(cls, assembly: Assembly) -> None:
-        """
-
-        :param assembly:
-        """
+        """:param assembly:"""
     @classmethod
     @overload
     def Refresh(cls, module: Module) -> None:
-        """
-
-        :param module:
-        """
+        """:param module:"""
     @classmethod
     @overload
     def Refresh(cls, component: object) -> None:
-        """
-
-        :param component:
-        """
+        """:param component:"""
     @classmethod
     @overload
     def Refresh(cls, type: Type) -> None:
-        """
-
-        :param type:
-        """
+        """:param type:"""
     @classmethod
     def RemoveAssociation(cls, primary: object, secondary: object) -> None:
-        """
-
-        :param primary:
+        """:param primary:
         :param secondary:
         """
     @classmethod
     def RemoveAssociations(cls, primary: object) -> None:
-        """
-
-        :param primary:
-        """
+        """:param primary:"""
     @classmethod
     @overload
     def RemoveProvider(cls, provider: TypeDescriptionProvider, instance: object) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param instance:
         """
     @classmethod
     @overload
     def RemoveProvider(cls, provider: TypeDescriptionProvider, type: Type) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param type:
         """
     @classmethod
     @overload
     def RemoveProviderTransparent(cls, provider: TypeDescriptionProvider, instance: object) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param instance:
         """
     @classmethod
     @overload
     def RemoveProviderTransparent(cls, provider: TypeDescriptionProvider, type: Type) -> None:
-        """
-
-        :param provider:
+        """:param provider:
         :param type:
         """
     @classmethod
     def SortDescriptorArray(cls, infos: IList) -> None:
-        """
-
-        :param infos:
-        """
+        """:param infos:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     Refreshed: EventType[RefreshEventHandler] = ...
     """"""
 
@@ -21288,79 +14623,59 @@ class TypeListConverter(ABC, TypeConverter):
 
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -21368,18 +14683,14 @@ class TypeListConverter(ABC, TypeConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -21391,9 +14702,7 @@ class TypeListConverter(ABC, TypeConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -21401,31 +14710,23 @@ class TypeListConverter(ABC, TypeConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -21433,161 +14734,112 @@ class TypeListConverter(ABC, TypeConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UInt16Converter(BaseNumberConverter):
     """"""
@@ -21596,79 +14848,59 @@ class UInt16Converter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -21676,18 +14908,14 @@ class UInt16Converter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -21699,9 +14927,7 @@ class UInt16Converter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -21709,31 +14935,23 @@ class UInt16Converter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -21741,161 +14959,112 @@ class UInt16Converter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UInt32Converter(BaseNumberConverter):
     """"""
@@ -21904,79 +15073,59 @@ class UInt32Converter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -21984,18 +15133,14 @@ class UInt32Converter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -22007,9 +15152,7 @@ class UInt32Converter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -22017,31 +15160,23 @@ class UInt32Converter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -22049,161 +15184,112 @@ class UInt32Converter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class UInt64Converter(BaseNumberConverter):
     """"""
@@ -22212,79 +15298,59 @@ class UInt64Converter(BaseNumberConverter):
         """"""
     @overload
     def CanConvertFrom(self, sourceType: Type) -> bool:
-        """
-
-        :param sourceType:
+        """:param sourceType:
         :return:
         """
     @overload
     def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param sourceType:
         :return:
         """
     @overload
     def CanConvertTo(self, destinationType: Type) -> bool:
-        """
-
-        :param destinationType:
+        """:param destinationType:
         :return:
         """
     @overload
     def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param destinationType:
         :return:
         """
     @overload
     def ConvertFrom(self, value: object) -> object:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertFrom(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
     @overload
     def ConvertFromString(self, text: str) -> object:
-        """
-
-        :param text:
+        """:param text:
         :return:
         """
     @overload
     def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param text:
         :return:
         """
@@ -22292,18 +15358,14 @@ class UInt64Converter(BaseNumberConverter):
     def ConvertFromString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param text:
         :return:
         """
     @overload
     def ConvertTo(self, value: object, destinationType: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param destinationType:
         :return:
         """
@@ -22315,9 +15377,7 @@ class UInt64Converter(BaseNumberConverter):
         value: object,
         destinationType: Type,
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :param destinationType:
@@ -22325,31 +15385,23 @@ class UInt64Converter(BaseNumberConverter):
         """
     @overload
     def ConvertToInvariantString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def ConvertToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
@@ -22357,161 +15409,112 @@ class UInt64Converter(BaseNumberConverter):
     def ConvertToString(
         self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
     ) -> str:
-        """
-
-        :param context:
+        """:param context:
         :param culture:
         :param value:
         :return:
         """
     @overload
     def CreateInstance(self, propertyValues: IDictionary) -> object:
-        """
-
-        :param propertyValues:
+        """:param propertyValues:
         :return:
         """
     @overload
     def CreateInstance(
         self, context: ITypeDescriptorContext, propertyValues: IDictionary
     ) -> object:
-        """
-
-        :param context:
+        """:param context:
         :param propertyValues:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetCreateInstanceSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetProperties(self, value: object) -> PropertyDescriptorCollection:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def GetProperties(
         self, context: ITypeDescriptorContext, value: object
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     @overload
     def GetProperties(
-        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+        self,
+        context: ITypeDescriptorContext,
+        value: object,
+        attributes: Array[Attribute],
     ) -> PropertyDescriptorCollection:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :param attributes:
         :return:
         """
     @overload
     def GetPropertiesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValues(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValues(
         self, context: ITypeDescriptorContext
     ) -> TypeConverter.StandardValuesCollection:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesExclusive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     @overload
     def GetStandardValuesSupported(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsValid(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
-        """
-
-        :param context:
+        """:param context:
         :param value:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WarningException(SystemException, _Exception, ISerializable):
     """"""
@@ -22521,165 +15524,97 @@ class WarningException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @overload
     def __init__(self, message: str, helpUrl: str):
-        """
-
-        :param message:
+        """:param message:
         :param helpUrl:
         """
     @overload
     def __init__(self, message: str, helpUrl: str, helpTopic: str):
-        """
-
-        :param message:
+        """:param message:
         :param helpUrl:
         :param helpTopic:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def HelpTopic(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpUrl(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WeakHashtable(
     Hashtable,
@@ -22694,165 +15629,92 @@ class WeakHashtable(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsKey(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsValue(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def SetWeak(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -22864,160 +15726,91 @@ class Win32Exception(ExternalException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, error: int):
-        """
-
-        :param error:
-        """
+        """:param error:"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, error: int, message: str):
-        """
-
-        :param error:
+        """:param error:
         :param message:
         """
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NativeErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

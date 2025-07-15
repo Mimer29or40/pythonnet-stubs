@@ -1,8 +1,4 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Optional
-from typing import Tuple
 from typing import overload
 
 from System import Array
@@ -32,7 +28,6 @@ from System.Net import HttpRequestStream
 from System.Net import HttpResponseStream
 from System.Net import ICredentials
 from System.Net import IWebProxy
-from System.Net.WebSockets.WebSocketBase import IWebSocketStream
 from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Remoting import ObjRef
@@ -50,42 +45,24 @@ class ClientWebSocket(WebSocket, IDisposable):
     def __init__(self):
         """"""
     @property
-    def CloseStatus(self) -> Optional[WebSocketCloseStatus]:
-        """
-
-        :return:
-        """
+    def CloseStatus(self) -> WebSocketCloseStatus | None:
+        """:return:"""
     @property
     def CloseStatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultKeepAliveInterval(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Options(self) -> ClientWebSocketOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> WebSocketState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubProtocol(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def CloseAsync(
@@ -94,9 +71,7 @@ class ClientWebSocket(WebSocket, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -107,44 +82,30 @@ class ClientWebSocket(WebSocket, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
         """
     def ConnectAsync(self, uri: Uri, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param uri:
+        """:param uri:
         :param cancellationToken:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReceiveAsync(
         self, buffer: ArraySegment[int], cancellationToken: CancellationToken
     ) -> Task[WebSocketReceiveResult]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param cancellationToken:
         :return:
         """
@@ -155,217 +116,127 @@ class ClientWebSocket(WebSocket, IDisposable):
         endOfMessage: bool,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param messageType:
         :param endOfMessage:
         :param cancellationToken:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ClientWebSocketOptions(Object):
     """"""
 
     @property
     def ClientCertificates(self) -> X509CertificateCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ClientCertificates.setter
     def ClientCertificates(self, value: X509CertificateCollection) -> None: ...
     @property
     def Cookies(self) -> CookieContainer:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Cookies.setter
     def Cookies(self, value: CookieContainer) -> None: ...
     @property
     def Credentials(self) -> ICredentials:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Credentials.setter
     def Credentials(self, value: ICredentials) -> None: ...
     @property
     def KeepAliveInterval(self) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @KeepAliveInterval.setter
     def KeepAliveInterval(self, value: TimeSpan) -> None: ...
     @property
     def Proxy(self) -> IWebProxy:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Proxy.setter
     def Proxy(self, value: IWebProxy) -> None: ...
     @property
     def UseDefaultCredentials(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @UseDefaultCredentials.setter
     def UseDefaultCredentials(self, value: bool) -> None: ...
     def AddSubProtocol(self, subProtocol: str) -> None:
-        """
-
-        :param subProtocol:
-        """
+        """:param subProtocol:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def SetBuffer(self, receiveBufferSize: int, sendBufferSize: int) -> None:
-        """
-
-        :param receiveBufferSize:
+        """:param receiveBufferSize:
         :param sendBufferSize:
         """
     @overload
     def SetBuffer(
         self, receiveBufferSize: int, sendBufferSize: int, buffer: ArraySegment[int]
     ) -> None:
-        """
-
-        :param receiveBufferSize:
+        """:param receiveBufferSize:
         :param sendBufferSize:
         :param buffer:
         """
     def SetRequestHeader(self, headerName: str, headerValue: str) -> None:
-        """
-
-        :param headerName:
+        """:param headerName:
         :param headerValue:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class HttpListenerWebSocketContext(WebSocketContext):
     """"""
 
     @property
     def CookieCollection(self) -> CookieCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Headers(self) -> NameValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLocal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecureConnection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Origin(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RequestUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecWebSocketKey(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecWebSocketProtocols(self) -> IEnumerable[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecWebSocketVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def User(self) -> IPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WebSocket(self) -> WebSocket:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class InternalClientWebSocket(WebSocketBase, IDisposable):
     """"""
@@ -380,9 +251,7 @@ class InternalClientWebSocket(WebSocketBase, IDisposable):
         useZeroMaskingKey: bool,
         internalBuffer: ArraySegment[int],
     ):
-        """
-
-        :param innerStream:
+        """:param innerStream:
         :param subProtocol:
         :param receiveBufferSize:
         :param sendBufferSize:
@@ -391,36 +260,21 @@ class InternalClientWebSocket(WebSocketBase, IDisposable):
         :param internalBuffer:
         """
     @property
-    def CloseStatus(self) -> Optional[WebSocketCloseStatus]:
-        """
-
-        :return:
-        """
+    def CloseStatus(self) -> WebSocketCloseStatus | None:
+        """:return:"""
     @property
     def CloseStatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultKeepAliveInterval(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> WebSocketState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubProtocol(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def CloseAsync(
@@ -429,9 +283,7 @@ class InternalClientWebSocket(WebSocketBase, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -442,9 +294,7 @@ class InternalClientWebSocket(WebSocketBase, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -452,27 +302,17 @@ class InternalClientWebSocket(WebSocketBase, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReceiveAsync(
         self, buffer: ArraySegment[int], cancellationToken: CancellationToken
     ) -> Task[WebSocketReceiveResult]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param cancellationToken:
         :return:
         """
@@ -483,19 +323,14 @@ class InternalClientWebSocket(WebSocketBase, IDisposable):
         endOfMessage: bool,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param messageType:
         :param endOfMessage:
         :param cancellationToken:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ServerWebSocket(WebSocketBase, IDisposable):
     """"""
@@ -508,45 +343,28 @@ class ServerWebSocket(WebSocketBase, IDisposable):
         keepAliveInterval: TimeSpan,
         internalBuffer: ArraySegment[int],
     ):
-        """
-
-        :param innerStream:
+        """:param innerStream:
         :param subProtocol:
         :param receiveBufferSize:
         :param keepAliveInterval:
         :param internalBuffer:
         """
     @property
-    def CloseStatus(self) -> Optional[WebSocketCloseStatus]:
-        """
-
-        :return:
-        """
+    def CloseStatus(self) -> WebSocketCloseStatus | None:
+        """:return:"""
     @property
     def CloseStatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultKeepAliveInterval(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> WebSocketState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubProtocol(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def CloseAsync(
@@ -555,9 +373,7 @@ class ServerWebSocket(WebSocketBase, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -568,9 +384,7 @@ class ServerWebSocket(WebSocketBase, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -578,27 +392,17 @@ class ServerWebSocket(WebSocketBase, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReceiveAsync(
         self, buffer: ArraySegment[int], cancellationToken: CancellationToken
     ) -> Task[WebSocketReceiveResult]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param cancellationToken:
         :return:
         """
@@ -609,54 +413,34 @@ class ServerWebSocket(WebSocketBase, IDisposable):
         endOfMessage: bool,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param messageType:
         :param endOfMessage:
         :param cancellationToken:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocket(ABC, Object, IDisposable):
     """"""
 
     @property
-    def CloseStatus(self) -> Optional[WebSocketCloseStatus]:
-        """
-
-        :return:
-        """
+    def CloseStatus(self) -> WebSocketCloseStatus | None:
+        """:return:"""
     @property
     def CloseStatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultKeepAliveInterval(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> WebSocketState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubProtocol(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def CloseAsync(
@@ -665,9 +449,7 @@ class WebSocket(ABC, Object, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -678,18 +460,14 @@ class WebSocket(ABC, Object, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
         """
     @classmethod
     def CreateClientBuffer(cls, receiveBufferSize: int, sendBufferSize: int) -> ArraySegment[int]:
-        """
-
-        :param receiveBufferSize:
+        """:param receiveBufferSize:
         :param sendBufferSize:
         :return:
         """
@@ -704,9 +482,7 @@ class WebSocket(ABC, Object, IDisposable):
         useZeroMaskingKey: bool,
         internalBuffer: ArraySegment[int],
     ) -> WebSocket:
-        """
-
-        :param innerStream:
+        """:param innerStream:
         :param subProtocol:
         :param receiveBufferSize:
         :param sendBufferSize:
@@ -717,41 +493,26 @@ class WebSocket(ABC, Object, IDisposable):
         """
     @classmethod
     def CreateServerBuffer(cls, receiveBufferSize: int) -> ArraySegment[int]:
-        """
-
-        :param receiveBufferSize:
+        """:param receiveBufferSize:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def IsApplicationTargeting45(cls) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReceiveAsync(
         self, buffer: ArraySegment[int], cancellationToken: CancellationToken
     ) -> Task[WebSocketReceiveResult]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param cancellationToken:
         :return:
         """
@@ -765,54 +526,34 @@ class WebSocket(ABC, Object, IDisposable):
         endOfMessage: bool,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param messageType:
         :param endOfMessage:
         :param cancellationToken:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketBase(ABC, WebSocket, IDisposable):
     """"""
 
     @property
-    def CloseStatus(self) -> Optional[WebSocketCloseStatus]:
-        """
-
-        :return:
-        """
+    def CloseStatus(self) -> WebSocketCloseStatus | None:
+        """:return:"""
     @property
     def CloseStatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultKeepAliveInterval(cls) -> TimeSpan:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> WebSocketState:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SubProtocol(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Abort(self) -> None:
         """"""
     def CloseAsync(
@@ -821,9 +562,7 @@ class WebSocketBase(ABC, WebSocket, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -834,9 +573,7 @@ class WebSocketBase(ABC, WebSocket, IDisposable):
         statusDescription: str,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param closeStatus:
+        """:param closeStatus:
         :param statusDescription:
         :param cancellationToken:
         :return:
@@ -844,27 +581,17 @@ class WebSocketBase(ABC, WebSocket, IDisposable):
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ReceiveAsync(
         self, buffer: ArraySegment[int], cancellationToken: CancellationToken
     ) -> Task[WebSocketReceiveResult]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param cancellationToken:
         :return:
         """
@@ -875,65 +602,40 @@ class WebSocketBase(ABC, WebSocket, IDisposable):
         endOfMessage: bool,
         cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param messageType:
         :param endOfMessage:
         :param cancellationToken:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketBuffer(Object, IDisposable):
     """"""
 
     @property
     def ReceiveBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SendBufferSize(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Dispose(self) -> None:
         """"""
     @overload
     def Dispose(self, webSocketState: WebSocketState) -> None:
-        """
-
-        :param webSocketState:
-        """
+        """:param webSocketState:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketCloseStatus(Enum):
     """"""
@@ -963,55 +665,32 @@ class WebSocketConnectionStream(BufferedReadStream, WebSocketBase.IWebSocketStre
     """"""
 
     def __init__(self, connectStream: ConnectStream, connectionGroupName: str):
-        """
-
-        :param connectStream:
+        """:param connectStream:
         :param connectionGroupName:
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
@@ -1019,20 +698,20 @@ class WebSocketConnectionStream(BufferedReadStream, WebSocketBase.IWebSocketStre
         """"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def Abort(self) -> None:
         """"""
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1040,11 +719,14 @@ class WebSocketConnectionStream(BufferedReadStream, WebSocketBase.IWebSocketStre
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1057,29 +739,20 @@ class WebSocketConnectionStream(BufferedReadStream, WebSocketBase.IWebSocketStre
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1087,260 +760,167 @@ class WebSocketConnectionStream(BufferedReadStream, WebSocketBase.IWebSocketStre
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MultipleWriteAsync(
         self, buffers: IList[ArraySegment[int]], cancellationToken: CancellationToken
     ) -> Task:
         """"""
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def SwitchToOpaqueMode(self, webSocket: WebSocketBase) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class WebSocketContext(ABC, Object):
     """"""
 
     @property
     def CookieCollection(self) -> CookieCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Headers(self) -> NameValueCollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAuthenticated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLocal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecureConnection(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Origin(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def RequestUri(self) -> Uri:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecWebSocketKey(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecWebSocketProtocols(self) -> IEnumerable[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecWebSocketVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def User(self) -> IPrincipal:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WebSocket(self) -> WebSocket:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketError(Enum):
     """"""
@@ -1374,263 +954,165 @@ class WebSocketException(Win32Exception, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, error: WebSocketError):
-        """
-
-        :param error:
-        """
+        """:param error:"""
     @overload
     def __init__(self, nativeError: int):
-        """
-
-        :param nativeError:
-        """
+        """:param nativeError:"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, error: WebSocketError, innerException: Exception):
-        """
-
-        :param error:
+        """:param error:
         :param innerException:
         """
     @overload
     def __init__(self, error: WebSocketError, nativeError: int):
-        """
-
-        :param error:
+        """:param error:
         :param nativeError:
         """
     @overload
     def __init__(self, error: WebSocketError, message: str):
-        """
-
-        :param error:
+        """:param error:
         :param message:
         """
     @overload
     def __init__(self, nativeError: int, innerException: Exception):
-        """
-
-        :param nativeError:
+        """:param nativeError:
         :param innerException:
         """
     @overload
     def __init__(self, nativeError: int, message: str):
-        """
-
-        :param nativeError:
+        """:param nativeError:
         :param message:
         """
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @overload
     def __init__(self, error: WebSocketError, nativeError: int, innerException: Exception):
-        """
-
-        :param error:
+        """:param error:
         :param nativeError:
         :param innerException:
         """
     @overload
     def __init__(self, error: WebSocketError, nativeError: int, message: str):
-        """
-
-        :param error:
+        """:param error:
         :param nativeError:
         :param message:
         """
     @overload
     def __init__(self, error: WebSocketError, message: str, innerException: Exception):
-        """
-
-        :param error:
+        """:param error:
         :param message:
         :param innerException:
         """
     @overload
     def __init__(
-        self, error: WebSocketError, nativeError: int, message: str, innerException: Exception
+        self,
+        error: WebSocketError,
+        nativeError: int,
+        message: str,
+        innerException: Exception,
     ):
-        """
-
-        :param error:
+        """:param error:
         :param nativeError:
         :param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def NativeErrorCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def WebSocketErrorCode(self) -> WebSocketError:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketHelpers(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, IDisposable):
     """"""
@@ -1641,56 +1123,33 @@ class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, 
         outputStream: HttpResponseStream,
         context: HttpListenerContext,
     ):
-        """
-
-        :param inputStream:
+        """:param inputStream:
         :param outputStream:
         :param context:
         """
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanSeek(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanTimeout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Length(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Position.setter
     def Position(self, value: int) -> None: ...
     @property
     def ReadTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @ReadTimeout.setter
     def ReadTimeout(self, value: int) -> None: ...
     @property
@@ -1698,20 +1157,20 @@ class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, 
         """"""
     @property
     def WriteTimeout(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @WriteTimeout.setter
     def WriteTimeout(self, value: int) -> None: ...
     def Abort(self) -> None:
         """"""
     def BeginRead(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1719,11 +1178,14 @@ class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, 
         :return:
         """
     def BeginWrite(
-        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        callback: AsyncCallback,
+        state: object,
     ) -> IAsyncResult:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param callback:
@@ -1736,29 +1198,20 @@ class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, 
         """"""
     @overload
     def CopyTo(self, destination: Stream) -> None:
-        """
-
-        :param destination:
-        """
+        """:param destination:"""
     @overload
     def CopyTo(self, destination: Stream, bufferSize: int) -> None:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         """
     @overload
     def CopyToAsync(self, destination: Stream) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :return:
         """
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :return:
         """
@@ -1766,163 +1219,117 @@ class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, 
     def CopyToAsync(
         self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
     ) -> Task:
-        """
-
-        :param destination:
+        """:param destination:
         :param bufferSize:
         :param cancellationToken:
         :return:
         """
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Dispose(self) -> None:
         """"""
     def EndRead(self, asyncResult: IAsyncResult) -> int:
-        """
-
-        :param asyncResult:
+        """:param asyncResult:
         :return:
         """
     def EndWrite(self, asyncResult: IAsyncResult) -> None:
-        """
-
-        :param asyncResult:
-        """
+        """:param asyncResult:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def Flush(self) -> None:
         """"""
     @overload
     def FlushAsync(self) -> Task:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
-        """
-
-        :param cancellationToken:
+        """:param cancellationToken:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MultipleWriteAsync(
         self, buffers: IList[ArraySegment[int]], cancellationToken: CancellationToken
     ) -> Task:
         """"""
-    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
-        """
-
-        :param buffer:
+    def Read(self, buffer: Array[int], offset: int, count: int) -> tuple[int, Array[int]]:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def ReadAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task[int]:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def ReadByte(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Seek(self, offset: int, origin: SeekOrigin) -> int:
-        """
-
-        :param offset:
+        """:param offset:
         :param origin:
         :return:
         """
     def SetLength(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def SwitchToOpaqueMode(self, webSocket: WebSocketBase) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Write(self, buffer: Array[int], offset: int, count: int) -> None:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         """
     @overload
     def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :return:
         """
     @overload
     def WriteAsync(
-        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+        self,
+        buffer: Array[int],
+        offset: int,
+        count: int,
+        cancellationToken: CancellationToken,
     ) -> Task:
-        """
-
-        :param buffer:
+        """:param buffer:
         :param offset:
         :param count:
         :param cancellationToken:
         :return:
         """
     def WriteByte(self, value: int) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
 
 class WebSocketMessageType(Enum):
     """"""
@@ -1938,42 +1345,27 @@ class WebSocketProtocolComponent(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def Succeeded(cls, hr: int) -> bool:
-        """
-
-        :param hr:
+        """:param hr:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketReceiveResult(Object):
     """"""
 
     @overload
     def __init__(self, count: int, messageType: WebSocketMessageType, endOfMessage: bool):
-        """
-
-        :param count:
+        """:param count:
         :param messageType:
         :param endOfMessage:
         """
@@ -1983,68 +1375,40 @@ class WebSocketReceiveResult(Object):
         count: int,
         messageType: WebSocketMessageType,
         endOfMessage: bool,
-        closeStatus: Optional[WebSocketCloseStatus],
+        closeStatus: WebSocketCloseStatus | None,
         closeStatusDescription: str,
     ):
-        """
-
-        :param count:
+        """:param count:
         :param messageType:
         :param endOfMessage:
         :param closeStatus:
         :param closeStatusDescription:
         """
     @property
-    def CloseStatus(self) -> Optional[WebSocketCloseStatus]:
-        """
-
-        :return:
-        """
+    def CloseStatus(self) -> WebSocketCloseStatus | None:
+        """:return:"""
     @property
     def CloseStatusDescription(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EndOfMessage(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MessageType(self) -> WebSocketMessageType:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class WebSocketState(Enum):
     """"""

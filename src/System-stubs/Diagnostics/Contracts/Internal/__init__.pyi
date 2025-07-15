@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from abc import ABC
 
 from System import Exception
@@ -11,21 +9,13 @@ class ContractHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def RaiseContractFailedEvent(
         cls,
@@ -34,19 +24,14 @@ class ContractHelper(ABC, Object):
         conditionText: str,
         innerException: Exception,
     ) -> str:
-        """
-
-        :param failureKind:
+        """:param failureKind:
         :param userMessage:
         :param conditionText:
         :param innerException:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def TriggerFailure(
         cls,
@@ -56,9 +41,7 @@ class ContractHelper(ABC, Object):
         conditionText: str,
         innerException: Exception,
     ) -> None:
-        """
-
-        :param kind:
+        """:param kind:
         :param displayMessage:
         :param userMessage:
         :param conditionText:

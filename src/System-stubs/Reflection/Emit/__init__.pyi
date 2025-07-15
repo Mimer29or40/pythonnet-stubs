@@ -1,9 +1,6 @@
-from __future__ import annotations
-
 from typing import ClassVar
 from typing import Final
 from typing import Generic
-from typing import Tuple
 from typing import TypeVar
 from typing import overload
 
@@ -120,157 +117,94 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 class AssemblyBuilder(
-    Assembly, ICustomAttributeProvider, _Assembly, _AssemblyBuilder, ISerializable, IEvidenceFactory
+    Assembly,
+    ICustomAttributeProvider,
+    _Assembly,
+    _AssemblyBuilder,
+    ISerializable,
+    IEvidenceFactory,
 ):
     """"""
 
     @property
     def CodeBase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DefinedTypes(self) -> IEnumerable[TypeInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EntryPoint(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EscapedCodeBase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Evidence(self) -> Evidence:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Evidence(self) -> Evidence:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExportedTypes(self) -> IEnumerable[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GlobalAssemblyCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HostContext(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImageRuntimeVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDynamic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFullyTrusted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Location(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ManifestModule(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Modules(self) -> IEnumerable[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PermissionSet(self) -> PermissionSet:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectionOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityRuleSet(self) -> SecurityRuleSet:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AddResourceFile(self, name: str, fileName: str) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param fileName:
         """
     @overload
     def AddResourceFile(self, name: str, fileName: str, attribute: ResourceAttributes) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param fileName:
         :param attribute:
         """
     @overload
     def CreateInstance(self, typeName: str) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :return:
         """
     @overload
     def CreateInstance(self, typeName: str, ignoreCase: bool) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :param ignoreCase:
         :return:
         """
@@ -285,9 +219,7 @@ class AssemblyBuilder(
         culture: CultureInfo,
         activationAttributes: Array[object],
     ) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :param ignoreCase:
         :param bindingAttr:
         :param binder:
@@ -301,9 +233,7 @@ class AssemblyBuilder(
     def DefineDynamicAssembly(
         cls, name: AssemblyName, access: AssemblyBuilderAccess
     ) -> AssemblyBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param access:
         :return:
         """
@@ -315,50 +245,38 @@ class AssemblyBuilder(
         access: AssemblyBuilderAccess,
         assemblyAttributes: IEnumerable[CustomAttributeBuilder],
     ) -> AssemblyBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param access:
         :param assemblyAttributes:
         :return:
         """
     @overload
     def DefineDynamicModule(self, name: str) -> ModuleBuilder:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def DefineDynamicModule(self, name: str, emitSymbolInfo: bool) -> ModuleBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param emitSymbolInfo:
         :return:
         """
     @overload
     def DefineDynamicModule(self, name: str, fileName: str) -> ModuleBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param fileName:
         :return:
         """
     @overload
     def DefineDynamicModule(self, name: str, fileName: str, emitSymbolInfo: bool) -> ModuleBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param fileName:
         :param emitSymbolInfo:
         :return:
         """
     @overload
     def DefineResource(self, name: str, description: str, fileName: str) -> IResourceWriter:
-        """
-
-        :param name:
+        """:param name:
         :param description:
         :param fileName:
         :return:
@@ -367,9 +285,7 @@ class AssemblyBuilder(
     def DefineResource(
         self, name: str, description: str, fileName: str, attribute: ResourceAttributes
     ) -> IResourceWriter:
-        """
-
-        :param name:
+        """:param name:
         :param description:
         :param fileName:
         :param attribute:
@@ -377,26 +293,23 @@ class AssemblyBuilder(
         """
     @overload
     def DefineUnmanagedResource(self, resource: Array[int]) -> None:
-        """
-
-        :param resource:
-        """
+        """:param resource:"""
     @overload
     def DefineUnmanagedResource(self, resourceFileName: str) -> None:
-        """
-
-        :param resourceFileName:
-        """
+        """:param resourceFileName:"""
     @overload
     def DefineVersionInfoResource(self) -> None:
         """"""
     @overload
     def DefineVersionInfoResource(
-        self, product: str, productVersion: str, company: str, copyright: str, trademark: str
+        self,
+        product: str,
+        productVersion: str,
+        company: str,
+        copyright: str,
+        trademark: str,
     ) -> None:
-        """
-
-        :param product:
+        """:param product:
         :param productVersion:
         :param company:
         :param copyright:
@@ -404,101 +317,66 @@ class AssemblyBuilder(
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDynamicModule(self, name: str) -> ModuleBuilder:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetExportedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetFile(self, name: str) -> FileStream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetFiles(self) -> Array[FileStream]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetFiles(self, getResourceModules: bool) -> Array[FileStream]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -506,162 +384,105 @@ class AssemblyBuilder(
         """
     @overload
     def GetLoadedModules(self) -> Array[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetLoadedModules(self, getResourceModules: bool) -> Array[Module]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     def GetManifestResourceInfo(self, resourceName: str) -> ManifestResourceInfo:
-        """
-
-        :param resourceName:
+        """:param resourceName:
         :return:
         """
     def GetManifestResourceNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetManifestResourceStream(self, name: str) -> Stream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetManifestResourceStream(self, type: Type, name: str) -> Stream:
-        """
-
-        :param type:
+        """:param type:
         :param name:
         :return:
         """
     def GetModule(self, name: str) -> Module:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetModules(self) -> Array[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetModules(self, getResourceModules: bool) -> Array[Module]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     @overload
     def GetName(self) -> AssemblyName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetName(self, copiedName: bool) -> AssemblyName:
-        """
-
-        :param copiedName:
+        """:param copiedName:
         :return:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetReferencedAssemblies(self) -> Array[AssemblyName]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSatelliteAssembly(self, culture: CultureInfo) -> Assembly:
-        """
-
-        :param culture:
+        """:param culture:
         :return:
         """
     @overload
     def GetSatelliteAssembly(self, culture: CultureInfo, version: Version) -> Assembly:
-        """
-
-        :param culture:
+        """:param culture:
         :param version:
         :return:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :param ignoreCase:
         :return:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def GetTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -673,9 +494,7 @@ class AssemblyBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -686,25 +505,19 @@ class AssemblyBuilder(
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def LoadModule(self, moduleName: str, rawModule: Array[int]) -> Module:
-        """
-
-        :param moduleName:
+        """:param moduleName:
         :param rawModule:
         :return:
         """
@@ -712,19 +525,14 @@ class AssemblyBuilder(
     def LoadModule(
         self, moduleName: str, rawModule: Array[int], rawSymbolStore: Array[int]
     ) -> Module:
-        """
-
-        :param moduleName:
+        """:param moduleName:
         :param rawModule:
         :param rawSymbolStore:
         :return:
         """
     @overload
     def Save(self, assemblyFileName: str) -> None:
-        """
-
-        :param assemblyFileName:
-        """
+        """:param assemblyFileName:"""
     @overload
     def Save(
         self,
@@ -732,50 +540,32 @@ class AssemblyBuilder(
         portableExecutableKind: PortableExecutableKinds,
         imageFileMachine: ImageFileMachine,
     ) -> None:
-        """
-
-        :param assemblyFileName:
+        """:param assemblyFileName:
         :param portableExecutableKind:
         :param imageFileMachine:
         """
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     @overload
     def SetEntryPoint(self, entryMethod: MethodInfo) -> None:
-        """
-
-        :param entryMethod:
-        """
+        """:param entryMethod:"""
     @overload
     def SetEntryPoint(self, entryMethod: MethodInfo, fileKind: PEFileKinds) -> None:
-        """
-
-        :param entryMethod:
+        """:param entryMethod:
         :param fileKind:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     ModuleResolve: EventType[ModuleResolveEventHandler] = ...
     """"""
 
@@ -797,26 +587,15 @@ class AssemblyBuilderData(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConstructorBuilder(
     ConstructorInfo,
@@ -830,493 +609,274 @@ class ConstructorBuilder(
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitLocals(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitLocals.setter
     def InitLocals(self, value: bool) -> None: ...
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethod(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethodDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Signature(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddDeclarativeSecurity(self, action: SecurityAction, pset: PermissionSet) -> None:
-        """
-
-        :param action:
+        """:param action:
         :param pset:
         """
     def DefineParameter(
         self, iSequence: int, attributes: ParameterAttributes, strParamName: str
     ) -> ParameterBuilder:
-        """
-
-        :param iSequence:
+        """:param iSequence:
         :param attributes:
         :param strParamName:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -1326,9 +886,7 @@ class ConstructorBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -1338,9 +896,7 @@ class ConstructorBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -1350,9 +906,7 @@ class ConstructorBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -1360,148 +914,86 @@ class ConstructorBuilder(
         """
     @overload
     def GetILGenerator(self) -> ILGenerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetILGenerator(self, streamSize: int) -> ILGenerator:
-        """
-
-        :param streamSize:
+        """:param streamSize:
         :return:
         """
     def GetMethodBody(self) -> MethodBody:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetModule(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetToken(self) -> MethodToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, parameters: Array[object]) -> object:
-        """
-
-        :param parameters:
+        """:param parameters:
         :return:
         """
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -1513,9 +1005,7 @@ class ConstructorBuilder(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param invokeAttr:
+        """:param invokeAttr:
         :param binder:
         :param parameters:
         :param culture:
@@ -1530,9 +1020,7 @@ class ConstructorBuilder(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -1551,9 +1039,7 @@ class ConstructorBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1574,9 +1060,7 @@ class ConstructorBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1597,9 +1081,7 @@ class ConstructorBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1620,9 +1102,7 @@ class ConstructorBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1639,9 +1119,7 @@ class ConstructorBuilder(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -1649,9 +1127,7 @@ class ConstructorBuilder(
         :return:
         """
     def Invoke_3(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -1662,70 +1138,50 @@ class ConstructorBuilder(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param invokeAttr:
+        """:param invokeAttr:
         :param binder:
         :param parameters:
         :param culture:
         :return:
         """
     def Invoke_5(self, parameters: Array[object]) -> object:
-        """
-
-        :param parameters:
+        """:param parameters:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetImplementationFlags(self, attributes: MethodImplAttributes) -> None:
-        """
-
-        :param attributes:
-        """
+        """:param attributes:"""
     def SetMethodBody(
         self,
         il: Array[int],
@@ -1734,503 +1190,285 @@ class ConstructorBuilder(
         exceptionHandlers: IEnumerable[ExceptionHandler],
         tokenFixups: IEnumerable[int],
     ) -> None:
-        """
-
-        :param il:
+        """:param il:
         :param maxStack:
         :param localSignature:
         :param exceptionHandlers:
         :param tokenFixups:
         """
     def SetSymCustomAttribute(self, name: str, data: Array[int]) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param data:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ConstructorOnTypeBuilderInstantiation(
-    ConstructorInfo, ICustomAttributeProvider, _ConstructorInfo, _MemberInfo, _MethodBase
+    ConstructorInfo,
+    ICustomAttributeProvider,
+    _ConstructorInfo,
+    _MemberInfo,
+    _MethodBase,
 ):
     """"""
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethod(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethodDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -2240,9 +1478,7 @@ class ConstructorOnTypeBuilderInstantiation(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -2252,121 +1488,73 @@ class ConstructorOnTypeBuilderInstantiation(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetMethodBody(self) -> MethodBody:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, parameters: Array[object]) -> object:
-        """
-
-        :param parameters:
+        """:param parameters:
         :return:
         """
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -2378,9 +1566,7 @@ class ConstructorOnTypeBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param invokeAttr:
+        """:param invokeAttr:
         :param binder:
         :param parameters:
         :param culture:
@@ -2395,9 +1581,7 @@ class ConstructorOnTypeBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -2416,9 +1600,7 @@ class ConstructorOnTypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2439,9 +1621,7 @@ class ConstructorOnTypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2462,9 +1642,7 @@ class ConstructorOnTypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2481,9 +1659,7 @@ class ConstructorOnTypeBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -2491,9 +1667,7 @@ class ConstructorOnTypeBuilderInstantiation(
         :return:
         """
     def Invoke_3(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -2504,85 +1678,59 @@ class ConstructorOnTypeBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param invokeAttr:
+        """:param invokeAttr:
         :param binder:
         :param parameters:
         :param culture:
         :return:
         """
     def Invoke_5(self, parameters: Array[object]) -> object:
-        """
-
-        :param parameters:
+        """:param parameters:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class CustomAttributeBuilder(Object, _CustomAttributeBuilder):
     """"""
 
     @overload
     def __init__(self, con: ConstructorInfo, constructorArgs: Array[object]):
-        """
-
-        :param con:
+        """:param con:
         :param constructorArgs:
         """
     @overload
@@ -2593,9 +1741,7 @@ class CustomAttributeBuilder(Object, _CustomAttributeBuilder):
         namedFields: Array[FieldInfo],
         fieldValues: Array[object],
     ):
-        """
-
-        :param con:
+        """:param con:
         :param constructorArgs:
         :param namedFields:
         :param fieldValues:
@@ -2608,9 +1754,7 @@ class CustomAttributeBuilder(Object, _CustomAttributeBuilder):
         namedProperties: Array[PropertyInfo],
         propertyValues: Array[object],
     ):
-        """
-
-        :param con:
+        """:param con:
         :param constructorArgs:
         :param namedProperties:
         :param propertyValues:
@@ -2625,9 +1769,7 @@ class CustomAttributeBuilder(Object, _CustomAttributeBuilder):
         namedFields: Array[FieldInfo],
         fieldValues: Array[object],
     ):
-        """
-
-        :param con:
+        """:param con:
         :param constructorArgs:
         :param namedProperties:
         :param propertyValues:
@@ -2635,44 +1777,29 @@ class CustomAttributeBuilder(Object, _CustomAttributeBuilder):
         :param fieldValues:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2684,9 +1811,7 @@ class CustomAttributeBuilder(Object, _CustomAttributeBuilder):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2696,10 +1821,7 @@ class CustomAttributeBuilder(Object, _CustomAttributeBuilder):
         :param puArgErr:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DynamicAssemblyFlags(Enum):
     """"""
@@ -2722,22 +1844,13 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
 
     @property
     def ILOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginCatchBlock(self, exceptionType: Type) -> None:
-        """
-
-        :param exceptionType:
-        """
+        """:param exceptionType:"""
     def BeginExceptFilterBlock(self) -> None:
         """"""
     def BeginExceptionBlock(self) -> Label:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginFaultBlock(self) -> None:
         """"""
     def BeginFinallyBlock(self) -> None:
@@ -2746,148 +1859,107 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
         """"""
     @overload
     def DeclareLocal(self, localType: Type) -> LocalBuilder:
-        """
-
-        :param localType:
+        """:param localType:
         :return:
         """
     @overload
     def DeclareLocal(self, localType: Type, pinned: bool) -> LocalBuilder:
-        """
-
-        :param localType:
+        """:param localType:
         :param pinned:
         :return:
         """
     def DefineLabel(self) -> Label:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Emit(self, opcode: OpCode) -> None:
-        """
-
-        :param opcode:
-        """
+        """:param opcode:"""
     @overload
     def Emit(self, opcode: OpCode, label: Label) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param label:
         """
     @overload
     def Emit(self, opcode: OpCode, local: LocalBuilder) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param local:
         """
     @overload
     def Emit(self, opcode: OpCode, signature: SignatureHelper) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param signature:
         """
     @overload
     def Emit(self, opcode: OpCode, con: ConstructorInfo) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param con:
         """
     @overload
     def Emit(self, opcode: OpCode, field: FieldInfo) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param field:
         """
     @overload
     def Emit(self, opcode: OpCode, meth: MethodInfo) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param meth:
         """
     @overload
     def Emit(self, opcode: OpCode, labels: Array[Label]) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param labels:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: float) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: float) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, str: str) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param str:
         """
     @overload
     def Emit(self, opcode: OpCode, cls: Type) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param cls:
         """
     def EmitCall(
-        self, opcode: OpCode, methodInfo: MethodInfo, optionalParameterTypes: Array[Type]
+        self,
+        opcode: OpCode,
+        methodInfo: MethodInfo,
+        optionalParameterTypes: Array[Type],
     ) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param methodInfo:
         :param optionalParameterTypes:
         """
@@ -2899,9 +1971,7 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param unmanagedCallConv:
         :param returnType:
         :param parameterTypes:
@@ -2915,9 +1985,7 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
         parameterTypes: Array[Type],
         optionalParameterTypes: Array[Type],
     ) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param callingConvention:
         :param returnType:
         :param parameterTypes:
@@ -2925,65 +1993,41 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
         """
     @overload
     def EmitWriteLine(self, localBuilder: LocalBuilder) -> None:
-        """
-
-        :param localBuilder:
-        """
+        """:param localBuilder:"""
     @overload
     def EmitWriteLine(self, fld: FieldInfo) -> None:
-        """
-
-        :param fld:
-        """
+        """:param fld:"""
     @overload
     def EmitWriteLine(self, value: str) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def EndExceptionBlock(self) -> None:
         """"""
     def EndScope(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -2995,9 +2039,7 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -3007,10 +2049,7 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
         :param puArgErr:
         """
     def MarkLabel(self, loc: Label) -> None:
-        """
-
-        :param loc:
-        """
+        """:param loc:"""
     def MarkSequencePoint(
         self,
         document: ISymbolDocumentWriter,
@@ -3019,176 +2058,117 @@ class DynamicILGenerator(ILGenerator, _ILGenerator):
         endLine: int,
         endColumn: int,
     ) -> None:
-        """
-
-        :param document:
+        """:param document:
         :param startLine:
         :param startColumn:
         :param endLine:
         :param endColumn:
         """
     def ThrowException(self, excType: Type) -> None:
-        """
-
-        :param excType:
-        """
+        """:param excType:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UsingNamespace(self, usingNamespace: str) -> None:
-        """
-
-        :param usingNamespace:
-        """
+        """:param usingNamespace:"""
 
 class DynamicILInfo(Object):
     """"""
 
     @property
     def DynamicMethod(self) -> DynamicMethod:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTokenFor(self, method: DynamicMethod) -> int:
-        """
-
-        :param method:
+        """:param method:
         :return:
         """
     @overload
     def GetTokenFor(self, signature: Array[int]) -> int:
-        """
-
-        :param signature:
+        """:param signature:
         :return:
         """
     @overload
     def GetTokenFor(self, field: RuntimeFieldHandle) -> int:
-        """
-
-        :param field:
+        """:param field:
         :return:
         """
     @overload
     def GetTokenFor(self, method: RuntimeMethodHandle) -> int:
-        """
-
-        :param method:
+        """:param method:
         :return:
         """
     @overload
     def GetTokenFor(self, type: RuntimeTypeHandle) -> int:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def GetTokenFor(self, literal: str) -> int:
-        """
-
-        :param literal:
+        """:param literal:
         :return:
         """
     @overload
     def GetTokenFor(self, field: RuntimeFieldHandle, contextType: RuntimeTypeHandle) -> int:
-        """
-
-        :param field:
+        """:param field:
         :param contextType:
         :return:
         """
     @overload
     def GetTokenFor(self, method: RuntimeMethodHandle, contextType: RuntimeTypeHandle) -> int:
-        """
-
-        :param method:
+        """:param method:
         :param contextType:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def SetCode(self, code: Array[int], maxStackSize: int) -> None:
-        """
-
-        :param code:
+        """:param code:
         :param maxStackSize:
         """
     @overload
     def SetCode(self, code: int, codeSize: int, maxStackSize: int) -> None:
-        """
-
-        :param code:
+        """:param code:
         :param codeSize:
         :param maxStackSize:
         """
     @overload
     def SetExceptions(self, exceptions: Array[int]) -> None:
-        """
-
-        :param exceptions:
-        """
+        """:param exceptions:"""
     @overload
     def SetExceptions(self, exceptions: int, exceptionsSize: int) -> None:
-        """
-
-        :param exceptions:
+        """:param exceptions:
         :param exceptionsSize:
         """
     @overload
     def SetLocalSignature(self, localSignature: Array[int]) -> None:
-        """
-
-        :param localSignature:
-        """
+        """:param localSignature:"""
     @overload
     def SetLocalSignature(self, localSignature: int, signatureSize: int) -> None:
-        """
-
-        :param localSignature:
+        """:param localSignature:
         :param signatureSize:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBase, _MethodInfo):
     """"""
 
     @overload
     def __init__(self, name: str, returnType: Type, parameterTypes: Array[Type]):
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param parameterTypes:
         """
     @overload
     def __init__(self, name: str, returnType: Type, parameterTypes: Array[Type], m: Module):
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param parameterTypes:
         :param m:
@@ -3201,18 +2181,14 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         parameterTypes: Array[Type],
         restrictedSkipVisibility: bool,
     ):
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param parameterTypes:
         :param restrictedSkipVisibility:
         """
     @overload
     def __init__(self, name: str, returnType: Type, parameterTypes: Array[Type], owner: Type):
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param parameterTypes:
         :param owner:
@@ -3226,9 +2202,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         m: Module,
         skipVisibility: bool,
     ):
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param parameterTypes:
         :param m:
@@ -3243,9 +2217,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         owner: Type,
         skipVisibility: bool,
     ):
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param parameterTypes:
         :param owner:
@@ -3262,9 +2234,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         m: Module,
         skipVisibility: bool,
     ):
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -3283,9 +2253,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         owner: Type,
         skipVisibility: bool,
     ):
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -3295,523 +2263,290 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         """
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitLocals(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitLocals.setter
     def InitLocals(self, value: bool) -> None: ...
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethod(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethodDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnParameter(self) -> ParameterInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnTypeCustomAttributes(self) -> ICustomAttributeProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateDelegate(self, delegateType: Type) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :return:
         """
     @overload
     def CreateDelegate(self, delegateType: Type, target: object) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :param target:
         :return:
         """
     def DefineParameter(
         self, position: int, attributes: ParameterAttributes, parameterName: str
     ) -> ParameterBuilder:
-        """
-
-        :param position:
+        """:param position:
         :param attributes:
         :param parameterName:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def GetBaseDefinition(self) -> MethodInfo:
-        """
-
+        """:return:"""
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
-    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDynamicILInfo(self) -> DynamicILInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericMethodDefinition(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -3821,9 +2556,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -3833,9 +2566,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -3843,125 +2574,74 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         """
     @overload
     def GetILGenerator(self) -> ILGenerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetILGenerator(self, streamSize: int) -> ILGenerator:
-        """
-
-        :param streamSize:
+        """:param streamSize:
         :return:
         """
     def GetMethodBody(self) -> MethodBody:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -3974,9 +2654,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -3992,9 +2670,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -4013,9 +2689,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4036,9 +2710,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4059,9 +2731,7 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -4072,721 +2742,403 @@ class DynamicMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBa
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def MakeGenericMethod(self, typeArguments: Array[Type]) -> MethodInfo:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DynamicResolver(Resolver):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class DynamicScope(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTokenFor(self, method: DynamicMethod) -> int:
-        """
-
-        :param method:
+        """:param method:
         :return:
         """
     @overload
     def GetTokenFor(self, signature: Array[int]) -> int:
-        """
-
-        :param signature:
+        """:param signature:
         :return:
         """
     @overload
     def GetTokenFor(self, field: RuntimeFieldHandle) -> int:
-        """
-
-        :param field:
+        """:param field:
         :return:
         """
     @overload
     def GetTokenFor(self, method: RuntimeMethodHandle) -> int:
-        """
-
-        :param method:
+        """:param method:
         :return:
         """
     @overload
     def GetTokenFor(self, type: RuntimeTypeHandle) -> int:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @overload
     def GetTokenFor(self, literal: str) -> int:
-        """
-
-        :param literal:
+        """:param literal:
         :return:
         """
     @overload
     def GetTokenFor(self, field: RuntimeFieldHandle, typeContext: RuntimeTypeHandle) -> int:
-        """
-
-        :param field:
+        """:param field:
         :param typeContext:
         :return:
         """
     @overload
     def GetTokenFor(self, method: RuntimeMethodHandle, typeContext: RuntimeTypeHandle) -> int:
-        """
-
-        :param method:
+        """:param method:
         :param typeContext:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EnumBuilder(
-    TypeInfo, ICustomAttributeProvider, IReflect, IReflectableType, _EnumBuilder, _MemberInfo, _Type
+    TypeInfo,
+    ICustomAttributeProvider,
+    IReflect,
+    IReflectableType,
+    _EnumBuilder,
+    _MemberInfo,
+    _Type,
 ):
     """"""
 
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BaseType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredConstructors(self) -> IEnumerable[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredEvents(self) -> IEnumerable[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredFields(self) -> IEnumerable[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMembers(self) -> IEnumerable[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMethods(self) -> IEnumerable[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredNestedTypes(self) -> IEnumerable[TypeInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredProperties(self) -> IEnumerable[PropertyInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringMethod(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultBinder(cls) -> Binder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GUID(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterAttributes(self) -> GenericParameterAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterPosition(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeParameters(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasElementType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementedInterfaces(self) -> IEnumerable[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAnsiClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsArray(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCOMObject(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructedGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContextful(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsExplicitLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericParameter(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericTypeDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsImport(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLayoutSequential(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMarshalByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNested(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamANDAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamORAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPointer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrimitive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSealed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSerializable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsUnicodeClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValueType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVisible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StructLayoutAttribute(self) -> StructLayoutAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeHandle(self) -> RuntimeTypeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeInitializer(self) -> ConstructorInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeToken(self) -> TypeToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingField(self) -> FieldBuilder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateTypeInfo(self) -> TypeInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DefineLiteral(self, literalName: str, literalValue: object) -> FieldBuilder:
-        """
-
-        :param literalName:
+        """:param literalName:
         :param literalValue:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, o: Type) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def FindInterfaces(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
@@ -4797,24 +3149,17 @@ class EnumBuilder(
         filter: MemberFilter,
         filterCriteria: object,
     ) -> Array[MemberInfo]:
-        """
-
-        :param memberType:
+        """:param memberType:
         :param bindingAttr:
         :param filter:
         :param filterCriteria:
         :return:
         """
     def GetArrayRank(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructor(self, types: Array[Type]) -> ConstructorInfo:
-        """
-
-        :param types:
+        """:param types:
         :return:
         """
     @overload
@@ -4825,9 +3170,7 @@ class EnumBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param types:
         :param modifiers:
@@ -4842,9 +3185,7 @@ class EnumBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param callConvention:
         :param types:
@@ -4853,245 +3194,154 @@ class EnumBuilder(
         """
     @overload
     def GetConstructors(self) -> Array[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructors(self, bindingAttr: BindingFlags) -> Array[ConstructorInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDeclaredEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethods(self, name: str) -> IEnumerable[MethodInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredNestedType(self, name: str) -> TypeInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDefaultMembers(self) -> Array[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetElementType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumName(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def GetEnumNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumUnderlyingType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumValues(self) -> Array:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetEvent(self, name: str, bindingAttr: BindingFlags) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetEvents(self) -> Array[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, bindingAttr: BindingFlags) -> Array[EventInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericParameterConstraints(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericTypeDefinition(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -5101,9 +3351,7 @@ class EnumBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -5113,9 +3361,7 @@ class EnumBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -5123,50 +3369,35 @@ class EnumBuilder(
         """
     @overload
     def GetInterface(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetInterface(self, name: str, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetInterfaceMap(self, interfaceType: Type) -> InterfaceMapping:
-        """
-
-        :param interfaceType:
+        """:param interfaceType:
         :return:
         """
     def GetInterfaces(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMember(self, name: str) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -5174,61 +3405,44 @@ class EnumBuilder(
     def GetMember(
         self, name: str, type: MemberTypes, bindingAttr: BindingFlags
     ) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param type:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self) -> Array[MemberInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
@@ -5236,9 +3450,7 @@ class EnumBuilder(
     def GetMethod(
         self, name: str, types: Array[Type], modifiers: Array[ParameterModifier]
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :param modifiers:
         :return:
@@ -5252,9 +3464,7 @@ class EnumBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -5270,9 +3480,7 @@ class EnumBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -5289,9 +3497,7 @@ class EnumBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -5301,127 +3507,94 @@ class EnumBuilder(
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetNestedType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetNestedType(self, name: str, bindingAttr: BindingFlags) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetNestedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetNestedTypes(self, bindingAttr: BindingFlags) -> Array[Type]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self) -> Array[PropertyInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :return:
         """
     @overload
     def GetProperty(
-        self, name: str, returnType: Type, types: Array[Type], modifiers: Array[ParameterModifier]
+        self,
+        name: str,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :param modifiers:
@@ -5437,9 +3610,7 @@ class EnumBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -5457,9 +3628,7 @@ class EnumBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -5469,70 +3638,43 @@ class EnumBuilder(
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self) -> TypeInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(
         self,
@@ -5545,9 +3687,7 @@ class EnumBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5568,9 +3708,7 @@ class EnumBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5591,9 +3729,7 @@ class EnumBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5611,9 +3747,7 @@ class EnumBuilder(
         target: object,
         args: Array[object],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -5630,9 +3764,7 @@ class EnumBuilder(
         args: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -5652,9 +3784,7 @@ class EnumBuilder(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -5676,9 +3806,7 @@ class EnumBuilder(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -5690,179 +3818,113 @@ class EnumBuilder(
         """
     @overload
     def IsAssignableFrom(self, typeInfo: TypeInfo) -> bool:
-        """
-
-        :param typeInfo:
+        """:param typeInfo:
         :return:
         """
     @overload
     def IsAssignableFrom(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsEnumDefined(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def IsEquivalentTo(self, other: Type) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def IsInstanceOfType(self, o: object) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def IsSubclassOf(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def MakeArrayType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def MakeArrayType(self, rank: int) -> Type:
-        """
-
-        :param rank:
+        """:param rank:
         :return:
         """
     def MakeByRefType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MakeGenericType(self, typeArguments: Array[Type]) -> Type:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     def MakePointerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventBuilder(Object, _EventBuilder):
     """"""
 
     def AddOtherMethod(self, mdBuilder: MethodBuilder) -> None:
-        """
-
-        :param mdBuilder:
-        """
+        """:param mdBuilder:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEventToken(self) -> EventToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5874,9 +3936,7 @@ class EventBuilder(Object, _EventBuilder):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -5886,38 +3946,21 @@ class EventBuilder(Object, _EventBuilder):
         :param puArgErr:
         """
     def SetAddOnMethod(self, mdBuilder: MethodBuilder) -> None:
-        """
-
-        :param mdBuilder:
-        """
+        """:param mdBuilder:"""
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetRaiseMethod(self, mdBuilder: MethodBuilder) -> None:
-        """
-
-        :param mdBuilder:
-        """
+        """:param mdBuilder:"""
     def SetRemoveOnMethod(self, mdBuilder: MethodBuilder) -> None:
-        """
-
-        :param mdBuilder:
-        """
+        """:param mdBuilder:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class EventToken(ValueType):
     """"""
@@ -5929,64 +3972,40 @@ class EventToken(ValueType):
     """
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: EventToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: EventToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: EventToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: EventToken, b: EventToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: EventToken, b: EventToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -6004,9 +4023,7 @@ class ExceptionHandler(ValueType, IEquatable[ExceptionHandler]):
         kind: ExceptionHandlingClauseOptions,
         exceptionTypeToken: int,
     ):
-        """
-
-        :param tryOffset:
+        """:param tryOffset:
         :param tryLength:
         :param filterOffset:
         :param handlerOffset:
@@ -6016,100 +4033,58 @@ class ExceptionHandler(ValueType, IEquatable[ExceptionHandler]):
         """
     @property
     def ExceptionTypeToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FilterOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HandlerLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HandlerOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Kind(self) -> ExceptionHandlingClauseOptions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TryLength(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TryOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, other: ExceptionHandler) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: ExceptionHandler) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: ExceptionHandler) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, left: ExceptionHandler, right: ExceptionHandler) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
     @classmethod
     def op_Inequality(cls, left: ExceptionHandler, right: ExceptionHandler) -> bool:
-        """
-
-        :param left:
+        """:param left:
         :param right:
         :return:
         """
@@ -6119,274 +4094,155 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
 
     @property
     def Attributes(self) -> FieldAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldHandle(self) -> RuntimeFieldHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInitOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLiteral(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotSerialized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPinvokeImpl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -6396,9 +4252,7 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -6408,104 +4262,62 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetOptionalCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawConstantValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRequiredCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetToken(self) -> FieldToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def GetValue(self, obj: object) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetValueDirect(self, obj: TypedReference) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -6520,9 +4332,7 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6543,9 +4353,7 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6566,9 +4374,7 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -6579,61 +4385,39 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def SetConstant(self, defaultValue: object) -> None:
-        """
-
-        :param defaultValue:
-        """
+        """:param defaultValue:"""
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetMarshal(self, unmanagedMarshal: UnmanagedMarshal) -> None:
-        """
-
-        :param unmanagedMarshal:
-        """
+        """:param unmanagedMarshal:"""
     def SetOffset(self, iOffset: int) -> None:
-        """
-
-        :param iOffset:
-        """
+        """:param iOffset:"""
     @overload
     def SetValue(self, obj: object, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
@@ -6645,312 +4429,180 @@ class FieldBuilder(FieldInfo, ICustomAttributeProvider, _FieldBuilder, _FieldInf
         binder: Binder,
         culture: CultureInfo,
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param invokeAttr:
         :param binder:
         :param culture:
         """
     def SetValueDirect(self, obj: TypedReference, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FieldOnTypeBuilderInstantiation(FieldInfo, ICustomAttributeProvider, _FieldInfo, _MemberInfo):
     """"""
 
     @property
     def Attributes(self) -> FieldAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldHandle(self) -> RuntimeFieldHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInitOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLiteral(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotSerialized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPinvokeImpl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -6960,85 +4612,51 @@ class FieldOnTypeBuilderInstantiation(FieldInfo, ICustomAttributeProvider, _Fiel
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetOptionalCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawConstantValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRequiredCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def GetValue(self, obj: object) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetValueDirect(self, obj: TypedReference) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -7053,9 +4671,7 @@ class FieldOnTypeBuilderInstantiation(FieldInfo, ICustomAttributeProvider, _Fiel
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7076,9 +4692,7 @@ class FieldOnTypeBuilderInstantiation(FieldInfo, ICustomAttributeProvider, _Fiel
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -7089,33 +4703,25 @@ class FieldOnTypeBuilderInstantiation(FieldInfo, ICustomAttributeProvider, _Fiel
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def SetValue(self, obj: object, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
@@ -7127,38 +4733,25 @@ class FieldOnTypeBuilderInstantiation(FieldInfo, ICustomAttributeProvider, _Fiel
         binder: Binder,
         culture: CultureInfo,
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param invokeAttr:
         :param binder:
         :param culture:
         """
     def SetValueDirect(self, obj: TypedReference, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FieldToken(ValueType):
     """"""
@@ -7170,64 +4763,40 @@ class FieldToken(ValueType):
     """
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: FieldToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: FieldToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: FieldToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: FieldToken, b: FieldToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: FieldToken, b: FieldToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -7258,51 +4827,29 @@ class GenericFieldInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GenericMethodInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class GenericTypeParameterBuilder(
     TypeInfo, ICustomAttributeProvider, IReflect, IReflectableType, _MemberInfo, _Type
@@ -7311,516 +4858,266 @@ class GenericTypeParameterBuilder(
 
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BaseType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredConstructors(self) -> IEnumerable[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredEvents(self) -> IEnumerable[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredFields(self) -> IEnumerable[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMembers(self) -> IEnumerable[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMethods(self) -> IEnumerable[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredNestedTypes(self) -> IEnumerable[TypeInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredProperties(self) -> IEnumerable[PropertyInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringMethod(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultBinder(cls) -> Binder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GUID(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterAttributes(self) -> GenericParameterAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterPosition(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeParameters(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasElementType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementedInterfaces(self) -> IEnumerable[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAnsiClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsArray(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCOMObject(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructedGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContextful(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsExplicitLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericParameter(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericTypeDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsImport(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLayoutSequential(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMarshalByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNested(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamANDAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamORAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPointer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrimitive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSealed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSerializable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsUnicodeClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValueType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVisible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StructLayoutAttribute(self) -> StructLayoutAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeHandle(self) -> RuntimeTypeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeInitializer(self) -> ConstructorInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, o: Type) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def FindInterfaces(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
@@ -7831,24 +5128,17 @@ class GenericTypeParameterBuilder(
         filter: MemberFilter,
         filterCriteria: object,
     ) -> Array[MemberInfo]:
-        """
-
-        :param memberType:
+        """:param memberType:
         :param bindingAttr:
         :param filter:
         :param filterCriteria:
         :return:
         """
     def GetArrayRank(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructor(self, types: Array[Type]) -> ConstructorInfo:
-        """
-
-        :param types:
+        """:param types:
         :return:
         """
     @overload
@@ -7859,9 +5149,7 @@ class GenericTypeParameterBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param types:
         :param modifiers:
@@ -7876,9 +5164,7 @@ class GenericTypeParameterBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param callConvention:
         :param types:
@@ -7887,245 +5173,154 @@ class GenericTypeParameterBuilder(
         """
     @overload
     def GetConstructors(self) -> Array[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructors(self, bindingAttr: BindingFlags) -> Array[ConstructorInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDeclaredEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethods(self, name: str) -> IEnumerable[MethodInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredNestedType(self, name: str) -> TypeInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDefaultMembers(self) -> Array[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetElementType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumName(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def GetEnumNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumUnderlyingType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumValues(self) -> Array:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetEvent(self, name: str, bindingAttr: BindingFlags) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetEvents(self) -> Array[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, bindingAttr: BindingFlags) -> Array[EventInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericParameterConstraints(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericTypeDefinition(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -8135,9 +5330,7 @@ class GenericTypeParameterBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -8145,50 +5338,35 @@ class GenericTypeParameterBuilder(
         """
     @overload
     def GetInterface(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetInterface(self, name: str, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetInterfaceMap(self, interfaceType: Type) -> InterfaceMapping:
-        """
-
-        :param interfaceType:
+        """:param interfaceType:
         :return:
         """
     def GetInterfaces(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMember(self, name: str) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -8196,61 +5374,44 @@ class GenericTypeParameterBuilder(
     def GetMember(
         self, name: str, type: MemberTypes, bindingAttr: BindingFlags
     ) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param type:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self) -> Array[MemberInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
@@ -8258,9 +5419,7 @@ class GenericTypeParameterBuilder(
     def GetMethod(
         self, name: str, types: Array[Type], modifiers: Array[ParameterModifier]
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :param modifiers:
         :return:
@@ -8274,9 +5433,7 @@ class GenericTypeParameterBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -8292,9 +5449,7 @@ class GenericTypeParameterBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -8311,9 +5466,7 @@ class GenericTypeParameterBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -8323,127 +5476,94 @@ class GenericTypeParameterBuilder(
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetNestedType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetNestedType(self, name: str, bindingAttr: BindingFlags) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetNestedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetNestedTypes(self, bindingAttr: BindingFlags) -> Array[Type]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self) -> Array[PropertyInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :return:
         """
     @overload
     def GetProperty(
-        self, name: str, returnType: Type, types: Array[Type], modifiers: Array[ParameterModifier]
+        self,
+        name: str,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :param modifiers:
@@ -8459,9 +5579,7 @@ class GenericTypeParameterBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -8479,9 +5597,7 @@ class GenericTypeParameterBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -8491,56 +5607,34 @@ class GenericTypeParameterBuilder(
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self) -> TypeInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(
         self,
@@ -8553,9 +5647,7 @@ class GenericTypeParameterBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -8576,9 +5668,7 @@ class GenericTypeParameterBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -8596,9 +5686,7 @@ class GenericTypeParameterBuilder(
         target: object,
         args: Array[object],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -8615,9 +5703,7 @@ class GenericTypeParameterBuilder(
         args: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -8637,9 +5723,7 @@ class GenericTypeParameterBuilder(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -8661,9 +5745,7 @@ class GenericTypeParameterBuilder(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -8675,165 +5757,102 @@ class GenericTypeParameterBuilder(
         """
     @overload
     def IsAssignableFrom(self, typeInfo: TypeInfo) -> bool:
-        """
-
-        :param typeInfo:
+        """:param typeInfo:
         :return:
         """
     @overload
     def IsAssignableFrom(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsEnumDefined(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def IsEquivalentTo(self, other: Type) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def IsInstanceOfType(self, o: object) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def IsSubclassOf(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def MakeArrayType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def MakeArrayType(self, rank: int) -> Type:
-        """
-
-        :param rank:
+        """:param rank:
         :return:
         """
     def MakeByRefType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MakeGenericType(self, typeArguments: Array[Type]) -> Type:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     def MakePointerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetBaseTypeConstraint(self, baseTypeConstraint: Type) -> None:
-        """
-
-        :param baseTypeConstraint:
-        """
+        """:param baseTypeConstraint:"""
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetGenericParameterAttributes(
         self, genericParameterAttributes: GenericParameterAttributes
     ) -> None:
-        """
-
-        :param genericParameterAttributes:
-        """
+        """:param genericParameterAttributes:"""
     def SetInterfaceConstraints(self, interfaceConstraints: Array[Type]) -> None:
-        """
-
-        :param interfaceConstraints:
-        """
+        """:param interfaceConstraints:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ILGenerator(Object, _ILGenerator):
     """"""
 
     @property
     def ILOffset(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginCatchBlock(self, exceptionType: Type) -> None:
-        """
-
-        :param exceptionType:
-        """
+        """:param exceptionType:"""
     def BeginExceptFilterBlock(self) -> None:
         """"""
     def BeginExceptionBlock(self) -> Label:
-        """
-
-        :return:
-        """
+        """:return:"""
     def BeginFaultBlock(self) -> None:
         """"""
     def BeginFinallyBlock(self) -> None:
@@ -8842,148 +5861,107 @@ class ILGenerator(Object, _ILGenerator):
         """"""
     @overload
     def DeclareLocal(self, localType: Type) -> LocalBuilder:
-        """
-
-        :param localType:
+        """:param localType:
         :return:
         """
     @overload
     def DeclareLocal(self, localType: Type, pinned: bool) -> LocalBuilder:
-        """
-
-        :param localType:
+        """:param localType:
         :param pinned:
         :return:
         """
     def DefineLabel(self) -> Label:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Emit(self, opcode: OpCode) -> None:
-        """
-
-        :param opcode:
-        """
+        """:param opcode:"""
     @overload
     def Emit(self, opcode: OpCode, label: Label) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param label:
         """
     @overload
     def Emit(self, opcode: OpCode, local: LocalBuilder) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param local:
         """
     @overload
     def Emit(self, opcode: OpCode, signature: SignatureHelper) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param signature:
         """
     @overload
     def Emit(self, opcode: OpCode, con: ConstructorInfo) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param con:
         """
     @overload
     def Emit(self, opcode: OpCode, field: FieldInfo) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param field:
         """
     @overload
     def Emit(self, opcode: OpCode, meth: MethodInfo) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param meth:
         """
     @overload
     def Emit(self, opcode: OpCode, labels: Array[Label]) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param labels:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: float) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: int) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, arg: float) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param arg:
         """
     @overload
     def Emit(self, opcode: OpCode, str: str) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param str:
         """
     @overload
     def Emit(self, opcode: OpCode, cls: Type) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param cls:
         """
     def EmitCall(
-        self, opcode: OpCode, methodInfo: MethodInfo, optionalParameterTypes: Array[Type]
+        self,
+        opcode: OpCode,
+        methodInfo: MethodInfo,
+        optionalParameterTypes: Array[Type],
     ) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param methodInfo:
         :param optionalParameterTypes:
         """
@@ -8995,9 +5973,7 @@ class ILGenerator(Object, _ILGenerator):
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param unmanagedCallConv:
         :param returnType:
         :param parameterTypes:
@@ -9011,9 +5987,7 @@ class ILGenerator(Object, _ILGenerator):
         parameterTypes: Array[Type],
         optionalParameterTypes: Array[Type],
     ) -> None:
-        """
-
-        :param opcode:
+        """:param opcode:
         :param callingConvention:
         :param returnType:
         :param parameterTypes:
@@ -9021,65 +5995,41 @@ class ILGenerator(Object, _ILGenerator):
         """
     @overload
     def EmitWriteLine(self, localBuilder: LocalBuilder) -> None:
-        """
-
-        :param localBuilder:
-        """
+        """:param localBuilder:"""
     @overload
     def EmitWriteLine(self, fld: FieldInfo) -> None:
-        """
-
-        :param fld:
-        """
+        """:param fld:"""
     @overload
     def EmitWriteLine(self, value: str) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def EndExceptionBlock(self) -> None:
         """"""
     def EndScope(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -9091,9 +6041,7 @@ class ILGenerator(Object, _ILGenerator):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -9103,10 +6051,7 @@ class ILGenerator(Object, _ILGenerator):
         :param puArgErr:
         """
     def MarkLabel(self, loc: Label) -> None:
-        """
-
-        :param loc:
-        """
+        """:param loc:"""
     def MarkSequencePoint(
         self,
         document: ISymbolDocumentWriter,
@@ -9115,29 +6060,18 @@ class ILGenerator(Object, _ILGenerator):
         endLine: int,
         endColumn: int,
     ) -> None:
-        """
-
-        :param document:
+        """:param document:
         :param startLine:
         :param startColumn:
         :param endLine:
         :param endColumn:
         """
     def ThrowException(self, excType: Type) -> None:
-        """
-
-        :param excType:
-        """
+        """:param excType:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def UsingNamespace(self, usingNamespace: str) -> None:
-        """
-
-        :param usingNamespace:
-        """
+        """:param usingNamespace:"""
 
 class InternalAssemblyBuilder(
     RuntimeAssembly,
@@ -9151,136 +6085,72 @@ class InternalAssemblyBuilder(
 
     @property
     def CodeBase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DefinedTypes(self) -> IEnumerable[TypeInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EntryPoint(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def EscapedCodeBase(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Evidence(self) -> Evidence:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Evidence(self) -> Evidence:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ExportedTypes(self) -> IEnumerable[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GlobalAssemblyCache(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HostContext(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImageRuntimeVersion(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsDynamic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFullyTrusted(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Location(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ManifestModule(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Modules(self) -> IEnumerable[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PermissionSet(self) -> PermissionSet:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectionOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SecurityRuleSet(self) -> SecurityRuleSet:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateInstance(self, typeName: str) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :return:
         """
     @overload
     def CreateInstance(self, typeName: str, ignoreCase: bool) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :param ignoreCase:
         :return:
         """
@@ -9295,9 +6165,7 @@ class InternalAssemblyBuilder(
         culture: CultureInfo,
         activationAttributes: Array[object],
     ) -> object:
-        """
-
-        :param typeName:
+        """:param typeName:
         :param ignoreCase:
         :param bindingAttr:
         :param binder:
@@ -9308,263 +6176,172 @@ class InternalAssemblyBuilder(
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetExportedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetFile(self, name: str) -> FileStream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetFiles(self) -> Array[FileStream]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetFiles(self, getResourceModules: bool) -> Array[FileStream]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
-    def GetInterface(self, iid: Guid, ppv: IntPtr) -> Tuple[CustomQueryInterfaceResult, IntPtr]:
-        """
-
-        :param iid:
+        """:return:"""
+    def GetInterface(self, iid: Guid, ppv: IntPtr) -> tuple[CustomQueryInterfaceResult, IntPtr]:
+        """:param iid:
         :param ppv:
         :return:
         """
     @overload
     def GetLoadedModules(self) -> Array[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetLoadedModules(self, getResourceModules: bool) -> Array[Module]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     def GetManifestResourceInfo(self, resourceName: str) -> ManifestResourceInfo:
-        """
-
-        :param resourceName:
+        """:param resourceName:
         :return:
         """
     def GetManifestResourceNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetManifestResourceStream(self, name: str) -> Stream:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetManifestResourceStream(self, type: Type, name: str) -> Stream:
-        """
-
-        :param type:
+        """:param type:
         :param name:
         :return:
         """
     def GetModule(self, name: str) -> Module:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetModules(self) -> Array[Module]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetModules(self, getResourceModules: bool) -> Array[Module]:
-        """
-
-        :param getResourceModules:
+        """:param getResourceModules:
         :return:
         """
     @overload
     def GetName(self) -> AssemblyName:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetName(self, copiedName: bool) -> AssemblyName:
-        """
-
-        :param copiedName:
+        """:param copiedName:
         :return:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetReferencedAssemblies(self) -> Array[AssemblyName]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSatelliteAssembly(self, culture: CultureInfo) -> Assembly:
-        """
-
-        :param culture:
+        """:param culture:
         :return:
         """
     @overload
     def GetSatelliteAssembly(self, culture: CultureInfo, version: Version) -> Assembly:
-        """
-
-        :param culture:
+        """:param culture:
         :param version:
         :return:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :return:
         """
     @overload
     def GetType(self, name: str, throwOnError: bool, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param throwOnError:
         :param ignoreCase:
         :return:
         """
     def GetTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def LoadModule(self, moduleName: str, rawModule: Array[int]) -> Module:
-        """
-
-        :param moduleName:
+        """:param moduleName:
         :param rawModule:
         :return:
         """
@@ -9572,25 +6349,17 @@ class InternalAssemblyBuilder(
     def LoadModule(
         self, moduleName: str, rawModule: Array[int], rawSymbolStore: Array[int]
     ) -> Module:
-        """
-
-        :param moduleName:
+        """:param moduleName:
         :param rawModule:
         :param rawSymbolStore:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     ModuleResolve: EventType[ModuleResolveEventHandler] = ...
     """"""
 
@@ -9599,130 +6368,78 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
 
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MDStreamVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ModuleHandle(self) -> ModuleHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ModuleVersionId(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ScopeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FindTypes(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetFields(self, bindingFlags: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingFlags:
+        """:param bindingFlags:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -9730,16 +6447,12 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
@@ -9753,9 +6466,7 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -9765,83 +6476,54 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethods(self, bindingFlags: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingFlags:
+        """:param bindingFlags:
         :return:
         """
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetPEKind(
         self, peKind: PortableExecutableKinds, machine: ImageFileMachine
-    ) -> Tuple[None, PortableExecutableKinds, ImageFileMachine]:
-        """
-
-        :param peKind:
+    ) -> tuple[None, PortableExecutableKinds, ImageFileMachine]:
+        """:param peKind:
         :param machine:
         """
     def GetSignerCertificate(self) -> X509Certificate:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self, className: str) -> Type:
-        """
-
-        :param className:
+        """:param className:
         :return:
         """
     @overload
     def GetType(self, className: str, ignoreCase: bool) -> Type:
-        """
-
-        :param className:
+        """:param className:
         :param ignoreCase:
         :return:
         """
     @overload
     def GetType(self, className: str, throwOnError: bool, ignoreCase: bool) -> Type:
-        """
-
-        :param className:
+        """:param className:
         :param throwOnError:
         :param ignoreCase:
         :return:
         """
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def GetTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -9853,9 +6535,7 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -9865,22 +6545,15 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsResource(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ResolveField(self, metadataToken: int) -> FieldInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -9890,18 +6563,14 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> FieldInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     @overload
     def ResolveMember(self, metadataToken: int) -> MemberInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -9911,18 +6580,14 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> MemberInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     @overload
     def ResolveMethod(self, metadataToken: int) -> MethodBase:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -9932,30 +6597,22 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> MethodBase:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     def ResolveSignature(self, metadataToken: int) -> Array[int]:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     def ResolveString(self, metadataToken: int) -> str:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
     def ResolveType(self, metadataToken: int) -> Type:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -9965,76 +6622,50 @@ class InternalModuleBuilder(RuntimeModule, ICustomAttributeProvider, _Module, IS
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> Type:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Label(ValueType):
     """"""
 
     @overload
     def Equals(self, obj: Label) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: Label) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: Label) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: Label, b: Label) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: Label, b: Label) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -10043,87 +6674,52 @@ class LineNumberInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LocalBuilder(LocalVariableInfo, _LocalBuilder):
     """"""
 
     @property
     def IsPinned(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LocalIndex(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def LocalType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -10135,9 +6731,7 @@ class LocalBuilder(LocalVariableInfo, _LocalBuilder):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10148,592 +6742,339 @@ class LocalBuilder(LocalVariableInfo, _LocalBuilder):
         """
     @overload
     def SetLocalSymInfo(self, name: str) -> None:
-        """
-
-        :param name:
-        """
+        """:param name:"""
     @overload
     def SetLocalSymInfo(self, name: str, startOffset: int, endOffset: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param startOffset:
         :param endOffset:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class LocalSymInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MethodBuilder(
-    MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBase, _MethodBuilder, _MethodInfo
+    MethodInfo,
+    ICustomAttributeProvider,
+    _MemberInfo,
+    _MethodBase,
+    _MethodBuilder,
+    _MethodInfo,
 ):
     """"""
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def InitLocals(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @InitLocals.setter
     def InitLocals(self, value: bool) -> None: ...
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethod(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethodDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnParameter(self) -> ParameterInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnTypeCustomAttributes(self) -> ICustomAttributeProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Signature(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddDeclarativeSecurity(self, action: SecurityAction, pset: PermissionSet) -> None:
-        """
-
-        :param action:
+        """:param action:
         :param pset:
         """
     @overload
     def CreateDelegate(self, delegateType: Type) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :return:
         """
     @overload
     def CreateDelegate(self, delegateType: Type, target: object) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :param target:
         :return:
         """
     def CreateMethodBody(self, il: Array[int], count: int) -> None:
-        """
-
-        :param il:
+        """:param il:
         :param count:
         """
     def DefineGenericParameters(self, names: Array[str]) -> Array[GenericTypeParameterBuilder]:
-        """
-
-        :param names:
+        """:param names:
         :return:
         """
     def DefineParameter(
         self, position: int, attributes: ParameterAttributes, strParamName: str
     ) -> ParameterBuilder:
-        """
-
-        :param position:
+        """:param position:
         :param attributes:
         :param strParamName:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def GetBaseDefinition(self) -> MethodInfo:
-        """
-
+        """:return:"""
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
-    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericMethodDefinition(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -10743,9 +7084,7 @@ class MethodBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -10755,9 +7094,7 @@ class MethodBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -10767,9 +7104,7 @@ class MethodBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -10777,149 +7112,87 @@ class MethodBuilder(
         """
     @overload
     def GetILGenerator(self) -> ILGenerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetILGenerator(self, size: int) -> ILGenerator:
-        """
-
-        :param size:
+        """:param size:
         :return:
         """
     def GetMethodBody(self) -> MethodBody:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetModule(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetToken(self) -> MethodToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -10932,9 +7205,7 @@ class MethodBuilder(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -10950,9 +7221,7 @@ class MethodBuilder(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -10971,9 +7240,7 @@ class MethodBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -10994,9 +7261,7 @@ class MethodBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11017,9 +7282,7 @@ class MethodBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11040,9 +7303,7 @@ class MethodBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11053,65 +7314,44 @@ class MethodBuilder(
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def MakeGenericMethod(self, typeArguments: Array[Type]) -> MethodInfo:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetImplementationFlags(self, attributes: MethodImplAttributes) -> None:
-        """
-
-        :param attributes:
-        """
+        """:param attributes:"""
     def SetMarshal(self, unmanagedMarshal: UnmanagedMarshal) -> None:
-        """
-
-        :param unmanagedMarshal:
-        """
+        """:param unmanagedMarshal:"""
     def SetMethodBody(
         self,
         il: Array[int],
@@ -11120,24 +7360,16 @@ class MethodBuilder(
         exceptionHandlers: IEnumerable[ExceptionHandler],
         tokenFixups: IEnumerable[int],
     ) -> None:
-        """
-
-        :param il:
+        """:param il:
         :param maxStack:
         :param localSignature:
         :param exceptionHandlers:
         :param tokenFixups:
         """
     def SetParameters(self, parameterTypes: Array[Type]) -> None:
-        """
-
-        :param parameterTypes:
-        """
+        """:param parameterTypes:"""
     def SetReturnType(self, returnType: Type) -> None:
-        """
-
-        :param returnType:
-        """
+        """:param returnType:"""
     def SetSignature(
         self,
         returnType: Type,
@@ -11147,9 +7379,7 @@ class MethodBuilder(
         parameterTypeRequiredCustomModifiers: Array[Type],
         parameterTypeOptionalCustomModifiers: Array[Type],
     ) -> None:
-        """
-
-        :param returnType:
+        """:param returnType:
         :param returnTypeRequiredCustomModifiers:
         :param returnTypeOptionalCustomModifiers:
         :param parameterTypes:
@@ -11157,35 +7387,21 @@ class MethodBuilder(
         :param parameterTypeOptionalCustomModifiers:
         """
     def SetSymCustomAttribute(self, name: str, data: Array[int]) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param data:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MethodBuilderInstantiation(
     MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBase, _MethodInfo
@@ -11194,500 +7410,275 @@ class MethodBuilderInstantiation(
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethod(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethodDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnParameter(self) -> ParameterInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnTypeCustomAttributes(self) -> ICustomAttributeProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateDelegate(self, delegateType: Type) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :return:
         """
     @overload
     def CreateDelegate(self, delegateType: Type, target: object) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :param target:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def GetBaseDefinition(self) -> MethodInfo:
-        """
-
+        """:return:"""
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
-    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericMethodDefinition(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -11697,9 +7688,7 @@ class MethodBuilderInstantiation(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -11709,122 +7698,74 @@ class MethodBuilderInstantiation(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetMethodBody(self) -> MethodBody:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -11837,9 +7778,7 @@ class MethodBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -11855,9 +7794,7 @@ class MethodBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -11876,9 +7813,7 @@ class MethodBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11899,9 +7834,7 @@ class MethodBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11922,9 +7855,7 @@ class MethodBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -11935,66 +7866,44 @@ class MethodBuilderInstantiation(
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def MakeGenericMethod(self, typeArguments: Array[Type]) -> MethodInfo:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MethodOnTypeBuilderInstantiation(
     MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBase, _MethodInfo
@@ -12003,500 +7912,275 @@ class MethodOnTypeBuilderInstantiation(
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethod(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethodDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnParameter(self) -> ParameterInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnTypeCustomAttributes(self) -> ICustomAttributeProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateDelegate(self, delegateType: Type) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :return:
         """
     @overload
     def CreateDelegate(self, delegateType: Type, target: object) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :param target:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def GetBaseDefinition(self) -> MethodInfo:
-        """
-
+        """:return:"""
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
-    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericMethodDefinition(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -12506,9 +8190,7 @@ class MethodOnTypeBuilderInstantiation(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -12518,122 +8200,74 @@ class MethodOnTypeBuilderInstantiation(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetMethodBody(self) -> MethodBody:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -12646,9 +8280,7 @@ class MethodOnTypeBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -12664,9 +8296,7 @@ class MethodOnTypeBuilderInstantiation(
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -12685,9 +8315,7 @@ class MethodOnTypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -12708,9 +8336,7 @@ class MethodOnTypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -12731,9 +8357,7 @@ class MethodOnTypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -12744,66 +8368,44 @@ class MethodOnTypeBuilderInstantiation(
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def MakeGenericMethod(self, typeArguments: Array[Type]) -> MethodInfo:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MethodRental(Object, _MethodRental):
     """"""
@@ -12819,44 +8421,29 @@ class MethodRental(Object, _MethodRental):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -12868,9 +8455,7 @@ class MethodRental(Object, _MethodRental):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -12883,19 +8468,14 @@ class MethodRental(Object, _MethodRental):
     def SwapMethodBody(
         cls, cls: Type, methodtoken: int, rgIL: IntPtr, methodSize: int, flags: int
     ) -> None:
-        """
-
-        :param cls:
+        """:param cls:
         :param methodtoken:
         :param rgIL:
         :param methodSize:
         :param flags:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MethodToken(ValueType):
     """"""
@@ -12907,64 +8487,40 @@ class MethodToken(ValueType):
     """
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: MethodToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: MethodToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: MethodToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: MethodToken, b: MethodToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: MethodToken, b: MethodToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -12974,66 +8530,37 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
 
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MDStreamVersion(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ModuleHandle(self) -> ModuleHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ModuleVersionId(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ScopeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateGlobalFunctions(self) -> None:
         """"""
     def DefineDocument(
         self, url: str, language: Guid, languageVendor: Guid, documentType: Guid
     ) -> ISymbolDocumentWriter:
-        """
-
-        :param url:
+        """:param url:
         :param language:
         :param languageVendor:
         :param documentType:
@@ -13042,20 +8569,20 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineEnum(
         self, name: str, visibility: TypeAttributes, underlyingType: Type
     ) -> EnumBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param visibility:
         :param underlyingType:
         :return:
         """
     @overload
     def DefineGlobalMethod(
-        self, name: str, attributes: MethodAttributes, returnType: Type, parameterTypes: Array[Type]
+        self,
+        name: str,
+        attributes: MethodAttributes,
+        returnType: Type,
+        parameterTypes: Array[Type],
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param returnType:
         :param parameterTypes:
@@ -13070,9 +8597,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -13092,9 +8617,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         requiredParameterTypeCustomModifiers: Array[Type],
         optionalParameterTypeCustomModifiers: Array[Type],
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -13108,9 +8631,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineInitializedData(
         self, name: str, data: Array[int], attributes: FieldAttributes
     ) -> FieldBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param data:
         :param attributes:
         :return:
@@ -13118,9 +8639,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineManifestResource(
         self, name: str, stream: Stream, attribute: ResourceAttributes
     ) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param stream:
         :param attribute:
         """
@@ -13136,9 +8655,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         nativeCallConv: CallingConvention,
         nativeCharSet: CharSet,
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param dllName:
         :param attributes:
         :param callingConvention:
@@ -13161,9 +8678,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         nativeCallConv: CallingConvention,
         nativeCharSet: CharSet,
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param dllName:
         :param entryName:
         :param attributes:
@@ -13176,9 +8691,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         """
     @overload
     def DefineResource(self, name: str, description: str) -> IResourceWriter:
-        """
-
-        :param name:
+        """:param name:
         :param description:
         :return:
         """
@@ -13186,33 +8699,25 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineResource(
         self, name: str, description: str, attribute: ResourceAttributes
     ) -> IResourceWriter:
-        """
-
-        :param name:
+        """:param name:
         :param description:
         :param attribute:
         :return:
         """
     @overload
     def DefineType(self, name: str) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def DefineType(self, name: str, attr: TypeAttributes) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :return:
         """
     @overload
     def DefineType(self, name: str, attr: TypeAttributes, parent: Type) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :return:
@@ -13221,9 +8726,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineType(
         self, name: str, attr: TypeAttributes, parent: Type, packsize: PackingSize
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param packsize:
@@ -13233,9 +8736,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineType(
         self, name: str, attr: TypeAttributes, parent: Type, interfaces: Array[Type]
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param interfaces:
@@ -13245,9 +8746,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineType(
         self, name: str, attr: TypeAttributes, parent: Type, typesize: int
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param typesize:
@@ -13255,11 +8754,14 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         """
     @overload
     def DefineType(
-        self, name: str, attr: TypeAttributes, parent: Type, packingSize: PackingSize, typesize: int
+        self,
+        name: str,
+        attr: TypeAttributes,
+        parent: Type,
+        packingSize: PackingSize,
+        typesize: int,
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param packingSize:
@@ -13269,35 +8771,23 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def DefineUninitializedData(
         self, name: str, size: int, attributes: FieldAttributes
     ) -> FieldBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param size:
         :param attributes:
         :return:
         """
     @overload
     def DefineUnmanagedResource(self, resource: Array[int]) -> None:
-        """
-
-        :param resource:
-        """
+        """:param resource:"""
     @overload
     def DefineUnmanagedResource(self, resourceFileName: str) -> None:
-        """
-
-        :param resourceFileName:
-        """
+        """:param resourceFileName:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def FindTypes(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
@@ -13309,9 +8799,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> MethodInfo:
-        """
-
-        :param arrayClass:
+        """:param arrayClass:
         :param methodName:
         :param callingConvention:
         :param returnType:
@@ -13326,9 +8814,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> MethodToken:
-        """
-
-        :param arrayClass:
+        """:param arrayClass:
         :param methodName:
         :param callingConvention:
         :param returnType:
@@ -13337,87 +8823,60 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         """
     @overload
     def GetConstructorToken(self, con: ConstructorInfo) -> MethodToken:
-        """
-
-        :param con:
+        """:param con:
         :return:
         """
     @overload
     def GetConstructorToken(
         self, constructor: ConstructorInfo, optionalParameterTypes: IEnumerable[Type]
     ) -> MethodToken:
-        """
-
-        :param constructor:
+        """:param constructor:
         :param optionalParameterTypes:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     def GetFieldToken(self, field: FieldInfo) -> FieldToken:
-        """
-
-        :param field:
+        """:param field:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetFields(self, bindingFlags: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingFlags:
+        """:param bindingFlags:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -13427,9 +8886,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -13437,16 +8894,12 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
@@ -13460,9 +8913,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -13472,156 +8923,105 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         """
     @overload
     def GetMethodToken(self, method: MethodInfo) -> MethodToken:
-        """
-
-        :param method:
+        """:param method:
         :return:
         """
     @overload
     def GetMethodToken(
         self, method: MethodInfo, optionalParameterTypes: IEnumerable[Type]
     ) -> MethodToken:
-        """
-
-        :param method:
+        """:param method:
         :param optionalParameterTypes:
         :return:
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethods(self, bindingFlags: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingFlags:
+        """:param bindingFlags:
         :return:
         """
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetPEKind(
         self, peKind: PortableExecutableKinds, machine: ImageFileMachine
-    ) -> Tuple[None, PortableExecutableKinds, ImageFileMachine]:
-        """
-
-        :param peKind:
+    ) -> tuple[None, PortableExecutableKinds, ImageFileMachine]:
+        """:param peKind:
         :param machine:
         """
     @overload
     def GetSignatureToken(self, sigHelper: SignatureHelper) -> SignatureToken:
-        """
-
-        :param sigHelper:
+        """:param sigHelper:
         :return:
         """
     @overload
     def GetSignatureToken(self, sigBytes: Array[int], sigLength: int) -> SignatureToken:
-        """
-
-        :param sigBytes:
+        """:param sigBytes:
         :param sigLength:
         :return:
         """
     def GetSignerCertificate(self) -> X509Certificate:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetStringConstant(self, str: str) -> StringToken:
-        """
-
-        :param str:
+        """:param str:
         :return:
         """
     def GetSymWriter(self) -> ISymbolWriter:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self, className: str) -> Type:
-        """
-
-        :param className:
+        """:param className:
         :return:
         """
     @overload
     def GetType(self, className: str, ignoreCase: bool) -> Type:
-        """
-
-        :param className:
+        """:param className:
         :param ignoreCase:
         :return:
         """
     @overload
     def GetType(self, className: str, throwOnError: bool, ignoreCase: bool) -> Type:
-        """
-
-        :param className:
+        """:param className:
         :param throwOnError:
         :param ignoreCase:
         :return:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def GetTypeToken(self, name: str) -> TypeToken:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetTypeToken(self, type: Type) -> TypeToken:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     def GetTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Invoke(
         self,
@@ -13634,9 +9034,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13657,9 +9055,7 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -13669,27 +9065,17 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         :param puArgErr:
         """
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsResource(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def IsTransient(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ResolveField(self, metadataToken: int) -> FieldInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -13699,18 +9085,14 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> FieldInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     @overload
     def ResolveMember(self, metadataToken: int) -> MemberInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -13720,18 +9102,14 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> MemberInfo:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     @overload
     def ResolveMethod(self, metadataToken: int) -> MethodBase:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -13741,30 +9119,22 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> MethodBase:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     def ResolveSignature(self, metadataToken: int) -> Array[int]:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     def ResolveString(self, metadataToken: int) -> str:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
     def ResolveType(self, metadataToken: int) -> Type:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :return:
         """
     @overload
@@ -13774,198 +9144,116 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         genericTypeArguments: Array[Type],
         genericMethodArguments: Array[Type],
     ) -> Type:
-        """
-
-        :param metadataToken:
+        """:param metadataToken:
         :param genericTypeArguments:
         :param genericMethodArguments:
         :return:
         """
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetSymCustomAttribute(self, name: str, data: Array[int]) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param data:
         """
     def SetUserEntryPoint(self, entryPoint: MethodInfo) -> None:
-        """
-
-        :param entryPoint:
-        """
+        """:param entryPoint:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ModuleBuilderData(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class NativeVersionInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OpCode(ValueType):
     """"""
 
     @property
     def FlowControl(self) -> FlowControl:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OpCodeType(self) -> OpCodeType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def OperandType(self) -> OperandType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StackBehaviourPop(self) -> StackBehaviour:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StackBehaviourPush(self) -> StackBehaviour:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: OpCode) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: OpCode) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: OpCode) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: OpCode, b: OpCode) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: OpCode, b: OpCode) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -15576,33 +10864,20 @@ class OpCodes(Object):
     :return: 
     """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def TakesSingleByteArgument(cls, inst: OpCode) -> bool:
-        """
-
-        :param inst:
+        """:param inst:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OperandType(Enum):
     """"""
@@ -15681,84 +10956,48 @@ class ParameterBuilder(Object, _ParameterBuilder):
 
     @property
     def Attributes(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsIn(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsOptional(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsOut(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Position(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetToken(self) -> ParameterToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -15770,9 +11009,7 @@ class ParameterBuilder(Object, _ParameterBuilder):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -15782,33 +11019,19 @@ class ParameterBuilder(Object, _ParameterBuilder):
         :param puArgErr:
         """
     def SetConstant(self, defaultValue: object) -> None:
-        """
-
-        :param defaultValue:
-        """
+        """:param defaultValue:"""
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetMarshal(self, unmanagedMarshal: UnmanagedMarshal) -> None:
-        """
-
-        :param unmanagedMarshal:
-        """
+        """:param unmanagedMarshal:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ParameterToken(ValueType):
     """"""
@@ -15820,64 +11043,40 @@ class ParameterToken(ValueType):
     """
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: ParameterToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: ParameterToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: ParameterToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: ParameterToken, b: ParameterToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: ParameterToken, b: ParameterToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -15889,250 +11088,145 @@ class PropertyBuilder(
 
     @property
     def Attributes(self) -> PropertyAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanRead(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CanWrite(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GetMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyToken(self) -> PropertyToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PropertyType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SetMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddOtherMethod(self, mdBuilder: MethodBuilder) -> None:
-        """
-
-        :param mdBuilder:
-        """
+        """:param mdBuilder:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetAccessors(self) -> Array[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetAccessors(self, nonPublic: bool) -> Array[MethodInfo]:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     def GetConstantValue(self) -> object:
-        """
-
+        """:return:"""
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
-    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetGetMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetGetMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -16142,9 +11236,7 @@ class PropertyBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -16154,119 +11246,72 @@ class PropertyBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetIndexParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetOptionalCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawConstantValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRequiredCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSetMethod(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetSetMethod(self, nonPublic: bool) -> MethodInfo:
-        """
-
-        :param nonPublic:
+        """:param nonPublic:
         :return:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def GetValue(self, obj: object) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def GetValue(self, obj: object, index: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param index:
         :return:
         """
@@ -16279,9 +11324,7 @@ class PropertyBuilder(
         index: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param index:
@@ -16300,9 +11343,7 @@ class PropertyBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16323,9 +11364,7 @@ class PropertyBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16346,9 +11385,7 @@ class PropertyBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16359,68 +11396,44 @@ class PropertyBuilder(
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def SetConstant(self, defaultValue: object) -> None:
-        """
-
-        :param defaultValue:
-        """
+        """:param defaultValue:"""
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetGetMethod(self, mdBuilder: MethodBuilder) -> None:
-        """
-
-        :param mdBuilder:
-        """
+        """:param mdBuilder:"""
     def SetSetMethod(self, mdBuilder: MethodBuilder) -> None:
-        """
-
-        :param mdBuilder:
-        """
+        """:param mdBuilder:"""
     @overload
     def SetValue(self, obj: object, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
     def SetValue(self, obj: object, value: object, index: Array[object]) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param index:
         """
@@ -16434,9 +11447,7 @@ class PropertyBuilder(
         index: Array[object],
         culture: CultureInfo,
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param invokeAttr:
         :param binder:
@@ -16445,22 +11456,13 @@ class PropertyBuilder(
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class PropertyToken(ValueType):
     """"""
@@ -16472,64 +11474,40 @@ class PropertyToken(ValueType):
     """
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: PropertyToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: PropertyToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: PropertyToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: PropertyToken, b: PropertyToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: PropertyToken, b: PropertyToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -16538,51 +11516,29 @@ class REDocument(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ResWriterData(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ScopeAction(Enum):
     """"""
@@ -16596,41 +11552,25 @@ class ScopeTree(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SignatureHelper(Object, _SignatureHelper):
     """"""
 
     @overload
     def AddArgument(self, clsArgument: Type) -> None:
-        """
-
-        :param clsArgument:
-        """
+        """:param clsArgument:"""
     @overload
     def AddArgument(self, argument: Type, pinned: bool) -> None:
-        """
-
-        :param argument:
+        """:param argument:
         :param pinned:
         """
     @overload
@@ -16640,9 +11580,7 @@ class SignatureHelper(Object, _SignatureHelper):
         requiredCustomModifiers: Array[Type],
         optionalCustomModifiers: Array[Type],
     ) -> None:
-        """
-
-        :param argument:
+        """:param argument:
         :param requiredCustomModifiers:
         :param optionalCustomModifiers:
         """
@@ -16652,38 +11590,27 @@ class SignatureHelper(Object, _SignatureHelper):
         requiredCustomModifiers: Array[Type],
         optionalCustomModifiers: Array[Type],
     ) -> None:
-        """
-
-        :param arguments:
+        """:param arguments:
         :param requiredCustomModifiers:
         :param optionalCustomModifiers:
         """
     def AddSentinel(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @classmethod
     def GetFieldSigHelper(cls, mod: Module) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -16692,16 +11619,11 @@ class SignatureHelper(Object, _SignatureHelper):
     @classmethod
     @overload
     def GetLocalVarSigHelper(cls) -> SignatureHelper:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @overload
     def GetLocalVarSigHelper(cls, mod: Module) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :return:
         """
     @classmethod
@@ -16709,9 +11631,7 @@ class SignatureHelper(Object, _SignatureHelper):
     def GetMethodSigHelper(
         cls, callingConvention: CallingConventions, returnType: Type
     ) -> SignatureHelper:
-        """
-
-        :param callingConvention:
+        """:param callingConvention:
         :param returnType:
         :return:
         """
@@ -16720,9 +11640,7 @@ class SignatureHelper(Object, _SignatureHelper):
     def GetMethodSigHelper(
         cls, unmanagedCallingConvention: CallingConvention, returnType: Type
     ) -> SignatureHelper:
-        """
-
-        :param unmanagedCallingConvention:
+        """:param unmanagedCallingConvention:
         :param returnType:
         :return:
         """
@@ -16731,9 +11649,7 @@ class SignatureHelper(Object, _SignatureHelper):
     def GetMethodSigHelper(
         cls, mod: Module, callingConvention: CallingConventions, returnType: Type
     ) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :param callingConvention:
         :param returnType:
         :return:
@@ -16743,9 +11659,7 @@ class SignatureHelper(Object, _SignatureHelper):
     def GetMethodSigHelper(
         cls, mod: Module, unmanagedCallConv: CallingConvention, returnType: Type
     ) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :param unmanagedCallConv:
         :param returnType:
         :return:
@@ -16755,9 +11669,7 @@ class SignatureHelper(Object, _SignatureHelper):
     def GetMethodSigHelper(
         cls, mod: Module, returnType: Type, parameterTypes: Array[Type]
     ) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :param returnType:
         :param parameterTypes:
         :return:
@@ -16767,9 +11679,7 @@ class SignatureHelper(Object, _SignatureHelper):
     def GetPropertySigHelper(
         cls, mod: Module, returnType: Type, parameterTypes: Array[Type]
     ) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :param returnType:
         :param parameterTypes:
         :return:
@@ -16786,9 +11696,7 @@ class SignatureHelper(Object, _SignatureHelper):
         requiredParameterTypeCustomModifiers: Array[Type],
         optionalParameterTypeCustomModifiers: Array[Type],
     ) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :param returnType:
         :param requiredReturnTypeCustomModifiers:
         :param optionalReturnTypeCustomModifiers:
@@ -16810,9 +11718,7 @@ class SignatureHelper(Object, _SignatureHelper):
         requiredParameterTypeCustomModifiers: Array[Type],
         optionalParameterTypeCustomModifiers: Array[Type],
     ) -> SignatureHelper:
-        """
-
-        :param mod:
+        """:param mod:
         :param callingConvention:
         :param returnType:
         :param requiredReturnTypeCustomModifiers:
@@ -16823,27 +11729,16 @@ class SignatureHelper(Object, _SignatureHelper):
         :return:
         """
     def GetSignature(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -16855,9 +11750,7 @@ class SignatureHelper(Object, _SignatureHelper):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -16867,10 +11760,7 @@ class SignatureHelper(Object, _SignatureHelper):
         :param puArgErr:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SignatureToken(ValueType):
     """"""
@@ -16882,64 +11772,40 @@ class SignatureToken(ValueType):
     """
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: SignatureToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: SignatureToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: SignatureToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: SignatureToken, b: SignatureToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: SignatureToken, b: SignatureToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -17011,64 +11877,40 @@ class StringToken(ValueType):
 
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: StringToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: StringToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: StringToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: StringToken, b: StringToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: StringToken, b: StringToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -17078,500 +11920,275 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
 
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> MethodAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CallingConvention(self) -> CallingConventions:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructor(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFinal(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethod(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericMethodDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsHideBySig(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVirtual(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodHandle(self) -> RuntimeMethodHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnParameter(self) -> ParameterInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReturnTypeCustomAttributes(self) -> ICustomAttributeProvider:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def CreateDelegate(self, delegateType: Type) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :return:
         """
     @overload
     def CreateDelegate(self, delegateType: Type, target: object) -> Delegate:
-        """
-
-        :param delegateType:
+        """:param delegateType:
         :param target:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def GetBaseDefinition(self) -> MethodInfo:
-        """
-
+        """:return:"""
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
-    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericMethodDefinition(self) -> MethodInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -17581,9 +12198,7 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -17593,132 +12208,78 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetMethodBody(self) -> MethodBody:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMethodImplementationFlags(self) -> MethodImplAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetModule(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetParameters(self) -> Array[ParameterInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetToken(self) -> MethodToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
     @overload
     def Invoke(self, obj: object, parameters: Array[object]) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param parameters:
         :return:
         """
@@ -17731,9 +12292,7 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -17749,9 +12308,7 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
         parameters: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param invokeAttr:
         :param binder:
         :param parameters:
@@ -17770,9 +12327,7 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -17793,9 +12348,7 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -17816,9 +12369,7 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -17829,66 +12380,44 @@ class SymbolMethod(MethodInfo, ICustomAttributeProvider, _MemberInfo, _MethodBas
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def MakeGenericMethod(self, typeArguments: Array[Type]) -> MethodInfo:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SymbolType(
     TypeInfo, ICustomAttributeProvider, IReflect, IReflectableType, _MemberInfo, _Type
@@ -17897,516 +12426,266 @@ class SymbolType(
 
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BaseType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredConstructors(self) -> IEnumerable[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredEvents(self) -> IEnumerable[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredFields(self) -> IEnumerable[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMembers(self) -> IEnumerable[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMethods(self) -> IEnumerable[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredNestedTypes(self) -> IEnumerable[TypeInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredProperties(self) -> IEnumerable[PropertyInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringMethod(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultBinder(cls) -> Binder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GUID(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterAttributes(self) -> GenericParameterAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterPosition(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeParameters(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasElementType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementedInterfaces(self) -> IEnumerable[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAnsiClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsArray(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCOMObject(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructedGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContextful(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsExplicitLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericParameter(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericTypeDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsImport(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLayoutSequential(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMarshalByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNested(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamANDAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamORAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPointer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrimitive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSealed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSerializable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsUnicodeClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValueType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVisible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StructLayoutAttribute(self) -> StructLayoutAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeHandle(self) -> RuntimeTypeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeInitializer(self) -> ConstructorInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, o: Type) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def FindInterfaces(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
@@ -18417,24 +12696,17 @@ class SymbolType(
         filter: MemberFilter,
         filterCriteria: object,
     ) -> Array[MemberInfo]:
-        """
-
-        :param memberType:
+        """:param memberType:
         :param bindingAttr:
         :param filter:
         :param filterCriteria:
         :return:
         """
     def GetArrayRank(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructor(self, types: Array[Type]) -> ConstructorInfo:
-        """
-
-        :param types:
+        """:param types:
         :return:
         """
     @overload
@@ -18445,9 +12717,7 @@ class SymbolType(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param types:
         :param modifiers:
@@ -18462,9 +12732,7 @@ class SymbolType(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param callConvention:
         :param types:
@@ -18473,245 +12741,154 @@ class SymbolType(
         """
     @overload
     def GetConstructors(self) -> Array[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructors(self, bindingAttr: BindingFlags) -> Array[ConstructorInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDeclaredEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethods(self, name: str) -> IEnumerable[MethodInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredNestedType(self, name: str) -> TypeInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDefaultMembers(self) -> Array[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetElementType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumName(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def GetEnumNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumUnderlyingType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumValues(self) -> Array:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetEvent(self, name: str, bindingAttr: BindingFlags) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetEvents(self) -> Array[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, bindingAttr: BindingFlags) -> Array[EventInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericParameterConstraints(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericTypeDefinition(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -18721,9 +12898,7 @@ class SymbolType(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -18731,50 +12906,35 @@ class SymbolType(
         """
     @overload
     def GetInterface(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetInterface(self, name: str, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetInterfaceMap(self, interfaceType: Type) -> InterfaceMapping:
-        """
-
-        :param interfaceType:
+        """:param interfaceType:
         :return:
         """
     def GetInterfaces(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMember(self, name: str) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -18782,61 +12942,44 @@ class SymbolType(
     def GetMember(
         self, name: str, type: MemberTypes, bindingAttr: BindingFlags
     ) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param type:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self) -> Array[MemberInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
@@ -18844,9 +12987,7 @@ class SymbolType(
     def GetMethod(
         self, name: str, types: Array[Type], modifiers: Array[ParameterModifier]
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :param modifiers:
         :return:
@@ -18860,9 +13001,7 @@ class SymbolType(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -18878,9 +13017,7 @@ class SymbolType(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -18897,9 +13034,7 @@ class SymbolType(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -18909,127 +13044,94 @@ class SymbolType(
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetNestedType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetNestedType(self, name: str, bindingAttr: BindingFlags) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetNestedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetNestedTypes(self, bindingAttr: BindingFlags) -> Array[Type]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self) -> Array[PropertyInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :return:
         """
     @overload
     def GetProperty(
-        self, name: str, returnType: Type, types: Array[Type], modifiers: Array[ParameterModifier]
+        self,
+        name: str,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :param modifiers:
@@ -19045,9 +13147,7 @@ class SymbolType(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -19065,9 +13165,7 @@ class SymbolType(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -19077,56 +13175,34 @@ class SymbolType(
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self) -> TypeInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(
         self,
@@ -19139,9 +13215,7 @@ class SymbolType(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -19162,9 +13236,7 @@ class SymbolType(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -19182,9 +13254,7 @@ class SymbolType(
         target: object,
         args: Array[object],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -19201,9 +13271,7 @@ class SymbolType(
         args: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -19223,9 +13291,7 @@ class SymbolType(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -19247,9 +13313,7 @@ class SymbolType(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -19261,116 +13325,82 @@ class SymbolType(
         """
     @overload
     def IsAssignableFrom(self, typeInfo: TypeInfo) -> bool:
-        """
-
-        :param typeInfo:
+        """:param typeInfo:
         :return:
         """
     @overload
     def IsAssignableFrom(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsEnumDefined(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def IsEquivalentTo(self, other: Type) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def IsInstanceOfType(self, o: object) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def IsSubclassOf(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def MakeArrayType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def MakeArrayType(self, rank: int) -> Type:
-        """
-
-        :param rank:
+        """:param rank:
         :return:
         """
     def MakeByRefType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MakeGenericType(self, typeArguments: Array[Type]) -> Type:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     def MakePointerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeBuilder(
-    TypeInfo, ICustomAttributeProvider, IReflect, IReflectableType, _MemberInfo, _Type, _TypeBuilder
+    TypeInfo,
+    ICustomAttributeProvider,
+    IReflect,
+    IReflectableType,
+    _MemberInfo,
+    _Type,
+    _TypeBuilder,
 ):
     """"""
 
@@ -19381,523 +13411,263 @@ class TypeBuilder(
     """
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BaseType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredConstructors(self) -> IEnumerable[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredEvents(self) -> IEnumerable[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredFields(self) -> IEnumerable[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMembers(self) -> IEnumerable[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMethods(self) -> IEnumerable[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredNestedTypes(self) -> IEnumerable[TypeInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredProperties(self) -> IEnumerable[PropertyInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringMethod(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultBinder(cls) -> Binder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GUID(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterAttributes(self) -> GenericParameterAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterPosition(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeParameters(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasElementType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementedInterfaces(self) -> IEnumerable[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAnsiClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsArray(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCOMObject(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructedGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContextful(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsExplicitLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericParameter(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericTypeDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsImport(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLayoutSequential(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMarshalByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNested(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamANDAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamORAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPointer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrimitive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSealed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSerializable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsUnicodeClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValueType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVisible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def PackingSize(self) -> PackingSize:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Size(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StructLayoutAttribute(self) -> StructLayoutAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeHandle(self) -> RuntimeTypeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeInitializer(self) -> ConstructorInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeToken(self) -> TypeToken:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddDeclarativeSecurity(self, action: SecurityAction, pset: PermissionSet) -> None:
-        """
-
-        :param action:
+        """:param action:
         :param pset:
         """
     def AddInterfaceImplementation(self, interfaceType: Type) -> None:
-        """
-
-        :param interfaceType:
-        """
+        """:param interfaceType:"""
     def AsType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateTypeInfo(self) -> TypeInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def DefineConstructor(
         self,
@@ -19905,9 +13675,7 @@ class TypeBuilder(
         callingConvention: CallingConventions,
         parameterTypes: Array[Type],
     ) -> ConstructorBuilder:
-        """
-
-        :param attributes:
+        """:param attributes:
         :param callingConvention:
         :param parameterTypes:
         :return:
@@ -19921,9 +13689,7 @@ class TypeBuilder(
         requiredCustomModifiers: Array[Type],
         optionalCustomModifiers: Array[Type],
     ) -> ConstructorBuilder:
-        """
-
-        :param attributes:
+        """:param attributes:
         :param callingConvention:
         :param parameterTypes:
         :param requiredCustomModifiers:
@@ -19931,24 +13697,18 @@ class TypeBuilder(
         :return:
         """
     def DefineDefaultConstructor(self, attributes: MethodAttributes) -> ConstructorBuilder:
-        """
-
-        :param attributes:
+        """:param attributes:
         :return:
         """
     def DefineEvent(self, name: str, attributes: EventAttributes, eventtype: Type) -> EventBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param eventtype:
         :return:
         """
     @overload
     def DefineField(self, fieldName: str, type: Type, attributes: FieldAttributes) -> FieldBuilder:
-        """
-
-        :param fieldName:
+        """:param fieldName:
         :param type:
         :param attributes:
         :return:
@@ -19962,9 +13722,7 @@ class TypeBuilder(
         optionalCustomModifiers: Array[Type],
         attributes: FieldAttributes,
     ) -> FieldBuilder:
-        """
-
-        :param fieldName:
+        """:param fieldName:
         :param type:
         :param requiredCustomModifiers:
         :param optionalCustomModifiers:
@@ -19972,47 +13730,44 @@ class TypeBuilder(
         :return:
         """
     def DefineGenericParameters(self, names: Array[str]) -> Array[GenericTypeParameterBuilder]:
-        """
-
-        :param names:
+        """:param names:
         :return:
         """
     def DefineInitializedData(
         self, name: str, data: Array[int], attributes: FieldAttributes
     ) -> FieldBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param data:
         :param attributes:
         :return:
         """
     @overload
     def DefineMethod(self, name: str, attributes: MethodAttributes) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :return:
         """
     @overload
     def DefineMethod(
-        self, name: str, attributes: MethodAttributes, callingConvention: CallingConventions
+        self,
+        name: str,
+        attributes: MethodAttributes,
+        callingConvention: CallingConventions,
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :return:
         """
     @overload
     def DefineMethod(
-        self, name: str, attributes: MethodAttributes, returnType: Type, parameterTypes: Array[Type]
+        self,
+        name: str,
+        attributes: MethodAttributes,
+        returnType: Type,
+        parameterTypes: Array[Type],
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param returnType:
         :param parameterTypes:
@@ -20027,9 +13782,7 @@ class TypeBuilder(
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -20049,9 +13802,7 @@ class TypeBuilder(
         parameterTypeRequiredCustomModifiers: Array[Type],
         parameterTypeOptionalCustomModifiers: Array[Type],
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -20065,31 +13816,23 @@ class TypeBuilder(
     def DefineMethodOverride(
         self, methodInfoBody: MethodInfo, methodInfoDeclaration: MethodInfo
     ) -> None:
-        """
-
-        :param methodInfoBody:
+        """:param methodInfoBody:
         :param methodInfoDeclaration:
         """
     @overload
     def DefineNestedType(self, name: str) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def DefineNestedType(self, name: str, attr: TypeAttributes) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :return:
         """
     @overload
     def DefineNestedType(self, name: str, attr: TypeAttributes, parent: Type) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :return:
@@ -20098,9 +13841,7 @@ class TypeBuilder(
     def DefineNestedType(
         self, name: str, attr: TypeAttributes, parent: Type, packSize: PackingSize
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param packSize:
@@ -20110,9 +13851,7 @@ class TypeBuilder(
     def DefineNestedType(
         self, name: str, attr: TypeAttributes, parent: Type, interfaces: Array[Type]
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param interfaces:
@@ -20122,9 +13861,7 @@ class TypeBuilder(
     def DefineNestedType(
         self, name: str, attr: TypeAttributes, parent: Type, typeSize: int
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param typeSize:
@@ -20132,11 +13869,14 @@ class TypeBuilder(
         """
     @overload
     def DefineNestedType(
-        self, name: str, attr: TypeAttributes, parent: Type, packSize: PackingSize, typeSize: int
+        self,
+        name: str,
+        attr: TypeAttributes,
+        parent: Type,
+        packSize: PackingSize,
+        typeSize: int,
     ) -> TypeBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attr:
         :param parent:
         :param packSize:
@@ -20155,9 +13895,7 @@ class TypeBuilder(
         nativeCallConv: CallingConvention,
         nativeCharSet: CharSet,
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param dllName:
         :param attributes:
         :param callingConvention:
@@ -20180,9 +13918,7 @@ class TypeBuilder(
         nativeCallConv: CallingConvention,
         nativeCharSet: CharSet,
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param dllName:
         :param entryName:
         :param attributes:
@@ -20210,9 +13946,7 @@ class TypeBuilder(
         nativeCallConv: CallingConvention,
         nativeCharSet: CharSet,
     ) -> MethodBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param dllName:
         :param entryName:
         :param attributes:
@@ -20235,9 +13969,7 @@ class TypeBuilder(
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> PropertyBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param returnType:
         :param parameterTypes:
@@ -20252,9 +13984,7 @@ class TypeBuilder(
         returnType: Type,
         parameterTypes: Array[Type],
     ) -> PropertyBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -20273,9 +14003,7 @@ class TypeBuilder(
         parameterTypeRequiredCustomModifiers: Array[Type],
         parameterTypeOptionalCustomModifiers: Array[Type],
     ) -> PropertyBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param returnType:
         :param returnTypeRequiredCustomModifiers:
@@ -20298,9 +14026,7 @@ class TypeBuilder(
         parameterTypeRequiredCustomModifiers: Array[Type],
         parameterTypeOptionalCustomModifiers: Array[Type],
     ) -> PropertyBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param attributes:
         :param callingConvention:
         :param returnType:
@@ -20312,52 +14038,37 @@ class TypeBuilder(
         :return:
         """
     def DefineTypeInitializer(self) -> ConstructorBuilder:
-        """
-
-        :return:
-        """
+        """:return:"""
     def DefineUninitializedData(
         self, name: str, size: int, attributes: FieldAttributes
     ) -> FieldBuilder:
-        """
-
-        :param name:
+        """:param name:
         :param size:
         :param attributes:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, o: Type) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def FindInterfaces(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
@@ -20368,32 +14079,23 @@ class TypeBuilder(
         filter: MemberFilter,
         filterCriteria: object,
     ) -> Array[MemberInfo]:
-        """
-
-        :param memberType:
+        """:param memberType:
         :param bindingAttr:
         :param filter:
         :param filterCriteria:
         :return:
         """
     def GetArrayRank(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructor(self, types: Array[Type]) -> ConstructorInfo:
-        """
-
-        :param types:
+        """:param types:
         :return:
         """
     @classmethod
     @overload
     def GetConstructor(cls, type: Type, constructor: ConstructorInfo) -> ConstructorInfo:
-        """
-
-        :param type:
+        """:param type:
         :param constructor:
         :return:
         """
@@ -20405,9 +14107,7 @@ class TypeBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param types:
         :param modifiers:
@@ -20422,9 +14122,7 @@ class TypeBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param callConvention:
         :param types:
@@ -20433,254 +14131,161 @@ class TypeBuilder(
         """
     @overload
     def GetConstructors(self) -> Array[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructors(self, bindingAttr: BindingFlags) -> Array[ConstructorInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDeclaredEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethods(self, name: str) -> IEnumerable[MethodInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredNestedType(self, name: str) -> TypeInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDefaultMembers(self) -> Array[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetElementType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumName(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def GetEnumNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumUnderlyingType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumValues(self) -> Array:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetEvent(self, name: str, bindingAttr: BindingFlags) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetEvents(self) -> Array[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, bindingAttr: BindingFlags) -> Array[EventInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @classmethod
     @overload
     def GetField(cls, type: Type, field: FieldInfo) -> FieldInfo:
-        """
-
-        :param type:
+        """:param type:
         :param field:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericParameterConstraints(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericTypeDefinition(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -20690,9 +14295,7 @@ class TypeBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -20702,9 +14305,7 @@ class TypeBuilder(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -20712,50 +14313,35 @@ class TypeBuilder(
         """
     @overload
     def GetInterface(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetInterface(self, name: str, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetInterfaceMap(self, interfaceType: Type) -> InterfaceMapping:
-        """
-
-        :param interfaceType:
+        """:param interfaceType:
         :return:
         """
     def GetInterfaces(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMember(self, name: str) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -20763,70 +14349,51 @@ class TypeBuilder(
     def GetMember(
         self, name: str, type: MemberTypes, bindingAttr: BindingFlags
     ) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param type:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self) -> Array[MemberInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
     @classmethod
     @overload
     def GetMethod(cls, type: Type, method: MethodInfo) -> MethodInfo:
-        """
-
-        :param type:
+        """:param type:
         :param method:
         :return:
         """
@@ -20834,9 +14401,7 @@ class TypeBuilder(
     def GetMethod(
         self, name: str, types: Array[Type], modifiers: Array[ParameterModifier]
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :param modifiers:
         :return:
@@ -20850,9 +14415,7 @@ class TypeBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -20868,9 +14431,7 @@ class TypeBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -20887,9 +14448,7 @@ class TypeBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -20899,127 +14458,94 @@ class TypeBuilder(
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetNestedType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetNestedType(self, name: str, bindingAttr: BindingFlags) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetNestedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetNestedTypes(self, bindingAttr: BindingFlags) -> Array[Type]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self) -> Array[PropertyInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :return:
         """
     @overload
     def GetProperty(
-        self, name: str, returnType: Type, types: Array[Type], modifiers: Array[ParameterModifier]
+        self,
+        name: str,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :param modifiers:
@@ -21035,9 +14561,7 @@ class TypeBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -21055,9 +14579,7 @@ class TypeBuilder(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -21067,70 +14589,43 @@ class TypeBuilder(
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self) -> TypeInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(
         self,
@@ -21143,9 +14638,7 @@ class TypeBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -21166,9 +14659,7 @@ class TypeBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -21189,9 +14680,7 @@ class TypeBuilder(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -21209,9 +14698,7 @@ class TypeBuilder(
         target: object,
         args: Array[object],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -21228,9 +14715,7 @@ class TypeBuilder(
         args: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -21250,9 +14735,7 @@ class TypeBuilder(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -21274,9 +14757,7 @@ class TypeBuilder(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -21288,136 +14769,85 @@ class TypeBuilder(
         """
     @overload
     def IsAssignableFrom(self, typeInfo: TypeInfo) -> bool:
-        """
-
-        :param typeInfo:
+        """:param typeInfo:
         :return:
         """
     @overload
     def IsAssignableFrom(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     def IsCreated(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsEnumDefined(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def IsEquivalentTo(self, other: Type) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def IsInstanceOfType(self, o: object) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def IsSubclassOf(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def MakeArrayType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def MakeArrayType(self, rank: int) -> Type:
-        """
-
-        :param rank:
+        """:param rank:
         :return:
         """
     def MakeByRefType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MakeGenericType(self, typeArguments: Array[Type]) -> Type:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     def MakePointerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def SetCustomAttribute(self, customBuilder: CustomAttributeBuilder) -> None:
-        """
-
-        :param customBuilder:
-        """
+        """:param customBuilder:"""
     @overload
     def SetCustomAttribute(self, con: ConstructorInfo, binaryAttribute: Array[int]) -> None:
-        """
-
-        :param con:
+        """:param con:
         :param binaryAttribute:
         """
     def SetParent(self, parent: Type) -> None:
-        """
-
-        :param parent:
-        """
+        """:param parent:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeBuilderInstantiation(
     TypeInfo, ICustomAttributeProvider, IReflect, IReflectableType, _MemberInfo, _Type
@@ -21426,516 +14856,266 @@ class TypeBuilderInstantiation(
 
     @property
     def Assembly(self) -> Assembly:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def AssemblyQualifiedName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Attributes(self) -> TypeAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def BaseType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ContainsGenericParameters(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredConstructors(self) -> IEnumerable[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredEvents(self) -> IEnumerable[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredFields(self) -> IEnumerable[FieldInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMembers(self) -> IEnumerable[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredMethods(self) -> IEnumerable[MethodInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredNestedTypes(self) -> IEnumerable[TypeInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaredProperties(self) -> IEnumerable[PropertyInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringMethod(self) -> MethodBase:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     @property
     def DefaultBinder(cls) -> Binder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FullName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GUID(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterAttributes(self) -> GenericParameterAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericParameterPosition(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GenericTypeParameters(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HasElementType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ImplementedInterfaces(self) -> IEnumerable[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAbstract(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAnsiClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsArray(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAutoLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsCOMObject(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsConstructedGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsContextful(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsEnum(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsExplicitLayout(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericParameter(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsGenericTypeDefinition(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsImport(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInterface(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLayoutSequential(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsMarshalByRef(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNested(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamANDAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamORAssem(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNestedPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPointer(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrimitive(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSealed(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSerializable(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsUnicodeClass(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsValueType(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsVisible(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Namespace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def StructLayoutAttribute(self) -> StructLayoutAttribute:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeHandle(self) -> RuntimeTypeHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TypeInitializer(self) -> ConstructorInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def UnderlyingSystemType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AsType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, o: Type) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def FindInterfaces(self, filter: TypeFilter, filterCriteria: object) -> Array[Type]:
-        """
-
-        :param filter:
+        """:param filter:
         :param filterCriteria:
         :return:
         """
@@ -21946,24 +15126,17 @@ class TypeBuilderInstantiation(
         filter: MemberFilter,
         filterCriteria: object,
     ) -> Array[MemberInfo]:
-        """
-
-        :param memberType:
+        """:param memberType:
         :param bindingAttr:
         :param filter:
         :param filterCriteria:
         :return:
         """
     def GetArrayRank(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructor(self, types: Array[Type]) -> ConstructorInfo:
-        """
-
-        :param types:
+        """:param types:
         :return:
         """
     @overload
@@ -21974,9 +15147,7 @@ class TypeBuilderInstantiation(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param types:
         :param modifiers:
@@ -21991,9 +15162,7 @@ class TypeBuilderInstantiation(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> ConstructorInfo:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :param binder:
         :param callConvention:
         :param types:
@@ -22002,245 +15171,154 @@ class TypeBuilderInstantiation(
         """
     @overload
     def GetConstructors(self) -> Array[ConstructorInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetConstructors(self, bindingAttr: BindingFlags) -> Array[ConstructorInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetDeclaredEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredMethods(self, name: str) -> IEnumerable[MethodInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredNestedType(self, name: str) -> TypeInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDeclaredProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDefaultMembers(self) -> Array[MemberInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetElementType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumName(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def GetEnumNames(self) -> Array[str]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumUnderlyingType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetEnumValues(self) -> Array:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvent(self, name: str) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetEvent(self, name: str, bindingAttr: BindingFlags) -> EventInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetEvents(self) -> Array[EventInfo]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetEvents(self, bindingAttr: BindingFlags) -> Array[EventInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self) -> Array[FieldInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     def GetGenericArguments(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericParameterConstraints(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetGenericTypeDefinition(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -22250,9 +15328,7 @@ class TypeBuilderInstantiation(
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -22260,50 +15336,35 @@ class TypeBuilderInstantiation(
         """
     @overload
     def GetInterface(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetInterface(self, name: str, ignoreCase: bool) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param ignoreCase:
         :return:
         """
     def GetInterfaceMap(self, interfaceType: Type) -> InterfaceMapping:
-        """
-
-        :param interfaceType:
+        """:param interfaceType:
         :return:
         """
     def GetInterfaces(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetMember(self, name: str) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
@@ -22311,61 +15372,44 @@ class TypeBuilderInstantiation(
     def GetMember(
         self, name: str, type: MemberTypes, bindingAttr: BindingFlags
     ) -> Array[MemberInfo]:
-        """
-
-        :param name:
+        """:param name:
         :param type:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self) -> Array[MemberInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetMethod(self, name: str, types: Array[Type]) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
@@ -22373,9 +15417,7 @@ class TypeBuilderInstantiation(
     def GetMethod(
         self, name: str, types: Array[Type], modifiers: Array[ParameterModifier]
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :param modifiers:
         :return:
@@ -22389,9 +15431,7 @@ class TypeBuilderInstantiation(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -22407,9 +15447,7 @@ class TypeBuilderInstantiation(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param types:
@@ -22426,9 +15464,7 @@ class TypeBuilderInstantiation(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> MethodInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param callConvention:
@@ -22438,127 +15474,94 @@ class TypeBuilderInstantiation(
         """
     @overload
     def GetMethods(self) -> Array[MethodInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetNestedType(self, name: str) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetNestedType(self, name: str, bindingAttr: BindingFlags) -> Type:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetNestedTypes(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetNestedTypes(self, bindingAttr: BindingFlags) -> Array[Type]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self) -> Array[PropertyInfo]:
-        """
-
+        """:return:"""
+    @overload
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
-        :return:
-        """
-    @overload
-    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
-        """
-
-        :param bindingAttr:
+        """:param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :return:
         """
     @overload
     def GetProperty(self, name: str, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param types:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :return:
         """
     @overload
     def GetProperty(self, name: str, returnType: Type, types: Array[Type]) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :return:
         """
     @overload
     def GetProperty(
-        self, name: str, returnType: Type, types: Array[Type], modifiers: Array[ParameterModifier]
+        self,
+        name: str,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param returnType:
         :param types:
         :param modifiers:
@@ -22574,9 +15577,7 @@ class TypeBuilderInstantiation(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -22594,9 +15595,7 @@ class TypeBuilderInstantiation(
         types: Array[Type],
         modifiers: Array[ParameterModifier],
     ) -> PropertyInfo:
-        """
-
-        :param name:
+        """:param name:
         :param bindingAttr:
         :param binder:
         :param returnType:
@@ -22606,56 +15605,34 @@ class TypeBuilderInstantiation(
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self) -> TypeInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
     def Invoke(
         self,
@@ -22668,9 +15645,7 @@ class TypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -22691,9 +15666,7 @@ class TypeBuilderInstantiation(
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -22711,9 +15684,7 @@ class TypeBuilderInstantiation(
         target: object,
         args: Array[object],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -22730,9 +15701,7 @@ class TypeBuilderInstantiation(
         args: Array[object],
         culture: CultureInfo,
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -22752,9 +15721,7 @@ class TypeBuilderInstantiation(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -22776,9 +15743,7 @@ class TypeBuilderInstantiation(
         culture: CultureInfo,
         namedParameters: Array[str],
     ) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param invokeAttr:
         :param binder:
         :param target:
@@ -22790,113 +15755,73 @@ class TypeBuilderInstantiation(
         """
     @overload
     def IsAssignableFrom(self, typeInfo: TypeInfo) -> bool:
-        """
-
-        :param typeInfo:
+        """:param typeInfo:
         :return:
         """
     @overload
     def IsAssignableFrom(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def IsEnumDefined(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def IsEquivalentTo(self, other: Type) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def IsInstanceOfType(self, o: object) -> bool:
-        """
-
-        :param o:
+        """:param o:
         :return:
         """
     def IsSubclassOf(self, c: Type) -> bool:
-        """
-
-        :param c:
+        """:param c:
         :return:
         """
     @overload
     def MakeArrayType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def MakeArrayType(self, rank: int) -> Type:
-        """
-
-        :param rank:
+        """:param rank:
         :return:
         """
     def MakeByRefType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MakeGenericType(self, typeArguments: Array[Type]) -> Type:
-        """
-
-        :param typeArguments:
+        """:param typeArguments:
         :return:
         """
     def MakePointerType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeKind(Enum):
     """"""
@@ -22912,26 +15837,15 @@ class TypeNameBuilder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeToken(ValueType):
     """"""
@@ -22943,64 +15857,40 @@ class TypeToken(ValueType):
     """
     @property
     def Token(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: TypeToken) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __eq__(self, other: TypeToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     def __ne__(self, other: TypeToken) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @classmethod
     def op_Equality(cls, a: TypeToken, b: TypeToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
     @classmethod
     def op_Inequality(cls, a: TypeToken, b: TypeToken) -> bool:
-        """
-
-        :param a:
+        """:param a:
         :param b:
         :return:
         """
@@ -23010,156 +15900,90 @@ class UnmanagedMarshal(Object):
 
     @property
     def BaseType(self) -> UnmanagedType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ElementCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def GetUnmanagedType(self) -> UnmanagedType:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IIDGuid(self) -> Guid:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def DefineByValArray(cls, elemCount: int) -> UnmanagedMarshal:
-        """
-
-        :param elemCount:
+        """:param elemCount:
         :return:
         """
     @classmethod
     def DefineByValTStr(cls, elemCount: int) -> UnmanagedMarshal:
-        """
-
-        :param elemCount:
+        """:param elemCount:
         :return:
         """
     @classmethod
     def DefineLPArray(cls, elemType: UnmanagedType) -> UnmanagedMarshal:
-        """
-
-        :param elemType:
+        """:param elemType:
         :return:
         """
     @classmethod
     def DefineSafeArray(cls, elemType: UnmanagedType) -> UnmanagedMarshal:
-        """
-
-        :param elemType:
+        """:param elemType:
         :return:
         """
     @classmethod
     def DefineUnmanagedMarshal(cls, unmanagedType: UnmanagedType) -> UnmanagedMarshal:
-        """
-
-        :param unmanagedType:
+        """:param unmanagedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class VarArgMethod(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class __ExceptionInfo(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class __FixupData(ValueType):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from System import Enum
 from System import Guid
 from System import Type
@@ -73,9 +71,7 @@ class IAsyncCausalityTracerStatics:
         operationId: int,
         status: AsyncCausalityStatus,
     ) -> None:
-        """
-
-        :param traceLevel:
+        """:param traceLevel:
         :param source:
         :param platformId:
         :param operationId:
@@ -90,9 +86,7 @@ class IAsyncCausalityTracerStatics:
         operationName: str,
         relatedContext: int,
     ) -> None:
-        """
-
-        :param traceLevel:
+        """:param traceLevel:
         :param source:
         :param platformId:
         :param operationId:
@@ -107,9 +101,7 @@ class IAsyncCausalityTracerStatics:
         operationId: int,
         relation: CausalityRelation,
     ) -> None:
-        """
-
-        :param traceLevel:
+        """:param traceLevel:
         :param source:
         :param platformId:
         :param operationId:
@@ -121,9 +113,7 @@ class IAsyncCausalityTracerStatics:
         source: CausalitySource,
         work: CausalitySynchronousWork,
     ) -> None:
-        """
-
-        :param traceLevel:
+        """:param traceLevel:
         :param source:
         :param work:
         """
@@ -135,9 +125,7 @@ class IAsyncCausalityTracerStatics:
         operationId: int,
         work: CausalitySynchronousWork,
     ) -> None:
-        """
-
-        :param traceLevel:
+        """:param traceLevel:
         :param source:
         :param platformId:
         :param operationId:
@@ -149,16 +137,10 @@ class ITracingStatusChangedEventArgs:
 
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TraceLevel(self) -> CausalityTraceLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TracingStatusChangedEventArgs(RuntimeClass, ITracingStatusChangedEventArgs):
     """"""
@@ -167,50 +149,25 @@ class TracingStatusChangedEventArgs(RuntimeClass, ITracingStatusChangedEventArgs
         """"""
     @property
     def Enabled(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TraceLevel(self) -> CausalityTraceLevel:
-        """
-
-        :return:
-        """
+        """:return:"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """
-
-        :param requestedType:
+        """:param requestedType:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def InitializeLifetimeService(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""

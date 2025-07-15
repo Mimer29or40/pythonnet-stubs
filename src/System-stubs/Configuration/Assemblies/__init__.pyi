@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import ClassVar
 from typing import Final
 from typing import overload
@@ -20,61 +18,33 @@ class AssemblyHash(ValueType, ICloneable):
     """
     @overload
     def __init__(self, value: Array[int]):
-        """
-
-        :param value:
-        """
+        """:param value:"""
     @overload
     def __init__(self, algorithm: AssemblyHashAlgorithm, value: Array[int]):
-        """
-
-        :param algorithm:
+        """:param algorithm:
         :param value:
         """
     @property
     def Algorithm(self) -> AssemblyHashAlgorithm:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Algorithm.setter
     def Algorithm(self, value: AssemblyHashAlgorithm) -> None: ...
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetValue(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetValue(self, value: Array[int]) -> None:
-        """
-
-        :param value:
-        """
+        """:param value:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class AssemblyHashAlgorithm(Enum):
     """"""

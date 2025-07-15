@@ -1,9 +1,6 @@
-from __future__ import annotations
-
 from abc import ABC
-from typing import Callable
-from typing import Iterator
-from typing import Tuple
+from collections.abc import Callable
+from collections.abc import Iterator
 from typing import overload
 
 from System import Array
@@ -60,112 +57,66 @@ class FixupHolder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FixupHolderList(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class Formatter(ABC, Object, IFormatter):
     """"""
 
     @property
     def Binder(self) -> SerializationBinder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Binder.setter
     def Binder(self, value: SerializationBinder) -> None: ...
     @property
     def Context(self) -> StreamingContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Context.setter
     def Context(self, value: StreamingContext) -> None: ...
     @property
     def SurrogateSelector(self) -> ISurrogateSelector:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SurrogateSelector.setter
     def SurrogateSelector(self, value: ISurrogateSelector) -> None: ...
     def Deserialize(self, serializationStream: Stream) -> object:
-        """
-
-        :param serializationStream:
+        """:param serializationStream:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Serialize(self, serializationStream: Stream, graph: object) -> None:
-        """
-
-        :param serializationStream:
+        """:param serializationStream:
         :param graph:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class FormatterConverter(Object, IFormatterConverter):
     """"""
@@ -174,131 +125,86 @@ class FormatterConverter(Object, IFormatterConverter):
         """"""
     @overload
     def Convert(self, value: object, type: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param type:
         :return:
         """
     @overload
     def Convert(self, value: object, typeCode: TypeCode) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param typeCode:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToBoolean(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToByte(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToChar(self, value: object) -> Char:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToDateTime(self, value: object) -> DateTime:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToDecimal(self, value: object) -> Decimal:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToDouble(self, value: object) -> float:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToInt16(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToInt32(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToInt64(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToSByte(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToSingle(self, value: object) -> float:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToUInt16(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToUInt32(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToUInt64(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
 
@@ -307,51 +213,36 @@ class FormatterServices(ABC, Object):
 
     @classmethod
     def CheckTypeSecurity(cls, t: Type, securityLevel: TypeFilterLevel) -> None:
-        """
-
-        :param t:
+        """:param t:
         :param securityLevel:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetObjectData(cls, obj: object, members: Array[MemberInfo]) -> Array[object]:
-        """
-
-        :param obj:
+        """:param obj:
         :param members:
         :return:
         """
     @classmethod
     def GetSafeUninitializedObject(cls, type: Type) -> object:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     @overload
     def GetSerializableMembers(cls, type: Type) -> Array[MemberInfo]:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     @overload
     def GetSerializableMembers(cls, type: Type, context: StreamingContext) -> Array[MemberInfo]:
-        """
-
-        :param type:
+        """:param type:
         :param context:
         :return:
         """
@@ -359,94 +250,64 @@ class FormatterServices(ABC, Object):
     def GetSurrogateForCyclicalReference(
         cls, innerSurrogate: ISerializationSurrogate
     ) -> ISerializationSurrogate:
-        """
-
-        :param innerSurrogate:
+        """:param innerSurrogate:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @classmethod
     def GetTypeFromAssembly(cls, assem: Assembly, name: str) -> Type:
-        """
-
-        :param assem:
+        """:param assem:
         :param name:
         :return:
         """
     @classmethod
     def GetUninitializedObject(cls, type: Type) -> object:
-        """
-
-        :param type:
+        """:param type:
         :return:
         """
     @classmethod
     def PopulateObjectMembers(
         cls, obj: object, members: Array[MemberInfo], data: Array[object]
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param members:
         :param data:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class IDeserializationCallback:
     """"""
 
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
 
 class IFormatter:
     """"""
 
     @property
     def Binder(self) -> SerializationBinder:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Binder.setter
     def Binder(self, value: SerializationBinder) -> None: ...
     @property
     def Context(self) -> StreamingContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Context.setter
     def Context(self, value: StreamingContext) -> None: ...
     @property
     def SurrogateSelector(self) -> ISurrogateSelector:
-        """
-
-        :return:
-        """
+        """:return:"""
     @SurrogateSelector.setter
     def SurrogateSelector(self, value: ISurrogateSelector) -> None: ...
     def Deserialize(self, serializationStream: Stream) -> object:
-        """
-
-        :param serializationStream:
+        """:param serializationStream:
         :return:
         """
     def Serialize(self, serializationStream: Stream, graph: object) -> None:
-        """
-
-        :param serializationStream:
+        """:param serializationStream:
         :param graph:
         """
 
@@ -455,108 +316,74 @@ class IFormatterConverter:
 
     @overload
     def Convert(self, value: object, type: Type) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param type:
         :return:
         """
     @overload
     def Convert(self, value: object, typeCode: TypeCode) -> object:
-        """
-
-        :param value:
+        """:param value:
         :param typeCode:
         :return:
         """
     def ToBoolean(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToByte(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToChar(self, value: object) -> Char:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToDateTime(self, value: object) -> DateTime:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToDecimal(self, value: object) -> Decimal:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToDouble(self, value: object) -> float:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToInt16(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToInt32(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToInt64(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToSByte(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToSingle(self, value: object) -> float:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToString(self, value: object) -> str:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToUInt16(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToUInt32(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def ToUInt64(self, value: object) -> int:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
 
@@ -564,9 +391,7 @@ class IObjectReference:
     """"""
 
     def GetRealObject(self, context: StreamingContext) -> object:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
 
@@ -574,18 +399,13 @@ class ISafeSerializationData:
     """"""
 
     def CompleteDeserialization(self, deserialized: object) -> None:
-        """
-
-        :param deserialized:
-        """
+        """:param deserialized:"""
 
 class ISerializable:
     """"""
 
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
 
@@ -595,9 +415,7 @@ class ISerializationSurrogate:
     def GetObjectData(
         self, obj: object, info: SerializationInfo, context: StreamingContext
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param info:
         :param context:
         """
@@ -608,9 +426,7 @@ class ISerializationSurrogate:
         context: StreamingContext,
         selector: ISurrogateSelector,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param info:
         :param context:
         :param selector:
@@ -621,21 +437,13 @@ class ISurrogateSelector:
     """"""
 
     def ChainSelector(self, selector: ISurrogateSelector) -> None:
-        """
-
-        :param selector:
-        """
+        """:param selector:"""
     def GetNextSelector(self) -> ISurrogateSelector:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSurrogate(
         self, type: Type, context: StreamingContext, selector: ISurrogateSelector
-    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]:
-        """
-
-        :param type:
+    ) -> tuple[ISerializationSurrogate, ISurrogateSelector]:
+        """:param type:
         :param context:
         :param selector:
         :return:
@@ -645,151 +453,85 @@ class LongList(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class MemberHolder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectCloneHelper(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectHolder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectHolderList(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectHolderListEnumerator(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectIDGenerator(Object):
     """"""
@@ -797,127 +539,85 @@ class ObjectIDGenerator(Object):
     def __init__(self):
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
-    def GetId(self, obj: object, firstTime: bool) -> Tuple[int, bool]:
-        """
-
-        :param obj:
+        """:return:"""
+    def GetId(self, obj: object, firstTime: bool) -> tuple[int, bool]:
+        """:param obj:
         :param firstTime:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
-    def HasId(self, obj: object, firstTime: bool) -> Tuple[int, bool]:
-        """
-
-        :param obj:
+        """:return:"""
+    def HasId(self, obj: object, firstTime: bool) -> tuple[int, bool]:
+        """:param obj:
         :param firstTime:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ObjectManager(Object):
     """"""
 
     def __init__(self, selector: ISurrogateSelector, context: StreamingContext):
-        """
-
-        :param selector:
+        """:param selector:
         :param context:
         """
     def DoFixups(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObject(self, objectID: int) -> object:
-        """
-
-        :param objectID:
+        """:param objectID:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RaiseDeserializationEvent(self) -> None:
         """"""
     def RaiseOnDeserializingEvent(self, obj: object) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     @overload
     def RecordArrayElementFixup(
         self, arrayToBeFixed: int, indices: Array[int], objectRequired: int
     ) -> None:
-        """
-
-        :param arrayToBeFixed:
+        """:param arrayToBeFixed:
         :param indices:
         :param objectRequired:
         """
     @overload
     def RecordArrayElementFixup(self, arrayToBeFixed: int, index: int, objectRequired: int) -> None:
-        """
-
-        :param arrayToBeFixed:
+        """:param arrayToBeFixed:
         :param index:
         :param objectRequired:
         """
     def RecordDelayedFixup(
         self, objectToBeFixed: int, memberName: str, objectRequired: int
     ) -> None:
-        """
-
-        :param objectToBeFixed:
+        """:param objectToBeFixed:
         :param memberName:
         :param objectRequired:
         """
     def RecordFixup(self, objectToBeFixed: int, member: MemberInfo, objectRequired: int) -> None:
-        """
-
-        :param objectToBeFixed:
+        """:param objectToBeFixed:
         :param member:
         :param objectRequired:
         """
     @overload
     def RegisterObject(self, obj: object, objectID: int) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param objectID:
         """
     @overload
     def RegisterObject(self, obj: object, objectID: int, info: SerializationInfo) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param objectID:
         :param info:
         """
@@ -930,9 +630,7 @@ class ObjectManager(Object):
         idOfContainingObj: int,
         member: MemberInfo,
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param objectID:
         :param info:
         :param idOfContainingObj:
@@ -948,9 +646,7 @@ class ObjectManager(Object):
         member: MemberInfo,
         arrayIndex: Array[int],
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param objectID:
         :param info:
         :param idOfContainingObj:
@@ -958,10 +654,7 @@ class ObjectManager(Object):
         :param arrayIndex:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OnDeserializedAttribute(Attribute, _Attribute):
     """"""
@@ -970,49 +663,31 @@ class OnDeserializedAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1024,9 +699,7 @@ class OnDeserializedAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1036,21 +709,13 @@ class OnDeserializedAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OnDeserializingAttribute(Attribute, _Attribute):
     """"""
@@ -1059,49 +724,31 @@ class OnDeserializingAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1113,9 +760,7 @@ class OnDeserializingAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1125,21 +770,13 @@ class OnDeserializingAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OnSerializedAttribute(Attribute, _Attribute):
     """"""
@@ -1148,49 +785,31 @@ class OnSerializedAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1202,9 +821,7 @@ class OnSerializedAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1214,21 +831,13 @@ class OnSerializedAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OnSerializingAttribute(Attribute, _Attribute):
     """"""
@@ -1237,49 +846,31 @@ class OnSerializingAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1291,9 +882,7 @@ class OnSerializingAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1303,21 +892,13 @@ class OnSerializingAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class OptionalFieldAttribute(Attribute, _Attribute):
     """"""
@@ -1326,57 +907,36 @@ class OptionalFieldAttribute(Attribute, _Attribute):
         """"""
     @property
     def TypeId(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def VersionAdded(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @VersionAdded.setter
     def VersionAdded(self, value: int) -> None: ...
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -1388,9 +948,7 @@ class OptionalFieldAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -1400,178 +958,103 @@ class OptionalFieldAttribute(Attribute, _Attribute):
         :param puArgErr:
         """
     def IsDefaultAttribute(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Match(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeSerializationEventArgs(EventArgs):
     """"""
 
     @property
     def StreamingContext(self) -> StreamingContext:
-        """
-
-        :return:
-        """
+        """:return:"""
     def AddSerializedState(self, serializedState: ISafeSerializationData) -> None:
-        """
-
-        :param serializedState:
-        """
+        """:param serializedState:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SafeSerializationManager(Object, IObjectReference, ISerializable):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetRealObject(self, context: StreamingContext) -> object:
-        """
-
-        :param context:
+        """:param context:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationBinder(ABC, Object):
     """"""
 
     def BindToName(
         self, serializedType: Type, assemblyName: str, typeName: str
-    ) -> Tuple[None, str, str]:
-        """
-
-        :param serializedType:
+    ) -> tuple[None, str, str]:
+        """:param serializedType:
         :param assemblyName:
         :param typeName:
         """
     def BindToType(self, assemblyName: str, typeName: str) -> Type:
-        """
-
-        :param assemblyName:
+        """:param assemblyName:
         :param typeName:
         :return:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationEntry(ValueType):
     """"""
 
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 SerializationEventHandler: Callable[[StreamingContext], None] = ...
 """
@@ -1583,51 +1066,29 @@ class SerializationEvents(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationEventsCache(ABC, Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationException(SystemException, _Exception, ISerializable):
     """"""
@@ -1637,412 +1098,235 @@ class SerializationException(SystemException, _Exception, ISerializable):
         """"""
     @overload
     def __init__(self, message: str):
-        """
-
-        :param message:
-        """
+        """:param message:"""
     @overload
     def __init__(self, message: str, innerException: Exception):
-        """
-
-        :param message:
+        """:param message:
         :param innerException:
         """
     @property
     def Data(self) -> IDictionary:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HResult(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def HelpLink(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Message(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Source(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def TargetSite(self) -> MethodBase:
-        """
-
+        """:return:"""
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBaseException(self) -> Exception:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _MemberInfo):
     """"""
 
     @property
     def Attributes(self) -> FieldAttributes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def DeclaringType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldHandle(self) -> RuntimeFieldHandle:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def FieldType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamily(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyAndAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFamilyOrAssembly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsInitOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsLiteral(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsNotSerialized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPinvokeImpl(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPrivate(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsPublic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecuritySafeCritical(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSecurityTransparent(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSpecialName(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsStatic(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberType(self) -> MemberTypes:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MetadataToken(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Module(self) -> Module:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ReflectedType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def Equals(self, other: object) -> bool:
-        """
-
-        :param other:
+        """:param other:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
-        """
-
-        :param inherit:
+        """:param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """:param inherit:
+        :return:
         """
-
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
-        :param inherit:
-        :return:
-        """
-    @overload
-    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
@@ -2052,85 +1336,51 @@ class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _M
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """
-
-        :param riid:
+        """:param riid:
         :param rgszNames:
         :param cNames:
         :param lcid:
         :param rgDispId:
         """
     def GetOptionalCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRawConstantValue(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetRequiredCustomModifiers(self) -> Array[Type]:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """
-
-        :param iTInfo:
+        """:param iTInfo:
         :param lcid:
         :param ppTInfo:
         """
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     @overload
-    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
-        """
-
-        :param pcTInfo:
-        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
+        """:param pcTInfo:"""
     def GetValue(self, obj: object) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetValueDirect(self, obj: TypedReference) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     @overload
@@ -2145,9 +1395,7 @@ class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _M
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2168,9 +1416,7 @@ class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _M
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """
-
-        :param dispIdMember:
+        """:param dispIdMember:
         :param riid:
         :param lcid:
         :param wFlags:
@@ -2181,33 +1427,25 @@ class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _M
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
-        """
-
-        :param attributeType:
+        """:param attributeType:
         :param inherit:
         :return:
         """
     @overload
     def SetValue(self, obj: object, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
@@ -2219,483 +1457,305 @@ class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _M
         binder: Binder,
         culture: CultureInfo,
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         :param invokeAttr:
         :param binder:
         :param culture:
         """
     def SetValueDirect(self, obj: TypedReference, value: object) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param value:
         """
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationInfo(Object):
     """"""
 
     @overload
     def __init__(self, type: Type, converter: IFormatterConverter):
-        """
-
-        :param type:
+        """:param type:
         :param converter:
         """
     @overload
     def __init__(
-        self, type: Type, converter: IFormatterConverter, requireSameTokenInPartialTrust: bool
+        self,
+        type: Type,
+        converter: IFormatterConverter,
+        requireSameTokenInPartialTrust: bool,
     ):
-        """
-
-        :param type:
+        """:param type:
         :param converter:
         :param requireSameTokenInPartialTrust:
         """
     @property
     def AssemblyName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @AssemblyName.setter
     def AssemblyName(self, value: str) -> None: ...
     @property
     def FullTypeName(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @FullTypeName.setter
     def FullTypeName(self, value: str) -> None: ...
     @property
     def IsAssemblyNameSetExplicit(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFullTypeNameSetExplicit(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def MemberCount(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @overload
     def AddValue(self, name: str, value: bool) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: Char) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: DateTime) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: Decimal) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: float) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: object) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: float) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: int) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         """
     @overload
     def AddValue(self, name: str, value: object, type: Type) -> None:
-        """
-
-        :param name:
+        """:param name:
         :param value:
         :param type:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetBoolean(self, name: str) -> bool:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetByte(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetChar(self, name: str) -> Char:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDateTime(self, name: str) -> DateTime:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDecimal(self, name: str) -> Decimal:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetDouble(self, name: str) -> float:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetEnumerator(self) -> SerializationInfoEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetInt16(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetInt32(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetInt64(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetSByte(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetSingle(self, name: str) -> float:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetString(self, name: str) -> str:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetUInt16(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetUInt32(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetUInt64(self, name: str) -> int:
-        """
-
-        :param name:
+        """:param name:
         :return:
         """
     def GetValue(self, name: str, type: Type) -> object:
-        """
-
-        :param name:
+        """:param name:
         :param type:
         :return:
         """
     def SetType(self, type: Type) -> None:
-        """
-
-        :param type:
-        """
+        """:param type:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationInfoEnumerator(Object, IEnumerator):
     """"""
 
     @property
     def Current(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Name(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ObjectType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Value(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def MoveNext(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Reset(self) -> None:
         """"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SerializationObjectManager(Object):
     """"""
 
     def __init__(self, context: StreamingContext):
-        """
-
-        :param context:
-        """
+        """:param context:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RaiseOnSerializedEvent(self) -> None:
         """"""
     def RegisterObject(self, obj: object) -> None:
-        """
-
-        :param obj:
-        """
+        """:param obj:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StreamingContext(ValueType):
     """"""
 
     @overload
     def __init__(self, state: StreamingContextStates):
-        """
-
-        :param state:
-        """
+        """:param state:"""
     @overload
     def __init__(self, state: StreamingContextStates, additional: object):
-        """
-
-        :param state:
+        """:param state:
         :param additional:
         """
     @property
     def Context(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def State(self) -> StreamingContextStates:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class StreamingContextStates(Enum):
     """"""
@@ -2723,30 +1783,20 @@ class SurrogateForCyclicalReference(Object, ISerializationSurrogate):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(
         self, obj: object, info: SerializationInfo, context: StreamingContext
     ) -> None:
-        """
-
-        :param obj:
+        """:param obj:
         :param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def SetObjectData(
         self,
         obj: object,
@@ -2754,19 +1804,14 @@ class SurrogateForCyclicalReference(Object, ISerializationSurrogate):
         context: StreamingContext,
         selector: ISurrogateSelector,
     ) -> object:
-        """
-
-        :param obj:
+        """:param obj:
         :param info:
         :param context:
         :param selector:
         :return:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SurrogateHashtable(
     Hashtable,
@@ -2781,159 +1826,88 @@ class SurrogateHashtable(
 
     @property
     def Count(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsFixedSize(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsReadOnly(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def IsSynchronized(self) -> bool:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Item(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @Item.setter
     def Item(self, value: object) -> None: ...
     @property
     def Keys(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def SyncRoot(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def Values(self) -> ICollection:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Add(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
     def Clear(self) -> None:
         """"""
     def Clone(self) -> object:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Contains(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsKey(self, key: object) -> bool:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def ContainsValue(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def CopyTo(self, array: Array, index: int) -> None:
-        """
-
-        :param array:
+        """:param array:
         :param index:
         """
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetEnumerator(self) -> IEnumerator:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """
-
-        :param info:
+        """:param info:
         :param context:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def OnDeserialization(self, sender: object) -> None:
-        """
-
-        :param sender:
-        """
+        """:param sender:"""
     def Remove(self, key: object) -> None:
-        """
-
-        :param key:
-        """
+        """:param key:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __contains__(self, value: object) -> bool:
-        """
-
-        :param value:
+        """:param value:
         :return:
         """
     def __getitem__(self, key: object) -> object:
-        """
-
-        :param key:
+        """:param key:
         :return:
         """
     def __iter__(self) -> Iterator[object]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __len__(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def __setitem__(self, key: object, value: object) -> None:
-        """
-
-        :param key:
+        """:param key:
         :param value:
         """
 
@@ -2941,26 +1915,15 @@ class SurrogateKey(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class SurrogateSelector(Object, ISurrogateSelector):
     """"""
@@ -2970,131 +1933,75 @@ class SurrogateSelector(Object, ISurrogateSelector):
     def AddSurrogate(
         self, type: Type, context: StreamingContext, surrogate: ISerializationSurrogate
     ) -> None:
-        """
-
-        :param type:
+        """:param type:
         :param context:
         :param surrogate:
         """
     def ChainSelector(self, selector: ISurrogateSelector) -> None:
-        """
-
-        :param selector:
-        """
+        """:param selector:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetNextSelector(self) -> ISurrogateSelector:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetSurrogate(
         self, type: Type, context: StreamingContext, selector: ISurrogateSelector
-    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]:
-        """
-
-        :param type:
+    ) -> tuple[ISerializationSurrogate, ISurrogateSelector]:
+        """:param type:
         :param context:
         :param selector:
         :return:
         """
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def RemoveSurrogate(self, type: Type, context: StreamingContext) -> None:
-        """
-
-        :param type:
+        """:param type:
         :param context:
         """
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class TypeLoadExceptionHolder(Object):
     """"""
 
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
 
 class ValueTypeFixupInfo(Object):
     """"""
 
     def __init__(self, containerID: int, member: FieldInfo, parentIndex: Array[int]):
-        """
-
-        :param containerID:
+        """:param containerID:
         :param member:
         :param parentIndex:
         """
     @property
     def ContainerID(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParentField(self) -> FieldInfo:
-        """
-
-        :return:
-        """
+        """:return:"""
     @property
     def ParentIndex(self) -> Array[int]:
-        """
-
-        :return:
-        """
+        """:return:"""
     def Equals(self, obj: object) -> bool:
-        """
-
-        :param obj:
+        """:param obj:
         :return:
         """
     def GetHashCode(self) -> int:
-        """
-
-        :return:
-        """
+        """:return:"""
     def GetType(self) -> Type:
-        """
-
-        :return:
-        """
+        """:return:"""
     def ToString(self) -> str:
-        """
-
-        :return:
-        """
+        """:return:"""
