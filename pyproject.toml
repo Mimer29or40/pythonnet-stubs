@@ -55,7 +55,8 @@ stubgen = "stubgen.__main__:main"
 
 [project.optional-dependencies]
 tests = [
-    "tox",
+    "tox>=4.27.0",
+    "pytest>=8.4.1",
 ]
 
 [build-system]

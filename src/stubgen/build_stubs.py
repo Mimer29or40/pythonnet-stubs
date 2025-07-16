@@ -1056,7 +1056,7 @@ def build_type(
                 type_str = f"{type_str}[{', '.join(children)}]"
     else:
         imports.add_type(type)
-        type_str = type.simple_name
+        type_str = type.doc_name
 
     if type.nullable:
         imports.add_type(CType(name="Optional", namespace="typing"))

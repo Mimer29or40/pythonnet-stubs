@@ -19,8 +19,9 @@
       <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/obj" />
       <excludeFolder url="file://$MODULE_DIR$/test/output" />
       <excludeFolder url="file://$MODULE_DIR$/src/stubs/raw" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="uv (pythonnet-stubs)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

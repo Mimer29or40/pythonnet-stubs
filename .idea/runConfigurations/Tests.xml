@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Tests" type="CompoundRunConfigurationType">
-    <toRun name="test_build" type="tests" />
-    <toRun name="test_extract" type="tests" />
-    <toRun name="test_model" type="tests" />
-    <method v="2" />
-  </configuration>
-</component>

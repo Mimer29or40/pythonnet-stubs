@@ -4,28 +4,20 @@ import functools
 import keyword
 import re
 import time
-from collections.abc import Callable
-from contextlib import contextmanager
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from stubgen.log import get_logger
 
-logger = get_logger(__name__)
+if TYPE_CHECKING:  # pragma: no cover
+    from collections.abc import Callable
+    from logging import Logger
+    from pathlib import Path
 
-
-@contextmanager
-def time_it(name: str, log_func: Callable = logger.debug):
-    log_func(f"Starting Timer: {name}")
-    start_time = time.time()
-    try:
-        yield
-    finally:
-        duration = time.time() - start_time
-        log_func(f"Timer Finished: {name} - {duration} sec")
+logger: Logger = get_logger(__name__)
 
 
 def time_function(func=None, *, log_func: Callable = logger.debug):
-    def decorator(_func):
+    def decorator(_func) -> Callable:
         @functools.wraps(_func)
         def wrapper(*args, **kwargs):
             log_func(f"Timing Function: {_func.__name__}")
