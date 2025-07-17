@@ -12,11 +12,12 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import AnyStr
 from typing import Final
-from typing import TypeVar
 from typing import cast
+from typing import override
 
 import black
 import isort
@@ -25,6 +26,7 @@ from black import TargetVersion
 from black import WriteBack
 from isort import Config
 
+from stubgen.command import CommandArguments
 from stubgen.log import get_logger
 from stubgen.model import CClass
 from stubgen.model import CConstructor
@@ -42,9 +44,22 @@ from stubgen.model import CType
 from stubgen.model import CTypeDefinition
 from stubgen.util import make_python_name
 
-T = TypeVar("T")
+if TYPE_CHECKING:  # pragma: no cover
+    from argparse import ArgumentParser
 
-logger = get_logger(__name__)
+    # noinspection PyProtectedMember
+    from argparse import _SubParsersAction
+    from collections.abc import Callable
+    from collections.abc import Mapping
+    from collections.abc import Sequence
+    from logging import Logger
+    from typing import TypeVar
+
+    from stubgen.command import CommandResult
+
+    T = TypeVar("T")
+
+logger: Logger = get_logger(__name__)
 
 # TODO - Need to handle method that override methods in parent classes better
 # Example Object.Equals(Object) -> AFObject.Equals(AFObject)
@@ -1347,6 +1362,147 @@ def build_stubs(
             executor.shutdown(wait=True)
         else:
             for file in output_dir.rglob("*.pyi"):
+                format_file(file)
+
+    return 0
+
+
+@dataclass(frozen=True, kw_only=True)
+class BuildArguments(CommandArguments):
+    """Arguments to run the 'build' command."""
+
+    command: str = "build"
+
+    line_length: int = 100
+    format_files: bool = False
+
+    skeletons: str
+    docs: str
+
+    @classmethod
+    @override
+    def populate_parser(cls, sub_parser: _SubParsersAction[ArgumentParser]) -> None:
+        build_command = sub_parser.add_parser("build", help="build stub file tree")
+
+        build_command.add_argument(
+            "-l",
+            "--line-length",
+            type=int,
+            default=100,
+            help="max length for a line in characters",
+            dest="line_length",
+        )
+        build_command.add_argument(
+            "-f",
+            "--format-files",
+            action="store_true",
+            help="format generated stub files",
+            dest="format_files",
+        )
+
+        build_command.add_argument(
+            "skeletons",
+            help="glob to the skeleton files",
+        )
+        build_command.add_argument(
+            "docs",
+            help="glob to the doc files",
+        )
+
+
+def command_build(args: BuildArguments) -> CommandResult:
+    """Run the 'build' command."""
+    logger.debug("Arguments: %s", args)
+
+    line_length: int = args.line_length
+    logger.debug("Using line length: %s", line_length)
+
+    format_files: bool = args.format_files
+    logger.debug("Using format files flag: %s", format_files)
+
+    skeleton_glob: str = args.skeletons
+    skeleton_files: list[Path] = []
+    for file_path in Path().glob(skeleton_glob):
+        skeleton_files.append(file_path)
+        logger.debug("Using skeleton file: %r", str(file_path))
+
+    doc_glob: str = args.docs
+    doc_files: list[Path] = []
+    for file_path in Path().glob(doc_glob):
+        doc_files.append(file_path)
+        logger.debug("Using doc file: %r", str(file_path))
+
+    namespaces: dict[str, CNamespace] = {}
+    for skeleton_file in skeleton_files:
+        logger.info("Loading skeletons file: '%s'", skeleton_file)
+        with skeleton_file.open("r") as file:
+            skeleton_dict: dict[str, Any] = json.load(file)
+
+        for namespace_json in skeleton_dict["namespaces"].values():
+            namespace: CNamespace = CNamespace.from_json(namespace_json)
+            if namespace.name in namespaces:
+                namespace = merge_namespace(namespaces[namespace.name], namespace, False)
+            namespaces[namespace.name] = namespace
+
+    doc: Doc = Doc({})
+    for doc_file in doc_files:
+        logger.info("Loading Doc File: %r", str(doc_file))
+        with doc_file.open("r") as file:
+            loaded_doc_dict_tree: dict[str, Any] = json.load(file)
+
+        new_doc: Doc = Doc(loaded_doc_dict_tree)
+        doc = merge_doc(doc, new_doc)
+
+    if args.multi_threaded:
+        executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
+        for namespace in namespaces.values():
+            executor.submit(build_stub, namespace, doc, args.output_dir, line_length)
+        executor.shutdown(wait=True)
+    else:
+        for namespace in namespaces.values():
+            build_stub(namespace, doc, args.output_dir, line_length)
+
+    if format_files:
+
+        def format_file(file: Path) -> None:
+            logger.debug("Formatting file: %s", file)
+            try:
+                isort.file(file, config=isort_config)
+            except Exception as e:
+                logger.warning('Unable to run isort on file "%s":', file, exc_info=e)
+
+            try:
+                black.format_file_in_place(
+                    file, fast=False, mode=black_mode, write_back=WriteBack.YES
+                )
+            except Exception as e:
+                logger.warning('Unable to run black on file "%s":', file, exc_info=e)
+
+        logger.info("Formatting stub files")
+        isort_config = Config(
+            profile="black",
+            line_length=line_length,
+            force_single_line=True,
+        )
+        black_mode: Mode = Mode(
+            target_versions={
+                TargetVersion.PY38,
+                TargetVersion.PY39,
+                TargetVersion.PY310,
+                TargetVersion.PY311,
+                TargetVersion.PY312,
+            },
+            line_length=line_length,
+            is_pyi=True,
+        )
+
+        if args.multi_threaded:
+            executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
+            for file in args.output_dir.rglob("*.pyi"):
+                executor.submit(format_file, file)
+            executor.shutdown(wait=True)
+        else:
+            for file in args.output_dir.rglob("*.pyi"):
                 format_file(file)
 
     return 0

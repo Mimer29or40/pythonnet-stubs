@@ -1,17 +1,17 @@
 from __future__ import annotations
 
-import dataclasses
 import itertools
 import json
+import sys
+from argparse import ZERO_OR_MORE
 from collections import defaultdict
-from collections.abc import Callable
-from collections.abc import Collection
-from collections.abc import Mapping
 from collections.abc import Sequence
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 from pathlib import Path
-from typing import TypeVar
+from typing import TYPE_CHECKING
+from typing import override
 
 import clr
 from System import Delegate
@@ -28,6 +28,10 @@ from System.Reflection import ParameterInfo
 from System.Reflection import PropertyInfo
 from System.Reflection import TypeInfo
 
+from stubgen.command import CommandArguments
+from stubgen.defaults import ASSEMBLIES
+from stubgen.defaults import BUILT_INS
+from stubgen.defaults import CORE
 from stubgen.log import get_logger
 from stubgen.model import CClass
 from stubgen.model import CConstructor
@@ -46,9 +50,23 @@ from stubgen.model import CTypeDefinition
 from stubgen.util import is_name_valid
 from stubgen.util import make_python_name
 
-logger = get_logger(__name__)
+if TYPE_CHECKING:  # pragma: no cover
+    from argparse import ArgumentParser
 
-T = TypeVar("T")
+    # noinspection PyProtectedMember
+    from argparse import _SubParsersAction
+    from collections.abc import Callable
+    from collections.abc import Collection
+    from collections.abc import Mapping
+    from collections.abc import Sequence
+    from logging import Logger
+    from typing import TypeVar
+
+    from stubgen.command import CommandResult
+
+    T = TypeVar("T")
+
+logger: Logger = get_logger(__name__)
 
 
 def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
@@ -610,6 +628,132 @@ def extract_assemblies(
                     return exit_code
             except Exception as e:
                 if skip_failed:
+                    logger.warning("Could not extract assembly: %s", assembly_name, exc_info=e)
+                else:
+                    raise e from None
+
+    return 0
+
+
+@dataclass(frozen=True, kw_only=True)
+class ExtractArguments(CommandArguments):
+    """Arguments to run the 'extract' command."""
+
+    command: str = "extract"
+
+    skip_failed: bool = False
+    paths: Sequence[Path] = ()
+    overwrite: bool = False
+
+    use_all: bool = False
+    use_built_in: bool = False
+    use_core: bool = False
+
+    assemblies: Sequence[str]
+
+    @classmethod
+    @override
+    def populate_parser(cls, sub_parser: _SubParsersAction[ArgumentParser]) -> None:
+        extract_command = sub_parser.add_parser(
+            "extract",
+            help="extract types from assemblies to json",
+        )
+        extract_command.add_argument(
+            "-s",
+            "--skip-failed",
+            action="store_true",
+            help="skips failed assemblies",
+            dest="skip_failed",
+        )
+        extract_command.add_argument(
+            "-p",
+            "--path",
+            action="append",
+            default=[],
+            type=Path,
+            help="additional directories to add to the path",
+            dest="paths",
+        )
+        extract_command.add_argument(
+            "-w",
+            "--overwrite",
+            action="store_true",
+            help="overwrite existing files",
+        )
+
+        assembly_group = extract_command.add_mutually_exclusive_group()
+        assembly_group.add_argument(
+            "-a",
+            "--all",
+            action="store_true",
+            help="process all assemblies",
+            dest="use_all",
+        )
+        assembly_group.add_argument(
+            "-b",
+            "--built_in",
+            action="store_true",
+            help="process built-in assemblies",
+            dest="use_built_in",
+        )
+        assembly_group.add_argument(
+            "-c",
+            "--core",
+            action="store_true",
+            help="process core assemblies",
+            dest="use_core",
+        )
+
+        extract_command.add_argument(
+            "assemblies",
+            nargs=ZERO_OR_MORE,
+            help="names of dll assemblies to process",
+        )
+
+
+def command_extract(args: ExtractArguments) -> CommandResult:
+    """Run the 'extract' command."""
+    logger.debug("Arguments: %s", args)
+
+    path: Path
+    for path in args.paths:
+        path_str: str = str(path.resolve())
+        sys.path.append(path_str)
+
+    assembly_names: list[str] = []
+    if args.use_all:
+        assembly_names.extend(ASSEMBLIES)
+        assembly_names.extend(BUILT_INS)
+        assembly_names.extend(CORE)
+    elif args.use_built_in:
+        assembly_names.extend(BUILT_INS)
+    elif args.use_core:
+        assembly_names.extend(CORE)
+    assembly_names.extend(args.assemblies)
+    assembly_names = sorted(set(assembly_names))
+
+    exit_code: CommandResult
+    if args.multi_threaded:
+        executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
+        for exit_code in executor.map(
+            extract_assembly,
+            assembly_names,
+            itertools.repeat(args.output_dir),
+            itertools.repeat(args.overwrite),
+        ):
+            if exit_code != 0 and not args.skip_failed:
+                executor.shutdown(cancel_futures=True)
+                return exit_code
+        executor.shutdown(wait=True)
+    else:
+        assembly_name: str
+        for assembly_name in assembly_names:
+            try:
+                exit_code = extract_assembly(assembly_name, args.output_dir, args.overwrite)
+                if exit_code != 0 and not args.skip_failed:
+                    return exit_code
+            except Exception as e:
+                if args.skip_failed:
                     logger.warning("Could not extract assembly: %s", assembly_name, exc_info=e)
                 else:
                     raise e from None
