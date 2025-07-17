@@ -27,7 +27,7 @@ if TYPE_CHECKING:  # pragma: no cover
 logger: Logger = get_logger(__name__)
 
 
-def _compare_boolean(x: bool | None, y: bool | None) -> CompareResults:
+def _compare_boolean(x: bool | None, y: bool | None) -> CompareResults:  # pragma: no cover
     match x, y:
         case (None, None):
             return 0
@@ -38,10 +38,10 @@ def _compare_boolean(x: bool | None, y: bool | None) -> CompareResults:
         case (bool(), bool()):
             return 0 if x == y else (-1 if y else 1)
     # This should never be reached, as long as the parameter types are correct
-    return 0  # pragma: no cover
+    return 0
 
 
-def _compare_string(x: str | None, y: str | None) -> CompareResults:
+def _compare_string(x: str | None, y: str | None) -> CompareResults:  # pragma: no cover
     match x, y:
         case (None, None):
             return 0
@@ -52,7 +52,7 @@ def _compare_string(x: str | None, y: str | None) -> CompareResults:
         case (str(), str()):
             return 0 if x == y else (-1 if x < y else 1)
     # This should never be reached, as long as the parameter types are correct
-    return 0  # pragma: no cover
+    return 0
 
 
 def _json_doc() -> dict[str, Any]:
@@ -319,7 +319,7 @@ class CConstructor(CMember):
 
     @override
     def __str__(self) -> str:
-        param_types: str = ", ".join(str(p.type) for p in self.parameters)
+        param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.declaring_type}.{self.name}({param_types})"
 
     @property
@@ -403,7 +403,7 @@ class CMethod(CMember):
 
     @override
     def __str__(self) -> str:
-        param_types: str = ", ".join(str(p.type) for p in self.parameters)
+        param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.declaring_type}.{self.name}({param_types})"
 
     @property
@@ -547,7 +547,7 @@ class CTypeDefinition(CWrapper, ABC):
                 return CEnum.from_json(json)
             case "delegate":
                 return CDelegate.from_json(json)
-        return None
+        return None  # pragma: no cover
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -750,7 +750,7 @@ class CDelegate(CTypeDefinition):
     @property
     @override
     def doc_name(self) -> str:
-        param_types: str = ", ".join(str(p.type) for p in self.parameters)
+        param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.name}({param_types})"
 
     @override

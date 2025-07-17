@@ -29,32 +29,77 @@ if TYPE_CHECKING:  # pragma: no cover
     from stubgen.model import JsonType
 
 
-def _make_json_params[T: CWrapper](params: Sequence[tuple[str, T, JsonType]]) -> Mapping[str, ...]:
+def _make_doc_name_params[T: CWrapper](o: Sequence[tuple[T, str]]) -> Mapping[str, ...]:
+    return {
+        "argnames": ("obj", "expected"),
+        "argvalues": [(obj, expected) for obj, expected in o],
+        "ids": [doc_name for _, doc_name in o],
+    }
+
+
+def _make_json_params[T: CWrapper](o: Sequence[tuple[str, T, JsonType]]) -> Mapping[str, ...]:
     return {
         "argnames": ("obj", "json"),
-        "argvalues": [(obj, json) for _, obj, json in params],
-        "ids": [name for name, _, _ in params],
+        "argvalues": [(obj, json) for _, obj, json in o],
+        "ids": [name for name, _, _ in o],
     }
 
 
-def _make_doc_params[T: CWrapper](params: Sequence[tuple[str, T, JsonType]]) -> Mapping[str, ...]:
+def _make_doc_params[T: CWrapper](o: Sequence[tuple[str, T, JsonType]]) -> Mapping[str, ...]:
     return {
         "argnames": ("obj", "doc"),
-        "argvalues": [(obj, doc) for _, obj, doc in params],
-        "ids": [name for name, _, _ in params],
+        "argvalues": [(obj, doc) for _, obj, doc in o],
+        "ids": [name for name, _, _ in o],
     }
 
 
-def _make_compare_parameters[T: CWrapper](params: Sequence[tuple[str, T, T]]) -> Mapping[str, ...]:
+def _make_compare_parameters[T: CWrapper](o: Sequence[tuple[str, T, T]]) -> Mapping[str, ...]:
     return {
         "argnames": ("x", "y"),
-        "argvalues": [(x, y) for _, x, y in params],
-        "ids": [name for name, _, _ in params],
+        "argvalues": [(x, y) for _, x, y in o],
+        "ids": [name for name, _, _ in o],
     }
+
+
+# noinspection PyTypeChecker
+def _compare[T: CWrapper](cls: type[T], x: T, y: T) -> None:
+    assert x < y
+    assert x <= y
+    assert x == x
+    assert y == y
+    assert y > x
+    assert y >= x
+    assert cls.compare(x, y) == -1
+    assert cls.compare(x, x) == 0
+    assert cls.compare(y, y) == 0
+    assert cls.compare(y, x) == 1
+
+
+# noinspection PyTypeChecker
+def _compare_seq[T: CWrapper](cls: type[T], x: T, y: T) -> None:
+    assert cls.compare_seq([], [y]) == -1
+    assert cls.compare_seq([x], [y]) == -1
+    assert cls.compare_seq([], []) == 0
+    assert cls.compare_seq([x], [x]) == 0
+    assert cls.compare_seq([y], [y]) == 0
+    assert cls.compare_seq([x], []) == 1
+    assert cls.compare_seq([y], [x]) == 1
 
 
 class TestCType:
     """Tests for CType."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CType, str]]] = [
+        (CType(name="Name"), "Name"),
+        (CType(name="Name", inner=(CType(name="A"), CType(name="B"))), "Name[A, B]"),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CType, expected: str) -> None:
+        """Test for CType.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CType, JsonType]]] = [
         ("basic", CType(name="Name"), "Name"),
@@ -112,19 +157,27 @@ class TestCType:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CType, y: CType) -> None:
         """Test for CType.compare()."""
-        assert CType.compare(x, y) == -1
-        assert CType.compare(y, x) == 1
+        _compare(CType, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CType, y: CType) -> None:
         """Test for CType.compare_seq()."""
-        assert CType.compare_seq([], [y]) == -1
-        assert CType.compare_seq([x], []) == 1
-        assert CType.compare_seq([x], [y]) == -1
+        _compare_seq(CType, x, y)
 
 
 class TestCParameter:
     """Tests for CParameter."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CParameter, str]]] = [
+        (CParameter(name="Name", type=CType(name="Type")), "Name"),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CParameter, expected: str) -> None:
+        """Test for CParameter.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CParameter, JsonType]]] = [
         (
@@ -176,19 +229,30 @@ class TestCParameter:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CParameter, y: CParameter) -> None:
         """Test for CParameter.compare()."""
-        assert CParameter.compare(x, y) == -1
-        assert CParameter.compare(y, x) == 1
+        _compare(CParameter, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CParameter, y: CParameter) -> None:
         """Test for CParameter.compare_seq()."""
-        assert CParameter.compare_seq([], [y]) == -1
-        assert CParameter.compare_seq([x], []) == 1
-        assert CParameter.compare_seq([x], [y]) == -1
+        _compare_seq(CParameter, x, y)
 
 
 class TestCField:
     """Tests for CField."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CField, str]]] = [
+        (
+            CField(name="Name", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
+            "Name",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CField, expected: str) -> None:
+        """Test for CField.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CField, JsonType]]] = [
         (
@@ -261,19 +325,37 @@ class TestCField:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CField, y: CField) -> None:
         """Test for CField.compare()."""
-        assert CField.compare(x, y) == -1
-        assert CField.compare(y, x) == 1
+        _compare(CField, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CField, y: CField) -> None:
         """Test for CField.compare_seq()."""
-        assert CField.compare_seq([], [y]) == -1
-        assert CField.compare_seq([x], []) == 1
-        assert CField.compare_seq([x], [y]) == -1
+        _compare_seq(CField, x, y)
 
 
 class TestCConstructor:
     """Tests for CConstructor."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CConstructor, str]]] = [
+        (CConstructor(declaring_type=CType(name="Type")), "__init__()"),
+        (
+            CConstructor(
+                declaring_type=CType(name="Type"),
+                parameters=(
+                    CParameter(name="param0", type=CType(name="Type")),
+                    CParameter(name="param0", type=CType(name="Type")),
+                ),
+            ),
+            "__init__(Type, Type)",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CConstructor, expected: str) -> None:
+        """Test for CConstructor.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CConstructor, JsonType]]] = [
         (
@@ -373,19 +455,30 @@ class TestCConstructor:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CConstructor, y: CConstructor) -> None:
         """Test for CConstructor.compare()."""
-        assert CConstructor.compare(x, y) == -1
-        assert CConstructor.compare(y, x) == 1
+        _compare(CConstructor, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CConstructor, y: CConstructor) -> None:
         """Test for CConstructor.compare_seq()."""
-        assert CConstructor.compare_seq([], [y]) == -1
-        assert CConstructor.compare_seq([x], []) == 1
-        assert CConstructor.compare_seq([x], [y]) == -1
+        _compare_seq(CConstructor, x, y)
 
 
 class TestCProperty:
     """Tests for CProperty."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CProperty, str]]] = [
+        (
+            CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
+            "Name",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CProperty, expected: str) -> None:
+        """Test for CProperty.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CProperty, JsonType]]] = [
         (
@@ -486,19 +579,38 @@ class TestCProperty:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CProperty, y: CProperty) -> None:
         """Test for CProperty.compare()."""
-        assert CProperty.compare(x, y) == -1
-        assert CProperty.compare(y, x) == 1
+        _compare(CProperty, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CProperty, y: CProperty) -> None:
         """Test for CProperty.compare_seq()."""
-        assert CProperty.compare_seq([], [y]) == -1
-        assert CProperty.compare_seq([x], []) == 1
-        assert CProperty.compare_seq([x], [y]) == -1
+        _compare_seq(CProperty, x, y)
 
 
 class TestCMethod:
     """Tests for CMethod."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CMethod, str]]] = [
+        (CMethod(name="Name", declaring_type=CType(name="Type")), "Name()"),
+        (
+            CMethod(
+                name="Name",
+                declaring_type=CType(name="Type"),
+                parameters=(
+                    CParameter(name="param0", type=CType(name="Type")),
+                    CParameter(name="param0", type=CType(name="Type")),
+                ),
+            ),
+            "Name(Type, Type)",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CMethod, expected: str) -> None:
+        """Test for CMethod.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CMethod, JsonType]]] = [
         (
@@ -666,19 +778,27 @@ class TestCMethod:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CMethod, y: CMethod) -> None:
         """Test for CMethod.compare()."""
-        assert CMethod.compare(x, y) == -1
-        assert CMethod.compare(y, x) == 1
+        _compare(CMethod, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CMethod, y: CMethod) -> None:
         """Test for CMethod.compare_seq()."""
-        assert CMethod.compare_seq([], [y]) == -1
-        assert CMethod.compare_seq([x], []) == 1
-        assert CMethod.compare_seq([x], [y]) == -1
+        _compare_seq(CMethod, x, y)
 
 
 class TestCEvent:
     """Tests for CEvent."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CEvent, str]]] = [
+        (CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")), "Name"),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CEvent, expected: str) -> None:
+        """Test for CEvent.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CEvent, JsonType]]] = [
         (
@@ -736,19 +856,27 @@ class TestCEvent:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CEvent, y: CEvent) -> None:
         """Test for CEvent.compare()."""
-        assert CEvent.compare(x, y) == -1
-        assert CEvent.compare(y, x) == 1
+        _compare(CEvent, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CEvent, y: CEvent) -> None:
         """Test for CEvent.compare_seq()."""
-        assert CEvent.compare_seq([], [y]) == -1
-        assert CEvent.compare_seq([x], []) == 1
-        assert CEvent.compare_seq([x], [y]) == -1
+        _compare_seq(CEvent, x, y)
 
 
 class TestCNamespace:
     """Tests for CNamespace."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CNamespace, str]]] = [
+        (CNamespace(name="Name"), "Name"),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CNamespace, expected: str) -> None:
+        """Test for CNamespace.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CNamespace, JsonType]]] = [
         (
@@ -859,19 +987,34 @@ class TestCNamespace:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CNamespace, y: CNamespace) -> None:
         """Test for CNamespace.compare()."""
-        assert CNamespace.compare(x, y) == -1
-        assert CNamespace.compare(y, x) == 1
+        _compare(CNamespace, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CNamespace, y: CNamespace) -> None:
         """Test for CNamespace.compare_seq()."""
-        assert CNamespace.compare_seq([], [y]) == -1
-        assert CNamespace.compare_seq([x], []) == 1
-        assert CNamespace.compare_seq([x], [y]) == -1
+        _compare_seq(CNamespace, x, y)
 
 
 class TestCClass:
     """Tests for CClass."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CClass, str]]] = [
+        (CClass(name="Name"), "Name"),
+        (
+            CClass(
+                name="Name",
+                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            ),
+            "Name[$A, $B]",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CClass, expected: str) -> None:
+        """Test for CClass.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CClass, JsonType]]] = [
         (
@@ -1473,19 +1616,34 @@ class TestCClass:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CClass, y: CClass) -> None:
         """Test for CClass.compare()."""
-        assert CClass.compare(x, y) == -1
-        assert CClass.compare(y, x) == 1
+        _compare(CClass, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CClass, y: CClass) -> None:
         """Test for CClass.compare_seq()."""
-        assert CClass.compare_seq([], [y]) == -1
-        assert CClass.compare_seq([x], []) == 1
-        assert CClass.compare_seq([x], [y]) == -1
+        _compare_seq(CClass, x, y)
 
 
 class TestCStruct:
     """Tests for CStruct."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CStruct, str]]] = [
+        (CStruct(name="Name"), "Name"),
+        (
+            CStruct(
+                name="Name",
+                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            ),
+            "Name[$A, $B]",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CStruct, expected: str) -> None:
+        """Test for CStruct.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CStruct, JsonType]]] = [
         (
@@ -2087,19 +2245,34 @@ class TestCStruct:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CStruct, y: CStruct) -> None:
         """Test for CStruct.compare()."""
-        assert CStruct.compare(x, y) == -1
-        assert CStruct.compare(y, x) == 1
+        _compare(CStruct, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CStruct, y: CStruct) -> None:
         """Test for CStruct.compare_seq()."""
-        assert CStruct.compare_seq([], [y]) == -1
-        assert CStruct.compare_seq([x], []) == 1
-        assert CStruct.compare_seq([x], [y]) == -1
+        _compare_seq(CStruct, x, y)
 
 
 class TestCInterface:
     """Tests for CInterface."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CInterface, str]]] = [
+        (CInterface(name="Name"), "Name"),
+        (
+            CInterface(
+                name="Name",
+                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            ),
+            "Name[$A, $B]",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CInterface, expected: str) -> None:
+        """Test for CInterface.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CInterface, JsonType]]] = [
         (
@@ -2569,19 +2742,27 @@ class TestCInterface:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CInterface, y: CInterface) -> None:
         """Test for CInterface.compare()."""
-        assert CInterface.compare(x, y) == -1
-        assert CInterface.compare(y, x) == 1
+        _compare(CInterface, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CInterface, y: CInterface) -> None:
         """Test for CInterface.compare_seq()."""
-        assert CInterface.compare_seq([], [y]) == -1
-        assert CInterface.compare_seq([x], []) == 1
-        assert CInterface.compare_seq([x], [y]) == -1
+        _compare_seq(CInterface, x, y)
 
 
 class TestCEnum:
     """Tests for CEnum."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CEnum, str]]] = [
+        (CEnum(name="Name"), "Name"),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CEnum, expected: str) -> None:
+        """Test for CEnum.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CEnum, JsonType]]] = [
         (
@@ -2654,19 +2835,37 @@ class TestCEnum:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CEnum, y: CEnum) -> None:
         """Test for CEnum.compare()."""
-        assert CEnum.compare(x, y) == -1
-        assert CEnum.compare(y, x) == 1
+        _compare(CEnum, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CEnum, y: CEnum) -> None:
         """Test for CEnum.compare_seq()."""
-        assert CEnum.compare_seq([], [y]) == -1
-        assert CEnum.compare_seq([x], []) == 1
-        assert CEnum.compare_seq([x], [y]) == -1
+        _compare_seq(CEnum, x, y)
 
 
 class TestCDelegate:
     """Tests for CDelegate."""
+
+    doc_name_objects: ClassVar[Sequence[tuple[CDelegate, str]]] = [
+        (CDelegate(name="Name"), "Name()"),
+        (
+            CDelegate(
+                name="Name",
+                parameters=(
+                    CParameter(name="param0", type=CType(name="A")),
+                    CParameter(name="param1", type=CType(name="B")),
+                ),
+            ),
+            "Name(A, B)",
+        ),
+    ]
+
+    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    def test_doc_name(self, obj: CDelegate, expected: str) -> None:
+        """Test for CDelegate.doc_name."""
+        actual: str = obj.doc_name
+
+        assert actual == expected
 
     json_objects: ClassVar[Sequence[tuple[str, CDelegate, JsonType]]] = [
         (
@@ -2776,15 +2975,12 @@ class TestCDelegate:
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare(self, x: CDelegate, y: CDelegate) -> None:
         """Test for CDelegate.compare()."""
-        assert CDelegate.compare(x, y) == -1
-        assert CDelegate.compare(y, x) == 1
+        _compare(CDelegate, x, y)
 
     @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
     def test_compare_seq(self, x: CDelegate, y: CDelegate) -> None:
         """Test for CDelegate.compare_seq()."""
-        assert CDelegate.compare_seq([], [y]) == -1
-        assert CDelegate.compare_seq([x], []) == 1
-        assert CDelegate.compare_seq([x], [y]) == -1
+        _compare_seq(CDelegate, x, y)
 
 
 if __name__ == "__main__":

@@ -219,3 +219,5 @@ logs/
 /src/TestLibSrc/obj/
 /test/output/
 /src/stubs/raw/
+/htmlcov/
+/output/

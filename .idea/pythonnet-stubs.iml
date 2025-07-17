@@ -20,6 +20,9 @@
       <excludeFolder url="file://$MODULE_DIR$/test/output" />
       <excludeFolder url="file://$MODULE_DIR$/src/stubs/raw" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dictionaries" />
+      <excludeFolder url="file://$MODULE_DIR$/htmlcov" />
+      <excludeFolder url="file://$MODULE_DIR$/output" />
     </content>
     <orderEntry type="jdk" jdkName="uv (pythonnet-stubs)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
