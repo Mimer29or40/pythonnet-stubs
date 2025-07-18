@@ -59,6 +59,60 @@ def _json_doc() -> dict[str, Any]:
     return {"doc": "", "doc_formatted": {}}
 
 
+@dataclass(frozen=True)
+class DocTree:
+    """A tree data structure for representing doc-strings for C# objects."""
+
+    name: str
+    doc: str = ""
+    doc_formatted: Mapping[str, Sequence[str]] = field(default_factory=dict)
+    parameters: Mapping[str, str] = field(default_factory=dict)
+    return_doc: str | None = None
+    exceptions: Mapping[str, str] = field(default_factory=dict)
+    nodes: Sequence[DocTree] = ()
+
+    # def __getitem__(self, key, /):
+    #     pass
+    #
+    # def __len__(self):
+    #     pass
+    #
+    # def __iter__(self):
+    #     pass
+
+    # def get(self, key, default=None):
+    #     'D.get(k[,d]) -> D[k] if k in D, else d.  d defaults to None.'
+    #     try:
+    #         return self[key]
+    #     except KeyError:
+    #         return default
+    #
+    # def __contains__(self, key):
+    #     try:
+    #         self[key]
+    #     except KeyError:
+    #         return False
+    #     else:
+    #         return True
+    #
+    # def keys(self):
+    #     "D.keys() -> a set-like object providing a view on D's keys"
+    #     return KeysView(self)
+    #
+    # def items(self):
+    #     "D.items() -> a set-like object providing a view on D's items"
+    #     return ItemsView(self)
+    #
+    # def values(self):
+    #     "D.values() -> an object providing a view on D's values"
+    #     return ValuesView(self)
+    #
+    # def __eq__(self, other):
+    #     if not isinstance(other, Mapping):
+    #         return NotImplemented
+    #     return dict(self.items()) == dict(other.items())
+
+
 @dataclass(frozen=True, kw_only=True)
 class CWrapper(ABC):
     """Base class for C# wrappers."""

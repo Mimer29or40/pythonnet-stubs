@@ -2,53 +2,16 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import TYPE_CHECKING
-from typing import Any
 
 import pytest
-from test_base import TestBase
 
-from stubgen.extract_stubs import extract_assembly
-from stubgen.extract_stubs import extract_constructor
-from stubgen.extract_stubs import extract_constructors
-from stubgen.extract_stubs import extract_event
-from stubgen.extract_stubs import extract_events
-from stubgen.extract_stubs import extract_field
-from stubgen.extract_stubs import extract_fields
-from stubgen.extract_stubs import extract_method
-from stubgen.extract_stubs import extract_methods
-from stubgen.extract_stubs import extract_parameter
-from stubgen.extract_stubs import extract_properties
-from stubgen.extract_stubs import extract_property
 from stubgen.extract_stubs import extract_type
-from stubgen.extract_stubs import extract_type_def
-from stubgen.model import CClass
-from stubgen.model import CConstructor
-from stubgen.model import CDelegate
-from stubgen.model import CEnum
-from stubgen.model import CEvent
-from stubgen.model import CField
-from stubgen.model import CInterface
-from stubgen.model import CMethod
-from stubgen.model import CParameter
-from stubgen.model import CProperty
-from stubgen.model import CStruct
 from stubgen.model import CType
-from stubgen.model import CTypeDefinition
 from stubgen.util import make_python_name
 
 if TYPE_CHECKING:  # pragma: no cover
-    from collections.abc import Mapping
-    from collections.abc import Sequence
-
     from System.Reflection import Assembly
-    from System.Reflection import EventInfo
-    from System.Reflection import FieldInfo
-    from System.Reflection import MethodInfo
-    from System.Reflection import ParameterInfo
-    from System.Reflection import PropertyInfo
     from System.Reflection import TypeInfo
 
 
@@ -65,7 +28,7 @@ def assembly() -> Assembly:
 
 
 # @pytest.fixture
-# def type_info(assembly: Assembly, request) -> TypeInfo:  # noqa: ANN001
+# def type_info(assembly: Assembly, request) -> TypeInfo:
 #     """C# TypeInfo fixture."""
 #     type_info: TypeInfo
 #     for type_info in assembly.GetTypes():

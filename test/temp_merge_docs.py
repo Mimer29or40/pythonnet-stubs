@@ -57,7 +57,7 @@ def main() -> None:
         def func(name: str) -> bool:
             return name != namespace_name and name.startswith(namespace_name)
 
-        doc: Doc = global_doc.get(namespace_name)
+        doc: Doc = global_doc.get_node(namespace_name)
         raw_data: dict[str, Any] = {k: doc.data[k] for k in sorted(doc.data.keys())}
         sub_namespaces: Sequence[str] = list(filter(func, namespace_names))
         for sub_namespace in sub_namespaces:

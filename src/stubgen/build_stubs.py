@@ -1,9 +1,12 @@
+"""Build stubs from skeleton files."""
+
 from __future__ import annotations
 
 import functools
 import itertools
 import json
 import re
+from collections import UserDict
 from collections.abc import Callable
 from collections.abc import Mapping
 from collections.abc import Sequence
@@ -61,7 +64,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 logger: Logger = get_logger(__name__)
 
-# TODO - Need to handle method that override methods in parent classes better
+# TODO(Ryan): Need to handle method that override methods in parent classes better
 # Example Object.Equals(Object) -> AFObject.Equals(AFObject)
 
 
@@ -459,19 +462,19 @@ class Imports:
     type_vars: Final[set[str]] = field(default_factory=set)
     include_event_type: bool = False
 
-    def add_type(self, type: CType, inner: bool = True) -> None:
-        if type.generic:
-            self.add_type_var(type)
+    def add_type(self, obj: CType, inner: bool = True) -> None:
+        if obj.generic:
+            self.add_type_var(obj)
             return
 
-        self.types.add(type.import_name)
+        self.types.add(obj.import_name)
         if inner:
-            for inner_type in type.inner:
+            for inner_type in obj.inner:
                 self.add_type(inner_type)
 
-    def add_type_var(self, type: CType) -> None:
+    def add_type_var(self, obj: CType) -> None:
         self.add_type(CType(name="TypeVar", namespace="typing"))
-        self.type_vars.add(type.name)
+        self.type_vars.add(obj.name)
 
     def build(self, namespace: str = None) -> Sequence[str]:
         if self.include_event_type:
@@ -480,8 +483,8 @@ class Imports:
 
         lines: list[str] = []
 
-        for type in sorted(self.types):
-            split: Sequence[str] = type.split(".")
+        for obj in sorted(self.types):
+            split: Sequence[str] = obj.split(".")
             namespace_name: str = ".".join(split[:-1])
             name: str = split[-1]
             if namespace is not None and namespace == namespace_name:
@@ -491,11 +494,11 @@ class Imports:
         lines.extend(f'{t} = TypeVar("{t}")' for t in sorted(self.type_vars))
 
         if self.include_event_type:
-            lines.append("class EventType(Generic[T]):")
-            lines.append("    def __iadd__(self, other: T): ...")
-            lines.append("    def __isub__(self, other: T): ...")
+            lines.append("class EventType[T]:")
+            lines.append("    def __iadd__(self, other: T) -> Self: ...")
+            lines.append("    def __isub__(self, other: T) -> Self: ...")
 
-        return tuple(lines)
+        return lines
 
 
 class Doc:
@@ -710,6 +713,226 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
 type_conversion: Final[Mapping[str, str]] = {}
 
 
+def build_type(obj: CType, imports: Imports, convert: bool = False) -> str:
+    """Build a string representation for a CType."""
+    type_str: str
+    if convert:
+        type_map: Mapping[str, str] = {
+            "Boolean": "bool",
+            "SByte": "int",
+            "Byte": "int",
+            "Int16": "int",
+            "UInt16": "int",
+            "Int32": "int",
+            "UInt32": "int",
+            "Int64": "int",
+            "UInt64": "int",
+            "Single": "float",
+            "Double": "float",
+            "String": "str",
+            "Object": "object",
+            "Void": "None",
+        }
+        # char    System.Char
+        # decimal System.Decimal
+        # nint    System.IntPtr
+        # nuint   System.UIntPtr
+
+        try:
+            type_str = type_map[obj.name]
+        except KeyError:
+            imports.add_type(obj, inner=False)
+            type_str = obj.name
+            if len(obj.inner) > 0:
+                children: list[str] = [build_type(t, imports) for t in obj.inner]
+                type_str = f"{type_str}[{', '.join(children)}]"
+    else:
+        imports.add_type(obj)
+        type_str = obj.doc_name
+
+    if obj.nullable:
+        imports.add_type(CType(name="Optional", namespace="typing"))
+        type_str = f"Optional[{type_str}]"
+    return type_str
+
+
+def build_parameter(obj: CParameter, imports: Imports) -> str:
+    """Build a string representation for a CParameter."""
+    param_str: str = f"{obj.name}: {build_type(obj.type, imports, convert=True)}"
+    if obj.default:
+        param_str = param_str + " = ..."
+    return param_str
+
+
+def build_field(
+    obj: CField,
+    imports: Imports,
+    doc: Doc,
+    line_length: int,
+    indent: int = 0,
+) -> Sequence[str]:
+    imports.add_type(CType(name="Final", namespace="typing"))
+
+    type_str: str = build_type(obj.return_type, imports, convert=True)
+    if obj.static:
+        imports.add_type(CType(name="ClassVar", namespace="typing"))
+        type_str = f"ClassVar[{type_str}]"
+
+    doc_str: Sequence[str]
+    doc_node: Doc = doc.get_node(str(obj))
+    if doc_node is not None:
+        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
+    else:
+        doc_str = [f'{"    " * indent}""""""']
+
+    return f"{'    ' * indent}{obj.name}: Final[{type_str}] = ...", *doc_str
+
+
+def build_constructor(
+    constructor: CConstructor,
+    imports: Imports,
+    doc: Doc,
+    overload: bool,
+    indent: int = 0,
+    line_length: int = 100,
+) -> Sequence[str]:
+    lines: list[str] = []
+
+    if overload:
+        imports.add_type(CType(name="overload", namespace="typing"))
+        lines.append(f"{'    ' * indent}@overload")
+
+    parameters: Sequence[str] = tuple(build_parameter(p, imports) for p in constructor.parameters)
+    lines.append(f"{'    ' * indent}def __init__(self{''.join(parameters)}):")
+
+    doc_str: Sequence[str]
+    doc_node: Doc = doc.get_node(str(constructor))
+    if doc_node is not None:
+        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
+    else:
+        doc_str = [f'{"    " * (indent + 1)}""""""']
+    lines.extend(doc_str)
+
+    return tuple(lines)
+
+
+def build_property(
+    property: CProperty,
+    imports: Imports,
+    doc: Doc,
+    indent: int = 0,
+    line_length: int = 100,
+) -> Sequence[str]:
+    indent_str: str = "    " * indent
+
+    if property.static:
+        imports.add_type(CType(name="ClassVar", namespace="typing"))
+        type_str: str = f"ClassVar[{build_type(property.type, imports, convert=True)}]"
+        if not property.setter:
+            imports.add_type(CType(name="Final", namespace="typing"))
+            type_str = f"Final[{type_str}]"
+
+        doc_str: Sequence[str]
+        doc_node: Doc = doc.get_node(str(property))
+        if doc_node is not None:
+            doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
+        else:
+            doc_str = [f'{indent_str}""""""']
+
+        return f"{indent_str}{property.name}: {type_str} = ...", *doc_str
+
+    lines: list[str] = [f"{indent_str}@property"]
+
+    property_type: str = build_type(property.type, imports, convert=True)
+    lines.append(f"{indent_str}def {property.name}(self) -> {property_type}:")
+
+    doc_str: Sequence[str]
+    doc_node: Doc = doc.get_node(str(property))
+    if doc_node is not None:
+        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
+    else:
+        doc_str = [f'{"    " * (indent + 1)}""""""']
+    lines.extend(doc_str)
+
+    if property.setter:
+        lines.append(f"{indent_str}@{property.name}.setter")
+        lines.append(f"{indent_str}def {property.name}(self, value: {property_type}) -> None: ...")
+
+    return tuple(lines)
+
+
+def build_method(
+    method: CMethod,
+    imports: Imports,
+    doc: Doc,
+    overload: bool,
+    indent: int = 0,
+    line_length: int = 100,
+) -> Sequence[str]:
+    lines: list[str] = []
+
+    self_cls: str = "self"
+    if method.static:
+        self_cls = "cls"
+        lines.append(f"{'    ' * indent}@classmethod")
+
+    if overload:
+        imports.add_type(CType(name="overload", namespace="typing"))
+        lines.append(f"{'    ' * indent}@overload")
+
+    parameters: Sequence[str] = tuple(map(lambda p: build_parameter(p, imports), method.parameters))
+
+    return_str: str
+    if len(method.return_types) > 1:
+        imports.add_type(CType(name="Tuple", namespace="typing"))
+        return_types: list[str] = []
+        for return_type in method.return_types:
+            return_types.append(build_type(return_type, imports, convert=True))
+        return_str = f"Tuple[{', '.join(return_types)}]"
+    else:
+        return_str = build_type(method.return_types[0], imports, convert=True)
+
+    lines.append(
+        f"{'    ' * indent}def {method.name}({self_cls}{''.join(parameters)}) -> {return_str}:"
+    )
+
+    doc_str: Sequence[str]
+    doc_node: Doc = doc.get_node(str(method))
+    if doc_node is not None:
+        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
+    else:
+        doc_str = [f'{"    " * (indent + 1)}""""""']
+    lines.extend(doc_str)
+
+    return tuple(lines)
+
+
+def build_event(
+    event: CEvent,
+    imports: Imports,
+    doc: Doc,
+    indent: int = 0,
+    line_length: int = 100,
+) -> Sequence[str]:
+    indent_str: str = "    " * indent
+
+    imports.include_event_type = True
+
+    lines: list[str] = [
+        f"{indent_str}{event.name}: EventType[{build_type(event.type, imports, convert=True)}] = ..."
+    ]
+
+    doc_str: Sequence[str]
+    doc_node: Doc = doc.get_node(str(event))
+    if doc_node is not None:
+        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
+    else:
+        doc_str = [f'{indent_str}""""""']
+    lines.extend(doc_str)
+
+    return tuple(lines)
+
+
 def build_namespace(
     namespace: CNamespace,
     doc: Doc,
@@ -788,7 +1011,7 @@ def build_class(
         lines.append(f"{'    ' * indent}class {type_def.name}:")
 
     doc_lines: Sequence[str]
-    doc_node: Doc = doc.get(str(type_def))
+    doc_node: Doc = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -797,7 +1020,7 @@ def build_class(
 
     for field in type_def.fields.values():
         field_lines: Sequence[str] = build_field(
-            field=field,
+            obj=field,
             imports=imports,
             doc=doc,
             indent=indent + 1,
@@ -905,7 +1128,7 @@ def build_interface(
         lines.append(f"{'    ' * indent}class {type_def.name}:")
 
     doc_lines: Sequence[str]
-    doc_node: Doc = doc.get(str(type_def))
+    doc_node: Doc = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -914,7 +1137,7 @@ def build_interface(
 
     for field in type_def.fields.values():
         field_lines: Sequence[str] = build_field(
-            field=field,
+            obj=field,
             imports=imports,
             doc=doc,
             indent=indent + 1,
@@ -980,7 +1203,7 @@ def build_enum(
 
     indent_str: str = "    " * (indent + 1)
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get(str(type_def))
+    doc_node: Doc = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -990,7 +1213,7 @@ def build_enum(
     for field in type_def.fields:
         lines.append(f"{indent_str}{make_python_name(field)}: {type_def.name} = ...")
 
-        doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}.{field}")
+        doc_node: Doc = doc.get_node(f"{type_def.namespace}.{type_def.name}.{field}")
         if doc_node is not None:
             doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
         else:
@@ -1021,236 +1244,7 @@ def build_delegate(
     ]
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get(str(type_def))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
-    else:
-        doc_str = [f'{indent_str}""""""']
-    lines.extend(doc_str)
-
-    return tuple(lines)
-
-
-def build_type(
-    type: CType,
-    imports: Imports,
-    convert: bool = False,
-) -> str:
-    type_str: str
-    if convert:
-        type_map: Mapping[str, str] = {
-            "Boolean": "bool",
-            "SByte": "int",
-            "Byte": "int",
-            "Int16": "int",
-            "UInt16": "int",
-            "Int32": "int",
-            "UInt32": "int",
-            "Int64": "int",
-            "UInt64": "int",
-            "Single": "float",
-            "Double": "float",
-            "String": "str",
-            "Object": "object",
-            "Void": "None",
-        }
-        # char    System.Char
-        # decimal System.Decimal
-        # nint    System.IntPtr
-        # nuint   System.UIntPtr
-
-        try:
-            type_str = type_map[type.name]
-        except KeyError:
-            imports.add_type(type, inner=False)
-            type_str = type.name
-            if len(type.inner) > 0:
-                children: list[str] = []
-                for inner_type in type.inner:
-                    children.append(build_type(inner_type, imports, convert=convert))
-                type_str = f"{type_str}[{', '.join(children)}]"
-    else:
-        imports.add_type(type)
-        type_str = type.doc_name
-
-    if type.nullable:
-        imports.add_type(CType(name="Optional", namespace="typing"))
-        type_str = f"Optional[{type_str}]"
-    return type_str
-
-
-def build_parameter(
-    parameter: CParameter,
-    imports: Imports,
-) -> str:
-    param_str: str = f", {parameter.name}: {build_type(parameter.type, imports, convert=True)}"
-    if parameter.default:
-        param_str = param_str + " = ..."
-    return param_str
-
-
-def build_field(
-    field: CField,
-    imports: Imports,
-    doc: Doc,
-    indent: int = 0,
-    line_length: int = 100,
-) -> Sequence[str]:
-    imports.add_type(CType(name="Final", namespace="typing"))
-
-    type_str: str = build_type(field.return_type, imports, convert=True)
-    if field.static:
-        imports.add_type(CType(name="ClassVar", namespace="typing"))
-        type_str = f"ClassVar[{type_str}]"
-
-    doc_str: Sequence[str]
-    doc_node: Doc = doc.get(str(field))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * indent}""""""']
-
-    return f"{'    ' * indent}{field.name}: Final[{type_str}] = ...", *doc_str
-
-
-def build_constructor(
-    constructor: CConstructor,
-    imports: Imports,
-    doc: Doc,
-    overload: bool,
-    indent: int = 0,
-    line_length: int = 100,
-) -> Sequence[str]:
-    lines: list[str] = []
-
-    if overload:
-        imports.add_type(CType(name="overload", namespace="typing"))
-        lines.append(f"{'    ' * indent}@overload")
-
-    parameters: Sequence[str] = tuple(
-        map(lambda p: build_parameter(p, imports), constructor.parameters)
-    )
-    lines.append(f"{'    ' * indent}def __init__(self{''.join(parameters)}):")
-
-    doc_str: Sequence[str]
-    doc_node: Doc = doc.get(str(constructor))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_str)
-
-    return tuple(lines)
-
-
-def build_property(
-    property: CProperty,
-    imports: Imports,
-    doc: Doc,
-    indent: int = 0,
-    line_length: int = 100,
-) -> Sequence[str]:
-    indent_str: str = "    " * indent
-
-    if property.static:
-        imports.add_type(CType(name="ClassVar", namespace="typing"))
-        type_str: str = f"ClassVar[{build_type(property.type, imports, convert=True)}]"
-        if not property.setter:
-            imports.add_type(CType(name="Final", namespace="typing"))
-            type_str = f"Final[{type_str}]"
-
-        doc_str: Sequence[str]
-        doc_node: Doc = doc.get(str(property))
-        if doc_node is not None:
-            doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
-        else:
-            doc_str = [f'{indent_str}""""""']
-
-        return f"{indent_str}{property.name}: {type_str} = ...", *doc_str
-
-    lines: list[str] = [f"{indent_str}@property"]
-
-    property_type: str = build_type(property.type, imports, convert=True)
-    lines.append(f"{indent_str}def {property.name}(self) -> {property_type}:")
-
-    doc_str: Sequence[str]
-    doc_node: Doc = doc.get(str(property))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_str)
-
-    if property.setter:
-        lines.append(f"{indent_str}@{property.name}.setter")
-        lines.append(f"{indent_str}def {property.name}(self, value: {property_type}) -> None: ...")
-
-    return tuple(lines)
-
-
-def build_method(
-    method: CMethod,
-    imports: Imports,
-    doc: Doc,
-    overload: bool,
-    indent: int = 0,
-    line_length: int = 100,
-) -> Sequence[str]:
-    lines: list[str] = []
-
-    self_cls: str = "self"
-    if method.static:
-        self_cls = "cls"
-        lines.append(f"{'    ' * indent}@classmethod")
-
-    if overload:
-        imports.add_type(CType(name="overload", namespace="typing"))
-        lines.append(f"{'    ' * indent}@overload")
-
-    parameters: Sequence[str] = tuple(map(lambda p: build_parameter(p, imports), method.parameters))
-
-    return_str: str
-    if len(method.return_types) > 1:
-        imports.add_type(CType(name="Tuple", namespace="typing"))
-        return_types: list[str] = []
-        for return_type in method.return_types:
-            return_types.append(build_type(return_type, imports, convert=True))
-        return_str = f"Tuple[{', '.join(return_types)}]"
-    else:
-        return_str = build_type(method.return_types[0], imports, convert=True)
-
-    lines.append(
-        f"{'    ' * indent}def {method.name}({self_cls}{''.join(parameters)}) -> {return_str}:"
-    )
-
-    doc_str: Sequence[str]
-    doc_node: Doc = doc.get(str(method))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_str)
-
-    return tuple(lines)
-
-
-def build_event(
-    event: CEvent,
-    imports: Imports,
-    doc: Doc,
-    indent: int = 0,
-    line_length: int = 100,
-) -> Sequence[str]:
-    indent_str: str = "    " * indent
-
-    imports.include_event_type = True
-
-    lines: list[str] = [
-        f"{indent_str}{event.name}: EventType[{build_type(event.type, imports, convert=True)}] = ..."
-    ]
-
-    doc_str: Sequence[str]
-    doc_node: Doc = doc.get(str(event))
+    doc_node: Doc = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
@@ -1281,90 +1275,6 @@ def build_stub(namespace: CNamespace, doc: Doc, output_dir: Path, line_length: i
 
     logger.info("Writing file: %r", str(namespace_file))
     namespace_file.write_text("\n".join(lines))
-
-
-def build_stubs(
-    skeleton_files: Sequence[Path],
-    doc_files: Sequence[Path],
-    output_dir: Path,
-    line_length: int,
-    multi_threaded: bool,
-    format_files: bool,
-) -> int | str:
-    namespaces: dict[str, CNamespace] = {}
-    for skeleton_file in skeleton_files:
-        logger.info("Loading skeletons file: '%s'", skeleton_file)
-        with skeleton_file.open("r") as file:
-            skeleton_dict: dict[str, Any] = json.load(file)
-
-        for namespace_json in skeleton_dict["namespaces"].values():
-            namespace: CNamespace = CNamespace.from_json(namespace_json)
-            if namespace.name in namespaces:
-                namespace = merge_namespace(namespaces[namespace.name], namespace, False)
-            namespaces[namespace.name] = namespace
-
-    doc: Doc = Doc({})
-    for doc_file in doc_files:
-        logger.info("Loading Doc File: %r", str(doc_file))
-        with doc_file.open("r") as file:
-            loaded_doc_dict_tree: dict[str, Any] = json.load(file)
-
-        new_doc: Doc = Doc(loaded_doc_dict_tree)
-        doc = merge_doc(doc, new_doc)
-
-    if multi_threaded:
-        executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
-        for namespace in namespaces.values():
-            executor.submit(build_stub, namespace, doc, output_dir, line_length)
-        executor.shutdown(wait=True)
-    else:
-        for namespace in namespaces.values():
-            build_stub(namespace, doc, output_dir, line_length)
-
-    if format_files:
-
-        def format_file(file: Path) -> None:
-            logger.debug("Formatting file: %s", file)
-            try:
-                isort.file(file, config=isort_config)
-            except Exception as e:
-                logger.warning('Unable to run isort on file "%s":', file, exc_info=e)
-
-            try:
-                black.format_file_in_place(
-                    file, fast=False, mode=black_mode, write_back=WriteBack.YES
-                )
-            except Exception as e:
-                logger.warning('Unable to run black on file "%s":', file, exc_info=e)
-
-        logger.info("Formatting stub files")
-        isort_config = Config(
-            profile="black",
-            line_length=line_length,
-            force_single_line=True,
-        )
-        black_mode: Mode = Mode(
-            target_versions={
-                TargetVersion.PY38,
-                TargetVersion.PY39,
-                TargetVersion.PY310,
-                TargetVersion.PY311,
-                TargetVersion.PY312,
-            },
-            line_length=line_length,
-            is_pyi=True,
-        )
-
-        if multi_threaded:
-            executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
-            for file in output_dir.rglob("*.pyi"):
-                executor.submit(format_file, file)
-            executor.shutdown(wait=True)
-        else:
-            for file in output_dir.rglob("*.pyi"):
-                format_file(file)
-
-    return 0
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -1414,12 +1324,6 @@ def command_build(args: BuildArguments) -> CommandResult:
     """Run the 'build' command."""
     logger.debug("Arguments: %s", args)
 
-    line_length: int = args.line_length
-    logger.debug("Using line length: %s", line_length)
-
-    format_files: bool = args.format_files
-    logger.debug("Using format files flag: %s", format_files)
-
     skeleton_glob: str = args.skeletons
     skeleton_files: list[Path] = []
     for file_path in Path().glob(skeleton_glob):
@@ -1456,13 +1360,13 @@ def command_build(args: BuildArguments) -> CommandResult:
     if args.multi_threaded:
         executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
         for namespace in namespaces.values():
-            executor.submit(build_stub, namespace, doc, args.output_dir, line_length)
+            executor.submit(build_stub, namespace, doc, args.output_dir, args.line_length)
         executor.shutdown(wait=True)
     else:
         for namespace in namespaces.values():
-            build_stub(namespace, doc, args.output_dir, line_length)
+            build_stub(namespace, doc, args.output_dir, args.line_length)
 
-    if format_files:
+    if args.format_files:
 
         def format_file(file: Path) -> None:
             logger.debug("Formatting file: %s", file)
@@ -1481,7 +1385,7 @@ def command_build(args: BuildArguments) -> CommandResult:
         logger.info("Formatting stub files")
         isort_config = Config(
             profile="black",
-            line_length=line_length,
+            line_length=args.line_length,
             force_single_line=True,
         )
         black_mode: Mode = Mode(
@@ -1492,7 +1396,7 @@ def command_build(args: BuildArguments) -> CommandResult:
                 TargetVersion.PY311,
                 TargetVersion.PY312,
             },
-            line_length=line_length,
+            line_length=args.line_length,
             is_pyi=True,
         )
 
