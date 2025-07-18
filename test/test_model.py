@@ -1,4 +1,4 @@
-"""Tests for stubgen.model."""
+"""Tests for stubgen.model.py."""
 
 from __future__ import annotations
 

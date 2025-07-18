@@ -1,3 +1,5 @@
+"""Experiment to build docs from Microsoft references."""
+
 from __future__ import annotations
 
 import requests

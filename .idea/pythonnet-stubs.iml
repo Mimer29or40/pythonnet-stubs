@@ -14,15 +14,17 @@
       <excludeFolder url="file://$MODULE_DIR$/src/pythonnet_stub_generator.egg-info" />
       <excludeFolder url="file://$MODULE_DIR$/src/stubgen.egg-info" />
       <excludeFolder url="file://$MODULE_DIR$/dlls" />
-      <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/.vs" />
-      <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/obj" />
       <excludeFolder url="file://$MODULE_DIR$/test/output" />
       <excludeFolder url="file://$MODULE_DIR$/src/stubs/raw" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dictionaries" />
       <excludeFolder url="file://$MODULE_DIR$/htmlcov" />
       <excludeFolder url="file://$MODULE_DIR$/output" />
+      <excludeFolder url="file://$MODULE_DIR$/test/TestLib/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/test/TestLib/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/test/TestLibOld/.vs" />
+      <excludeFolder url="file://$MODULE_DIR$/test/TestLibOld/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/test/TestLibOld/obj" />
     </content>
     <orderEntry type="jdk" jdkName="uv (pythonnet-stubs)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

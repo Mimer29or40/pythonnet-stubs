@@ -1,3 +1,5 @@
+"""Extract stubs from C# libraries to create skeleton files."""
+
 from __future__ import annotations
 
 import itertools
@@ -5,7 +7,6 @@ import json
 import sys
 from argparse import ZERO_OR_MORE
 from collections import defaultdict
-from collections.abc import Sequence
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -69,107 +70,7 @@ if TYPE_CHECKING:  # pragma: no cover
 logger: Logger = get_logger(__name__)
 
 
-def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
-    def is_delegate() -> bool:
-        if info in (Delegate, MulticastDelegate):
-            return False
-        # noinspection PyTypeChecker
-        return info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
-
-    if not is_name_valid(info.Namespace):
-        return None
-
-    if info.IsValueType:
-        if info.IsEnum:
-            return extract_enum(info)
-        return extract_struct(info)
-    if info.IsInterface:
-        return extract_interface(info)
-    if is_delegate():
-        return extract_delegate(info)
-    if info.IsClass:
-        return extract_class(info)
-
-
-def extract_class(info: TypeInfo) -> CClass | None:
-    logger.info(f'Extracting class "{info.Namespace}.{info.Name}"')
-    return CClass(
-        name=make_python_name(info.Name),
-        namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        abstract=info.IsAbstract,
-        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
-        super_class=extract_type(info.BaseType),
-        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
-        fields=extract_fields(info),
-        constructors=extract_constructors(info),
-        properties=extract_properties(info),
-        methods=extract_methods(info),
-        events=extract_events(info),
-        nested_types=extract_nested_types(info),
-    )
-
-
-def extract_struct(info: TypeInfo) -> CStruct | None:
-    logger.info(f'Extracting struct "{info.Namespace}.{info.Name}"')
-    return CStruct(
-        name=make_python_name(info.Name),
-        namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        abstract=info.IsAbstract,
-        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
-        super_class=extract_type(info.BaseType),
-        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
-        fields=extract_fields(info),
-        constructors=extract_constructors(info),
-        properties=extract_properties(info),
-        methods=extract_methods(info),
-        events=extract_events(info),
-        nested_types=extract_nested_types(info),
-    )
-
-
-def extract_interface(info: TypeInfo) -> CInterface | None:
-    logger.info(f'Extracting interface "{info.Namespace}.{info.Name}"')
-    return CInterface(
-        name=make_python_name(info.Name),
-        namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
-        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
-        fields=extract_fields(info),
-        properties=extract_properties(info),
-        methods=extract_methods(info),
-        events=extract_events(info),
-        nested_types=extract_nested_types(info),
-    )
-
-
-def extract_enum(info: TypeInfo) -> CEnum | None:
-    logger.info(f'Extracting enum "{info.Namespace}.{info.Name}"')
-    return CEnum(
-        name=make_python_name(info.Name),
-        namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        fields=tuple(info.GetEnumNames()),
-    )
-
-
-def extract_delegate(info: TypeInfo) -> CDelegate | None:
-    logger.info(f'Extracting delegate "{info.Namespace}.{info.Name}"')
-
-    invoke: MethodInfo = info.GetMethod("Invoke")
-
-    return CDelegate(
-        name=make_python_name(info.Name),
-        namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        parameters=tuple(map(extract_parameter, invoke.GetParameters())),
-        return_type=extract_type(invoke.ReturnType),
-    )
-
-
-def extract_type(info: TypeInfo, use_generic: bool = False) -> CType | None:
+def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | None:
     if info is None:
         return None
 
@@ -528,6 +429,107 @@ def extract_nested_types(type_info: TypeInfo) -> Mapping[str, CTypeDefinition]:
     return {str(member): member for member in sorted_members}
 
 
+def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
+    def is_delegate() -> bool:
+        if info in (Delegate, MulticastDelegate):
+            return False
+        # noinspection PyTypeChecker
+        return info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
+
+    if not is_name_valid(info.Namespace):
+        return None
+
+    if info.IsValueType:
+        if info.IsEnum:
+            return extract_enum(info)
+        return extract_struct(info)
+    if info.IsInterface:
+        return extract_interface(info)
+    if is_delegate():
+        return extract_delegate(info)
+    if info.IsClass:
+        return extract_class(info)
+    return None
+
+
+def extract_class(info: TypeInfo) -> CClass | None:
+    logger.info(f'Extracting class "{info.Namespace}.{info.Name}"')
+    return CClass(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
+        abstract=info.IsAbstract,
+        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
+        super_class=extract_type(info.BaseType),
+        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
+        fields=extract_fields(info),
+        constructors=extract_constructors(info),
+        properties=extract_properties(info),
+        methods=extract_methods(info),
+        events=extract_events(info),
+        nested_types=extract_nested_types(info),
+    )
+
+
+def extract_struct(info: TypeInfo) -> CStruct | None:
+    logger.info(f'Extracting struct "{info.Namespace}.{info.Name}"')
+    return CStruct(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
+        abstract=info.IsAbstract,
+        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
+        super_class=extract_type(info.BaseType),
+        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
+        fields=extract_fields(info),
+        constructors=extract_constructors(info),
+        properties=extract_properties(info),
+        methods=extract_methods(info),
+        events=extract_events(info),
+        nested_types=extract_nested_types(info),
+    )
+
+
+def extract_interface(info: TypeInfo) -> CInterface | None:
+    logger.info(f'Extracting interface "{info.Namespace}.{info.Name}"')
+    return CInterface(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
+        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
+        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
+        fields=extract_fields(info),
+        properties=extract_properties(info),
+        methods=extract_methods(info),
+        events=extract_events(info),
+        nested_types=extract_nested_types(info),
+    )
+
+
+def extract_enum(info: TypeInfo) -> CEnum | None:
+    logger.info(f'Extracting enum "{info.Namespace}.{info.Name}"')
+    return CEnum(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
+        fields=tuple(info.GetEnumNames()),
+    )
+
+
+def extract_delegate(info: TypeInfo) -> CDelegate | None:
+    logger.info(f'Extracting delegate "{info.Namespace}.{info.Name}"')
+
+    invoke: MethodInfo = info.GetMethod("Invoke")
+
+    return CDelegate(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
+        parameters=tuple(map(extract_parameter, invoke.GetParameters())),
+        return_type=extract_type(invoke.ReturnType),
+    )
+
+
 def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> int | str:
     logger.info("Extracting assembly: %r", assembly_name)
 
@@ -596,41 +598,6 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> i
             file,
             indent=2,
         )
-
-    return 0
-
-
-def extract_assemblies(
-    assembly_names: Sequence[str],
-    output_dir: Path,
-    overwrite: bool,
-    skip_failed: bool,
-    multi_threaded: bool,
-) -> int | str:
-    if multi_threaded:
-        executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
-        for exit_code in executor.map(
-            extract_assembly,
-            assembly_names,
-            itertools.repeat(output_dir),
-            itertools.repeat(overwrite),
-        ):
-            if exit_code != 0 and not skip_failed:
-                executor.shutdown(cancel_futures=True)
-                return exit_code
-        executor.shutdown(wait=True)
-    else:
-        assembly_name: str
-        for assembly_name in assembly_names:
-            try:
-                exit_code: int | str = extract_assembly(assembly_name, output_dir, overwrite)
-                if exit_code != 0 and not skip_failed:
-                    return exit_code
-            except Exception as e:
-                if skip_failed:
-                    logger.warning("Could not extract assembly: %s", assembly_name, exc_info=e)
-                else:
-                    raise e from None
 
     return 0
 

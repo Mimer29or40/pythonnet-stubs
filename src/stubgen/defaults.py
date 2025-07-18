@@ -1,3 +1,5 @@
+"""Default Assemblies."""
+
 from __future__ import annotations
 
 ASSEMBLIES: list[str] = [
