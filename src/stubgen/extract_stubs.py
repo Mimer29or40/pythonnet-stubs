@@ -217,7 +217,7 @@ def extract_fields(type_info: TypeInfo) -> Mapping[str, CField]:
             binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
         for info in type_info.GetFields(binding_flags):
             obj: CField = extract_field(info)
-            key: str = obj.to_doc_json()[0]
+            key: str = obj.to_doc_tree()[0]
             found[key] = obj
 
         extract_base_members(type_info, found, extract_raw)
@@ -242,7 +242,7 @@ def extract_constructors(type_info: TypeInfo) -> Mapping[str, CConstructor]:
             binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
         for info in type_info.GetConstructors(binding_flags):
             obj: CConstructor = extract_constructor(info)
-            key: str = obj.to_doc_json()[0]
+            key: str = obj.to_doc_tree()[0]
             found[key] = obj
 
         return found.values()
@@ -265,7 +265,7 @@ def extract_properties(type_info: TypeInfo) -> Mapping[str, CProperty]:
             binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
         for info in type_info.GetProperties(binding_flags):
             obj: CProperty = extract_property(info)
-            key: str = obj.to_doc_json()[0]
+            key: str = obj.to_doc_tree()[0]
             found[key] = obj
 
         extract_base_members(type_info, found, extract_raw)
@@ -294,7 +294,7 @@ def extract_methods(type_info: TypeInfo) -> Mapping[str, CMethod]:
             binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
         for info in type_info.GetMethods(binding_flags):
             obj: CMethod = extract_method(info)
-            key: str = obj.to_doc_json()[0]
+            key: str = obj.to_doc_tree()[0]
             found[key] = obj
 
         extract_base_members(type_info, found, extract_raw)
@@ -392,7 +392,7 @@ def extract_events(type_info: TypeInfo) -> Mapping[str, CEvent]:
             binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
         for info in type_info.GetEvents(binding_flags):
             obj: CEvent = extract_event(info)
-            key: str = obj.to_doc_json()[0]
+            key: str = obj.to_doc_tree()[0]
             found[key] = obj
 
         extract_base_members(type_info, found, extract_raw)
@@ -417,7 +417,7 @@ def extract_nested_types(type_info: TypeInfo) -> Mapping[str, CTypeDefinition]:
             binding_flags = BindingFlags.Public
         for info in type_info.GetNestedTypes(binding_flags):
             obj: CTypeDefinition = extract_type_def(info)
-            key: str = obj.to_doc_json()[0]
+            key: str = obj.to_doc_tree()[0]
             found[key] = obj
 
         return found.values()
@@ -589,7 +589,7 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> i
                 curr[n] = {"doc": ""}
             curr = curr[n]
         for type in namespace.types.values():
-            name, doc_json = type.to_doc_json()
+            name, doc_json = type.to_doc_tree()
             curr[name] = doc_json
 
     with doc_file.open("w") as file:

@@ -20,6 +20,7 @@ from stubgen.model import CParameter
 from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
+from stubgen.model import DocTree
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
@@ -28,36 +29,13 @@ if TYPE_CHECKING:  # pragma: no cover
     from stubgen.model import CWrapper
     from stubgen.model import JsonType
 
+    type ParamSequence[T] = Sequence[tuple[str, T]]
 
-def _make_doc_name_params[T: CWrapper](o: Sequence[tuple[T, str]]) -> Mapping[str, ...]:
+
+def _make_params[T](o: ParamSequence[T]) -> Mapping[str, ...]:
     return {
-        "argnames": ("obj", "expected"),
-        "argvalues": [(obj, expected) for obj, expected in o],
-        "ids": [doc_name for _, doc_name in o],
-    }
-
-
-def _make_json_params[T: CWrapper](o: Sequence[tuple[str, T, JsonType]]) -> Mapping[str, ...]:
-    return {
-        "argnames": ("obj", "json"),
-        "argvalues": [(obj, json) for _, obj, json in o],
-        "ids": [name for name, _, _ in o],
-    }
-
-
-def _make_doc_params[T: CWrapper](o: Sequence[tuple[str, T, JsonType]]) -> Mapping[str, ...]:
-    return {
-        "argnames": ("obj", "doc"),
-        "argvalues": [(obj, doc) for _, obj, doc in o],
-        "ids": [name for name, _, _ in o],
-    }
-
-
-def _make_compare_parameters[T: CWrapper](o: Sequence[tuple[str, T, T]]) -> Mapping[str, ...]:
-    return {
-        "argnames": ("x", "y"),
-        "argvalues": [(x, y) for _, x, y in o],
-        "ids": [name for name, _, _ in o],
+        "argvalues": [payload for _, payload in o],
+        "ids": [identifier for identifier, _ in o],
     }
 
 
@@ -86,40 +64,411 @@ def _compare_seq[T: CWrapper](cls: type[T], x: T, y: T) -> None:
     assert cls.compare_seq([y], [x]) == 1
 
 
+class TestDocTree:
+    """Tests for DocTree."""
+
+    @pytest.mark.parametrize(
+        ("string", "expected"),
+        **_make_params(
+            [
+                ("namespace", ("A", ["A"])),
+                ("namespace_type", ("A:B", ["A", "B"])),
+                ("namespace_nested_type", ("A:B.C", ["A", "B", "C"])),
+                ("namespace_type_generic", ("A:B[$C]", ["A", "B[$C]"])),
+                ("namespace_nested_type_generic", ("A:B.C[$D]", ["A", "B", "C[$D]"])),
+                ("nested_namespace", ("A.B", ["A", "B"])),
+                (
+                    "complex",
+                    (
+                        "A.B:C.D[E:F].G[H, I:J[K]].L().M(N, O:P[Q])",
+                        ["A", "B", "C", "D[E:F]", "G[H, I:J[K]]", "L()", "M(N, O:P[Q])"],
+                    ),
+                ),
+            ]
+        ),
+    )
+    def test_split_node_string(self, string: str, expected: Sequence[str]) -> None:
+        """Test for DocTree.pattern."""
+        actual: Sequence[str] = DocTree._split_node_string(string)  # noqa: SLF001
+
+        assert actual == expected
+
+    class TestGetItem:
+        """Tests for DocTree.__getitem__()."""
+
+        def test_empty(self) -> None:
+            """Test for DocTree.__getitem__() with an empty string."""
+            doc: DocTree = DocTree("Test")
+
+            expected: DocTree | None = None
+            actual: DocTree | None = doc[""]
+
+            assert actual == expected
+
+        def test_child(self) -> None:
+            """Test for DocTree.__getitem__()."""
+            child: DocTree = DocTree("Child")
+            doc: DocTree = DocTree("Test", children=[child])
+
+            expected: DocTree | None = child
+            actual: DocTree | None = doc["Child"]
+
+            assert actual == expected
+
+        def test_grandchild(self) -> None:
+            """Test for DocTree.__getitem__()."""
+            grandchild: DocTree = DocTree("Grandchild")
+            child: DocTree = DocTree("Child", children=[grandchild])
+            doc: DocTree = DocTree("Test", children=[child])
+
+            expected: DocTree | None = grandchild
+            actual: DocTree | None = doc["Child.Grandchild"]
+
+            assert actual == expected
+
+        def test_missing(self) -> None:
+            """Test for DocTree.__getitem__() with a missing child."""
+            doc: DocTree = DocTree("Test")
+
+            expected: DocTree | None = None
+            actual: DocTree | None = doc["Child"]
+
+            assert actual == expected
+
+    @pytest.mark.parametrize(
+        ("doc", "indent", "expected"),
+        **_make_params(
+            [
+                ("empty", (DocTree("A"), 0, ['""""""'])),
+                ("empty_indent", (DocTree("A"), 1, ['    """"""'])),
+                ("single_line", (DocTree("A", doc="Summary line."), 0, ['"""Summary line."""'])),
+                (
+                    "single_line_indent",
+                    (
+                        DocTree("A", doc="Summary line."),
+                        1,
+                        ['    """Summary line."""   # noqa: E501'],
+                    ),
+                ),
+                (
+                    "paragraph",
+                    (
+                        DocTree("A", doc="Summary line.\nParagraph line."),
+                        0,
+                        [
+                            '"""Summary line.',
+                            "",
+                            "Paragraph line.",
+                            '"""',
+                        ],
+                    ),
+                ),
+                (
+                    "paragraph_indent",
+                    (
+                        DocTree("A", doc="Summary line.\nParagraph line."),
+                        1,
+                        [
+                            '    """Summary line.',
+                            "",
+                            "    Paragraph line.",
+                            '    """',
+                        ],
+                    ),
+                ),
+                (
+                    "long_paragraph",
+                    (
+                        DocTree("A", doc="Summary line.\nLong paragraph line."),
+                        0,
+                        [
+                            '"""Summary line.',
+                            "",
+                            "Long paragraph line.",
+                            '"""',
+                        ],
+                    ),
+                ),
+                (
+                    "long_paragraph_indent",
+                    (
+                        DocTree("A", doc="Summary line.\nLong paragraph line."),
+                        1,
+                        [
+                            '    """Summary line.',
+                            "",
+                            "    Long paragraph",
+                            "    line.",
+                            '    """',
+                        ],
+                    ),
+                ),
+                (
+                    "parameters",
+                    (
+                        DocTree("A", parameter_docs={f"p{i}": f"Parameter {i}" for i in range(2)}),
+                        0,
+                        [
+                            '"""',
+                            "",
+                            ":param p0: Parameter",
+                            "  0",
+                            ":param p1: Parameter",
+                            "  1",
+                            '"""',
+                        ],
+                    ),
+                ),
+                (
+                    "parameters_indent",
+                    (
+                        DocTree("A", parameter_docs={f"p{i}": f"Parameter {i}" for i in range(2)}),
+                        1,
+                        [
+                            '    """',
+                            "",
+                            "    :param p0:",
+                            "      Parameter 0",
+                            "    :param p1:",
+                            "      Parameter 1",
+                            '    """',
+                        ],
+                    ),
+                ),
+                (
+                    "return",
+                    (
+                        DocTree("A", return_doc="Return string."),
+                        0,
+                        [
+                            '"""',
+                            "",
+                            ":return: Return",
+                            "  string.",
+                            '"""',
+                        ],
+                    ),
+                ),
+                (
+                    "return_indent",
+                    (
+                        DocTree("A", return_doc="Return string."),
+                        1,
+                        [
+                            '    """',
+                            "",
+                            "    :return: Return",
+                            "      string.",
+                            '    """',
+                        ],
+                    ),
+                ),
+                (
+                    "exceptions",
+                    (
+                        DocTree("A", exception_docs={f"E{i}": f"Except {i}" for i in range(2)}),
+                        0,
+                        [
+                            '"""',
+                            "",
+                            ":except E0: Except 0",
+                            ":except E1: Except 1",
+                            '"""',
+                        ],
+                    ),
+                ),
+                (
+                    "exceptions_indent",
+                    (
+                        DocTree("A", exception_docs={f"E{i}": f"Except {i}" for i in range(2)}),
+                        1,
+                        [
+                            '    """',
+                            "",
+                            "    :except E0:",
+                            "      Except 0",
+                            "    :except E1:",
+                            "      Except 1",
+                            '    """',
+                        ],
+                    ),
+                ),
+                (
+                    "doc_formatted",
+                    (
+                        DocTree(
+                            "A",
+                            doc="\n%replace%",
+                            doc_formatted={
+                                "replace": (
+                                    "       | Column 1 | Column 2 | Column 3 | Column 4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 1 |   R1C1   |   R1C2   |   R1C3   |   R1C4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 2 |   R2C1   |   R2C2   |   R2C3   |   R2C4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 3 |   R3C1   |   R3C2   |   R3C3   |   R3C4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 4 |   R4C1   |   R4C2   |   R4C3   |   R4C4",
+                                    "-------|----------|----------|----------|----------",
+                                ),
+                            },
+                        ),
+                        0,
+                        [
+                            '"""',
+                            "",
+                            "       | Column 1 | Column 2 | Column 3 | Column 4",
+                            "-------|----------|----------|----------|----------",
+                            " Row 1 |   R1C1   |   R1C2   |   R1C3   |   R1C4",
+                            "-------|----------|----------|----------|----------",
+                            " Row 2 |   R2C1   |   R2C2   |   R2C3   |   R2C4",
+                            "-------|----------|----------|----------|----------",
+                            " Row 3 |   R3C1   |   R3C2   |   R3C3   |   R3C4",
+                            "-------|----------|----------|----------|----------",
+                            " Row 4 |   R4C1   |   R4C2   |   R4C3   |   R4C4",
+                            "-------|----------|----------|----------|----------",
+                            '"""',
+                        ],
+                    ),
+                ),
+                (
+                    "doc_formatted_indent",
+                    (
+                        DocTree(
+                            "A",
+                            doc="\n%replace%",
+                            doc_formatted={
+                                "replace": (
+                                    "       | Column 1 | Column 2 | Column 3 | Column 4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 1 |   R1C1   |   R1C2   |   R1C3   |   R1C4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 2 |   R2C1   |   R2C2   |   R2C3   |   R2C4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 3 |   R3C1   |   R3C2   |   R3C3   |   R3C4",
+                                    "-------|----------|----------|----------|----------",
+                                    " Row 4 |   R4C1   |   R4C2   |   R4C3   |   R4C4",
+                                    "-------|----------|----------|----------|----------",
+                                ),
+                            },
+                        ),
+                        1,
+                        [
+                            '    """',
+                            "",
+                            "           | Column 1 | Column 2 | Column 3 | Column 4",
+                            "    -------|----------|----------|----------|----------",
+                            "     Row 1 |   R1C1   |   R1C2   |   R1C3   |   R1C4",
+                            "    -------|----------|----------|----------|----------",
+                            "     Row 2 |   R2C1   |   R2C2   |   R2C3   |   R2C4",
+                            "    -------|----------|----------|----------|----------",
+                            "     Row 3 |   R3C1   |   R3C2   |   R3C3   |   R3C4",
+                            "    -------|----------|----------|----------|----------",
+                            "     Row 4 |   R4C1   |   R4C2   |   R4C3   |   R4C4",
+                            "    -------|----------|----------|----------|----------",
+                            '    """',
+                        ],
+                    ),
+                ),
+            ]
+        ),
+    )
+    def test_doc_string(self, doc: DocTree, indent: int, expected: Sequence[str]) -> None:
+        """Test for DocTree.doc_string()."""
+        actual: Sequence[str] = doc.doc_string(20, indent=indent)
+
+        assert actual == expected
+
+    json_list: ClassVar[ParamSequence[tuple[DocTree, JsonType]]] = [
+        ("basic", (DocTree("A"), {"doc": "", "doc_formatted": {}})),
+        (
+            "parameters",
+            (
+                DocTree("A", parameter_docs={f"p{i}": "" for i in range(2)}),
+                {"doc": "", "doc_formatted": {}, "parameters": {"p0": "", "p1": ""}},
+            ),
+        ),
+        (
+            "parameters_empty",
+            (
+                DocTree("A", parameter_docs={}),
+                {"doc": "", "doc_formatted": {}, "parameters": {}},
+            ),
+        ),
+        (
+            "return",
+            (
+                DocTree("A", return_doc=""),
+                {"doc": "", "doc_formatted": {}, "return": ""},
+            ),
+        ),
+        (
+            "exceptions",
+            (
+                DocTree("A", exception_docs={f"e{i}": "" for i in range(2)}),
+                {"doc": "", "doc_formatted": {}, "exceptions": {"e0": "", "e1": ""}},
+            ),
+        ),
+        (
+            "exceptions_empty",
+            (
+                DocTree("A", exception_docs={}),
+                {"doc": "", "doc_formatted": {}, "exceptions": {}},
+            ),
+        ),
+    ]
+
+    @pytest.mark.parametrize(("doc", "json"), **_make_params(json_list))
+    def test_to_json(self, doc: DocTree, json: Mapping[str, ...]) -> None:
+        """Test for DocTree.to_json()."""
+        expected: JsonType = json
+        actual: JsonType = doc.to_json()
+
+        assert actual == expected
+
+    @pytest.mark.parametrize(("doc", "json"), **_make_params(json_list))
+    def test_from_json(self, doc: DocTree, json: Mapping[str, ...]) -> None:
+        """Test for DocTree.from_json()."""
+        expected: DocTree = doc
+        actual: DocTree = DocTree.from_json("A", json)
+
+        assert actual == expected
+
+
 class TestCType:
     """Tests for CType."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CType, str]]] = [
-        (CType(name="Name"), "Name"),
-        (CType(name="Name", inner=(CType(name="A"), CType(name="B"))), "Name[A, B]"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CType, str]]] = [
+        ("basic", (CType(name="Name"), "Name")),
+        ("inner", (CType(name="Name", inner=(CType(name="A"), CType(name="B"))), "Name[A, B]")),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CType, expected: str) -> None:
         """Test for CType.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CType, JsonType]]] = [
-        ("basic", CType(name="Name"), "Name"),
-        ("namespace", CType(name="Name", namespace="Namespace"), "Namespace:Name"),
-        ("nested", CType(name="Nested.Name"), "Nested.Name"),
-        ("reference", CType(name="Name", reference=True), "*Name"),
-        ("generic", CType(name="Name", generic=True), "$Name"),
-        ("nullable", CType(name="Name", nullable=True), "Name?"),
-        ("reference_generic", CType(name="Name", reference=True, generic=True), "$*Name"),
-        ("reference_nullable", CType(name="Name", reference=True, nullable=True), "*Name?"),
-        ("generic_nullable", CType(name="Name", generic=True, nullable=True), "$Name?"),
+    json_objects: ClassVar[ParamSequence[tuple[CType, JsonType]]] = [
+        ("basic", (CType(name="Name"), "Name")),
+        ("namespace", (CType(name="Name", namespace="Namespace"), "Namespace:Name")),
+        ("nested", (CType(name="Nested.Name"), "Nested.Name")),
+        ("reference", (CType(name="Name", reference=True), "*Name")),
+        ("generic", (CType(name="Name", generic=True), "$Name")),
+        ("nullable", (CType(name="Name", nullable=True), "Name?")),
+        ("reference_generic", (CType(name="Name", reference=True, generic=True), "$*Name")),
+        ("reference_nullable", (CType(name="Name", reference=True, nullable=True), "*Name?")),
+        ("generic_nullable", (CType(name="Name", generic=True, nullable=True), "$Name?")),
         (
             "reference_generic_nullable",
-            CType(name="Name", reference=True, generic=True, nullable=True),
-            "$*Name?",
+            (CType(name="Name", reference=True, generic=True, nullable=True), "$*Name?"),
         ),
-        ("inner", CType(name="Name", inner=(CType(name="A"), CType(name="B"))), "Name[A, B]"),
+        ("inner", (CType(name="Name", inner=(CType(name="A"), CType(name="B"))), "Name[A, B]")),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CType, json: JsonType) -> None:
         """Test for CType.to_json()."""
         expected: JsonType = json
@@ -127,7 +476,7 @@ class TestCType:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CType, json: JsonType) -> None:
         """Test for CType.from_json()."""
         expected: CType = obj
@@ -135,31 +484,33 @@ class TestCType:
 
         assert actual == expected
 
-    def test_to_doc_json(self) -> None:
+    def test_to_doc_tree(self) -> None:
         """Test for CType.to_doc_json()."""
         with pytest.raises(NotImplementedError):
-            CType(name="Name").to_doc_json()
+            CType(name="Name").to_doc_tree()
 
-    compare_list: ClassVar[Sequence[tuple[str, CType, CType]]] = [
-        ("namespace", CType(name="Name", namespace="A"), CType(name="Name", namespace="B")),
-        ("namespace_none", CType(name="Name", namespace=None), CType(name="Name", namespace="A")),
-        ("name", CType(name="NameA"), CType(name="NameB")),
+    compare_list: ClassVar[ParamSequence[tuple[CType, CType]]] = [
+        ("namespace", (CType(name="Name", namespace="A"), CType(name="Name", namespace="B"))),
+        ("namespace_none", (CType(name="Name", namespace=None), CType(name="Name", namespace="A"))),
+        ("name", (CType(name="NameA"), CType(name="NameB"))),
         (
             "inner",
-            CType(name="Name", inner=(CType(name="A"),)),
-            CType(name="Name", inner=(CType(name="B"),)),
+            (
+                CType(name="Name", inner=(CType(name="A"),)),
+                CType(name="Name", inner=(CType(name="B"),)),
+            ),
         ),
-        ("reference", CType(name="Name", reference=False), CType(name="Name", reference=True)),
-        ("generic", CType(name="Name", generic=False), CType(name="Name", generic=True)),
-        ("nullable", CType(name="Name", nullable=False), CType(name="Name", nullable=True)),
+        ("reference", (CType(name="Name", reference=False), CType(name="Name", reference=True))),
+        ("generic", (CType(name="Name", generic=False), CType(name="Name", generic=True))),
+        ("nullable", (CType(name="Name", nullable=False), CType(name="Name", nullable=True))),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CType, y: CType) -> None:
         """Test for CType.compare()."""
         _compare(CType, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CType, y: CType) -> None:
         """Test for CType.compare_seq()."""
         _compare_seq(CType, x, y)
@@ -168,36 +519,42 @@ class TestCType:
 class TestCParameter:
     """Tests for CParameter."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CParameter, str]]] = [
-        (CParameter(name="Name", type=CType(name="Type")), "Name"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CParameter, str]]] = [
+        ("basic", (CParameter(name="Name", type=CType(name="Type")), "Name")),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CParameter, expected: str) -> None:
         """Test for CParameter.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CParameter, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CParameter, JsonType]]] = [
         (
             "basic",
-            CParameter(name="Name", type=CType(name="Type")),
-            {"name": "Name", "type": "Type", "default": False, "out": False},
+            (
+                CParameter(name="Name", type=CType(name="Type")),
+                {"name": "Name", "type": "Type", "default": False, "out": False},
+            ),
         ),
         (
             "default",
-            CParameter(name="Name", type=CType(name="Type"), default=True),
-            {"name": "Name", "type": "Type", "default": True, "out": False},
+            (
+                CParameter(name="Name", type=CType(name="Type"), default=True),
+                {"name": "Name", "type": "Type", "default": True, "out": False},
+            ),
         ),
         (
             "out",
-            CParameter(name="Name", type=CType(name="Type"), out=True),
-            {"name": "Name", "type": "Type", "default": False, "out": True},
+            (
+                CParameter(name="Name", type=CType(name="Type"), out=True),
+                {"name": "Name", "type": "Type", "default": False, "out": True},
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CParameter, json: JsonType) -> None:
         """Test for CParameter.to_json()."""
         expected: JsonType = json
@@ -205,7 +562,7 @@ class TestCParameter:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CParameter, json: JsonType) -> None:
         """Test for CParameter.from_json()."""
         expected: CParameter = obj
@@ -213,25 +570,27 @@ class TestCParameter:
 
         assert actual == expected
 
-    def test_to_doc_json(self) -> None:
+    def test_to_doc_tree(self) -> None:
         """Test for CParameter.to_doc_json()."""
         with pytest.raises(NotImplementedError):
-            CParameter(name="Name", type=CType(name="Type")).to_doc_json()
+            CParameter(name="Name", type=CType(name="Type")).to_doc_tree()
 
-    compare_list: ClassVar[Sequence[tuple[str, CParameter, CParameter]]] = [
+    compare_list: ClassVar[ParamSequence[tuple[CParameter, CParameter]]] = [
         (
             "name",
-            CParameter(name="Name", type=CType(name="A")),
-            CParameter(name="Name", type=CType(name="B")),
+            (
+                CParameter(name="Name", type=CType(name="A")),
+                CParameter(name="Name", type=CType(name="B")),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CParameter, y: CParameter) -> None:
         """Test for CParameter.compare()."""
         _compare(CParameter, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CParameter, y: CParameter) -> None:
         """Test for CParameter.compare_seq()."""
         _compare_seq(CParameter, x, y)
@@ -240,39 +599,52 @@ class TestCParameter:
 class TestCField:
     """Tests for CField."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CField, str]]] = [
+    doc_name_objects: ClassVar[ParamSequence[tuple[CField, str]]] = [
         (
-            CField(name="Name", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
-            "Name",
+            "basic",
+            (
+                CField(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    return_type=CType(name="Type"),
+                ),
+                "Name",
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CField, expected: str) -> None:
         """Test for CField.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CField, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CField, JsonType]]] = [
         (
             "basic",
-            CField(name="Name", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
-            {"name": "Name", "declaring_type": "Type", "return_type": "Type", "static": False},
+            (
+                CField(
+                    name="Name", declaring_type=CType(name="Type"), return_type=CType(name="Type")
+                ),
+                {"name": "Name", "declaring_type": "Type", "return_type": "Type", "static": False},
+            ),
         ),
         (
             "static",
-            CField(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                return_type=CType(name="Type"),
-                static=True,
+            (
+                CField(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    return_type=CType(name="Type"),
+                    static=True,
+                ),
+                {"name": "Name", "declaring_type": "Type", "return_type": "Type", "static": True},
             ),
-            {"name": "Name", "declaring_type": "Type", "return_type": "Type", "static": True},
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CField, json: JsonType) -> None:
         """Test for CField.to_json()."""
         expected: JsonType = json
@@ -280,7 +652,7 @@ class TestCField:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CField, json: JsonType) -> None:
         """Test for CField.from_json()."""
         expected: CField = obj
@@ -288,46 +660,49 @@ class TestCField:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CField, JsonType]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CField, DocTree]]] = [
         (
             "basic",
-            CField(name="Name", declaring_type=CType(name="Type"), return_type=CType.VOID),
-            {"doc": "", "doc_formatted": {}},
+            (
+                CField(name="Name", declaring_type=CType(name="Type"), return_type=CType.VOID),
+                DocTree(name="Name"),
+            ),
         ),
         (
             "return",
-            CField(name="Name", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
-            {"doc": "", "doc_formatted": {}, "return": ""},
+            (
+                CField(
+                    name="Name", declaring_type=CType(name="Type"), return_type=CType(name="Type")
+                ),
+                DocTree(name="Name", return_doc=""),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CField, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CField, doc: DocTree) -> None:
         """Test for CField.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CField, CField]]] = [
+    compare_list: ClassVar[ParamSequence[tuple[CField, CField]]] = [
         (
             "name",
-            CField(name="A", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
-            CField(name="B", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
+            (
+                CField(name="A", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
+                CField(name="B", declaring_type=CType(name="Type"), return_type=CType(name="Type")),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CField, y: CField) -> None:
         """Test for CField.compare()."""
         _compare(CField, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CField, y: CField) -> None:
         """Test for CField.compare_seq()."""
         _compare_seq(CField, x, y)
@@ -336,53 +711,60 @@ class TestCField:
 class TestCConstructor:
     """Tests for CConstructor."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CConstructor, str]]] = [
-        (CConstructor(declaring_type=CType(name="Type")), "__init__()"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CConstructor, str]]] = [
+        ("0_params", (CConstructor(declaring_type=CType(name="Type")), "__init__()")),
         (
-            CConstructor(
-                declaring_type=CType(name="Type"),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type")),
-                    CParameter(name="param0", type=CType(name="Type")),
+            "2_params",
+            (
+                CConstructor(
+                    declaring_type=CType(name="Type"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param0", type=CType(name="Type")),
+                    ),
                 ),
+                "__init__(Type, Type)",
             ),
-            "__init__(Type, Type)",
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CConstructor, expected: str) -> None:
         """Test for CConstructor.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CConstructor, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CConstructor, JsonType]]] = [
         (
             "basic",
-            CConstructor(declaring_type=CType(name="Type")),
-            {"declaring_type": "Type", "parameters": ()},
+            (
+                CConstructor(declaring_type=CType(name="Type")),
+                {"declaring_type": "Type", "parameters": ()},
+            ),
         ),
         (
             "parameters",
-            CConstructor(
-                declaring_type=CType(name="Type"),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type")),
-                    CParameter(name="param1", type=CType(name="Type")),
+            (
+                CConstructor(
+                    declaring_type=CType(name="Type"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param1", type=CType(name="Type")),
+                    ),
                 ),
+                {
+                    "declaring_type": "Type",
+                    "parameters": (
+                        {"name": "param0", "type": "Type", "default": False, "out": False},
+                        {"name": "param1", "type": "Type", "default": False, "out": False},
+                    ),
+                },
             ),
-            {
-                "declaring_type": "Type",
-                "parameters": (
-                    {"name": "param0", "type": "Type", "default": False, "out": False},
-                    {"name": "param1", "type": "Type", "default": False, "out": False},
-                ),
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CConstructor, json: JsonType) -> None:
         """Test for CConstructor.to_json()."""
         expected: JsonType = json
@@ -390,7 +772,7 @@ class TestCConstructor:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CConstructor, json: JsonType) -> None:
         """Test for CConstructor.from_json()."""
         expected: CConstructor = obj
@@ -398,66 +780,69 @@ class TestCConstructor:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CConstructor, JsonType]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CConstructor, DocTree]]] = [
         (
             "basic",
-            CConstructor(declaring_type=CType(name="Type")),
-            {"doc": "", "doc_formatted": {}},
+            (CConstructor(declaring_type=CType(name="Type")), DocTree("__init__()")),
         ),
         (
             "parameters",
-            CConstructor(
-                declaring_type=CType(name="Type"),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            (
+                CConstructor(
+                    declaring_type=CType(name="Type"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param1", type=CType(name="Type")),
+                    ),
+                ),
+                DocTree(
+                    "__init__(Type, Type)",
+                    parameter_docs={"param0": "", "param1": ""},
                 ),
             ),
-            {"doc": "", "doc_formatted": {}, "parameters": {"param0": "", "param1": ""}},
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CConstructor, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CConstructor, doc: DocTree) -> None:
         """Test for CConstructor.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CConstructor, CConstructor]]] = [
+    compare_list: ClassVar[ParamSequence[tuple[CConstructor, CConstructor]]] = [
         (
             "name",
-            CConstructor(
-                declaring_type=CType(name="Type"),
-                parameters=(CParameter(name="Name", type=CType(name="A")),),
-            ),
-            CConstructor(
-                declaring_type=CType(name="Type"),
-                parameters=(CParameter(name="Name", type=CType(name="B")),),
+            (
+                CConstructor(
+                    declaring_type=CType(name="Type"),
+                    parameters=(CParameter(name="Name", type=CType(name="A")),),
+                ),
+                CConstructor(
+                    declaring_type=CType(name="Type"),
+                    parameters=(CParameter(name="Name", type=CType(name="B")),),
+                ),
             ),
         ),
         (
             "parameter_length",
-            CConstructor(declaring_type=CType(name="Type")),
-            CConstructor(
-                declaring_type=CType(name="Type"),
-                parameters=(CParameter(name="Name", type=CType(name="Type")),),
+            (
+                CConstructor(declaring_type=CType(name="Type")),
+                CConstructor(
+                    declaring_type=CType(name="Type"),
+                    parameters=(CParameter(name="Name", type=CType(name="Type")),),
+                ),
             ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CConstructor, y: CConstructor) -> None:
         """Test for CConstructor.compare()."""
         _compare(CConstructor, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CConstructor, y: CConstructor) -> None:
         """Test for CConstructor.compare_seq()."""
         _compare_seq(CConstructor, x, y)
@@ -466,67 +851,76 @@ class TestCConstructor:
 class TestCProperty:
     """Tests for CProperty."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CProperty, str]]] = [
+    doc_name_objects: ClassVar[ParamSequence[tuple[CProperty, str]]] = [
         (
-            CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
-            "Name",
+            "basic",
+            (
+                CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                "Name",
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CProperty, expected: str) -> None:
         """Test for CProperty.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CProperty, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CProperty, JsonType]]] = [
         (
             "basic",
-            CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
-            {
-                "name": "Name",
-                "declaring_type": "Type",
-                "type": "Type",
-                "setter": False,
-                "static": False,
-            },
+            (
+                CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                {
+                    "name": "Name",
+                    "declaring_type": "Type",
+                    "type": "Type",
+                    "setter": False,
+                    "static": False,
+                },
+            ),
         ),
         (
             "setter",
-            CProperty(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                type=CType(name="Type"),
-                setter=True,
+            (
+                CProperty(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    type=CType(name="Type"),
+                    setter=True,
+                ),
+                {
+                    "name": "Name",
+                    "declaring_type": "Type",
+                    "type": "Type",
+                    "setter": True,
+                    "static": False,
+                },
             ),
-            {
-                "name": "Name",
-                "declaring_type": "Type",
-                "type": "Type",
-                "setter": True,
-                "static": False,
-            },
         ),
         (
             "static",
-            CProperty(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                type=CType(name="Type"),
-                static=True,
+            (
+                CProperty(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    type=CType(name="Type"),
+                    static=True,
+                ),
+                {
+                    "name": "Name",
+                    "declaring_type": "Type",
+                    "type": "Type",
+                    "setter": False,
+                    "static": True,
+                },
             ),
-            {
-                "name": "Name",
-                "declaring_type": "Type",
-                "type": "Type",
-                "setter": False,
-                "static": True,
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CProperty, json: JsonType) -> None:
         """Test for CProperty.to_json()."""
         expected: JsonType = json
@@ -534,7 +928,7 @@ class TestCProperty:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CProperty, json: JsonType) -> None:
         """Test for CProperty.from_json()."""
         expected: CProperty = obj
@@ -542,46 +936,47 @@ class TestCProperty:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CProperty, JsonType]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CProperty, DocTree]]] = [
         (
             "basic",
-            CProperty(name="Name", declaring_type=CType(name="Type"), type=CType.VOID),
-            {"doc": "", "doc_formatted": {}},
+            (
+                CProperty(name="Name", declaring_type=CType(name="Type"), type=CType.VOID),
+                DocTree(name="Name"),
+            ),
         ),
         (
             "return",
-            CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
-            {"doc": "", "doc_formatted": {}, "return": ""},
+            (
+                CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                DocTree(name="Name", return_doc=""),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CProperty, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CProperty, doc: DocTree) -> None:
         """Test for CProperty.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CProperty, CProperty]]] = [
+    compare_list: ClassVar[ParamSequence[tuple[CProperty, CProperty]]] = [
         (
             "name",
-            CProperty(name="A", declaring_type=CType(name="Type"), type=CType(name="Type")),
-            CProperty(name="B", declaring_type=CType(name="Type"), type=CType(name="Type")),
+            (
+                CProperty(name="A", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                CProperty(name="B", declaring_type=CType(name="Type"), type=CType(name="Type")),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CProperty, y: CProperty) -> None:
         """Test for CProperty.compare()."""
         _compare(CProperty, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CProperty, y: CProperty) -> None:
         """Test for CProperty.compare_seq()."""
         _compare_seq(CProperty, x, y)
@@ -590,90 +985,101 @@ class TestCProperty:
 class TestCMethod:
     """Tests for CMethod."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CMethod, str]]] = [
-        (CMethod(name="Name", declaring_type=CType(name="Type")), "Name()"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CMethod, str]]] = [
+        ("0_params", (CMethod(name="Name", declaring_type=CType(name="Type")), "Name()")),
         (
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type")),
-                    CParameter(name="param0", type=CType(name="Type")),
+            "2_params",
+            (
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param0", type=CType(name="Type")),
+                    ),
                 ),
+                "Name(Type, Type)",
             ),
-            "Name(Type, Type)",
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CMethod, expected: str) -> None:
         """Test for CMethod.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CMethod, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CMethod, JsonType]]] = [
         (
             "basic",
-            CMethod(name="Name", declaring_type=CType(name="Type")),
-            {
-                "name": "Name",
-                "declaring_type": "Type",
-                "parameters": (),
-                "return_types": (),
-                "static": False,
-            },
+            (
+                CMethod(name="Name", declaring_type=CType(name="Type")),
+                {
+                    "name": "Name",
+                    "declaring_type": "Type",
+                    "parameters": (),
+                    "return_types": (),
+                    "static": False,
+                },
+            ),
         ),
         (
             "parameters",
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type")),
-                    CParameter(name="param1", type=CType(name="Type")),
+            (
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param1", type=CType(name="Type")),
+                    ),
                 ),
+                {
+                    "name": "Name",
+                    "declaring_type": "Type",
+                    "parameters": (
+                        {"name": "param0", "type": "Type", "default": False, "out": False},
+                        {"name": "param1", "type": "Type", "default": False, "out": False},
+                    ),
+                    "return_types": (),
+                    "static": False,
+                },
             ),
-            {
-                "name": "Name",
-                "declaring_type": "Type",
-                "parameters": (
-                    {"name": "param0", "type": "Type", "default": False, "out": False},
-                    {"name": "param1", "type": "Type", "default": False, "out": False},
-                ),
-                "return_types": (),
-                "static": False,
-            },
         ),
         (
             "return_types",
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                return_types=(CType(name="Type"), CType(name="Type")),
+            (
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    return_types=(CType(name="Type"), CType(name="Type")),
+                ),
+                {
+                    "name": "Name",
+                    "declaring_type": "Type",
+                    "parameters": (),
+                    "return_types": ("Type", "Type"),
+                    "static": False,
+                },
             ),
-            {
-                "name": "Name",
-                "declaring_type": "Type",
-                "parameters": (),
-                "return_types": ("Type", "Type"),
-                "static": False,
-            },
         ),
         (
             "static",
-            CMethod(name="Name", declaring_type=CType(name="Type"), static=True),
-            {
-                "name": "Name",
-                "declaring_type": "Type",
-                "parameters": (),
-                "return_types": (),
-                "static": True,
-            },
+            (
+                CMethod(name="Name", declaring_type=CType(name="Type"), static=True),
+                {
+                    "name": "Name",
+                    "declaring_type": "Type",
+                    "parameters": (),
+                    "return_types": (),
+                    "static": True,
+                },
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CMethod, json: JsonType) -> None:
         """Test for CMethod.to_json()."""
         expected: JsonType = json
@@ -681,7 +1087,7 @@ class TestCMethod:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CMethod, json: JsonType) -> None:
         """Test for CMethod.from_json()."""
         expected: CMethod = obj
@@ -689,98 +1095,106 @@ class TestCMethod:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CMethod, JsonType]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CMethod, DocTree]]] = [
         (
             "basic",
-            CMethod(name="Name", declaring_type=CType(name="Type")),
-            {"doc": "", "doc_formatted": {}, "exceptions": {}},
+            (
+                CMethod(name="Name", declaring_type=CType(name="Type")),
+                DocTree(name="Name()", exception_docs={}),
+            ),
         ),
         (
             "parameters",
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type")),
-                    CParameter(name="param1", type=CType(name="Type")),
+            (
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param1", type=CType(name="Type")),
+                    ),
+                ),
+                DocTree(
+                    name="Name(Type, Type)",
+                    parameter_docs={"param0": "", "param1": ""},
+                    exception_docs={},
                 ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "exceptions": {},
-                "parameters": {"param0": "", "param1": ""},
-            },
         ),
         (
             "return_types",
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                return_types=(CType(name="Type"), CType(name="Type")),
+            (
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    return_types=(CType(name="Type"), CType(name="Type")),
+                ),
+                DocTree(name="Name()", return_doc="", exception_docs={}),
             ),
-            {"doc": "", "doc_formatted": {}, "exceptions": {}, "return": ""},
         ),
         (
             "static",
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                static=True,
+            (
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    static=True,
+                ),
+                DocTree(name="Name()", exception_docs={}),
             ),
-            {"doc": "", "doc_formatted": {}, "exceptions": {}},
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CMethod, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CMethod, doc: DocTree) -> None:
         """Test for CMethod.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CMethod, CMethod]]] = [
+    compare_list: ClassVar[ParamSequence[tuple[CMethod, CMethod]]] = [
         (
             "name",
-            CMethod(name="A", declaring_type=CType(name="Type")),
-            CMethod(name="B", declaring_type=CType(name="Type")),
+            (
+                CMethod(name="A", declaring_type=CType(name="Type")),
+                CMethod(name="B", declaring_type=CType(name="Type")),
+            ),
         ),
         (
             "parameters",
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                parameters=(CParameter(name="Name", type=CType(name="A")),),
-            ),
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                parameters=(CParameter(name="Name", type=CType(name="B")),),
+            (
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    parameters=(CParameter(name="Name", type=CType(name="A")),),
+                ),
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    parameters=(CParameter(name="Name", type=CType(name="B")),),
+                ),
             ),
         ),
         (
             "parameter_length",
-            CMethod(name="Name", declaring_type=CType(name="Type")),
-            CMethod(
-                name="Name",
-                declaring_type=CType(name="Type"),
-                parameters=(CParameter(name="Name", type=CType(name="A")),),
+            (
+                CMethod(name="Name", declaring_type=CType(name="Type")),
+                CMethod(
+                    name="Name",
+                    declaring_type=CType(name="Type"),
+                    parameters=(CParameter(name="Name", type=CType(name="A")),),
+                ),
             ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CMethod, y: CMethod) -> None:
         """Test for CMethod.compare()."""
         _compare(CMethod, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CMethod, y: CMethod) -> None:
         """Test for CMethod.compare_seq()."""
         _compare_seq(CMethod, x, y)
@@ -789,26 +1203,34 @@ class TestCMethod:
 class TestCEvent:
     """Tests for CEvent."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CEvent, str]]] = [
-        (CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")), "Name"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CEvent, str]]] = [
+        (
+            "basic",
+            (
+                CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                "Name",
+            ),
+        ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CEvent, expected: str) -> None:
         """Test for CEvent.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CEvent, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CEvent, JsonType]]] = [
         (
             "basic",
-            CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
-            {"name": "Name", "declaring_type": "Type", "type": "Type"},
+            (
+                CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                {"name": "Name", "declaring_type": "Type", "type": "Type"},
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CEvent, json: JsonType) -> None:
         """Test for CEvent.to_json()."""
         expected: JsonType = json
@@ -816,7 +1238,7 @@ class TestCEvent:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CEvent, json: JsonType) -> None:
         """Test for CEvent.from_json()."""
         expected: CEvent = obj
@@ -824,41 +1246,40 @@ class TestCEvent:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CEvent, JsonType]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CEvent, DocTree]]] = [
         (
             "basic",
-            CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
-            {"doc": "", "doc_formatted": {}},
+            (
+                CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                DocTree(name="Name"),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CEvent, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CEvent, doc: DocTree) -> None:
         """Test for CEvent.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CEvent, CEvent]]] = [
+    compare_list: ClassVar[ParamSequence[tuple[CEvent, CEvent]]] = [
         (
             "name",
-            CEvent(name="A", declaring_type=CType(name="Type"), type=CType(name="Type")),
-            CEvent(name="B", declaring_type=CType(name="Type"), type=CType(name="Type")),
+            (
+                CEvent(name="A", declaring_type=CType(name="Type"), type=CType(name="Type")),
+                CEvent(name="B", declaring_type=CType(name="Type"), type=CType(name="Type")),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CEvent, y: CEvent) -> None:
         """Test for CEvent.compare()."""
         _compare(CEvent, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CEvent, y: CEvent) -> None:
         """Test for CEvent.compare_seq()."""
         _compare_seq(CEvent, x, y)
@@ -867,99 +1288,103 @@ class TestCEvent:
 class TestCNamespace:
     """Tests for CNamespace."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CNamespace, str]]] = [
-        (CNamespace(name="Name"), "Name"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CNamespace, str]]] = [
+        ("basic", (CNamespace(name="Name"), "Name")),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CNamespace, expected: str) -> None:
         """Test for CNamespace.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CNamespace, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CNamespace, JsonType]]] = [
         (
             "basic",
-            CNamespace(
-                name="Namespace",
-                types={
-                    "Namespace:IInterface": CInterface(name="IInterface", namespace="Namespace"),
-                    "Namespace:Class": CClass(name="Class", namespace="Namespace"),
-                    "Namespace:Delegate": CDelegate(name="Delegate", namespace="Namespace"),
-                    "Namespace:Enum": CEnum(name="Enum", namespace="Namespace"),
-                    "Namespace:Struct": CStruct(name="Struct", namespace="Namespace"),
+            (
+                CNamespace(
+                    name="Namespace",
+                    types={
+                        "Namespace:IInterface": CInterface(
+                            name="IInterface", namespace="Namespace"
+                        ),
+                        "Namespace:Class": CClass(name="Class", namespace="Namespace"),
+                        "Namespace:Delegate": CDelegate(name="Delegate", namespace="Namespace"),
+                        "Namespace:Enum": CEnum(name="Enum", namespace="Namespace"),
+                        "Namespace:Struct": CStruct(name="Struct", namespace="Namespace"),
+                    },
+                ),
+                {
+                    "name": "Namespace",
+                    "types": {
+                        "Namespace:IInterface": {
+                            "type": "interface",
+                            "name": "IInterface",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "generic_args": (),
+                            "interfaces": (),
+                            "fields": {},
+                            "properties": {},
+                            "methods": {},
+                            "events": {},
+                            "nested_types": {},
+                        },
+                        "Namespace:Class": {
+                            "type": "class",
+                            "name": "Class",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "abstract": False,
+                            "generic_args": (),
+                            "super_class": None,
+                            "interfaces": (),
+                            "fields": {},
+                            "constructors": {},
+                            "properties": {},
+                            "methods": {},
+                            "events": {},
+                            "nested_types": {},
+                        },
+                        "Namespace:Delegate": {
+                            "type": "delegate",
+                            "name": "Delegate",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "parameters": (),
+                            "return_type": "System:Void",
+                        },
+                        "Namespace:Enum": {
+                            "type": "enum",
+                            "name": "Enum",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "fields": (),
+                        },
+                        "Namespace:Struct": {
+                            "type": "struct",
+                            "name": "Struct",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "abstract": False,
+                            "generic_args": (),
+                            "super_class": None,
+                            "interfaces": (),
+                            "fields": {},
+                            "constructors": {},
+                            "properties": {},
+                            "methods": {},
+                            "events": {},
+                            "nested_types": {},
+                        },
+                    },
                 },
             ),
-            {
-                "name": "Namespace",
-                "types": {
-                    "Namespace:IInterface": {
-                        "type": "interface",
-                        "name": "IInterface",
-                        "namespace": "Namespace",
-                        "nested": None,
-                        "generic_args": (),
-                        "interfaces": (),
-                        "fields": {},
-                        "properties": {},
-                        "methods": {},
-                        "events": {},
-                        "nested_types": {},
-                    },
-                    "Namespace:Class": {
-                        "type": "class",
-                        "name": "Class",
-                        "namespace": "Namespace",
-                        "nested": None,
-                        "abstract": False,
-                        "generic_args": (),
-                        "super_class": None,
-                        "interfaces": (),
-                        "fields": {},
-                        "constructors": {},
-                        "properties": {},
-                        "methods": {},
-                        "events": {},
-                        "nested_types": {},
-                    },
-                    "Namespace:Delegate": {
-                        "type": "delegate",
-                        "name": "Delegate",
-                        "namespace": "Namespace",
-                        "nested": None,
-                        "parameters": (),
-                        "return_type": "System:Void",
-                    },
-                    "Namespace:Enum": {
-                        "type": "enum",
-                        "name": "Enum",
-                        "namespace": "Namespace",
-                        "nested": None,
-                        "fields": (),
-                    },
-                    "Namespace:Struct": {
-                        "type": "struct",
-                        "name": "Struct",
-                        "namespace": "Namespace",
-                        "nested": None,
-                        "abstract": False,
-                        "generic_args": (),
-                        "super_class": None,
-                        "interfaces": (),
-                        "fields": {},
-                        "constructors": {},
-                        "properties": {},
-                        "methods": {},
-                        "events": {},
-                        "nested_types": {},
-                    },
-                },
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CNamespace, json: JsonType) -> None:
         """Test for CNamespace.to_json()."""
         expected: JsonType = json
@@ -967,7 +1392,7 @@ class TestCNamespace:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CNamespace, json: JsonType) -> None:
         """Test for CNamespace.from_json()."""
         expected: CNamespace = obj
@@ -975,21 +1400,21 @@ class TestCNamespace:
 
         assert actual == expected
 
-    def test_to_doc_json(self) -> None:
+    def test_to_doc_tree(self) -> None:
         """Test for CNamespace.to_doc_json()."""
         with pytest.raises(NotImplementedError):
-            CNamespace(name="Name").to_doc_json()
+            CNamespace(name="Name").to_doc_tree()
 
-    compare_list: ClassVar[Sequence[tuple[str, CNamespace, CNamespace]]] = [
-        ("name", CNamespace(name="A"), CNamespace(name="B")),
+    compare_list: ClassVar[ParamSequence[tuple[CNamespace, CNamespace]]] = [
+        ("name", (CNamespace(name="A"), CNamespace(name="B"))),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CNamespace, y: CNamespace) -> None:
         """Test for CNamespace.compare()."""
         _compare(CNamespace, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CNamespace, y: CNamespace) -> None:
         """Test for CNamespace.compare_seq()."""
         _compare_seq(CNamespace, x, y)
@@ -998,423 +1423,448 @@ class TestCNamespace:
 class TestCClass:
     """Tests for CClass."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CClass, str]]] = [
-        (CClass(name="Name"), "Name"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CClass, str]]] = [
+        ("basic", (CClass(name="Name"), "Name")),
         (
-            CClass(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            "generic_args",
+            (
+                CClass(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                "Name[$A, $B]",
             ),
-            "Name[$A, $B]",
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CClass, expected: str) -> None:
         """Test for CClass.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CClass, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CClass, JsonType]]] = [
         (
             "basic",
-            CClass(name="Name"),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "class",
-            },
+            (
+                CClass(name="Name"),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "class",
+                },
+            ),
         ),
         (
             "abstract",
-            CClass(name="Name", abstract=True),
-            {
-                "type": "class",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "abstract": True,
-                "generic_args": (),
-                "super_class": None,
-                "interfaces": (),
-                "fields": {},
-                "constructors": {},
-                "properties": {},
-                "methods": {},
-                "events": {},
-                "nested_types": {},
-            },
+            (
+                CClass(name="Name", abstract=True),
+                {
+                    "type": "class",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "abstract": True,
+                    "generic_args": (),
+                    "super_class": None,
+                    "interfaces": (),
+                    "fields": {},
+                    "constructors": {},
+                    "properties": {},
+                    "methods": {},
+                    "events": {},
+                    "nested_types": {},
+                },
+            ),
         ),
         (
             "generic_args",
-            CClass(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            (
+                CClass(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                {
+                    "type": "class",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "abstract": False,
+                    "generic_args": ("$A", "$B"),
+                    "super_class": None,
+                    "interfaces": (),
+                    "fields": {},
+                    "constructors": {},
+                    "properties": {},
+                    "methods": {},
+                    "events": {},
+                    "nested_types": {},
+                },
             ),
-            {
-                "type": "class",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "abstract": False,
-                "generic_args": ("$A", "$B"),
-                "super_class": None,
-                "interfaces": (),
-                "fields": {},
-                "constructors": {},
-                "properties": {},
-                "methods": {},
-                "events": {},
-                "nested_types": {},
-            },
         ),
         (
             "super_class",
-            CClass(name="Name", super_class=CType(name="Name")),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": "Name",
-                "type": "class",
-            },
+            (
+                CClass(name="Name", super_class=CType(name="Name")),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": "Name",
+                    "type": "class",
+                },
+            ),
         ),
         (
             "interfaces",
-            CClass(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": ("A", "B"),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "class",
-            },
+            (
+                CClass(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": ("A", "B"),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "class",
+                },
+            ),
         ),
         (
             "fields",
-            CClass(
-                name="Name",
-                fields={
-                    "Name.A": CField(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                    "Name.B": CField(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
+            (
+                CClass(
+                    name="Name",
+                    fields={
+                        "Name.A": CField(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                        "Name.B": CField(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {
+                        "Name.A": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "return_type": "Type",
+                            "static": False,
+                        },
+                        "Name.B": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "return_type": "Type",
+                            "static": False,
+                        },
+                    },
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "class",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {
-                    "Name.A": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "return_type": "Type",
-                        "static": False,
-                    },
-                    "Name.B": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "return_type": "Type",
-                        "static": False,
-                    },
-                },
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "class",
-            },
         ),
         (
             "constructors",
-            CClass(
-                name="Name",
-                constructors={
-                    "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
-                    "Name.__init__(Namespace:Type)": CConstructor(
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                    ),
-                },
-            ),
-            {
-                "abstract": False,
-                "constructors": {
-                    "Name.__init__()": {"declaring_type": "Name", "parameters": ()},
-                    "Name.__init__(Namespace:Type)": {
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {"name": "param0", "type": "Type", "default": False, "out": False},
+            (
+                CClass(
+                    name="Name",
+                    constructors={
+                        "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
+                        "Name.__init__(Namespace:Type)": CConstructor(
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
                         ),
                     },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {
+                        "Name.__init__()": {"declaring_type": "Name", "parameters": ()},
+                        "Name.__init__(Namespace:Type)": {
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {"name": "param0", "type": "Type", "default": False, "out": False},
+                            ),
+                        },
+                    },
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "class",
                 },
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "class",
-            },
+            ),
         ),
         (
             "properties",
-            CClass(
-                name="Name",
-                properties={
-                    "Name.A": CProperty(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                    "Name.B": CProperty(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
+            (
+                CClass(
+                    name="Name",
+                    properties={
+                        "Name.A": CProperty(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                        "Name.B": CProperty(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {
+                        "Name.B": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "type": "Type",
+                            "setter": True,
+                            "static": False,
+                        },
+                        "Name.A": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "type": "Type",
+                            "setter": True,
+                            "static": False,
+                        },
+                    },
+                    "super_class": None,
+                    "type": "class",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {
-                    "Name.B": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "type": "Type",
-                        "setter": True,
-                        "static": False,
-                    },
-                    "Name.A": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "type": "Type",
-                        "setter": True,
-                        "static": False,
-                    },
-                },
-                "super_class": None,
-                "type": "class",
-            },
         ),
         (
             "methods",
-            CClass(
-                name="Name",
-                methods={
-                    "Name.A(Type) -> Type": CMethod(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
-                    "Name.B(Type) -> Type": CMethod(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
+            (
+                CClass(
+                    name="Name",
+                    methods={
+                        "Name.A(Type) -> Type": CMethod(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                        "Name.B(Type) -> Type": CMethod(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {
+                        "Name.A(Type) -> Type": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {
+                                    "name": "param0",
+                                    "type": "Type",
+                                    "default": False,
+                                    "out": False,
+                                },
+                            ),
+                            "return_types": ("Type",),
+                            "static": False,
+                        },
+                        "Name.B(Type) -> Type": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {
+                                    "name": "param0",
+                                    "type": "Type",
+                                    "default": False,
+                                    "out": False,
+                                },
+                            ),
+                            "return_types": ("Type",),
+                            "static": False,
+                        },
+                    },
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "class",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {
-                    "Name.A(Type) -> Type": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {
-                                "name": "param0",
-                                "type": "Type",
-                                "default": False,
-                                "out": False,
-                            },
-                        ),
-                        "return_types": ("Type",),
-                        "static": False,
-                    },
-                    "Name.B(Type) -> Type": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {
-                                "name": "param0",
-                                "type": "Type",
-                                "default": False,
-                                "out": False,
-                            },
-                        ),
-                        "return_types": ("Type",),
-                        "static": False,
-                    },
-                },
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "class",
-            },
         ),
         (
             "events",
-            CClass(
-                name="Name",
-                events={
-                    "Name.A -> (Type)": CEvent(
-                        name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                    "Name.B -> (Type)": CEvent(
-                        name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
+            (
+                CClass(
+                    name="Name",
+                    events={
+                        "Name.A -> (Type)": CEvent(
+                            name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                        "Name.B -> (Type)": CEvent(
+                            name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {
+                        "Name.A -> (Type)": {"name": "A", "declaring_type": "Name", "type": "Type"},
+                        "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
+                    },
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "class",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {
-                    "Name.A -> (Type)": {"name": "A", "declaring_type": "Name", "type": "Type"},
-                    "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
-                },
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "class",
-            },
         ),
         (
             "nested_types",
-            CClass(
-                name="Name",
-                nested_types={
-                    "Name.A": CClass(name="A", nested=CType(name="Name")),
-                    "Name.B": CClass(name="B", nested=CType(name="Name")),
+            (
+                CClass(
+                    name="Name",
+                    nested_types={
+                        "Name.A": CClass(name="A", nested=CType(name="Name")),
+                        "Name.B": CClass(name="B", nested=CType(name="Name")),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {
+                        "Name.A": {
+                            "abstract": False,
+                            "constructors": {},
+                            "events": {},
+                            "fields": {},
+                            "generic_args": (),
+                            "interfaces": (),
+                            "methods": {},
+                            "name": "A",
+                            "namespace": None,
+                            "nested": "Name",
+                            "nested_types": {},
+                            "properties": {},
+                            "super_class": None,
+                            "type": "class",
+                        },
+                        "Name.B": {
+                            "abstract": False,
+                            "constructors": {},
+                            "events": {},
+                            "fields": {},
+                            "generic_args": (),
+                            "interfaces": (),
+                            "methods": {},
+                            "name": "B",
+                            "namespace": None,
+                            "nested": "Name",
+                            "nested_types": {},
+                            "properties": {},
+                            "super_class": None,
+                            "type": "class",
+                        },
+                    },
+                    "properties": {},
+                    "super_class": None,
+                    "type": "class",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {
-                    "Name.A": {
-                        "abstract": False,
-                        "constructors": {},
-                        "events": {},
-                        "fields": {},
-                        "generic_args": (),
-                        "interfaces": (),
-                        "methods": {},
-                        "name": "A",
-                        "namespace": None,
-                        "nested": "Name",
-                        "nested_types": {},
-                        "properties": {},
-                        "super_class": None,
-                        "type": "class",
-                    },
-                    "Name.B": {
-                        "abstract": False,
-                        "constructors": {},
-                        "events": {},
-                        "fields": {},
-                        "generic_args": (),
-                        "interfaces": (),
-                        "methods": {},
-                        "name": "B",
-                        "namespace": None,
-                        "nested": "Name",
-                        "nested_types": {},
-                        "properties": {},
-                        "super_class": None,
-                        "type": "class",
-                    },
-                },
-                "properties": {},
-                "super_class": None,
-                "type": "class",
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CClass, json: JsonType) -> None:
         """Test for CClass.to_json()."""
         expected: JsonType = json
@@ -1422,7 +1872,7 @@ class TestCClass:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CClass, json: JsonType) -> None:
         """Test for CClass.from_json()."""
         expected: CClass = obj
@@ -1430,195 +1880,197 @@ class TestCClass:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CClass, JsonType]]] = [
-        ("basic", CClass(name="Name"), {"doc": "", "doc_formatted": {}}),
-        ("abstract", CClass(name="Name", abstract=True), {"doc": "", "doc_formatted": {}}),
+    doc_objects: ClassVar[ParamSequence[tuple[CClass, DocTree]]] = [
+        ("basic", (CClass(name="Name"), DocTree(name="Name"))),
+        ("abstract", (CClass(name="Name", abstract=True), DocTree(name="Name"))),
         (
             "generic_args",
-            CClass(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            (
+                CClass(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                DocTree(name="Name[$A, $B]"),
             ),
-            {"doc": "", "doc_formatted": {}},
         ),
         (
             "super_class",
-            CClass(name="Name", super_class=CType(name="Name")),
-            {"doc": "", "doc_formatted": {}},
+            (CClass(name="Name", super_class=CType(name="Name")), DocTree(name="Name")),
         ),
         (
             "interfaces",
-            CClass(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-            {"doc": "", "doc_formatted": {}},
+            (
+                CClass(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                DocTree(name="Name"),
+            ),
         ),
         (
             "fields",
-            CClass(
-                name="Name",
-                fields={
-                    "Name.A": CField(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                    "Name.B": CField(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                },
+            (
+                CClass(
+                    name="Name",
+                    fields={
+                        "Name.A": CField(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                        "Name.B": CField(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}, "return": ""},
-                "B": {"doc": "", "doc_formatted": {}, "return": ""},
-            },
         ),
         (
             "constructors",
-            CClass(
-                name="Name",
-                constructors={
-                    "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
-                    "Name.__init__(Namespace:Type)": CConstructor(
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
+            (
+                CClass(
+                    name="Name",
+                    constructors={
+                        "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
+                        "Name.__init__(Namespace:Type)": CConstructor(
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(
+                        DocTree(name="__init__()"),
+                        DocTree(name="__init__(Type)", parameter_docs={"param0": ""}),
                     ),
-                },
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "__init__()": {"doc": "", "doc_formatted": {}},
-                "__init__(Type)": {"doc": "", "doc_formatted": {}, "parameters": {"param0": ""}},
-            },
         ),
         (
             "properties",
-            CClass(
-                name="Name",
-                properties={
-                    "Name.A": CProperty(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                    "Name.B": CProperty(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                },
+            (
+                CClass(
+                    name="Name",
+                    properties={
+                        "Name.A": CProperty(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                        "Name.B": CProperty(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}, "return": ""},
-                "B": {"doc": "", "doc_formatted": {}, "return": ""},
-            },
         ),
         (
             "methods",
-            CClass(
-                name="Name",
-                methods={
-                    "Name.A(Type) -> Type": CMethod(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
+            (
+                CClass(
+                    name="Name",
+                    methods={
+                        "Name.A(Type) -> Type": CMethod(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                        "Name.B(Type) -> Type": CMethod(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(
+                        DocTree(
+                            name="A(Type)",
+                            parameter_docs={"param0": ""},
+                            return_doc="",
+                            exception_docs={},
+                        ),
+                        DocTree(
+                            name="B(Type)",
+                            parameter_docs={"param0": ""},
+                            return_doc="",
+                            exception_docs={},
+                        ),
                     ),
-                    "Name.B(Type) -> Type": CMethod(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
-                },
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A(Type)": {
-                    "doc": "",
-                    "doc_formatted": {},
-                    "exceptions": {},
-                    "parameters": {"param0": ""},
-                    "return": "",
-                },
-                "B(Type)": {
-                    "doc": "",
-                    "doc_formatted": {},
-                    "exceptions": {},
-                    "parameters": {"param0": ""},
-                    "return": "",
-                },
-            },
         ),
         (
             "events",
-            CClass(
-                name="Name",
-                events={
-                    "Name.A -> (Type)": CEvent(
-                        name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                    "Name.B -> (Type)": CEvent(
-                        name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                },
+            (
+                CClass(
+                    name="Name",
+                    events={
+                        "Name.A -> (Type)": CEvent(
+                            name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                        "Name.B -> (Type)": CEvent(
+                            name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A"), DocTree(name="B")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}},
-                "B": {"doc": "", "doc_formatted": {}},
-            },
         ),
         (
             "nested_types",
-            CClass(
-                name="Name",
-                nested_types={
-                    "Name.A": CClass(name="A", nested=CType(name="Name")),
-                    "Name.B": CClass(name="B", nested=CType(name="Name")),
-                },
+            (
+                CClass(
+                    name="Name",
+                    nested_types={
+                        "Name.A": CClass(name="A", nested=CType(name="Name")),
+                        "Name.B": CClass(name="B", nested=CType(name="Name")),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A"), DocTree(name="B")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}},
-                "B": {"doc": "", "doc_formatted": {}},
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CClass, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CClass, doc: DocTree) -> None:
         """Test for CClass.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CClass, CClass]]] = [
-        ("name", CClass(name="A"), CClass(name="B")),
+    compare_list: ClassVar[ParamSequence[tuple[CClass, CClass]]] = [
+        ("name", (CClass(name="A"), CClass(name="B"))),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CClass, y: CClass) -> None:
         """Test for CClass.compare()."""
         _compare(CClass, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CClass, y: CClass) -> None:
         """Test for CClass.compare_seq()."""
         _compare_seq(CClass, x, y)
@@ -1627,423 +2079,448 @@ class TestCClass:
 class TestCStruct:
     """Tests for CStruct."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CStruct, str]]] = [
-        (CStruct(name="Name"), "Name"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CStruct, str]]] = [
+        ("basic", (CStruct(name="Name"), "Name")),
         (
-            CStruct(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            "generic_args",
+            (
+                CStruct(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                "Name[$A, $B]",
             ),
-            "Name[$A, $B]",
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CStruct, expected: str) -> None:
         """Test for CStruct.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CStruct, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CStruct, JsonType]]] = [
         (
             "basic",
-            CStruct(name="Name"),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "struct",
-            },
+            (
+                CStruct(name="Name"),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "struct",
+                },
+            ),
         ),
         (
             "abstract",
-            CStruct(name="Name", abstract=True),
-            {
-                "type": "struct",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "abstract": True,
-                "generic_args": (),
-                "super_class": None,
-                "interfaces": (),
-                "fields": {},
-                "constructors": {},
-                "properties": {},
-                "methods": {},
-                "events": {},
-                "nested_types": {},
-            },
+            (
+                CStruct(name="Name", abstract=True),
+                {
+                    "type": "struct",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "abstract": True,
+                    "generic_args": (),
+                    "super_class": None,
+                    "interfaces": (),
+                    "fields": {},
+                    "constructors": {},
+                    "properties": {},
+                    "methods": {},
+                    "events": {},
+                    "nested_types": {},
+                },
+            ),
         ),
         (
             "generic_args",
-            CStruct(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            (
+                CStruct(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                {
+                    "type": "struct",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "abstract": False,
+                    "generic_args": ("$A", "$B"),
+                    "super_class": None,
+                    "interfaces": (),
+                    "fields": {},
+                    "constructors": {},
+                    "properties": {},
+                    "methods": {},
+                    "events": {},
+                    "nested_types": {},
+                },
             ),
-            {
-                "type": "struct",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "abstract": False,
-                "generic_args": ("$A", "$B"),
-                "super_class": None,
-                "interfaces": (),
-                "fields": {},
-                "constructors": {},
-                "properties": {},
-                "methods": {},
-                "events": {},
-                "nested_types": {},
-            },
         ),
         (
             "super_class",
-            CStruct(name="Name", super_class=CType(name="Name")),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": "Name",
-                "type": "struct",
-            },
+            (
+                CStruct(name="Name", super_class=CType(name="Name")),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": "Name",
+                    "type": "struct",
+                },
+            ),
         ),
         (
             "interfaces",
-            CStruct(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": ("A", "B"),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "struct",
-            },
+            (
+                CStruct(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": ("A", "B"),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "struct",
+                },
+            ),
         ),
         (
             "fields",
-            CStruct(
-                name="Name",
-                fields={
-                    "Name.A": CField(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                    "Name.B": CField(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
+            (
+                CStruct(
+                    name="Name",
+                    fields={
+                        "Name.A": CField(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                        "Name.B": CField(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {
+                        "Name.A": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "return_type": "Type",
+                            "static": False,
+                        },
+                        "Name.B": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "return_type": "Type",
+                            "static": False,
+                        },
+                    },
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "struct",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {
-                    "Name.A": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "return_type": "Type",
-                        "static": False,
-                    },
-                    "Name.B": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "return_type": "Type",
-                        "static": False,
-                    },
-                },
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "struct",
-            },
         ),
         (
             "constructors",
-            CStruct(
-                name="Name",
-                constructors={
-                    "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
-                    "Name.__init__(Namespace:Type)": CConstructor(
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                    ),
-                },
-            ),
-            {
-                "abstract": False,
-                "constructors": {
-                    "Name.__init__()": {"declaring_type": "Name", "parameters": ()},
-                    "Name.__init__(Namespace:Type)": {
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {"name": "param0", "type": "Type", "default": False, "out": False},
+            (
+                CStruct(
+                    name="Name",
+                    constructors={
+                        "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
+                        "Name.__init__(Namespace:Type)": CConstructor(
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
                         ),
                     },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {
+                        "Name.__init__()": {"declaring_type": "Name", "parameters": ()},
+                        "Name.__init__(Namespace:Type)": {
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {"name": "param0", "type": "Type", "default": False, "out": False},
+                            ),
+                        },
+                    },
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "struct",
                 },
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "struct",
-            },
+            ),
         ),
         (
             "properties",
-            CStruct(
-                name="Name",
-                properties={
-                    "Name.A": CProperty(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                    "Name.B": CProperty(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
+            (
+                CStruct(
+                    name="Name",
+                    properties={
+                        "Name.A": CProperty(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                        "Name.B": CProperty(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {
+                        "Name.B": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "type": "Type",
+                            "setter": True,
+                            "static": False,
+                        },
+                        "Name.A": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "type": "Type",
+                            "setter": True,
+                            "static": False,
+                        },
+                    },
+                    "super_class": None,
+                    "type": "struct",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {
-                    "Name.B": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "type": "Type",
-                        "setter": True,
-                        "static": False,
-                    },
-                    "Name.A": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "type": "Type",
-                        "setter": True,
-                        "static": False,
-                    },
-                },
-                "super_class": None,
-                "type": "struct",
-            },
         ),
         (
             "methods",
-            CStruct(
-                name="Name",
-                methods={
-                    "Name.A(Type) -> Type": CMethod(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
-                    "Name.B(Type) -> Type": CMethod(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
+            (
+                CStruct(
+                    name="Name",
+                    methods={
+                        "Name.A(Type) -> Type": CMethod(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                        "Name.B(Type) -> Type": CMethod(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {
+                        "Name.A(Type) -> Type": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {
+                                    "name": "param0",
+                                    "type": "Type",
+                                    "default": False,
+                                    "out": False,
+                                },
+                            ),
+                            "return_types": ("Type",),
+                            "static": False,
+                        },
+                        "Name.B(Type) -> Type": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {
+                                    "name": "param0",
+                                    "type": "Type",
+                                    "default": False,
+                                    "out": False,
+                                },
+                            ),
+                            "return_types": ("Type",),
+                            "static": False,
+                        },
+                    },
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "struct",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {
-                    "Name.A(Type) -> Type": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {
-                                "name": "param0",
-                                "type": "Type",
-                                "default": False,
-                                "out": False,
-                            },
-                        ),
-                        "return_types": ("Type",),
-                        "static": False,
-                    },
-                    "Name.B(Type) -> Type": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {
-                                "name": "param0",
-                                "type": "Type",
-                                "default": False,
-                                "out": False,
-                            },
-                        ),
-                        "return_types": ("Type",),
-                        "static": False,
-                    },
-                },
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "struct",
-            },
         ),
         (
             "events",
-            CStruct(
-                name="Name",
-                events={
-                    "Name.A -> (Type)": CEvent(
-                        name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                    "Name.B -> (Type)": CEvent(
-                        name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
+            (
+                CStruct(
+                    name="Name",
+                    events={
+                        "Name.A -> (Type)": CEvent(
+                            name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                        "Name.B -> (Type)": CEvent(
+                            name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {
+                        "Name.A -> (Type)": {"name": "A", "declaring_type": "Name", "type": "Type"},
+                        "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
+                    },
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "super_class": None,
+                    "type": "struct",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {
-                    "Name.A -> (Type)": {"name": "A", "declaring_type": "Name", "type": "Type"},
-                    "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
-                },
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "super_class": None,
-                "type": "struct",
-            },
         ),
         (
             "nested_types",
-            CStruct(
-                name="Name",
-                nested_types={
-                    "Name.A": CStruct(name="A", nested=CType(name="Name")),
-                    "Name.B": CStruct(name="B", nested=CType(name="Name")),
+            (
+                CStruct(
+                    name="Name",
+                    nested_types={
+                        "Name.A": CStruct(name="A", nested=CType(name="Name")),
+                        "Name.B": CStruct(name="B", nested=CType(name="Name")),
+                    },
+                ),
+                {
+                    "abstract": False,
+                    "constructors": {},
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {
+                        "Name.A": {
+                            "abstract": False,
+                            "constructors": {},
+                            "events": {},
+                            "fields": {},
+                            "generic_args": (),
+                            "interfaces": (),
+                            "methods": {},
+                            "name": "A",
+                            "namespace": None,
+                            "nested": "Name",
+                            "nested_types": {},
+                            "properties": {},
+                            "super_class": None,
+                            "type": "struct",
+                        },
+                        "Name.B": {
+                            "abstract": False,
+                            "constructors": {},
+                            "events": {},
+                            "fields": {},
+                            "generic_args": (),
+                            "interfaces": (),
+                            "methods": {},
+                            "name": "B",
+                            "namespace": None,
+                            "nested": "Name",
+                            "nested_types": {},
+                            "properties": {},
+                            "super_class": None,
+                            "type": "struct",
+                        },
+                    },
+                    "properties": {},
+                    "super_class": None,
+                    "type": "struct",
                 },
             ),
-            {
-                "abstract": False,
-                "constructors": {},
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {
-                    "Name.A": {
-                        "abstract": False,
-                        "constructors": {},
-                        "events": {},
-                        "fields": {},
-                        "generic_args": (),
-                        "interfaces": (),
-                        "methods": {},
-                        "name": "A",
-                        "namespace": None,
-                        "nested": "Name",
-                        "nested_types": {},
-                        "properties": {},
-                        "super_class": None,
-                        "type": "struct",
-                    },
-                    "Name.B": {
-                        "abstract": False,
-                        "constructors": {},
-                        "events": {},
-                        "fields": {},
-                        "generic_args": (),
-                        "interfaces": (),
-                        "methods": {},
-                        "name": "B",
-                        "namespace": None,
-                        "nested": "Name",
-                        "nested_types": {},
-                        "properties": {},
-                        "super_class": None,
-                        "type": "struct",
-                    },
-                },
-                "properties": {},
-                "super_class": None,
-                "type": "struct",
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CStruct, json: JsonType) -> None:
         """Test for CStruct.to_json()."""
         expected: JsonType = json
@@ -2051,7 +2528,7 @@ class TestCStruct:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CStruct, json: JsonType) -> None:
         """Test for CStruct.from_json()."""
         expected: CStruct = obj
@@ -2059,195 +2536,197 @@ class TestCStruct:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CStruct, JsonType]]] = [
-        ("basic", CStruct(name="Name"), {"doc": "", "doc_formatted": {}}),
-        ("abstract", CStruct(name="Name", abstract=True), {"doc": "", "doc_formatted": {}}),
+    doc_objects: ClassVar[ParamSequence[tuple[CStruct, DocTree]]] = [
+        ("basic", (CStruct(name="Name"), DocTree(name="Name"))),
+        ("abstract", (CStruct(name="Name", abstract=True), DocTree(name="Name"))),
         (
             "generic_args",
-            CStruct(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            (
+                CStruct(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                DocTree(name="Name[$A, $B]"),
             ),
-            {"doc": "", "doc_formatted": {}},
         ),
         (
             "super_class",
-            CStruct(name="Name", super_class=CType(name="Name")),
-            {"doc": "", "doc_formatted": {}},
+            (CStruct(name="Name", super_class=CType(name="Name")), DocTree(name="Name")),
         ),
         (
             "interfaces",
-            CStruct(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-            {"doc": "", "doc_formatted": {}},
+            (
+                CStruct(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                DocTree(name="Name"),
+            ),
         ),
         (
             "fields",
-            CStruct(
-                name="Name",
-                fields={
-                    "Name.A": CField(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                    "Name.B": CField(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                },
+            (
+                CStruct(
+                    name="Name",
+                    fields={
+                        "Name.A": CField(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                        "Name.B": CField(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}, "return": ""},
-                "B": {"doc": "", "doc_formatted": {}, "return": ""},
-            },
         ),
         (
             "constructors",
-            CStruct(
-                name="Name",
-                constructors={
-                    "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
-                    "Name.__init__(Namespace:Type)": CConstructor(
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
+            (
+                CStruct(
+                    name="Name",
+                    constructors={
+                        "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
+                        "Name.__init__(Namespace:Type)": CConstructor(
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(
+                        DocTree(name="__init__()"),
+                        DocTree(name="__init__(Type)", parameter_docs={"param0": ""}),
                     ),
-                },
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "__init__()": {"doc": "", "doc_formatted": {}},
-                "__init__(Type)": {"doc": "", "doc_formatted": {}, "parameters": {"param0": ""}},
-            },
         ),
         (
             "properties",
-            CStruct(
-                name="Name",
-                properties={
-                    "Name.A": CProperty(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                    "Name.B": CProperty(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                },
+            (
+                CStruct(
+                    name="Name",
+                    properties={
+                        "Name.A": CProperty(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                        "Name.B": CProperty(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}, "return": ""},
-                "B": {"doc": "", "doc_formatted": {}, "return": ""},
-            },
         ),
         (
             "methods",
-            CStruct(
-                name="Name",
-                methods={
-                    "Name.A(Type) -> Type": CMethod(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
+            (
+                CStruct(
+                    name="Name",
+                    methods={
+                        "Name.A(Type) -> Type": CMethod(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                        "Name.B(Type) -> Type": CMethod(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(
+                        DocTree(
+                            name="A(Type)",
+                            parameter_docs={"param0": ""},
+                            return_doc="",
+                            exception_docs={},
+                        ),
+                        DocTree(
+                            name="B(Type)",
+                            parameter_docs={"param0": ""},
+                            return_doc="",
+                            exception_docs={},
+                        ),
                     ),
-                    "Name.B(Type) -> Type": CMethod(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
-                },
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A(Type)": {
-                    "doc": "",
-                    "doc_formatted": {},
-                    "exceptions": {},
-                    "parameters": {"param0": ""},
-                    "return": "",
-                },
-                "B(Type)": {
-                    "doc": "",
-                    "doc_formatted": {},
-                    "exceptions": {},
-                    "parameters": {"param0": ""},
-                    "return": "",
-                },
-            },
         ),
         (
             "events",
-            CStruct(
-                name="Name",
-                events={
-                    "Name.A -> (Type)": CEvent(
-                        name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                    "Name.B -> (Type)": CEvent(
-                        name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                },
+            (
+                CStruct(
+                    name="Name",
+                    events={
+                        "Name.A -> (Type)": CEvent(
+                            name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                        "Name.B -> (Type)": CEvent(
+                            name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A"), DocTree(name="B")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}},
-                "B": {"doc": "", "doc_formatted": {}},
-            },
         ),
         (
             "nested_types",
-            CStruct(
-                name="Name",
-                nested_types={
-                    "Name.A": CStruct(name="A", nested=CType(name="Name")),
-                    "Name.B": CStruct(name="B", nested=CType(name="Name")),
-                },
+            (
+                CStruct(
+                    name="Name",
+                    nested_types={
+                        "Name.A": CStruct(name="A", nested=CType(name="Name")),
+                        "Name.B": CStruct(name="B", nested=CType(name="Name")),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A"), DocTree(name="B")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}},
-                "B": {"doc": "", "doc_formatted": {}},
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CStruct, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CStruct, doc: DocTree) -> None:
         """Test for CStruct.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CStruct, CStruct]]] = [
-        ("name", CStruct(name="A"), CStruct(name="B")),
+    compare_list: ClassVar[ParamSequence[tuple[CStruct, CStruct]]] = [
+        ("name", (CStruct(name="A"), CStruct(name="B"))),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CStruct, y: CStruct) -> None:
         """Test for CStruct.compare()."""
         _compare(CStruct, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CStruct, y: CStruct) -> None:
         """Test for CStruct.compare_seq()."""
         _compare_seq(CStruct, x, y)
@@ -2256,316 +2735,335 @@ class TestCStruct:
 class TestCInterface:
     """Tests for CInterface."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CInterface, str]]] = [
-        (CInterface(name="Name"), "Name"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CInterface, str]]] = [
+        ("basic", (CInterface(name="Name"), "Name")),
         (
-            CInterface(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            "generic_args",
+            (
+                CInterface(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                "Name[$A, $B]",
             ),
-            "Name[$A, $B]",
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CInterface, expected: str) -> None:
         """Test for CInterface.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CInterface, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CInterface, JsonType]]] = [
         (
             "basic",
-            CInterface(name="Name"),
-            {
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "type": "interface",
-            },
+            (
+                CInterface(name="Name"),
+                {
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "type": "interface",
+                },
+            ),
         ),
         (
             "generic_args",
-            CInterface(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            (
+                CInterface(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                {
+                    "type": "interface",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "generic_args": ("$A", "$B"),
+                    "interfaces": (),
+                    "fields": {},
+                    "properties": {},
+                    "methods": {},
+                    "events": {},
+                    "nested_types": {},
+                },
             ),
-            {
-                "type": "interface",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "generic_args": ("$A", "$B"),
-                "interfaces": (),
-                "fields": {},
-                "properties": {},
-                "methods": {},
-                "events": {},
-                "nested_types": {},
-            },
         ),
         (
             "interfaces",
-            CInterface(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-            {
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": ("A", "B"),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "type": "interface",
-            },
+            (
+                CInterface(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                {
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": ("A", "B"),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "type": "interface",
+                },
+            ),
         ),
         (
             "fields",
-            CInterface(
-                name="Name",
-                fields={
-                    "Name.A": CField(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                    "Name.B": CField(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
+            (
+                CInterface(
+                    name="Name",
+                    fields={
+                        "Name.A": CField(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                        "Name.B": CField(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                    },
+                ),
+                {
+                    "events": {},
+                    "fields": {
+                        "Name.A": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "return_type": "Type",
+                            "static": False,
+                        },
+                        "Name.B": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "return_type": "Type",
+                            "static": False,
+                        },
+                    },
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "type": "interface",
                 },
             ),
-            {
-                "events": {},
-                "fields": {
-                    "Name.A": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "return_type": "Type",
-                        "static": False,
-                    },
-                    "Name.B": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "return_type": "Type",
-                        "static": False,
-                    },
-                },
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "type": "interface",
-            },
         ),
         (
             "properties",
-            CInterface(
-                name="Name",
-                properties={
-                    "Name.A": CProperty(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                    "Name.B": CProperty(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
+            (
+                CInterface(
+                    name="Name",
+                    properties={
+                        "Name.A": CProperty(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                        "Name.B": CProperty(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                    },
+                ),
+                {
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {
+                        "Name.B": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "type": "Type",
+                            "setter": True,
+                            "static": False,
+                        },
+                        "Name.A": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "type": "Type",
+                            "setter": True,
+                            "static": False,
+                        },
+                    },
+                    "type": "interface",
                 },
             ),
-            {
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {
-                    "Name.B": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "type": "Type",
-                        "setter": True,
-                        "static": False,
-                    },
-                    "Name.A": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "type": "Type",
-                        "setter": True,
-                        "static": False,
-                    },
-                },
-                "type": "interface",
-            },
         ),
         (
             "methods",
-            CInterface(
-                name="Name",
-                methods={
-                    "Name.A(Type) -> Type": CMethod(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
-                    "Name.B(Type) -> Type": CMethod(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
+            (
+                CInterface(
+                    name="Name",
+                    methods={
+                        "Name.A(Type) -> Type": CMethod(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                        "Name.B(Type) -> Type": CMethod(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                    },
+                ),
+                {
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {
+                        "Name.A(Type) -> Type": {
+                            "name": "A",
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {
+                                    "name": "param0",
+                                    "type": "Type",
+                                    "default": False,
+                                    "out": False,
+                                },
+                            ),
+                            "return_types": ("Type",),
+                            "static": False,
+                        },
+                        "Name.B(Type) -> Type": {
+                            "name": "B",
+                            "declaring_type": "Name",
+                            "parameters": (
+                                {
+                                    "name": "param0",
+                                    "type": "Type",
+                                    "default": False,
+                                    "out": False,
+                                },
+                            ),
+                            "return_types": ("Type",),
+                            "static": False,
+                        },
+                    },
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "type": "interface",
                 },
             ),
-            {
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {
-                    "Name.A(Type) -> Type": {
-                        "name": "A",
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {
-                                "name": "param0",
-                                "type": "Type",
-                                "default": False,
-                                "out": False,
-                            },
-                        ),
-                        "return_types": ("Type",),
-                        "static": False,
-                    },
-                    "Name.B(Type) -> Type": {
-                        "name": "B",
-                        "declaring_type": "Name",
-                        "parameters": (
-                            {
-                                "name": "param0",
-                                "type": "Type",
-                                "default": False,
-                                "out": False,
-                            },
-                        ),
-                        "return_types": ("Type",),
-                        "static": False,
-                    },
-                },
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "type": "interface",
-            },
         ),
         (
             "events",
-            CInterface(
-                name="Name",
-                events={
-                    "Name.A -> (Type)": CEvent(
-                        name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                    "Name.B -> (Type)": CEvent(
-                        name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
+            (
+                CInterface(
+                    name="Name",
+                    events={
+                        "Name.A -> (Type)": CEvent(
+                            name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                        "Name.B -> (Type)": CEvent(
+                            name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                    },
+                ),
+                {
+                    "events": {
+                        "Name.A -> (Type)": {"name": "A", "declaring_type": "Name", "type": "Type"},
+                        "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
+                    },
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {},
+                    "properties": {},
+                    "type": "interface",
                 },
             ),
-            {
-                "events": {
-                    "Name.A -> (Type)": {"name": "A", "declaring_type": "Name", "type": "Type"},
-                    "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
-                },
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {},
-                "properties": {},
-                "type": "interface",
-            },
         ),
         (
             "nested_types",
-            CInterface(
-                name="Name",
-                nested_types={
-                    "Name.A": CInterface(name="A", nested=CType(name="Name")),
-                    "Name.B": CInterface(name="B", nested=CType(name="Name")),
+            (
+                CInterface(
+                    name="Name",
+                    nested_types={
+                        "Name.A": CInterface(name="A", nested=CType(name="Name")),
+                        "Name.B": CInterface(name="B", nested=CType(name="Name")),
+                    },
+                ),
+                {
+                    "events": {},
+                    "fields": {},
+                    "generic_args": (),
+                    "interfaces": (),
+                    "methods": {},
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "nested_types": {
+                        "Name.A": {
+                            "events": {},
+                            "fields": {},
+                            "generic_args": (),
+                            "interfaces": (),
+                            "methods": {},
+                            "name": "A",
+                            "namespace": None,
+                            "nested": "Name",
+                            "nested_types": {},
+                            "properties": {},
+                            "type": "interface",
+                        },
+                        "Name.B": {
+                            "events": {},
+                            "fields": {},
+                            "generic_args": (),
+                            "interfaces": (),
+                            "methods": {},
+                            "name": "B",
+                            "namespace": None,
+                            "nested": "Name",
+                            "nested_types": {},
+                            "properties": {},
+                            "type": "interface",
+                        },
+                    },
+                    "properties": {},
+                    "type": "interface",
                 },
             ),
-            {
-                "events": {},
-                "fields": {},
-                "generic_args": (),
-                "interfaces": (),
-                "methods": {},
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "nested_types": {
-                    "Name.A": {
-                        "events": {},
-                        "fields": {},
-                        "generic_args": (),
-                        "interfaces": (),
-                        "methods": {},
-                        "name": "A",
-                        "namespace": None,
-                        "nested": "Name",
-                        "nested_types": {},
-                        "properties": {},
-                        "type": "interface",
-                    },
-                    "Name.B": {
-                        "events": {},
-                        "fields": {},
-                        "generic_args": (),
-                        "interfaces": (),
-                        "methods": {},
-                        "name": "B",
-                        "namespace": None,
-                        "nested": "Name",
-                        "nested_types": {},
-                        "properties": {},
-                        "type": "interface",
-                    },
-                },
-                "properties": {},
-                "type": "interface",
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CInterface, json: JsonType) -> None:
         """Test for CInterface.to_json()."""
         expected: JsonType = json
@@ -2573,7 +3071,7 @@ class TestCInterface:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CInterface, json: JsonType) -> None:
         """Test for CInterface.from_json()."""
         expected: CInterface = obj
@@ -2581,170 +3079,164 @@ class TestCInterface:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CInterface, JsonType]]] = [
-        ("basic", CInterface(name="Name"), {"doc": "", "doc_formatted": {}}),
+    doc_objects: ClassVar[ParamSequence[tuple[CInterface, DocTree]]] = [
+        ("basic", (CInterface(name="Name"), DocTree(name="Name"))),
         (
             "generic_args",
-            CInterface(
-                name="Name",
-                generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            (
+                CInterface(
+                    name="Name",
+                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                ),
+                DocTree(name="Name[$A, $B]"),
             ),
-            {"doc": "", "doc_formatted": {}},
         ),
         (
             "interfaces",
-            CInterface(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-            {"doc": "", "doc_formatted": {}},
+            (
+                CInterface(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                DocTree(name="Name"),
+            ),
         ),
         (
             "fields",
-            CInterface(
-                name="Name",
-                fields={
-                    "Name.A": CField(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                    "Name.B": CField(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        return_type=CType(name="Type"),
-                    ),
-                },
+            (
+                CInterface(
+                    name="Name",
+                    fields={
+                        "Name.A": CField(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                        "Name.B": CField(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            return_type=CType(name="Type"),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}, "return": ""},
-                "B": {"doc": "", "doc_formatted": {}, "return": ""},
-            },
         ),
         (
             "properties",
-            CInterface(
-                name="Name",
-                properties={
-                    "Name.A": CProperty(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                    "Name.B": CProperty(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        type=CType(name="Type"),
-                        setter=True,
-                    ),
-                },
+            (
+                CInterface(
+                    name="Name",
+                    properties={
+                        "Name.A": CProperty(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                        "Name.B": CProperty(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            type=CType(name="Type"),
+                            setter=True,
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}, "return": ""},
-                "B": {"doc": "", "doc_formatted": {}, "return": ""},
-            },
         ),
         (
             "methods",
-            CInterface(
-                name="Name",
-                methods={
-                    "Name.A(Type) -> Type": CMethod(
-                        name="A",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
+            (
+                CInterface(
+                    name="Name",
+                    methods={
+                        "Name.A(Type) -> Type": CMethod(
+                            name="A",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                        "Name.B(Type) -> Type": CMethod(
+                            name="B",
+                            declaring_type=CType(name="Name"),
+                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            return_types=(CType(name="Type"),),
+                        ),
+                    },
+                ),
+                DocTree(
+                    name="Name",
+                    children=(
+                        DocTree(
+                            name="A(Type)",
+                            parameter_docs={"param0": ""},
+                            return_doc="",
+                            exception_docs={},
+                        ),
+                        DocTree(
+                            name="B(Type)",
+                            parameter_docs={"param0": ""},
+                            return_doc="",
+                            exception_docs={},
+                        ),
                     ),
-                    "Name.B(Type) -> Type": CMethod(
-                        name="B",
-                        declaring_type=CType(name="Name"),
-                        parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                        return_types=(CType(name="Type"),),
-                    ),
-                },
+                ),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A(Type)": {
-                    "doc": "",
-                    "doc_formatted": {},
-                    "exceptions": {},
-                    "parameters": {"param0": ""},
-                    "return": "",
-                },
-                "B(Type)": {
-                    "doc": "",
-                    "doc_formatted": {},
-                    "exceptions": {},
-                    "parameters": {"param0": ""},
-                    "return": "",
-                },
-            },
         ),
         (
             "events",
-            CInterface(
-                name="Name",
-                events={
-                    "Name.A -> (Type)": CEvent(
-                        name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                    "Name.B -> (Type)": CEvent(
-                        name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
-                    ),
-                },
+            (
+                CInterface(
+                    name="Name",
+                    events={
+                        "Name.A -> (Type)": CEvent(
+                            name="A", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                        "Name.B -> (Type)": CEvent(
+                            name="B", declaring_type=CType(name="Name"), type=CType(name="Type")
+                        ),
+                    },
+                ),
+                DocTree(name="Name", children=(DocTree(name="A"), DocTree(name="B"))),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}},
-                "B": {"doc": "", "doc_formatted": {}},
-            },
         ),
         (
             "nested_types",
-            CInterface(
-                name="Name",
-                nested_types={
-                    "Name.A": CInterface(name="A", nested=CType(name="Name")),
-                    "Name.B": CInterface(name="B", nested=CType(name="Name")),
-                },
+            (
+                CInterface(
+                    name="Name",
+                    nested_types={
+                        "Name.A": CInterface(name="A", nested=CType(name="Name")),
+                        "Name.B": CInterface(name="B", nested=CType(name="Name")),
+                    },
+                ),
+                DocTree(name="Name", children=(DocTree(name="A"), DocTree(name="B"))),
             ),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "A": {"doc": "", "doc_formatted": {}},
-                "B": {"doc": "", "doc_formatted": {}},
-            },
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CInterface, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CInterface, doc: DocTree) -> None:
         """Test for CInterface.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CInterface, CInterface]]] = [
-        ("name", CInterface(name="A"), CInterface(name="B")),
+    compare_list: ClassVar[ParamSequence[tuple[CInterface, CInterface]]] = [
+        ("name", (CInterface(name="A"), CInterface(name="B"))),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CInterface, y: CInterface) -> None:
         """Test for CInterface.compare()."""
         _compare(CInterface, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CInterface, y: CInterface) -> None:
         """Test for CInterface.compare_seq()."""
         _compare_seq(CInterface, x, y)
@@ -2753,37 +3245,41 @@ class TestCInterface:
 class TestCEnum:
     """Tests for CEnum."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CEnum, str]]] = [
-        (CEnum(name="Name"), "Name"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CEnum, str]]] = [
+        ("basic", (CEnum(name="Name"), "Name")),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CEnum, expected: str) -> None:
         """Test for CEnum.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CEnum, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CEnum, JsonType]]] = [
         (
             "basic",
-            CEnum(name="Name"),
-            {"type": "enum", "name": "Name", "namespace": None, "nested": None, "fields": ()},
+            (
+                CEnum(name="Name"),
+                {"type": "enum", "name": "Name", "namespace": None, "nested": None, "fields": ()},
+            ),
         ),
         (
             "fields",
-            CEnum(name="Name", fields=("Field0", "Field1", "Field2", "Field3")),
-            {
-                "type": "enum",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "fields": ("Field0", "Field1", "Field2", "Field3"),
-            },
+            (
+                CEnum(name="Name", fields=("Field0", "Field1", "Field2", "Field3")),
+                {
+                    "type": "enum",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "fields": ("Field0", "Field1", "Field2", "Field3"),
+                },
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CEnum, json: JsonType) -> None:
         """Test for CEnum.to_json()."""
         expected: JsonType = json
@@ -2791,7 +3287,7 @@ class TestCEnum:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CEnum, json: JsonType) -> None:
         """Test for CEnum.from_json()."""
         expected: CEnum = obj
@@ -2799,45 +3295,43 @@ class TestCEnum:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CEnum, JsonType]]] = [
-        ("basic", CEnum(name="Name"), {"doc": "", "doc_formatted": {}}),
+    doc_objects: ClassVar[ParamSequence[tuple[CEnum, DocTree]]] = [
+        ("basic", (CEnum(name="Name"), DocTree(name="Name"))),
         (
             "fields",
-            CEnum(name="Name", fields=("Field0", "Field1", "Field2", "Field3")),
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "Field0": {"doc": ""},
-                "Field1": {"doc": ""},
-                "Field2": {"doc": ""},
-                "Field3": {"doc": ""},
-            },
+            (
+                CEnum(name="Name", fields=("Field0", "Field1", "Field2", "Field3")),
+                DocTree(
+                    name="Name",
+                    children=(
+                        DocTree(name="Field0"),
+                        DocTree(name="Field1"),
+                        DocTree(name="Field2"),
+                        DocTree(name="Field3"),
+                    ),
+                ),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CEnum, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CEnum, doc: DocTree) -> None:
         """Test for CEnum.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CEnum, CEnum]]] = [
-        ("name", CEnum(name="A"), CEnum(name="B")),
+    compare_list: ClassVar[ParamSequence[tuple[CEnum, CEnum]]] = [
+        ("name", (CEnum(name="A"), CEnum(name="B"))),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CEnum, y: CEnum) -> None:
         """Test for CEnum.compare()."""
         _compare(CEnum, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CEnum, y: CEnum) -> None:
         """Test for CEnum.compare_seq()."""
         _compare_seq(CEnum, x, y)
@@ -2846,76 +3340,85 @@ class TestCEnum:
 class TestCDelegate:
     """Tests for CDelegate."""
 
-    doc_name_objects: ClassVar[Sequence[tuple[CDelegate, str]]] = [
-        (CDelegate(name="Name"), "Name()"),
+    doc_name_objects: ClassVar[ParamSequence[tuple[CDelegate, str]]] = [
+        ("basic", (CDelegate(name="Name"), "Name()")),
         (
-            CDelegate(
-                name="Name",
-                parameters=(
-                    CParameter(name="param0", type=CType(name="A")),
-                    CParameter(name="param1", type=CType(name="B")),
+            "parameters",
+            (
+                CDelegate(
+                    name="Name",
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="A")),
+                        CParameter(name="param1", type=CType(name="B")),
+                    ),
                 ),
+                "Name(A, B)",
             ),
-            "Name(A, B)",
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_name_params(doc_name_objects))
+    @pytest.mark.parametrize(("obj", "expected"), **_make_params(doc_name_objects))
     def test_doc_name(self, obj: CDelegate, expected: str) -> None:
         """Test for CDelegate.doc_name."""
         actual: str = obj.doc_name
 
         assert actual == expected
 
-    json_objects: ClassVar[Sequence[tuple[str, CDelegate, JsonType]]] = [
+    json_objects: ClassVar[ParamSequence[tuple[CDelegate, JsonType]]] = [
         (
             "basic",
-            CDelegate(name="Name"),
-            {
-                "type": "delegate",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "parameters": (),
-                "return_type": "System:Void",
-            },
+            (
+                CDelegate(name="Name"),
+                {
+                    "type": "delegate",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "parameters": (),
+                    "return_type": "System:Void",
+                },
+            ),
         ),
         (
             "parameters",
-            CDelegate(
-                name="Name",
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type")),
-                    CParameter(name="param1", type=CType(name="Type")),
+            (
+                CDelegate(
+                    name="Name",
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param1", type=CType(name="Type")),
+                    ),
                 ),
+                {
+                    "type": "delegate",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "parameters": (
+                        {"name": "param0", "type": "Type", "default": False, "out": False},
+                        {"name": "param1", "type": "Type", "default": False, "out": False},
+                    ),
+                    "return_type": "System:Void",
+                },
             ),
-            {
-                "type": "delegate",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "parameters": (
-                    {"name": "param0", "type": "Type", "default": False, "out": False},
-                    {"name": "param1", "type": "Type", "default": False, "out": False},
-                ),
-                "return_type": "System:Void",
-            },
         ),
         (
             "return_type",
-            CDelegate(name="Name", return_type=CType(name="Type")),
-            {
-                "type": "delegate",
-                "name": "Name",
-                "namespace": None,
-                "nested": None,
-                "parameters": (),
-                "return_type": "Type",
-            },
+            (
+                CDelegate(name="Name", return_type=CType(name="Type")),
+                {
+                    "type": "delegate",
+                    "name": "Name",
+                    "namespace": None,
+                    "nested": None,
+                    "parameters": (),
+                    "return_type": "Type",
+                },
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_to_json(self, obj: CDelegate, json: JsonType) -> None:
         """Test for CDelegate.to_json()."""
         expected: JsonType = json
@@ -2923,7 +3426,7 @@ class TestCDelegate:
 
         assert actual == expected
 
-    @pytest.mark.parametrize(**_make_json_params(json_objects))
+    @pytest.mark.parametrize(("obj", "json"), **_make_params(json_objects))
     def test_from_json(self, obj: CDelegate, json: JsonType) -> None:
         """Test for CDelegate.from_json()."""
         expected: CDelegate = obj
@@ -2931,53 +3434,48 @@ class TestCDelegate:
 
         assert actual == expected
 
-    doc_objects: ClassVar[Sequence[tuple[str, CDelegate, JsonType]]] = [
-        (
-            "basic",
-            CDelegate(name="Name"),
-            {"doc": "", "doc_formatted": {}},
-        ),
+    doc_objects: ClassVar[ParamSequence[tuple[CDelegate, DocTree]]] = [
+        ("basic", (CDelegate(name="Name"), DocTree(name="Name()"))),
         (
             "parameters",
-            CDelegate(
-                name="Name",
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Type")),
-                    CParameter(name="param1", type=CType(name="Type")),
+            (
+                CDelegate(
+                    name="Name",
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type")),
+                        CParameter(name="param1", type=CType(name="Type")),
+                    ),
                 ),
+                DocTree(name="Name(Type, Type)", parameter_docs={"param0": "", "param1": ""}),
             ),
-            {"doc": "", "doc_formatted": {}, "parameters": {"param0": "", "param1": ""}},
         ),
         (
             "return_type",
-            CDelegate(name="Name", return_type=CType(name="Type")),
-            {"doc": "", "doc_formatted": {}, "return": ""},
+            (
+                CDelegate(name="Name", return_type=CType(name="Type")),
+                DocTree(name="Name()", doc="", return_doc=""),
+            ),
         ),
     ]
 
-    @pytest.mark.parametrize(**_make_doc_params(doc_objects))
-    def test_to_doc_json(self, obj: CDelegate, doc: JsonType) -> None:
+    @pytest.mark.parametrize(("obj", "doc"), **_make_params(doc_objects))
+    def test_to_doc_tree(self, obj: CDelegate, doc: DocTree) -> None:
         """Test for CDelegate.to_doc_json()."""
-        expected_name: str = obj.doc_name
-        expected_doc: JsonType = doc
+        expected: DocTree = doc
+        actual: DocTree = obj.to_doc_tree()
 
-        actual_name: str
-        actual_doc: JsonType
-        actual_name, actual_doc = obj.to_doc_json()
+        assert actual == expected
 
-        assert actual_name == expected_name
-        assert actual_doc == expected_doc
-
-    compare_list: ClassVar[Sequence[tuple[str, CDelegate, CDelegate]]] = [
-        ("name", CDelegate(name="A"), CDelegate(name="B")),
+    compare_list: ClassVar[ParamSequence[tuple[CDelegate, CDelegate]]] = [
+        ("name", (CDelegate(name="A"), CDelegate(name="B"))),
     ]
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare(self, x: CDelegate, y: CDelegate) -> None:
         """Test for CDelegate.compare()."""
         _compare(CDelegate, x, y)
 
-    @pytest.mark.parametrize(**_make_compare_parameters(compare_list))
+    @pytest.mark.parametrize(("x", "y"), **_make_params(compare_list))
     def test_compare_seq(self, x: CDelegate, y: CDelegate) -> None:
         """Test for CDelegate.compare_seq()."""
         _compare_seq(CDelegate, x, y)

@@ -7,6 +7,7 @@ from abc import ABC
 from abc import abstractmethod
 from dataclasses import dataclass
 from dataclasses import field
+from textwrap import TextWrapper
 from typing import TYPE_CHECKING
 from typing import Any
 from typing import ClassVar
@@ -55,10 +56,6 @@ def _compare_string(x: str | None, y: str | None) -> CompareResults:  # pragma: 
     return 0
 
 
-def _json_doc() -> dict[str, Any]:
-    return {"doc": "", "doc_formatted": {}}
-
-
 @dataclass(frozen=True)
 class DocTree:
     """A tree data structure for representing doc-strings for C# objects."""
@@ -66,51 +63,155 @@ class DocTree:
     name: str
     doc: str = ""
     doc_formatted: Mapping[str, Sequence[str]] = field(default_factory=dict)
-    parameters: Mapping[str, str] = field(default_factory=dict)
+    parameter_docs: Mapping[str, str] | None = None
     return_doc: str | None = None
-    exceptions: Mapping[str, str] = field(default_factory=dict)
-    nodes: Sequence[DocTree] = ()
+    exception_docs: Mapping[str, str] | None = None
+    children: Sequence[DocTree] = ()
 
-    # def __getitem__(self, key, /):
-    #     pass
-    #
-    # def __len__(self):
-    #     pass
-    #
-    # def __iter__(self):
-    #     pass
+    def __getitem__(self, node: str, /) -> DocTree | None:
+        """Get a descendant node of this tree.
 
-    # def get(self, key, default=None):
-    #     'D.get(k[,d]) -> D[k] if k in D, else d.  d defaults to None.'
-    #     try:
-    #         return self[key]
-    #     except KeyError:
-    #         return default
-    #
-    # def __contains__(self, key):
-    #     try:
-    #         self[key]
-    #     except KeyError:
-    #         return False
-    #     else:
-    #         return True
-    #
-    # def keys(self):
-    #     "D.keys() -> a set-like object providing a view on D's keys"
-    #     return KeysView(self)
-    #
-    # def items(self):
-    #     "D.items() -> a set-like object providing a view on D's items"
-    #     return ItemsView(self)
-    #
-    # def values(self):
-    #     "D.values() -> an object providing a view on D's values"
-    #     return ValuesView(self)
-    #
-    # def __eq__(self, other):
-    #     if not isinstance(other, Mapping):
-    #         return NotImplemented
-    #     return dict(self.items()) == dict(other.items())
+        :param node: The fully qualified name of the node to get.
+        :return: The DocTree node, if it exists.
+        """
+        return self._get(self._split_node_string(node))
+
+    def _get(self, nodes: Sequence[str]) -> DocTree | None:
+        nodes_len: int = len(nodes)
+        if nodes_len == 0:
+            return None
+        node: str = nodes[0]
+        child: DocTree
+        for child in self.children:
+            if child.name == node:
+                return child if nodes_len == 1 else child._get(nodes[1:])  # noqa: SLF001
+        return None
+
+    @staticmethod
+    def _split_node_string(string: str) -> Sequence[str]:
+        result: list[str] = []
+        i: int
+        s: str
+        brackets: int = 0
+        start: int = 0
+        for i, s in enumerate(string):
+            match s:
+                case "." | ":" if brackets == 0:
+                    result.append(string[start:i])
+                    start = i + 1
+                case "[" | "(":
+                    brackets += 1
+                case "]" | ")":
+                    brackets -= 1
+        if start != len(string):
+            result.append(string[start:])
+        return result
+
+    def doc_string(self, line_length: int, indent: int = 0) -> Sequence[str]:  # noqa: C901
+        """Generate a doc-string sequence for this tree."""
+        indent_str: str = "    " * indent
+
+        params: list[str] = []
+        if self.parameter_docs is not None:
+            params = [f":param {k}: {v}" for k, v in self.parameter_docs.items()]
+        exceptions: list[str] = []
+        if self.exception_docs is not None:
+            exceptions = [f":except {k}: {v}" for k, v in self.exception_docs.items()]
+
+        simple_doc: bool = len(params) == 0 and self.return_doc is None and len(exceptions) == 0
+
+        if simple_doc and "\n" not in self.doc:
+            line: str = f'{indent_str}"""{self.doc}"""'
+            if len(line) > line_length:
+                line += "   # noqa: E501"
+            return [line]
+
+        result: list[str] = []
+        doc_wrapper: TextWrapper = TextWrapper(
+            width=line_length,
+            initial_indent=indent_str,
+            subsequent_indent=indent_str,
+        )
+        paragraph: str
+        for paragraph in f'"""{self.doc.replace("\n", "\n\n")}'.splitlines():
+            if paragraph == "":
+                result.append("")
+            else:
+                result.extend(doc_wrapper.wrap(paragraph))
+
+        if not simple_doc:
+            result.append("")
+
+            extra_wrapper: TextWrapper = TextWrapper(
+                width=line_length,
+                initial_indent=indent_str,
+                subsequent_indent=f"{indent_str}  ",
+            )
+
+            param: str
+            for param in params:
+                result.extend(extra_wrapper.wrap(param))
+
+            if self.return_doc is not None:
+                result.extend(extra_wrapper.wrap(f":return: {self.return_doc}"))
+
+            exception: str
+            for exception in exceptions:
+                result.extend(extra_wrapper.wrap(exception))
+
+        if len(self.doc_formatted) > 0:
+            line_index: int = 0
+            while line_index < len(result):
+                line: str = result[line_index]
+                for replace_str, replace_seq in self.doc_formatted.items():
+                    replace_str = f"%{replace_str}%"
+                    if replace_str in line:
+                        result[line_index] = line.replace(replace_str, replace_seq[0])
+                        for new_line in reversed(replace_seq[1:]):
+                            result.insert(line_index + 1, indent_str + new_line)
+                line_index += 1
+
+        result.append(f'{indent_str}"""')
+        return result
+
+    def to_json(self) -> JsonType:
+        """Convert this DocTree into a JSON compatible object."""
+        obj: dict[str, Any] = {
+            "doc": self.doc,
+            "doc_formatted": self.doc_formatted,
+        }
+        if self.parameter_docs is not None:
+            obj["parameters"] = self.parameter_docs
+        if self.return_doc is not None:
+            obj["return"] = self.return_doc
+        if self.exception_docs is not None:
+            obj["exceptions"] = self.exception_docs
+        child: DocTree
+        for child in self.children:
+            obj[child.name] = child.to_json()
+        return obj
+
+    @classmethod
+    def from_json(cls, name: str, obj: JsonType) -> Self:
+        """Convert a JSON object into a DocTree."""
+        obj = dict(obj)
+
+        doc: str = obj.pop("doc", "")
+        doc_formatted: Mapping[str, Sequence[str]] = obj.pop("doc_formatted", {})
+        parameter_docs: Mapping[str, str] | None = obj.pop("parameters", None)
+        return_doc: str | None = obj.pop("return", None)
+        exception_docs: Mapping[str, str] | None = obj.pop("exceptions", None)
+        children: Sequence[DocTree] = tuple(DocTree.from_json(k, v) for k, v in obj.items())
+
+        return DocTree(
+            name,
+            doc=doc,
+            doc_formatted=doc_formatted,
+            parameter_docs=parameter_docs,
+            return_doc=return_doc,
+            exception_docs=exception_docs,
+            children=children,
+        )
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -149,8 +250,8 @@ class CWrapper(ABC):
         """Convert this object into a JSON compatible object."""
 
     @abstractmethod
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        """Convert this object into the doc format."""
+    def to_doc_tree(self) -> DocTree:
+        """Convert this object into a DocTree."""
 
     @classmethod
     @abstractmethod
@@ -234,7 +335,7 @@ class CType(CWrapper):
         return self.full_name
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
+    def to_doc_tree(self) -> DocTree:
         raise NotImplementedError
 
     @classmethod
@@ -299,7 +400,7 @@ class CParameter(CWrapper):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
+    def to_doc_tree(self) -> DocTree:
         raise NotImplementedError
 
     @classmethod
@@ -347,11 +448,11 @@ class CField(CMember):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        doc_json: dict[str, Any] = _json_doc()
+    def to_doc_tree(self) -> DocTree:
+        return_doc: str | None = None
         if self.return_type is not None and self.return_type != CType.VOID:
-            doc_json["return"] = ""
-        return self.doc_name, doc_json
+            return_doc = ""
+        return DocTree(name=self.doc_name, return_doc=return_doc)
 
     @classmethod
     @override
@@ -390,11 +491,11 @@ class CConstructor(CMember):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        doc_json: dict[str, Any] = _json_doc()
+    def to_doc_tree(self) -> DocTree:
+        parameter_docs: Mapping[str, str] | None = None
         if len(self.parameters) > 0:
-            doc_json["parameters"] = {p.name: "" for p in self.parameters}
-        return self.doc_name, doc_json
+            parameter_docs = {p.name: "" for p in self.parameters}
+        return DocTree(name=self.doc_name, parameter_docs=parameter_docs)
 
     @classmethod
     @override
@@ -429,11 +530,11 @@ class CProperty(CMember):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        doc_json: dict[str, Any] = _json_doc()
+    def to_doc_tree(self) -> DocTree:
+        return_doc: str | None = None
         if self.type is not None and self.type != CType.VOID:
-            doc_json["return"] = ""
-        return self.doc_name, doc_json
+            return_doc = ""
+        return DocTree(name=self.doc_name, return_doc=return_doc)
 
     @classmethod
     @override
@@ -477,13 +578,19 @@ class CMethod(CMember):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        doc_json: dict[str, Any] = {**_json_doc(), "exceptions": {}}
+    def to_doc_tree(self) -> DocTree:
+        parameter_docs: Mapping[str, str] | None = None
         if len(self.parameters) > 0:
-            doc_json["parameters"] = {p.name: "" for p in self.parameters}
+            parameter_docs = {p.name: "" for p in self.parameters}
+        return_doc: str | None = None
         if len(self.return_types) > 0 and self.return_types[0] != CType.VOID:
-            doc_json["return"] = ""
-        return self.doc_name, doc_json
+            return_doc = ""
+        return DocTree(
+            name=self.doc_name,
+            parameter_docs=parameter_docs,
+            return_doc=return_doc,
+            exception_docs={},
+        )
 
     @classmethod
     @override
@@ -522,8 +629,8 @@ class CEvent(CMember):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        return self.doc_name, _json_doc()
+    def to_doc_tree(self) -> DocTree:
+        return DocTree(name=self.doc_name)
 
     @classmethod
     @override
@@ -549,7 +656,7 @@ class CNamespace(CWrapper):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
+    def to_doc_tree(self) -> DocTree:
         raise NotImplementedError
 
     @classmethod
@@ -639,9 +746,7 @@ class CClass(CTypeDefinition):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        doc_json: dict[str, Any] = _json_doc()
-
+    def to_doc_tree(self) -> DocTree:
         members: Sequence[CMember] = (
             *self.fields.values(),
             *self.constructors.values(),
@@ -649,17 +754,13 @@ class CClass(CTypeDefinition):
             *self.methods.values(),
             *self.events.values(),
         )
-        for member in members:
-            if member.declaring_type.name == self.name:
-                name, json = member.to_doc_json()
-                doc_json[name] = json
-
-        child: CTypeDefinition
-        for child in self.nested_types.values():
-            name, json = child.to_doc_json()
-            doc_json[name] = json
-
-        return self.doc_name, doc_json
+        return DocTree(
+            self.doc_name,
+            children=(
+                *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
+                *(c.to_doc_tree() for c in self.nested_types.values()),
+            ),
+        )
 
     @classmethod
     @override
@@ -721,26 +822,20 @@ class CInterface(CTypeDefinition):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        doc_json: dict[str, Any] = _json_doc()
-
+    def to_doc_tree(self) -> DocTree:
         members: Sequence[CMember] = (
             *self.fields.values(),
             *self.properties.values(),
             *self.methods.values(),
             *self.events.values(),
         )
-        for member in members:
-            if member.declaring_type.name == self.name:
-                name, json = member.to_doc_json()
-                doc_json[name] = json
-
-        child: CTypeDefinition
-        for child in self.nested_types.values():
-            name, json = child.to_doc_json()
-            doc_json[name] = json
-
-        return self.doc_name, doc_json
+        return DocTree(
+            self.doc_name,
+            children=(
+                *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
+                *(c.to_doc_tree() for c in self.nested_types.values()),
+            ),
+        )
 
     @classmethod
     @override
@@ -776,12 +871,11 @@ class CEnum(CTypeDefinition):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        return self.doc_name, {
-            "doc": "",
-            "doc_formatted": {},
-            **{f: {"doc": ""} for f in self.fields},
-        }
+    def to_doc_tree(self) -> DocTree:
+        return DocTree(
+            self.doc_name,
+            children=tuple(DocTree(f) for f in self.fields),
+        )
 
     @classmethod
     @override
@@ -819,13 +913,14 @@ class CDelegate(CTypeDefinition):
         }
 
     @override
-    def to_doc_json(self) -> tuple[str, JsonType]:
-        doc_json: dict[str, Any] = _json_doc()
+    def to_doc_tree(self) -> DocTree:
+        parameter_docs: Mapping[str, str] | None = None
         if len(self.parameters) > 0:
-            doc_json["parameters"] = {p.name: "" for p in self.parameters}
+            parameter_docs = {p.name: "" for p in self.parameters}
+        return_doc: str | None = None
         if self.return_type is not None and self.return_type != CType.VOID:
-            doc_json["return"] = ""
-        return self.doc_name, doc_json
+            return_doc = ""
+        return DocTree(self.doc_name, parameter_docs=parameter_docs, return_doc=return_doc)
 
     @classmethod
     @override

@@ -27,18 +27,6 @@ def assembly() -> Assembly:
     return clr.AddReference(TEST_LIB)
 
 
-# @pytest.fixture
-# def type_info(assembly: Assembly, request) -> TypeInfo:
-#     """C# TypeInfo fixture."""
-#     type_info: TypeInfo
-#     for type_info in assembly.GetTypes():
-#         if type_info.Namespace is None or type_info.IsNested:
-#             continue
-#         if make_python_name(type_info.Name) == request.param:
-#             return type_info
-#     raise NameError(f"Unable to find type named {request.param!r}")
-
-
 def _get_type(assembly: Assembly, name: str) -> TypeInfo:
     type_info: TypeInfo
     for type_info in assembly.GetTypes():
