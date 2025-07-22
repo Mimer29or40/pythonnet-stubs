@@ -5,14 +5,15 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
+from conftest import make_params
 
-from stubgen.build_stubs import Doc
 from stubgen.build_stubs import Imports
 from stubgen.build_stubs import build_parameter
 from stubgen.build_stubs import build_type
 from stubgen.model import CField
 from stubgen.model import CParameter
 from stubgen.model import CType
+from stubgen.model import DocTree
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Sequence
@@ -22,12 +23,6 @@ if TYPE_CHECKING:  # pragma: no cover
 def imports() -> Imports:
     """Get Imports fixture."""
     return Imports()
-
-
-@pytest.fixture
-def doc() -> Doc:
-    """Get Doc fixture."""
-    return Doc({})
 
 
 # class TestMergeParameter:
@@ -3045,159 +3040,6 @@ def doc() -> Doc:
 #         )
 #
 #         self.assertRaises(AttributeError, lambda: merge_delegate(delegate1, delegate2))
-#
-#
-# class TestImports:
-#     def test_add_type(self) -> None:
-#         imports = Imports()
-#         imports.add_type(CType(name="TypeA", namespace="NamespaceA"))
-#         imports.add_type(CType(name="TypeA", namespace="NamespaceA"))
-#         imports.add_type(CType(name="TypeB", namespace="NamespaceA"))
-#         imports.add_type(CType(name="TypeA", namespace="NamespaceB"))
-#         imports.add_type(CType(name="TypeA", namespace="NamespaceB"))
-#         imports.add_type(CType(name="TypeB", namespace="NamespaceB"))
-#
-#         expected: set[str] = {
-#             "NamespaceA.TypeA",
-#             "NamespaceA.TypeB",
-#             "NamespaceB.TypeA",
-#             "NamespaceB.TypeB",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_add_type_inner(self) -> None:
-#         imports = Imports()
-#
-#         types: Sequence[CType] = (
-#             CType(
-#                 name="Type",
-#                 namespace="Namespace",
-#                 inner=(CType(name="InnerA", namespace="Namespace"),),
-#             ),
-#             CType(
-#                 name="Type",
-#                 namespace="Namespace",
-#                 inner=(CType(name="InnerB", namespace="Namespace"),),
-#             ),
-#         )
-#         for type in types:
-#             imports.add_type(type)
-#
-#         expected: set[str] = {"Namespace.Type", "Namespace.InnerA", "Namespace.InnerB"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_add_type_inner_false(self) -> None:
-#         imports = Imports()
-#
-#         types: Sequence[CType] = (
-#             CType(
-#                 name="Type",
-#                 namespace="Namespace",
-#                 inner=(CType(name="InnerA", namespace="Namespace"),),
-#             ),
-#             CType(
-#                 name="Type",
-#                 namespace="Namespace",
-#                 inner=(CType(name="InnerB", namespace="Namespace"),),
-#             ),
-#         )
-#         for type in types:
-#             imports.add_type(type, inner=False)
-#
-#         expected: set[str] = {"Namespace.Type"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_add_type_type_var(self) -> None:
-#         imports = Imports()
-#
-#         types: Sequence[CType] = (
-#             CType(name="T", namespace="Namespace", generic=True),
-#             CType(name="U", namespace="Namespace", generic=True),
-#             CType(name="V", namespace="Namespace", generic=True),
-#         )
-#         for type in types:
-#             imports.add_type(type)
-#
-#         expected_types: set[str] = {"typing.TypeVar"}
-#         expected_type_vars: set[str] = {"T", "U", "V"}
-#
-#         self.assertEqual(expected_types, imports.types)
-#         self.assertEqual(expected_type_vars, imports.type_vars)
-#
-#     def test_build_empty(self) -> None:
-#         imports = Imports()
-#
-#         lines: Sequence[str] = imports.build("Namespace")
-#         expected: Sequence[str] = ()
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build(self) -> None:
-#         imports = Imports()
-#         imports.add_type(CType(name="TypeA", namespace="namespace"))
-#         imports.add_type(CType(name="TypeB", namespace="namespace"))
-#         imports.add_type(CType(name="TypeC", namespace="namespace"))
-#         imports.add_type(CType(name="TypeD", namespace="namespace"))
-#
-#         lines: Sequence[str] = imports.build()
-#         expected: Sequence[str] = (
-#             "from namespace import TypeA",
-#             "from namespace import TypeB",
-#             "from namespace import TypeC",
-#             "from namespace import TypeD",
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_namespace(self) -> None:
-#         imports = Imports()
-#         imports.add_type(CType(name="TypeA", namespace="Namespace"))
-#         imports.add_type(CType(name="TypeB", namespace="Namespace.Namespace"))
-#         imports.add_type(CType(name="TypeC", namespace="Namespace.Namespace"))
-#         imports.add_type(CType(name="TypeD", namespace="Namespace.Namespace.Namespace"))
-#
-#         lines: Sequence[str] = imports.build("Namespace.Namespace")
-#         expected: Sequence[str] = (
-#             "from Namespace.Namespace.Namespace import TypeD",
-#             "from Namespace import TypeA",
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_type_vars(self) -> None:
-#         imports = Imports()
-#         imports.add_type(CType(name="T", namespace="Namespace", generic=True))
-#         imports.add_type(CType(name="U", namespace="Namespace", generic=True))
-#         imports.add_type(CType(name="V", namespace="Namespace", generic=True))
-#
-#         lines: Sequence[str] = imports.build()
-#         expected: Sequence[str] = (
-#             "from typing import TypeVar",
-#             'T = TypeVar("T")',
-#             'U = TypeVar("U")',
-#             'V = TypeVar("V")',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_include_event_type(self) -> None:
-#         imports = Imports()
-#         imports.include_event_type = True
-#
-#         lines: Sequence[str] = imports.build()
-#         expected: Sequence[str] = (
-#             "from typing import Generic",
-#             "from typing import TypeVar",
-#             'T = TypeVar("T")',
-#             "class EventType(Generic[T]):",
-#             "    def __iadd__(self, other: T): ...",
-#             "    def __isub__(self, other: T): ...",
-#         )
-#
-#         self.assertEqual(expected, lines)
 
 
 # class TestMergeDoc:
@@ -3210,7 +3052,7 @@ def doc() -> Doc:
 #             "exceptions": {},
 #         }
 #         tree1: Mapping[str, Any] = {
-#             "doc": "Doc String\n%format0%",
+#             "doc": "DocTree String\n%format0%",
 #             "doc_formatted": {
 #                 "format0": ("0", "1", "2", "3"),
 #                 "format1": ("0", "2", "4", "6"),
@@ -3226,16 +3068,16 @@ def doc() -> Doc:
 #             },
 #         }
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
-#                 "doc": "Doc String\n%format0%",
+#                 "doc": "DocTree String\n%format0%",
 #                 "doc_formatted": {
 #                     "format0": ("0", "1", "2", "3"),
 #                     "format1": ("0", "2", "4", "6"),
@@ -3257,26 +3099,26 @@ def doc() -> Doc:
 #         tree0: Mapping[str, Any] = {"doc": "Doc0"}
 #         tree1: Mapping[str, Any] = {"doc": ""}
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual({"doc": "Doc0"}, merged.data)
 #
 #     def test_merge_doc_both(self) -> None:
 #         tree0: Mapping[str, Any] = {"doc": "Doc0"}
 #         tree1: Mapping[str, Any] = {"doc": "Doc1"}
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual({"doc": "Doc0\nDoc1"}, merged.data)
 #
 #     def test_merge_doc_formatted_empty(self) -> None:
@@ -3292,13 +3134,13 @@ def doc() -> Doc:
 #             },
 #         }
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
 #                 "doc_formatted": {
@@ -3325,13 +3167,13 @@ def doc() -> Doc:
 #             },
 #         }
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
 #                 "doc_formatted": {
@@ -3357,13 +3199,13 @@ def doc() -> Doc:
 #             },
 #         }
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
 #                 "parameters": {
@@ -3390,13 +3232,13 @@ def doc() -> Doc:
 #             },
 #         }
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
 #                 "parameters": {
@@ -3413,26 +3255,26 @@ def doc() -> Doc:
 #         tree0: Mapping[str, Any] = {"return": "Return0"}
 #         tree1: Mapping[str, Any] = {"return": ""}
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual({"return": "Return0"}, merged.data)
 #
 #     def test_merge_return_both(self) -> None:
 #         tree0: Mapping[str, Any] = {"return": "Return0"}
 #         tree1: Mapping[str, Any] = {"return": "Return1"}
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual({"return": "Return0\nReturn1"}, merged.data)
 #
 #     def test_merge_exceptions_empty(self) -> None:
@@ -3448,13 +3290,13 @@ def doc() -> Doc:
 #             },
 #         }
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
 #                 "exceptions": {
@@ -3481,13 +3323,13 @@ def doc() -> Doc:
 #             },
 #         }
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
 #                 "exceptions": {
@@ -3504,13 +3346,13 @@ def doc() -> Doc:
 #         tree0: Mapping[str, Any] = {"NodeA": {}}
 #         tree1: Mapping[str, Any] = {"NodeB": {}}
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {
 #                 "NodeA": {},
@@ -3523,13 +3365,13 @@ def doc() -> Doc:
 #         tree0: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"NodeD": {}}}}}
 #         tree1: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"NodeE": {}}}}}
 #
-#         doc_dict0: Doc = Doc(tree0)
-#         doc_dict1: Doc = Doc(tree1)
+#         doc_dict0: DocTree = DocTree(tree0)
+#         doc_dict1: DocTree = DocTree(tree1)
 #
-#         merged: Doc = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, Doc)
+#         self.assertIsInstance(merged, DocTree)
 #         self.assertEqual(
 #             {"NodeA": {"NodeB": {"NodeC": {"NodeD": {}, "NodeE": {}}}}},
 #             merged.data,
@@ -3539,250 +3381,77 @@ def doc() -> Doc:
 class TestBuildType:
     """Tests for build_type()."""
 
-    def _assert_c_type(self, obj: CType, expected: str, imported: set[str]) -> None:
-        pass
+    @pytest.mark.parametrize(
+        ("obj", "expected", "imported"),
+        **make_params([("basic", (CType(name="Type"), "Type", {"Type"}))]),
+    )
+    def test_basic(self, obj: CType, expected: str, imported: set[str], imports: Imports) -> None:
+        """Test for build_type() with native types."""
+        actual: str = build_type(obj, imports, convert=False)
+
+        assert actual == expected
+        assert imports.types == imported
 
     @pytest.mark.parametrize(
-        argnames=("obj", "expected", "imported"),
-        argvalues=[],
-        ids=[],
+        ("obj", "expected", "imported"),
+        **make_params(
+            [
+                ("Boolean", (CType(name="Boolean"), "bool", set())),
+                ("SByte", (CType(name="SByte"), "int", set())),
+                ("Byte", (CType(name="Byte"), "int", set())),
+                ("Int16", (CType(name="Int16"), "int", set())),
+                ("UInt16", (CType(name="UInt16"), "int", set())),
+                ("Int32", (CType(name="Int32"), "int", set())),
+                ("UInt32", (CType(name="UInt32"), "int", set())),
+                ("Int64", (CType(name="Int64"), "int", set())),
+                ("UInt64", (CType(name="UInt64"), "int", set())),
+                ("Single", (CType(name="Single"), "float", set())),
+                ("Double", (CType(name="Double"), "float", set())),
+                ("String", (CType(name="String"), "str", set())),
+                ("Object", (CType(name="Object"), "object", set())),
+                ("Void", (CType(name="Void"), "None", set())),
+                ("basic", (CType(name="Type"), "Type", {"Type"})),
+            ]
+        ),
     )
-    def test_basic(self, obj: CType, expected: str, imported: set[str]) -> None:
-        """Test for build_type() with native types."""
-        self._assert_c_type(obj, expected, imported)
+    def test_convert(self, obj: CType, expected: str, imported: set[str], imports: Imports) -> None:
+        """Test for build_type() when convert is True."""
+        actual: str = build_type(obj, imports, convert=True)
 
-    def test_build(self) -> None:
-        tests: Sequence[tuple[CType, str, set[str]]] = (
-            (CType(name="Boolean", namespace="System"), "Boolean", {"System.Boolean"}),
-            (CType(name="SByte", namespace="System"), "SByte", {"System.SByte"}),
-            (CType(name="Byte", namespace="System"), "Byte", {"System.Byte"}),
-            (CType(name="Int16", namespace="System"), "Int16", {"System.Int16"}),
-            (CType(name="UInt16", namespace="System"), "UInt16", {"System.UInt16"}),
-            (CType(name="Int32", namespace="System"), "Int32", {"System.Int32"}),
-            (CType(name="UInt32", namespace="System"), "UInt32", {"System.UInt32"}),
-            (CType(name="Int64", namespace="System"), "Int64", {"System.Int64"}),
-            (CType(name="UInt64", namespace="System"), "UInt64", {"System.UInt64"}),
-            (CType(name="Single", namespace="System"), "Single", {"System.Single"}),
-            (CType(name="Double", namespace="System"), "Double", {"System.Double"}),
-            (CType(name="String", namespace="System"), "String", {"System.String"}),
-            (CType(name="Object", namespace="System"), "Object", {"System.Object"}),
-            (CType(name="Void", namespace="System"), "Void", {"System.Void"}),
-            (CType(name="T", generic=True), "T", {"typing.TypeVar"}),
-        )
-        for test in tests:
-            imports = Imports()
+        assert actual == expected
+        assert imports.types == imported
 
-            type: CType = test[0]
-            expected: str = test[1]
-            expected_types: set[str] = test[2]
+    @pytest.mark.parametrize(
+        ("obj", "expected", "imported"),
+        **make_params(
+            [
+                (
+                    "inner",
+                    (
+                        CType(name="Type", inner=(CType(name="Inner"),)),
+                        "Type[Inner]",
+                        {"Type", "Inner"},
+                    ),
+                )
+            ]
+        ),
+    )
+    def test_inner(self, obj: CType, expected: str, imported: set[str], imports: Imports) -> None:
+        """Test for build_type() when convert is True."""
+        actual: str = build_type(obj, imports, convert=False)
 
-            with self.subTest(type=type.name):
-                result: str = build_type(type, imports)
+        assert actual == expected
+        assert imports.types == imported
 
-                self.assertEqual(expected, result)
-                self.assertEqual(expected_types, imports.types)
+    @pytest.mark.parametrize(
+        ("obj", "expected"),
+        **make_params([("basic", (CType(name="Type", nullable=True), "Type | None"))]),
+    )
+    def test_nullable(self, obj: CType, expected: str, imports: Imports) -> None:
+        """Test for build_type() when convert is True."""
+        actual: str = build_type(obj, imports, convert=False)
 
-    def test_build_nullable(self) -> None:
-        tests: Sequence[tuple[CType, str, set[str]]] = (
-            (
-                CType(name="Boolean", namespace="System", nullable=True),
-                "Optional[Boolean]",
-                {"typing.Optional", "System.Boolean"},
-            ),
-            (
-                CType(name="SByte", namespace="System", nullable=True),
-                "Optional[SByte]",
-                {"typing.Optional", "System.SByte"},
-            ),
-            (
-                CType(name="Byte", namespace="System", nullable=True),
-                "Optional[Byte]",
-                {"typing.Optional", "System.Byte"},
-            ),
-            (
-                CType(name="Int16", namespace="System", nullable=True),
-                "Optional[Int16]",
-                {"typing.Optional", "System.Int16"},
-            ),
-            (
-                CType(name="UInt16", namespace="System", nullable=True),
-                "Optional[UInt16]",
-                {"typing.Optional", "System.UInt16"},
-            ),
-            (
-                CType(name="Int32", namespace="System", nullable=True),
-                "Optional[Int32]",
-                {"typing.Optional", "System.Int32"},
-            ),
-            (
-                CType(name="UInt32", namespace="System", nullable=True),
-                "Optional[UInt32]",
-                {"typing.Optional", "System.UInt32"},
-            ),
-            (
-                CType(name="Int64", namespace="System", nullable=True),
-                "Optional[Int64]",
-                {"typing.Optional", "System.Int64"},
-            ),
-            (
-                CType(name="UInt64", namespace="System", nullable=True),
-                "Optional[UInt64]",
-                {"typing.Optional", "System.UInt64"},
-            ),
-            (
-                CType(name="Single", namespace="System", nullable=True),
-                "Optional[Single]",
-                {"typing.Optional", "System.Single"},
-            ),
-            (
-                CType(name="Double", namespace="System", nullable=True),
-                "Optional[Double]",
-                {"typing.Optional", "System.Double"},
-            ),
-            (
-                CType(name="String", namespace="System", nullable=True),
-                "Optional[String]",
-                {"typing.Optional", "System.String"},
-            ),
-            (
-                CType(name="Object", namespace="System", nullable=True),
-                "Optional[Object]",
-                {"typing.Optional", "System.Object"},
-            ),
-            (
-                CType(name="Void", namespace="System", nullable=True),
-                "Optional[Void]",
-                {"typing.Optional", "System.Void"},
-            ),
-            (
-                CType(name="T", generic=True, nullable=True),
-                "Optional[T]",
-                {"typing.Optional", "typing.TypeVar"},
-            ),
-        )
-        for test in tests:
-            imports = Imports()
-
-            type: CType = test[0]
-            expected: str = test[1]
-            expected_types: set[str] = test[2]
-
-            with self.subTest(type=type.name):
-                result: str = build_type(type, imports)
-
-                self.assertEqual(expected, result)
-                self.assertEqual(expected_types, imports.types)
-
-    def test_build_convert(self) -> None:
-        tests: Sequence[tuple[CType, str, set[str]]] = (
-            (CType(name="Boolean", namespace="System"), "bool", set()),
-            (CType(name="SByte", namespace="System"), "int", set()),
-            (CType(name="Byte", namespace="System"), "int", set()),
-            (CType(name="Int16", namespace="System"), "int", set()),
-            (CType(name="UInt16", namespace="System"), "int", set()),
-            (CType(name="Int32", namespace="System"), "int", set()),
-            (CType(name="UInt32", namespace="System"), "int", set()),
-            (CType(name="Int64", namespace="System"), "int", set()),
-            (CType(name="UInt64", namespace="System"), "int", set()),
-            (CType(name="Single", namespace="System"), "float", set()),
-            (CType(name="Double", namespace="System"), "float", set()),
-            (CType(name="String", namespace="System"), "str", set()),
-            (CType(name="Object", namespace="System"), "object", set()),
-            (CType(name="Void", namespace="System"), "None", set()),
-        )
-        for test in tests:
-            imports = Imports()
-
-            type: CType = test[0]
-            expected: str = test[1]
-            expected_types: set[str] = test[2]
-
-            with self.subTest(type=type.name):
-                result: str = build_type(type, imports, convert=True)
-
-                self.assertEqual(expected, result)
-                self.assertEqual(expected_types, imports.types)
-
-    def test_build_convert_nullable(self) -> None:
-        tests: Sequence[tuple[CType, str, set[str]]] = (
-            (
-                CType(name="Boolean", namespace="System", nullable=True),
-                "Optional[bool]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="SByte", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="Byte", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="Int16", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="UInt16", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="Int32", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="UInt32", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="Int64", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="UInt64", namespace="System", nullable=True),
-                "Optional[int]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="Single", namespace="System", nullable=True),
-                "Optional[float]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="Double", namespace="System", nullable=True),
-                "Optional[float]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="String", namespace="System", nullable=True),
-                "Optional[str]",
-                {"typing.Optional"},
-            ),
-            (
-                CType(name="Object", namespace="System", nullable=True),
-                "Optional[object]",
-                {"typing.Optional"},
-            ),
-        )
-        for test in tests:
-            imports = Imports()
-
-            type: CType = test[0]
-            expected: str = test[1]
-            expected_types: set[str] = test[2]
-
-            with self.subTest(type=type.name):
-                result: str = build_type(type, imports, convert=True)
-
-                self.assertEqual(expected, result)
-                self.assertEqual(expected_types, imports.types)
+        assert actual == expected
 
 
 class TestBuildParameter:
@@ -3807,117 +3476,117 @@ class TestBuildParameter:
         assert actual == expected
 
 
-# class TestBuildField:
-#     """Tests for build_field()."""
-#
-#     def test_build(self, imports: Imports, doc: Doc) -> None:
-#         obj: CField = CField(
-#             name="Field",
-#             declaring_type=CType(name="Type"),
-#             return_type=CType(name="Type"),
-#         )
-#
-#         lines: Sequence[str] = build_field(field=obj, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Field: Final[ReturnType] = ...",
-#             '""""""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_static(self) -> None:
-#         field: CField = CField(
-#             name="Field",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: Doc = Doc({})
-#
-#         lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Field: Final[ClassVar[ReturnType]] = ...",
-#             '""""""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         field: CField = CField(
-#             name="Field",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: Doc = Doc({})
-#
-#         build_field(field=field, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Final", "Namespace.ReturnType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_static(self) -> None:
-#         field: CField = CField(
-#             name="Field",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: Doc = Doc({})
-#
-#         build_field(field=field, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Final", "typing.ClassVar", "Namespace.ReturnType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         field: CField = CField(
-#             name="Field",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: Doc = Doc(
-#             {
-#                 "Namespace": {
-#                     "Type": {"Field": {"doc": "Field doc string."}},
-#                 },
-#             },
-#         )
-#
-#         lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Field: Final[ReturnType] = ...",
-#             '"""Field doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_static(self) -> None:
-#         field: CField = CField(
-#             name="Field",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: Doc = Doc(
-#             {
-#                 "Namespace": {
-#                     "Type": {"Field": {"doc": "Field doc string."}},
-#                 },
-#             },
-#         )
-#
-#         lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Field: Final[ClassVar[ReturnType]] = ...",
-#             '"""Field doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
+class TestBuildField:
+    """Tests for build_field()."""
+
+    def test_build(self, imports: Imports, doc: DocTree) -> None:
+        obj: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type"),
+            return_type=CType(name="Type"),
+        )
+
+        lines: Sequence[str] = build_field(field=obj, imports=imports, doc=doc)
+        expected: Sequence[str] = (
+            "Field: Final[ReturnType] = ...",
+            '""""""',
+        )
+
+        self.assertEqual(expected, lines)
+
+    def test_build_static(self) -> None:
+        field: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="ReturnType", namespace="Namespace"),
+            static=True,
+        )
+        imports: Imports = Imports()
+        doc: DocTree = DocTree({})
+
+        lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
+        expected: Sequence[str] = (
+            "Field: Final[ClassVar[ReturnType]] = ...",
+            '""""""',
+        )
+
+        self.assertEqual(expected, lines)
+
+    def test_imports(self) -> None:
+        field: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="ReturnType", namespace="Namespace"),
+        )
+        imports: Imports = Imports()
+        doc: DocTree = DocTree({})
+
+        build_field(field=field, imports=imports, doc=doc)
+        expected: set[str] = {"typing.Final", "Namespace.ReturnType"}
+
+        self.assertEqual(expected, imports.types)
+
+    def test_imports_static(self) -> None:
+        field: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="ReturnType", namespace="Namespace"),
+            static=True,
+        )
+        imports: Imports = Imports()
+        doc: DocTree = DocTree({})
+
+        build_field(field=field, imports=imports, doc=doc)
+        expected: set[str] = {"typing.Final", "typing.ClassVar", "Namespace.ReturnType"}
+
+        self.assertEqual(expected, imports.types)
+
+    def test_doc(self) -> None:
+        field: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="ReturnType", namespace="Namespace"),
+        )
+        imports: Imports = Imports()
+        doc: DocTree = DocTree(
+            {
+                "Namespace": {
+                    "Type": {"Field": {"doc": "Field doc string."}},
+                },
+            },
+        )
+
+        lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
+        expected: Sequence[str] = (
+            "Field: Final[ReturnType] = ...",
+            '"""Field doc string."""',
+        )
+
+        self.assertEqual(expected, lines)
+
+    def test_doc_static(self) -> None:
+        field: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="ReturnType", namespace="Namespace"),
+            static=True,
+        )
+        imports: Imports = Imports()
+        doc: DocTree = DocTree(
+            {
+                "Namespace": {
+                    "Type": {"Field": {"doc": "Field doc string."}},
+                },
+            },
+        )
+
+        lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
+        expected: Sequence[str] = (
+            "Field: Final[ClassVar[ReturnType]] = ...",
+            '"""Field doc string."""',
+        )
+
+        self.assertEqual(expected, lines)
 
 
 # class TestBuildConstructor:
@@ -3930,7 +3599,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_constructor(
 #             constructor=constructor,
@@ -3954,7 +3623,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_constructor(
 #             constructor=constructor,
@@ -3976,7 +3645,7 @@ class TestBuildParameter:
 #             parameters=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_constructor(
 #             constructor=constructor,
@@ -3997,7 +3666,7 @@ class TestBuildParameter:
 #             parameters=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_constructor(
 #             constructor=constructor,
@@ -4022,7 +3691,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_constructor(
 #             constructor=constructor,
@@ -4043,7 +3712,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_constructor(
 #             constructor=constructor,
@@ -4061,7 +3730,7 @@ class TestBuildParameter:
 #             parameters=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_constructor(
 #             constructor=constructor,
@@ -4079,7 +3748,7 @@ class TestBuildParameter:
 #             parameters=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_constructor(
 #             constructor=constructor,
@@ -4100,7 +3769,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4142,7 +3811,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4182,7 +3851,7 @@ class TestBuildParameter:
 #             parameters=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4213,7 +3882,7 @@ class TestBuildParameter:
 #             parameters=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4248,7 +3917,7 @@ class TestBuildParameter:
 #             type=CType(name="PropertyType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -4267,7 +3936,7 @@ class TestBuildParameter:
 #             setter=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -4288,7 +3957,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -4307,7 +3976,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -4324,7 +3993,7 @@ class TestBuildParameter:
 #             type=CType(name="PropertyType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_property(property=property, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.PropertyType"}
@@ -4339,7 +4008,7 @@ class TestBuildParameter:
 #             setter=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_property(property=property, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.PropertyType"}
@@ -4354,7 +4023,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_property(property=property, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -4374,7 +4043,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_property(property=property, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.PropertyType", "typing.ClassVar"}
@@ -4388,7 +4057,7 @@ class TestBuildParameter:
 #             type=CType(name="PropertyType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4421,7 +4090,7 @@ class TestBuildParameter:
 #             setter=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4456,7 +4125,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4489,7 +4158,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -4526,7 +4195,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4548,7 +4217,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4570,7 +4239,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4593,7 +4262,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4613,7 +4282,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4632,7 +4301,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4651,7 +4320,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4671,7 +4340,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4697,7 +4366,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4722,7 +4391,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4747,7 +4416,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4773,7 +4442,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4796,7 +4465,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4818,7 +4487,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: Sequence[str] = (
@@ -4840,7 +4509,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4863,7 +4532,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: Sequence[str] = (
@@ -4886,7 +4555,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"Namespace.Param", "Namespace.Return"}
@@ -4905,7 +4574,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"Namespace.Param", "Namespace.Return"}
@@ -4923,7 +4592,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
@@ -4942,7 +4611,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
@@ -4957,7 +4626,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"Namespace.Return"}
@@ -4973,7 +4642,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"Namespace.Return"}
@@ -4988,7 +4657,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {"typing.overload", "Namespace.Return"}
@@ -5004,7 +4673,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {"typing.overload", "Namespace.Return"}
@@ -5025,7 +4694,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
@@ -5047,7 +4716,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
@@ -5068,7 +4737,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {
@@ -5095,7 +4764,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {
@@ -5118,7 +4787,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"typing.Tuple", "Namespace.Return"}
@@ -5137,7 +4806,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=False)
 #         expected: set[str] = {"typing.Tuple", "Namespace.Return"}
@@ -5155,7 +4824,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
@@ -5174,7 +4843,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_method(method=method, imports=imports, doc=doc, overload=True)
 #         expected: set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
@@ -5192,7 +4861,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5234,7 +4903,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5276,7 +4945,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5319,7 +4988,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5359,7 +5028,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5392,7 +5061,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5425,7 +5094,7 @@ class TestBuildParameter:
 #             return_types=(CType(name="Return", namespace="Namespace"),),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5459,7 +5128,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5499,7 +5168,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5544,7 +5213,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5589,7 +5258,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5635,7 +5304,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5678,7 +5347,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5714,7 +5383,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5750,7 +5419,7 @@ class TestBuildParameter:
 #             ),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5787,7 +5456,7 @@ class TestBuildParameter:
 #             static=True,
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5822,7 +5491,7 @@ class TestBuildParameter:
 #             type=CType(name="Event", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_event(event=event, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -5839,7 +5508,7 @@ class TestBuildParameter:
 #             type=CType(name="Event", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_event(event=event, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.Event"}
@@ -5853,7 +5522,7 @@ class TestBuildParameter:
 #             type=CType(name="Event", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Type": {
@@ -5892,7 +5561,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -5919,7 +5588,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -5949,7 +5618,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -5976,7 +5645,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6006,7 +5675,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6044,7 +5713,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6080,7 +5749,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6123,7 +5792,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6167,7 +5836,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6231,7 +5900,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6289,7 +5958,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6333,7 +6002,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6420,7 +6089,7 @@ class TestBuildParameter:
 #             },
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -6457,7 +6126,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = set()
@@ -6481,7 +6150,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"abc.ABC"}
@@ -6508,7 +6177,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.Generic", "typing.TypeVar"}
@@ -6532,7 +6201,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.Super"}
@@ -6559,7 +6228,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
@@ -6594,7 +6263,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.Final", "Namespace.FieldType"}
@@ -6623,7 +6292,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = set()
@@ -6661,7 +6330,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.overload", "Namespace.Type"}
@@ -6696,7 +6365,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.PropertyType"}
@@ -6751,7 +6420,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
@@ -6802,7 +6471,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -6841,7 +6510,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.EventHandler"}
@@ -6921,7 +6590,7 @@ class TestBuildParameter:
 #             },
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_class(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -6949,7 +6618,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Class": {
@@ -6986,7 +6655,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7013,7 +6682,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7043,7 +6712,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7070,7 +6739,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7100,7 +6769,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7138,7 +6807,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7174,7 +6843,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7217,7 +6886,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7261,7 +6930,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7325,7 +6994,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7383,7 +7052,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7427,7 +7096,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7514,7 +7183,7 @@ class TestBuildParameter:
 #             },
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -7551,7 +7220,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = set()
@@ -7575,7 +7244,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"abc.ABC"}
@@ -7602,7 +7271,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.Generic", "typing.TypeVar"}
@@ -7626,7 +7295,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.Super"}
@@ -7653,7 +7322,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
@@ -7688,7 +7357,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.Final", "Namespace.FieldType"}
@@ -7717,7 +7386,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = set()
@@ -7755,7 +7424,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.overload", "Namespace.Type"}
@@ -7790,7 +7459,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.PropertyType"}
@@ -7845,7 +7514,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
@@ -7896,7 +7565,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -7935,7 +7604,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.EventHandler"}
@@ -8015,7 +7684,7 @@ class TestBuildParameter:
 #             },
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_struct(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -8043,7 +7712,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Struct": {
@@ -8077,7 +7746,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8104,7 +7773,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8131,7 +7800,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8166,7 +7835,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8205,7 +7874,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8266,7 +7935,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8321,7 +7990,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8362,7 +8031,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8446,7 +8115,7 @@ class TestBuildParameter:
 #             },
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8480,7 +8149,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = set()
@@ -8504,7 +8173,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.Generic", "typing.TypeVar"}
@@ -8528,7 +8197,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
@@ -8560,7 +8229,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.Final", "Namespace.FieldType"}
@@ -8592,7 +8261,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.PropertyType"}
@@ -8644,7 +8313,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
@@ -8692,7 +8361,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -8728,7 +8397,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"Namespace.EventHandler"}
@@ -8805,7 +8474,7 @@ class TestBuildParameter:
 #             },
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_interface(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -8830,7 +8499,7 @@ class TestBuildParameter:
 #             nested_types={},
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Interface": {
@@ -8858,7 +8527,7 @@ class TestBuildParameter:
 #             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8884,7 +8553,7 @@ class TestBuildParameter:
 #             fields=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -8902,7 +8571,7 @@ class TestBuildParameter:
 #             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_enum(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"System.Enum"}
@@ -8917,7 +8586,7 @@ class TestBuildParameter:
 #             fields=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_enum(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"System.Enum"}
@@ -8932,7 +8601,7 @@ class TestBuildParameter:
 #             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Enum": {
@@ -8970,7 +8639,7 @@ class TestBuildParameter:
 #             fields=(),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Enum": {
@@ -9002,7 +8671,7 @@ class TestBuildParameter:
 #             return_type=CType(name="ReturnType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -9021,7 +8690,7 @@ class TestBuildParameter:
 #             return_type=CType(name="ReturnType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
 #         expected: Sequence[str] = (
@@ -9043,7 +8712,7 @@ class TestBuildParameter:
 #             return_type=CType(name="ReturnType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_delegate(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {
@@ -9063,7 +8732,7 @@ class TestBuildParameter:
 #             return_type=CType(name="ReturnType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc({})
+#         doc: DocTree = DocTree({})
 #
 #         build_delegate(type_def=type_def, imports=imports, doc=doc)
 #         expected: set[str] = {"typing.Callable", "Namespace.ReturnType"}
@@ -9082,7 +8751,7 @@ class TestBuildParameter:
 #             return_type=CType(name="ReturnType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Delegate(Namespace:ParamType, Namespace:ParamType)": {
@@ -9119,7 +8788,7 @@ class TestBuildParameter:
 #             return_type=CType(name="ReturnType", namespace="Namespace"),
 #         )
 #         imports: Imports = Imports()
-#         doc: Doc = Doc(
+#         doc: DocTree = DocTree(
 #             {
 #                 "Namespace": {
 #                     "Delegate()": {

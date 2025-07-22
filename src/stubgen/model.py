@@ -214,15 +214,59 @@ class DocTree:
         )
 
 
+@dataclass(frozen=True)
+class ImportList:
+    """A data structure that holds imports for a stub file."""
+
+    EVENT_TYPE: ClassVar[str] = "--[EVENT_TYPE]--"
+
+    types: set[str] = field(default_factory=set)
+
+    def add_type(self, obj: CType) -> None:
+        """Add a type to the import list."""
+        if obj.generic:
+            # No longer need to declare TypeVar.
+            return
+        self.types.add(obj.import_name)
+        inner: CType
+        for inner in obj.inner:
+            self.add_type(inner)
+
+    def add_event_type(self) -> None:
+        """Add EventType to the import list."""
+        self.types.add(self.EVENT_TYPE)
+
+    def build(self, namespace: str) -> Sequence[str]:
+        """Build a sequence of import strings."""
+        lines: list[str] = []
+        # TODO(Ryan): Move this to build_stubs
+
+        import_event_type: bool = False
+
+        import_name: str
+        for import_name in sorted(self.types):
+            if import_name == self.EVENT_TYPE:
+                import_event_type = True
+
+            split: Sequence[str] = import_name.split(".")
+            namespace_name: str = ".".join(split[:-1])
+            if namespace == namespace_name:
+                continue
+            lines.append(f"from {namespace_name} import {split[-1]}")
+
+        if import_event_type:
+            lines.append("class EventType[T]:")
+            lines.append("    def __iadd__(self, other: T) -> Self: ...")
+            lines.append("    def __isub__(self, other: T) -> Self: ...")
+
+        return lines
+
+
 @dataclass(frozen=True, kw_only=True)
 class CWrapper(ABC):
     """Base class for C# wrappers."""
 
     name: str
-
-    @override
-    def __str__(self) -> str:
-        return self.name
 
     def __lt__(self, other: CWrapper) -> bool:
         """Compare two C# wrappers."""
@@ -241,7 +285,7 @@ class CWrapper(ABC):
         return self.compare(self, other) >= 0
 
     @property
-    def doc_name(self) -> str:
+    def unique_name(self) -> str:
         """Get the simple name of the wrapped object."""
         return self.name
 
@@ -294,10 +338,6 @@ class CType(CWrapper):
     generic: bool = False
     nullable: bool = False
 
-    @override
-    def __str__(self) -> str:
-        return self.full_name
-
     @property
     def import_name(self) -> str:
         """Get the name to use when importing this CType."""
@@ -308,10 +348,10 @@ class CType(CWrapper):
 
     @property
     @override
-    def doc_name(self) -> str:
+    def unique_name(self) -> str:
         name: str = self.name
         if len(self.inner) > 0:
-            name = f"{name}[{', '.join(t.doc_name for t in self.inner)}]"
+            name = f"{name}[{', '.join(t.unique_name for t in self.inner)}]"
         return name
 
     @property
@@ -327,7 +367,7 @@ class CType(CWrapper):
         if self.namespace is not None:
             name = f"{self.namespace}:{name}"
         if len(self.inner) > 0:
-            name = f"{name}[{', '.join(map(str, self.inner))}]"
+            name = f"{name}[{', '.join(t.full_name for t in self.inner)}]"
         return name
 
     @override
@@ -426,10 +466,6 @@ class CMember(CWrapper, ABC):
 
     declaring_type: CType
 
-    @override
-    def __str__(self) -> str:
-        return f"{self.declaring_type}.{self.name}"
-
 
 @dataclass(frozen=True, kw_only=True)
 class CField(CMember):
@@ -452,7 +488,7 @@ class CField(CMember):
         return_doc: str | None = None
         if self.return_type is not None and self.return_type != CType.VOID:
             return_doc = ""
-        return DocTree(name=self.doc_name, return_doc=return_doc)
+        return DocTree(name=self.unique_name, return_doc=return_doc)
 
     @classmethod
     @override
@@ -472,13 +508,8 @@ class CConstructor(CMember):
     name: str = "__init__"
     parameters: Sequence[CParameter] = ()
 
-    @override
-    def __str__(self) -> str:
-        param_types: str = ", ".join(p.type.full_name for p in self.parameters)
-        return f"{self.declaring_type}.{self.name}({param_types})"
-
     @property
-    def doc_name(self) -> str:
+    def unique_name(self) -> str:
         """Get the name that appears when generating the doc json."""
         param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.name}({param_types})"
@@ -495,7 +526,7 @@ class CConstructor(CMember):
         parameter_docs: Mapping[str, str] | None = None
         if len(self.parameters) > 0:
             parameter_docs = {p.name: "" for p in self.parameters}
-        return DocTree(name=self.doc_name, parameter_docs=parameter_docs)
+        return DocTree(name=self.unique_name, parameter_docs=parameter_docs)
 
     @classmethod
     @override
@@ -534,7 +565,7 @@ class CProperty(CMember):
         return_doc: str | None = None
         if self.type is not None and self.type != CType.VOID:
             return_doc = ""
-        return DocTree(name=self.doc_name, return_doc=return_doc)
+        return DocTree(name=self.unique_name, return_doc=return_doc)
 
     @classmethod
     @override
@@ -556,13 +587,8 @@ class CMethod(CMember):
     return_types: Sequence[CType] = ()
     static: bool = False
 
-    @override
-    def __str__(self) -> str:
-        param_types: str = ", ".join(p.type.full_name for p in self.parameters)
-        return f"{self.declaring_type}.{self.name}({param_types})"
-
     @property
-    def doc_name(self) -> str:
+    def unique_name(self) -> str:
         """Get the name that appears when generating the doc json."""
         param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.name}({param_types})"
@@ -586,7 +612,7 @@ class CMethod(CMember):
         if len(self.return_types) > 0 and self.return_types[0] != CType.VOID:
             return_doc = ""
         return DocTree(
-            name=self.doc_name,
+            name=self.unique_name,
             parameter_docs=parameter_docs,
             return_doc=return_doc,
             exception_docs={},
@@ -630,7 +656,7 @@ class CEvent(CMember):
 
     @override
     def to_doc_tree(self) -> DocTree:
-        return DocTree(name=self.doc_name)
+        return DocTree(name=self.unique_name)
 
     @classmethod
     @override
@@ -675,22 +701,13 @@ class CTypeDefinition(CWrapper, ABC):
     namespace: str | None = None
     nested: CType | None = None
 
-    @override
-    def __str__(self) -> str:
-        name: str = self.doc_name
-        if self.nested is not None:
-            name = f"{self.nested.full_name}.{name}"
-        elif self.namespace is not None:
-            name = f"{self.namespace}.{name}"
-        return name
-
     @property
     @override
-    def doc_name(self) -> str:
-        name: str = super().doc_name
+    def unique_name(self) -> str:
+        name: str = super().unique_name
         generic_args: Sequence[CType] = getattr(self, "generic_args", [])
         if len(generic_args) > 0:
-            generic: str = ", ".join(map(str, generic_args))
+            generic: str = ", ".join(t.full_name for t in generic_args)
             name = f"{name}[{generic}]"
         return name
 
@@ -755,7 +772,7 @@ class CClass(CTypeDefinition):
             *self.events.values(),
         )
         return DocTree(
-            self.doc_name,
+            self.unique_name,
             children=(
                 *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
                 *(c.to_doc_tree() for c in self.nested_types.values()),
@@ -830,7 +847,7 @@ class CInterface(CTypeDefinition):
             *self.events.values(),
         )
         return DocTree(
-            self.doc_name,
+            self.unique_name,
             children=(
                 *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
                 *(c.to_doc_tree() for c in self.nested_types.values()),
@@ -873,7 +890,7 @@ class CEnum(CTypeDefinition):
     @override
     def to_doc_tree(self) -> DocTree:
         return DocTree(
-            self.doc_name,
+            self.unique_name,
             children=tuple(DocTree(f) for f in self.fields),
         )
 
@@ -897,7 +914,7 @@ class CDelegate(CTypeDefinition):
 
     @property
     @override
-    def doc_name(self) -> str:
+    def unique_name(self) -> str:
         param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.name}({param_types})"
 
@@ -920,7 +937,7 @@ class CDelegate(CTypeDefinition):
         return_doc: str | None = None
         if self.return_type is not None and self.return_type != CType.VOID:
             return_doc = ""
-        return DocTree(self.doc_name, parameter_docs=parameter_docs, return_doc=return_doc)
+        return DocTree(self.unique_name, parameter_docs=parameter_docs, return_doc=return_doc)
 
     @classmethod
     @override

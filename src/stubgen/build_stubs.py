@@ -6,7 +6,6 @@ import functools
 import itertools
 import json
 import re
-from collections import UserDict
 from collections.abc import Callable
 from collections.abc import Mapping
 from collections.abc import Sequence
@@ -45,6 +44,7 @@ from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
+from stubgen.model import DocTree
 from stubgen.util import make_python_name
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -501,181 +501,8 @@ class Imports:
         return lines
 
 
-class Doc:
-    data: Mapping[str, Any]
-
-    def __init__(self, data: Mapping[str, Any]):
-        self.data = data
-
-    @classmethod
-    def split_node_str(cls, node_str: str) -> tuple[str, str | None]:
-        result: list[str] = []
-        i: int = 0
-        n: int = len(node_str)
-        bracket_count: int = 0
-        while i < n:
-            c: str = node_str[i]
-            i = i + 1
-            if c in (".", ":") and bracket_count == 0:
-                return "".join(result), "".join(node_str[i:])
-            if c in ("[", "("):
-                bracket_count += 1
-            elif c in ("]", ")"):
-                bracket_count -= 1
-            result.append(c)
-        return "".join(result), None
-
-    @classmethod
-    def translate(cls, pattern: str) -> str:
-        star: object = object()
-
-        parts: list[str | object] = []
-        i: int = 0
-        n: int = len(pattern)
-        while i < n:
-            c: str = pattern[i]
-            i = i + 1
-            if c == "*":
-                parts.append(star)
-            elif c == "$":
-                j = i
-                while j < n and pattern[j] not in (",", "]", ")"):
-                    j = j + 1
-                parts.append(r"\$" if j >= n else star)
-                i = j
-            else:
-                parts.append(re.escape(c))
-        assert i == n
-
-        result: list[str] = []
-        i: int = 0
-        n: int = len(parts)
-        while i < n and parts[i] is not star:
-            result.append(parts[i])
-            i += 1
-
-        next_group_num = itertools.count().__next__
-        while i < n:
-            assert parts[i] is star
-            i += 1
-            if i == n:
-                result.append(".*")
-                break
-            assert parts[i] is not star
-            fixed: list[str | object] = []
-            while i < n and parts[i] is not star:
-                fixed.append(parts[i])
-                i += 1
-            fixed_str: str = "".join(fixed)
-            if i == n:
-                result.append(".*")
-                result.append(fixed_str)
-            else:
-                group_num: int = next_group_num()
-                result.append(f"(?=(?P<g{group_num}>.*?{fixed_str}))(?P=g{group_num})")
-        assert i == n
-
-        result_str: str = "".join(result)
-        return rf"(?s:{result_str})\Z"
-
-    @classmethod
-    @functools.lru_cache(maxsize=256, typed=True)
-    def _compile_pattern(cls, pattern: AnyStr) -> re.Pattern:
-        result: AnyStr
-        if isinstance(pattern, bytes):
-            pat_str: str = str(pattern, "ISO-8859-1")
-            res_str: str = cls.translate(pat_str)
-            result = bytes(res_str, "ISO-8859-1")
-        else:
-            result = cls.translate(pattern)
-        return re.compile(result)
-
-    def get(self, node_str: str) -> Doc | None:
-        node: str
-        search: str = node_str
-        data: Mapping[str, Any] = self.data
-        while True:
-            if search in data:
-                return Doc(data[search])
-            node, search = self.split_node_str(search)
-            for key in data:
-                pattern: re.Pattern = self._compile_pattern(key)
-                if pattern.match(node) is not None:
-                    data = data[key]
-                    if search is None:
-                        return Doc(data)
-                    break
-            else:
-                return None
-
-    def doc_string(self, indent: int = 0, line_length: int = 100) -> Sequence[str]:
-        indent_str: str = "    " * indent
-
-        doc: str | None = self.data.get("doc", None)
-        doc_formatted: Mapping[str, Sequence[str]] = self.data.get("doc_formatted", {})
-        parameters: Mapping[str, str] = self.data.get("parameters", {})
-        return_str: str | None = self.data.get("return", None)
-        exceptions: Mapping[str, str] = self.data.get("exceptions", {})
-
-        if len(parameters) == 0 and return_str is None and len(exceptions) == 0:
-            if doc is None:
-                return (f'{indent_str}""""""',)
-            if "\n" not in doc and 4 * indent + len(doc) + 3 <= line_length:
-                return (f'{indent_str}"""{doc}"""',)
-
-        doc = '"""' + doc.replace("\n", "\n\n")
-        doc_lines: list[str] = list(self.split(doc, indent, line_length))
-
-        if len(parameters) > 0 or return_str is not None or len(exceptions) > 0:
-            doc_lines.append(indent_str)
-
-            for param, param_doc in parameters.items():
-                param_str: str = f":param {param}: {param_doc}"
-                doc_lines.extend(self.split(param_str, indent, line_length, "  "))
-
-            if return_str is not None:
-                doc_lines.extend(self.split(f":return: {return_str}", indent, line_length, "  "))
-
-            for exception, exception_doc in exceptions.items():
-                param_str: str = f":except {exception}: {exception_doc}"
-                doc_lines.extend(self.split(param_str, indent, line_length, "  "))
-
-        line_index: int = 0
-        while line_index < len(doc_lines):
-            line: str = doc_lines[line_index]
-            for replace_str, replace_seq in doc_formatted.items():
-                replace_str = f"%{replace_str}%"
-                if replace_str in line:
-                    doc_lines[line_index] = line.replace(replace_str, replace_seq[0])
-                    for new_line in reversed(replace_seq[1:]):
-                        doc_lines.insert(line_index + 1, indent_str + new_line)
-            line_index += 1
-
-        doc_lines.append(indent_str + '"""')
-        return tuple(doc_lines)
-
-    @staticmethod
-    def split(
-        text: str, indent: int = 0, line_length: int = 100, prefix: str = ""
-    ) -> Sequence[str]:
-        indent_str: str = "    " * indent
-
-        lines: list[str] = []
-        for doc_paragraph in text.splitlines():
-            words: list[str] = doc_paragraph.split(" ")
-            doc_line: str = indent_str + words[0]
-            for word in words[1:]:
-                if len(doc_line) + len(word) + 1 > line_length:
-                    lines.append(doc_line)
-                    doc_line = indent_str + prefix + word
-                else:
-                    doc_line += " " + word
-            lines.append(doc_line)
-        return lines
-
-
-def merge_doc(self, other: Doc) -> Doc:
-    return Doc(merge_doc_node(self.data, other.data))
+def merge_doc(self, other: DocTree) -> DocTree:
+    return DocTree(merge_doc_node(self.data, other.data))
 
 
 def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -713,7 +540,7 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
 type_conversion: Final[Mapping[str, str]] = {}
 
 
-def build_type(obj: CType, imports: Imports, convert: bool = False) -> str:
+def build_type(obj: CType, imports: Imports, *, convert: bool) -> str:
     """Build a string representation for a CType."""
     type_str: str
     if convert:
@@ -743,16 +570,16 @@ def build_type(obj: CType, imports: Imports, convert: bool = False) -> str:
         except KeyError:
             imports.add_type(obj, inner=False)
             type_str = obj.name
-            if len(obj.inner) > 0:
-                children: list[str] = [build_type(t, imports) for t in obj.inner]
-                type_str = f"{type_str}[{', '.join(children)}]"
     else:
         imports.add_type(obj)
-        type_str = obj.doc_name
+        type_str = obj.name
+
+    if len(obj.inner) > 0:
+        children: list[str] = [build_type(t, imports, convert=convert) for t in obj.inner]
+        type_str = f"{type_str}[{', '.join(children)}]"
 
     if obj.nullable:
-        imports.add_type(CType(name="Optional", namespace="typing"))
-        type_str = f"Optional[{type_str}]"
+        type_str = f"{type_str} | None"
     return type_str
 
 
@@ -767,7 +594,7 @@ def build_parameter(obj: CParameter, imports: Imports) -> str:
 def build_field(
     obj: CField,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     line_length: int,
     indent: int = 0,
 ) -> Sequence[str]:
@@ -779,9 +606,9 @@ def build_field(
         type_str = f"ClassVar[{type_str}]"
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get_node(str(obj))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
+    doc_tree: DocTree = doc[obj.unique_name]
+    if doc_tree is not None:
+        doc_str = doc_tree.doc_string(indent=indent, line_length=line_length)
     else:
         doc_str = [f'{"    " * indent}""""""']
 
@@ -791,7 +618,7 @@ def build_field(
 def build_constructor(
     constructor: CConstructor,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     overload: bool,
     indent: int = 0,
     line_length: int = 100,
@@ -806,7 +633,7 @@ def build_constructor(
     lines.append(f"{'    ' * indent}def __init__(self{''.join(parameters)}):")
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get_node(str(constructor))
+    doc_node: DocTree = doc.get_node(str(constructor))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -819,7 +646,7 @@ def build_constructor(
 def build_property(
     property: CProperty,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -833,7 +660,7 @@ def build_property(
             type_str = f"Final[{type_str}]"
 
         doc_str: Sequence[str]
-        doc_node: Doc = doc.get_node(str(property))
+        doc_node: DocTree = doc.get_node(str(property))
         if doc_node is not None:
             doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
         else:
@@ -847,7 +674,7 @@ def build_property(
     lines.append(f"{indent_str}def {property.name}(self) -> {property_type}:")
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get_node(str(property))
+    doc_node: DocTree = doc.get_node(str(property))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -864,7 +691,7 @@ def build_property(
 def build_method(
     method: CMethod,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     overload: bool,
     indent: int = 0,
     line_length: int = 100,
@@ -897,7 +724,7 @@ def build_method(
     )
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get_node(str(method))
+    doc_node: DocTree = doc.get_node(str(method))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -910,7 +737,7 @@ def build_method(
 def build_event(
     event: CEvent,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -923,7 +750,7 @@ def build_event(
     ]
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get_node(str(event))
+    doc_node: DocTree = doc.get_node(str(event))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
@@ -935,7 +762,7 @@ def build_event(
 
 def build_namespace(
     namespace: CNamespace,
-    doc: Doc,
+    doc: DocTree,
     line_length: int = 100,
 ) -> Sequence[str]:
     imports = Imports()
@@ -962,7 +789,7 @@ def build_namespace(
 def build_type_def(
     type_def: CTypeDefinition,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -982,7 +809,7 @@ def build_type_def(
 def build_class(
     type_def: CClass,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -1011,7 +838,7 @@ def build_class(
         lines.append(f"{'    ' * indent}class {type_def.name}:")
 
     doc_lines: Sequence[str]
-    doc_node: Doc = doc.get_node(str(type_def))
+    doc_node: DocTree = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -1089,7 +916,7 @@ def build_class(
 def build_struct(
     type_def: CStruct,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -1105,7 +932,7 @@ def build_struct(
 def build_interface(
     type_def: CInterface,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -1128,7 +955,7 @@ def build_interface(
         lines.append(f"{'    ' * indent}class {type_def.name}:")
 
     doc_lines: Sequence[str]
-    doc_node: Doc = doc.get_node(str(type_def))
+    doc_node: DocTree = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -1194,7 +1021,7 @@ def build_interface(
 def build_enum(
     type_def: CEnum,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -1203,7 +1030,7 @@ def build_enum(
 
     indent_str: str = "    " * (indent + 1)
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get_node(str(type_def))
+    doc_node: DocTree = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -1213,7 +1040,7 @@ def build_enum(
     for field in type_def.fields:
         lines.append(f"{indent_str}{make_python_name(field)}: {type_def.name} = ...")
 
-        doc_node: Doc = doc.get_node(f"{type_def.namespace}.{type_def.name}.{field}")
+        doc_node: DocTree = doc.get_node(f"{type_def.namespace}.{type_def.name}.{field}")
         if doc_node is not None:
             doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
         else:
@@ -1226,7 +1053,7 @@ def build_enum(
 def build_delegate(
     type_def: CDelegate,
     imports: Imports,
-    doc: Doc,
+    doc: DocTree,
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
@@ -1244,7 +1071,7 @@ def build_delegate(
     ]
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get_node(str(type_def))
+    doc_node: DocTree = doc.get_node(str(type_def))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
@@ -1254,7 +1081,7 @@ def build_delegate(
     return tuple(lines)
 
 
-def build_stub(namespace: CNamespace, doc: Doc, output_dir: Path, line_length: int) -> None:
+def build_stub(namespace: CNamespace, doc: DocTree, output_dir: Path, line_length: int) -> None:
     logger.debug("Building namespace: %s", namespace.name)
 
     namespace_dir: Path = output_dir
@@ -1348,13 +1175,13 @@ def command_build(args: BuildArguments) -> CommandResult:
                 namespace = merge_namespace(namespaces[namespace.name], namespace, False)
             namespaces[namespace.name] = namespace
 
-    doc: Doc = Doc({})
+    doc: DocTree = DocTree({})
     for doc_file in doc_files:
-        logger.info("Loading Doc File: %r", str(doc_file))
+        logger.info("Loading DocTree File: %r", str(doc_file))
         with doc_file.open("r") as file:
             loaded_doc_dict_tree: dict[str, Any] = json.load(file)
 
-        new_doc: Doc = Doc(loaded_doc_dict_tree)
+        new_doc: DocTree = DocTree(loaded_doc_dict_tree)
         doc = merge_doc(doc, new_doc)
 
     if args.multi_threaded:
