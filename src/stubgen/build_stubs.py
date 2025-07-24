@@ -2,22 +2,13 @@
 
 from __future__ import annotations
 
-import functools
-import itertools
 import json
-import re
-from collections.abc import Callable
-from collections.abc import Mapping
-from collections.abc import Sequence
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
-from dataclasses import field
 from pathlib import Path
 from typing import TYPE_CHECKING
 from typing import Any
-from typing import AnyStr
-from typing import Final
 from typing import cast
 from typing import override
 
@@ -44,7 +35,8 @@ from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
-from stubgen.model import DocTree
+from stubgen.model import DocNode
+from stubgen.model import ImportList
 from stubgen.util import make_python_name
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -56,11 +48,8 @@ if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
     from collections.abc import Sequence
     from logging import Logger
-    from typing import TypeVar
 
     from stubgen.command import CommandResult
-
-    T = TypeVar("T")
 
 logger: Logger = get_logger(__name__)
 
@@ -68,17 +57,19 @@ logger: Logger = get_logger(__name__)
 # Example Object.Equals(Object) -> AFObject.Equals(AFObject)
 
 
-def verify_attribute(obj1, obj2, type: str, attribute: str, should_raise: bool = True) -> None:
+def verify_attribute(
+    obj1: object, obj2: object, type_name: str, attribute: str, should_raise: bool = True
+) -> None:
     attr1 = getattr(obj1, attribute)
     attr2 = getattr(obj2, attribute)
     if attr1 != attr2:
-        message: str = f"{type} have different {attribute} values: {attr1} != {attr2}"
+        message: str = f"{type_name} have different {attribute} values: {attr1} != {attr2}"
         if should_raise:
             raise AttributeError(message)
         logger.warning(message)
 
 
-def merge_mapping(
+def merge_mapping[T](
     mapping1: Mapping[str, T],
     mapping2: Mapping[str, T],
     merge_func: Callable[[T, T, bool], T],
@@ -102,21 +93,112 @@ def merge_mapping(
     return merged
 
 
-def merge_namespace(
-    namespace1: CNamespace, namespace2: CNamespace, should_raise: bool = True
-) -> CNamespace:
-    logger.debug("Merging Namespaces: %s", namespace1)
+def merge_parameter(obj1: CParameter, obj2: CParameter, should_raise: bool = True) -> CParameter:
+    verify_attribute(obj1, obj2, "Parameters", "type", should_raise)
+    verify_attribute(obj1, obj2, "Parameters", "default", should_raise)
+    verify_attribute(obj1, obj2, "Parameters", "out", should_raise)
 
-    verify_attribute(namespace1, namespace2, "Namespaces", "name", should_raise)
-
-    type_map: Mapping[str, CTypeDefinition] = merge_mapping(
-        mapping1=namespace1.types,
-        mapping2=namespace2.types,
-        merge_func=merge_type_def,
-        should_raise=should_raise,
+    return CParameter(
+        name=obj1.name,
+        type=obj1.type,
+        default=obj1.default,
+        out=obj1.out,
     )
 
-    return CNamespace(name=namespace1.name, types=type_map)
+
+def merge_parameters(
+    parameters1: Sequence[CParameter],
+    parameters2: Sequence[CParameter],
+    should_raise: bool = True,
+) -> Sequence[CParameter]:
+    len1: int = len(parameters1)
+    len2: int = len(parameters2)
+    if len1 != len2:
+        message: str = f"Parameters have different length: {len1} != {len2}"
+        if should_raise:
+            raise AttributeError(message)
+        logger.warning(message)
+    return tuple(
+        merge_parameter(p1, p2, should_raise)
+        for p1, p2 in zip(parameters1, parameters2, strict=False)
+    )
+
+
+def merge_field(field1: CField, field2: CField, should_raise: bool = True) -> CField:
+    verify_attribute(field1, field2, "Fields", "name", should_raise)
+    verify_attribute(field1, field2, "Fields", "declaring_type", should_raise)
+    verify_attribute(field1, field2, "Fields", "return_type", should_raise)
+    verify_attribute(field1, field2, "Fields", "static", should_raise)
+
+    return CField(
+        name=field1.name,
+        declaring_type=field1.declaring_type,
+        return_type=field1.return_type,
+        static=field1.static,
+    )
+
+
+def merge_constructor(
+    constructor1: CConstructor, constructor2: CConstructor, should_raise: bool = True
+) -> CConstructor:
+    verify_attribute(constructor1, constructor2, "Constructors", "declaring_type", should_raise)
+
+    parameters: Sequence[CParameter] = merge_parameters(
+        constructor1.parameters, constructor2.parameters, should_raise
+    )
+
+    return CConstructor(
+        declaring_type=constructor1.declaring_type,
+        parameters=parameters,
+    )
+
+
+def merge_property(
+    property1: CProperty, property2: CProperty, should_raise: bool = True
+) -> CProperty:
+    verify_attribute(property1, property2, "Properties", "name", should_raise)
+    verify_attribute(property1, property2, "Properties", "declaring_type", should_raise)
+    verify_attribute(property1, property2, "Properties", "type", should_raise)
+    verify_attribute(property1, property2, "Properties", "static", should_raise)
+
+    return CProperty(
+        name=property1.name,
+        declaring_type=property1.declaring_type,
+        type=property1.type,
+        setter=property1.setter or property2.setter,
+        static=property1.static,
+    )
+
+
+def merge_method(method1: CMethod, method2: CMethod, should_raise: bool = True) -> CMethod:
+    verify_attribute(method1, method2, "Methods", "name", should_raise)
+    verify_attribute(method1, method2, "Methods", "declaring_type", should_raise)
+    verify_attribute(method1, method2, "Methods", "return_types", should_raise)
+    verify_attribute(method1, method2, "Methods", "static", should_raise)
+
+    parameters: Sequence[CParameter] = merge_parameters(
+        method1.parameters, method2.parameters, should_raise
+    )
+
+    return CMethod(
+        name=method1.name,
+        declaring_type=method1.declaring_type,
+        parameters=parameters,
+        return_types=method1.return_types,
+        static=method1.static,
+    )
+
+
+def merge_event(event1: CEvent, event2: CEvent, should_raise: bool = True) -> CEvent:
+    verify_attribute(event1, event2, "Properties", "name", should_raise)
+    verify_attribute(event1, event2, "Properties", "declaring_type", should_raise)
+    verify_attribute(event1, event2, "Properties", "type", should_raise)
+
+    return CEvent(
+        name=event1.name,
+        declaring_type=event1.declaring_type,
+        type=event1.type,
+    )
 
 
 def merge_type_def(
@@ -346,163 +428,23 @@ def merge_delegate(
     )
 
 
-def merge_parameter(
-    parameter1: CParameter, parameter2: CParameter, should_raise: bool = True
-) -> CParameter:
-    verify_attribute(parameter1, parameter2, "Parameters", "type", should_raise)
-    verify_attribute(parameter1, parameter2, "Parameters", "default", should_raise)
-    verify_attribute(parameter1, parameter2, "Parameters", "out", should_raise)
+def merge_namespace(obj1: CNamespace, obj2: CNamespace, should_raise: bool = True) -> CNamespace:
+    logger.debug("Merging Namespaces: %s", obj1)
 
-    return CParameter(
-        name=parameter1.name,
-        type=parameter1.type,
-        default=parameter1.default,
-        out=parameter1.out,
+    verify_attribute(obj1, obj2, "Namespaces", "name", should_raise)
+
+    type_map: Mapping[str, CTypeDefinition] = merge_mapping(
+        mapping1=obj1.types,
+        mapping2=obj2.types,
+        merge_func=merge_type_def,
+        should_raise=should_raise,
     )
 
-
-def merge_parameters(
-    parameters1: Sequence[CParameter],
-    parameters2: Sequence[CParameter],
-    should_raise: bool = True,
-) -> Sequence[CParameter]:
-    len1: int = len(parameters1)
-    len2: int = len(parameters2)
-    if len1 != len2:
-        message: str = f"Parameters have different length: {len1} != {len2}"
-        if should_raise:
-            raise AttributeError(message)
-        logger.warning(message)
-    return tuple(
-        merge_parameter(p1, p2, should_raise)
-        for p1, p2 in zip(parameters1, parameters2, strict=False)
-    )
+    return CNamespace(name=obj1.name, types=type_map)
 
 
-def merge_field(field1: CField, field2: CField, should_raise: bool = True) -> CField:
-    verify_attribute(field1, field2, "Fields", "name", should_raise)
-    verify_attribute(field1, field2, "Fields", "declaring_type", should_raise)
-    verify_attribute(field1, field2, "Fields", "return_type", should_raise)
-    verify_attribute(field1, field2, "Fields", "static", should_raise)
-
-    return CField(
-        name=field1.name,
-        declaring_type=field1.declaring_type,
-        return_type=field1.return_type,
-        static=field1.static,
-    )
-
-
-def merge_constructor(
-    constructor1: CConstructor, constructor2: CConstructor, should_raise: bool = True
-) -> CConstructor:
-    verify_attribute(constructor1, constructor2, "Constructors", "declaring_type", should_raise)
-
-    parameters: Sequence[CParameter] = merge_parameters(
-        constructor1.parameters, constructor2.parameters, should_raise
-    )
-
-    return CConstructor(
-        declaring_type=constructor1.declaring_type,
-        parameters=parameters,
-    )
-
-
-def merge_property(
-    property1: CProperty, property2: CProperty, should_raise: bool = True
-) -> CProperty:
-    verify_attribute(property1, property2, "Properties", "name", should_raise)
-    verify_attribute(property1, property2, "Properties", "declaring_type", should_raise)
-    verify_attribute(property1, property2, "Properties", "type", should_raise)
-    verify_attribute(property1, property2, "Properties", "static", should_raise)
-
-    return CProperty(
-        name=property1.name,
-        declaring_type=property1.declaring_type,
-        type=property1.type,
-        setter=property1.setter or property2.setter,
-        static=property1.static,
-    )
-
-
-def merge_method(method1: CMethod, method2: CMethod, should_raise: bool = True) -> CMethod:
-    verify_attribute(method1, method2, "Methods", "name", should_raise)
-    verify_attribute(method1, method2, "Methods", "declaring_type", should_raise)
-    verify_attribute(method1, method2, "Methods", "return_types", should_raise)
-    verify_attribute(method1, method2, "Methods", "static", should_raise)
-
-    parameters: Sequence[CParameter] = merge_parameters(
-        method1.parameters, method2.parameters, should_raise
-    )
-
-    return CMethod(
-        name=method1.name,
-        declaring_type=method1.declaring_type,
-        parameters=parameters,
-        return_types=method1.return_types,
-        static=method1.static,
-    )
-
-
-def merge_event(event1: CEvent, event2: CEvent, should_raise: bool = True) -> CEvent:
-    verify_attribute(event1, event2, "Properties", "name", should_raise)
-    verify_attribute(event1, event2, "Properties", "declaring_type", should_raise)
-    verify_attribute(event1, event2, "Properties", "type", should_raise)
-
-    return CEvent(
-        name=event1.name,
-        declaring_type=event1.declaring_type,
-        type=event1.type,
-    )
-
-
-@dataclass
-class Imports:
-    types: Final[set[str]] = field(default_factory=set)
-    type_vars: Final[set[str]] = field(default_factory=set)
-    include_event_type: bool = False
-
-    def add_type(self, obj: CType, inner: bool = True) -> None:
-        if obj.generic:
-            self.add_type_var(obj)
-            return
-
-        self.types.add(obj.import_name)
-        if inner:
-            for inner_type in obj.inner:
-                self.add_type(inner_type)
-
-    def add_type_var(self, obj: CType) -> None:
-        self.add_type(CType(name="TypeVar", namespace="typing"))
-        self.type_vars.add(obj.name)
-
-    def build(self, namespace: str = None) -> Sequence[str]:
-        if self.include_event_type:
-            self.add_type(CType(name="Generic", namespace="typing"))
-            self.add_type_var(CType(name="T"))
-
-        lines: list[str] = []
-
-        for obj in sorted(self.types):
-            split: Sequence[str] = obj.split(".")
-            namespace_name: str = ".".join(split[:-1])
-            name: str = split[-1]
-            if namespace is not None and namespace == namespace_name:
-                continue
-            lines.append(f"from {namespace_name} import {name}")
-
-        lines.extend(f'{t} = TypeVar("{t}")' for t in sorted(self.type_vars))
-
-        if self.include_event_type:
-            lines.append("class EventType[T]:")
-            lines.append("    def __iadd__(self, other: T) -> Self: ...")
-            lines.append("    def __isub__(self, other: T) -> Self: ...")
-
-        return lines
-
-
-def merge_doc(self, other: DocTree) -> DocTree:
-    return DocTree(merge_doc_node(self.data, other.data))
+def merge_doc(self, other: DocNode) -> DocNode:
+    return DocNode(merge_doc_node(self.data, other.data))
 
 
 def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -537,11 +479,18 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
     return new_dict
 
 
-type_conversion: Final[Mapping[str, str]] = {}
-
-
-def build_type(obj: CType, imports: Imports, *, convert: bool) -> str:
+def build_type(
+    *,
+    obj: CType,
+    import_list: ImportList,
+    convert: bool = False,
+) -> str:
     """Build a string representation for a CType."""
+    logger.debug("Building type: %s", obj.unique_name)
+
+    if obj == CType.VOID:
+        return "None"
+
     type_str: str
     if convert:
         type_map: Mapping[str, str] = {
@@ -568,14 +517,16 @@ def build_type(obj: CType, imports: Imports, *, convert: bool) -> str:
         try:
             type_str = type_map[obj.name]
         except KeyError:
-            imports.add_type(obj, inner=False)
+            import_list.add_type(obj)
             type_str = obj.name
     else:
-        imports.add_type(obj)
+        import_list.add_type(obj)
         type_str = obj.name
 
     if len(obj.inner) > 0:
-        children: list[str] = [build_type(t, imports, convert=convert) for t in obj.inner]
+        children: list[str] = [
+            build_type(obj=t, import_list=import_list, convert=convert) for t in obj.inner
+        ]
         type_str = f"{type_str}[{', '.join(children)}]"
 
     if obj.nullable:
@@ -583,507 +534,551 @@ def build_type(obj: CType, imports: Imports, *, convert: bool) -> str:
     return type_str
 
 
-def build_parameter(obj: CParameter, imports: Imports) -> str:
+def build_parameter(
+    *,
+    obj: CParameter,
+    import_list: ImportList,
+) -> str:
     """Build a string representation for a CParameter."""
-    param_str: str = f"{obj.name}: {build_type(obj.type, imports, convert=True)}"
+    logger.debug("Building parameter: %s", obj.unique_name)
+
+    param_str: str = f"{obj.name}: {build_type(obj=obj.type, import_list=import_list)}"
     if obj.default:
         param_str = param_str + " = ..."
     return param_str
 
 
 def build_field(
+    *,
     obj: CField,
-    imports: Imports,
-    doc: DocTree,
+    import_list: ImportList,
+    doc_tree: DocNode,
     line_length: int,
     indent: int = 0,
 ) -> Sequence[str]:
-    imports.add_type(CType(name="Final", namespace="typing"))
+    """Build a list of strings to represent a CField."""
+    logger.debug("Building field: %s", obj.unique_name)
 
-    type_str: str = build_type(obj.return_type, imports, convert=True)
+    import_list.add_final()
+
+    type_str: str = build_type(obj=obj.return_type, import_list=import_list)
     if obj.static:
-        imports.add_type(CType(name="ClassVar", namespace="typing"))
+        import_list.add_class_var()
         type_str = f"ClassVar[{type_str}]"
 
-    doc_str: Sequence[str]
-    doc_tree: DocTree = doc[obj.unique_name]
-    if doc_tree is not None:
-        doc_str = doc_tree.doc_string(indent=indent, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * indent}""""""']
+    lines: list[str] = [f"{'    ' * indent}{obj.name}: Final[{type_str}] = ..."]
 
-    return f"{'    ' * indent}{obj.name}: Final[{type_str}] = ...", *doc_str
+    doc_node: DocNode = doc_tree[obj.unique_name]
+    lines.extend(doc_node.doc_string(indent=indent, line_length=line_length))
+
+    return lines
 
 
 def build_constructor(
-    constructor: CConstructor,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CConstructor,
+    import_list: ImportList,
+    doc_tree: DocNode,
     overload: bool,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
+    """Build a list of strings to represent a CConstructor."""
+    logger.debug("Building constructor: %s", obj.unique_name)
+
     lines: list[str] = []
 
     if overload:
-        imports.add_type(CType(name="overload", namespace="typing"))
+        import_list.add_overload()
         lines.append(f"{'    ' * indent}@overload")
 
-    parameters: Sequence[str] = tuple(build_parameter(p, imports) for p in constructor.parameters)
-    lines.append(f"{'    ' * indent}def __init__(self{''.join(parameters)}):")
+    parameters: Sequence[str] = [
+        "self",
+        *(build_parameter(obj=p, import_list=import_list) for p in obj.parameters),
+    ]
+    lines.append(f"{'    ' * indent}def __init__({', '.join(parameters)}) -> None:")
 
-    doc_str: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(constructor))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_str)
+    doc_node: DocNode = doc_tree[obj.unique_name]
+    lines.extend(doc_node.doc_string(indent=indent + 1, line_length=line_length))
 
-    return tuple(lines)
+    return lines
 
 
 def build_property(
-    property: CProperty,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CProperty,
+    import_list: ImportList,
+    doc_tree: DocNode,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
+    """Build a list of strings to represent a CProperty."""
+    logger.debug("Building property: %s", obj.unique_name)
+
     indent_str: str = "    " * indent
 
-    if property.static:
-        imports.add_type(CType(name="ClassVar", namespace="typing"))
-        type_str: str = f"ClassVar[{build_type(property.type, imports, convert=True)}]"
-        if not property.setter:
-            imports.add_type(CType(name="Final", namespace="typing"))
+    if obj.static:
+        import_list.add_type(CType(name="ClassVar", namespace="typing"))
+        type_str: str = f"ClassVar[{build_type(obj=obj.type, import_list=import_list)}]"
+        if not obj.setter:
+            import_list.add_type(CType(name="Final", namespace="typing"))
             type_str = f"Final[{type_str}]"
 
-        doc_str: Sequence[str]
-        doc_node: DocTree = doc.get_node(str(property))
-        if doc_node is not None:
-            doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
-        else:
-            doc_str = [f'{indent_str}""""""']
+        lines: list[str] = [f"{indent_str}{obj.name}: {type_str} = ..."]
 
-        return f"{indent_str}{property.name}: {type_str} = ...", *doc_str
+        doc_node: DocNode = doc_tree[obj.unique_name]
+        lines.extend(doc_node.doc_string(indent=indent, line_length=line_length))
+
+        return lines
 
     lines: list[str] = [f"{indent_str}@property"]
 
-    property_type: str = build_type(property.type, imports, convert=True)
-    lines.append(f"{indent_str}def {property.name}(self) -> {property_type}:")
+    property_type: str = build_type(obj=obj.type, import_list=import_list)
+    lines.append(f"{indent_str}def {obj.name}(self) -> {property_type}:")
 
-    doc_str: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(property))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_str)
+    doc_node: DocNode = doc_tree[obj.unique_name]
+    lines.extend(doc_node.doc_string(indent=indent + 1, line_length=line_length))
 
-    if property.setter:
-        lines.append(f"{indent_str}@{property.name}.setter")
-        lines.append(f"{indent_str}def {property.name}(self, value: {property_type}) -> None: ...")
+    if obj.setter:
+        lines.append(f"{indent_str}@{obj.name}.setter")
+        lines.append(f"{indent_str}def {obj.name}(self, value: {property_type}) -> None: ...")
 
-    return tuple(lines)
+    return lines
 
 
 def build_method(
-    method: CMethod,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CMethod,
+    import_list: ImportList,
+    doc_tree: DocNode,
     overload: bool,
-    indent: int = 0,
     line_length: int = 100,
+    indent: int = 0,
 ) -> Sequence[str]:
+    """Build a list of strings to represent a CMethod."""
+    logger.debug("Building method: %s", obj.unique_name)
+
     lines: list[str] = []
 
     self_cls: str = "self"
-    if method.static:
+    if obj.static:
         self_cls = "cls"
         lines.append(f"{'    ' * indent}@classmethod")
 
     if overload:
-        imports.add_type(CType(name="overload", namespace="typing"))
+        import_list.add_overload()
         lines.append(f"{'    ' * indent}@overload")
 
-    parameters: Sequence[str] = tuple(map(lambda p: build_parameter(p, imports), method.parameters))
+    parameters: Sequence[str] = [
+        self_cls,
+        *(build_parameter(obj=p, import_list=import_list) for p in obj.parameters),
+    ]
 
     return_str: str
-    if len(method.return_types) > 1:
-        imports.add_type(CType(name="Tuple", namespace="typing"))
-        return_types: list[str] = []
-        for return_type in method.return_types:
-            return_types.append(build_type(return_type, imports, convert=True))
-        return_str = f"Tuple[{', '.join(return_types)}]"
+    if len(obj.return_types) > 1:
+        return_types: list[str] = [
+            build_type(obj=t, import_list=import_list) for t in obj.return_types
+        ]
+        return_str = f"tuple[{', '.join(return_types)}]"
     else:
-        return_str = build_type(method.return_types[0], imports, convert=True)
+        return_str = build_type(obj=obj.return_types[0], import_list=import_list)
 
-    lines.append(
-        f"{'    ' * indent}def {method.name}({self_cls}{''.join(parameters)}) -> {return_str}:"
-    )
+    lines.append(f"{'    ' * indent}def {obj.name}({', '.join(parameters)}) -> {return_str}:")
 
-    doc_str: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(method))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_str = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_str)
+    doc_node: DocNode = doc_tree[obj.unique_name]
+    lines.extend(doc_node.doc_string(indent=indent + 1, line_length=line_length))
 
-    return tuple(lines)
+    return lines
 
 
 def build_event(
-    event: CEvent,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CEvent,
+    import_list: ImportList,
+    doc_tree: DocNode,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
+    """Build a list of strings to represent a CEvent."""
+    logger.debug("Building event: %s", obj.unique_name)
+
     indent_str: str = "    " * indent
 
-    imports.include_event_type = True
+    import_list.add_event_type()
 
     lines: list[str] = [
-        f"{indent_str}{event.name}: EventType[{build_type(event.type, imports, convert=True)}] = ..."
+        f"{indent_str}{obj.name}: "
+        f"EventType[{build_type(obj=obj.type, import_list=import_list)}] = ..."
     ]
 
-    doc_str: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(event))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
-    else:
-        doc_str = [f'{indent_str}""""""']
-    lines.extend(doc_str)
+    doc_node: DocNode = doc_tree[obj.unique_name]
+    lines.extend(doc_node.doc_string(indent=indent, line_length=line_length))
 
-    return tuple(lines)
-
-
-def build_namespace(
-    namespace: CNamespace,
-    doc: DocTree,
-    line_length: int = 100,
-) -> Sequence[str]:
-    imports = Imports()
-    imports.add_type(CType(name="annotations", namespace="__future__"))
-
-    built_types: list[Sequence[str]] = []
-    for type_def in namespace.types.values():
-        logger.debug("Building type: %s", type_def)
-        built_type: Sequence[str] = build_type_def(
-            type_def=type_def,
-            imports=imports,
-            doc=doc,
-            indent=0,
-            line_length=line_length,
-        )
-        built_types.append(built_type)
-
-    lines: list[str] = list(imports.build(namespace.name))
-    for built_type in built_types:
-        lines.extend(built_type)
     return lines
 
 
 def build_type_def(
-    type_def: CTypeDefinition,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CTypeDefinition,
+    doc_tree: DocNode,
+    import_list: ImportList,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
-    type_name: str = type_def.__class__.__name__
-    if type_name == "CClass":
-        return build_class(cast("CClass", type_def), imports, doc, indent, line_length)
-    if type_name == "CStruct":
-        return build_struct(cast("CStruct", type_def), imports, doc, indent, line_length)
-    if type_name == "CInterface":
-        return build_interface(cast("CInterface", type_def), imports, doc, indent, line_length)
-    if type_name == "CEnum":
-        return build_enum(cast("CEnum", type_def), imports, doc, indent, line_length)
-    if type_name == "CDelegate":
-        return build_delegate(cast("CDelegate", type_def), imports, doc, indent, line_length)
+    """Build a list of strings to represent a CTypeDefinition python stub."""
+    match obj:
+        case CClass():
+            return build_class(
+                obj=obj,
+                doc_tree=doc_tree,
+                import_list=import_list,
+                line_length=line_length,
+                indent=indent,
+            )
+        case CStruct():
+            return build_struct(
+                obj=obj,
+                doc_tree=doc_tree,
+                import_list=import_list,
+                line_length=line_length,
+                indent=indent,
+            )
+        case CInterface():
+            return build_interface(
+                obj=obj,
+                doc_tree=doc_tree,
+                import_list=import_list,
+                line_length=line_length,
+                indent=indent,
+            )
+        case CEnum():
+            return build_enum(
+                obj=obj,
+                doc_tree=doc_tree,
+                import_list=import_list,
+                line_length=line_length,
+                indent=indent,
+            )
+        case CDelegate():
+            return build_delegate(
+                obj=obj,
+                doc_tree=doc_tree,
+                import_list=import_list,
+                line_length=line_length,
+                indent=indent,
+            )
+    raise NotImplementedError  # pragma: no cover
 
 
 def build_class(
-    type_def: CClass,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CClass,
+    doc_tree: DocNode,
+    import_list: ImportList,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
+    """Build a list of strings to represent a CClass python stub."""
+    logger.debug("Building class: %s", obj.unique_name)
+
     parents: list[str] = []
-    if type_def.abstract:
-        imports.add_type(CType(name="ABC", namespace="abc"))
+    if obj.abstract:
+        import_list.add_abc()
         parents.append("ABC")
 
-    if len(type_def.generic_args) > 0:
-        imports.add_type(CType(name="Generic", namespace="typing"))
-        args: list[str] = []
-        for arg in type_def.generic_args:
-            args.append(build_type(arg, imports))
-        parents.append(f"Generic[{', '.join(args)}]")
+    generic_arg_str: str = ""
+    if len(obj.generic_args) > 0:
+        args: list[str] = [build_type(obj=arg, import_list=import_list) for arg in obj.generic_args]
+        generic_arg_str = f"[{', '.join(args)}]"
 
-    if type_def.super_class is not None:
-        parents.append(build_type(type_def.super_class, imports))
-    for interface in type_def.interfaces:
-        parents.append(build_type(interface, imports))
+    if obj.super_class is not None:
+        parents.append(build_type(obj=obj.super_class, import_list=import_list))
 
-    lines: list[str] = []
-    if len(parents) > 0:
-        par_str: str = ", ".join(parents)
-        lines.append(f"{'    ' * indent}class {type_def.name}({par_str}):")
-    else:
-        lines.append(f"{'    ' * indent}class {type_def.name}:")
+    parents.extend(
+        build_type(obj=interface_obj, import_list=import_list) for interface_obj in obj.interfaces
+    )
 
-    doc_lines: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(type_def))
-    if doc_node is not None:
-        doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_lines = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_lines)
+    parents_str: str = f"({', '.join(parents)})" if len(parents) > 0 else ""
+    lines: list[str] = [f"{'    ' * indent}class {obj.name}{generic_arg_str}{parents_str}:"]
 
-    for field in type_def.fields.values():
-        field_lines: Sequence[str] = build_field(
-            obj=field,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    doc_node: DocNode = doc_tree[obj.unique_name] or DocNode("Blank")
+    lines.extend(doc_node.doc_string(line_length, indent=indent + 1))
+
+    for field_obj in obj.fields.values():
+        lines.extend(
+            build_field(
+                obj=field_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            ),
         )
-        lines.extend(field_lines)
 
-    constructor_overload: bool = len(type_def.constructors) > 1
-    for constructor in type_def.constructors.values():
-        constructor_lines: Sequence[str] = build_constructor(
-            constructor=constructor,
-            imports=imports,
-            doc=doc,
-            overload=constructor_overload,
-            indent=indent + 1,
-            line_length=line_length,
+    constructor_overload: bool = len(obj.constructors) > 1
+    for constructor_obj in obj.constructors.values():
+        lines.extend(
+            build_constructor(
+                obj=constructor_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                overload=constructor_overload,
+                indent=indent + 1,
+                line_length=line_length,
+            )
         )
-        lines.extend(constructor_lines)
 
-    for property in type_def.properties.values():
-        property_lines: Sequence[str] = build_property(
-            property=property,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    for property_obj in obj.properties.values():
+        lines.extend(
+            build_property(
+                obj=property_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(property_lines)
 
-    method_names: Sequence[str] = tuple(map(lambda m: m.name, type_def.methods.values()))
-    for method in type_def.methods.values():
-        method_overload: bool = len(tuple(filter(lambda m: m == method.name, method_names))) > 1
-        method_lines: Sequence[str] = build_method(
-            method=method,
-            imports=imports,
-            doc=doc,
-            overload=method_overload,
-            indent=indent + 1,
-            line_length=line_length,
+    method_names: Sequence[str] = [m.name for m in obj.methods.values()]
+    for method_obj in obj.methods.values():
+        method_overload: bool = len([m for m in method_names if m == method_obj.name]) > 1
+        lines.extend(
+            build_method(
+                obj=method_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                overload=method_overload,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(method_lines)
 
-    for event in type_def.events.values():
-        event_lines: Sequence[str] = build_event(
-            event=event,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    for event_obj in obj.events.values():
+        lines.extend(
+            build_event(
+                obj=event_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(event_lines)
 
-    for nested_type_def in type_def.nested_types.values():
-        nested_type_def_lines: Sequence[str] = build_type_def(
-            type_def=nested_type_def,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    for nested_obj in obj.nested_types.values():
+        lines.extend(
+            build_type_def(
+                obj=nested_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(nested_type_def_lines)
 
-    return tuple(lines)
+    return lines
 
 
 def build_struct(
-    type_def: CStruct,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CStruct,
+    doc_tree: DocNode,
+    import_list: ImportList,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
+    """Build a list of strings to represent a CStruct python stub."""
+    logger.debug("Building struct: %s", obj.unique_name)
+
     return build_class(
-        type_def=type_def,
-        imports=imports,
-        doc=doc,
-        indent=indent,
+        obj=obj,
+        doc_tree=doc_tree,
+        import_list=import_list,
         line_length=line_length,
+        indent=indent,
     )
 
 
 def build_interface(
-    type_def: CInterface,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CInterface,
+    doc_tree: DocNode,
+    import_list: ImportList,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
-    parents: list[str] = []
-    if len(type_def.generic_args) > 0:
-        imports.add_type(CType(name="Generic", namespace="typing"))
-        args: list[str] = []
-        for arg in type_def.generic_args:
-            args.append(build_type(arg, imports))
-        parents.append(f"Generic[{', '.join(args)}]")
+    """Build a list of strings to represent a CInterface python stub."""
+    logger.debug("Building interface: %s", obj.unique_name)
 
-    for interface in type_def.interfaces:
-        parents.append(build_type(interface, imports))
+    generic_arg_str: str = ""
+    if len(obj.generic_args) > 0:
+        args: list[str] = [build_type(obj=arg, import_list=import_list) for arg in obj.generic_args]
+        generic_arg_str = f"[{', '.join(args)}]"
 
-    lines: list[str] = []
-    if len(parents) > 0:
-        par_str: str = ", ".join(parents)
-        lines.append(f"{'    ' * indent}class {type_def.name}({par_str}):")
-    else:
-        lines.append(f"{'    ' * indent}class {type_def.name}:")
+    parents: list[str] = [
+        build_type(obj=interface_obj, import_list=import_list) for interface_obj in obj.interfaces
+    ]
 
-    doc_lines: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(type_def))
-    if doc_node is not None:
-        doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_lines = [f'{"    " * (indent + 1)}""""""']
-    lines.extend(doc_lines)
+    parents_str: str = f"({', '.join(parents)})" if len(parents) > 0 else ""
+    lines: list[str] = [f"{'    ' * indent}class {obj.name}{generic_arg_str}{parents_str}:"]
 
-    for field in type_def.fields.values():
-        field_lines: Sequence[str] = build_field(
-            obj=field,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    doc_node: DocNode = doc_tree[obj.unique_name] or DocNode("Blank")
+    lines.extend(doc_node.doc_string(line_length, indent=indent + 1))
+
+    for field_obj in obj.fields.values():
+        lines.extend(
+            build_field(
+                obj=field_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            ),
         )
-        lines.extend(field_lines)
 
-    for property in type_def.properties.values():
-        property_lines: Sequence[str] = build_property(
-            property=property,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    for property_obj in obj.properties.values():
+        lines.extend(
+            build_property(
+                obj=property_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(property_lines)
 
-    method_names: Sequence[str] = tuple(map(lambda m: m.name, type_def.methods.values()))
-    for method in type_def.methods.values():
-        method_overload: bool = len(tuple(filter(lambda m: m == method.name, method_names))) > 1
-        method_lines: Sequence[str] = build_method(
-            method=method,
-            imports=imports,
-            doc=doc,
-            overload=method_overload,
-            indent=indent + 1,
-            line_length=line_length,
+    method_names: Sequence[str] = [m.name for m in obj.methods.values()]
+    for method_obj in obj.methods.values():
+        method_overload: bool = len([m for m in method_names if m == method_obj.name]) > 1
+        lines.extend(
+            build_method(
+                obj=method_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                overload=method_overload,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(method_lines)
 
-    for event in type_def.events.values():
-        event_lines: Sequence[str] = build_event(
-            event=event,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    for event_obj in obj.events.values():
+        lines.extend(
+            build_event(
+                obj=event_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(event_lines)
 
-    for nested_type_def in type_def.nested_types.values():
-        nested_type_def_lines: Sequence[str] = build_type_def(
-            type_def=nested_type_def,
-            imports=imports,
-            doc=doc,
-            indent=indent + 1,
-            line_length=line_length,
+    for nested_obj in obj.nested_types.values():
+        lines.extend(
+            build_type_def(
+                obj=nested_obj,
+                import_list=import_list,
+                doc_tree=doc_tree,
+                line_length=line_length,
+                indent=indent + 1,
+            )
         )
-        lines.extend(nested_type_def_lines)
 
-    return tuple(lines)
+    return lines
 
 
 def build_enum(
-    type_def: CEnum,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CEnum,
+    doc_tree: DocNode,
+    import_list: ImportList,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
-    imports.add_type(CType(name="Enum", namespace="System"))
-    lines: list[str] = [f"{'    ' * indent}class {type_def.name}(Enum):"]
+    """Build a list of strings to represent a CEnum python stub."""
+    logger.debug("Building enum: %s", obj.unique_name)
 
-    indent_str: str = "    " * (indent + 1)
-    doc_str: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(type_def))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-    else:
-        doc_str = [f'{indent_str}""""""']
-    lines.extend(doc_str)
+    import_list.add_enum()
 
-    for field in type_def.fields:
-        lines.append(f"{indent_str}{make_python_name(field)}: {type_def.name} = ...")
+    lines: list[str] = [f"{'    ' * indent}class {obj.name}(Enum):"]
 
-        doc_node: DocTree = doc.get_node(f"{type_def.namespace}.{type_def.name}.{field}")
-        if doc_node is not None:
-            doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
-        else:
-            doc_str = [f'{indent_str}""""""']
-        lines.extend(doc_str)
+    doc_node: DocNode = doc_tree[obj.unique_name] or DocNode("Blank")
+    lines.extend(doc_node.doc_string(line_length, indent=indent + 1))
 
-    return tuple(lines)
+    for field_obj in obj.fields:
+        lines.append(f"{'    ' * (indent + 1)}{make_python_name(field_obj)}: {obj.name} = ...")
+
+        doc_node: DocNode = doc_tree[f"{obj.namespace}.{obj.name}.{field_obj}"] or DocNode("Blank")
+        lines.extend(doc_node.doc_string(line_length, indent=indent + 1))
+
+    return lines
 
 
 def build_delegate(
-    type_def: CDelegate,
-    imports: Imports,
-    doc: DocTree,
+    *,
+    obj: CDelegate,
+    doc_tree: DocNode,
+    import_list: ImportList,
+    line_length: int,
     indent: int = 0,
-    line_length: int = 100,
 ) -> Sequence[str]:
-    indent_str: str = "    " * indent
+    """Build a list of strings to represent a CDelegate python stub."""
+    logger.debug("Building delegate: %s", obj.unique_name)
 
-    parameters: list[str] = []
-    for parameter in type_def.parameters:
-        parameters.append(build_type(parameter.type, imports, convert=True))
+    import_list.add_callable()
 
-    return_str: str = build_type(type_def.return_type, imports, convert=True)
-
-    imports.add_type(CType(name="Callable", namespace="typing"))
-    lines: list[str] = [
-        f"{indent_str}{type_def.name}: Callable[[{', '.join(parameters)}], {return_str}] = ...",
+    parameters: Sequence[str] = [
+        build_type(obj=p.type, import_list=import_list, convert=True) for p in obj.parameters
     ]
 
-    doc_str: Sequence[str]
-    doc_node: DocTree = doc.get_node(str(type_def))
-    if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
-    else:
-        doc_str = [f'{indent_str}""""""']
-    lines.extend(doc_str)
+    return_str: str = build_type(obj=obj.return_type, import_list=import_list)
 
-    return tuple(lines)
+    lines: list[str] = [
+        f"{'    ' * indent}{obj.name}: Callable[[{', '.join(parameters)}], {return_str}] = ...",
+    ]
+
+    doc_node: DocNode = doc_tree[obj.unique_name] or DocNode("Blank")
+    lines.extend(doc_node.doc_string(line_length, indent=indent))
+
+    return lines
 
 
-def build_stub(namespace: CNamespace, doc: DocTree, output_dir: Path, line_length: int) -> None:
-    logger.debug("Building namespace: %s", namespace.name)
+def build_namespace(
+    *,
+    obj: CNamespace,
+    doc_tree: DocNode,
+    line_length: int,
+) -> Sequence[str]:
+    """Build a list of strings to represent a python stub."""
+    logger.debug("Building namespace: %s", obj.name)
 
+    import_list = ImportList()
+
+    built_type_lines: list[str] = []
+    for _, type_def in sorted(obj.types.items()):
+        built_type_lines.extend(
+            build_type_def(
+                obj=type_def,
+                doc_tree=doc_tree,
+                import_list=import_list,
+                line_length=line_length,
+                indent=0,
+            )
+        )
+
+    lines: list[str] = [
+        f'"""Automatically generated stubs for C# namespace: {obj.name}."""',
+        "",
+    ]
+    lines.extend(import_list.build(obj.name))
+    lines.extend(built_type_lines)
+    return lines
+
+
+def build_stub(
+    namespace: CNamespace,
+    doc_tree: DocNode,
+    output_dir: Path,
+    line_length: int,
+) -> None:
     namespace_dir: Path = output_dir
     namespace_file: Path = Path()
     for name in namespace.name.split("."):
@@ -1095,8 +1090,8 @@ def build_stub(namespace: CNamespace, doc: DocTree, output_dir: Path, line_lengt
         namespace_file.touch(exist_ok=True)
 
     lines: Sequence[str] = build_namespace(
-        namespace=namespace,
-        doc=doc,
+        obj=namespace,
+        doc_tree=doc_tree,
         line_length=line_length,
     )
 
@@ -1143,7 +1138,7 @@ class BuildArguments(CommandArguments):
         )
         build_command.add_argument(
             "docs",
-            help="glob to the doc files",
+            help="glob to the doc_tree files",
         )
 
 
@@ -1151,17 +1146,26 @@ def command_build(args: BuildArguments) -> CommandResult:
     """Run the 'build' command."""
     logger.debug("Arguments: %s", args)
 
-    skeleton_glob: str = args.skeletons
-    skeleton_files: list[Path] = []
-    for file_path in Path().glob(skeleton_glob):
-        skeleton_files.append(file_path)
-        logger.debug("Using skeleton file: %r", str(file_path))
-
     doc_glob: str = args.docs
     doc_files: list[Path] = []
     for file_path in Path().glob(doc_glob):
         doc_files.append(file_path)
-        logger.debug("Using doc file: %r", str(file_path))
+        logger.debug("Using doc_tree file: '%s'", file_path)
+
+    doc_tree: DocNode = DocNode({})
+    for doc_file in doc_files:
+        logger.info("Loading DocNode File: '%s'", doc_file)
+        with doc_file.open("r") as file:
+            loaded_doc_dict_tree: dict[str, Any] = json.load(file)
+
+        new_doc: DocNode = DocNode(loaded_doc_dict_tree)
+        doc_tree = merge_doc(doc_tree, new_doc)
+
+    skeleton_glob: str = args.skeletons
+    skeleton_files: list[Path] = []
+    for file_path in Path().glob(skeleton_glob):
+        skeleton_files.append(file_path)
+        logger.debug("Using skeleton file: '%s'", file_path)
 
     namespaces: dict[str, CNamespace] = {}
     for skeleton_file in skeleton_files:
@@ -1175,23 +1179,14 @@ def command_build(args: BuildArguments) -> CommandResult:
                 namespace = merge_namespace(namespaces[namespace.name], namespace, False)
             namespaces[namespace.name] = namespace
 
-    doc: DocTree = DocTree({})
-    for doc_file in doc_files:
-        logger.info("Loading DocTree File: %r", str(doc_file))
-        with doc_file.open("r") as file:
-            loaded_doc_dict_tree: dict[str, Any] = json.load(file)
-
-        new_doc: DocTree = DocTree(loaded_doc_dict_tree)
-        doc = merge_doc(doc, new_doc)
-
     if args.multi_threaded:
         executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
         for namespace in namespaces.values():
-            executor.submit(build_stub, namespace, doc, args.output_dir, args.line_length)
+            executor.submit(build_stub, namespace, doc_tree, args.output_dir, args.line_length)
         executor.shutdown(wait=True)
     else:
         for namespace in namespaces.values():
-            build_stub(namespace, doc, args.output_dir, args.line_length)
+            build_stub(namespace, doc_tree, args.output_dir, args.line_length)
 
     if args.format_files:
 
@@ -1200,14 +1195,14 @@ def command_build(args: BuildArguments) -> CommandResult:
             try:
                 isort.file(file, config=isort_config)
             except Exception as e:
-                logger.warning('Unable to run isort on file "%s":', file, exc_info=e)
+                logger.warning("Unable to run isort on file '%s':", file, exc_info=e)
 
             try:
                 black.format_file_in_place(
                     file, fast=False, mode=black_mode, write_back=WriteBack.YES
                 )
             except Exception as e:
-                logger.warning('Unable to run black on file "%s":', file, exc_info=e)
+                logger.warning("Unable to run black on file '%s':", file, exc_info=e)
 
         logger.info("Formatting stub files")
         isort_config = Config(

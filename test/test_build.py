@@ -7,22 +7,55 @@ from typing import TYPE_CHECKING
 import pytest
 from conftest import make_params
 
-from stubgen.build_stubs import Imports
+from stubgen.build_stubs import build_class
+from stubgen.build_stubs import build_constructor
+from stubgen.build_stubs import build_delegate
+from stubgen.build_stubs import build_enum
+from stubgen.build_stubs import build_event
+from stubgen.build_stubs import build_field
+from stubgen.build_stubs import build_interface
+from stubgen.build_stubs import build_method
+from stubgen.build_stubs import build_namespace
 from stubgen.build_stubs import build_parameter
+from stubgen.build_stubs import build_property
+from stubgen.build_stubs import build_struct
 from stubgen.build_stubs import build_type
+from stubgen.model import CClass
+from stubgen.model import CConstructor
+from stubgen.model import CDelegate
+from stubgen.model import CEnum
+from stubgen.model import CEvent
 from stubgen.model import CField
+from stubgen.model import CInterface
+from stubgen.model import CMethod
+from stubgen.model import CNamespace
 from stubgen.model import CParameter
+from stubgen.model import CProperty
+from stubgen.model import CStruct
 from stubgen.model import CType
-from stubgen.model import DocTree
+from stubgen.model import DocNode
+from stubgen.model import ImportList
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Sequence
 
 
 @pytest.fixture
-def imports() -> Imports:
-    """Get Imports fixture."""
-    return Imports()
+def doc() -> DocNode:
+    """DocNode fixture."""
+    return DocNode(name="Test")
+
+
+@pytest.fixture
+def imports() -> ImportList:
+    """ImportList fixture."""
+    return ImportList()
+
+
+@pytest.fixture
+def line_length() -> int:
+    """Line length fixture."""
+    return 100
 
 
 # class TestMergeParameter:
@@ -3052,7 +3085,7 @@ def imports() -> Imports:
 #             "exceptions": {},
 #         }
 #         tree1: Mapping[str, Any] = {
-#             "doc": "DocTree String\n%format0%",
+#             "doc": "DocNode String\n%format0%",
 #             "doc_formatted": {
 #                 "format0": ("0", "1", "2", "3"),
 #                 "format1": ("0", "2", "4", "6"),
@@ -3068,16 +3101,16 @@ def imports() -> Imports:
 #             },
 #         }
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
-#                 "doc": "DocTree String\n%format0%",
+#                 "doc": "DocNode String\n%format0%",
 #                 "doc_formatted": {
 #                     "format0": ("0", "1", "2", "3"),
 #                     "format1": ("0", "2", "4", "6"),
@@ -3099,26 +3132,26 @@ def imports() -> Imports:
 #         tree0: Mapping[str, Any] = {"doc": "Doc0"}
 #         tree1: Mapping[str, Any] = {"doc": ""}
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual({"doc": "Doc0"}, merged.data)
 #
 #     def test_merge_doc_both(self) -> None:
 #         tree0: Mapping[str, Any] = {"doc": "Doc0"}
 #         tree1: Mapping[str, Any] = {"doc": "Doc1"}
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual({"doc": "Doc0\nDoc1"}, merged.data)
 #
 #     def test_merge_doc_formatted_empty(self) -> None:
@@ -3134,13 +3167,13 @@ def imports() -> Imports:
 #             },
 #         }
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
 #                 "doc_formatted": {
@@ -3167,13 +3200,13 @@ def imports() -> Imports:
 #             },
 #         }
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
 #                 "doc_formatted": {
@@ -3199,13 +3232,13 @@ def imports() -> Imports:
 #             },
 #         }
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
 #                 "parameters": {
@@ -3232,13 +3265,13 @@ def imports() -> Imports:
 #             },
 #         }
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
 #                 "parameters": {
@@ -3255,26 +3288,26 @@ def imports() -> Imports:
 #         tree0: Mapping[str, Any] = {"return": "Return0"}
 #         tree1: Mapping[str, Any] = {"return": ""}
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual({"return": "Return0"}, merged.data)
 #
 #     def test_merge_return_both(self) -> None:
 #         tree0: Mapping[str, Any] = {"return": "Return0"}
 #         tree1: Mapping[str, Any] = {"return": "Return1"}
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual({"return": "Return0\nReturn1"}, merged.data)
 #
 #     def test_merge_exceptions_empty(self) -> None:
@@ -3290,13 +3323,13 @@ def imports() -> Imports:
 #             },
 #         }
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
 #                 "exceptions": {
@@ -3323,13 +3356,13 @@ def imports() -> Imports:
 #             },
 #         }
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
 #                 "exceptions": {
@@ -3346,13 +3379,13 @@ def imports() -> Imports:
 #         tree0: Mapping[str, Any] = {"NodeA": {}}
 #         tree1: Mapping[str, Any] = {"NodeB": {}}
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {
 #                 "NodeA": {},
@@ -3365,13 +3398,13 @@ def imports() -> Imports:
 #         tree0: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"NodeD": {}}}}}
 #         tree1: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"NodeE": {}}}}}
 #
-#         doc_dict0: DocTree = DocTree(tree0)
-#         doc_dict1: DocTree = DocTree(tree1)
+#         doc_dict0: DocNode = DocNode(tree0)
+#         doc_dict1: DocNode = DocNode(tree1)
 #
-#         merged: DocTree = merge_doc(doc_dict0, doc_dict1)
+#         merged: DocNode = merge_doc(doc_dict0, doc_dict1)
 #
 #         self.assertIsNotNone(merged)
-#         self.assertIsInstance(merged, DocTree)
+#         self.assertIsInstance(merged, DocNode)
 #         self.assertEqual(
 #             {"NodeA": {"NodeB": {"NodeC": {"NodeD": {}, "NodeE": {}}}}},
 #             merged.data,
@@ -3383,11 +3416,18 @@ class TestBuildType:
 
     @pytest.mark.parametrize(
         ("obj", "expected", "imported"),
-        **make_params([("basic", (CType(name="Type"), "Type", {"Type"}))]),
+        **make_params(
+            [
+                ("basic", (CType(name="Type"), "Type", {"Type"})),
+                ("void", (CType.VOID, "None", set())),
+            ]
+        ),
     )
-    def test_basic(self, obj: CType, expected: str, imported: set[str], imports: Imports) -> None:
+    def test_basic(
+        self, obj: CType, expected: str, imported: set[str], imports: ImportList
+    ) -> None:
         """Test for build_type() with native types."""
-        actual: str = build_type(obj, imports, convert=False)
+        actual: str = build_type(obj=obj, import_list=imports, convert=False)
 
         assert actual == expected
         assert imports.types == imported
@@ -3414,9 +3454,11 @@ class TestBuildType:
             ]
         ),
     )
-    def test_convert(self, obj: CType, expected: str, imported: set[str], imports: Imports) -> None:
+    def test_convert(
+        self, obj: CType, expected: str, imported: set[str], imports: ImportList
+    ) -> None:
         """Test for build_type() when convert is True."""
-        actual: str = build_type(obj, imports, convert=True)
+        actual: str = build_type(obj=obj, import_list=imports, convert=True)
 
         assert actual == expected
         assert imports.types == imported
@@ -3436,9 +3478,11 @@ class TestBuildType:
             ]
         ),
     )
-    def test_inner(self, obj: CType, expected: str, imported: set[str], imports: Imports) -> None:
+    def test_inner(
+        self, obj: CType, expected: str, imported: set[str], imports: ImportList
+    ) -> None:
         """Test for build_type() when convert is True."""
-        actual: str = build_type(obj, imports, convert=False)
+        actual: str = build_type(obj=obj, import_list=imports, convert=False)
 
         assert actual == expected
         assert imports.types == imported
@@ -3447,9 +3491,9 @@ class TestBuildType:
         ("obj", "expected"),
         **make_params([("basic", (CType(name="Type", nullable=True), "Type | None"))]),
     )
-    def test_nullable(self, obj: CType, expected: str, imports: Imports) -> None:
+    def test_nullable(self, obj: CType, expected: str, imports: ImportList) -> None:
         """Test for build_type() when convert is True."""
-        actual: str = build_type(obj, imports, convert=False)
+        actual: str = build_type(obj=obj, import_list=imports, convert=False)
 
         assert actual == expected
 
@@ -3457,21 +3501,21 @@ class TestBuildType:
 class TestBuildParameter:
     """Tests for build_parameter()."""
 
-    def test_simple(self, imports: Imports) -> None:
+    def test_simple(self, imports: ImportList) -> None:
         """Test for build_parameter() with a simple parameter."""
         obj: CParameter = CParameter(name="name", type=CType(name="Type"))
 
         expected: str = "name: Type"
-        actual: str = build_parameter(obj, imports=imports)
+        actual: str = build_parameter(obj=obj, import_list=imports)
 
         assert actual == expected
 
-    def test_default(self, imports: Imports) -> None:
+    def test_default(self, imports: ImportList) -> None:
         """Test for build_parameter() with a parameter with a default value."""
         obj: CParameter = CParameter(name="name", type=CType(name="Type"), default=True)
 
         expected: str = "name: Type = ..."
-        actual: str = build_parameter(obj, imports=imports)
+        actual: str = build_parameter(obj=obj, import_list=imports)
 
         assert actual == expected
 
@@ -3479,5338 +3523,1821 @@ class TestBuildParameter:
 class TestBuildField:
     """Tests for build_field()."""
 
-    def test_build(self, imports: Imports, doc: DocTree) -> None:
+    def test_basic(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_field() with a basic field."""
         obj: CField = CField(
-            name="Field",
-            declaring_type=CType(name="Type"),
-            return_type=CType(name="Type"),
-        )
-
-        lines: Sequence[str] = build_field(field=obj, imports=imports, doc=doc)
-        expected: Sequence[str] = (
-            "Field: Final[ReturnType] = ...",
-            '""""""',
-        )
-
-        self.assertEqual(expected, lines)
-
-    def test_build_static(self) -> None:
-        field: CField = CField(
-            name="Field",
+            name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
+            return_type=CType(name="Type", namespace="Namespace"),
+        )
+
+        expected: Sequence[str] = [
+            "Name: Final[Type] = ...",
+            '""""""',
+        ]
+        actual: Sequence[str] = build_field(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.FINAL, "Namespace.Type"}
+
+    def test_static(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_field() with a static field."""
+        obj: CField = CField(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="Type", namespace="Namespace"),
             static=True,
         )
-        imports: Imports = Imports()
-        doc: DocTree = DocTree({})
 
-        lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-        expected: Sequence[str] = (
-            "Field: Final[ClassVar[ReturnType]] = ...",
+        expected: Sequence[str] = [
+            "Name: Final[ClassVar[Type]] = ...",
             '""""""',
+        ]
+        actual: Sequence[str] = build_field(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            line_length=line_length,
         )
 
-        self.assertEqual(expected, lines)
+        assert actual == expected
+        assert imports.types == {ImportList.FINAL, ImportList.CLASS_VAR, "Namespace.Type"}
 
-    def test_imports(self) -> None:
-        field: CField = CField(
-            name="Field",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
+
+class TestBuildConstructor:
+    """Tests for build_constructor()."""
+
+    def test_basic(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_constructor() with a basic constructor."""
+        obj: CConstructor = CConstructor(declaring_type=CType(name="Type", namespace="Namespace"))
+
+        expected: Sequence[str] = [
+            "def __init__(self) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_constructor(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
         )
-        imports: Imports = Imports()
-        doc: DocTree = DocTree({})
 
-        build_field(field=field, imports=imports, doc=doc)
-        expected: set[str] = {"typing.Final", "Namespace.ReturnType"}
+        assert actual == expected
+        assert imports.types == set()
 
-        self.assertEqual(expected, imports.types)
-
-    def test_imports_static(self) -> None:
-        field: CField = CField(
-            name="Field",
+    def test_parameters(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_constructor() with a constructor with parameters."""
+        obj: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+        )
+
+        expected: Sequence[str] = [
+            "def __init__(self, param0: Type, param1: Type) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_constructor(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_overload(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_constructor() with an overloaded constructor."""
+        obj: CConstructor = CConstructor(declaring_type=CType(name="Type", namespace="Namespace"))
+
+        expected: Sequence[str] = [
+            "@overload",
+            "def __init__(self) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_constructor(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=True,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD}
+
+
+class TestBuildProperty:
+    """Tests for build_property()."""
+
+    def test_basic(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_property() with a basic property."""
+        obj: CProperty = CProperty(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Type", namespace="Namespace"),
+        )
+
+        expected: Sequence[str] = [
+            "@property",
+            "def Name(self) -> Type:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_property(
+            obj=obj, import_list=imports, doc_tree=doc, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_setter(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_property() with a property with a setter."""
+        obj: CProperty = CProperty(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Type", namespace="Namespace"),
+            setter=True,
+        )
+
+        expected: Sequence[str] = [
+            "@property",
+            "def Name(self) -> Type:",
+            '    """"""',
+            "@Name.setter",
+            "def Name(self, value: Type) -> None: ...",
+        ]
+        actual: Sequence[str] = build_property(
+            obj=obj, import_list=imports, doc_tree=doc, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_static(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_property() with a static property."""
+        obj: CProperty = CProperty(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Type", namespace="Namespace"),
             static=True,
         )
-        imports: Imports = Imports()
-        doc: DocTree = DocTree({})
 
-        build_field(field=field, imports=imports, doc=doc)
-        expected: set[str] = {"typing.Final", "typing.ClassVar", "Namespace.ReturnType"}
-
-        self.assertEqual(expected, imports.types)
-
-    def test_doc(self) -> None:
-        field: CField = CField(
-            name="Field",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
+        expected: Sequence[str] = [
+            "Name: Final[ClassVar[Type]] = ...",
+            '""""""',
+        ]
+        actual: Sequence[str] = build_property(
+            obj=obj, import_list=imports, doc_tree=doc, line_length=line_length
         )
-        imports: Imports = Imports()
-        doc: DocTree = DocTree(
-            {
-                "Namespace": {
-                    "Type": {"Field": {"doc": "Field doc string."}},
-                },
+
+        assert actual == expected
+        assert imports.types == {ImportList.CLASS_VAR, "Namespace.Type", ImportList.FINAL}
+
+    def test_static_setter(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_property() with a static property with a setter."""
+        obj: CProperty = CProperty(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Type", namespace="Namespace"),
+            setter=True,
+            static=True,
+        )
+
+        expected: Sequence[str] = [
+            "Name: ClassVar[Type] = ...",
+            '""""""',
+        ]
+        actual: Sequence[str] = build_property(
+            obj=obj, import_list=imports, doc_tree=doc, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.CLASS_VAR, "Namespace.Type"}
+
+
+class TestBuildMethod:
+    """Tests for build_method()."""
+
+    def test_basic(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with a basic method."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+            return_types=(CType.VOID,),
+        )
+
+        expected: Sequence[str] = [
+            "def Name(self) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == set()
+
+    def test_parameters(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with a method with parameters."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+            return_types=(CType.VOID,),
+        )
+
+        expected: Sequence[str] = [
+            "def Name(self, param0: Type, param1: Type) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_return(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with a method with multiple returns."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+            return_types=(
+                CType(name="Type", namespace="Namespace"),
+                CType(name="Type", namespace="Namespace"),
+            ),
+        )
+
+        expected: Sequence[str] = [
+            "def Name(self) -> tuple[Type, Type]:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_overload(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with an overloaded method."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+            return_types=(CType.VOID,),
+        )
+
+        expected: Sequence[str] = [
+            "@overload",
+            "def Name(self) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=True,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD}
+
+    def test_static(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with a static method."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+            return_types=(CType.VOID,),
+            static=True,
+        )
+
+        expected: Sequence[str] = [
+            "@classmethod",
+            "def Name(cls) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == set()
+
+    def test_static_parameters(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with a static method with parameters."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+            return_types=(CType.VOID,),
+            static=True,
+        )
+
+        expected: Sequence[str] = [
+            "@classmethod",
+            "def Name(cls, param0: Type, param1: Type) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_static_returns(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with a static method with multiple returns."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+            return_types=(
+                CType(name="Type", namespace="Namespace"),
+                CType(name="Type", namespace="Namespace"),
+            ),
+            static=True,
+        )
+
+        expected: Sequence[str] = [
+            "@classmethod",
+            "def Name(cls) -> tuple[Type, Type]:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=False,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_static_overload(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_method() with an overloaded static method."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+            return_types=(CType.VOID,),
+            static=True,
+        )
+
+        expected: Sequence[str] = [
+            "@classmethod",
+            "@overload",
+            "def Name(cls) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_method(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            overload=True,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD}
+
+
+class TestBuildEvent:
+    """Tests for build_event()."""
+
+    def test_basic(self, imports: ImportList, doc: DocNode, line_length: int) -> None:
+        """Test for build_event() with a basic event."""
+        obj: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Type", namespace="Namespace"),
+        )
+
+        expected: Sequence[str] = [
+            "Event: EventType[Type] = ...",
+            '""""""',
+        ]
+        actual: Sequence[str] = build_event(
+            obj=obj,
+            import_list=imports,
+            doc_tree=doc,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type", ImportList.EVENT_TYPE}
+
+
+class TestBuildClass:
+    """Tests for build_class()."""
+
+    def test_basic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a basic class."""
+        obj: CClass = CClass(name="Name", namespace="Namespace")
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+
+    def test_abstract(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with an abstract class."""
+        obj: CClass = CClass(name="Name", namespace="Namespace", abstract=True)
+
+        expected: Sequence[str] = [
+            "class Name(ABC):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.ABC}
+
+    def test_generic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with generic arguments."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+        )
+
+        expected: Sequence[str] = [
+            "class Name[A, B]:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+
+    def test_super(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with a suber class."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            super_class=CType(name="Super", namespace="Namespace"),
+        )
+
+        expected: Sequence[str] = [
+            "class Name(Super):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Super"}
+
+    def test_interfaces(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with interfaces."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+            ),
+        )
+
+        expected: Sequence[str] = [
+            "class Name(InterfaceA, InterfaceB):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.InterfaceA", "Namespace.InterfaceB"}
+
+    def test_fields(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with fields."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            fields={
+                "Namespace:Class.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Class.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
             },
         )
 
-        lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-        expected: Sequence[str] = (
-            "Field: Final[ReturnType] = ...",
-            '"""Field doc string."""',
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    FieldA: Final[Type] = ...",
+            '    """"""',
+            "    FieldB: Final[Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
         )
 
-        self.assertEqual(expected, lines)
+        assert actual == expected
+        assert imports.types == {ImportList.FINAL, "Namespace.Type"}
 
-    def test_doc_static(self) -> None:
-        field: CField = CField(
-            name="Field",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: DocTree = DocTree(
-            {
-                "Namespace": {
-                    "Type": {"Field": {"doc": "Field doc string."}},
-                },
+    def test_constructor(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with a constructor."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            constructors={
+                "Namespace:Name.__init__()": CConstructor(
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(),
+                ),
             },
         )
 
-        lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-        expected: Sequence[str] = (
-            "Field: Final[ClassVar[ReturnType]] = ...",
-            '"""Field doc string."""',
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    def __init__(self) -> None:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
         )
 
-        self.assertEqual(expected, lines)
+        assert actual == expected
+        assert imports.types == set()
+
+    def test_constructors(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with constructors."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            constructors={
+                "Namespace:Name.__init__()": CConstructor(
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace:Name.__init__(Namespace:Type)": CConstructor(
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @overload",
+            "    def __init__(self) -> None:",
+            '        """"""',
+            "    @overload",
+            "    def __init__(self, param0: Type) -> None:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD, "Namespace.Type"}
+
+    def test_properties(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with properties."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            properties={
+                "Namespace:Name.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Name.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @property",
+            "    def PropertyA(self) -> Type:",
+            '        """"""',
+            "    @property",
+            "    def PropertyB(self) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_methods(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with methods."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            methods={
+                "Namespace:Name.MethodA(Namespace:Type, Namespace:Type)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+                "Namespace:Name.MethodB(Namespace:Type, Namespace:Type)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    def MethodA(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+            "    def MethodB(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_methods_overload(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with overloaded methods."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            methods={
+                "Namespace:Name.Method(Namespace:Type)": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+                "Namespace:Name.Method(Namespace:Type, Namespace:Type)": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @overload",
+            "    def Method(self, param0: Type) -> Type:",
+            '        """"""',
+            "    @overload",
+            "    def Method(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD, "Namespace.Type"}
+
+    def test_events(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with events."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            events={
+                "Namespace:Name.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Name.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    EventA: EventType[Type] = ...",
+            '    """"""',
+            "    EventB: EventType[Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type", ImportList.EVENT_TYPE}
+
+    def test_nested_types(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_class() with a class with nested types."""
+        obj: CClass = CClass(
+            name="Name",
+            namespace="Namespace",
+            nested_types={
+                "Namespace:Name.NestedClass": CClass(
+                    name="NestedClass",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.NestedStruct": CStruct(
+                    name="NestedStruct",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.INestedInterface": CInterface(
+                    name="INestedInterface",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                    fields=(),
+                ),
+                "Namespace:Name.NestedDelegate": CDelegate(
+                    name="NestedDelegate",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                    parameters=(),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    class NestedClass:",
+            '        """"""',
+            "    class NestedStruct:",
+            '        """"""',
+            "    class INestedInterface:",
+            '        """"""',
+            "    class NestedEnum(Enum):",
+            '        """"""',
+            "    NestedDelegate: Callable[[], Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_class(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.CALLABLE, ImportList.ENUM, "Namespace.Type"}
 
 
-# class TestBuildConstructor:
-#     def test_build(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=False,
-#         )
-#         expected: Sequence[str] = (
-#             "def __init__(self, param0: Param, param1: Param):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_overload(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=True,
-#         )
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def __init__(self, param0: Param, param1: Param):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_parameters(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=False,
-#         )
-#         expected: Sequence[str] = (
-#             "def __init__(self):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_parameters_overload(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=True,
-#         )
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def __init__(self):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=False,
-#         )
-#         expected: set[str] = {"Namespace.Param"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_overload(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=True,
-#         )
-#         expected: set[str] = {"typing.overload", "Namespace.Param"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_parameters(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=False,
-#         )
-#         expected: set[str] = set()
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_parameters_overload(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=True,
-#         )
-#         expected: set[str] = {"typing.overload"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc_parameters(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "__init__(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Constructor doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                         }
-#                     },
-#                 },
-#             },
-#         )
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=False,
-#         )
-#         expected: Sequence[str] = (
-#             "def __init__(self, param0: Param, param1: Param):",
-#             '    """Constructor doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_parameters_overload(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "__init__(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Constructor doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                         }
-#                     },
-#                 },
-#             },
-#         )
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=True,
-#         )
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def __init__(self, param0: Param, param1: Param):",
-#             '    """Constructor doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_parameters_none(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "__init__()": {
-#                             "doc": "Constructor doc string.",
-#                         }
-#                     },
-#                 },
-#             },
-#         )
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=False,
-#         )
-#         expected: Sequence[str] = (
-#             "def __init__(self):",
-#             '    """Constructor doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_parameters_none_overload(self) -> None:
-#         constructor: CConstructor = CConstructor(
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "__init__()": {
-#                             "doc": "Constructor doc string.",
-#                         }
-#                     },
-#                 },
-#             },
-#         )
-#
-#         lines: Sequence[str] = build_constructor(
-#             constructor=constructor,
-#             imports=imports,
-#             doc=doc,
-#             overload=True,
-#         )
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def __init__(self):",
-#             '    """Constructor doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildProperty:
-#     def test_build(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "@property",
-#             "def Property(self) -> PropertyType:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_setter(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             setter=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "@property",
-#             "def Property(self) -> PropertyType:",
-#             '    """"""',
-#             "@Property.setter",
-#             "def Property(self, value: PropertyType) -> None: ...",
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_static(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Property: Final[ClassVar[PropertyType]] = ...",
-#             '""""""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_setter_static(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             setter=True,
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Property: ClassVar[PropertyType] = ...",
-#             '""""""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_property(property=property, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.PropertyType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_setter(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             setter=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_property(property=property, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.PropertyType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_static(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_property(property=property, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "Namespace.PropertyType",
-#             "typing.ClassVar",
-#             "typing.Final",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_setter_static(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             setter=True,
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_property(property=property, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.PropertyType", "typing.ClassVar"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Property": {
-#                             "doc": "Property doc string.",
-#                             "return": "Property return string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "@property",
-#             "def Property(self) -> PropertyType:",
-#             '    """Property doc string.',
-#             "    ",
-#             "    :return: Property return string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_setter(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             setter=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Property": {
-#                             "doc": "Property doc string.",
-#                             "return": "Property return string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "@property",
-#             "def Property(self) -> PropertyType:",
-#             '    """Property doc string.',
-#             "    ",
-#             "    :return: Property return string.",
-#             '    """',
-#             "@Property.setter",
-#             "def Property(self, value: PropertyType) -> None: ...",
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_static(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Property": {
-#                             "doc": "Property doc string.",
-#                             "return": "Property return string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Property: Final[ClassVar[PropertyType]] = ...",
-#             '"""Property doc string.',
-#             "",
-#             ":return: Property return string.",
-#             '"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_setter_static(self) -> None:
-#         property: CProperty = CProperty(
-#             name="Property",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="PropertyType", namespace="Namespace"),
-#             setter=True,
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Property": {
-#                             "doc": "Property doc string.",
-#                             "return": "Property return string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Property: ClassVar[PropertyType] = ...",
-#             '"""Property doc string.',
-#             "",
-#             ":return: Property return string.",
-#             '"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildMethod:
-#     def test_build(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self, param0: Param, param1: Param) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls, param0: Param, param1: Param) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self, param0: Param, param1: Param) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls, param0: Param, param1: Param) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_params(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_params_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_params_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_params_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls) -> Return:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns_no_params(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns_no_params_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns_no_params_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_returns_no_params_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls) -> Tuple[Return, Return]:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"Namespace.Param", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"Namespace.Param", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_params(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_params_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_params_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {"typing.overload", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_params_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {"typing.overload", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {
-#             "typing.overload",
-#             "typing.Tuple",
-#             "Namespace.Param",
-#             "Namespace.Return",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {
-#             "typing.overload",
-#             "typing.Tuple",
-#             "Namespace.Param",
-#             "Namespace.Return",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns_no_params(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"typing.Tuple", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns_no_params_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: set[str] = {"typing.Tuple", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns_no_params_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_returns_no_params_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self, param0: Param, param1: Param) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls, param0: Param, param1: Param) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self, param0: Param, param1: Param) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls, param0: Param, param1: Param) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_no_params(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_no_params_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_no_params_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_no_params_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(CType(name="Return", namespace="Namespace"),),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls) -> Return:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-#             ),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method(Namespace:Param, Namespace:Param)": {
-#                             "doc": "Method doc string.",
-#                             "parameters": {
-#                                 "param0": "Parameter 0 doc string.",
-#                                 "param1": "Parameter 1 doc string.",
-#                             },
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :param param0: Parameter 0 doc string.",
-#             "    :param param1: Parameter 1 doc string.",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns_no_params(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "def Method(self) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns_no_params_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "def Method(cls) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns_no_params_overload(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@overload",
-#             "def Method(self) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_returns_no_params_overload_static(self) -> None:
-#         method: CMethod = CMethod(
-#             name="Method",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             parameters=(),
-#             return_types=(
-#                 CType(name="Return", namespace="Namespace"),
-#                 CType(name="Return", namespace="Namespace"),
-#             ),
-#             static=True,
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Method()": {
-#                             "doc": "Method doc string.",
-#                             "return": "Return doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-#         expected: Sequence[str] = (
-#             "@classmethod",
-#             "@overload",
-#             "def Method(cls) -> Tuple[Return, Return]:",
-#             '    """Method doc string.',
-#             "    ",
-#             "    :return: Return doc string.",
-#             '    """',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildEvent:
-#     def test_build(self) -> None:
-#         event: CEvent = CEvent(
-#             name="Event",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="Event", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_event(event=event, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Event: EventType[Event] = ...",
-#             '""""""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         event: CEvent = CEvent(
-#             name="Event",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="Event", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_event(event=event, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.Event"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         event: CEvent = CEvent(
-#             name="Event",
-#             declaring_type=CType(name="Type", namespace="Namespace"),
-#             type=CType(name="Event", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Type": {
-#                         "Event": {
-#                             "doc": "Event doc string.",
-#                         },
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_event(event=event, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Event: EventType[Event] = ...",
-#             '"""Event doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildClass:
-#     def test_build(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_abstract(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=True,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class(ABC):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_generic(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(
-#                 CType(name="K", namespace="Namespace", generic=True),
-#                 CType(name="V", namespace="Namespace", generic=True),
-#             ),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class(Generic[K, V]):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_super(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=CType(name="Super", namespace="Namespace"),
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class(Super):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_interfaces(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(
-#                 CType(name="InterfaceA", namespace="Namespace"),
-#                 CType(name="InterfaceB", namespace="Namespace"),
-#             ),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class(InterfaceA, InterfaceB):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_fields(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={
-#                 "Namespace:Class.FieldA": CField(
-#                     name="FieldA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Class.FieldB": CField(
-#                     name="FieldB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#             },
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    FieldA: Final[FieldType] = ...",
-#             '    """"""',
-#             "    FieldB: Final[FieldType] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_constructors(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Class.__init__()": CConstructor(
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    def __init__(self):",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_constructors_overload(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Class.__init__()": CConstructor(
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#                 "Namespace:Class.__init__(Namespace:Type)": CConstructor(
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="Type", namespace="Namespace"),
-#                         ),
-#                     ),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    @overload",
-#             "    def __init__(self):",
-#             '        """"""',
-#             "    @overload",
-#             "    def __init__(self, param0: Type):",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_properties(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={
-#                 "Namespace:Class.PropertyA": CProperty(
-#                     name="PropertyA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Class.PropertyB": CProperty(
-#                     name="PropertyB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#             },
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    @property",
-#             "    def PropertyA(self) -> PropertyType:",
-#             '        """"""',
-#             "    @property",
-#             "    def PropertyB(self) -> PropertyType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_methods(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Class.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#             "    def MethodB(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_methods_overload(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Class.MethodA(Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    @overload",
-#             "    def MethodA(self, param0: ParamType) -> MethodType:",
-#             '        """"""',
-#             "    @overload",
-#             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_events(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={
-#                 "Namespace:Class.EventA": CEvent(
-#                     name="EventA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Class.EventB": CEvent(
-#                     name="EventB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#             },
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    EventA: EventType[EventHandler] = ...",
-#             '    """"""',
-#             "    EventB: EventType[EventHandler] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_nested_types(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={
-#                 "Namespace:Class.NestedClass": CClass(
-#                     name="NestedClass",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Class.NestedStruct": CStruct(
-#                     name="NestedStruct",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Class.INestedInterface": CInterface(
-#                     name="INestedInterface",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     generic_args=(),
-#                     interfaces=(),
-#                     fields={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Class.NestedEnum": CEnum(
-#                     name="NestedEnum",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     fields=(),
-#                 ),
-#                 "Namespace:Class.NestedDelegate": CDelegate(
-#                     name="NestedDelegate",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     parameters=(),
-#                     return_type=CType(name="DelegateType", namespace="Namespace"),
-#                 ),
-#             },
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """"""',
-#             "    class NestedClass:",
-#             '        """"""',
-#             "    class NestedStruct:",
-#             '        """"""',
-#             "    class INestedInterface:",
-#             '        """"""',
-#             "    class NestedEnum(Enum):",
-#             '        """"""',
-#             "    NestedDelegate: Callable[[], DelegateType] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = set()
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_abstract(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=True,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"abc.ABC"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_generic(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(
-#                 CType(name="K", namespace="Namespace", generic=True),
-#                 CType(name="V", namespace="Namespace", generic=True),
-#             ),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Generic", "typing.TypeVar"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_super(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=CType(name="Super", namespace="Namespace"),
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.Super"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_interfaces(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(
-#                 CType(name="InterfaceA", namespace="Namespace"),
-#                 CType(name="InterfaceB", namespace="Namespace"),
-#             ),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_fields(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={
-#                 "Namespace:Class.FieldA": CField(
-#                     name="FieldA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Class.FieldB": CField(
-#                     name="FieldB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#             },
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Final", "Namespace.FieldType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_constructors(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Class.__init__()": CConstructor(
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = set()
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_constructors_overload(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Class.__init__()": CConstructor(
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#                 "Namespace:Class.__init__(Namespace:Type)": CConstructor(
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="Type", namespace="Namespace"),
-#                         ),
-#                     ),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.overload", "Namespace.Type"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_properties(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={
-#                 "Namespace:Class.PropertyA": CProperty(
-#                     name="PropertyA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Class.PropertyB": CProperty(
-#                     name="PropertyB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#             },
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.PropertyType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_methods(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Class.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_methods_overload(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Class.MethodA(Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "typing.overload",
-#             "Namespace.ParamType",
-#             "Namespace.MethodType",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_events(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={
-#                 "Namespace:Class.EventA": CEvent(
-#                     name="EventA",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Class.EventB": CEvent(
-#                     name="EventB",
-#                     declaring_type=CType(name="Class", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#             },
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.EventHandler"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_nested(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={
-#                 "Namespace:Class.NestedClass": CClass(
-#                     name="NestedClass",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Class.NestedStruct": CStruct(
-#                     name="NestedStruct",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Class.INestedInterface": CInterface(
-#                     name="INestedInterface",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     generic_args=(),
-#                     interfaces=(),
-#                     fields={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Class.NestedEnum": CEnum(
-#                     name="NestedEnum",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     fields=(),
-#                 ),
-#                 "Namespace:Class.NestedDelegate": CDelegate(
-#                     name="NestedDelegate",
-#                     namespace="Namespace",
-#                     nested=CType(name="Class", namespace="Namespace"),
-#                     parameters=(),
-#                     return_type=CType(name="DelegateType", namespace="Namespace"),
-#                 ),
-#             },
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "typing.Callable",
-#             "System.Enum",
-#             "Namespace.DelegateType",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         type_def: CClass = CClass(
-#             name="Class",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Class": {
-#                         "doc": "Class doc string.",
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Class:",
-#             '    """Class doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildStruct:
-#     def test_build(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_abstract(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=True,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct(ABC):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_generic(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(
-#                 CType(name="K", namespace="Namespace", generic=True),
-#                 CType(name="V", namespace="Namespace", generic=True),
-#             ),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct(Generic[K, V]):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_super(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=CType(name="Super", namespace="Namespace"),
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct(Super):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_interfaces(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(
-#                 CType(name="InterfaceA", namespace="Namespace"),
-#                 CType(name="InterfaceB", namespace="Namespace"),
-#             ),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct(InterfaceA, InterfaceB):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_fields(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={
-#                 "Namespace:Struct.FieldA": CField(
-#                     name="FieldA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Struct.FieldB": CField(
-#                     name="FieldB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#             },
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    FieldA: Final[FieldType] = ...",
-#             '    """"""',
-#             "    FieldB: Final[FieldType] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_constructors(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Struct.__init__()": CConstructor(
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    def __init__(self):",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_constructors_overload(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Struct.__init__()": CConstructor(
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#                 "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="Type", namespace="Namespace"),
-#                         ),
-#                     ),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    @overload",
-#             "    def __init__(self):",
-#             '        """"""',
-#             "    @overload",
-#             "    def __init__(self, param0: Type):",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_properties(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={
-#                 "Namespace:Struct.PropertyA": CProperty(
-#                     name="PropertyA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Struct.PropertyB": CProperty(
-#                     name="PropertyB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#             },
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    @property",
-#             "    def PropertyA(self) -> PropertyType:",
-#             '        """"""',
-#             "    @property",
-#             "    def PropertyB(self) -> PropertyType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_methods(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Struct.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#             "    def MethodB(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_methods_overload(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Struct.MethodA(Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    @overload",
-#             "    def MethodA(self, param0: ParamType) -> MethodType:",
-#             '        """"""',
-#             "    @overload",
-#             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_events(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={
-#                 "Namespace:Struct.EventA": CEvent(
-#                     name="EventA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Struct.EventB": CEvent(
-#                     name="EventB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#             },
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    EventA: EventType[EventHandler] = ...",
-#             '    """"""',
-#             "    EventB: EventType[EventHandler] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_nested(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={
-#                 "Namespace:Struct.NestedClass": CClass(
-#                     name="NestedClass",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Struct.NestedStruct": CStruct(
-#                     name="NestedStruct",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Struct.INestedInterface": CInterface(
-#                     name="INestedInterface",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     generic_args=(),
-#                     interfaces=(),
-#                     fields={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Struct.NestedEnum": CEnum(
-#                     name="NestedEnum",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     fields=(),
-#                 ),
-#                 "Namespace:Struct.NestedDelegate": CDelegate(
-#                     name="NestedDelegate",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(),
-#                     return_type=CType(name="DelegateType", namespace="Namespace"),
-#                 ),
-#             },
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """"""',
-#             "    class NestedClass:",
-#             '        """"""',
-#             "    class NestedStruct:",
-#             '        """"""',
-#             "    class INestedInterface:",
-#             '        """"""',
-#             "    class NestedEnum(Enum):",
-#             '        """"""',
-#             "    NestedDelegate: Callable[[], DelegateType] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = set()
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_abstract(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=True,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"abc.ABC"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_generic(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(
-#                 CType(name="K", namespace="Namespace", generic=True),
-#                 CType(name="V", namespace="Namespace", generic=True),
-#             ),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Generic", "typing.TypeVar"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_super(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=CType(name="Super", namespace="Namespace"),
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.Super"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_interfaces(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(
-#                 CType(name="InterfaceA", namespace="Namespace"),
-#                 CType(name="InterfaceB", namespace="Namespace"),
-#             ),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_fields(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={
-#                 "Namespace:Struct.FieldA": CField(
-#                     name="FieldA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Struct.FieldB": CField(
-#                     name="FieldB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#             },
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Final", "Namespace.FieldType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_constructors(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Struct.__init__()": CConstructor(
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = set()
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_constructors_overload(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={
-#                 "Namespace:Struct.__init__()": CConstructor(
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(),
-#                 ),
-#                 "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="Type", namespace="Namespace"),
-#                         ),
-#                     ),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.overload", "Namespace.Type"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_properties(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={
-#                 "Namespace:Struct.PropertyA": CProperty(
-#                     name="PropertyA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Struct.PropertyB": CProperty(
-#                     name="PropertyB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#             },
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.PropertyType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_methods(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Struct.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_methods_overload(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={
-#                 "Namespace:Struct.MethodA(Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "typing.overload",
-#             "Namespace.MethodType",
-#             "Namespace.ParamType",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_events(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={
-#                 "Namespace:Struct.EventA": CEvent(
-#                     name="EventA",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Struct.EventB": CEvent(
-#                     name="EventB",
-#                     declaring_type=CType(name="Struct", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#             },
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.EventHandler"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_nested(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={
-#                 "Namespace:Struct.NestedClass": CClass(
-#                     name="NestedClass",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Struct.NestedStruct": CStruct(
-#                     name="NestedStruct",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Struct.INestedInterface": CInterface(
-#                     name="INestedInterface",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     generic_args=(),
-#                     interfaces=(),
-#                     fields={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Struct.NestedEnum": CEnum(
-#                     name="NestedEnum",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     fields=(),
-#                 ),
-#                 "Namespace:Struct.NestedDelegate": CDelegate(
-#                     name="NestedDelegate",
-#                     namespace="Namespace",
-#                     nested=CType(name="Struct", namespace="Namespace"),
-#                     parameters=(),
-#                     return_type=CType(name="DelegateType", namespace="Namespace"),
-#                 ),
-#             },
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "typing.Callable",
-#             "Namespace.DelegateType",
-#             "System.Enum",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         type_def: CStruct = CStruct(
-#             name="Struct",
-#             namespace="Namespace",
-#             nested=None,
-#             abstract=False,
-#             generic_args=(),
-#             super_class=None,
-#             interfaces=(),
-#             fields={},
-#             constructors={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Struct": {
-#                         "doc": "Struct doc string.",
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Struct:",
-#             '    """Struct doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildInterface:
-#     def test_build(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_generic(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(
-#                 CType(name="K", namespace="Namespace", generic=True),
-#                 CType(name="V", namespace="Namespace", generic=True),
-#             ),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface(Generic[K, V]):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_interfaces(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(
-#                 CType(name="InterfaceA", namespace="Namespace"),
-#                 CType(name="InterfaceB", namespace="Namespace"),
-#             ),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface(InterfaceA, InterfaceB):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_fields(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={
-#                 "Namespace:Interface.FieldA": CField(
-#                     name="FieldA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Interface.FieldB": CField(
-#                     name="FieldB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """"""',
-#             "    FieldA: Final[FieldType] = ...",
-#             '    """"""',
-#             "    FieldB: Final[FieldType] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_properties(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={
-#                 "Namespace:Interface.PropertyA": CProperty(
-#                     name="PropertyA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Interface.PropertyB": CProperty(
-#                     name="PropertyB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#             },
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """"""',
-#             "    @property",
-#             "    def PropertyA(self) -> PropertyType:",
-#             '        """"""',
-#             "    @property",
-#             "    def PropertyB(self) -> PropertyType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_methods(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={
-#                 "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Interface.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """"""',
-#             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#             "    def MethodB(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_methods_overload(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={
-#                 "Namespace:Interface.MethodA(Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """"""',
-#             "    @overload",
-#             "    def MethodA(self, param0: ParamType) -> MethodType:",
-#             '        """"""',
-#             "    @overload",
-#             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
-#             '        """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_events(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={
-#                 "Namespace:Interface.EventA": CEvent(
-#                     name="EventA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Interface.EventB": CEvent(
-#                     name="EventB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#             },
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """"""',
-#             "    EventA: EventType[EventHandler] = ...",
-#             '    """"""',
-#             "    EventB: EventType[EventHandler] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_nested(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={
-#                 "Namespace:Interface.NestedClass": CClass(
-#                     name="NestedClass",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Interface.NestedStruct": CStruct(
-#                     name="NestedStruct",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Interface.INestedInterface": CInterface(
-#                     name="INestedInterface",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     generic_args=(),
-#                     interfaces=(),
-#                     fields={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Interface.NestedEnum": CEnum(
-#                     name="NestedEnum",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     fields=(),
-#                 ),
-#                 "Namespace:Interface.NestedDelegate": CDelegate(
-#                     name="NestedDelegate",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(),
-#                     return_type=CType(name="DelegateType", namespace="Namespace"),
-#                 ),
-#             },
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """"""',
-#             "    class NestedClass:",
-#             '        """"""',
-#             "    class NestedStruct:",
-#             '        """"""',
-#             "    class INestedInterface:",
-#             '        """"""',
-#             "    class NestedEnum(Enum):",
-#             '        """"""',
-#             "    NestedDelegate: Callable[[], DelegateType] = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = set()
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_generic(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(
-#                 CType(name="K", namespace="Namespace", generic=True),
-#                 CType(name="V", namespace="Namespace", generic=True),
-#             ),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Generic", "typing.TypeVar"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_interfaces(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(
-#                 CType(name="InterfaceA", namespace="Namespace"),
-#                 CType(name="InterfaceB", namespace="Namespace"),
-#             ),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_fields(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={
-#                 "Namespace:Interface.FieldA": CField(
-#                     name="FieldA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Interface.FieldB": CField(
-#                     name="FieldB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     return_type=CType(name="FieldType", namespace="Namespace"),
-#                 ),
-#             },
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Final", "Namespace.FieldType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_properties(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={
-#                 "Namespace:Interface.PropertyA": CProperty(
-#                     name="PropertyA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Interface.PropertyB": CProperty(
-#                     name="PropertyB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="PropertyType", namespace="Namespace"),
-#                 ),
-#             },
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.PropertyType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_methods(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={
-#                 "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Interface.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_methods_overload(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={
-#                 "Namespace:Interface.MethodA(Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#                 "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-#                     name="MethodA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(
-#                         CParameter(
-#                             name="param0",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                         CParameter(
-#                             name="param1",
-#                             type=CType(name="ParamType", namespace="Namespace"),
-#                         ),
-#                     ),
-#                     return_types=(CType(name="MethodType", namespace="Namespace"),),
-#                 ),
-#             },
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "typing.overload",
-#             "Namespace.ParamType",
-#             "Namespace.MethodType",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_events(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={
-#                 "Namespace:Interface.EventA": CEvent(
-#                     name="EventA",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#                 "Namespace:Interface.EventB": CEvent(
-#                     name="EventB",
-#                     declaring_type=CType(name="Interface", namespace="Namespace"),
-#                     type=CType(name="EventHandler", namespace="Namespace"),
-#                 ),
-#             },
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"Namespace.EventHandler"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_nested(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={
-#                 "Namespace:Interface.NestedClass": CClass(
-#                     name="NestedClass",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Interface.NestedStruct": CStruct(
-#                     name="NestedStruct",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     abstract=False,
-#                     generic_args=(),
-#                     super_class=None,
-#                     interfaces=(),
-#                     fields={},
-#                     constructors={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Interface.INestedInterface": CInterface(
-#                     name="INestedInterface",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     generic_args=(),
-#                     interfaces=(),
-#                     fields={},
-#                     properties={},
-#                     methods={},
-#                     events={},
-#                     nested_types={},
-#                 ),
-#                 "Namespace:Interface.NestedEnum": CEnum(
-#                     name="NestedEnum",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     fields=(),
-#                 ),
-#                 "Namespace:Interface.NestedDelegate": CDelegate(
-#                     name="NestedDelegate",
-#                     namespace="Namespace",
-#                     nested=CType(name="Interface", namespace="Namespace"),
-#                     parameters=(),
-#                     return_type=CType(name="DelegateType", namespace="Namespace"),
-#                 ),
-#             },
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "typing.Callable",
-#             "Namespace.DelegateType",
-#             "System.Enum",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         type_def: CInterface = CInterface(
-#             name="Interface",
-#             namespace="Namespace",
-#             nested=None,
-#             generic_args=(),
-#             interfaces=(),
-#             fields={},
-#             properties={},
-#             methods={},
-#             events={},
-#             nested_types={},
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Interface": {
-#                         "doc": "Interface doc string.",
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Interface:",
-#             '    """Interface doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildEnum:
-#     def test_build(self) -> None:
-#         type_def: CEnum = CEnum(
-#             name="Enum",
-#             namespace="Namespace",
-#             nested=None,
-#             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Enum(Enum):",
-#             '    """"""',
-#             "    FieldA: Enum = ...",
-#             '    """"""',
-#             "    FieldB: Enum = ...",
-#             '    """"""',
-#             "    FieldC: Enum = ...",
-#             '    """"""',
-#             "    FieldD: Enum = ...",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_fields(self) -> None:
-#         type_def: CEnum = CEnum(
-#             name="Enum",
-#             namespace="Namespace",
-#             nested=None,
-#             fields=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Enum(Enum):",
-#             '    """"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         type_def: CEnum = CEnum(
-#             name="Enum",
-#             namespace="Namespace",
-#             nested=None,
-#             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_enum(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"System.Enum"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_fields(self) -> None:
-#         type_def: CEnum = CEnum(
-#             name="Enum",
-#             namespace="Namespace",
-#             nested=None,
-#             fields=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_enum(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"System.Enum"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         type_def: CEnum = CEnum(
-#             name="Enum",
-#             namespace="Namespace",
-#             nested=None,
-#             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Enum": {
-#                         "doc": "Enum doc string.",
-#                         "FieldA": {"doc": "FieldA doc string."},
-#                         "FieldB": {"doc": "FieldB doc string."},
-#                         "FieldC": {"doc": "FieldC doc string."},
-#                         "FieldD": {"doc": "FieldD doc string."},
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Enum(Enum):",
-#             '    """Enum doc string."""',
-#             "    FieldA: Enum = ...",
-#             '    """FieldA doc string."""',
-#             "    FieldB: Enum = ...",
-#             '    """FieldB doc string."""',
-#             "    FieldC: Enum = ...",
-#             '    """FieldC doc string."""',
-#             "    FieldD: Enum = ...",
-#             '    """FieldD doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_no_fields(self) -> None:
-#         type_def: CEnum = CEnum(
-#             name="Enum",
-#             namespace="Namespace",
-#             nested=None,
-#             fields=(),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Enum": {
-#                         "doc": "Enum doc string.",
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "class Enum(Enum):",
-#             '    """Enum doc string."""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
-# class TestBuildDelegate:
-#     def test_build(self) -> None:
-#         type_def: CDelegate = CDelegate(
-#             name="Delegate",
-#             namespace="Namespace",
-#             nested=None,
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
-#             ),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Delegate: Callable[[ParamType, ParamType], ReturnType] = ...",
-#             '""""""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_build_no_params(self) -> None:
-#         type_def: CDelegate = CDelegate(
-#             name="Delegate",
-#             namespace="Namespace",
-#             nested=None,
-#             parameters=(),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Delegate: Callable[[], ReturnType] = ...",
-#             '""""""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_imports(self) -> None:
-#         type_def: CDelegate = CDelegate(
-#             name="Delegate",
-#             namespace="Namespace",
-#             nested=None,
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
-#             ),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_delegate(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {
-#             "typing.Callable",
-#             "Namespace.ReturnType",
-#             "Namespace.ParamType",
-#         }
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_imports_no_params(self) -> None:
-#         type_def: CDelegate = CDelegate(
-#             name="Delegate",
-#             namespace="Namespace",
-#             nested=None,
-#             parameters=(),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree({})
-#
-#         build_delegate(type_def=type_def, imports=imports, doc=doc)
-#         expected: set[str] = {"typing.Callable", "Namespace.ReturnType"}
-#
-#         self.assertEqual(expected, imports.types)
-#
-#     def test_doc(self) -> None:
-#         type_def: CDelegate = CDelegate(
-#             name="Delegate",
-#             namespace="Namespace",
-#             nested=None,
-#             parameters=(
-#                 CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
-#                 CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
-#             ),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Delegate(Namespace:ParamType, Namespace:ParamType)": {
-#                         "doc": "Delegate doc string.",
-#                         "parameters": {
-#                             "param0": "Parameter 0 doc string.",
-#                             "param1": "Parameter 1 doc string.",
-#                         },
-#                         "return": "Return doc string.",
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Delegate: Callable[[ParamType, ParamType], ReturnType] = ...",
-#             '"""Delegate doc string.',
-#             "",
-#             ":param param0: Parameter 0 doc string.",
-#             ":param param1: Parameter 1 doc string.",
-#             ":return: Return doc string.",
-#             '"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#     def test_doc_no_params(self) -> None:
-#         type_def: CDelegate = CDelegate(
-#             name="Delegate",
-#             namespace="Namespace",
-#             nested=None,
-#             parameters=(),
-#             return_type=CType(name="ReturnType", namespace="Namespace"),
-#         )
-#         imports: Imports = Imports()
-#         doc: DocTree = DocTree(
-#             {
-#                 "Namespace": {
-#                     "Delegate()": {
-#                         "doc": "Delegate doc string.",
-#                         "return": "Return doc string.",
-#                     },
-#                 },
-#             }
-#         )
-#
-#         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-#         expected: Sequence[str] = (
-#             "Delegate: Callable[[], ReturnType] = ...",
-#             '"""Delegate doc string.',
-#             "",
-#             ":return: Return doc string.",
-#             '"""',
-#         )
-#
-#         self.assertEqual(expected, lines)
-#
-#
+class TestBuildStruct:
+    """Tests for build_struct()."""
+
+    def test_basic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a basic struct."""
+        obj: CStruct = CStruct(name="Name", namespace="Namespace")
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+
+    def test_abstract(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with an abstract struct."""
+        obj: CStruct = CStruct(name="Name", namespace="Namespace", abstract=True)
+
+        expected: Sequence[str] = [
+            "class Name(ABC):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.ABC}
+
+    def test_generic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with generic arguments."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+        )
+
+        expected: Sequence[str] = [
+            "class Name[A, B]:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+
+    def test_super(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with a suber class."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            super_class=CType(name="Super", namespace="Namespace"),
+        )
+
+        expected: Sequence[str] = [
+            "class Name(Super):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Super"}
+
+    def test_interfaces(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with interfaces."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+            ),
+        )
+
+        expected: Sequence[str] = [
+            "class Name(InterfaceA, InterfaceB):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.InterfaceA", "Namespace.InterfaceB"}
+
+    def test_fields(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with fields."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            fields={
+                "Namespace:Class.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Class.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    FieldA: Final[Type] = ...",
+            '    """"""',
+            "    FieldB: Final[Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.FINAL, "Namespace.Type"}
+
+    def test_constructor(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with a constructor."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            constructors={
+                "Namespace:Name.__init__()": CConstructor(
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    def __init__(self) -> None:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == set()
+
+    def test_constructors(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with constructors."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            constructors={
+                "Namespace:Name.__init__()": CConstructor(
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace:Name.__init__(Namespace:Type)": CConstructor(
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @overload",
+            "    def __init__(self) -> None:",
+            '        """"""',
+            "    @overload",
+            "    def __init__(self, param0: Type) -> None:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD, "Namespace.Type"}
+
+    def test_properties(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with properties."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            properties={
+                "Namespace:Name.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Name.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @property",
+            "    def PropertyA(self) -> Type:",
+            '        """"""',
+            "    @property",
+            "    def PropertyB(self) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_methods(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with methods."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            methods={
+                "Namespace:Name.MethodA(Namespace:Type, Namespace:Type)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+                "Namespace:Name.MethodB(Namespace:Type, Namespace:Type)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    def MethodA(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+            "    def MethodB(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_methods_overload(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with overloaded methods."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            methods={
+                "Namespace:Name.Method(Namespace:Type)": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+                "Namespace:Name.Method(Namespace:Type, Namespace:Type)": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @overload",
+            "    def Method(self, param0: Type) -> Type:",
+            '        """"""',
+            "    @overload",
+            "    def Method(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD, "Namespace.Type"}
+
+    def test_events(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with events."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            events={
+                "Namespace:Name.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Name.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    EventA: EventType[Type] = ...",
+            '    """"""',
+            "    EventB: EventType[Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type", ImportList.EVENT_TYPE}
+
+    def test_nested_types(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_struct() with a struct with nested types."""
+        obj: CStruct = CStruct(
+            name="Name",
+            namespace="Namespace",
+            nested_types={
+                "Namespace:Name.NestedClass": CClass(
+                    name="NestedClass",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.NestedStruct": CStruct(
+                    name="NestedStruct",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.INestedInterface": CInterface(
+                    name="INestedInterface",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                    fields=(),
+                ),
+                "Namespace:Name.NestedDelegate": CDelegate(
+                    name="NestedDelegate",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                    parameters=(),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    class NestedClass:",
+            '        """"""',
+            "    class NestedStruct:",
+            '        """"""',
+            "    class INestedInterface:",
+            '        """"""',
+            "    class NestedEnum(Enum):",
+            '        """"""',
+            "    NestedDelegate: Callable[[], Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_struct(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.CALLABLE, ImportList.ENUM, "Namespace.Type"}
+
+
+class TestBuildInterface:
+    """Tests for build_interface()."""
+
+    def test_basic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with a basic interface."""
+        obj: CInterface = CInterface(name="Name", namespace="Namespace")
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+
+    def test_generic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with generic arguments."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+        )
+
+        expected: Sequence[str] = [
+            "class Name[A, B]:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+
+    def test_interfaces(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with interfaces."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+            ),
+        )
+
+        expected: Sequence[str] = [
+            "class Name(InterfaceA, InterfaceB):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.InterfaceA", "Namespace.InterfaceB"}
+
+    def test_fields(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with fields."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            fields={
+                "Namespace:Class.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Class.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    FieldA: Final[Type] = ...",
+            '    """"""',
+            "    FieldB: Final[Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.FINAL, "Namespace.Type"}
+
+    def test_properties(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with properties."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            properties={
+                "Namespace:Name.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Name.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @property",
+            "    def PropertyA(self) -> Type:",
+            '        """"""',
+            "    @property",
+            "    def PropertyB(self) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_methods(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with methods."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            methods={
+                "Namespace:Name.MethodA(Namespace:Type, Namespace:Type)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+                "Namespace:Name.MethodB(Namespace:Type, Namespace:Type)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    def MethodA(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+            "    def MethodB(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type"}
+
+    def test_methods_overload(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with overloaded methods."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            methods={
+                "Namespace:Name.Method(Namespace:Type)": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+                "Namespace:Name.Method(Namespace:Type, Namespace:Type)": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    @overload",
+            "    def Method(self, param0: Type) -> Type:",
+            '        """"""',
+            "    @overload",
+            "    def Method(self, param0: Type, param1: Type) -> Type:",
+            '        """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.OVERLOAD, "Namespace.Type"}
+
+    def test_events(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with events."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            events={
+                "Namespace:Name.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+                "Namespace:Name.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Name", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    EventA: EventType[Type] = ...",
+            '    """"""',
+            "    EventB: EventType[Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj, doc_tree=doc, import_list=imports, line_length=line_length
+        )
+
+        assert actual == expected
+        assert imports.types == {"Namespace.Type", ImportList.EVENT_TYPE}
+
+    def test_nested_types(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_interface() with an interface with nested types."""
+        obj: CInterface = CInterface(
+            name="Name",
+            namespace="Namespace",
+            nested_types={
+                "Namespace:Name.NestedClass": CClass(
+                    name="NestedClass",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.NestedStruct": CStruct(
+                    name="NestedStruct",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.INestedInterface": CInterface(
+                    name="INestedInterface",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                ),
+                "Namespace:Name.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                    fields=(),
+                ),
+                "Namespace:Name.NestedDelegate": CDelegate(
+                    name="NestedDelegate",
+                    namespace="Namespace",
+                    nested=CType(name="Name", namespace="Namespace"),
+                    parameters=(),
+                    return_type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+        )
+
+        expected: Sequence[str] = [
+            "class Name:",
+            '    """"""',
+            "    class NestedClass:",
+            '        """"""',
+            "    class NestedStruct:",
+            '        """"""',
+            "    class INestedInterface:",
+            '        """"""',
+            "    class NestedEnum(Enum):",
+            '        """"""',
+            "    NestedDelegate: Callable[[], Type] = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_interface(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.CALLABLE, ImportList.ENUM, "Namespace.Type"}
+
+
+class TestBuildEnum:
+    """Tests for build_enum()."""
+
+    def test_basic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_enum() with a basic enum."""
+        obj: CEnum = CEnum(name="Name", namespace="Namespace")
+
+        expected: Sequence[str] = [
+            "class Name(Enum):",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_enum(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.ENUM}
+
+    def test_fields(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_enum() with an enum with multiple fields."""
+        obj: CEnum = CEnum(
+            name="Enum",
+            namespace="Namespace",
+            fields=("FieldA", "FieldB", "FieldC", "FieldD"),
+        )
+
+        expected: Sequence[str] = [
+            "class Enum(Enum):",
+            '    """"""',
+            "    FieldA: Enum = ...",
+            '    """"""',
+            "    FieldB: Enum = ...",
+            '    """"""',
+            "    FieldC: Enum = ...",
+            '    """"""',
+            "    FieldD: Enum = ...",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_enum(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.ENUM}
+
+
+class TestBuildDelegate:
+    """Tests for build_delegate()."""
+
+    def test_basic(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_delegate() with a basic delegate."""
+        obj: CDelegate = CDelegate(name="Name", namespace="Namespace")
+
+        expected: Sequence[str] = [
+            "Name: Callable[[], None] = ...",
+            '""""""',
+        ]
+        actual: Sequence[str] = build_delegate(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.CALLABLE}
+
+    def test_parameters(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_delegate() with a delegate with parameters."""
+        obj: CDelegate = CDelegate(
+            name="Name",
+            namespace="Namespace",
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+        )
+
+        expected: Sequence[str] = [
+            "Name: Callable[[Type, Type], None] = ...",
+            '""""""',
+        ]
+        actual: Sequence[str] = build_delegate(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.CALLABLE, "Namespace.Type"}
+
+    def test_return(self, doc: DocNode, imports: ImportList, line_length: int) -> None:
+        """Test for build_delegate() with a delegate with parameters."""
+        obj: CDelegate = CDelegate(
+            name="Name",
+            namespace="Namespace",
+            return_type=CType(name="Type", namespace="Namespace"),
+        )
+
+        expected: Sequence[str] = [
+            "Name: Callable[[], Type] = ...",
+            '""""""',
+        ]
+        actual: Sequence[str] = build_delegate(
+            obj=obj,
+            doc_tree=doc,
+            import_list=imports,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+        assert imports.types == {ImportList.CALLABLE, "Namespace.Type"}
+
+
+class TestBuildNamespace:
+    """Tests for build_namespace()."""
+
+    def test_basic(self, doc: DocNode, line_length: int) -> None:
+        """Test for build_namespace() with a basic namespace."""
+        obj: CNamespace = CNamespace(
+            name="Name",
+            types={},
+        )
+
+        expected: Sequence[str] = [
+            '"""Automatically generated stubs for C# namespace: Name."""',
+            "",
+        ]
+        actual: Sequence[str] = build_namespace(
+            obj=obj,
+            doc_tree=doc,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+
+    def test_types(self, doc: DocNode, line_length: int) -> None:
+        """Test for build_namespace() with a basic namespace."""
+        obj: CNamespace = CNamespace(
+            name="Name",
+            types={
+                "Name:Class": CClass(name="Class", namespace="Name"),
+                "Name:Struct": CStruct(name="Struct", namespace="Name"),
+                "Name:IInterface": CInterface(name="IInterface", namespace="Name"),
+                "Name:Enum": CEnum(name="Enum", namespace="Name"),
+                "Name:Delegate": CDelegate(name="Delegate", namespace="Name"),
+            },
+        )
+
+        expected: Sequence[str] = [
+            '"""Automatically generated stubs for C# namespace: Name."""',
+            "",
+            "from System import Enum",
+            "from collections.abc import Callable",
+            "class Class:",
+            '    """"""',
+            "Delegate: Callable[[], None] = ...",
+            '""""""',
+            "class Enum(Enum):",
+            '    """"""',
+            "class IInterface:",
+            '    """"""',
+            "class Struct:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = build_namespace(
+            obj=obj,
+            doc_tree=doc,
+            line_length=line_length,
+        )
+
+        assert actual == expected
+
+
 # class TestBuildStubs:
 #     output_dir: Path
 #

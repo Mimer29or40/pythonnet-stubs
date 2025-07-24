@@ -21,10 +21,12 @@ from stubgen.model import CParameter
 from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
+from stubgen.model import DocNode
 from stubgen.model import DocTree
 from stubgen.model import ImportList
 
 if TYPE_CHECKING:  # pragma: no cover
+    from collections.abc import Callable
     from collections.abc import Mapping
     from collections.abc import Sequence
 
@@ -83,7 +85,7 @@ class TestDocTree:
         ),
     )
     def test_split_node_string(self, string: str, expected: Sequence[str]) -> None:
-        """Test for DocTree.pattern."""
+        """Test for DocTree._split_node_string()."""
         actual: Sequence[str] = DocTree._split_node_string(string)  # noqa: SLF001
 
         assert actual == expected
@@ -93,54 +95,86 @@ class TestDocTree:
 
         def test_empty(self) -> None:
             """Test for DocTree.__getitem__() with an empty string."""
-            doc: DocTree = DocTree("Test")
+            doc: DocTree = DocTree()
 
-            expected: DocTree | None = None
-            actual: DocTree | None = doc[""]
+            expected: DocNode | None = None
+            actual: DocNode | None = doc[""]
 
             assert actual == expected
 
         def test_child(self) -> None:
             """Test for DocTree.__getitem__()."""
-            child: DocTree = DocTree("Child")
-            doc: DocTree = DocTree("Test", children=[child])
+            child: DocNode = DocNode("Child")
+            doc: DocTree = DocTree(children=(child,))
 
-            expected: DocTree | None = child
-            actual: DocTree | None = doc["Child"]
+            expected: DocNode | None = child
+            actual: DocNode | None = doc["Child"]
 
             assert actual == expected
 
         def test_grandchild(self) -> None:
             """Test for DocTree.__getitem__()."""
-            grandchild: DocTree = DocTree("Grandchild")
-            child: DocTree = DocTree("Child", children=[grandchild])
-            doc: DocTree = DocTree("Test", children=[child])
+            grandchild: DocNode = DocNode("Grandchild")
+            child: DocNode = DocNode("Child", children=[grandchild])
+            doc: DocTree = DocTree(children=(child,))
 
-            expected: DocTree | None = grandchild
-            actual: DocTree | None = doc["Child.Grandchild"]
+            expected: DocNode | None = grandchild
+            actual: DocNode | None = doc["Child.Grandchild"]
 
             assert actual == expected
 
         def test_missing(self) -> None:
             """Test for DocTree.__getitem__() with a missing child."""
-            doc: DocTree = DocTree("Test")
+            child: DocNode = DocNode("Child")
+            doc: DocTree = DocTree()
 
-            expected: DocTree | None = None
-            actual: DocTree | None = doc["Child"]
+            expected: DocNode | None = child
+            actual: DocNode | None = doc["Child"]
 
             assert actual == expected
+
+    json_list: ClassVar[ParamSequence[tuple[DocNode, JsonType]]] = [
+        ("basic", (DocTree(), {})),
+        (
+            "children",
+            (
+                DocTree(children=(DocNode("A"), DocNode("B"))),
+                {"A": {"doc": "", "doc_formatted": {}}, "B": {"doc": "", "doc_formatted": {}}},
+            ),
+        ),
+    ]
+
+    @pytest.mark.parametrize(("doc", "json"), **make_params(json_list))
+    def test_to_json(self, doc: DocTree, json: Mapping[str, ...]) -> None:
+        """Test for DocTree.to_json()."""
+        expected: JsonType = json
+        actual: JsonType = doc.to_json()
+
+        assert actual == expected
+
+    @pytest.mark.parametrize(("doc", "json"), **make_params(json_list))
+    def test_from_json(self, doc: DocTree, json: Mapping[str, ...]) -> None:
+        """Test for DocTree.from_json()."""
+        expected: DocTree = doc
+        actual: DocTree = DocTree.from_json(json)
+
+        assert actual == expected
+
+
+class TestDocNode:
+    """Tests for DocNode."""
 
     @pytest.mark.parametrize(
         ("doc", "indent", "expected"),
         **make_params(
             [
-                ("empty", (DocTree("A"), 0, ['""""""'])),
-                ("empty_indent", (DocTree("A"), 1, ['    """"""'])),
-                ("single_line", (DocTree("A", doc="Summary line."), 0, ['"""Summary line."""'])),
+                ("empty", (DocNode("A"), 0, ['""""""'])),
+                ("empty_indent", (DocNode("A"), 1, ['    """"""'])),
+                ("single_line", (DocNode("A", doc="Summary line."), 0, ['"""Summary line."""'])),
                 (
                     "single_line_indent",
                     (
-                        DocTree("A", doc="Summary line."),
+                        DocNode("A", doc="Summary line."),
                         1,
                         ['    """Summary line."""   # noqa: E501'],
                     ),
@@ -148,7 +182,7 @@ class TestDocTree:
                 (
                     "paragraph",
                     (
-                        DocTree("A", doc="Summary line.\nParagraph line."),
+                        DocNode("A", doc="Summary line.\nParagraph line."),
                         0,
                         [
                             '"""Summary line.',
@@ -161,7 +195,7 @@ class TestDocTree:
                 (
                     "paragraph_indent",
                     (
-                        DocTree("A", doc="Summary line.\nParagraph line."),
+                        DocNode("A", doc="Summary line.\nParagraph line."),
                         1,
                         [
                             '    """Summary line.',
@@ -174,7 +208,7 @@ class TestDocTree:
                 (
                     "long_paragraph",
                     (
-                        DocTree("A", doc="Summary line.\nLong paragraph line."),
+                        DocNode("A", doc="Summary line.\nLong paragraph line."),
                         0,
                         [
                             '"""Summary line.',
@@ -187,7 +221,7 @@ class TestDocTree:
                 (
                     "long_paragraph_indent",
                     (
-                        DocTree("A", doc="Summary line.\nLong paragraph line."),
+                        DocNode("A", doc="Summary line.\nLong paragraph line."),
                         1,
                         [
                             '    """Summary line.',
@@ -201,7 +235,7 @@ class TestDocTree:
                 (
                     "parameters",
                     (
-                        DocTree("A", parameter_docs={f"p{i}": f"Parameter {i}" for i in range(2)}),
+                        DocNode("A", parameter_docs={f"p{i}": f"Parameter {i}" for i in range(2)}),
                         0,
                         [
                             '"""',
@@ -217,7 +251,7 @@ class TestDocTree:
                 (
                     "parameters_indent",
                     (
-                        DocTree("A", parameter_docs={f"p{i}": f"Parameter {i}" for i in range(2)}),
+                        DocNode("A", parameter_docs={f"p{i}": f"Parameter {i}" for i in range(2)}),
                         1,
                         [
                             '    """',
@@ -233,7 +267,7 @@ class TestDocTree:
                 (
                     "return",
                     (
-                        DocTree("A", return_doc="Return string."),
+                        DocNode("A", return_doc="Return string."),
                         0,
                         [
                             '"""',
@@ -247,7 +281,7 @@ class TestDocTree:
                 (
                     "return_indent",
                     (
-                        DocTree("A", return_doc="Return string."),
+                        DocNode("A", return_doc="Return string."),
                         1,
                         [
                             '    """',
@@ -261,7 +295,7 @@ class TestDocTree:
                 (
                     "exceptions",
                     (
-                        DocTree("A", exception_docs={f"E{i}": f"Except {i}" for i in range(2)}),
+                        DocNode("A", exception_docs={f"E{i}": f"Except {i}" for i in range(2)}),
                         0,
                         [
                             '"""',
@@ -275,7 +309,7 @@ class TestDocTree:
                 (
                     "exceptions_indent",
                     (
-                        DocTree("A", exception_docs={f"E{i}": f"Except {i}" for i in range(2)}),
+                        DocNode("A", exception_docs={f"E{i}": f"Except {i}" for i in range(2)}),
                         1,
                         [
                             '    """',
@@ -291,7 +325,7 @@ class TestDocTree:
                 (
                     "doc_formatted",
                     (
-                        DocTree(
+                        DocNode(
                             "A",
                             doc="\n%replace%",
                             doc_formatted={
@@ -330,7 +364,7 @@ class TestDocTree:
                 (
                     "doc_formatted_indent",
                     (
-                        DocTree(
+                        DocNode(
                             "A",
                             doc="\n%replace%",
                             doc_formatted={
@@ -369,71 +403,71 @@ class TestDocTree:
             ]
         ),
     )
-    def test_doc_string(self, doc: DocTree, indent: int, expected: Sequence[str]) -> None:
-        """Test for DocTree.doc_string()."""
+    def test_doc_string(self, doc: DocNode, indent: int, expected: Sequence[str]) -> None:
+        """Test for DocNode.doc_string()."""
         actual: Sequence[str] = doc.doc_string(20, indent=indent)
 
         assert actual == expected
 
-    json_list: ClassVar[ParamSequence[tuple[DocTree, JsonType]]] = [
-        ("basic", (DocTree("A"), {"doc": "", "doc_formatted": {}})),
+    json_list: ClassVar[ParamSequence[tuple[DocNode, JsonType]]] = [
+        ("basic", (DocNode("A"), {"doc": "", "doc_formatted": {}})),
         (
             "parameters",
             (
-                DocTree("A", parameter_docs={f"p{i}": "" for i in range(2)}),
+                DocNode("A", parameter_docs={f"p{i}": "" for i in range(2)}),
                 {"doc": "", "doc_formatted": {}, "parameters": {"p0": "", "p1": ""}},
             ),
         ),
         (
             "parameters_empty",
             (
-                DocTree("A", parameter_docs={}),
+                DocNode("A", parameter_docs={}),
                 {"doc": "", "doc_formatted": {}, "parameters": {}},
             ),
         ),
         (
             "return",
             (
-                DocTree("A", return_doc=""),
+                DocNode("A", return_doc=""),
                 {"doc": "", "doc_formatted": {}, "return": ""},
             ),
         ),
         (
             "exceptions",
             (
-                DocTree("A", exception_docs={f"e{i}": "" for i in range(2)}),
+                DocNode("A", exception_docs={f"e{i}": "" for i in range(2)}),
                 {"doc": "", "doc_formatted": {}, "exceptions": {"e0": "", "e1": ""}},
             ),
         ),
         (
             "exceptions_empty",
             (
-                DocTree("A", exception_docs={}),
+                DocNode("A", exception_docs={}),
                 {"doc": "", "doc_formatted": {}, "exceptions": {}},
             ),
         ),
         (
-            "exceptions_children",
+            "children",
             (
-                DocTree("A", children=(DocTree("B"),)),
+                DocNode("A", children=(DocNode("B"),)),
                 {"doc": "", "doc_formatted": {}, "B": {"doc": "", "doc_formatted": {}}},
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("doc", "json"), **make_params(json_list))
-    def test_to_json(self, doc: DocTree, json: Mapping[str, ...]) -> None:
-        """Test for DocTree.to_json()."""
+    def test_to_json(self, doc: DocNode, json: Mapping[str, ...]) -> None:
+        """Test for DocNode.to_json()."""
         expected: JsonType = json
         actual: JsonType = doc.to_json()
 
         assert actual == expected
 
     @pytest.mark.parametrize(("doc", "json"), **make_params(json_list))
-    def test_from_json(self, doc: DocTree, json: Mapping[str, ...]) -> None:
-        """Test for DocTree.from_json()."""
-        expected: DocTree = doc
-        actual: DocTree = DocTree.from_json("A", json)
+    def test_from_json(self, doc: DocNode, json: Mapping[str, ...]) -> None:
+        """Test for DocNode.from_json()."""
+        expected: DocNode = doc
+        actual: DocNode = DocNode.from_json("A", json)
 
         assert actual == expected
 
@@ -479,11 +513,35 @@ class TestImportList:
 
             assert import_list.types == expected
 
-    def test_add_event_type(self, import_list: ImportList) -> None:
-        """Test for ImportList.add_event_type()."""
-        import_list.add_event_type()
+        def test_void(self, import_list: ImportList) -> None:
+            """Test for ImportList.add_type() with CType.VOID."""
+            obj: CType = CType.VOID
 
-        expected: set[str] = {ImportList.EVENT_TYPE}
+            import_list.add_type(obj)
+
+            expected: set[str] = set()
+
+            assert import_list.types == expected
+
+    @pytest.mark.parametrize(
+        ("func", "expected"),
+        **make_params(
+            [
+                ("event_type", (ImportList.add_event_type, {ImportList.EVENT_TYPE})),
+                ("abc", (ImportList.add_abc, {ImportList.ABC})),
+                ("final", (ImportList.add_final, {ImportList.FINAL})),
+                ("class_var", (ImportList.add_class_var, {ImportList.CLASS_VAR})),
+                ("overload", (ImportList.add_overload, {ImportList.OVERLOAD})),
+                ("enum", (ImportList.add_enum, {ImportList.ENUM})),
+                ("callable", (ImportList.add_callable, {ImportList.CALLABLE})),
+            ]
+        ),
+    )
+    def test_add(
+        self, import_list: ImportList, func: Callable[[ImportList], None], expected: set[str]
+    ) -> None:
+        """Test for the various add functions."""
+        func(import_list)
 
         assert import_list.types == expected
 
@@ -777,12 +835,12 @@ class TestCField:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CField, DocTree]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CField, DocNode]]] = [
         (
             "basic",
             (
                 CField(name="Name", declaring_type=CType(name="Type"), return_type=CType.VOID),
-                DocTree(name="Name"),
+                DocNode(name="Name"),
             ),
         ),
         (
@@ -791,16 +849,16 @@ class TestCField:
                 CField(
                     name="Name", declaring_type=CType(name="Type"), return_type=CType(name="Type")
                 ),
-                DocTree(name="Name", return_doc=""),
+                DocNode(name="Name", return_doc=""),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CField, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CField, doc: DocNode) -> None:
         """Test for CField.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -897,10 +955,10 @@ class TestCConstructor:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CConstructor, DocTree]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CConstructor, DocNode]]] = [
         (
             "basic",
-            (CConstructor(declaring_type=CType(name="Type")), DocTree("__init__()")),
+            (CConstructor(declaring_type=CType(name="Type")), DocNode("__init__()")),
         ),
         (
             "parameters",
@@ -912,7 +970,7 @@ class TestCConstructor:
                         CParameter(name="param1", type=CType(name="Type")),
                     ),
                 ),
-                DocTree(
+                DocNode(
                     "__init__(Type, Type)",
                     parameter_docs={"param0": "", "param1": ""},
                 ),
@@ -921,10 +979,10 @@ class TestCConstructor:
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CConstructor, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CConstructor, doc: DocNode) -> None:
         """Test for CConstructor.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -1053,28 +1111,28 @@ class TestCProperty:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CProperty, DocTree]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CProperty, DocNode]]] = [
         (
             "basic",
             (
                 CProperty(name="Name", declaring_type=CType(name="Type"), type=CType.VOID),
-                DocTree(name="Name"),
+                DocNode(name="Name"),
             ),
         ),
         (
             "return",
             (
                 CProperty(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
-                DocTree(name="Name", return_doc=""),
+                DocNode(name="Name", return_doc=""),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CProperty, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CProperty, doc: DocNode) -> None:
         """Test for CProperty.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -1212,12 +1270,12 @@ class TestCMethod:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CMethod, DocTree]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CMethod, DocNode]]] = [
         (
             "basic",
             (
                 CMethod(name="Name", declaring_type=CType(name="Type")),
-                DocTree(name="Name()", exception_docs={}),
+                DocNode(name="Name()", exception_docs={}),
             ),
         ),
         (
@@ -1231,7 +1289,7 @@ class TestCMethod:
                         CParameter(name="param1", type=CType(name="Type")),
                     ),
                 ),
-                DocTree(
+                DocNode(
                     name="Name(Type, Type)",
                     parameter_docs={"param0": "", "param1": ""},
                     exception_docs={},
@@ -1246,7 +1304,7 @@ class TestCMethod:
                     declaring_type=CType(name="Type"),
                     return_types=(CType(name="Type"), CType(name="Type")),
                 ),
-                DocTree(name="Name()", return_doc="", exception_docs={}),
+                DocNode(name="Name()", return_doc="", exception_docs={}),
             ),
         ),
         (
@@ -1257,16 +1315,16 @@ class TestCMethod:
                     declaring_type=CType(name="Type"),
                     static=True,
                 ),
-                DocTree(name="Name()", exception_docs={}),
+                DocNode(name="Name()", exception_docs={}),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CMethod, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CMethod, doc: DocNode) -> None:
         """Test for CMethod.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -1363,21 +1421,21 @@ class TestCEvent:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CEvent, DocTree]]] = [
+    doc_objects: ClassVar[ParamSequence[tuple[CEvent, DocNode]]] = [
         (
             "basic",
             (
                 CEvent(name="Name", declaring_type=CType(name="Type"), type=CType(name="Type")),
-                DocTree(name="Name"),
+                DocNode(name="Name"),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CEvent, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CEvent, doc: DocNode) -> None:
         """Test for CEvent.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -1997,9 +2055,9 @@ class TestCClass:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CClass, DocTree]]] = [
-        ("basic", (CClass(name="Name"), DocTree(name="Name"))),
-        ("abstract", (CClass(name="Name", abstract=True), DocTree(name="Name"))),
+    doc_objects: ClassVar[ParamSequence[tuple[CClass, DocNode]]] = [
+        ("basic", (CClass(name="Name"), DocNode(name="Name"))),
+        ("abstract", (CClass(name="Name", abstract=True), DocNode(name="Name"))),
         (
             "generic_args",
             (
@@ -2007,18 +2065,18 @@ class TestCClass:
                     name="Name",
                     generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
                 ),
-                DocTree(name="Name[$A, $B]"),
+                DocNode(name="Name[$A, $B]"),
             ),
         ),
         (
             "super_class",
-            (CClass(name="Name", super_class=CType(name="Name")), DocTree(name="Name")),
+            (CClass(name="Name", super_class=CType(name="Name")), DocNode(name="Name")),
         ),
         (
             "interfaces",
             (
                 CClass(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-                DocTree(name="Name"),
+                DocNode(name="Name"),
             ),
         ),
         (
@@ -2039,9 +2097,9 @@ class TestCClass:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
                 ),
             ),
         ),
@@ -2058,11 +2116,11 @@ class TestCClass:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
                     children=(
-                        DocTree(name="__init__()"),
-                        DocTree(name="__init__(Type)", parameter_docs={"param0": ""}),
+                        DocNode(name="__init__()"),
+                        DocNode(name="__init__(Type)", parameter_docs={"param0": ""}),
                     ),
                 ),
             ),
@@ -2087,9 +2145,9 @@ class TestCClass:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
                 ),
             ),
         ),
@@ -2113,16 +2171,16 @@ class TestCClass:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
                     children=(
-                        DocTree(
+                        DocNode(
                             name="A(Type)",
                             parameter_docs={"param0": ""},
                             return_doc="",
                             exception_docs={},
                         ),
-                        DocTree(
+                        DocNode(
                             name="B(Type)",
                             parameter_docs={"param0": ""},
                             return_doc="",
@@ -2146,9 +2204,9 @@ class TestCClass:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A"), DocTree(name="B")),
+                    children=(DocNode(name="A"), DocNode(name="B")),
                 ),
             ),
         ),
@@ -2162,19 +2220,19 @@ class TestCClass:
                         "Name.B": CClass(name="B", nested=CType(name="Name")),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A"), DocTree(name="B")),
+                    children=(DocNode(name="A"), DocNode(name="B")),
                 ),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CClass, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CClass, doc: DocNode) -> None:
         """Test for CClass.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -2653,9 +2711,9 @@ class TestCStruct:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CStruct, DocTree]]] = [
-        ("basic", (CStruct(name="Name"), DocTree(name="Name"))),
-        ("abstract", (CStruct(name="Name", abstract=True), DocTree(name="Name"))),
+    doc_objects: ClassVar[ParamSequence[tuple[CStruct, DocNode]]] = [
+        ("basic", (CStruct(name="Name"), DocNode(name="Name"))),
+        ("abstract", (CStruct(name="Name", abstract=True), DocNode(name="Name"))),
         (
             "generic_args",
             (
@@ -2663,18 +2721,18 @@ class TestCStruct:
                     name="Name",
                     generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
                 ),
-                DocTree(name="Name[$A, $B]"),
+                DocNode(name="Name[$A, $B]"),
             ),
         ),
         (
             "super_class",
-            (CStruct(name="Name", super_class=CType(name="Name")), DocTree(name="Name")),
+            (CStruct(name="Name", super_class=CType(name="Name")), DocNode(name="Name")),
         ),
         (
             "interfaces",
             (
                 CStruct(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-                DocTree(name="Name"),
+                DocNode(name="Name"),
             ),
         ),
         (
@@ -2695,9 +2753,9 @@ class TestCStruct:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
                 ),
             ),
         ),
@@ -2714,11 +2772,11 @@ class TestCStruct:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
                     children=(
-                        DocTree(name="__init__()"),
-                        DocTree(name="__init__(Type)", parameter_docs={"param0": ""}),
+                        DocNode(name="__init__()"),
+                        DocNode(name="__init__(Type)", parameter_docs={"param0": ""}),
                     ),
                 ),
             ),
@@ -2743,9 +2801,9 @@ class TestCStruct:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
                 ),
             ),
         ),
@@ -2769,16 +2827,16 @@ class TestCStruct:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
                     children=(
-                        DocTree(
+                        DocNode(
                             name="A(Type)",
                             parameter_docs={"param0": ""},
                             return_doc="",
                             exception_docs={},
                         ),
-                        DocTree(
+                        DocNode(
                             name="B(Type)",
                             parameter_docs={"param0": ""},
                             return_doc="",
@@ -2802,9 +2860,9 @@ class TestCStruct:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A"), DocTree(name="B")),
+                    children=(DocNode(name="A"), DocNode(name="B")),
                 ),
             ),
         ),
@@ -2818,19 +2876,19 @@ class TestCStruct:
                         "Name.B": CStruct(name="B", nested=CType(name="Name")),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A"), DocTree(name="B")),
+                    children=(DocNode(name="A"), DocNode(name="B")),
                 ),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CStruct, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CStruct, doc: DocNode) -> None:
         """Test for CStruct.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -3196,8 +3254,8 @@ class TestCInterface:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CInterface, DocTree]]] = [
-        ("basic", (CInterface(name="Name"), DocTree(name="Name"))),
+    doc_objects: ClassVar[ParamSequence[tuple[CInterface, DocNode]]] = [
+        ("basic", (CInterface(name="Name"), DocNode(name="Name"))),
         (
             "generic_args",
             (
@@ -3205,14 +3263,14 @@ class TestCInterface:
                     name="Name",
                     generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
                 ),
-                DocTree(name="Name[$A, $B]"),
+                DocNode(name="Name[$A, $B]"),
             ),
         ),
         (
             "interfaces",
             (
                 CInterface(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
-                DocTree(name="Name"),
+                DocNode(name="Name"),
             ),
         ),
         (
@@ -3233,9 +3291,9 @@ class TestCInterface:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
                 ),
             ),
         ),
@@ -3259,9 +3317,9 @@ class TestCInterface:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
-                    children=(DocTree(name="A", return_doc=""), DocTree(name="B", return_doc="")),
+                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
                 ),
             ),
         ),
@@ -3285,16 +3343,16 @@ class TestCInterface:
                         ),
                     },
                 ),
-                DocTree(
+                DocNode(
                     name="Name",
                     children=(
-                        DocTree(
+                        DocNode(
                             name="A(Type)",
                             parameter_docs={"param0": ""},
                             return_doc="",
                             exception_docs={},
                         ),
-                        DocTree(
+                        DocNode(
                             name="B(Type)",
                             parameter_docs={"param0": ""},
                             return_doc="",
@@ -3318,7 +3376,7 @@ class TestCInterface:
                         ),
                     },
                 ),
-                DocTree(name="Name", children=(DocTree(name="A"), DocTree(name="B"))),
+                DocNode(name="Name", children=(DocNode(name="A"), DocNode(name="B"))),
             ),
         ),
         (
@@ -3331,16 +3389,16 @@ class TestCInterface:
                         "Name.B": CInterface(name="B", nested=CType(name="Name")),
                     },
                 ),
-                DocTree(name="Name", children=(DocTree(name="A"), DocTree(name="B"))),
+                DocNode(name="Name", children=(DocNode(name="A"), DocNode(name="B"))),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CInterface, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CInterface, doc: DocNode) -> None:
         """Test for CInterface.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -3412,19 +3470,19 @@ class TestCEnum:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CEnum, DocTree]]] = [
-        ("basic", (CEnum(name="Name"), DocTree(name="Name"))),
+    doc_objects: ClassVar[ParamSequence[tuple[CEnum, DocNode]]] = [
+        ("basic", (CEnum(name="Name"), DocNode(name="Name"))),
         (
             "fields",
             (
                 CEnum(name="Name", fields=("Field0", "Field1", "Field2", "Field3")),
-                DocTree(
+                DocNode(
                     name="Name",
                     children=(
-                        DocTree(name="Field0"),
-                        DocTree(name="Field1"),
-                        DocTree(name="Field2"),
-                        DocTree(name="Field3"),
+                        DocNode(name="Field0"),
+                        DocNode(name="Field1"),
+                        DocNode(name="Field2"),
+                        DocNode(name="Field3"),
                     ),
                 ),
             ),
@@ -3432,10 +3490,10 @@ class TestCEnum:
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CEnum, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CEnum, doc: DocNode) -> None:
         """Test for CEnum.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
@@ -3551,8 +3609,8 @@ class TestCDelegate:
 
         assert actual == expected
 
-    doc_objects: ClassVar[ParamSequence[tuple[CDelegate, DocTree]]] = [
-        ("basic", (CDelegate(name="Name"), DocTree(name="Name()"))),
+    doc_objects: ClassVar[ParamSequence[tuple[CDelegate, DocNode]]] = [
+        ("basic", (CDelegate(name="Name"), DocNode(name="Name()"))),
         (
             "parameters",
             (
@@ -3563,23 +3621,23 @@ class TestCDelegate:
                         CParameter(name="param1", type=CType(name="Type")),
                     ),
                 ),
-                DocTree(name="Name(Type, Type)", parameter_docs={"param0": "", "param1": ""}),
+                DocNode(name="Name(Type, Type)", parameter_docs={"param0": "", "param1": ""}),
             ),
         ),
         (
             "return_type",
             (
                 CDelegate(name="Name", return_type=CType(name="Type")),
-                DocTree(name="Name()", doc="", return_doc=""),
+                DocNode(name="Name()", doc="", return_doc=""),
             ),
         ),
     ]
 
     @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
-    def test_to_doc_tree(self, obj: CDelegate, doc: DocTree) -> None:
+    def test_to_doc_tree(self, obj: CDelegate, doc: DocNode) -> None:
         """Test for CDelegate.to_doc_json()."""
-        expected: DocTree = doc
-        actual: DocTree = obj.to_doc_tree()
+        expected: DocNode = doc
+        actual: DocNode = obj.to_doc_tree()
 
         assert actual == expected
 
