@@ -138,7 +138,7 @@ class TestDocTree:
         (
             "children",
             (
-                DocTree(children=(DocNode("A"), DocNode("B"))),
+                DocTree(children=[DocNode("A"), DocNode("B")]),
                 {"A": {"doc": "", "doc_formatted": {}}, "B": {"doc": "", "doc_formatted": {}}},
             ),
         ),
@@ -449,7 +449,7 @@ class TestDocNode:
         (
             "children",
             (
-                DocNode("A", children=(DocNode("B"),)),
+                DocNode("A", children=[DocNode("B")]),
                 {"doc": "", "doc_formatted": {}, "B": {"doc": "", "doc_formatted": {}}},
             ),
         ),
@@ -616,7 +616,7 @@ class TestCType:
 
     unique_name_objects: ClassVar[ParamSequence[tuple[CType, str]]] = [
         ("basic", (CType(name="Name"), "Name")),
-        ("inner", (CType(name="Name", inner=(CType(name="A"), CType(name="B"))), "Name[A, B]")),
+        ("inner", (CType(name="Name", inner=[CType(name="A"), CType(name="B")]), "Name[A, B]")),
     ]
 
     @pytest.mark.parametrize(("obj", "expected"), **make_params(unique_name_objects))
@@ -640,7 +640,7 @@ class TestCType:
             "reference_generic_nullable",
             (CType(name="Name", reference=True, generic=True, nullable=True), "$*Name?"),
         ),
-        ("inner", (CType(name="Name", inner=(CType(name="A"), CType(name="B"))), "Name[A, B]")),
+        ("inner", (CType(name="Name", inner=[CType(name="A"), CType(name="B")]), "Name[A, B]")),
     ]
 
     @pytest.mark.parametrize(("obj", "json"), **make_params(json_objects))
@@ -893,10 +893,10 @@ class TestCConstructor:
             (
                 CConstructor(
                     declaring_type=CType(name="Type"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type")),
                         CParameter(name="param0", type=CType(name="Type")),
-                    ),
+                    ],
                 ),
                 "__init__(Type, Type)",
             ),
@@ -915,7 +915,7 @@ class TestCConstructor:
             "basic",
             (
                 CConstructor(declaring_type=CType(name="Type")),
-                {"declaring_type": "Type", "parameters": ()},
+                {"declaring_type": "Type", "parameters": []},
             ),
         ),
         (
@@ -923,17 +923,17 @@ class TestCConstructor:
             (
                 CConstructor(
                     declaring_type=CType(name="Type"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type")),
                         CParameter(name="param1", type=CType(name="Type")),
-                    ),
+                    ],
                 ),
                 {
                     "declaring_type": "Type",
-                    "parameters": (
+                    "parameters": [
                         {"name": "param0", "type": "Type", "default": False, "out": False},
                         {"name": "param1", "type": "Type", "default": False, "out": False},
-                    ),
+                    ],
                 },
             ),
         ),
@@ -965,10 +965,10 @@ class TestCConstructor:
             (
                 CConstructor(
                     declaring_type=CType(name="Type"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type")),
                         CParameter(name="param1", type=CType(name="Type")),
-                    ),
+                    ],
                 ),
                 DocNode(
                     "__init__(Type, Type)",
@@ -992,11 +992,11 @@ class TestCConstructor:
             (
                 CConstructor(
                     declaring_type=CType(name="Type"),
-                    parameters=(CParameter(name="Name", type=CType(name="A")),),
+                    parameters=[CParameter(name="Name", type=CType(name="A"))],
                 ),
                 CConstructor(
                     declaring_type=CType(name="Type"),
-                    parameters=(CParameter(name="Name", type=CType(name="B")),),
+                    parameters=[CParameter(name="Name", type=CType(name="B"))],
                 ),
             ),
         ),
@@ -1006,7 +1006,7 @@ class TestCConstructor:
                 CConstructor(declaring_type=CType(name="Type")),
                 CConstructor(
                     declaring_type=CType(name="Type"),
-                    parameters=(CParameter(name="Name", type=CType(name="Type")),),
+                    parameters=[CParameter(name="Name", type=CType(name="Type"))],
                 ),
             ),
         ),
@@ -1168,10 +1168,10 @@ class TestCMethod:
                 CMethod(
                     name="Name",
                     declaring_type=CType(name="Type"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type")),
                         CParameter(name="param0", type=CType(name="Type")),
-                    ),
+                    ],
                 ),
                 "Name(Type, Type)",
             ),
@@ -1193,8 +1193,8 @@ class TestCMethod:
                 {
                     "name": "Name",
                     "declaring_type": "Type",
-                    "parameters": (),
-                    "return_types": (),
+                    "parameters": [],
+                    "return_types": [],
                     "static": False,
                 },
             ),
@@ -1205,19 +1205,19 @@ class TestCMethod:
                 CMethod(
                     name="Name",
                     declaring_type=CType(name="Type"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type")),
                         CParameter(name="param1", type=CType(name="Type")),
-                    ),
+                    ],
                 ),
                 {
                     "name": "Name",
                     "declaring_type": "Type",
-                    "parameters": (
+                    "parameters": [
                         {"name": "param0", "type": "Type", "default": False, "out": False},
                         {"name": "param1", "type": "Type", "default": False, "out": False},
-                    ),
-                    "return_types": (),
+                    ],
+                    "return_types": [],
                     "static": False,
                 },
             ),
@@ -1228,13 +1228,13 @@ class TestCMethod:
                 CMethod(
                     name="Name",
                     declaring_type=CType(name="Type"),
-                    return_types=(CType(name="Type"), CType(name="Type")),
+                    return_types=[CType(name="Type"), CType(name="Type")],
                 ),
                 {
                     "name": "Name",
                     "declaring_type": "Type",
-                    "parameters": (),
-                    "return_types": ("Type", "Type"),
+                    "parameters": [],
+                    "return_types": ["Type", "Type"],
                     "static": False,
                 },
             ),
@@ -1246,8 +1246,8 @@ class TestCMethod:
                 {
                     "name": "Name",
                     "declaring_type": "Type",
-                    "parameters": (),
-                    "return_types": (),
+                    "parameters": [],
+                    "return_types": [],
                     "static": True,
                 },
             ),
@@ -1460,141 +1460,6 @@ class TestCEvent:
         _compare_seq(CEvent, x, y)
 
 
-class TestCNamespace:
-    """Tests for CNamespace."""
-
-    unique_name_objects: ClassVar[ParamSequence[tuple[CNamespace, str]]] = [
-        ("basic", (CNamespace(name="Name"), "Name")),
-    ]
-
-    @pytest.mark.parametrize(("obj", "expected"), **make_params(unique_name_objects))
-    def test_unique_name(self, obj: CNamespace, expected: str) -> None:
-        """Test for CNamespace.unique_name."""
-        actual: str = obj.unique_name
-
-        assert actual == expected
-
-    json_objects: ClassVar[ParamSequence[tuple[CNamespace, JsonType]]] = [
-        (
-            "basic",
-            (
-                CNamespace(
-                    name="Namespace",
-                    types={
-                        "Namespace:IInterface": CInterface(
-                            name="IInterface", namespace="Namespace"
-                        ),
-                        "Namespace:Class": CClass(name="Class", namespace="Namespace"),
-                        "Namespace:Delegate": CDelegate(name="Delegate", namespace="Namespace"),
-                        "Namespace:Enum": CEnum(name="Enum", namespace="Namespace"),
-                        "Namespace:Struct": CStruct(name="Struct", namespace="Namespace"),
-                    },
-                ),
-                {
-                    "name": "Namespace",
-                    "types": {
-                        "Namespace:IInterface": {
-                            "type": "interface",
-                            "name": "IInterface",
-                            "namespace": "Namespace",
-                            "nested": None,
-                            "generic_args": (),
-                            "interfaces": (),
-                            "fields": {},
-                            "properties": {},
-                            "methods": {},
-                            "events": {},
-                            "nested_types": {},
-                        },
-                        "Namespace:Class": {
-                            "type": "class",
-                            "name": "Class",
-                            "namespace": "Namespace",
-                            "nested": None,
-                            "abstract": False,
-                            "generic_args": (),
-                            "super_class": None,
-                            "interfaces": (),
-                            "fields": {},
-                            "constructors": {},
-                            "properties": {},
-                            "methods": {},
-                            "events": {},
-                            "nested_types": {},
-                        },
-                        "Namespace:Delegate": {
-                            "type": "delegate",
-                            "name": "Delegate",
-                            "namespace": "Namespace",
-                            "nested": None,
-                            "parameters": (),
-                            "return_type": "System:Void",
-                        },
-                        "Namespace:Enum": {
-                            "type": "enum",
-                            "name": "Enum",
-                            "namespace": "Namespace",
-                            "nested": None,
-                            "fields": (),
-                        },
-                        "Namespace:Struct": {
-                            "type": "struct",
-                            "name": "Struct",
-                            "namespace": "Namespace",
-                            "nested": None,
-                            "abstract": False,
-                            "generic_args": (),
-                            "super_class": None,
-                            "interfaces": (),
-                            "fields": {},
-                            "constructors": {},
-                            "properties": {},
-                            "methods": {},
-                            "events": {},
-                            "nested_types": {},
-                        },
-                    },
-                },
-            ),
-        ),
-    ]
-
-    @pytest.mark.parametrize(("obj", "json"), **make_params(json_objects))
-    def test_to_json(self, obj: CNamespace, json: JsonType) -> None:
-        """Test for CNamespace.to_json()."""
-        expected: JsonType = json
-        actual: JsonType = obj.to_json()
-
-        assert actual == expected
-
-    @pytest.mark.parametrize(("obj", "json"), **make_params(json_objects))
-    def test_from_json(self, obj: CNamespace, json: JsonType) -> None:
-        """Test for CNamespace.from_json()."""
-        expected: CNamespace = obj
-        actual: CNamespace = CNamespace.from_json(json)
-
-        assert actual == expected
-
-    def test_to_doc_tree(self) -> None:
-        """Test for CNamespace.to_doc_json()."""
-        with pytest.raises(NotImplementedError):
-            CNamespace(name="Name").to_doc_tree()
-
-    compare_list: ClassVar[ParamSequence[tuple[CNamespace, CNamespace]]] = [
-        ("name", (CNamespace(name="A"), CNamespace(name="B"))),
-    ]
-
-    @pytest.mark.parametrize(("x", "y"), **make_params(compare_list))
-    def test_compare(self, x: CNamespace, y: CNamespace) -> None:
-        """Test for CNamespace.compare()."""
-        _compare(CNamespace, x, y)
-
-    @pytest.mark.parametrize(("x", "y"), **make_params(compare_list))
-    def test_compare_seq(self, x: CNamespace, y: CNamespace) -> None:
-        """Test for CNamespace.compare_seq()."""
-        _compare_seq(CNamespace, x, y)
-
-
 class TestCClass:
     """Tests for CClass."""
 
@@ -1605,7 +1470,7 @@ class TestCClass:
             (
                 CClass(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 "Name[$A, $B]",
             ),
@@ -1629,8 +1494,8 @@ class TestCClass:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -1652,9 +1517,9 @@ class TestCClass:
                     "namespace": None,
                     "nested": None,
                     "abstract": True,
-                    "generic_args": (),
+                    "generic_args": [],
                     "super_class": None,
-                    "interfaces": (),
+                    "interfaces": [],
                     "fields": {},
                     "constructors": {},
                     "properties": {},
@@ -1669,7 +1534,7 @@ class TestCClass:
             (
                 CClass(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 {
                     "type": "class",
@@ -1677,9 +1542,9 @@ class TestCClass:
                     "namespace": None,
                     "nested": None,
                     "abstract": False,
-                    "generic_args": ("$A", "$B"),
+                    "generic_args": ["$A", "$B"],
                     "super_class": None,
-                    "interfaces": (),
+                    "interfaces": [],
                     "fields": {},
                     "constructors": {},
                     "properties": {},
@@ -1698,8 +1563,8 @@ class TestCClass:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -1714,14 +1579,14 @@ class TestCClass:
         (
             "interfaces",
             (
-                CClass(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                CClass(name="Name", interfaces=[CType(name="A"), CType(name="B")]),
                 {
                     "abstract": False,
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": ("A", "B"),
+                    "generic_args": [],
+                    "interfaces": ["A", "B"],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -1769,8 +1634,8 @@ class TestCClass:
                             "static": False,
                         },
                     },
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -1791,25 +1656,25 @@ class TestCClass:
                         "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
                         "Name.__init__(Namespace:Type)": CConstructor(
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
                         ),
                     },
                 ),
                 {
                     "abstract": False,
                     "constructors": {
-                        "Name.__init__()": {"declaring_type": "Name", "parameters": ()},
+                        "Name.__init__()": {"declaring_type": "Name", "parameters": []},
                         "Name.__init__(Namespace:Type)": {
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {"name": "param0", "type": "Type", "default": False, "out": False},
-                            ),
+                            ],
                         },
                     },
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -1846,8 +1711,8 @@ class TestCClass:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -1883,14 +1748,14 @@ class TestCClass:
                         "Name.A(Type) -> Type": CMethod(
                             name="A",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                         "Name.B(Type) -> Type": CMethod(
                             name="B",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                     },
                 ),
@@ -1899,35 +1764,35 @@ class TestCClass:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {
                         "Name.A(Type) -> Type": {
                             "name": "A",
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {
                                     "name": "param0",
                                     "type": "Type",
                                     "default": False,
                                     "out": False,
                                 },
-                            ),
-                            "return_types": ("Type",),
+                            ],
+                            "return_types": ["Type"],
                             "static": False,
                         },
                         "Name.B(Type) -> Type": {
                             "name": "B",
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {
                                     "name": "param0",
                                     "type": "Type",
                                     "default": False,
                                     "out": False,
                                 },
-                            ),
-                            "return_types": ("Type",),
+                            ],
+                            "return_types": ["Type"],
                             "static": False,
                         },
                     },
@@ -1963,8 +1828,8 @@ class TestCClass:
                         "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
                     },
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -1991,8 +1856,8 @@ class TestCClass:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2003,8 +1868,8 @@ class TestCClass:
                             "constructors": {},
                             "events": {},
                             "fields": {},
-                            "generic_args": (),
-                            "interfaces": (),
+                            "generic_args": [],
+                            "interfaces": [],
                             "methods": {},
                             "name": "A",
                             "namespace": None,
@@ -2019,8 +1884,8 @@ class TestCClass:
                             "constructors": {},
                             "events": {},
                             "fields": {},
-                            "generic_args": (),
-                            "interfaces": (),
+                            "generic_args": [],
+                            "interfaces": [],
                             "methods": {},
                             "name": "B",
                             "namespace": None,
@@ -2063,7 +1928,7 @@ class TestCClass:
             (
                 CClass(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 DocNode(name="Name[$A, $B]"),
             ),
@@ -2099,7 +1964,7 @@ class TestCClass:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
+                    children=[DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")],
                 ),
             ),
         ),
@@ -2112,16 +1977,16 @@ class TestCClass:
                         "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
                         "Name.__init__(Namespace:Type)": CConstructor(
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
                         ),
                     },
                 ),
                 DocNode(
                     name="Name",
-                    children=(
+                    children=[
                         DocNode(name="__init__()"),
                         DocNode(name="__init__(Type)", parameter_docs={"param0": ""}),
-                    ),
+                    ],
                 ),
             ),
         ),
@@ -2147,7 +2012,7 @@ class TestCClass:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
+                    children=[DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")],
                 ),
             ),
         ),
@@ -2160,20 +2025,20 @@ class TestCClass:
                         "Name.A(Type) -> Type": CMethod(
                             name="A",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                         "Name.B(Type) -> Type": CMethod(
                             name="B",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                     },
                 ),
                 DocNode(
                     name="Name",
-                    children=(
+                    children=[
                         DocNode(
                             name="A(Type)",
                             parameter_docs={"param0": ""},
@@ -2186,7 +2051,7 @@ class TestCClass:
                             return_doc="",
                             exception_docs={},
                         ),
-                    ),
+                    ],
                 ),
             ),
         ),
@@ -2206,7 +2071,7 @@ class TestCClass:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A"), DocNode(name="B")),
+                    children=[DocNode(name="A"), DocNode(name="B")],
                 ),
             ),
         ),
@@ -2222,7 +2087,7 @@ class TestCClass:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A"), DocNode(name="B")),
+                    children=[DocNode(name="A"), DocNode(name="B")],
                 ),
             ),
         ),
@@ -2261,7 +2126,7 @@ class TestCStruct:
             (
                 CStruct(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 "Name[$A, $B]",
             ),
@@ -2285,8 +2150,8 @@ class TestCStruct:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2308,9 +2173,9 @@ class TestCStruct:
                     "namespace": None,
                     "nested": None,
                     "abstract": True,
-                    "generic_args": (),
+                    "generic_args": [],
                     "super_class": None,
-                    "interfaces": (),
+                    "interfaces": [],
                     "fields": {},
                     "constructors": {},
                     "properties": {},
@@ -2325,7 +2190,7 @@ class TestCStruct:
             (
                 CStruct(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 {
                     "type": "struct",
@@ -2333,9 +2198,9 @@ class TestCStruct:
                     "namespace": None,
                     "nested": None,
                     "abstract": False,
-                    "generic_args": ("$A", "$B"),
+                    "generic_args": ["$A", "$B"],
                     "super_class": None,
-                    "interfaces": (),
+                    "interfaces": [],
                     "fields": {},
                     "constructors": {},
                     "properties": {},
@@ -2354,8 +2219,8 @@ class TestCStruct:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2370,14 +2235,14 @@ class TestCStruct:
         (
             "interfaces",
             (
-                CStruct(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                CStruct(name="Name", interfaces=[CType(name="A"), CType(name="B")]),
                 {
                     "abstract": False,
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": ("A", "B"),
+                    "generic_args": [],
+                    "interfaces": ["A", "B"],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2425,8 +2290,8 @@ class TestCStruct:
                             "static": False,
                         },
                     },
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2447,25 +2312,25 @@ class TestCStruct:
                         "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
                         "Name.__init__(Namespace:Type)": CConstructor(
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
                         ),
                     },
                 ),
                 {
                     "abstract": False,
                     "constructors": {
-                        "Name.__init__()": {"declaring_type": "Name", "parameters": ()},
+                        "Name.__init__()": {"declaring_type": "Name", "parameters": []},
                         "Name.__init__(Namespace:Type)": {
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {"name": "param0", "type": "Type", "default": False, "out": False},
-                            ),
+                            ],
                         },
                     },
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2502,8 +2367,8 @@ class TestCStruct:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2539,14 +2404,14 @@ class TestCStruct:
                         "Name.A(Type) -> Type": CMethod(
                             name="A",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                         "Name.B(Type) -> Type": CMethod(
                             name="B",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                     },
                 ),
@@ -2555,35 +2420,35 @@ class TestCStruct:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {
                         "Name.A(Type) -> Type": {
                             "name": "A",
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {
                                     "name": "param0",
                                     "type": "Type",
                                     "default": False,
                                     "out": False,
                                 },
-                            ),
-                            "return_types": ("Type",),
+                            ],
+                            "return_types": ["Type"],
                             "static": False,
                         },
                         "Name.B(Type) -> Type": {
                             "name": "B",
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {
                                     "name": "param0",
                                     "type": "Type",
                                     "default": False,
                                     "out": False,
                                 },
-                            ),
-                            "return_types": ("Type",),
+                            ],
+                            "return_types": ["Type"],
                             "static": False,
                         },
                     },
@@ -2619,8 +2484,8 @@ class TestCStruct:
                         "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
                     },
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2647,8 +2512,8 @@ class TestCStruct:
                     "constructors": {},
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2659,8 +2524,8 @@ class TestCStruct:
                             "constructors": {},
                             "events": {},
                             "fields": {},
-                            "generic_args": (),
-                            "interfaces": (),
+                            "generic_args": [],
+                            "interfaces": [],
                             "methods": {},
                             "name": "A",
                             "namespace": None,
@@ -2675,8 +2540,8 @@ class TestCStruct:
                             "constructors": {},
                             "events": {},
                             "fields": {},
-                            "generic_args": (),
-                            "interfaces": (),
+                            "generic_args": [],
+                            "interfaces": [],
                             "methods": {},
                             "name": "B",
                             "namespace": None,
@@ -2719,7 +2584,7 @@ class TestCStruct:
             (
                 CStruct(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 DocNode(name="Name[$A, $B]"),
             ),
@@ -2731,7 +2596,7 @@ class TestCStruct:
         (
             "interfaces",
             (
-                CStruct(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                CStruct(name="Name", interfaces=[CType(name="A"), CType(name="B")]),
                 DocNode(name="Name"),
             ),
         ),
@@ -2755,7 +2620,7 @@ class TestCStruct:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
+                    children=[DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")],
                 ),
             ),
         ),
@@ -2768,16 +2633,16 @@ class TestCStruct:
                         "Name.__init__()": CConstructor(declaring_type=CType(name="Name")),
                         "Name.__init__(Namespace:Type)": CConstructor(
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
                         ),
                     },
                 ),
                 DocNode(
                     name="Name",
-                    children=(
+                    children=[
                         DocNode(name="__init__()"),
                         DocNode(name="__init__(Type)", parameter_docs={"param0": ""}),
-                    ),
+                    ],
                 ),
             ),
         ),
@@ -2803,7 +2668,7 @@ class TestCStruct:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
+                    children=[DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")],
                 ),
             ),
         ),
@@ -2816,20 +2681,20 @@ class TestCStruct:
                         "Name.A(Type) -> Type": CMethod(
                             name="A",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                         "Name.B(Type) -> Type": CMethod(
                             name="B",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                     },
                 ),
                 DocNode(
                     name="Name",
-                    children=(
+                    children=[
                         DocNode(
                             name="A(Type)",
                             parameter_docs={"param0": ""},
@@ -2842,7 +2707,7 @@ class TestCStruct:
                             return_doc="",
                             exception_docs={},
                         ),
-                    ),
+                    ],
                 ),
             ),
         ),
@@ -2862,7 +2727,7 @@ class TestCStruct:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A"), DocNode(name="B")),
+                    children=[DocNode(name="A"), DocNode(name="B")],
                 ),
             ),
         ),
@@ -2878,7 +2743,7 @@ class TestCStruct:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A"), DocNode(name="B")),
+                    children=[DocNode(name="A"), DocNode(name="B")],
                 ),
             ),
         ),
@@ -2917,7 +2782,7 @@ class TestCInterface:
             (
                 CInterface(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 "Name[$A, $B]",
             ),
@@ -2939,8 +2804,8 @@ class TestCInterface:
                 {
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -2956,15 +2821,15 @@ class TestCInterface:
             (
                 CInterface(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 {
                     "type": "interface",
                     "name": "Name",
                     "namespace": None,
                     "nested": None,
-                    "generic_args": ("$A", "$B"),
-                    "interfaces": (),
+                    "generic_args": ["$A", "$B"],
+                    "interfaces": [],
                     "fields": {},
                     "properties": {},
                     "methods": {},
@@ -2976,12 +2841,12 @@ class TestCInterface:
         (
             "interfaces",
             (
-                CInterface(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                CInterface(name="Name", interfaces=[CType(name="A"), CType(name="B")]),
                 {
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": ("A", "B"),
+                    "generic_args": [],
+                    "interfaces": ["A", "B"],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -3026,8 +2891,8 @@ class TestCInterface:
                             "static": False,
                         },
                     },
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -3061,8 +2926,8 @@ class TestCInterface:
                 {
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -3097,49 +2962,49 @@ class TestCInterface:
                         "Name.A(Type) -> Type": CMethod(
                             name="A",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                         "Name.B(Type) -> Type": CMethod(
                             name="B",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                     },
                 ),
                 {
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {
                         "Name.A(Type) -> Type": {
                             "name": "A",
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {
                                     "name": "param0",
                                     "type": "Type",
                                     "default": False,
                                     "out": False,
                                 },
-                            ),
-                            "return_types": ("Type",),
+                            ],
+                            "return_types": ["Type"],
                             "static": False,
                         },
                         "Name.B(Type) -> Type": {
                             "name": "B",
                             "declaring_type": "Name",
-                            "parameters": (
+                            "parameters": [
                                 {
                                     "name": "param0",
                                     "type": "Type",
                                     "default": False,
                                     "out": False,
                                 },
-                            ),
-                            "return_types": ("Type",),
+                            ],
+                            "return_types": ["Type"],
                             "static": False,
                         },
                     },
@@ -3172,8 +3037,8 @@ class TestCInterface:
                         "Name.B -> (Type)": {"name": "B", "declaring_type": "Name", "type": "Type"},
                     },
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -3197,8 +3062,8 @@ class TestCInterface:
                 {
                     "events": {},
                     "fields": {},
-                    "generic_args": (),
-                    "interfaces": (),
+                    "generic_args": [],
+                    "interfaces": [],
                     "methods": {},
                     "name": "Name",
                     "namespace": None,
@@ -3207,8 +3072,8 @@ class TestCInterface:
                         "Name.A": {
                             "events": {},
                             "fields": {},
-                            "generic_args": (),
-                            "interfaces": (),
+                            "generic_args": [],
+                            "interfaces": [],
                             "methods": {},
                             "name": "A",
                             "namespace": None,
@@ -3220,8 +3085,8 @@ class TestCInterface:
                         "Name.B": {
                             "events": {},
                             "fields": {},
-                            "generic_args": (),
-                            "interfaces": (),
+                            "generic_args": [],
+                            "interfaces": [],
                             "methods": {},
                             "name": "B",
                             "namespace": None,
@@ -3261,7 +3126,7 @@ class TestCInterface:
             (
                 CInterface(
                     name="Name",
-                    generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
                 ),
                 DocNode(name="Name[$A, $B]"),
             ),
@@ -3269,7 +3134,7 @@ class TestCInterface:
         (
             "interfaces",
             (
-                CInterface(name="Name", interfaces=(CType(name="A"), CType(name="B"))),
+                CInterface(name="Name", interfaces=[CType(name="A"), CType(name="B")]),
                 DocNode(name="Name"),
             ),
         ),
@@ -3293,7 +3158,7 @@ class TestCInterface:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
+                    children=[DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")],
                 ),
             ),
         ),
@@ -3319,7 +3184,7 @@ class TestCInterface:
                 ),
                 DocNode(
                     name="Name",
-                    children=(DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")),
+                    children=[DocNode(name="A", return_doc=""), DocNode(name="B", return_doc="")],
                 ),
             ),
         ),
@@ -3332,20 +3197,20 @@ class TestCInterface:
                         "Name.A(Type) -> Type": CMethod(
                             name="A",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                         "Name.B(Type) -> Type": CMethod(
                             name="B",
                             declaring_type=CType(name="Name"),
-                            parameters=(CParameter(name="param0", type=CType(name="Type")),),
-                            return_types=(CType(name="Type"),),
+                            parameters=[CParameter(name="param0", type=CType(name="Type"))],
+                            return_types=[CType(name="Type")],
                         ),
                     },
                 ),
                 DocNode(
                     name="Name",
-                    children=(
+                    children=[
                         DocNode(
                             name="A(Type)",
                             parameter_docs={"param0": ""},
@@ -3358,7 +3223,7 @@ class TestCInterface:
                             return_doc="",
                             exception_docs={},
                         ),
-                    ),
+                    ],
                 ),
             ),
         ),
@@ -3376,7 +3241,7 @@ class TestCInterface:
                         ),
                     },
                 ),
-                DocNode(name="Name", children=(DocNode(name="A"), DocNode(name="B"))),
+                DocNode(name="Name", children=[DocNode(name="A"), DocNode(name="B")]),
             ),
         ),
         (
@@ -3389,7 +3254,7 @@ class TestCInterface:
                         "Name.B": CInterface(name="B", nested=CType(name="Name")),
                     },
                 ),
-                DocNode(name="Name", children=(DocNode(name="A"), DocNode(name="B"))),
+                DocNode(name="Name", children=[DocNode(name="A"), DocNode(name="B")]),
             ),
         ),
     ]
@@ -3436,19 +3301,19 @@ class TestCEnum:
             "basic",
             (
                 CEnum(name="Name"),
-                {"type": "enum", "name": "Name", "namespace": None, "nested": None, "fields": ()},
+                {"type": "enum", "name": "Name", "namespace": None, "nested": None, "fields": []},
             ),
         ),
         (
             "fields",
             (
-                CEnum(name="Name", fields=("Field0", "Field1", "Field2", "Field3")),
+                CEnum(name="Name", fields=["Field0", "Field1", "Field2", "Field3"]),
                 {
                     "type": "enum",
                     "name": "Name",
                     "namespace": None,
                     "nested": None,
-                    "fields": ("Field0", "Field1", "Field2", "Field3"),
+                    "fields": ["Field0", "Field1", "Field2", "Field3"],
                 },
             ),
         ),
@@ -3475,15 +3340,15 @@ class TestCEnum:
         (
             "fields",
             (
-                CEnum(name="Name", fields=("Field0", "Field1", "Field2", "Field3")),
+                CEnum(name="Name", fields=["Field0", "Field1", "Field2", "Field3"]),
                 DocNode(
                     name="Name",
-                    children=(
+                    children=[
                         DocNode(name="Field0"),
                         DocNode(name="Field1"),
                         DocNode(name="Field2"),
                         DocNode(name="Field3"),
-                    ),
+                    ],
                 ),
             ),
         ),
@@ -3522,10 +3387,10 @@ class TestCDelegate:
             (
                 CDelegate(
                     name="Name",
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="A")),
                         CParameter(name="param1", type=CType(name="B")),
-                    ),
+                    ],
                 ),
                 "Name(A, B)",
             ),
@@ -3549,7 +3414,7 @@ class TestCDelegate:
                     "name": "Name",
                     "namespace": None,
                     "nested": None,
-                    "parameters": (),
+                    "parameters": [],
                     "return_type": "System:Void",
                 },
             ),
@@ -3559,20 +3424,20 @@ class TestCDelegate:
             (
                 CDelegate(
                     name="Name",
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type")),
                         CParameter(name="param1", type=CType(name="Type")),
-                    ),
+                    ],
                 ),
                 {
                     "type": "delegate",
                     "name": "Name",
                     "namespace": None,
                     "nested": None,
-                    "parameters": (
+                    "parameters": [
                         {"name": "param0", "type": "Type", "default": False, "out": False},
                         {"name": "param1", "type": "Type", "default": False, "out": False},
-                    ),
+                    ],
                     "return_type": "System:Void",
                 },
             ),
@@ -3586,7 +3451,7 @@ class TestCDelegate:
                     "name": "Name",
                     "namespace": None,
                     "nested": None,
-                    "parameters": (),
+                    "parameters": [],
                     "return_type": "Type",
                 },
             ),
@@ -3654,6 +3519,141 @@ class TestCDelegate:
     def test_compare_seq(self, x: CDelegate, y: CDelegate) -> None:
         """Test for CDelegate.compare_seq()."""
         _compare_seq(CDelegate, x, y)
+
+
+class TestCNamespace:
+    """Tests for CNamespace."""
+
+    unique_name_objects: ClassVar[ParamSequence[tuple[CNamespace, str]]] = [
+        ("basic", (CNamespace(name="Name"), "Name")),
+    ]
+
+    @pytest.mark.parametrize(("obj", "expected"), **make_params(unique_name_objects))
+    def test_unique_name(self, obj: CNamespace, expected: str) -> None:
+        """Test for CNamespace.unique_name."""
+        actual: str = obj.unique_name
+
+        assert actual == expected
+
+    json_objects: ClassVar[ParamSequence[tuple[CNamespace, JsonType]]] = [
+        (
+            "basic",
+            (
+                CNamespace(
+                    name="Namespace",
+                    types={
+                        "Namespace:IInterface": CInterface(
+                            name="IInterface", namespace="Namespace"
+                        ),
+                        "Namespace:Class": CClass(name="Class", namespace="Namespace"),
+                        "Namespace:Delegate": CDelegate(name="Delegate", namespace="Namespace"),
+                        "Namespace:Enum": CEnum(name="Enum", namespace="Namespace"),
+                        "Namespace:Struct": CStruct(name="Struct", namespace="Namespace"),
+                    },
+                ),
+                {
+                    "name": "Namespace",
+                    "types": {
+                        "Namespace:IInterface": {
+                            "type": "interface",
+                            "name": "IInterface",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "generic_args": [],
+                            "interfaces": [],
+                            "fields": {},
+                            "properties": {},
+                            "methods": {},
+                            "events": {},
+                            "nested_types": {},
+                        },
+                        "Namespace:Class": {
+                            "type": "class",
+                            "name": "Class",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "abstract": False,
+                            "generic_args": [],
+                            "super_class": None,
+                            "interfaces": [],
+                            "fields": {},
+                            "constructors": {},
+                            "properties": {},
+                            "methods": {},
+                            "events": {},
+                            "nested_types": {},
+                        },
+                        "Namespace:Delegate": {
+                            "type": "delegate",
+                            "name": "Delegate",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "parameters": [],
+                            "return_type": "System:Void",
+                        },
+                        "Namespace:Enum": {
+                            "type": "enum",
+                            "name": "Enum",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "fields": [],
+                        },
+                        "Namespace:Struct": {
+                            "type": "struct",
+                            "name": "Struct",
+                            "namespace": "Namespace",
+                            "nested": None,
+                            "abstract": False,
+                            "generic_args": [],
+                            "super_class": None,
+                            "interfaces": [],
+                            "fields": {},
+                            "constructors": {},
+                            "properties": {},
+                            "methods": {},
+                            "events": {},
+                            "nested_types": {},
+                        },
+                    },
+                },
+            ),
+        ),
+    ]
+
+    @pytest.mark.parametrize(("obj", "json"), **make_params(json_objects))
+    def test_to_json(self, obj: CNamespace, json: JsonType) -> None:
+        """Test for CNamespace.to_json()."""
+        expected: JsonType = json
+        actual: JsonType = obj.to_json()
+
+        assert actual == expected
+
+    @pytest.mark.parametrize(("obj", "json"), **make_params(json_objects))
+    def test_from_json(self, obj: CNamespace, json: JsonType) -> None:
+        """Test for CNamespace.from_json()."""
+        expected: CNamespace = obj
+        actual: CNamespace = CNamespace.from_json(json)
+
+        assert actual == expected
+
+    def test_to_doc_tree(self) -> None:
+        """Test for CNamespace.to_doc_json()."""
+        with pytest.raises(NotImplementedError):
+            CNamespace(name="Name").to_doc_tree()
+
+    compare_list: ClassVar[ParamSequence[tuple[CNamespace, CNamespace]]] = [
+        ("name", (CNamespace(name="A"), CNamespace(name="B"))),
+    ]
+
+    @pytest.mark.parametrize(("x", "y"), **make_params(compare_list))
+    def test_compare(self, x: CNamespace, y: CNamespace) -> None:
+        """Test for CNamespace.compare()."""
+        _compare(CNamespace, x, y)
+
+    @pytest.mark.parametrize(("x", "y"), **make_params(compare_list))
+    def test_compare_seq(self, x: CNamespace, y: CNamespace) -> None:
+        """Test for CNamespace.compare_seq()."""
+        _compare_seq(CNamespace, x, y)
 
 
 if __name__ == "__main__":

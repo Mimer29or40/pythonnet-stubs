@@ -60,7 +60,7 @@ def _compare_string(x: str | None, y: str | None) -> CompareResults:  # pragma: 
 class DocTree:
     """A tree data structure for representing doc-strings for C# objects."""
 
-    children: Sequence[DocNode] = ()
+    children: Sequence[DocNode] = field(default_factory=list)
 
     def __getitem__(self, node: str, /) -> DocNode | None:
         """Get a descendant node of this tree.
@@ -78,7 +78,7 @@ class DocTree:
     def from_json(cls, obj: JsonType) -> Self:
         """Convert a JSON object into a DocTree."""
         return DocTree(
-            children=tuple(DocNode.from_json(k, v) for k, v in obj.items()),
+            children=[DocNode.from_json(k, v) for k, v in obj.items()],
         )
 
     @staticmethod
@@ -124,7 +124,7 @@ class DocNode:
     parameter_docs: Mapping[str, str] | None = None
     return_doc: str | None = None
     exception_docs: Mapping[str, str] | None = None
-    children: Sequence[DocNode] = ()
+    children: Sequence[DocNode] = field(default_factory=list)
 
     def doc_string(self, line_length: int, indent: int = 0) -> Sequence[str]:  # noqa: C901
         """Generate a doc-string sequence for this tree."""
@@ -221,7 +221,7 @@ class DocNode:
             parameter_docs=obj.pop("parameters", None),
             return_doc=obj.pop("return", None),
             exception_docs=obj.pop("exceptions", None),
-            children=tuple(DocNode.from_json(k, v) for k, v in obj.items()),
+            children=[DocNode.from_json(k, v) for k, v in obj.items()],
         )
 
 
@@ -375,7 +375,7 @@ class CType(CWrapper):
     VOID: ClassVar[CType]
 
     namespace: str | None = None
-    inner: Sequence[CType] = ()
+    inner: Sequence[CType] = field(default_factory=list)
     reference: bool = False
     generic: bool = False
     nullable: bool = False
@@ -430,9 +430,9 @@ class CType(CWrapper):
             json,
         )
         name: str = match.group(2)
-        inner: Sequence[CType] = ()
+        inner: Sequence[CType] = []
         if (inner_str := match.group(3)) is not None:
-            inner = tuple(map(CType.from_json, inner_str.split(", ")))
+            inner = list(map(CType.from_json, inner_str.split(", ")))
         return cls(
             name=re.sub(r"[?$*]", "", name),
             namespace=match.group(1),
@@ -548,7 +548,7 @@ class CConstructor(CMember):
     """C# Constructor wrapper."""
 
     name: str = "__init__"
-    parameters: Sequence[CParameter] = ()
+    parameters: Sequence[CParameter] = field(default_factory=list)
 
     @property
     def unique_name(self) -> str:
@@ -560,7 +560,7 @@ class CConstructor(CMember):
     def to_json(self) -> JsonType:
         return {
             "declaring_type": self.declaring_type.to_json(),
-            "parameters": tuple(p.to_json() for p in self.parameters),
+            "parameters": [p.to_json() for p in self.parameters],
         }
 
     @override
@@ -575,7 +575,7 @@ class CConstructor(CMember):
     def from_json(cls, json: JsonType) -> CConstructor:
         return cls(
             declaring_type=CType.from_json(json["declaring_type"]),
-            parameters=tuple(map(CParameter.from_json, json["parameters"])),
+            parameters=list(map(CParameter.from_json, json["parameters"])),
         )
 
     @classmethod
@@ -625,8 +625,8 @@ class CProperty(CMember):
 class CMethod(CMember):
     """C# Method wrapper."""
 
-    parameters: Sequence[CParameter] = ()
-    return_types: Sequence[CType] = ()
+    parameters: Sequence[CParameter] = field(default_factory=list)
+    return_types: Sequence[CType] = field(default_factory=list)
     static: bool = False
 
     @property
@@ -640,8 +640,8 @@ class CMethod(CMember):
         return {
             "name": self.name,
             "declaring_type": self.declaring_type.to_json(),
-            "parameters": tuple(p.to_json() for p in self.parameters),
-            "return_types": tuple(r.to_json() for r in self.return_types),
+            "parameters": [p.to_json() for p in self.parameters],
+            "return_types": [r.to_json() for r in self.return_types],
             "static": self.static,
         }
 
@@ -666,8 +666,8 @@ class CMethod(CMember):
         return cls(
             name=json["name"],
             declaring_type=CType.from_json(json["declaring_type"]),
-            parameters=tuple(map(CParameter.from_json, json["parameters"])),
-            return_types=tuple(map(CType.from_json, json["return_types"])),
+            parameters=list(map(CParameter.from_json, json["parameters"])),
+            return_types=list(map(CType.from_json, json["return_types"])),
             static=json["static"],
         )
 
@@ -711,32 +711,6 @@ class CEvent(CMember):
 
 
 @dataclass(frozen=True, kw_only=True)
-class CNamespace(CWrapper):
-    """C# Namespace wrapper."""
-
-    types: Mapping[str, CTypeDefinition] = field(default_factory=dict)
-
-    @override
-    def to_json(self) -> JsonType:
-        return {
-            "name": self.name,
-            "types": {k: v.to_json() for k, v in self.types.items()},
-        }
-
-    @override
-    def to_doc_tree(self) -> DocNode:
-        raise NotImplementedError
-
-    @classmethod
-    @override
-    def from_json(cls, json: JsonType) -> CNamespace:
-        return cls(
-            name=json["name"],
-            types={k: CTypeDefinition.from_json(v) for k, v in json["types"].items()},
-        )
-
-
-@dataclass(frozen=True, kw_only=True)
 class CTypeDefinition(CWrapper, ABC):
     """Base class for C# type definition wrappers."""
 
@@ -775,9 +749,9 @@ class CClass(CTypeDefinition):
     """C# Class wrapper."""
 
     abstract: bool = False
-    generic_args: Sequence[CType] = ()
+    generic_args: Sequence[CType] = field(default_factory=list)
     super_class: CType | None = None
-    interfaces: Sequence[CType] = ()
+    interfaces: Sequence[CType] = field(default_factory=list)
     fields: Mapping[str, CField] = field(default_factory=dict)
     constructors: Mapping[str, CConstructor] = field(default_factory=dict)
     properties: Mapping[str, CProperty] = field(default_factory=dict)
@@ -793,9 +767,9 @@ class CClass(CTypeDefinition):
             "namespace": self.namespace,
             "nested": None if self.nested is None else self.nested.to_json(),
             "abstract": self.abstract,
-            "generic_args": tuple(a.to_json() for a in self.generic_args),
+            "generic_args": [a.to_json() for a in self.generic_args],
             "super_class": None if self.super_class is None else self.super_class.to_json(),
-            "interfaces": tuple(sorted(i.to_json() for i in self.interfaces)),
+            "interfaces": sorted(i.to_json() for i in self.interfaces),
             "fields": {k: v.to_json() for k, v in self.fields.items()},
             "constructors": {k: v.to_json() for k, v in self.constructors.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
@@ -815,10 +789,10 @@ class CClass(CTypeDefinition):
         )
         return DocNode(
             self.unique_name,
-            children=(
+            children=[
                 *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
                 *(c.to_doc_tree() for c in self.nested_types.values()),
-            ),
+            ],
         )
 
     @classmethod
@@ -829,9 +803,9 @@ class CClass(CTypeDefinition):
             namespace=json["namespace"],
             nested=CType.from_json(json["nested"]),
             abstract=json["abstract"],
-            generic_args=tuple(map(CType.from_json, json["generic_args"])),
+            generic_args=list(map(CType.from_json, json["generic_args"])),
             super_class=CType.from_json(json["super_class"]),
-            interfaces=tuple(map(CType.from_json, json["interfaces"])),
+            interfaces=list(map(CType.from_json, json["interfaces"])),
             fields={k: CField.from_json(v) for k, v in json["fields"].items()},
             constructors={k: CConstructor.from_json(v) for k, v in json["constructors"].items()},
             properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
@@ -856,8 +830,8 @@ class CStruct(CClass):
 class CInterface(CTypeDefinition):
     """C# Interface wrapper."""
 
-    generic_args: Sequence[CType] = ()
-    interfaces: Sequence[CType] = ()
+    generic_args: Sequence[CType] = field(default_factory=list)
+    interfaces: Sequence[CType] = field(default_factory=list)
     fields: Mapping[str, CField] = field(default_factory=dict)
     properties: Mapping[str, CProperty] = field(default_factory=dict)
     methods: Mapping[str, CMethod] = field(default_factory=dict)
@@ -871,8 +845,8 @@ class CInterface(CTypeDefinition):
             "name": self.name,
             "namespace": self.namespace,
             "nested": None if self.nested is None else self.nested.to_json(),
-            "generic_args": tuple(a.to_json() for a in self.generic_args),
-            "interfaces": tuple(sorted(i.to_json() for i in self.interfaces)),
+            "generic_args": [a.to_json() for a in self.generic_args],
+            "interfaces": sorted(i.to_json() for i in self.interfaces),
             "fields": {k: v.to_json() for k, v in self.fields.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
             "methods": {k: v.to_json() for k, v in self.methods.items()},
@@ -890,10 +864,10 @@ class CInterface(CTypeDefinition):
         )
         return DocNode(
             self.unique_name,
-            children=(
+            children=[
                 *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
                 *(c.to_doc_tree() for c in self.nested_types.values()),
-            ),
+            ],
         )
 
     @classmethod
@@ -903,8 +877,8 @@ class CInterface(CTypeDefinition):
             name=json["name"],
             namespace=json["namespace"],
             nested=CType.from_json(json["nested"]),
-            generic_args=tuple(sorted(map(CType.from_json, json["generic_args"]))),
-            interfaces=tuple(map(CType.from_json, json["interfaces"])),
+            generic_args=sorted(map(CType.from_json, json["generic_args"])),
+            interfaces=list(map(CType.from_json, json["interfaces"])),
             fields={k: CField.from_json(v) for k, v in json["fields"].items()},
             properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
             methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
@@ -917,7 +891,7 @@ class CInterface(CTypeDefinition):
 class CEnum(CTypeDefinition):
     """C# Enum wrapper."""
 
-    fields: Sequence[str] = ()
+    fields: Sequence[str] = field(default_factory=list)
 
     @override
     def to_json(self) -> JsonType:
@@ -933,7 +907,7 @@ class CEnum(CTypeDefinition):
     def to_doc_tree(self) -> DocNode:
         return DocNode(
             self.unique_name,
-            children=tuple(DocNode(f) for f in self.fields),
+            children=[DocNode(f) for f in self.fields],
         )
 
     @classmethod
@@ -943,7 +917,7 @@ class CEnum(CTypeDefinition):
             name=json["name"],
             namespace=json["namespace"],
             nested=CType.from_json(json["nested"]),
-            fields=tuple(json["fields"]),
+            fields=list(json["fields"]),
         )
 
 
@@ -951,7 +925,7 @@ class CEnum(CTypeDefinition):
 class CDelegate(CTypeDefinition):
     """C# Delegate wrapper."""
 
-    parameters: Sequence[CParameter] = ()
+    parameters: Sequence[CParameter] = field(default_factory=list)
     return_type: CType = CType.VOID
 
     @property
@@ -967,7 +941,7 @@ class CDelegate(CTypeDefinition):
             "name": self.name,
             "namespace": self.namespace,
             "nested": None if self.nested is None else self.nested.to_json(),
-            "parameters": tuple(p.to_json() for p in self.parameters),
+            "parameters": [p.to_json() for p in self.parameters],
             "return_type": self.return_type.to_json(),
         }
 
@@ -988,6 +962,32 @@ class CDelegate(CTypeDefinition):
             name=json["name"],
             namespace=json["namespace"],
             nested=CType.from_json(json["nested"]),
-            parameters=tuple(map(CParameter.from_json, json["parameters"])),
+            parameters=list(map(CParameter.from_json, json["parameters"])),
             return_type=CType.from_json(json["return_type"]),
+        )
+
+
+@dataclass(frozen=True, kw_only=True)
+class CNamespace(CWrapper):
+    """C# Namespace wrapper."""
+
+    types: Mapping[str, CTypeDefinition] = field(default_factory=dict)
+
+    @override
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "types": {k: v.to_json() for k, v in self.types.items()},
+        }
+
+    @override
+    def to_doc_tree(self) -> DocNode:
+        raise NotImplementedError
+
+    @classmethod
+    @override
+    def from_json(cls, json: JsonType) -> CNamespace:
+        return cls(
+            name=json["name"],
+            types={k: CTypeDefinition.from_json(v) for k, v in json["types"].items()},
         )
