@@ -7,6 +7,7 @@ from abc import ABC
 from abc import abstractmethod
 from dataclasses import dataclass
 from dataclasses import field
+from functools import partial
 from textwrap import TextWrapper
 from typing import TYPE_CHECKING
 from typing import Any
@@ -15,45 +16,23 @@ from typing import Self
 from typing import override
 
 from stubgen.log import get_logger
+from stubgen.util import _compare_boolean
+from stubgen.util import _compare_string
+from stubgen.util import _compare_version
+from stubgen.util import _merge_mapping
+from stubgen.util import _merge_sequence
+from stubgen.util import _merge_string
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
     from collections.abc import Sequence
     from logging import Logger
-    from typing import Literal
 
-    type CompareResults = Literal[-1, 0, 1]
+    from stubgen.util import CompareResults
+
     type JsonType = None | int | float | str | Sequence | Mapping
 
 logger: Logger = get_logger(__name__)
-
-
-def _compare_boolean(x: bool | None, y: bool | None) -> CompareResults:  # pragma: no cover
-    match x, y:
-        case (None, None):
-            return 0
-        case (None, bool()):
-            return -1
-        case (bool(), None):
-            return 1
-        case (bool(), bool()):
-            return 0 if x == y else (-1 if y else 1)
-    # This should never be reached, as long as the parameter types are correct
-    return 0
-
-
-def _compare_string(x: str | None, y: str | None) -> CompareResults:  # pragma: no cover
-    match x, y:
-        case (None, None):
-            return 0
-        case (None, str()):
-            return -1
-        case (str(), None):
-            return 1
-        case (str(), str()):
-            return 0 if x == y else (-1 if x < y else 1)
-    # This should never be reached, as long as the parameter types are correct
-    return 0
 
 
 @dataclass(frozen=True)
@@ -80,6 +59,17 @@ class DocTree:
         return DocTree(
             children=[DocNode.from_json(k, v) for k, v in obj.items()],
         )
+
+    @classmethod
+    def merge(cls, obj1: DocTree, obj2: DocTree) -> DocTree:
+        """Merge two DocTrees into a single DocTree."""
+        children: Mapping[str, DocNode] = _merge_mapping(
+            {c.name: c for c in obj1.children},
+            {c.name: c for c in obj2.children},
+            DocNode.merge,
+        )
+
+        return DocTree(children=sorted(children.values(), key=lambda c: c.name))
 
     @staticmethod
     def _get_node(children: Sequence[DocNode], nodes: Sequence[str]) -> DocNode | None:
@@ -224,84 +214,67 @@ class DocNode:
             children=[DocNode.from_json(k, v) for k, v in obj.items()],
         )
 
+    @classmethod
+    def merge(cls, obj1: DocNode, obj2: DocNode) -> DocNode:
+        """Merge two DocNodes into a single DocNode."""
+        logger.debug("Merging DocNode %r and %r", obj1.name, obj2.name)
 
-@dataclass(frozen=True)
-class ImportList:
-    """A data structure that holds imports for a stub file."""
+        doc: str = _merge_string(obj1.doc, obj2.doc)
 
-    EVENT_TYPE: ClassVar[str] = "--[EVENT_TYPE]--"
-    ABC: ClassVar[str] = "abc.ABC"
-    FINAL: ClassVar[str] = "typing.Final"
-    CLASS_VAR: ClassVar[str] = "typing.ClassVar"
-    OVERLOAD: ClassVar[str] = "typing.overload"
-    ENUM: ClassVar[str] = "System.Enum"
-    CALLABLE: ClassVar[str] = "collections.abc.Callable"
+        doc_formatted: Mapping[str, Sequence[str]] = _merge_mapping(
+            obj1.doc_formatted,
+            obj2.doc_formatted,
+            partial(_merge_sequence, merge_func=_merge_string),
+        )
 
-    types: set[str] = field(default_factory=set)
+        parameter_docs: Mapping[str, str] | None = _merge_mapping(
+            obj1.parameter_docs,
+            obj2.parameter_docs,
+            _merge_string,
+        )
 
-    def add_type(self, obj: CType) -> None:
-        """Add a type to the import list."""
-        if obj == CType.VOID or obj.generic:
-            # No longer need to declare TypeVar.
-            return
-        self.types.add(obj.import_name)
-        inner: CType
-        for inner in obj.inner:
-            self.add_type(inner)
+        return_doc: str | None = _merge_string(obj1.return_doc, obj2.return_doc)
 
-    def add_event_type(self) -> None:
-        """Add EventType to the import list."""
-        self.types.add(self.EVENT_TYPE)
+        exception_docs: Mapping[str, str] | None = _merge_mapping(
+            obj1.exception_docs,
+            obj2.exception_docs,
+            _merge_string,
+        )
+        if exception_docs is not None:
+            exception_docs = dict(sorted(exception_docs.items()))
 
-    def add_abc(self) -> None:
-        """Add abc.ABC to the import list."""
-        self.types.add(self.ABC)
+        children: Mapping[str, DocNode] = _merge_mapping(
+            {c.name: c for c in obj1.children},
+            {c.name: c for c in obj2.children},
+            DocNode.merge,
+        )
 
-    def add_final(self) -> None:
-        """Add typing.Final to the import list."""
-        self.types.add(self.FINAL)
+        return DocNode(
+            name=obj1.name,
+            doc=doc,
+            doc_formatted=doc_formatted,
+            parameter_docs=parameter_docs,
+            return_doc=return_doc,
+            exception_docs=exception_docs,
+            children=sorted(children.values(), key=lambda c: c.name),
+        )
 
-    def add_class_var(self) -> None:
-        """Add typing.ClassVar to the import list."""
-        self.types.add(self.CLASS_VAR)
 
-    def add_overload(self) -> None:
-        """Add typing.overload to the import list."""
-        self.types.add(self.OVERLOAD)
+class DocNodeMixin(ABC):
+    """A mixin for objects that can provide DocNoes."""
 
-    def add_enum(self) -> None:
-        """Add System.Enum to the import list."""
-        self.types.add(self.ENUM)
+    @abstractmethod
+    def doc_node(self) -> DocNode:
+        """Convert this object into a DocNode."""
 
-    def add_callable(self) -> None:
-        """Add collections.abc.Callable to the import list."""
-        self.types.add(self.CALLABLE)
 
-    def build(self, namespace: str) -> Sequence[str]:
-        """Build a sequence of import strings."""
-        lines: list[str] = []
-        # TODO(Ryan): Move this to build_stubs
+class MergeMixin(ABC):
+    """A mixin for objects that can be merged."""
 
-        import_event_type: bool = False
-
-        import_name: str
-        for import_name in sorted(self.types):
-            if import_name == self.EVENT_TYPE:
-                import_event_type = True
-                continue
-
-            split: Sequence[str] = import_name.split(".")
-            namespace_name: str = ".".join(split[:-1])
-            if namespace == namespace_name:
-                continue
-            lines.append(f"from {namespace_name} import {split[-1]}")
-
-        if import_event_type:
-            lines.append("class EventType[T]:")
-            lines.append("    def __iadd__(self, other: T) -> Self: ...")
-            lines.append("    def __isub__(self, other: T) -> Self: ...")
-
-        return lines
+    @classmethod
+    @abstractmethod
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        """Merge two objects into a one."""
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -335,13 +308,9 @@ class CWrapper(ABC):
     def to_json(self) -> JsonType:
         """Convert this object into a JSON compatible object."""
 
-    @abstractmethod
-    def to_doc_tree(self) -> DocNode:
-        """Convert this object into a DocNode."""
-
     @classmethod
     @abstractmethod
-    def from_json(cls, json: JsonType) -> CNamespace:
+    def from_json(cls, json: JsonType) -> Self:
         """Convert a JSON compatible object into a C# wrapper object."""
 
     @classmethod
@@ -416,13 +385,9 @@ class CType(CWrapper):
     def to_json(self) -> JsonType:
         return self.full_name
 
-    @override
-    def to_doc_tree(self) -> DocNode:
-        raise NotImplementedError
-
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CType | None:
+    def from_json(cls, json: JsonType) -> Self | None:
         if json is None:
             return None
         match: re.Match = re.match(
@@ -481,13 +446,9 @@ class CParameter(CWrapper):
             "out": self.out,
         }
 
-    @override
-    def to_doc_tree(self) -> DocNode:
-        raise NotImplementedError
-
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CParameter:
+    def from_json(cls, json: JsonType) -> Self:
         return cls(
             name=json["name"],
             type=CType.from_json(json["type"]),
@@ -503,7 +464,7 @@ class CParameter(CWrapper):
 
 
 @dataclass(frozen=True, kw_only=True)
-class CMember(CWrapper, ABC):
+class CMember(CWrapper, DocNodeMixin, ABC):
     """C# Member wrapper."""
 
     declaring_type: CType
@@ -526,7 +487,7 @@ class CField(CMember):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         return_doc: str | None = None
         if self.return_type is not None and self.return_type != CType.VOID:
             return_doc = ""
@@ -534,7 +495,7 @@ class CField(CMember):
 
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CField:
+    def from_json(cls, json: JsonType) -> Self:
         return cls(
             name=json["name"],
             declaring_type=CType.from_json(json["declaring_type"]),
@@ -564,7 +525,7 @@ class CConstructor(CMember):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         parameter_docs: Mapping[str, str] | None = None
         if len(self.parameters) > 0:
             parameter_docs = {p.name: "" for p in self.parameters}
@@ -572,7 +533,7 @@ class CConstructor(CMember):
 
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CConstructor:
+    def from_json(cls, json: JsonType) -> Self:
         return cls(
             declaring_type=CType.from_json(json["declaring_type"]),
             parameters=list(map(CParameter.from_json, json["parameters"])),
@@ -603,7 +564,7 @@ class CProperty(CMember):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         return_doc: str | None = None
         if self.type is not None and self.type != CType.VOID:
             return_doc = ""
@@ -611,7 +572,7 @@ class CProperty(CMember):
 
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CProperty:
+    def from_json(cls, json: JsonType) -> Self:
         return cls(
             name=json["name"],
             declaring_type=CType.from_json(json["declaring_type"]),
@@ -646,7 +607,7 @@ class CMethod(CMember):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         parameter_docs: Mapping[str, str] | None = None
         if len(self.parameters) > 0:
             parameter_docs = {p.name: "" for p in self.parameters}
@@ -662,7 +623,7 @@ class CMethod(CMember):
 
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CMethod:
+    def from_json(cls, json: JsonType) -> Self:
         return cls(
             name=json["name"],
             declaring_type=CType.from_json(json["declaring_type"]),
@@ -697,12 +658,12 @@ class CEvent(CMember):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         return DocNode(name=self.unique_name)
 
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CEvent:
+    def from_json(cls, json: JsonType) -> Self:
         return cls(
             name=json["name"],
             declaring_type=CType.from_json(json["declaring_type"]),
@@ -711,7 +672,7 @@ class CEvent(CMember):
 
 
 @dataclass(frozen=True, kw_only=True)
-class CTypeDefinition(CWrapper, ABC):
+class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
     """Base class for C# type definition wrappers."""
 
     namespace: str | None = None
@@ -742,6 +703,24 @@ class CTypeDefinition(CWrapper, ABC):
             case "delegate":
                 return CDelegate.from_json(json)
         raise NotImplementedError  # pragma: no cover
+
+    @classmethod
+    @override
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        match obj1, obj2:
+            case CClass(), CClass():
+                return CClass.merge(obj1, obj2)
+            case CStruct(), CStruct():
+                return CStruct.merge(obj1, obj2)
+            case CInterface(), CInterface():
+                return CInterface.merge(obj1, obj2)
+            case CEnum(), CEnum():
+                return CEnum.merge(obj1, obj2)
+            case CDelegate(), CDelegate():
+                return CDelegate.merge(obj1, obj2)
+        raise TypeError(
+            f"Type definitions are not the same: {type(obj1)} != {type(obj2)}"
+        )  # pragma: no cover
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -779,7 +758,7 @@ class CClass(CTypeDefinition):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         members: Sequence[CMember] = (
             *self.fields.values(),
             *self.constructors.values(),
@@ -790,8 +769,8 @@ class CClass(CTypeDefinition):
         return DocNode(
             self.unique_name,
             children=[
-                *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
-                *(c.to_doc_tree() for c in self.nested_types.values()),
+                *(m.doc_node() for m in members if m.declaring_type.name == self.name),
+                *(c.doc_node() for c in self.nested_types.values()),
             ],
         )
 
@@ -814,16 +793,188 @@ class CClass(CTypeDefinition):
             nested_types={k: CTypeDefinition.from_json(v) for k, v in json["nested_types"].items()},
         )
 
+    @classmethod
+    @override
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        logger.debug("Merging CClasses %r and %r", obj1.name, obj2.name)
+
+        def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
+            return o1
+
+        interfaces: Sequence[CType] = _merge_sequence(obj1.interfaces, obj2.interfaces, first)
+        fields: Mapping[str, CField] = _merge_mapping(
+            obj1.fields,
+            obj2.fields,
+            first,
+        )
+        constructors: Mapping[str, CConstructor] = _merge_mapping(
+            obj1.constructors,
+            obj2.constructors,
+            first,
+        )
+        properties: Mapping[str, CProperty] = _merge_mapping(
+            obj1.properties,
+            obj2.properties,
+            first,
+        )
+        methods: Mapping[str, CMethod] = _merge_mapping(
+            obj1.methods,
+            obj2.methods,
+            first,
+        )
+        events: Mapping[str, CEvent] = _merge_mapping(
+            obj1.events,
+            obj2.events,
+            first,
+        )
+        nested_types: Mapping[str, CTypeDefinition] = _merge_mapping(
+            obj1.nested_types,
+            obj2.nested_types,
+            CTypeDefinition.merge,
+        )
+
+        return CClass(
+            name=obj1.name,
+            namespace=obj1.namespace,
+            nested=obj1.nested,
+            abstract=obj1.abstract,
+            generic_args=obj1.generic_args,
+            super_class=obj1.super_class,
+            interfaces=sorted(interfaces),
+            fields=dict(sorted(fields.items())),
+            constructors=dict(sorted(constructors.items())),
+            properties=dict(sorted(properties.items())),
+            methods=dict(sorted(methods.items())),
+            events=dict(sorted(events.items())),
+            nested_types=dict(sorted(nested_types.items())),
+        )
+
 
 @dataclass(frozen=True, kw_only=True)
-class CStruct(CClass):
+class CStruct(CTypeDefinition):
     """C# Struct wrapper."""
+
+    abstract: bool = False
+    generic_args: Sequence[CType] = field(default_factory=list)
+    super_class: CType | None = None
+    interfaces: Sequence[CType] = field(default_factory=list)
+    fields: Mapping[str, CField] = field(default_factory=dict)
+    constructors: Mapping[str, CConstructor] = field(default_factory=dict)
+    properties: Mapping[str, CProperty] = field(default_factory=dict)
+    methods: Mapping[str, CMethod] = field(default_factory=dict)
+    events: Mapping[str, CEvent] = field(default_factory=dict)
+    nested_types: Mapping[str, CTypeDefinition] = field(default_factory=dict)
 
     @override
     def to_json(self) -> JsonType:
-        json: dict[str, Any] = dict(**super().to_json())
-        json["type"] = "struct"
-        return json
+        return {
+            "type": "struct",
+            "name": self.name,
+            "namespace": self.namespace,
+            "nested": None if self.nested is None else self.nested.to_json(),
+            "abstract": self.abstract,
+            "generic_args": [a.to_json() for a in self.generic_args],
+            "super_class": None if self.super_class is None else self.super_class.to_json(),
+            "interfaces": sorted(i.to_json() for i in self.interfaces),
+            "fields": {k: v.to_json() for k, v in self.fields.items()},
+            "constructors": {k: v.to_json() for k, v in self.constructors.items()},
+            "properties": {k: v.to_json() for k, v in self.properties.items()},
+            "methods": {k: v.to_json() for k, v in self.methods.items()},
+            "events": {k: v.to_json() for k, v in self.events.items()},
+            "nested_types": {k: v.to_json() for k, v in self.nested_types.items()},
+        }
+
+    @override
+    def doc_node(self) -> DocNode:
+        members: Sequence[CMember] = (
+            *self.fields.values(),
+            *self.constructors.values(),
+            *self.properties.values(),
+            *self.methods.values(),
+            *self.events.values(),
+        )
+        return DocNode(
+            self.unique_name,
+            children=[
+                *(m.doc_node() for m in members if m.declaring_type.name == self.name),
+                *(c.doc_node() for c in self.nested_types.values()),
+            ],
+        )
+
+    @classmethod
+    @override
+    def from_json(cls, json: JsonType) -> Self:
+        return cls(
+            name=json["name"],
+            namespace=json["namespace"],
+            nested=CType.from_json(json["nested"]),
+            abstract=json["abstract"],
+            generic_args=list(map(CType.from_json, json["generic_args"])),
+            super_class=CType.from_json(json["super_class"]),
+            interfaces=list(map(CType.from_json, json["interfaces"])),
+            fields={k: CField.from_json(v) for k, v in json["fields"].items()},
+            constructors={k: CConstructor.from_json(v) for k, v in json["constructors"].items()},
+            properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
+            methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
+            events={k: CEvent.from_json(v) for k, v in json["events"].items()},
+            nested_types={k: CTypeDefinition.from_json(v) for k, v in json["nested_types"].items()},
+        )
+
+    @classmethod
+    @override
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        logger.debug("Merging CStructs %r and %r", obj1.name, obj2.name)
+
+        def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
+            return o1
+
+        interfaces: Sequence[CType] = _merge_sequence(obj1.interfaces, obj2.interfaces, first)
+        fields: Mapping[str, CField] = _merge_mapping(
+            obj1.fields,
+            obj2.fields,
+            first,
+        )
+        constructors: Mapping[str, CConstructor] = _merge_mapping(
+            obj1.constructors,
+            obj2.constructors,
+            first,
+        )
+        properties: Mapping[str, CProperty] = _merge_mapping(
+            obj1.properties,
+            obj2.properties,
+            first,
+        )
+        methods: Mapping[str, CMethod] = _merge_mapping(
+            obj1.methods,
+            obj2.methods,
+            first,
+        )
+        events: Mapping[str, CEvent] = _merge_mapping(
+            obj1.events,
+            obj2.events,
+            first,
+        )
+        nested_types: Mapping[str, CTypeDefinition] = _merge_mapping(
+            obj1.nested_types,
+            obj2.nested_types,
+            CTypeDefinition.merge,
+        )
+
+        return CStruct(
+            name=obj1.name,
+            namespace=obj1.namespace,
+            nested=obj1.nested,
+            abstract=obj1.abstract,
+            generic_args=obj1.generic_args,
+            super_class=obj1.super_class,
+            interfaces=sorted(interfaces),
+            fields=dict(sorted(fields.items())),
+            constructors=dict(sorted(constructors.items())),
+            properties=dict(sorted(properties.items())),
+            methods=dict(sorted(methods.items())),
+            events=dict(sorted(events.items())),
+            nested_types=dict(sorted(nested_types.items())),
+        )
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -855,7 +1006,7 @@ class CInterface(CTypeDefinition):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         members: Sequence[CMember] = (
             *self.fields.values(),
             *self.properties.values(),
@@ -865,8 +1016,8 @@ class CInterface(CTypeDefinition):
         return DocNode(
             self.unique_name,
             children=[
-                *(m.to_doc_tree() for m in members if m.declaring_type.name == self.name),
-                *(c.to_doc_tree() for c in self.nested_types.values()),
+                *(m.doc_node() for m in members if m.declaring_type.name == self.name),
+                *(c.doc_node() for c in self.nested_types.values()),
             ],
         )
 
@@ -884,6 +1035,54 @@ class CInterface(CTypeDefinition):
             methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
             nested_types={k: CTypeDefinition.from_json(v) for k, v in json["nested_types"].items()},
+        )
+
+    @classmethod
+    @override
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        logger.debug("Merging CInterfaces %r and %r", obj1.name, obj2.name)
+
+        def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
+            return o1
+
+        interfaces: Sequence[CType] = _merge_sequence(obj1.interfaces, obj2.interfaces, first)
+        fields: Mapping[str, CField] = _merge_mapping(
+            obj1.fields,
+            obj2.fields,
+            first,
+        )
+        properties: Mapping[str, CProperty] = _merge_mapping(
+            obj1.properties,
+            obj2.properties,
+            first,
+        )
+        methods: Mapping[str, CMethod] = _merge_mapping(
+            obj1.methods,
+            obj2.methods,
+            first,
+        )
+        events: Mapping[str, CEvent] = _merge_mapping(
+            obj1.events,
+            obj2.events,
+            first,
+        )
+        nested_types: Mapping[str, CTypeDefinition] = _merge_mapping(
+            obj1.nested_types,
+            obj2.nested_types,
+            CTypeDefinition.merge,
+        )
+
+        return CInterface(
+            name=obj1.name,
+            namespace=obj1.namespace,
+            nested=obj1.nested,
+            generic_args=obj1.generic_args,
+            interfaces=sorted(interfaces),
+            fields=dict(sorted(fields.items())),
+            properties=dict(sorted(properties.items())),
+            methods=dict(sorted(methods.items())),
+            events=dict(sorted(events.items())),
+            nested_types=dict(sorted(nested_types.items())),
         )
 
 
@@ -904,7 +1103,7 @@ class CEnum(CTypeDefinition):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         return DocNode(
             self.unique_name,
             children=[DocNode(f) for f in self.fields],
@@ -918,6 +1117,18 @@ class CEnum(CTypeDefinition):
             namespace=json["namespace"],
             nested=CType.from_json(json["nested"]),
             fields=list(json["fields"]),
+        )
+
+    @classmethod
+    @override
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        logger.debug("Merging CEnums %r and %r", obj1.name, obj2.name)
+
+        return CEnum(
+            name=obj1.name,
+            namespace=obj1.namespace,
+            nested=obj1.nested,
+            fields=obj1.fields,
         )
 
 
@@ -946,7 +1157,7 @@ class CDelegate(CTypeDefinition):
         }
 
     @override
-    def to_doc_tree(self) -> DocNode:
+    def doc_node(self) -> DocNode:
         parameter_docs: Mapping[str, str] | None = None
         if len(self.parameters) > 0:
             parameter_docs = {p.name: "" for p in self.parameters}
@@ -966,9 +1177,22 @@ class CDelegate(CTypeDefinition):
             return_type=CType.from_json(json["return_type"]),
         )
 
+    @classmethod
+    @override
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        logger.debug("Merging CDelegates %r and %r", obj1.name, obj2.name)
+
+        return CDelegate(
+            name=obj1.name,
+            namespace=obj1.namespace,
+            nested=obj1.nested,
+            parameters=obj1.parameters,
+            return_type=obj1.return_type,
+        )
+
 
 @dataclass(frozen=True, kw_only=True)
-class CNamespace(CWrapper):
+class CNamespace(CWrapper, MergeMixin):
     """C# Namespace wrapper."""
 
     types: Mapping[str, CTypeDefinition] = field(default_factory=dict)
@@ -980,14 +1204,63 @@ class CNamespace(CWrapper):
             "types": {k: v.to_json() for k, v in self.types.items()},
         }
 
-    @override
-    def to_doc_tree(self) -> DocNode:
-        raise NotImplementedError
-
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> CNamespace:
+    def from_json(cls, json: JsonType) -> Self:
         return cls(
             name=json["name"],
             types={k: CTypeDefinition.from_json(v) for k, v in json["types"].items()},
         )
+
+    @classmethod
+    @override
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
+        logger.debug("Merging CNamespaces %r and %r", obj1.name, obj2.name)
+
+        return CNamespace(
+            name=obj1.name,
+            types=dict(
+                sorted(
+                    _merge_mapping(
+                        obj1.types,
+                        obj2.types,
+                        CTypeDefinition.merge,
+                    ).items(),
+                )
+            ),
+        )
+
+
+@dataclass(frozen=True)
+class CAssembly(CWrapper):
+    """C# Assembly wrapper."""
+
+    version: str
+    namespaces: Mapping[str, CNamespace] = field(default_factory=dict)
+
+    @override
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "version": self.version,
+            "namespaces": {k: v.to_json() for k, v in self.namespaces.items()},
+        }
+
+    @classmethod
+    @override
+    def from_json(cls, json: JsonType) -> Self:
+        return cls(
+            name=json["name"],
+            version=json["version"],
+            namespaces={k: CNamespace.from_json(v) for k, v in json["namespaces"].items()},
+        )
+
+    @classmethod
+    @override
+    def compare(cls, x: Self, y: Self) -> CompareResults:
+        c: CompareResults
+        if (c := _compare_string(x.name, y.name)) != 0:
+            return c
+        if (c := _compare_version(x.version, y.version)) != 0:
+            return c
+        return 0

@@ -24,7 +24,7 @@ class CommandArguments(ABC):
     command: str
     verbose: bool = False
     output_dir: Path = Path()
-    multi_threaded: bool = False
+    threads: int = 1
 
     @classmethod
     @abstractmethod
