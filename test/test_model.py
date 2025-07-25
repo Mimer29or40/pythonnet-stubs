@@ -4439,7 +4439,7 @@ class TestCAssembly:
                 ),
                 {
                     "name": "Name",
-                    "version": "0.0.0",
+                    "version": "0.0.0.0",
                     "namespaces": {
                         "A": {"name": "A", "types": {}},
                         "B": {"name": "B", "types": {}},
