@@ -39,7 +39,7 @@ dependencies = [
     "pythonnet>=3.0.0",
     "black>=25.1.0",
     "isort>=6.0.1",
-    "ruff>=0.12.4",
+    "ruff>=0.12.5",
 ]
 dynamic = ["version"]
 
@@ -147,9 +147,9 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "*.pyi" = [
-    "N802",  # pep8-naming: Function name `Data` should be lowercase
-    "N803",  # pep8-naming: Argument name `innerException` should be lowercase
-    "N818",  # pep8-naming: Exception name `AggregateException` should be named with an Error suffix
+    "N802",  # pep8-naming: Function name should be lowercase
+    "N803",  # pep8-naming: Argument name should be lowercase
+    "N818",  # pep8-naming: Exception name should be named with an Error suffix
     "D205",  # pydocstyle: 1 blank line required between summary line and description
     "D418",  # pydocstyle: Function decorated with `@overload` shouldn't contain a docstring
     "D419",  # pydocstyle: Docstring is empty

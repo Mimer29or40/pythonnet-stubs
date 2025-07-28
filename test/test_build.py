@@ -9,6 +9,8 @@ import pytest
 from conftest import make_params
 
 from stubgen.build_stubs import NamespaceBuilder
+from stubgen.build_stubs import build_stubs
+from stubgen.build_stubs import format_stubs
 from stubgen.model import CClass
 from stubgen.model import CConstructor
 from stubgen.model import CDelegate
@@ -1821,6 +1823,56 @@ class TestBuildNamespace:
 class TestBuildStubs:
     """Tests for build_stubs()."""
 
+    namespaces_list: Sequence[tuple[str, tuple[Sequence[CNamespace], Sequence[str]]]] = [
+        ("basic", ([CNamespace(name="NS")], ["NS-stubs"])),
+        (
+            "nested",
+            (
+                [CNamespace(name="NS.NS1.NS2")],
+                ["NS-stubs", "NS-stubs/NS1", "NS-stubs/NS1/NS2"],
+            ),
+        ),
+        (
+            "multiple",
+            (
+                [CNamespace(name="NS1"), CNamespace(name="NS2"), CNamespace(name="NS3")],
+                ["NS1-stubs", "NS2-stubs", "NS3-stubs"],
+            ),
+        ),
+    ]
+
+    @pytest.mark.parametrize(("namespaces", "files"), **make_params(namespaces_list))
+    def test_basic(
+        self,
+        builder: NamespaceBuilder,
+        namespaces: Sequence[CNamespace],
+        tmp_path: Path,
+        files: Sequence[str],
+    ) -> None:
+        """Test for build_stubs()."""
+        build_stubs(builder, namespaces, tmp_path)
+
+        for file in files:
+            stub_file: Path = tmp_path / file / "__init__.pyi"
+
+            assert stub_file.exists()
+
+    @pytest.mark.parametrize(("namespaces", "files"), **make_params(namespaces_list))
+    def test_multi_threaded(
+        self,
+        builder: NamespaceBuilder,
+        namespaces: Sequence[CNamespace],
+        tmp_path: Path,
+        files: Sequence[str],
+    ) -> None:
+        """Test for build_stubs()."""
+        build_stubs(builder, namespaces, tmp_path, threads=4)
+
+        for file in files:
+            stub_file: Path = tmp_path / file / "__init__.pyi"
+
+            assert stub_file.exists()
+
     # def test_build_test_lib(self) -> None:
     #     skeleton_name: str = "TestLib_1.0.0.0_skeleton.json"
     #     doc_name: str = "TestLib_1.0.0.0_doc.json"
@@ -1839,6 +1891,14 @@ class TestBuildStubs:
 
 class TestFormatStubs:
     """Tests for format_stubs()."""
+
+    def test_basic(self, output_dir: Path) -> None:
+        """Test for format_stubs()."""
+        format_stubs(100, output_dir)
+
+    def test_multi_threaded(self, output_dir: Path) -> None:
+        """Test for format_stubs()."""
+        format_stubs(100, output_dir, threads=4)
 
 
 class TestCommandBuild:

@@ -529,8 +529,9 @@ def build_stubs(
         namespace_file.write_text("\n".join(lines))
 
     if threads > 1:
-        executor: Executor = ThreadPoolExecutor(max_workers=threads, thread_name_prefix="Worker")
-        executor.map(build_stub, namespaces)
+        executor: Executor
+        with ThreadPoolExecutor(max_workers=threads, thread_name_prefix="Worker") as executor:
+            executor.map(build_stub, namespaces)
     else:
         for namespace in namespaces:
             build_stub(namespace)
@@ -545,14 +546,7 @@ def format_stubs(
     logger.info("Formatting stub files.")
 
     mode: Mode = Mode(
-        target_versions={
-            TargetVersion.PY38,
-            TargetVersion.PY39,
-            TargetVersion.PY310,
-            TargetVersion.PY311,
-            TargetVersion.PY312,
-            TargetVersion.PY313,
-        },
+        target_versions={TargetVersion.PY313},
         line_length=line_length,
         is_pyi=True,
     )
@@ -580,8 +574,9 @@ def format_stubs(
             logger.warning("Unable to run black on file '%s':", file, exc_info=e)
 
     if threads > 1:
-        executor: Executor = ThreadPoolExecutor(max_workers=threads, thread_name_prefix="Worker")
-        executor.map(format_file, output_dir.glob("*.pyi"))
+        executor: Executor
+        with ThreadPoolExecutor(max_workers=threads, thread_name_prefix="Worker") as executor:
+            executor.map(format_file, output_dir.glob("*.pyi"))
     else:
         for file in output_dir.rglob("*.pyi"):
             format_file(file)
