@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import keyword
 import re
+from collections.abc import Mapping
+from collections.abc import Sequence
 from typing import TYPE_CHECKING
 
 from packaging.version import Version
@@ -12,49 +14,36 @@ from stubgen.log import get_logger
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Callable
-    from collections.abc import Mapping
-    from collections.abc import Sequence
     from logging import Logger
+    from re import Pattern
     from typing import Literal
 
     type CompareResults = Literal[-1, 0, 1]
+    type MergeFunc[T] = Callable[[T, T], T]
 
 logger: Logger = get_logger(__name__)
 
 
-def is_name_valid(name: str) -> bool:
-    if "." in name:
-        return all(map(is_name_valid, name.split(".")))
+def _is_valid_python_name(name: str) -> bool:  # pragma: no cover
     return name.isidentifier() and not keyword.iskeyword(name)
 
 
+illegal_chars: Pattern[str] = re.compile(r"`\d+|&|\[|]|\*|<|>")
+
+
 def make_python_name(string: str) -> str:
-    if "[" in string:
-        string = string[: string.index("[")]
-    string = make_python_name.pattern.sub("", string)
-    if keyword.iskeyword(string):
-        return f"_{string}"
-    return string
+    """Remove illegal characters to form a valid Python name."""
+    if (idx := string.find("[")) >= 0:
+        string = string[:idx]
+    string = illegal_chars.sub("", string)
+    return string if _is_valid_python_name(string) else f"_{string}"
 
 
-make_python_name.pattern = re.compile(r"`\d+|&|\[|]|\*|<|>")
+def _compare_boolean(x: bool, y: bool) -> CompareResults:
+    return 0 if x == y else (-1 if y else 1)
 
 
-def _compare_boolean(x: bool | None, y: bool | None) -> CompareResults:  # pragma: no cover
-    match x, y:
-        case (None, None):
-            return 0
-        case (None, bool()):
-            return -1
-        case (bool(), None):
-            return 1
-        case (bool(), bool()):
-            return 0 if x == y else (-1 if y else 1)
-    # This should never be reached, as long as the parameter types are correct
-    return 0
-
-
-def _compare_string(x: str | None, y: str | None) -> CompareResults:  # pragma: no cover
+def _compare_string(x: str | None, y: str | None) -> CompareResults:
     match x, y:
         case (None, None):
             return 0
@@ -65,49 +54,47 @@ def _compare_string(x: str | None, y: str | None) -> CompareResults:  # pragma: 
         case (str(), str()):
             return 0 if x == y else (-1 if x < y else 1)
     # This should never be reached, as long as the parameter types are correct
-    return 0
+    raise NotImplementedError  # pragma: no cover
 
 
-def _compare_version(x: str | None, y: str | None) -> CompareResults:  # pragma: no cover
-    x = Version(x)
-    y = Version(y)
+def _compare_version(x: str, y: str) -> CompareResults:
+    return 0 if (v_x := Version(x)) == (v_y := Version(y)) else (-1 if v_x < v_y else 1)
+
+
+def _merge_string(x: str | None, y: str | None) -> str | None:
     match x, y:
         case (None, None):
-            return 0
-        case (None, Version()):
-            return -1
-        case (Version(), None):
-            return 1
-        case (Version(), Version()):
-            return 0 if x == y else (-1 if x < y else 1)
+            return None
+        case (None, str()):
+            return y
+        case (str(), None):
+            return x
+        case ("", ""):
+            return ""
+        case ("", str()):
+            return y
+        case (str(), ""):
+            return x
+        case (str(), str()):
+            return f"{x}\n{y}"
     # This should never be reached, as long as the parameter types are correct
-    return 0
-
-
-def _merge_string(x: str | None, y: str | None) -> str | None:  # pragma: no cover
-    return_doc: str | None = None
-    if x is not None:
-        return_doc = x
-        if y is not None:
-            if x != "":
-                if y != "":
-                    return_doc += "\n" + y
-            elif y != "":
-                return_doc = y
-    elif y is not None:
-        return_doc = y
-    return return_doc
+    raise NotImplementedError  # pragma: no cover
 
 
 def _merge_sequence[T](
     x: Sequence[T] | None,
     y: Sequence[T] | None,
-    merge_func: Callable[[T, T], T],
-) -> list[T] | None:  # pragma: no cover
-    merged: list[T] | None = None
-    if x is not None:
-        merged = list(x)
-        if y is not None:
+    merge_func: MergeFunc[T],
+) -> list[T] | None:
+    match x, y:
+        case (None, None):
+            return None
+        case (None, Sequence()):
+            return y
+        case (Sequence(), None):
+            return x
+        case (Sequence(), Sequence()):
+            merged: list[T] = list(x)
             obj1: T
             obj2: T
             for obj2 in y:
@@ -117,20 +104,25 @@ def _merge_sequence[T](
                     merged[index] = merge_func(obj1, obj2)
                 except ValueError:
                     merged.append(obj2)
-    elif y is not None:
-        merged = list(y)
-    return merged
+            return merged
+    # This should never be reached, as long as the parameter types are correct
+    raise NotImplementedError  # pragma: no cover
 
 
 def _merge_mapping[T](
     x: Mapping[str, T] | None,
     y: Mapping[str, T] | None,
-    merge_func: Callable[[T, T], T],
-) -> Mapping[str, T] | None:  # pragma: no cover
-    merged: dict[str, T] | None = None
-    if x is not None:
-        merged = dict(x)
-        if y is not None:
+    merge_func: MergeFunc[T],
+) -> Mapping[str, T] | None:
+    match x, y:
+        case (None, None):
+            return None
+        case (None, Mapping()):
+            return y
+        case (Mapping(), None):
+            return x
+        case (Mapping(), Mapping()):
+            merged: dict[str, T] = dict(x)
             name: str
             obj1: T
             obj2: T
@@ -139,6 +131,6 @@ def _merge_mapping[T](
                     obj1 = x[name]
                     obj2 = merge_func(obj1, obj2)
                 merged[name] = obj2
-    elif y is not None:
-        merged = dict(y)
-    return merged
+            return merged
+    # This should never be reached, as long as the parameter types are correct
+    raise NotImplementedError  # pragma: no cover

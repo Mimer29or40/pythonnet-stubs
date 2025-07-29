@@ -39,7 +39,6 @@ from stubgen.model import CTypeDefinition
 from stubgen.model import DocNode
 from stubgen.model import DocTree
 from stubgen.util import _merge_mapping
-from stubgen.util import make_python_name
 
 if TYPE_CHECKING:  # pragma: no cover
     from argparse import ArgumentParser
@@ -430,7 +429,7 @@ class NamespaceBuilder:
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         for field_obj in obj.fields:
-            lines.append(f"{'    ' * (indent + 1)}{make_python_name(field_obj)}: {obj.name} = ...")
+            lines.append(f"{'    ' * (indent + 1)}{field_obj}: {obj.name} = ...")
 
             doc_node: DocNode = self.doc_tree[f"{obj.namespace}.{obj.name}.{field_obj}"]
             lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))

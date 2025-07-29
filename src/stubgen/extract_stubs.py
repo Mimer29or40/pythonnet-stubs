@@ -48,7 +48,7 @@ from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
-from stubgen.util import is_name_valid
+from stubgen.util import _is_valid_python_name
 from stubgen.util import make_python_name
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -436,7 +436,10 @@ def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
         # noinspection PyTypeChecker
         return info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
 
-    if not is_name_valid(info.Namespace):
+    if "." in info.Namespace:
+        if not all(map(_is_valid_python_name, info.Namespace.split("."))):
+            return None
+    elif not _is_valid_python_name(info.Namespace):
         return None
 
     if info.IsValueType:
@@ -453,7 +456,7 @@ def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
 
 
 def extract_class(info: TypeInfo) -> CClass | None:
-    logger.info(f'Extracting class "{info.Namespace}.{info.Name}"')
+    logger.info("Extracting class '%s.%s'", info.Namespace, info.Name)
     return CClass(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
@@ -512,7 +515,7 @@ def extract_enum(info: TypeInfo) -> CEnum | None:
         name=make_python_name(info.Name),
         namespace=info.Namespace,
         nested=extract_type(info.DeclaringType),
-        fields=tuple(info.GetEnumNames()),
+        fields=tuple(map(make_python_name, info.GetEnumNames())),
     )
 
 
