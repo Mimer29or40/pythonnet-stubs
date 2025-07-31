@@ -4,6 +4,19 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Configurations>Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <RunPostBuildEvent>Always</RunPostBuildEvent>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <PublicSign>false</PublicSign>
     </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <NoWarn>1701;1702;CS0067;CS0660;CS0661;CS8618</NoWarn>
+    </PropertyGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="xcopy /y &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..&quot;" />
+    </Target>
 
 </Project>

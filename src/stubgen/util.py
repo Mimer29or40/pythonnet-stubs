@@ -4,11 +4,16 @@ from __future__ import annotations
 
 import keyword
 import re
+from collections.abc import Iterable
 from collections.abc import Mapping
 from collections.abc import Sequence
 from typing import TYPE_CHECKING
 
+import clr  # noqa: F401
 from packaging.version import Version
+from System import Array
+from System.Collections.Generic import Dictionary
+from System.Collections.Generic import List
 
 from stubgen.log import get_logger
 
@@ -17,6 +22,9 @@ if TYPE_CHECKING:  # pragma: no cover
     from logging import Logger
     from re import Pattern
     from typing import Literal
+
+    from System.Collections.Generic import IDictionary
+    from System.Collections.Generic import IList
 
     type CompareResults = Literal[-1, 0, 1]
     type MergeFunc[T] = Callable[[T, T], T]
@@ -39,11 +47,13 @@ def make_python_name(string: str) -> str:
     return string if _is_valid_python_name(string) else f"_{string}"
 
 
-def _compare_boolean(x: bool, y: bool) -> CompareResults:
+def compare_boolean(x: bool, y: bool) -> CompareResults:
+    """Compare two boolean values."""
     return 0 if x == y else (-1 if y else 1)
 
 
-def _compare_string(x: str | None, y: str | None) -> CompareResults:
+def compare_string(x: str | None, y: str | None) -> CompareResults:
+    """Compare two str values."""
     match x, y:
         case (None, None):
             return 0
@@ -57,11 +67,13 @@ def _compare_string(x: str | None, y: str | None) -> CompareResults:
     raise NotImplementedError  # pragma: no cover
 
 
-def _compare_version(x: str, y: str) -> CompareResults:
+def compare_version(x: str, y: str) -> CompareResults:
+    """Compare two str values as Version objects."""
     return 0 if (v_x := Version(x)) == (v_y := Version(y)) else (-1 if v_x < v_y else 1)
 
 
-def _merge_string(x: str | None, y: str | None) -> str | None:
+def merge_string(x: str | None, y: str | None) -> str | None:
+    """Merge two str values into one."""
     match x, y:
         case (None, None):
             return None
@@ -81,11 +93,12 @@ def _merge_string(x: str | None, y: str | None) -> str | None:
     raise NotImplementedError  # pragma: no cover
 
 
-def _merge_sequence[T](
+def merge_sequence[T](
     x: Sequence[T] | None,
     y: Sequence[T] | None,
     merge_func: MergeFunc[T],
 ) -> list[T] | None:
+    """Merge two sequences into one."""
     match x, y:
         case (None, None):
             return None
@@ -109,11 +122,12 @@ def _merge_sequence[T](
     raise NotImplementedError  # pragma: no cover
 
 
-def _merge_mapping[T](
+def merge_mapping[T](
     x: Mapping[str, T] | None,
     y: Mapping[str, T] | None,
     merge_func: MergeFunc[T],
 ) -> Mapping[str, T] | None:
+    """Merge two mappings into one."""
     match x, y:
         case (None, None):
             return None
@@ -134,3 +148,61 @@ def _merge_mapping[T](
             return merged
     # This should never be reached, as long as the parameter types are correct
     raise NotImplementedError  # pragma: no cover
+
+
+def to_c_array[T](array_type: type[T], iterable: Iterable[T]) -> Array[T]:
+    """Convert a python sequence to a C# Array.
+
+    :param array_type: The type of the array.
+    :param iterable: The iterable.
+    :return: The Array
+    """
+    return Array[array_type](iterable)
+
+
+def from_c_array[T](c_array: Array[T]) -> Sequence[T]:
+    """Convert a C# Array to a python Sequence."""
+    return list(c_array)
+
+
+def to_c_list[T](list_type: type[T], iterable: Iterable[T]) -> List[T]:
+    """Convert a python sequence to a C# List.
+
+    :param list_type: The type of the array.
+    :param iterable: The iterable.
+    :return: The List
+    """
+    list_obj = List[list_type]()
+
+    for obj in iterable:
+        list_obj.Add(obj)
+
+    return list_obj
+
+
+def from_c_list[T](c_list: IList[T]) -> Sequence[T]:
+    """Convert a C# List to a python Sequence."""
+    return list(c_list)
+
+
+def to_c_dict[K, V](
+    key_type: type[K], value_type: type[V], mapping: Mapping[K, V]
+) -> Dictionary[K, V]:
+    """Convert a python mapping to a C# Dictionary.
+
+    :param key_type: The type of the keys.
+    :param value_type: The type of the values.
+    :param mapping: The mapping.
+    :return: The Dictionary
+    """
+    dict_obj = Dictionary[key_type, value_type]()
+
+    for key, value in mapping.items():
+        dict_obj.Add(key, value)
+
+    return dict_obj
+
+
+def from_c_dict[K, V](c_dict: IDictionary[K, V]) -> dict[K, V]:
+    """Convert a C# Dictionary to a python dict."""
+    return {kv.Key: kv.Value for kv in c_dict}

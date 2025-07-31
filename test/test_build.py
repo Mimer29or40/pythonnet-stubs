@@ -22,7 +22,6 @@ from stubgen.model import CMethod
 from stubgen.model import CNamespace
 from stubgen.model import CParameter
 from stubgen.model import CProperty
-from stubgen.model import CStruct
 from stubgen.model import CType
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -146,7 +145,7 @@ class TestBuildType:
                 (
                     "inner",
                     (
-                        CType(name="Type", inner=(CType(name="Inner"),)),
+                        CType(name="Type", inner=[CType(name="Inner")]),
                         "Type[Inner]",
                         {"Type", "Inner"},
                     ),
@@ -261,10 +260,10 @@ class TestBuildConstructor:
         """Test for NamespaceBuilder.build_constructor() with a constructor with parameters."""
         obj: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
+            parameters=[
                 CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-            ),
+            ],
         )
 
         expected: Sequence[str] = [
@@ -383,8 +382,7 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType.VOID,),
+            return_types=[CType.VOID],
         )
 
         expected: Sequence[str] = [
@@ -401,11 +399,11 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
+            parameters=[
                 CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-            ),
-            return_types=(CType.VOID,),
+            ],
+            return_types=[CType.VOID],
         )
 
         expected: Sequence[str] = [
@@ -422,11 +420,10 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(
+            return_types=[
                 CType(name="Type", namespace="Namespace"),
                 CType(name="Type", namespace="Namespace"),
-            ),
+            ],
         )
 
         expected: Sequence[str] = [
@@ -443,8 +440,7 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType.VOID,),
+            return_types=[CType.VOID],
         )
 
         expected: Sequence[str] = [
@@ -462,8 +458,7 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType.VOID,),
+            return_types=[CType.VOID],
             static=True,
         )
 
@@ -482,11 +477,11 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
+            parameters=[
                 CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-            ),
-            return_types=(CType.VOID,),
+            ],
+            return_types=[CType.VOID],
             static=True,
         )
 
@@ -505,11 +500,10 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(
+            return_types=[
                 CType(name="Type", namespace="Namespace"),
                 CType(name="Type", namespace="Namespace"),
-            ),
+            ],
             static=True,
         )
 
@@ -528,8 +522,7 @@ class TestBuildMethod:
         obj: CMethod = CMethod(
             name="Name",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType.VOID,),
+            return_types=[CType.VOID],
             static=True,
         )
 
@@ -599,7 +592,7 @@ class TestBuildClass:
         obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
-            generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
         )
 
         expected: Sequence[str] = [
@@ -632,10 +625,10 @@ class TestBuildClass:
         obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
-            interfaces=(
+            interfaces=[
                 CType(name="InterfaceA", namespace="Namespace"),
                 CType(name="InterfaceB", namespace="Namespace"),
-            ),
+            ],
         )
 
         expected: Sequence[str] = [
@@ -653,12 +646,12 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             fields={
-                "Namespace:Class.FieldA": CField(
+                "FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     return_type=CType(name="Type", namespace="Namespace"),
                 ),
-                "Namespace:Class.FieldB": CField(
+                "FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     return_type=CType(name="Type", namespace="Namespace"),
@@ -685,9 +678,8 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             constructors={
-                "Namespace:Name.__init__()": CConstructor(
+                "__init__()": CConstructor(
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(),
                 ),
             },
         )
@@ -709,15 +701,14 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             constructors={
-                "Namespace:Name.__init__()": CConstructor(
+                "__init__()": CConstructor(
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(),
                 ),
-                "Namespace:Name.__init__(Namespace:Type)": CConstructor(
+                "__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    ),
+                    ],
                 ),
             },
         )
@@ -743,12 +734,12 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             properties={
-                "Namespace:Name.PropertyA": CProperty(
+                "PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
                 ),
-                "Namespace:Name.PropertyB": CProperty(
+                "PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
@@ -777,23 +768,23 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             methods={
-                "Namespace:Name.MethodA(Namespace:Type, Namespace:Type)": CMethod(
+                "MethodA(Namespace:Type, Namespace:Type)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
-                "Namespace:Name.MethodB(Namespace:Type, Namespace:Type)": CMethod(
+                "MethodB(Namespace:Type, Namespace:Type)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
             },
         )
@@ -817,22 +808,22 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             methods={
-                "Namespace:Name.Method(Namespace:Type)": CMethod(
+                "Method(Namespace:Type)": CMethod(
                     name="Method",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
-                "Namespace:Name.Method(Namespace:Type, Namespace:Type)": CMethod(
+                "Method(Namespace:Type, Namespace:Type)": CMethod(
                     name="Method",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
             },
         )
@@ -858,12 +849,12 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             events={
-                "Namespace:Name.EventA": CEvent(
+                "EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
                 ),
-                "Namespace:Name.EventB": CEvent(
+                "EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
@@ -890,32 +881,26 @@ class TestBuildClass:
             name="Name",
             namespace="Namespace",
             nested_types={
-                "Namespace:Name.NestedClass": CClass(
+                "NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
+                    parent=CType(name="Name", namespace="Namespace"),
                 ),
-                "Namespace:Name.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                ),
-                "Namespace:Name.INestedInterface": CInterface(
+                "INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
+                    parent=CType(name="Name", namespace="Namespace"),
                 ),
-                "Namespace:Name.NestedEnum": CEnum(
+                "NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                    fields=(),
+                    parent=CType(name="Name", namespace="Namespace"),
+                    fields=[],
                 ),
-                "Namespace:Name.NestedDelegate": CDelegate(
+                "NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                    parameters=(),
+                    parent=CType(name="Name", namespace="Namespace"),
                     return_type=CType(name="Type", namespace="Namespace"),
                 ),
             },
@@ -925,8 +910,6 @@ class TestBuildClass:
             "class Name:",
             '    """"""',
             "    class NestedClass:",
-            '        """"""',
-            "    class NestedStruct:",
             '        """"""',
             "    class INestedInterface:",
             '        """"""',
@@ -936,385 +919,6 @@ class TestBuildClass:
             '    """"""',
         ]
         actual: Sequence[str] = builder.build_class(obj)
-
-        assert actual == expected
-        assert builder.import_set == {
-            NamespaceBuilder.CALLABLE,
-            NamespaceBuilder.ENUM,
-            "Namespace.Type",
-        }
-
-
-class TestBuildStruct:
-    """Tests for NamespaceBuilder.build_struct()."""
-
-    def test_basic(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a basic struct."""
-        obj: CStruct = CStruct(name="Name", namespace="Namespace")
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-
-    def test_abstract(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with an abstract struct."""
-        obj: CStruct = CStruct(name="Name", namespace="Namespace", abstract=True)
-
-        expected: Sequence[str] = [
-            "class Name(ABC):",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.ABC}
-
-    def test_generic(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with generic arguments."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
-        )
-
-        expected: Sequence[str] = [
-            "class Name[A, B]:",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-
-    def test_super(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with a suber class."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            super_class=CType(name="Super", namespace="Namespace"),
-        )
-
-        expected: Sequence[str] = [
-            "class Name(Super):",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {"Namespace.Super"}
-
-    def test_interfaces(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with interfaces."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            interfaces=(
-                CType(name="InterfaceA", namespace="Namespace"),
-                CType(name="InterfaceB", namespace="Namespace"),
-            ),
-        )
-
-        expected: Sequence[str] = [
-            "class Name(InterfaceA, InterfaceB):",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {"Namespace.InterfaceA", "Namespace.InterfaceB"}
-
-    def test_fields(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with fields."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            fields={
-                "Namespace:Class.FieldA": CField(
-                    name="FieldA",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    return_type=CType(name="Type", namespace="Namespace"),
-                ),
-                "Namespace:Class.FieldB": CField(
-                    name="FieldB",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    return_type=CType(name="Type", namespace="Namespace"),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    FieldA: Final[Type] = ...",
-            '    """"""',
-            "    FieldB: Final[Type] = ...",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.FINAL, "Namespace.Type"}
-
-    def test_constructor(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with a constructor."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            constructors={
-                "Namespace:Name.__init__()": CConstructor(
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    def __init__(self) -> None:",
-            '        """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == set()
-
-    def test_constructors(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with constructors."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            constructors={
-                "Namespace:Name.__init__()": CConstructor(
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(),
-                ),
-                "Namespace:Name.__init__(Namespace:Type)": CConstructor(
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    @overload",
-            "    def __init__(self) -> None:",
-            '        """"""',
-            "    @overload",
-            "    def __init__(self, param0: Type) -> None:",
-            '        """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD, "Namespace.Type"}
-
-    def test_properties(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with properties."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            properties={
-                "Namespace:Name.PropertyA": CProperty(
-                    name="PropertyA",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    type=CType(name="Type", namespace="Namespace"),
-                ),
-                "Namespace:Name.PropertyB": CProperty(
-                    name="PropertyB",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    type=CType(name="Type", namespace="Namespace"),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    @property",
-            "    def PropertyA(self) -> Type:",
-            '        """"""',
-            "    @property",
-            "    def PropertyB(self) -> Type:",
-            '        """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {"Namespace.Type"}
-
-    def test_methods(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with methods."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            methods={
-                "Namespace:Name.MethodA(Namespace:Type, Namespace:Type)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
-                ),
-                "Namespace:Name.MethodB(Namespace:Type, Namespace:Type)": CMethod(
-                    name="MethodB",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    def MethodA(self, param0: Type, param1: Type) -> Type:",
-            '        """"""',
-            "    def MethodB(self, param0: Type, param1: Type) -> Type:",
-            '        """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {"Namespace.Type"}
-
-    def test_methods_overload(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with overloaded methods."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            methods={
-                "Namespace:Name.Method(Namespace:Type)": CMethod(
-                    name="Method",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
-                ),
-                "Namespace:Name.Method(Namespace:Type, Namespace:Type)": CMethod(
-                    name="Method",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                        CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    @overload",
-            "    def Method(self, param0: Type) -> Type:",
-            '        """"""',
-            "    @overload",
-            "    def Method(self, param0: Type, param1: Type) -> Type:",
-            '        """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD, "Namespace.Type"}
-
-    def test_events(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with events."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            events={
-                "Namespace:Name.EventA": CEvent(
-                    name="EventA",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    type=CType(name="Type", namespace="Namespace"),
-                ),
-                "Namespace:Name.EventB": CEvent(
-                    name="EventB",
-                    declaring_type=CType(name="Name", namespace="Namespace"),
-                    type=CType(name="Type", namespace="Namespace"),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    EventA: EventType[Type] = ...",
-            '    """"""',
-            "    EventB: EventType[Type] = ...",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
-
-        assert actual == expected
-        assert builder.import_set == {"Namespace.Type", NamespaceBuilder.EVENT_TYPE}
-
-    def test_nested_types(self, builder: NamespaceBuilder) -> None:
-        """Test for NamespaceBuilder.build_struct() with a struct with nested types."""
-        obj: CStruct = CStruct(
-            name="Name",
-            namespace="Namespace",
-            nested_types={
-                "Namespace:Name.NestedClass": CClass(
-                    name="NestedClass",
-                    namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                ),
-                "Namespace:Name.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                ),
-                "Namespace:Name.INestedInterface": CInterface(
-                    name="INestedInterface",
-                    namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                ),
-                "Namespace:Name.NestedEnum": CEnum(
-                    name="NestedEnum",
-                    namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                    fields=(),
-                ),
-                "Namespace:Name.NestedDelegate": CDelegate(
-                    name="NestedDelegate",
-                    namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                    parameters=(),
-                    return_type=CType(name="Type", namespace="Namespace"),
-                ),
-            },
-        )
-
-        expected: Sequence[str] = [
-            "class Name:",
-            '    """"""',
-            "    class NestedClass:",
-            '        """"""',
-            "    class NestedStruct:",
-            '        """"""',
-            "    class INestedInterface:",
-            '        """"""',
-            "    class NestedEnum(Enum):",
-            '        """"""',
-            "    NestedDelegate: Callable[[], Type] = ...",
-            '    """"""',
-        ]
-        actual: Sequence[str] = builder.build_struct(obj)
 
         assert actual == expected
         assert builder.import_set == {
@@ -1344,7 +948,7 @@ class TestBuildInterface:
         obj: CInterface = CInterface(
             name="Name",
             namespace="Namespace",
-            generic_args=(CType(name="A", generic=True), CType(name="B", generic=True)),
+            generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
         )
 
         expected: Sequence[str] = [
@@ -1360,10 +964,10 @@ class TestBuildInterface:
         obj: CInterface = CInterface(
             name="Name",
             namespace="Namespace",
-            interfaces=(
+            interfaces=[
                 CType(name="InterfaceA", namespace="Namespace"),
                 CType(name="InterfaceB", namespace="Namespace"),
-            ),
+            ],
         )
 
         expected: Sequence[str] = [
@@ -1381,12 +985,12 @@ class TestBuildInterface:
             name="Name",
             namespace="Namespace",
             fields={
-                "Namespace:Class.FieldA": CField(
+                "FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     return_type=CType(name="Type", namespace="Namespace"),
                 ),
-                "Namespace:Class.FieldB": CField(
+                "FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     return_type=CType(name="Type", namespace="Namespace"),
@@ -1413,12 +1017,12 @@ class TestBuildInterface:
             name="Name",
             namespace="Namespace",
             properties={
-                "Namespace:Name.PropertyA": CProperty(
+                "PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
                 ),
-                "Namespace:Name.PropertyB": CProperty(
+                "PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
@@ -1447,23 +1051,23 @@ class TestBuildInterface:
             name="Name",
             namespace="Namespace",
             methods={
-                "Namespace:Name.MethodA(Namespace:Type, Namespace:Type)": CMethod(
+                "MethodA(Namespace:Type, Namespace:Type)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
-                "Namespace:Name.MethodB(Namespace:Type, Namespace:Type)": CMethod(
+                "MethodB(Namespace:Type, Namespace:Type)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
             },
         )
@@ -1490,19 +1094,19 @@ class TestBuildInterface:
                 "Namespace:Name.Method(Namespace:Type)": CMethod(
                     name="Method",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
                 "Namespace:Name.Method(Namespace:Type, Namespace:Type)": CMethod(
                     name="Method",
                     declaring_type=CType(name="Name", namespace="Namespace"),
-                    parameters=(
+                    parameters=[
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                    return_types=(CType(name="Type", namespace="Namespace"),),
+                    ],
+                    return_types=[CType(name="Type", namespace="Namespace")],
                 ),
             },
         )
@@ -1528,12 +1132,12 @@ class TestBuildInterface:
             name="Name",
             namespace="Namespace",
             events={
-                "Namespace:Name.EventA": CEvent(
+                "EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
                 ),
-                "Namespace:Name.EventB": CEvent(
+                "EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Name", namespace="Namespace"),
                     type=CType(name="Type", namespace="Namespace"),
@@ -1560,32 +1164,31 @@ class TestBuildInterface:
             name="Name",
             namespace="Namespace",
             nested_types={
-                "Namespace:Name.NestedClass": CClass(
+                "NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
+                    parent=CType(name="Name", namespace="Namespace"),
                 ),
-                "Namespace:Name.NestedStruct": CStruct(
+                "NestedStruct": CClass(
                     name="NestedStruct",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
+                    parent=CType(name="Name", namespace="Namespace"),
                 ),
-                "Namespace:Name.INestedInterface": CInterface(
+                "INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
+                    parent=CType(name="Name", namespace="Namespace"),
                 ),
-                "Namespace:Name.NestedEnum": CEnum(
+                "NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                    fields=(),
+                    parent=CType(name="Name", namespace="Namespace"),
+                    fields=[],
                 ),
-                "Namespace:Name.NestedDelegate": CDelegate(
+                "NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
-                    nested=CType(name="Name", namespace="Namespace"),
-                    parameters=(),
+                    parent=CType(name="Name", namespace="Namespace"),
                     return_type=CType(name="Type", namespace="Namespace"),
                 ),
             },
@@ -1636,7 +1239,7 @@ class TestBuildEnum:
         obj: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
-            fields=("FieldA", "FieldB", "FieldC", "FieldD"),
+            fields=["FieldA", "FieldB", "FieldC", "FieldD"],
         )
 
         expected: Sequence[str] = [
@@ -1678,10 +1281,10 @@ class TestBuildDelegate:
         obj: CDelegate = CDelegate(
             name="Name",
             namespace="Namespace",
-            parameters=(
+            parameters=[
                 CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
-            ),
+            ],
         )
 
         expected: Sequence[str] = [
@@ -1792,7 +1395,6 @@ class TestBuildNamespace:
             name="Name",
             types={
                 "Name:Class": CClass(name="Class", namespace="Name"),
-                "Name:Struct": CStruct(name="Struct", namespace="Name"),
                 "Name:IInterface": CInterface(name="IInterface", namespace="Name"),
                 "Name:Enum": CEnum(name="Enum", namespace="Name"),
                 "Name:Delegate": CDelegate(name="Delegate", namespace="Name"),
@@ -1811,8 +1413,6 @@ class TestBuildNamespace:
             "class Enum(Enum):",
             '    """"""',
             "class IInterface:",
-            '    """"""',
-            "class Struct:",
             '    """"""',
         ]
         actual: Sequence[str] = builder.build(obj)

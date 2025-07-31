@@ -16,12 +16,12 @@ from typing import Self
 from typing import override
 
 from stubgen.log import get_logger
-from stubgen.util import _compare_boolean
-from stubgen.util import _compare_string
-from stubgen.util import _compare_version
-from stubgen.util import _merge_mapping
-from stubgen.util import _merge_sequence
-from stubgen.util import _merge_string
+from stubgen.util import compare_boolean
+from stubgen.util import compare_string
+from stubgen.util import compare_version
+from stubgen.util import merge_mapping
+from stubgen.util import merge_sequence
+from stubgen.util import merge_string
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
@@ -63,7 +63,7 @@ class DocTree:
     @classmethod
     def merge(cls, obj1: DocTree, obj2: DocTree) -> DocTree:
         """Merge two DocTrees into a single DocTree."""
-        children: Mapping[str, DocNode] = _merge_mapping(
+        children: Mapping[str, DocNode] = merge_mapping(
             {c.name: c for c in obj1.children},
             {c.name: c for c in obj2.children},
             DocNode.merge,
@@ -219,31 +219,31 @@ class DocNode:
         """Merge two DocNodes into a single DocNode."""
         logger.debug("Merging DocNode %r and %r", obj1.name, obj2.name)
 
-        doc: str = _merge_string(obj1.doc, obj2.doc)
+        doc: str = merge_string(obj1.doc, obj2.doc)
 
-        doc_formatted: Mapping[str, Sequence[str]] = _merge_mapping(
+        doc_formatted: Mapping[str, Sequence[str]] = merge_mapping(
             obj1.doc_formatted,
             obj2.doc_formatted,
-            partial(_merge_sequence, merge_func=_merge_string),
+            partial(merge_sequence, merge_func=merge_string),
         )
 
-        parameter_docs: Mapping[str, str] | None = _merge_mapping(
+        parameter_docs: Mapping[str, str] | None = merge_mapping(
             obj1.parameter_docs,
             obj2.parameter_docs,
-            _merge_string,
+            merge_string,
         )
 
-        return_doc: str | None = _merge_string(obj1.return_doc, obj2.return_doc)
+        return_doc: str | None = merge_string(obj1.return_doc, obj2.return_doc)
 
-        exception_docs: Mapping[str, str] | None = _merge_mapping(
+        exception_docs: Mapping[str, str] | None = merge_mapping(
             obj1.exception_docs,
             obj2.exception_docs,
-            _merge_string,
+            merge_string,
         )
         if exception_docs is not None:
             exception_docs = dict(sorted(exception_docs.items()))
 
-        children: Mapping[str, DocNode] = _merge_mapping(
+        children: Mapping[str, DocNode] = merge_mapping(
             {c.name: c for c in obj1.children},
             {c.name: c for c in obj2.children},
             DocNode.merge,
@@ -316,7 +316,7 @@ class CWrapper(ABC):
     @classmethod
     def compare(cls, x: Self, y: Self) -> CompareResults:
         """Compare two C# wrappers."""
-        return _compare_string(x.name, y.name)
+        return compare_string(x.name, y.name)
 
     @classmethod
     def compare_seq(cls, x: Sequence[Self], y: Sequence[Self]) -> CompareResults:
@@ -411,17 +411,17 @@ class CType(CWrapper):
     @override
     def compare(cls, x: Self, y: Self) -> CompareResults:
         c: CompareResults
-        if (c := _compare_string(x.namespace, y.namespace)) != 0:
+        if (c := compare_string(x.namespace, y.namespace)) != 0:
             return c
-        if (c := _compare_string(x.name, y.name)) != 0:
+        if (c := compare_string(x.name, y.name)) != 0:
             return c
         if (c := cls.compare_seq(x.inner, y.inner)) != 0:
             return c
-        if (c := _compare_boolean(x.reference, y.reference)) != 0:
+        if (c := compare_boolean(x.reference, y.reference)) != 0:
             return c
-        if (c := _compare_boolean(x.generic, y.generic)) != 0:
+        if (c := compare_boolean(x.generic, y.generic)) != 0:
             return c
-        if (c := _compare_boolean(x.nullable, y.nullable)) != 0:
+        if (c := compare_boolean(x.nullable, y.nullable)) != 0:
             return c
         return 0
 
@@ -475,6 +475,7 @@ class CField(CMember):
     """C# Field wrapper."""
 
     return_type: CType
+    # TODO(Ryan): Check for readonly to influence Final or not
     static: bool = False
 
     @override
@@ -636,7 +637,7 @@ class CMethod(CMember):
     @override
     def compare(cls, x: Self, y: Self) -> CompareResults:
         c: CompareResults
-        if (c := _compare_string(x.name, y.name)) != 0:
+        if (c := compare_string(x.name, y.name)) != 0:
             return c
         if (c := CParameter.compare_seq(x.parameters, y.parameters)) != 0:
             return c
@@ -676,7 +677,7 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
     """Base class for C# type definition wrappers."""
 
     namespace: str | None = None
-    nested: CType | None = None
+    parent: CType | None = None
 
     @property
     @override
@@ -694,8 +695,6 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
         match json["type"]:
             case "class":
                 return CClass.from_json(json)
-            case "struct":
-                return CStruct.from_json(json)
             case "interface":
                 return CInterface.from_json(json)
             case "enum":
@@ -710,8 +709,6 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
         match obj1, obj2:
             case CClass(), CClass():
                 return CClass.merge(obj1, obj2)
-            case CStruct(), CStruct():
-                return CStruct.merge(obj1, obj2)
             case CInterface(), CInterface():
                 return CInterface.merge(obj1, obj2)
             case CEnum(), CEnum():
@@ -744,7 +741,7 @@ class CClass(CTypeDefinition):
             "type": "class",
             "name": self.name,
             "namespace": self.namespace,
-            "nested": None if self.nested is None else self.nested.to_json(),
+            "parent": None if self.parent is None else self.parent.to_json(),
             "abstract": self.abstract,
             "generic_args": [a.to_json() for a in self.generic_args],
             "super_class": None if self.super_class is None else self.super_class.to_json(),
@@ -780,7 +777,7 @@ class CClass(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
-            nested=CType.from_json(json["nested"]),
+            parent=CType.from_json(json["parent"]),
             abstract=json["abstract"],
             generic_args=list(map(CType.from_json, json["generic_args"])),
             super_class=CType.from_json(json["super_class"]),
@@ -801,33 +798,33 @@ class CClass(CTypeDefinition):
         def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
             return o1
 
-        interfaces: Sequence[CType] = _merge_sequence(obj1.interfaces, obj2.interfaces, first)
-        fields: Mapping[str, CField] = _merge_mapping(
+        interfaces: Sequence[CType] = merge_sequence(obj1.interfaces, obj2.interfaces, first)
+        fields: Mapping[str, CField] = merge_mapping(
             obj1.fields,
             obj2.fields,
             first,
         )
-        constructors: Mapping[str, CConstructor] = _merge_mapping(
+        constructors: Mapping[str, CConstructor] = merge_mapping(
             obj1.constructors,
             obj2.constructors,
             first,
         )
-        properties: Mapping[str, CProperty] = _merge_mapping(
+        properties: Mapping[str, CProperty] = merge_mapping(
             obj1.properties,
             obj2.properties,
             first,
         )
-        methods: Mapping[str, CMethod] = _merge_mapping(
+        methods: Mapping[str, CMethod] = merge_mapping(
             obj1.methods,
             obj2.methods,
             first,
         )
-        events: Mapping[str, CEvent] = _merge_mapping(
+        events: Mapping[str, CEvent] = merge_mapping(
             obj1.events,
             obj2.events,
             first,
         )
-        nested_types: Mapping[str, CTypeDefinition] = _merge_mapping(
+        nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
             obj1.nested_types,
             obj2.nested_types,
             CTypeDefinition.merge,
@@ -836,134 +833,7 @@ class CClass(CTypeDefinition):
         return CClass(
             name=obj1.name,
             namespace=obj1.namespace,
-            nested=obj1.nested,
-            abstract=obj1.abstract,
-            generic_args=obj1.generic_args,
-            super_class=obj1.super_class,
-            interfaces=sorted(interfaces),
-            fields=dict(sorted(fields.items())),
-            constructors=dict(sorted(constructors.items())),
-            properties=dict(sorted(properties.items())),
-            methods=dict(sorted(methods.items())),
-            events=dict(sorted(events.items())),
-            nested_types=dict(sorted(nested_types.items())),
-        )
-
-
-@dataclass(frozen=True, kw_only=True)
-class CStruct(CTypeDefinition):
-    """C# Struct wrapper."""
-
-    abstract: bool = False
-    generic_args: Sequence[CType] = field(default_factory=list)
-    super_class: CType | None = None
-    interfaces: Sequence[CType] = field(default_factory=list)
-    fields: Mapping[str, CField] = field(default_factory=dict)
-    constructors: Mapping[str, CConstructor] = field(default_factory=dict)
-    properties: Mapping[str, CProperty] = field(default_factory=dict)
-    methods: Mapping[str, CMethod] = field(default_factory=dict)
-    events: Mapping[str, CEvent] = field(default_factory=dict)
-    nested_types: Mapping[str, CTypeDefinition] = field(default_factory=dict)
-
-    @override
-    def to_json(self) -> JsonType:
-        return {
-            "type": "struct",
-            "name": self.name,
-            "namespace": self.namespace,
-            "nested": None if self.nested is None else self.nested.to_json(),
-            "abstract": self.abstract,
-            "generic_args": [a.to_json() for a in self.generic_args],
-            "super_class": None if self.super_class is None else self.super_class.to_json(),
-            "interfaces": sorted(i.to_json() for i in self.interfaces),
-            "fields": {k: v.to_json() for k, v in self.fields.items()},
-            "constructors": {k: v.to_json() for k, v in self.constructors.items()},
-            "properties": {k: v.to_json() for k, v in self.properties.items()},
-            "methods": {k: v.to_json() for k, v in self.methods.items()},
-            "events": {k: v.to_json() for k, v in self.events.items()},
-            "nested_types": {k: v.to_json() for k, v in self.nested_types.items()},
-        }
-
-    @override
-    def doc_node(self) -> DocNode:
-        members: Sequence[CMember] = (
-            *self.fields.values(),
-            *self.constructors.values(),
-            *self.properties.values(),
-            *self.methods.values(),
-            *self.events.values(),
-        )
-        return DocNode(
-            self.unique_name,
-            children=[
-                *(m.doc_node() for m in members if m.declaring_type.name == self.name),
-                *(c.doc_node() for c in self.nested_types.values()),
-            ],
-        )
-
-    @classmethod
-    @override
-    def from_json(cls, json: JsonType) -> Self:
-        return cls(
-            name=json["name"],
-            namespace=json["namespace"],
-            nested=CType.from_json(json["nested"]),
-            abstract=json["abstract"],
-            generic_args=list(map(CType.from_json, json["generic_args"])),
-            super_class=CType.from_json(json["super_class"]),
-            interfaces=list(map(CType.from_json, json["interfaces"])),
-            fields={k: CField.from_json(v) for k, v in json["fields"].items()},
-            constructors={k: CConstructor.from_json(v) for k, v in json["constructors"].items()},
-            properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
-            methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
-            events={k: CEvent.from_json(v) for k, v in json["events"].items()},
-            nested_types={k: CTypeDefinition.from_json(v) for k, v in json["nested_types"].items()},
-        )
-
-    @classmethod
-    @override
-    def merge(cls, obj1: Self, obj2: Self) -> Self:
-        logger.debug("Merging CStructs %r and %r", obj1.name, obj2.name)
-
-        def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
-            return o1
-
-        interfaces: Sequence[CType] = _merge_sequence(obj1.interfaces, obj2.interfaces, first)
-        fields: Mapping[str, CField] = _merge_mapping(
-            obj1.fields,
-            obj2.fields,
-            first,
-        )
-        constructors: Mapping[str, CConstructor] = _merge_mapping(
-            obj1.constructors,
-            obj2.constructors,
-            first,
-        )
-        properties: Mapping[str, CProperty] = _merge_mapping(
-            obj1.properties,
-            obj2.properties,
-            first,
-        )
-        methods: Mapping[str, CMethod] = _merge_mapping(
-            obj1.methods,
-            obj2.methods,
-            first,
-        )
-        events: Mapping[str, CEvent] = _merge_mapping(
-            obj1.events,
-            obj2.events,
-            first,
-        )
-        nested_types: Mapping[str, CTypeDefinition] = _merge_mapping(
-            obj1.nested_types,
-            obj2.nested_types,
-            CTypeDefinition.merge,
-        )
-
-        return CStruct(
-            name=obj1.name,
-            namespace=obj1.namespace,
-            nested=obj1.nested,
+            parent=obj1.parent,
             abstract=obj1.abstract,
             generic_args=obj1.generic_args,
             super_class=obj1.super_class,
@@ -995,7 +865,7 @@ class CInterface(CTypeDefinition):
             "type": "interface",
             "name": self.name,
             "namespace": self.namespace,
-            "nested": None if self.nested is None else self.nested.to_json(),
+            "parent": None if self.parent is None else self.parent.to_json(),
             "generic_args": [a.to_json() for a in self.generic_args],
             "interfaces": sorted(i.to_json() for i in self.interfaces),
             "fields": {k: v.to_json() for k, v in self.fields.items()},
@@ -1027,7 +897,7 @@ class CInterface(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
-            nested=CType.from_json(json["nested"]),
+            parent=CType.from_json(json["parent"]),
             generic_args=sorted(map(CType.from_json, json["generic_args"])),
             interfaces=list(map(CType.from_json, json["interfaces"])),
             fields={k: CField.from_json(v) for k, v in json["fields"].items()},
@@ -1045,28 +915,28 @@ class CInterface(CTypeDefinition):
         def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
             return o1
 
-        interfaces: Sequence[CType] = _merge_sequence(obj1.interfaces, obj2.interfaces, first)
-        fields: Mapping[str, CField] = _merge_mapping(
+        interfaces: Sequence[CType] = merge_sequence(obj1.interfaces, obj2.interfaces, first)
+        fields: Mapping[str, CField] = merge_mapping(
             obj1.fields,
             obj2.fields,
             first,
         )
-        properties: Mapping[str, CProperty] = _merge_mapping(
+        properties: Mapping[str, CProperty] = merge_mapping(
             obj1.properties,
             obj2.properties,
             first,
         )
-        methods: Mapping[str, CMethod] = _merge_mapping(
+        methods: Mapping[str, CMethod] = merge_mapping(
             obj1.methods,
             obj2.methods,
             first,
         )
-        events: Mapping[str, CEvent] = _merge_mapping(
+        events: Mapping[str, CEvent] = merge_mapping(
             obj1.events,
             obj2.events,
             first,
         )
-        nested_types: Mapping[str, CTypeDefinition] = _merge_mapping(
+        nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
             obj1.nested_types,
             obj2.nested_types,
             CTypeDefinition.merge,
@@ -1075,7 +945,7 @@ class CInterface(CTypeDefinition):
         return CInterface(
             name=obj1.name,
             namespace=obj1.namespace,
-            nested=obj1.nested,
+            parent=obj1.parent,
             generic_args=obj1.generic_args,
             interfaces=sorted(interfaces),
             fields=dict(sorted(fields.items())),
@@ -1098,7 +968,7 @@ class CEnum(CTypeDefinition):
             "type": "enum",
             "name": self.name,
             "namespace": self.namespace,
-            "nested": None if self.nested is None else self.nested.to_json(),
+            "parent": None if self.parent is None else self.parent.to_json(),
             "fields": self.fields,
         }
 
@@ -1115,7 +985,7 @@ class CEnum(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
-            nested=CType.from_json(json["nested"]),
+            parent=CType.from_json(json["parent"]),
             fields=list(json["fields"]),
         )
 
@@ -1127,7 +997,7 @@ class CEnum(CTypeDefinition):
         return CEnum(
             name=obj1.name,
             namespace=obj1.namespace,
-            nested=obj1.nested,
+            parent=obj1.parent,
             fields=obj1.fields,
         )
 
@@ -1151,7 +1021,7 @@ class CDelegate(CTypeDefinition):
             "type": "delegate",
             "name": self.name,
             "namespace": self.namespace,
-            "nested": None if self.nested is None else self.nested.to_json(),
+            "parent": None if self.parent is None else self.parent.to_json(),
             "parameters": [p.to_json() for p in self.parameters],
             "return_type": self.return_type.to_json(),
         }
@@ -1172,7 +1042,7 @@ class CDelegate(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
-            nested=CType.from_json(json["nested"]),
+            parent=CType.from_json(json["parent"]),
             parameters=list(map(CParameter.from_json, json["parameters"])),
             return_type=CType.from_json(json["return_type"]),
         )
@@ -1185,14 +1055,14 @@ class CDelegate(CTypeDefinition):
         return CDelegate(
             name=obj1.name,
             namespace=obj1.namespace,
-            nested=obj1.nested,
+            parent=obj1.parent,
             parameters=obj1.parameters,
             return_type=obj1.return_type,
         )
 
 
 @dataclass(frozen=True, kw_only=True)
-class CNamespace(CWrapper, MergeMixin):
+class CNamespace(CWrapper, DocNodeMixin, MergeMixin):
     """C# Namespace wrapper."""
 
     types: Mapping[str, CTypeDefinition] = field(default_factory=dict)
@@ -1203,6 +1073,13 @@ class CNamespace(CWrapper, MergeMixin):
             "name": self.name,
             "types": {k: v.to_json() for k, v in self.types.items()},
         }
+
+    @override
+    def doc_node(self) -> DocNode:
+        return DocNode(
+            self.unique_name.split(".")[-1],
+            children=[t.doc_node() for t in self.types.values()],
+        )
 
     @classmethod
     @override
@@ -1221,7 +1098,7 @@ class CNamespace(CWrapper, MergeMixin):
             name=obj1.name,
             types=dict(
                 sorted(
-                    _merge_mapping(
+                    merge_mapping(
                         obj1.types,
                         obj2.types,
                         CTypeDefinition.merge,
@@ -1246,6 +1123,11 @@ class CAssembly(CWrapper):
             "namespaces": {k: v.to_json() for k, v in self.namespaces.items()},
         }
 
+    def doc_tree(self) -> DocTree:
+        """Create a DocTree for this CAssembly."""
+        # This will have to handle deep namespaces A.B.C
+        # TODO(Ryan): Do this
+
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
@@ -1259,8 +1141,8 @@ class CAssembly(CWrapper):
     @override
     def compare(cls, x: Self, y: Self) -> CompareResults:
         c: CompareResults
-        if (c := _compare_string(x.name, y.name)) != 0:
+        if (c := compare_string(x.name, y.name)) != 0:
             return c
-        if (c := _compare_version(x.version, y.version)) != 0:
+        if (c := compare_version(x.version, y.version)) != 0:
             return c
         return 0

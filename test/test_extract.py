@@ -2,5927 +2,2033 @@
 
 from __future__ import annotations
 
+import functools
 import json
+from dataclasses import replace
 from pathlib import Path
+from pprint import pprint
 from typing import TYPE_CHECKING
 from typing import Any
 
+import clr
 import pytest
+from System import Int32
+from System import Type
+from System.Reflection import ReflectionTypeLoadException
 
 from stubgen.extract_stubs import extract_assembly
+from stubgen.extract_stubs import extract_class
 from stubgen.extract_stubs import extract_constructor
-from stubgen.extract_stubs import extract_constructors
+from stubgen.extract_stubs import extract_delegate
+from stubgen.extract_stubs import extract_enum
 from stubgen.extract_stubs import extract_event
-from stubgen.extract_stubs import extract_events
 from stubgen.extract_stubs import extract_field
-from stubgen.extract_stubs import extract_fields
+from stubgen.extract_stubs import extract_interface
 from stubgen.extract_stubs import extract_method
-from stubgen.extract_stubs import extract_methods
 from stubgen.extract_stubs import extract_parameter
-from stubgen.extract_stubs import extract_properties
 from stubgen.extract_stubs import extract_property
 from stubgen.extract_stubs import extract_type
 from stubgen.extract_stubs import extract_type_def
 from stubgen.model import CClass
 from stubgen.model import CConstructor
 from stubgen.model import CDelegate
+from stubgen.model import CEnum
 from stubgen.model import CEvent
 from stubgen.model import CField
+from stubgen.model import CInterface
 from stubgen.model import CMethod
 from stubgen.model import CParameter
 from stubgen.model import CProperty
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
 from stubgen.util import make_python_name
+from stubgen.util import to_c_array
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
     from collections.abc import Sequence
 
     from System.Reflection import Assembly
+    from System.Reflection import ConstructorInfo
     from System.Reflection import EventInfo
     from System.Reflection import FieldInfo
     from System.Reflection import MethodInfo
+    from System.Reflection import ParameterInfo
     from System.Reflection import PropertyInfo
     from System.Reflection import TypeInfo
 
 
 TEST_LIB: str = "TestLib"
 
+T: CType = CType(name="T", generic=True)
+OBJECT: CType = CType(name="Object", namespace="System")
+STRUCT: CType = CType(name="ValueType", namespace="System")
+INT32: CType = CType(name="Int32", namespace="System")
+BOOLEAN: CType = CType(name="Boolean", namespace="System")
+EVENT_HANDLER: CType = CType(name="EventHandler", namespace="System")
+EVENT_HANDLER_ARGS: CType = replace(
+    EVENT_HANDLER,
+    inner=[CType(name="EventArgs", namespace="System")],
+)
+
+COMPARABLE: CType = CType(name="IComparable", namespace="System", inner=[T])
+EQUATABLE: CType = CType(name="IEquatable", namespace="System", inner=[T])
+COLLECTION = CType(name="ICollection", namespace="System.Collections.Generic", inner=[T])
+ENUMERABLE = CType(name="IEnumerable", namespace="System.Collections.Generic", inner=[T])
+LIST = CType(name="IList", namespace="System.Collections.Generic", inner=[T])
+
 
 @pytest.fixture(scope="session")
 def assembly() -> Assembly:
     """Assembly fixture."""
-    import clr
-
     # noinspection PyUnresolvedReferences
     return clr.AddReference(TEST_LIB)
 
 
-def _get_type(assembly: Assembly, name: str) -> TypeInfo:
-    type_info: TypeInfo
-    for type_info in assembly.GetTypes():
-        if type_info.Namespace is None or type_info.IsNested:
-            continue
-        if make_python_name(type_info.Name) == name:
-            return type_info
-    raise NameError(f"Unable to find type named {name!r}")
+class _Base:
+    @staticmethod
+    def get_type(assembly: Assembly, name: str) -> TypeInfo:
+        try:
+            type_info: TypeInfo
+            for type_info in assembly.GetTypes():
+                if type_info.Namespace is None or type_info.IsNested:
+                    continue
+                if make_python_name(type_info.Name) == name:
+                    return type_info
+        except ReflectionTypeLoadException as e:
+            pprint([_e.Message for _e in e.LoaderExceptions])
+        raise NameError(f"Unable to find type named {name!r}")
+
+    @classmethod
+    def basic_class(cls, declaring_type: CType, parent: CType | None = None) -> CClass:
+        name: str = declaring_type.name
+        namespace: str = declaring_type.namespace
+        generic_args: Sequence[CType] = declaring_type.inner
+        if parent is not None:
+            declaring_type = replace(declaring_type, name=f"{parent.name}.{declaring_type.name}")
+        return CClass(
+            name=name,
+            namespace=namespace,
+            parent=parent,
+            generic_args=generic_args,
+            super_class=OBJECT,
+            constructors={"__init__()": CConstructor(declaring_type=declaring_type)},
+            methods={
+                "Equals(System:Object)": CMethod(
+                    name="Equals",
+                    declaring_type=OBJECT,
+                    parameters=[CParameter(name="obj", type=OBJECT)],
+                    return_types=[BOOLEAN],
+                ),
+                "GetHashCode()": CMethod(
+                    name="GetHashCode",
+                    declaring_type=OBJECT,
+                    return_types=[INT32],
+                ),
+                "GetType()": CMethod(
+                    name="GetType",
+                    declaring_type=OBJECT,
+                    return_types=[CType(name="Type", namespace="System")],
+                ),
+                "ToString()": CMethod(
+                    name="ToString",
+                    declaring_type=OBJECT,
+                    return_types=[CType(name="String", namespace="System")],
+                ),
+            },
+        )
+
+    @classmethod
+    def basic_struct(cls, declaring_type: CType, parent: CType | None = None) -> CClass:
+        name: str = declaring_type.name
+        namespace: str = declaring_type.namespace
+        generic_args: Sequence[CType] = declaring_type.inner
+        return CClass(
+            name=name,
+            namespace=namespace,
+            parent=parent,
+            generic_args=generic_args,
+            super_class=STRUCT,
+            methods={
+                "Equals(System:Object)": CMethod(
+                    name="Equals",
+                    declaring_type=OBJECT,
+                    parameters=[CParameter(name="obj", type=OBJECT)],
+                    return_types=[BOOLEAN],
+                ),
+                "GetHashCode()": CMethod(
+                    name="GetHashCode",
+                    declaring_type=OBJECT,
+                    return_types=[INT32],
+                ),
+                "GetType()": CMethod(
+                    name="GetType",
+                    declaring_type=OBJECT,
+                    return_types=[CType(name="Type", namespace="System")],
+                ),
+                "ToString()": CMethod(
+                    name="ToString",
+                    declaring_type=OBJECT,
+                    return_types=[CType(name="String", namespace="System")],
+                ),
+            },
+        )
+
+    @classmethod
+    def basic_record(cls, declaring_type: CType, parent: CType | None = None) -> CClass:
+        name: str = declaring_type.name
+        namespace: str = declaring_type.namespace
+        generic_args: Sequence[CType] = declaring_type.inner
+        if parent is not None:
+            declaring_type = replace(declaring_type, name=f"{parent.name}.{declaring_type.name}")
+        return CClass(
+            name=name,
+            namespace=namespace,
+            parent=parent,
+            generic_args=generic_args,
+            super_class=OBJECT,
+            interfaces=[replace(EQUATABLE, inner=[declaring_type])],
+            constructors={"__init__()": CConstructor(declaring_type=declaring_type)},
+            methods={
+                "Equals(System:Object)": CMethod(
+                    name="Equals",
+                    declaring_type=OBJECT,
+                    parameters=[CParameter(name="obj", type=OBJECT)],
+                    return_types=[BOOLEAN],
+                ),
+                f"Equals({declaring_type.full_name})": CMethod(
+                    name="Equals",
+                    declaring_type=EQUATABLE,
+                    parameters=[CParameter(name="other", type=declaring_type)],
+                    return_types=[BOOLEAN],
+                    static=False,
+                ),
+                "GetHashCode()": CMethod(
+                    name="GetHashCode",
+                    declaring_type=OBJECT,
+                    return_types=[INT32],
+                ),
+                "GetType()": CMethod(
+                    name="GetType",
+                    declaring_type=OBJECT,
+                    return_types=[CType(name="Type", namespace="System")],
+                ),
+                "ToString()": CMethod(
+                    name="ToString",
+                    declaring_type=OBJECT,
+                    return_types=[CType(name="String", namespace="System")],
+                ),
+                "_Clone$()": CMethod(
+                    name="_Clone$",
+                    declaring_type=declaring_type,
+                    return_types=[declaring_type],
+                ),
+                f"op_Equality({declaring_type.full_name}, {declaring_type.full_name})": CMethod(
+                    name="op_Equality",
+                    declaring_type=declaring_type,
+                    parameters=[
+                        CParameter(name="left", type=declaring_type),
+                        CParameter(name="right", type=declaring_type),
+                    ],
+                    return_types=[BOOLEAN],
+                    static=True,
+                ),
+                f"op_Inequality({declaring_type.full_name}, {declaring_type.full_name})": CMethod(
+                    name="op_Inequality",
+                    declaring_type=declaring_type,
+                    parameters=[
+                        CParameter(name="left", type=declaring_type),
+                        CParameter(name="right", type=declaring_type),
+                    ],
+                    return_types=[BOOLEAN],
+                    static=True,
+                ),
+                f"__eq__({declaring_type.full_name})": CMethod(
+                    name="__eq__",
+                    declaring_type=declaring_type,
+                    parameters=[CParameter(name="other", type=declaring_type)],
+                    return_types=[BOOLEAN],
+                ),
+                f"__ne__({declaring_type.full_name})": CMethod(
+                    name="__ne__",
+                    declaring_type=declaring_type,
+                    parameters=[CParameter(name="other", type=declaring_type)],
+                    return_types=[BOOLEAN],
+                ),
+            },
+        )
+
+    @classmethod
+    def basic_interface(cls, declaring_type: CType, parent: CType | None = None) -> CInterface:
+        return CInterface(
+            name=declaring_type.name,
+            namespace=declaring_type.namespace,
+            parent=parent,
+            generic_args=declaring_type.inner,
+        )
+
+    @classmethod
+    def basic_enum(cls, declaring_type: CType, parent: CType | None = None) -> CEnum:
+        return CEnum(name=declaring_type.name, namespace=declaring_type.namespace, parent=parent)
+
+    @classmethod
+    def basic_delegate(cls, declaring_type: CType, parent: CType | None = None) -> CDelegate:
+        return CDelegate(
+            name=declaring_type.name,
+            namespace=declaring_type.namespace,
+            parent=parent,
+        )
+
+    @classmethod
+    def dunder_methods(cls, declaring_type: CType) -> Mapping[str, CMethod]:
+        full_name: str = declaring_type.full_name
+        base: CMethod = CMethod(name="TEMP", declaring_type=declaring_type)
+        param_self: CMethod = replace(
+            base,
+            parameters=[CParameter(name="self", type=declaring_type)],
+        )
+        param_other: CMethod = replace(
+            base,
+            parameters=[CParameter(name="other", type=declaring_type)],
+        )
+        param_lr: CMethod = replace(
+            base,
+            parameters=[
+                CParameter(name="left", type=declaring_type),
+                CParameter(name="right", type=declaring_type),
+            ],
+        )
+        return {
+            f"op_Addition({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_Addition",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_BitwiseAnd({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_BitwiseAnd",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_BitwiseOr({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_BitwiseOr",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_Decrement({full_name})": replace(
+                param_self,
+                name="op_Decrement",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_Division({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_Division",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_Equality({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_Equality",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_ExclusiveOr({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_ExclusiveOr",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_False({full_name})": replace(
+                param_self,
+                name="op_False",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_GreaterThan({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_GreaterThan",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_GreaterThanOrEqual({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_GreaterThanOrEqual",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_Increment({full_name})": replace(
+                param_self,
+                name="op_Increment",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_Inequality({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_Inequality",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_LeftShift({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_LeftShift",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_LessThan({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_LessThan",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_LessThanOrEqual({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_LessThanOrEqual",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_LogicalNot({full_name})": replace(
+                param_self,
+                name="op_LogicalNot",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_Modulus({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_Modulus",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_Multiply({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_Multiply",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_OnesComplement({full_name})": replace(
+                param_self,
+                name="op_OnesComplement",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_Subtraction({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_Subtraction",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_True({full_name})": replace(
+                param_self,
+                name="op_True",
+                return_types=[BOOLEAN],
+                static=True,
+            ),
+            f"op_UnaryNegation({full_name})": replace(
+                param_self,
+                name="op_UnaryNegation",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_UnaryPlus({full_name})": replace(
+                param_self,
+                name="op_UnaryPlus",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"op_UnsignedRightShift({full_name}, {full_name})": replace(
+                param_lr,
+                name="op_UnsignedRightShift",
+                return_types=[declaring_type],
+                static=True,
+            ),
+            f"__add__({full_name})": replace(
+                param_other,
+                name="__add__",
+                return_types=[declaring_type],
+            ),
+            f"__and__({full_name})": replace(
+                param_other,
+                name="__and__",
+                return_types=[declaring_type],
+            ),
+            f"__eq__({full_name})": replace(
+                param_other,
+                name="__eq__",
+                return_types=[BOOLEAN],
+            ),
+            f"__ge__({full_name})": replace(
+                param_other,
+                name="__ge__",
+                return_types=[BOOLEAN],
+            ),
+            f"__gt__({full_name})": replace(
+                param_other,
+                name="__gt__",
+                return_types=[BOOLEAN],
+            ),
+            "__invert__()": CMethod(
+                name="__invert__",
+                declaring_type=declaring_type,
+                return_types=[declaring_type],
+            ),
+            f"__le__({full_name})": replace(
+                param_other,
+                name="__le__",
+                return_types=[BOOLEAN],
+            ),
+            f"__lshift__({full_name})": replace(
+                param_other,
+                name="__lshift__",
+                return_types=[declaring_type],
+            ),
+            f"__lt__({full_name})": replace(
+                param_other,
+                name="__lt__",
+                return_types=[BOOLEAN],
+            ),
+            f"__mod__({full_name})": replace(
+                param_other,
+                name="__mod__",
+                return_types=[declaring_type],
+            ),
+            f"__mul__({full_name})": replace(
+                param_other,
+                name="__mul__",
+                return_types=[declaring_type],
+            ),
+            f"__ne__({full_name})": replace(
+                param_other,
+                name="__ne__",
+                return_types=[BOOLEAN],
+            ),
+            "__neg__()": CMethod(
+                name="__neg__",
+                declaring_type=declaring_type,
+                parameters=[],
+                return_types=[declaring_type],
+            ),
+            f"__or__({full_name})": replace(
+                param_other,
+                name="__or__",
+                return_types=[declaring_type],
+            ),
+            "__pos__()": CMethod(
+                name="__pos__",
+                declaring_type=declaring_type,
+                parameters=[],
+                return_types=[declaring_type],
+            ),
+            f"__sub__({full_name})": replace(
+                param_other,
+                name="__sub__",
+                return_types=[declaring_type],
+            ),
+            f"__truediv__({full_name})": replace(
+                param_other,
+                name="__truediv__",
+                return_types=[declaring_type],
+            ),
+            f"__xor__({full_name})": replace(
+                param_other,
+                name="__xor__",
+                return_types=[declaring_type],
+            ),
+        }
+
+    @classmethod
+    def list_properties(cls) -> Mapping[str, CProperty]:
+        return {
+            "Count": CProperty(name="Count", declaring_type=COLLECTION, type=INT32),
+            "IsReadOnly": CProperty(name="IsReadOnly", declaring_type=COLLECTION, type=BOOLEAN),
+            "Item": CProperty(name="Item", declaring_type=LIST, type=INT32, setter=True),
+        }
+
+    @classmethod
+    def list_methods(cls, type_var: CType) -> Mapping[str, CMethod]:
+        return {
+            f"Add({type_var.full_name})": CMethod(
+                name="Add",
+                declaring_type=COLLECTION,
+                parameters=[CParameter(name="item", type=type_var)],
+                return_types=[CType.VOID],
+            ),
+            "Clear()": CMethod(
+                name="Clear",
+                declaring_type=COLLECTION,
+                return_types=[CType.VOID],
+            ),
+            f"Contains({type_var.full_name})": CMethod(
+                name="Contains",
+                declaring_type=COLLECTION,
+                parameters=[CParameter(name="item", type=type_var)],
+                return_types=[BOOLEAN],
+            ),
+            f"CopyTo(System:Array[{type_var.full_name}], System:Int32)": CMethod(
+                name="CopyTo",
+                declaring_type=COLLECTION,
+                parameters=[
+                    CParameter(
+                        name="array",
+                        type=CType(name="Array", namespace="System", inner=[type_var]),
+                    ),
+                    CParameter(name="arrayIndex", type=INT32),
+                ],
+                return_types=[CType.VOID],
+            ),
+            "GetEnumerator()": CMethod(
+                name="GetEnumerator",
+                declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
+                return_types=[
+                    CType(
+                        name="IEnumerator",
+                        namespace="System.Collections.Generic",
+                        inner=[type_var],
+                    ),
+                ],
+            ),
+            f"IndexOf({type_var.full_name})": CMethod(
+                name="IndexOf",
+                declaring_type=LIST,
+                parameters=[CParameter(name="item", type=type_var)],
+                return_types=[INT32],
+            ),
+            f"Insert(System:Int32, {type_var.full_name})": CMethod(
+                name="Insert",
+                declaring_type=LIST,
+                parameters=[
+                    CParameter(name="index", type=INT32),
+                    CParameter(name="item", type=type_var),
+                ],
+                return_types=[CType.VOID],
+            ),
+            f"Remove({type_var.full_name})": CMethod(
+                name="Remove",
+                declaring_type=COLLECTION,
+                parameters=[CParameter(name="item", type=type_var)],
+                return_types=[BOOLEAN],
+            ),
+            "RemoveAt(System:Int32)": CMethod(
+                name="RemoveAt",
+                declaring_type=LIST,
+                parameters=[CParameter(name="index", type=INT32)],
+                return_types=[CType.VOID],
+            ),
+            f"__contains__({type_var.full_name})": CMethod(
+                name="__contains__",
+                declaring_type=COLLECTION,
+                parameters=[CParameter(name="item", type=type_var)],
+                return_types=[BOOLEAN],
+            ),
+            f"__delitem__({type_var.full_name})": CMethod(
+                name="__delitem__",
+                declaring_type=COLLECTION,
+                parameters=[CParameter(name="item", type=type_var)],
+                return_types=[BOOLEAN],
+            ),
+            "__getitem__(System:Int32)": CMethod(
+                name="__getitem__",
+                declaring_type=LIST,
+                parameters=[CParameter(name="index", type=INT32)],
+                return_types=[INT32],
+            ),
+            "__iter__()": CMethod(
+                name="__iter__",
+                declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
+                return_types=[
+                    CType(name="Iterator", namespace="collections.abc", inner=[type_var])
+                ],
+            ),
+            "__len__()": CMethod(
+                name="__len__",
+                declaring_type=COLLECTION,
+                return_types=[INT32],
+            ),
+            f"__setitem__(System:Int32, {type_var.full_name})": CMethod(
+                name="__setitem__",
+                declaring_type=LIST,
+                parameters=[
+                    CParameter(name="index", type=INT32),
+                    CParameter(name="value", type=type_var),
+                ],
+                return_types=[CType.VOID],
+            ),
+        }
+
+    @classmethod
+    def nested_types(cls, parent: CType) -> Mapping[str, CTypeDefinition]:
+        base: CType = CType(name="TEMP", namespace=TEST_LIB)
+        return {
+            obj.unique_name: obj
+            for obj in [
+                cls.basic_interface(replace(base, name="INested"), parent=parent),
+                cls.basic_delegate(replace(base, name="NestedDelegate"), parent=parent),
+                cls.basic_enum(replace(base, name="NestedEnum"), parent=parent),
+                cls.basic_class(replace(base, name="NestedClass"), parent=parent),
+                cls.basic_record(replace(base, name="NestedRecord"), parent=parent),
+                cls.basic_struct(replace(base, name="NestedStruct"), parent=parent),
+            ]
+        }
 
 
-class TestExtractType:
+class _MemberBase(_Base):
+    type_name: str
+
+    @pytest.fixture(scope="class")
+    def type_info(self, assembly: Assembly) -> TypeInfo:
+        return self.get_type(assembly, self.type_name)
+
+    @classmethod
+    @functools.cache
+    def parent(cls) -> CType:
+        return CType(name=cls.type_name, namespace=TEST_LIB)
+
+
+class TestExtractType(_MemberBase):
     """Tests for extract_type()."""
 
     type_name: str = "ExtractType"
 
-    @pytest.fixture(scope="class")
-    def type_info(self, assembly: Assembly) -> TypeInfo:
-        """C# TypeInfo fixture."""
-        return _get_type(assembly, "ExtractType")
-
     def test_none(self) -> None:
-        """Tests for extract_type() with a None type."""
+        """Tests for extract_type() with None."""
         expected: CType | None = None
         actual: CType | None = extract_type(None)
 
         assert actual == expected
 
-    # namespace: str = f"{TEST_LIB}.ExtractType"
-    #
-    # @pytest.mark.parametrize("type_info", ["TypeBasic"], indirect=True)
-    # def test_basic(self, type_info: TypeInfo) -> None:
-    #     """Test for extract_type() with a basic type."""
-    #     expected: CType = CType(name="TypeBasic", namespace=self.namespace)
-    #     actual: CType = extract_type(type_info)
-    #
-    #     assert actual == expected
-    #
-    # @pytest.mark.parametrize("type_info", ["TypeInner"], indirect=True)
-    # def test_inner(self, type_info: TypeInfo) -> None:
-    #     """Test for extract_type() with a type with inner types."""
-    #     expected: CType = CType(
-    #         name="TypeInner",
-    #         namespace=self.namespace,
-    #         inner=(
-    #             CType(name="TA", generic=True),
-    #             CType(name="TB", generic=True),
-    #         ),
-    #     )
-    #     actual: CType = extract_type(type_info)
-    #
-    #     assert actual == expected
-    #
-    # @pytest.mark.parametrize("type_info", ["TypeReference"], indirect=True)
-    # def test_reference(self, type_info: TypeInfo) -> None:
-    #     """Test for extract_type() with a type that is a reference."""
-    #     expected: CType = CType(name="TypeReference", namespace=self.namespace, reference=True)
-    #     actual: CType = extract_type(type_info.MakeByRefType())
-    #
-    #     assert actual == expected
-    #
-    # @pytest.mark.parametrize("type_info", ["TypeGeneric"], indirect=True)
-    # def test_generic(self, type_info: TypeInfo) -> None:
-    #     """Test for extract_type() with a type that is generic."""
-    #     expected: CType = CType(name="T", generic=True)
-    #     actual: CType = extract_type(type_info.GenericTypeParameters[0])
-    #
-    #     assert actual == expected
-    #
-    # @pytest.mark.parametrize("type_info", ["TypeNullable"], indirect=True)
-    # def test_nullable(self, type_info: TypeInfo) -> None:
-    #     """Test for extract_type() with a type that is nullable."""
-    #     method_info: MethodInfo = type_info.GetMethod("Method")
-    #     parameter_info: ParameterInfo = method_info.GetParameters()[0]
-    #
-    #     expected: CType = CType(name="Int32", namespace="System", nullable=True)
-    #     actual: CType = extract_type(parameter_info.ParameterType)
-    #
-    #     assert actual == expected
+    def test_basic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_type() with a basic type."""
+        method: MethodInfo = type_info.GetMethod("Basic")
+        parameter: ParameterInfo = method.GetParameters()[0]
+
+        expected: CType | None = INT32
+        actual: CType | None = extract_type(parameter.ParameterType)
+
+        assert actual == expected
+
+    def test_reference(self, type_info: TypeInfo) -> None:
+        """Tests for extract_type() with a reference type."""
+        method: MethodInfo = type_info.GetMethod("Reference")
+        parameter: ParameterInfo = method.GetParameters()[0]
+
+        expected: CType | None = replace(INT32, reference=True)
+        actual: CType | None = extract_type(parameter.ParameterType)
+
+        assert actual == expected
+
+    def test_generic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_type() with a generic type."""
+        method: MethodInfo = type_info.GetMethod("Generic")
+        parameter: ParameterInfo = method.GetParameters()[0]
+
+        expected: CType | None = T
+        actual: CType | None = extract_type(parameter.ParameterType)
+
+        assert actual == expected
+
+    def test_nullable(self, type_info: TypeInfo) -> None:
+        """Tests for extract_type() with a nullable type."""
+        method: MethodInfo = type_info.GetMethod("Nullable")
+        parameter: ParameterInfo = method.GetParameters()[0]
+
+        expected: CType | None = replace(INT32, nullable=True)
+        actual: CType | None = extract_type(parameter.ParameterType)
+
+        assert actual == expected
+
+    def test_array(self, type_info: TypeInfo) -> None:
+        """Tests for extract_type() with an array type."""
+        method: MethodInfo = type_info.GetMethod("Array")
+        parameter: ParameterInfo = method.GetParameters()[0]
+
+        expected: CType | None = CType(name="Array", namespace="System", inner=[INT32])
+        actual: CType | None = extract_type(parameter.ParameterType)
+
+        assert actual == expected
+
+    def test_use_generic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_type() with a reference type."""
+        method: MethodInfo = type_info.GetMethod("UseGeneric")
+        parameter: ParameterInfo = method.GetParameters()[0]
+
+        expected: CType | None = EQUATABLE
+        actual: CType | None = extract_type(parameter.ParameterType, use_generic=True)
+
+        assert actual == expected
+
+    def test_nested(self, type_info: TypeInfo) -> None:
+        """Tests for extract_type() with a reference type."""
+        type_info = type_info.GetNestedType("Nested")
+
+        expected: CType | None = CType(name="ExtractType.Nested", namespace="TestLib")
+        actual: CType | None = extract_type(type_info)
+
+        assert actual == expected
 
 
-class TestCParameter:
-    def test_extract_parameter_simple(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
-        method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithParams1")
+class TestExtractParameter(_MemberBase):
+    """Tests for extract_parameter()."""
 
-        extracted: CParameter = extract_parameter(method_info.GetParameters()[0])
-        expected: CParameter = CParameter(
-            name="param0",
-            type=CType(name="Int32", namespace="System"),
-        )
+    type_name: str = "ExtractParameter"
 
-        self.assertEqual(expected, extracted)
+    def test_basic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_parameter() with a basic parameter."""
+        method: MethodInfo = type_info.GetMethod("Basic")
+        parameter: ParameterInfo = method.GetParameters()[0]
 
-    def test_extract_parameter_default(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
-        method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithDefaultParam")
+        expected: CParameter | None = CParameter(name="param", type=INT32)
+        actual: CParameter | None = extract_parameter(parameter)
 
-        extracted: CParameter = extract_parameter(method_info.GetParameters()[0])
-        expected: CParameter = CParameter(
-            name="param0",
-            type=CType(name="Int32", namespace="System"),
-            default=True,
-        )
+        assert actual == expected
 
-        self.assertEqual(expected, extracted)
+    def test_default(self, type_info: TypeInfo) -> None:
+        """Tests for extract_parameter() with a default parameter."""
+        method: MethodInfo = type_info.GetMethod("Default")
+        parameter: ParameterInfo = method.GetParameters()[0]
 
-    def test_extract_parameter_out(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
-        method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithOutParam")
+        expected: CParameter | None = CParameter(name="param", type=INT32, default=True)
+        actual: CParameter | None = extract_parameter(parameter)
 
-        extracted: CParameter = extract_parameter(method_info.GetParameters()[0])
-        expected: CParameter = CParameter(
-            name="param0",
-            type=CType(name="Int32", namespace="System", reference=True),
+        assert actual == expected
+
+    def test_out(self, type_info: TypeInfo) -> None:
+        """Tests for extract_parameter() with an out parameter."""
+        method: MethodInfo = type_info.GetMethod("Out")
+        parameter: ParameterInfo = method.GetParameters()[0]
+
+        expected: CParameter | None = CParameter(
+            name="param",
+            type=replace(INT32, reference=True),
             out=True,
         )
+        actual: CParameter | None = extract_parameter(parameter)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
 
-class TestCField:
-    def test_extract_field(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithFields")
-        field_info: FieldInfo = type_info.GetField("InstanceFieldA")
+class TestExtractField(_MemberBase):
+    """Tests for extract_field()."""
 
-        extracted: CField = extract_field(field_info)
-        expected: CField = CField(
-            name="InstanceFieldA",
-            declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-            return_type=CType(name="Int32", namespace="System"),
+    type_name: str = "ExtractField"
+
+    def test_basic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_field() with a basic field."""
+        name: str = "Basic"
+        field: FieldInfo = type_info.GetField(name)
+
+        expected: CField | None = CField(
+            name=name,
+            declaring_type=self.parent(),
+            return_type=INT32,
         )
+        actual: CField | None = extract_field(field)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_field_static(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithFields")
-        field_info: FieldInfo = type_info.GetField("StaticFieldA")
+    def test_readonly(self, type_info: TypeInfo) -> None:
+        """Tests for extract_field() with a readonly field."""
+        name: str = "Readonly"
+        field: FieldInfo = type_info.GetField(name)
 
-        extracted: CField = extract_field(field_info)
-        expected: CField = CField(
-            name="StaticFieldA",
-            declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-            return_type=CType(name="Int32", namespace="System"),
+        expected: CField | None = CField(
+            name=name,
+            declaring_type=self.parent(),
+            return_type=INT32,
+        )
+        actual: CField | None = extract_field(field)
+
+        assert actual == expected
+
+    def test_static(self, type_info: TypeInfo) -> None:
+        """Tests for extract_field() with a static field."""
+        name: str = "Static"
+        field: FieldInfo = type_info.GetField(name)
+
+        expected: CField | None = CField(
+            name=name,
+            declaring_type=self.parent(),
+            return_type=INT32,
             static=True,
         )
+        actual: CField | None = extract_field(field)
 
-        self.assertEqual(expected, extracted)
-
-    def test_extract_fields(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithFields")
-        extracted: Mapping[str, CField] = extract_fields(type_info)
-        expected: Mapping[str, CField] = {
-            "TestLib:ClassWithFields.InstanceFieldA": CField(
-                name="InstanceFieldA",
-                declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                return_type=CType(name="Int32", namespace="System"),
-            ),
-            "TestLib:ClassWithFields.InstanceFieldB": CField(
-                name="InstanceFieldB",
-                declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                return_type=CType(name="Int32", namespace="System"),
-            ),
-            "TestLib:ClassWithFields.InstanceFieldC": CField(
-                name="InstanceFieldC",
-                declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                return_type=CType(name="Int32", namespace="System"),
-            ),
-            "TestLib:ClassWithFields.StaticFieldA": CField(
-                name="StaticFieldA",
-                declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                return_type=CType(name="Int32", namespace="System"),
-                static=True,
-            ),
-            "TestLib:ClassWithFields.StaticFieldB": CField(
-                name="StaticFieldB",
-                declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                return_type=CType(name="Int32", namespace="System"),
-                static=True,
-            ),
-            "TestLib:ClassWithFields.StaticFieldC": CField(
-                name="StaticFieldC",
-                declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                return_type=CType(name="Int32", namespace="System"),
-                static=True,
-            ),
-        }
-
-        self.assertDictEqual(expected, extracted)
+        assert actual == expected
 
 
-class TestCConstructor:
-    def test_extract_constructor(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithConstructors")
-        extracted: Sequence[CConstructor] = list(
-            map(extract_constructor, type_info.GetConstructors())
+class TestExtractConstructor(_MemberBase):
+    """Tests for extract_field()."""
+
+    type_name: str = "ExtractConstructor"
+
+    def test_basic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_constructor() with a basic constructor."""
+        constructor: ConstructorInfo = type_info.GetConstructor(to_c_array(Type, []))
+
+        expected: CConstructor | None = CConstructor(declaring_type=self.parent())
+        actual: CConstructor | None = extract_constructor(constructor)
+
+        assert actual == expected
+
+    def test_parameters(self, type_info: TypeInfo) -> None:
+        """Tests for extract_constructor() with a constructor with parameters."""
+        constructor: ConstructorInfo = type_info.GetConstructor(to_c_array(Type, [Int32, Int32]))
+
+        expected: CConstructor | None = CConstructor(
+            declaring_type=self.parent(),
+            parameters=[
+                CParameter(name="param0", type=INT32),
+                CParameter(name="param1", type=INT32),
+            ],
         )
+        actual: CConstructor | None = extract_constructor(constructor)
 
-        expected: CConstructor = CConstructor(
-            declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-            parameters=(),
-        )
-
-        self.assertEqual(expected, extracted[0])
-
-        expected: CConstructor = CConstructor(
-            declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-            parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
-        )
-
-        self.assertEqual(expected, extracted[1])
-
-        expected: CConstructor = CConstructor(
-            declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-            ),
-        )
-
-        self.assertEqual(expected, extracted[2])
-
-        expected: CConstructor = CConstructor(
-            declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                CParameter(name="param2", type=CType(name="Int32", namespace="System")),
-            ),
-        )
-
-        self.assertEqual(expected, extracted[3])
-
-    def test_extract_constructors(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithConstructors")
-        extracted: Mapping[str, CConstructor] = extract_constructors(type_info)
-        expected: Mapping[str, CConstructor] = {
-            "TestLib:ClassWithConstructors.__init__()": CConstructor(
-                declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                parameters=(),
-            ),
-            "TestLib:ClassWithConstructors.__init__(System:Int32)": CConstructor(
-                declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                ),
-            ),
-            "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32)": CConstructor(
-                declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                ),
-            ),
-            "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32, System:Int32)": CConstructor(
-                declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    CParameter(name="param2", type=CType(name="Int32", namespace="System")),
-                ),
-            ),
-        }
-
-        self.assertDictEqual(expected, extracted)
+        assert actual == expected
 
 
-class TestCProperty:
-    def test_extract_property(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithProperties")
-        property_info: PropertyInfo = type_info.GetProperty("InstanceReadOnlyProperty0")
+class TestExtractProperty(_MemberBase):
+    """Tests for extract_property()."""
 
-        extracted: CProperty = extract_property(property_info)
-        expected: CProperty = CProperty(
-            name="InstanceReadOnlyProperty0",
-            declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-            type=CType(name="Int32", namespace="System"),
-        )
+    type_name: str = "ExtractProperty"
 
-        self.assertEqual(expected, extracted)
+    def test_basic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_property() with a basic property."""
+        name: str = "Basic"
+        property: PropertyInfo = type_info.GetProperty(name)  # noqa: A001
 
-    def test_extract_property_setter(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithProperties")
-        property_info: PropertyInfo = type_info.GetProperty("InstanceProperty0")
-
-        extracted: CProperty = extract_property(property_info)
-        expected: CProperty = CProperty(
-            name="InstanceProperty0",
-            declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-            type=CType(name="Int32", namespace="System"),
+        expected: CProperty | None = CProperty(
+            name=name,
+            declaring_type=self.parent(),
+            type=INT32,
             setter=True,
         )
+        actual: CProperty | None = extract_property(property)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_property_static(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithProperties")
-        property_info: PropertyInfo = type_info.GetProperty("StaticReadOnlyProperty0")
+    def test_readonly(self, type_info: TypeInfo) -> None:
+        """Tests for extract_property() with a readonly property."""
+        name: str = "Readonly"
+        property: PropertyInfo = type_info.GetProperty(name)  # noqa: A001
 
-        extracted: CProperty = extract_property(property_info)
-        expected: CProperty = CProperty(
-            name="StaticReadOnlyProperty0",
-            declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-            type=CType(name="Int32", namespace="System"),
-            static=True,
+        expected: CProperty | None = CProperty(
+            name=name,
+            declaring_type=self.parent(),
+            type=INT32,
         )
+        actual: CProperty | None = extract_property(property)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_property_setter_static(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithProperties")
-        property_info: PropertyInfo = type_info.GetProperty("StaticProperty0")
+    def test_static(self, type_info: TypeInfo) -> None:
+        """Tests for extract_property() with a static property."""
+        name: str = "Static"
+        property: PropertyInfo = type_info.GetProperty(name)  # noqa: A001
 
-        extracted: CProperty = extract_property(property_info)
-        expected: CProperty = CProperty(
-            name="StaticProperty0",
-            declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-            type=CType(name="Int32", namespace="System"),
+        expected: CProperty | None = CProperty(
+            name=name,
+            declaring_type=self.parent(),
+            type=INT32,
             setter=True,
             static=True,
         )
+        actual: CProperty | None = extract_property(property)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_properties(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithProperties")
-        extracted: Mapping[str, CProperty] = extract_properties(type_info)
-        expected: Mapping[str, CProperty] = {
-            "TestLib:ClassWithProperties.InstanceProperty0": CProperty(
-                name="InstanceProperty0",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                setter=True,
-            ),
-            "TestLib:ClassWithProperties.InstanceProperty1": CProperty(
-                name="InstanceProperty1",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                setter=True,
-            ),
-            "TestLib:ClassWithProperties.InstanceProperty2": CProperty(
-                name="InstanceProperty2",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                setter=True,
-            ),
-            "TestLib:ClassWithProperties.InstanceReadOnlyProperty0": CProperty(
-                name="InstanceReadOnlyProperty0",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-            ),
-            "TestLib:ClassWithProperties.InstanceReadOnlyProperty1": CProperty(
-                name="InstanceReadOnlyProperty1",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-            ),
-            "TestLib:ClassWithProperties.InstanceReadOnlyProperty2": CProperty(
-                name="InstanceReadOnlyProperty2",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-            ),
-            "TestLib:ClassWithProperties.StaticProperty0": CProperty(
-                name="StaticProperty0",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                setter=True,
-                static=True,
-            ),
-            "TestLib:ClassWithProperties.StaticProperty1": CProperty(
-                name="StaticProperty1",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                setter=True,
-                static=True,
-            ),
-            "TestLib:ClassWithProperties.StaticProperty2": CProperty(
-                name="StaticProperty2",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                setter=True,
-                static=True,
-            ),
-            "TestLib:ClassWithProperties.StaticReadOnlyProperty0": CProperty(
-                name="StaticReadOnlyProperty0",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                static=True,
-            ),
-            "TestLib:ClassWithProperties.StaticReadOnlyProperty1": CProperty(
-                name="StaticReadOnlyProperty1",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                static=True,
-            ),
-            "TestLib:ClassWithProperties.StaticReadOnlyProperty2": CProperty(
-                name="StaticReadOnlyProperty2",
-                declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                type=CType(name="Int32", namespace="System"),
-                static=True,
-            ),
-        }
+    def test_static_readonly(self, type_info: TypeInfo) -> None:
+        """Tests for extract_property() with a static, readonly property."""
+        name: str = "StaticReadOnly"
+        property: PropertyInfo = type_info.GetProperty(name)  # noqa: A001
 
-        self.assertDictEqual(expected, extracted)
-
-
-class TestCMethod:
-    def test_extract_method(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
-        method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithParams1")
-
-        extracted: CMethod = extract_method(method_info)
-        expected: CMethod = CMethod(
-            name="InstanceMethodWithParams1",
-            declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-            parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
-            return_types=(CType(name="Int32", namespace="System"),),
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_method_static(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
-        method_info: MethodInfo = type_info.GetMethod("StaticMethodWithParams1")
-
-        extracted: CMethod = extract_method(method_info)
-        expected: CMethod = CMethod(
-            name="StaticMethodWithParams1",
-            declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-            parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
-            return_types=(CType("Int32", "System"),),
+        expected: CProperty | None = CProperty(
+            name=name,
+            declaring_type=self.parent(),
+            type=INT32,
             static=True,
         )
+        actual: CProperty | None = extract_property(property)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_method_out(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
-        method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithOutParam")
 
-        extracted: CMethod = extract_method(method_info)
-        expected: CMethod = CMethod(
-            name="InstanceMethodWithOutParam",
-            declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-            parameters=(
-                CParameter(
-                    name="param0",
-                    type=CType(name="Int32", namespace="System", reference=True),
-                    out=True,
-                ),
-            ),
-            return_types=(
-                CType(name="Int32", namespace="System"),
-                CType(name="Int32", namespace="System", reference=True),
-            ),
+class TestExtractMethod(_MemberBase):
+    """Tests for extract_method()."""
+
+    type_name: str = "ExtractMethod"
+
+    def test_basic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a basic method."""
+        name: str = "Basic"
+        method: MethodInfo = type_info.GetMethod(name)
+
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            return_types=[CType.VOID],
         )
+        actual: CMethod | None = extract_method(method)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_methods(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
-        extracted: Mapping[str, CMethod] = extract_methods(type_info)
-        expected: Mapping[str, CMethod] = {
-            "System:Object.Equals(System:Object)": CMethod(
-                name="Equals",
-                declaring_type=CType(name="Object", namespace="System"),
-                parameters=(CParameter(name="obj", type=CType(name="Object", namespace="System")),),
-                return_types=(CType(name="Boolean", namespace="System"),),
-            ),
-            "System:Object.GetHashCode()": CMethod(
-                name="GetHashCode",
-                declaring_type=CType(name="Object", namespace="System"),
-                parameters=(),
-                return_types=(CType(name="Int32", namespace="System"),),
-            ),
-            "System:Object.GetType()": CMethod(
-                name="GetType",
-                declaring_type=CType(name="Object", namespace="System"),
-                parameters=(),
-                return_types=(CType(name="Type", namespace="System"),),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
-                name="InstanceMethodWithDefaultParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System"),
-                        default=True,
-                    ),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
-                name="InstanceMethodWithNullableDefaultParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System", nullable=True),
-                        default=True,
-                    ),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
-                name="InstanceMethodWithNullableOutParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(
-                            name="Int32",
-                            namespace="System",
-                            reference=True,
-                            nullable=True,
-                        ),
-                        out=True,
-                    ),
-                ),
-                return_types=(
-                    CType(name="Int32", namespace="System"),
-                    CType(name="Int32", namespace="System", reference=True, nullable=True),
-                ),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
-                name="InstanceMethodWithNullableParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System", nullable=True),
-                    ),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
-                name="InstanceMethodWithOutParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System", reference=True),
-                        out=True,
-                    ),
-                ),
-                return_types=(
-                    CType(name="Int32", namespace="System"),
-                    CType(name="Int32", namespace="System", reference=True),
-                ),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithParams0()": CMethod(
-                name="InstanceMethodWithParams0",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(),
-                return_types=(CType(name="Int32", namespace="System"),),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithParams1(System:Int32)": CMethod(
-                name="InstanceMethodWithParams1",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-            ),
-            "TestLib:ClassWithMethods.InstanceMethodWithParams2(System:Int32, System:Int32)": CMethod(
-                name="InstanceMethodWithParams2",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithDefaultParam(System:Int32)": CMethod(
-                name="StaticMethodWithDefaultParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System"),
-                        default=True,
-                    ),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-                static=True,
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithNullableDefaultParam(System:Int32?)": CMethod(
-                name="StaticMethodWithNullableDefaultParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System", nullable=True),
-                        default=True,
-                    ),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-                static=True,
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithNullableOutParam(System:*Int32?)": CMethod(
-                name="StaticMethodWithNullableOutParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(
-                            name="Int32",
-                            namespace="System",
-                            reference=True,
-                            nullable=True,
-                        ),
-                        out=True,
-                    ),
-                ),
-                return_types=(
-                    CType(name="Int32", namespace="System"),
-                    CType(name="Int32", namespace="System", reference=True, nullable=True),
-                ),
-                static=True,
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithNullableParam(System:Int32?)": CMethod(
-                name="StaticMethodWithNullableParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System", nullable=True),
-                    ),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-                static=True,
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithOutParam(System:*Int32)": CMethod(
-                name="StaticMethodWithOutParam",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(
-                        name="param0",
-                        type=CType(name="Int32", namespace="System", reference=True),
-                        out=True,
-                    ),
-                ),
-                return_types=(
-                    CType(name="Int32", namespace="System"),
-                    CType(name="Int32", namespace="System", reference=True),
-                ),
-                static=True,
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithParams0()": CMethod(
-                name="StaticMethodWithParams0",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(),
-                return_types=(CType(name="Int32", namespace="System"),),
-                static=True,
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithParams1(System:Int32)": CMethod(
-                name="StaticMethodWithParams1",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-                static=True,
-            ),
-            "TestLib:ClassWithMethods.StaticMethodWithParams2(System:Int32, System:Int32)": CMethod(
-                name="StaticMethodWithParams2",
-                declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                parameters=(
-                    CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                ),
-                return_types=(CType(name="Int32", namespace="System"),),
-                static=True,
-            ),
-            "System:Object.ToString()": CMethod(
-                name="ToString",
-                declaring_type=CType(name="Object", namespace="System"),
-                parameters=(),
-                return_types=(CType(name="String", namespace="System"),),
-            ),
-        }
+    def test_parameters(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a method with parameters."""
+        name: str = "Parameters"
+        method: MethodInfo = type_info.GetMethod(name)
 
-        self.assertDictEqual(expected, extracted)
-
-
-class TestCEvent:
-    def test_extract_event(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithEvents")
-        event_info: EventInfo = type_info.GetEvent("Event")
-
-        extracted: CEvent = extract_event(event_info)
-        expected: CEvent = CEvent(
-            name="Event",
-            declaring_type=CType(name="ClassWithEvents", namespace=TEST_LIB),
-            type=CType(name="EventHandler", namespace="System"),
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            parameters=[
+                CParameter(name="param0", type=INT32),
+                CParameter(name="param1", type=INT32),
+            ],
+            return_types=[CType.VOID],
         )
+        actual: CMethod | None = extract_method(method)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_event_args(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithEvents")
-        event_info: EventInfo = type_info.GetEvent("EventWithArgs")
+    def test_out(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a method with an out parameter."""
+        name: str = "Out"
+        method: MethodInfo = type_info.GetMethod(name)
 
-        extracted: CEvent = extract_event(event_info)
-        expected: CEvent = CEvent(
-            name="EventWithArgs",
-            declaring_type=CType(name="ClassWithEvents", namespace=TEST_LIB),
-            type=CType(
-                name="EventHandler",
-                namespace="System",
-                inner=(CType(name="EventArgs", namespace="System"),),
-            ),
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            parameters=[
+                CParameter(name="param", type=replace(INT32, reference=True), out=True),
+            ],
+            return_types=[INT32, replace(INT32, reference=True)],
         )
+        actual: CMethod | None = extract_method(method)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_events(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithEvents")
-        extracted: Mapping[str, CEvent] = extract_events(type_info)
-        expected: Mapping[str, CEvent] = {
-            "TestLib:ClassWithEvents.Event": CEvent(
-                name="Event",
-                declaring_type=CType(name="ClassWithEvents", namespace=TEST_LIB),
-                type=CType(name="EventHandler", namespace="System"),
-            ),
-            "TestLib:ClassWithEvents.EventWithArgs": CEvent(
-                name="EventWithArgs",
-                declaring_type=CType(name="ClassWithEvents", namespace=TEST_LIB),
-                type=CType(
-                    name="EventHandler",
-                    namespace="System",
-                    inner=(CType(name="EventArgs", namespace="System"),),
-                ),
-            ),
-        }
+    def test_void_out(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a method with an out parameter."""
+        name: str = "VoidOut"
+        method: MethodInfo = type_info.GetMethod(name)
 
-        self.assertDictEqual(expected, extracted)
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            parameters=[
+                CParameter(name="param", type=replace(INT32, reference=True), out=True),
+            ],
+            return_types=[CType.VOID, replace(INT32, reference=True)],
+        )
+        actual: CMethod | None = extract_method(method)
+
+        assert actual == expected
+
+    def test_static(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a static method."""
+        name: str = "Static"
+        method: MethodInfo = type_info.GetMethod(name)
+
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            return_types=[CType.VOID],
+            static=True,
+        )
+        actual: CMethod | None = extract_method(method)
+
+        assert actual == expected
 
 
-class TestCClass:
-    def test_extract_class_generic(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithGeneric")
+class TestExtractEvent(_MemberBase):
+    """Tests for extract_event()."""
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithGeneric",
+    type_name: str = "ExtractEvent"
+
+    def test_basic(self, type_info: TypeInfo) -> None:
+        """Tests for extract_event() with a basic event."""
+        name: str = "Basic"
+        event: EventInfo = type_info.GetEvent(name)
+
+        expected: CEvent | None = CEvent(
+            name=name,
+            declaring_type=self.parent(),
+            type=EVENT_HANDLER,
+        )
+        actual: CEvent | None = extract_event(event)
+
+        assert actual == expected
+
+    def test_arguments(self, type_info: TypeInfo) -> None:
+        """Tests for extract_event() with an event with ."""
+        name: str = "Arguments"
+        event: EventInfo = type_info.GetEvent(name)
+
+        expected: CEvent | None = CEvent(
+            name=name,
+            declaring_type=self.parent(),
+            type=EVENT_HANDLER_ARGS,
+        )
+        actual: CEvent | None = extract_event(event)
+
+        assert actual == expected
+
+
+class TestExtractTypeDef(_Base):
+    """Tests for extract_type_def()."""
+
+    def test_class(self, assembly: Assembly) -> None:
+        """Test for extract_type_def() with a class."""
+        name: str = "ClassBasic"
+        _class: TypeInfo = self.get_type(assembly, name)
+
+        actual: CTypeDefinition | None = extract_type_def(_class)
+
+        assert isinstance(actual, CClass)
+
+    def test_struct(self, assembly: Assembly) -> None:
+        """Tests for extract_type_def() with a struct."""
+        name: str = "StructBasic"
+        struct: TypeInfo = self.get_type(assembly, name)
+
+        actual: CTypeDefinition | None = extract_type_def(struct)
+
+        assert isinstance(actual, CClass)
+
+    def test_record(self, assembly: Assembly) -> None:
+        """Tests for extract_type_def() with a record."""
+        name: str = "RecordBasic"
+        record: TypeInfo = self.get_type(assembly, name)
+
+        actual: CTypeDefinition | None = extract_type_def(record)
+
+        assert isinstance(actual, CClass)
+
+    def test_interface(self, assembly: Assembly) -> None:
+        """Tests for extract_type_def() with an interface."""
+        name: str = "IBasic"
+        interface: TypeInfo = self.get_type(assembly, name)
+
+        actual: CTypeDefinition | None = extract_type_def(interface)
+
+        assert isinstance(actual, CInterface)
+
+    def test_enum(self, assembly: Assembly) -> None:
+        """Tests for extract_type_def() with an enum."""
+        name: str = "EnumBasic"
+        enum: TypeInfo = self.get_type(assembly, name)
+
+        actual: CTypeDefinition | None = extract_type_def(enum)
+
+        assert isinstance(actual, CEnum)
+
+    def test_delegate(self, assembly: Assembly) -> None:
+        """Tests for extract_type_def() with a delegate."""
+        name: str = "DelegateBasic"
+        delegate: TypeInfo = self.get_type(assembly, name)
+
+        actual: CTypeDefinition | None = extract_type_def(delegate)
+
+        assert isinstance(actual, CDelegate)
+
+
+class TestExtractClass(_Base):
+    """Tests for extract_class()."""
+
+    def test_basic(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a basic class."""
+        name: str = "ClassBasic"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CClass | None = self.basic_class(declaring_type)
+        actual: CClass | None = extract_class(_class)
+
+        assert actual == expected
+
+    def test_abstract(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with an abstract class."""
+        name: str = "ClassAbstract"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CClass | None = replace(
+            self.basic_class(declaring_type),
+            abstract=True,
+            constructors={},
+        )
+        actual: CClass | None = extract_class(_class)
+
+        assert actual == expected
+
+    def test_generic(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a generic class."""
+        name: str = "ClassGeneric"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(
+            name=name,
             namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(CType(name="T", generic=True),),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={
-                "TestLib:ClassWithGeneric[$T].__init__()": CConstructor(
-                    declaring_type=CType(
-                        name="ClassWithGeneric",
-                        namespace=TEST_LIB,
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(),
-                ),
-            },
-            properties={},
+            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+        )
+
+        expected: CClass | None = self.basic_class(declaring_type)
+        actual: CClass | None = extract_class(_class)
+
+        assert actual == expected
+
+    def test_interfaces(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with interfaces."""
+        name: str = "ClassInterfaces"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        basic: CClass = self.basic_class(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            interfaces=[replace(COMPARABLE, inner=[OBJECT]), replace(EQUATABLE, inner=[OBJECT])],
             methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
+                **basic.methods,
+                "CompareTo(System:Object)": CMethod(
+                    name="CompareTo",
+                    declaring_type=COMPARABLE,
+                    parameters=[CParameter(name="other", type=OBJECT)],
+                    return_types=[INT32],
+                ),
+                "Equals(System:Object)": replace(
+                    CMethod(
+                        name="Equals",
+                        declaring_type=EQUATABLE,
+                        parameters=[CParameter(name="obj", type=OBJECT)],
+                        return_types=[BOOLEAN],
                     ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "TestLib:ClassWithGeneric[$T].MethodWithGeneric($T)": CMethod(
-                    name="MethodWithGeneric",
-                    declaring_type=CType(
-                        name="ClassWithGeneric",
-                        namespace=TEST_LIB,
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
                 ),
             },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(_class)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_class_generic_multi(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMultiGeneric")
+    def test_fields(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with fields."""
+        name: str = "ClassFields"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithMultiGeneric",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(
-                CType(name="U", generic=True),
-                CType(name="V", generic=True),
-            ),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={
-                "TestLib:ClassWithMultiGeneric[$U, $V].__init__()": CConstructor(
-                    declaring_type=CType(
-                        name="ClassWithMultiGeneric",
-                        namespace=TEST_LIB,
-                        inner=(
-                            CType(name="U", generic=True),
-                            CType(name="V", generic=True),
-                        ),
-                    ),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_class_interfaces(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithInterface")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithInterface",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(
-                CType(
-                    name="IEquatable",
-                    namespace="System",
-                    inner=(CType(name="ClassWithInterface", namespace=TEST_LIB),),
-                ),
-            ),
-            fields={},
-            constructors={
-                "TestLib:ClassWithInterface.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithInterface", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:IEquatable[$T].Equals(TestLib:ClassWithInterface)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(
-                        name="IEquatable",
-                        namespace="System",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithInterface", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_class_fields(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithFields")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithFields",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
+        expected: CClass | None = replace(
+            self.basic_class(declaring_type),
             fields={
-                "TestLib:ClassWithFields.InstanceFieldA": CField(
-                    name="InstanceFieldA",
-                    declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:ClassWithFields.InstanceFieldB": CField(
-                    name="InstanceFieldB",
-                    declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:ClassWithFields.InstanceFieldC": CField(
-                    name="InstanceFieldC",
-                    declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:ClassWithFields.StaticFieldA": CField(
-                    name="StaticFieldA",
-                    declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:ClassWithFields.StaticFieldB": CField(
-                    name="StaticFieldB",
-                    declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:ClassWithFields.StaticFieldC": CField(
-                    name="StaticFieldC",
-                    declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
+                "A": CField(name="A", declaring_type=declaring_type, return_type=INT32),
+                "B": CField(name="B", declaring_type=declaring_type, return_type=INT32),
             },
-            constructors={
-                "TestLib:ClassWithFields.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithFields", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(_class)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_class_constructors(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithConstructors")
+    def test_constructors(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with constructors."""
+        name: str = "ClassConstructors"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithConstructors",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
+        basic: CClass = self.basic_class(declaring_type)
+        expected: CClass | None = replace(
+            basic,
             constructors={
-                "TestLib:ClassWithConstructors.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-                "TestLib:ClassWithConstructors.__init__(System:Int32)": CConstructor(
-                    declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    ),
-                ),
-                "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32)": CConstructor(
-                    declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    ),
-                ),
-                "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32, System:Int32)": CConstructor(
-                    declaring_type=CType(name="ClassWithConstructors", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param2", type=CType(name="Int32", namespace="System")),
-                    ),
+                **basic.constructors,
+                "__init__(System:Int32, System:Int32)": CConstructor(
+                    declaring_type=declaring_type,
+                    parameters=[
+                        CParameter(name="param0", type=INT32),
+                        CParameter(name="param1", type=INT32),
+                    ],
                 ),
             },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(_class)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_class_properties(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithProperties")
+    def test_properties(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with properties."""
+        name: str = "ClassProperties"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithProperties",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={
-                "TestLib:ClassWithProperties.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
+        expected: CClass | None = replace(
+            self.basic_class(declaring_type),
             properties={
-                "TestLib:ClassWithProperties.InstanceProperty0": CProperty(
-                    name="InstanceProperty0",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:ClassWithProperties.InstanceProperty1": CProperty(
-                    name="InstanceProperty1",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:ClassWithProperties.InstanceProperty2": CProperty(
-                    name="InstanceProperty2",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:ClassWithProperties.InstanceReadOnlyProperty0": CProperty(
-                    name="InstanceReadOnlyProperty0",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:ClassWithProperties.InstanceReadOnlyProperty1": CProperty(
-                    name="InstanceReadOnlyProperty1",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:ClassWithProperties.InstanceReadOnlyProperty2": CProperty(
-                    name="InstanceReadOnlyProperty2",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:ClassWithProperties.StaticProperty0": CProperty(
-                    name="StaticProperty0",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:ClassWithProperties.StaticProperty1": CProperty(
-                    name="StaticProperty1",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:ClassWithProperties.StaticProperty2": CProperty(
-                    name="StaticProperty2",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:ClassWithProperties.StaticReadOnlyProperty0": CProperty(
-                    name="StaticReadOnlyProperty0",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:ClassWithProperties.StaticReadOnlyProperty1": CProperty(
-                    name="StaticReadOnlyProperty1",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:ClassWithProperties.StaticReadOnlyProperty2": CProperty(
-                    name="StaticReadOnlyProperty2",
-                    declaring_type=CType(name="ClassWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
+                "A": CProperty(name="A", declaring_type=declaring_type, type=INT32),
+                "B": CProperty(name="B", declaring_type=declaring_type, type=INT32, setter=True),
             },
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(_class)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_class_methods(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithMethods")
+    def test_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with methods."""
+        name: str = "ClassMethods"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={
-                "TestLib:ClassWithMethods.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={},
+        basic: CClass = self.basic_class(declaring_type)
+        expected: CClass | None = replace(
+            basic,
             methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
-                    name="InstanceMethodWithDefaultParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System"),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
-                    name="InstanceMethodWithNullableDefaultParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
-                    name="InstanceMethodWithNullableOutParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(
-                                name="Int32",
-                                namespace="System",
-                                reference=True,
-                                nullable=True,
-                            ),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(
-                            name="Int32",
-                            namespace="System",
-                            reference=True,
-                            nullable=True,
-                        ),
-                    ),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
-                    name="InstanceMethodWithNullableParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
-                    name="InstanceMethodWithOutParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", reference=True),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True),
-                    ),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithParams0()": CMethod(
-                    name="InstanceMethodWithParams0",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithParams1(System:Int32)": CMethod(
-                    name="InstanceMethodWithParams1",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:ClassWithMethods.InstanceMethodWithParams2(System:Int32, System:Int32)": CMethod(
-                    name="InstanceMethodWithParams2",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithDefaultParam(System:Int32)": CMethod(
-                    name="StaticMethodWithDefaultParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System"),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithNullableDefaultParam(System:Int32?)": CMethod(
-                    name="StaticMethodWithNullableDefaultParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithNullableOutParam(System:*Int32?)": CMethod(
-                    name="StaticMethodWithNullableOutParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(
-                                name="Int32",
-                                namespace="System",
-                                reference=True,
-                                nullable=True,
-                            ),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(
-                            name="Int32",
-                            namespace="System",
-                            reference=True,
-                            nullable=True,
-                        ),
-                    ),
-                    static=True,
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithNullableParam(System:Int32?)": CMethod(
-                    name="StaticMethodWithNullableParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithOutParam(System:*Int32)": CMethod(
-                    name="StaticMethodWithOutParam",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", reference=True),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True),
-                    ),
-                    static=True,
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithParams0()": CMethod(
-                    name="StaticMethodWithParams0",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithParams1(System:Int32)": CMethod(
-                    name="StaticMethodWithParams1",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithMethods.StaticMethodWithParams2(System:Int32, System:Int32)": CMethod(
-                    name="StaticMethodWithParams2",
-                    declaring_type=CType(name="ClassWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
+                **basic.methods,
+                "A()": CMethod(name="A", declaring_type=declaring_type, return_types=[CType.VOID]),
+                "B()": CMethod(name="B", declaring_type=declaring_type, return_types=[INT32]),
             },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(_class)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_class_methods_dunder(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithOperatorMethods")
+    def test_dunder_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with dunder methods."""
+        name: str = "ClassDunderMethods"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithOperatorMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={
-                "TestLib:ClassWithOperatorMethods.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(
-                            name="obj",
-                            type=CType(name="Object", namespace="System"),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__add__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__add__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__and__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__and__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__eq__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__eq__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__ge__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__ge__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__gt__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__gt__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__invert__()": CMethod(
-                    name="__invert__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__le__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__le__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__lt__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__lt__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__mod__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__mod__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__mul__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__mul__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__ne__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__ne__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__neg__()": CMethod(
-                    name="__neg__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__or__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__or__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__pos__()": CMethod(
-                    name="__pos__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__sub__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__sub__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__truediv__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__truediv__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.__xor__(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="__xor__",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Addition(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Addition",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_BitwiseAnd(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_BitwiseAnd",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_BitwiseOr(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_BitwiseOr",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Decrement(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Decrement",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Division(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Division",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Equality(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Equality",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_ExclusiveOr(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_ExclusiveOr",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_False(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_False",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_GreaterThan(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_GreaterThan",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_GreaterThanOrEqual(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_GreaterThanOrEqual",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Increment(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Increment",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Inequality(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Inequality",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_LessThan(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_LessThan",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_LessThanOrEqual(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_LessThanOrEqual",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_LogicalNot(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_LogicalNot",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Modulus(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Modulus",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Multiply(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Multiply",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_OnesComplement(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_OnesComplement",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_Subtraction(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_Subtraction",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_True(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_True",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_UnaryNegation(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_UnaryNegation",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:ClassWithOperatorMethods.op_UnaryPlus(TestLib:ClassWithOperatorMethods)": CMethod(
-                    name="op_UnaryPlus",
-                    declaring_type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="ClassWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-            },
-            events={},
-            nested_types={},
+        basic: CClass = self.basic_class(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            methods={**basic.methods, **self.dunder_methods(declaring_type)},
         )
+        actual: CClass | None = extract_class(_class)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_class_methods_list(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithListMethods")
+    def test_list_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with list methods."""
+        name: str = "ClassListMethods"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithListMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(
+        basic: CClass = self.basic_class(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            interfaces=[
                 CType(name="IEnumerable", namespace="System.Collections"),
-                CType(
-                    name="ICollection",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-                CType(
-                    name="IEnumerable",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-                CType(
-                    name="IList",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-            ),
-            fields={},
-            constructors={
-                "TestLib:ClassWithListMethods.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithListMethods", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={
-                "System.Collections.Generic:ICollection[$T].Count": CProperty(
-                    name="Count",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "System.Collections.Generic:ICollection[$T].IsReadOnly": CProperty(
-                    name="IsReadOnly",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Boolean", namespace="System"),
-                ),
-            },
-            methods={
-                "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
-                    name="Add",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Clear()": CMethod(
-                    name="Clear",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Contains(System:Int32)": CMethod(
-                    name="Contains",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].CopyTo(System:Array[System:Int32], System:Int32)": CMethod(
-                    name="CopyTo",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(
-                            name="array",
-                            type=CType(
-                                name="Array",
-                                namespace="System",
-                                inner=(CType(name="Int32", namespace="System"),),
-                            ),
-                        ),
-                        CParameter(
-                            name="arrayIndex",
-                            type=CType(name="Int32", namespace="System"),
-                        ),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections:IEnumerable.GetEnumerator()": CMethod(
-                    name="GetEnumerator",
-                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="IEnumerator",
-                            namespace="System.Collections.Generic",
-                            inner=(CType(name="Int32", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].IndexOf(System:Int32)": CMethod(
-                    name="IndexOf",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].Insert(System:Int32, System:Int32)": CMethod(
-                    name="Insert",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Remove(System:Int32)": CMethod(
-                    name="Remove",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].RemoveAt(System:Int32)": CMethod(
-                    name="RemoveAt",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].__contains__(System:Int32)": CMethod(
-                    name="__contains__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": CMethod(
-                    name="__delitem__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].__getitem__(System:Int32)": CMethod(
-                    name="__getitem__",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections:IEnumerable.__iter__()": CMethod(
-                    name="__iter__",
-                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="Iterator",
-                            namespace="typing",
-                            inner=(CType(name="Int32", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System.Collections.Generic:ICollection[$T].__len__()": CMethod(
-                    name="__len__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].__setitem__(System:Int32, System:Int32)": CMethod(
-                    name="__setitem__",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
+                replace(COLLECTION, inner=[INT32]),
+                replace(ENUMERABLE, inner=[INT32]),
+                replace(LIST, inner=[INT32]),
+            ],
+            properties=self.list_properties(),
+            methods={**basic.methods, **self.list_methods(INT32)},
         )
+        actual: CClass | None = extract_class(_class)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_class_events(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithEvents")
+    def test_events(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with events."""
+        name: str = "ClassEvents"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithEvents",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={
-                "TestLib:ClassWithEvents.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithEvents", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
+        expected: CClass | None = replace(
+            self.basic_class(declaring_type),
             events={
-                "TestLib:ClassWithEvents.Event": CEvent(
-                    name="Event",
-                    declaring_type=CType(name="ClassWithEvents", namespace=TEST_LIB),
-                    type=CType(name="EventHandler", namespace="System"),
-                ),
-                "TestLib:ClassWithEvents.EventWithArgs": CEvent(
-                    name="EventWithArgs",
-                    declaring_type=CType(name="ClassWithEvents", namespace=TEST_LIB),
-                    type=CType(
-                        name="EventHandler",
-                        namespace="System",
-                        inner=(CType(name="EventArgs", namespace="System"),),
-                    ),
-                ),
+                "A": CEvent(name="A", declaring_type=declaring_type, type=EVENT_HANDLER),
+                "B": CEvent(name="B", declaring_type=declaring_type, type=EVENT_HANDLER_ARGS),
             },
-            nested_types={},
+        )
+        actual: CClass | None = extract_class(_class)
+
+        assert actual == expected
+
+    def test_nested(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a class with events."""
+        name: str = "ClassNested"
+        _class: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CClass | None = replace(
+            self.basic_class(declaring_type),
+            nested_types=self.nested_types(declaring_type),
+        )
+        actual: CClass | None = extract_class(_class)
+
+        assert actual == expected
+
+
+class TestExtractStruct(_Base):
+    """Tests for extract_class() with structs."""
+
+    def test_basic(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a basic struct."""
+        name: str = "StructBasic"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CClass | None = self.basic_struct(declaring_type)
+        actual: CClass | None = extract_class(struct)
+
+        assert actual == expected
+
+    def test_generic(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a generic struct."""
+        name: str = "StructGeneric"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(
+            name=name,
+            namespace=TEST_LIB,
+            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
         )
 
-        self.assertEqual(expected, extracted)
+        expected: CClass | None = self.basic_struct(declaring_type)
+        actual: CClass | None = extract_class(struct)
 
-    def test_extract_class_nested(self) -> None:
-        type_info: TypeInfo = self.get_type("ClassWithNested")
+        assert actual == expected
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CClass = CClass(
-            name="ClassWithNested",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Object", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={
-                "TestLib:ClassWithNested.__init__()": CConstructor(
-                    declaring_type=CType(name="ClassWithNested", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={},
+    def test_interfaces(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with interfaces."""
+        name: str = "StructInterfaces"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        basic: CClass = self.basic_struct(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            interfaces=[replace(COMPARABLE, inner=[OBJECT]), replace(EQUATABLE, inner=[OBJECT])],
             methods={
-                "System:Object.Equals(System:Object)": CMethod(
+                **basic.methods,
+                "CompareTo(System:Object)": CMethod(
+                    name="CompareTo",
+                    declaring_type=COMPARABLE,
+                    parameters=[CParameter(name="other", type=OBJECT)],
+                    return_types=[INT32],
+                ),
+                "Equals(System:Object)": CMethod(
                     name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={
-                "TestLib:ClassWithNested.INestedInterface": CInterface(
-                    name="INestedInterface",
-                    namespace=TEST_LIB,
-                    nested=CType(name="ClassWithNested", namespace=TEST_LIB),
-                    generic_args=(),
-                    interfaces=(),
-                    fields={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "TestLib:ClassWithNested.NestedClass": CClass(
-                    name="NestedClass",
-                    namespace=TEST_LIB,
-                    nested=CType(name="ClassWithNested", namespace=TEST_LIB),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=CType(name="Object", namespace="System"),
-                    interfaces=(),
-                    fields={},
-                    constructors={
-                        "TestLib:ClassWithNested.NestedClass.__init__()": CConstructor(
-                            declaring_type=CType(
-                                name="ClassWithNested.NestedClass",
-                                namespace=TEST_LIB,
-                            ),
-                            parameters=(),
-                        )
-                    },
-                    properties={},
-                    methods={
-                        "System:Object.Equals(System:Object)": CMethod(
-                            name="Equals",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(
-                                CParameter(
-                                    name="obj",
-                                    type=CType(name="Object", namespace="System"),
-                                ),
-                            ),
-                            return_types=(CType(name="Boolean", namespace="System"),),
-                        ),
-                        "System:Object.GetHashCode()": CMethod(
-                            name="GetHashCode",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Int32", namespace="System"),),
-                        ),
-                        "System:Object.GetType()": CMethod(
-                            name="GetType",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Type", namespace="System"),),
-                        ),
-                        "System:Object.ToString()": CMethod(
-                            name="ToString",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="String", namespace="System"),),
-                        ),
-                    },
-                    events={},
-                    nested_types={},
-                ),
-                "TestLib:ClassWithNested.NestedDelegate()": CDelegate(
-                    name="NestedDelegate",
-                    namespace=TEST_LIB,
-                    nested=CType(name="ClassWithNested", namespace=TEST_LIB),
-                    parameters=(),
-                    return_type=CType(name="Void", namespace="System"),
-                ),
-                "TestLib:ClassWithNested.NestedEnum": CEnum(
-                    name="NestedEnum",
-                    namespace=TEST_LIB,
-                    nested=CType(name="ClassWithNested", namespace=TEST_LIB),
-                    fields=(),
-                ),
-                "TestLib:ClassWithNested.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace=TEST_LIB,
-                    nested=CType(name="ClassWithNested", namespace=TEST_LIB),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=CType(name="ValueType", namespace="System"),
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={
-                        "System:Object.Equals(System:Object)": CMethod(
-                            name="Equals",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(
-                                CParameter(
-                                    name="obj",
-                                    type=CType(name="Object", namespace="System"),
-                                ),
-                            ),
-                            return_types=(CType(name="Boolean", namespace="System"),),
-                        ),
-                        "System:Object.GetHashCode()": CMethod(
-                            name="GetHashCode",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Int32", namespace="System"),),
-                        ),
-                        "System:Object.GetType()": CMethod(
-                            name="GetType",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Type", namespace="System"),),
-                        ),
-                        "System:Object.ToString()": CMethod(
-                            name="ToString",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="String", namespace="System"),),
-                        ),
-                    },
-                    events={},
-                    nested_types={},
+                    declaring_type=EQUATABLE,
+                    parameters=[CParameter(name="obj", type=OBJECT)],
+                    return_types=[BOOLEAN],
                 ),
             },
         )
+        actual: CClass | None = extract_class(struct)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
+    def test_fields(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with fields."""
+        name: str = "StructFields"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-class TestCStruct:
-    def test_extract_struct_generic(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithGeneric")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithGeneric",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(CType(name="T", generic=True),),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "TestLib:StructWithGeneric[$T].MethodWithGeneric($T)": CMethod(
-                    name="MethodWithGeneric",
-                    declaring_type=CType(
-                        name="StructWithGeneric",
-                        namespace=TEST_LIB,
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_struct_generic_multi(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithMultiGeneric")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithMultiGeneric",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(
-                CType(name="U", generic=True),
-                CType(name="V", generic=True),
-            ),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_struct_interfaces(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithInterface")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithInterface",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(
-                CType(
-                    name="IEquatable",
-                    namespace="System",
-                    inner=(CType(name="StructWithInterface", namespace=TEST_LIB),),
-                ),
-            ),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:IEquatable[$T].Equals(TestLib:StructWithInterface)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(
-                        name="IEquatable",
-                        namespace="System",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithInterface.Equals(TestLib:StructWithInterface?)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="StructWithInterface",
-                                namespace=TEST_LIB,
-                                nullable=True,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-                "TestLib:StructWithInterface.op_Equality(TestLib:StructWithInterface, TestLib:StructWithInterface)": CMethod(
-                    name="op_Equality",
-                    declaring_type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="left",
-                            type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="right",
-                            type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithInterface.op_Inequality(TestLib:StructWithInterface, TestLib:StructWithInterface)": CMethod(
-                    name="op_Inequality",
-                    declaring_type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="left",
-                            type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="right",
-                            type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithInterface.__eq__(TestLib:StructWithInterface)": CMethod(
-                    name="__eq__",
-                    declaring_type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithInterface.__ne__(TestLib:StructWithInterface)": CMethod(
-                    name="__ne__",
-                    declaring_type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithInterface", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_struct_fields(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithFields")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithFields",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
+        expected: CClass | None = replace(
+            self.basic_struct(declaring_type),
+            constructors={"__init__()": CConstructor(declaring_type=declaring_type)},
             fields={
-                "TestLib:StructWithFields.InstanceFieldA": CField(
-                    name="InstanceFieldA",
-                    declaring_type=CType(name="StructWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:StructWithFields.InstanceFieldB": CField(
-                    name="InstanceFieldB",
-                    declaring_type=CType(name="StructWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:StructWithFields.InstanceFieldC": CField(
-                    name="InstanceFieldC",
-                    declaring_type=CType(name="StructWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:StructWithFields.StaticFieldA": CField(
-                    name="StaticFieldA",
-                    declaring_type=CType(name="StructWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:StructWithFields.StaticFieldB": CField(
-                    name="StaticFieldB",
-                    declaring_type=CType(name="StructWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:StructWithFields.StaticFieldC": CField(
-                    name="StaticFieldC",
-                    declaring_type=CType(name="StructWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
+                "A": CField(name="A", declaring_type=declaring_type, return_type=INT32),
+                "B": CField(name="B", declaring_type=declaring_type, return_type=INT32),
             },
-            constructors={
-                "TestLib:StructWithFields.__init__()": CConstructor(
-                    declaring_type=CType(name="StructWithFields", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(struct)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_struct_constructors(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithConstructors")
+    def test_constructors(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with constructors."""
+        name: str = "StructConstructors"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithConstructors",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
+        expected: CClass | None = replace(
+            self.basic_struct(declaring_type),
             constructors={
-                "TestLib:StructWithConstructors.__init__()": CConstructor(
-                    declaring_type=CType(name="StructWithConstructors", namespace=TEST_LIB),
-                    parameters=(),
-                ),
-                "TestLib:StructWithConstructors.__init__(System:Int32)": CConstructor(
-                    declaring_type=CType(name="StructWithConstructors", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    ),
-                ),
-                "TestLib:StructWithConstructors.__init__(System:Int32, System:Int32)": CConstructor(
-                    declaring_type=CType(name="StructWithConstructors", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    ),
-                ),
-                "TestLib:StructWithConstructors.__init__(System:Int32, System:Int32, System:Int32)": CConstructor(
-                    declaring_type=CType(name="StructWithConstructors", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param2", type=CType(name="Int32", namespace="System")),
-                    ),
+                "__init__()": CConstructor(declaring_type=declaring_type),
+                "__init__(System:Int32, System:Int32)": CConstructor(
+                    declaring_type=declaring_type,
+                    parameters=[
+                        CParameter(name="param0", type=INT32),
+                        CParameter(name="param1", type=INT32),
+                    ],
                 ),
             },
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(struct)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_struct_properties(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithProperties")
+    def test_properties(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with properties."""
+        name: str = "StructProperties"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithProperties",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={},
+        expected: CClass | None = replace(
+            self.basic_struct(declaring_type),
             properties={
-                "TestLib:StructWithProperties.InstanceProperty0": CProperty(
-                    name="InstanceProperty0",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:StructWithProperties.InstanceProperty1": CProperty(
-                    name="InstanceProperty1",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:StructWithProperties.InstanceProperty2": CProperty(
-                    name="InstanceProperty2",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:StructWithProperties.InstanceReadOnlyProperty0": CProperty(
-                    name="InstanceReadOnlyProperty0",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:StructWithProperties.InstanceReadOnlyProperty1": CProperty(
-                    name="InstanceReadOnlyProperty1",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:StructWithProperties.InstanceReadOnlyProperty2": CProperty(
-                    name="InstanceReadOnlyProperty2",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:StructWithProperties.StaticProperty0": CProperty(
-                    name="StaticProperty0",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:StructWithProperties.StaticProperty1": CProperty(
-                    name="StaticProperty1",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:StructWithProperties.StaticProperty2": CProperty(
-                    name="StaticProperty2",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:StructWithProperties.StaticReadOnlyProperty0": CProperty(
-                    name="StaticReadOnlyProperty0",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:StructWithProperties.StaticReadOnlyProperty1": CProperty(
-                    name="StaticReadOnlyProperty1",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:StructWithProperties.StaticReadOnlyProperty2": CProperty(
-                    name="StaticReadOnlyProperty2",
-                    declaring_type=CType(name="StructWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
+                "A": CProperty(name="A", declaring_type=declaring_type, type=INT32),
+                "B": CProperty(name="B", declaring_type=declaring_type, type=INT32, setter=True),
             },
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(struct)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_struct_methods(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithMethods")
+    def test_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with methods."""
+        name: str = "StructMethods"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
+        basic: CClass = self.basic_struct(declaring_type)
+        expected: CClass | None = replace(
+            basic,
             methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
-                    name="InstanceMethodWithDefaultParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System"),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
-                    name="InstanceMethodWithNullableDefaultParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
-                    name="InstanceMethodWithNullableOutParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(
-                                name="Int32",
-                                namespace="System",
-                                reference=True,
-                                nullable=True,
-                            ),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(
-                            name="Int32",
-                            namespace="System",
-                            reference=True,
-                            nullable=True,
-                        ),
-                    ),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
-                    name="InstanceMethodWithNullableParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
-                    name="InstanceMethodWithOutParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", reference=True),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True),
-                    ),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithParams0()": CMethod(
-                    name="InstanceMethodWithParams0",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithParams1(System:Int32)": CMethod(
-                    name="InstanceMethodWithParams1",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:StructWithMethods.InstanceMethodWithParams2(System:Int32, System:Int32)": CMethod(
-                    name="InstanceMethodWithParams2",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithDefaultParam(System:Int32)": CMethod(
-                    name="StaticMethodWithDefaultParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System"),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithNullableDefaultParam(System:Int32?)": CMethod(
-                    name="StaticMethodWithNullableDefaultParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithNullableOutParam(System:*Int32?)": CMethod(
-                    name="StaticMethodWithNullableOutParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(
-                                name="Int32",
-                                namespace="System",
-                                reference=True,
-                                nullable=True,
-                            ),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(
-                            name="Int32",
-                            namespace="System",
-                            reference=True,
-                            nullable=True,
-                        ),
-                    ),
-                    static=True,
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithNullableParam(System:Int32?)": CMethod(
-                    name="StaticMethodWithNullableParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithOutParam(System:*Int32)": CMethod(
-                    name="StaticMethodWithOutParam",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", reference=True),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True),
-                    ),
-                    static=True,
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithParams0()": CMethod(
-                    name="StaticMethodWithParams0",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithParams1(System:Int32)": CMethod(
-                    name="StaticMethodWithParams1",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithMethods.StaticMethodWithParams2(System:Int32, System:Int32)": CMethod(
-                    name="StaticMethodWithParams2",
-                    declaring_type=CType(name="StructWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                    static=True,
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
+                **basic.methods,
+                "A()": CMethod(name="A", declaring_type=declaring_type, return_types=[CType.VOID]),
+                "B()": CMethod(name="B", declaring_type=declaring_type, return_types=[INT32]),
             },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(struct)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_struct_methods_dunder(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithOperatorMethods")
+    def test_dunder_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with dunder methods."""
+        name: str = "StructDunderMethods"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithOperatorMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(
-                            name="obj",
-                            type=CType(name="Object", namespace="System"),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-                "TestLib:StructWithOperatorMethods.op_Addition(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Addition",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_BitwiseAnd(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_BitwiseAnd",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_BitwiseOr(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_BitwiseOr",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Decrement(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Decrement",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Division(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Division",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Equality(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Equality",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_ExclusiveOr(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_ExclusiveOr",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_False(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_False",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_GreaterThan(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_GreaterThan",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_GreaterThanOrEqual(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_GreaterThanOrEqual",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Increment(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Increment",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Inequality(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Inequality",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_LessThan(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_LessThan",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_LessThanOrEqual(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_LessThanOrEqual",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_LogicalNot(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_LogicalNot",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Modulus(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Modulus",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Multiply(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Multiply",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_OnesComplement(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_OnesComplement",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_Subtraction(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_Subtraction",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_True(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_True",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_UnaryNegation(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_UnaryNegation",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.op_UnaryPlus(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="op_UnaryPlus",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:StructWithOperatorMethods.__add__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__add__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__and__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__and__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__eq__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__eq__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithOperatorMethods.__ge__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__ge__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithOperatorMethods.__gt__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__gt__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithOperatorMethods.__invert__()": CMethod(
-                    name="__invert__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__le__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__le__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithOperatorMethods.__lt__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__lt__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithOperatorMethods.__mod__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__mod__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__mul__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__mul__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__ne__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__ne__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:StructWithOperatorMethods.__neg__()": CMethod(
-                    name="__neg__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__or__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__or__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__pos__()": CMethod(
-                    name="__pos__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__sub__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__sub__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__truediv__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__truediv__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:StructWithOperatorMethods.__xor__(TestLib:StructWithOperatorMethods)": CMethod(
-                    name="__xor__",
-                    declaring_type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="StructWithOperatorMethods", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="StructWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-            },
-            events={},
-            nested_types={},
+        basic: CClass = self.basic_struct(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            methods={**basic.methods, **self.dunder_methods(declaring_type)},
         )
+        actual: CClass | None = extract_class(struct)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_struct_methods_list(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithListMethods")
+    def test_list_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with list methods."""
+        name: str = "StructListMethods"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithListMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(
+        basic: CClass = self.basic_struct(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            interfaces=[
                 CType(name="IEnumerable", namespace="System.Collections"),
-                CType(
-                    name="ICollection",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-                CType(
-                    name="IEnumerable",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-                CType(
-                    name="IList",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-            ),
-            fields={},
-            constructors={},
-            properties={
-                "System.Collections.Generic:ICollection[$T].Count": CProperty(
-                    name="Count",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "System.Collections.Generic:ICollection[$T].IsReadOnly": CProperty(
-                    name="IsReadOnly",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Boolean", namespace="System"),
-                ),
-            },
-            methods={
-                "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
-                    name="Add",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Clear()": CMethod(
-                    name="Clear",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Contains(System:Int32)": CMethod(
-                    name="Contains",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].CopyTo(System:Array[System:Int32], System:Int32)": CMethod(
-                    name="CopyTo",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(
-                            name="array",
-                            type=CType(
-                                name="Array",
-                                namespace="System",
-                                inner=(CType(name="Int32", namespace="System"),),
-                            ),
-                        ),
-                        CParameter(
-                            name="arrayIndex",
-                            type=CType(name="Int32", namespace="System"),
-                        ),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections:IEnumerable.GetEnumerator()": CMethod(
-                    name="GetEnumerator",
-                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="IEnumerator",
-                            namespace="System.Collections.Generic",
-                            inner=(CType(name="Int32", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].IndexOf(System:Int32)": CMethod(
-                    name="IndexOf",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].Insert(System:Int32, System:Int32)": CMethod(
-                    name="Insert",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Remove(System:Int32)": CMethod(
-                    name="Remove",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].RemoveAt(System:Int32)": CMethod(
-                    name="RemoveAt",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].__contains__(System:Int32)": CMethod(
-                    name="__contains__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": CMethod(
-                    name="__delitem__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].__getitem__(System:Int32)": CMethod(
-                    name="__getitem__",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections:IEnumerable.__iter__()": CMethod(
-                    name="__iter__",
-                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="Iterator",
-                            namespace="typing",
-                            inner=(CType(name="Int32", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System.Collections.Generic:ICollection[$T].__len__()": CMethod(
-                    name="__len__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].__setitem__(System:Int32, System:Int32)": CMethod(
-                    name="__setitem__",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
+                replace(COLLECTION, inner=[INT32]),
+                replace(ENUMERABLE, inner=[INT32]),
+                replace(LIST, inner=[INT32]),
+            ],
+            properties=self.list_properties(),
+            methods={**basic.methods, **self.list_methods(INT32)},
         )
+        actual: CClass | None = extract_class(struct)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_struct_events(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithEvents")
+    def test_events(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with events."""
+        name: str = "StructEvents"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithEvents",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
+        expected: CClass | None = replace(
+            self.basic_struct(declaring_type),
             events={
-                "TestLib:StructWithEvents.Event": CEvent(
-                    name="Event",
-                    declaring_type=CType(name="StructWithEvents", namespace=TEST_LIB),
-                    type=CType(name="EventHandler", namespace="System"),
-                ),
-                "TestLib:StructWithEvents.EventWithArgs": CEvent(
-                    name="EventWithArgs",
-                    declaring_type=CType(name="StructWithEvents", namespace=TEST_LIB),
-                    type=CType(
-                        name="EventHandler",
-                        namespace="System",
-                        inner=(CType(name="EventArgs", namespace="System"),),
-                    ),
-                ),
+                "A": CEvent(name="A", declaring_type=declaring_type, type=EVENT_HANDLER),
+                "B": CEvent(name="B", declaring_type=declaring_type, type=EVENT_HANDLER_ARGS),
             },
-            nested_types={},
+        )
+        actual: CClass | None = extract_class(struct)
+
+        assert actual == expected
+
+    def test_nested(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a struct with events."""
+        name: str = "StructNested"
+        struct: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CClass | None = replace(
+            self.basic_struct(declaring_type),
+            nested_types=self.nested_types(declaring_type),
+        )
+        actual: CClass | None = extract_class(struct)
+
+        assert actual == expected
+
+
+class TestExtractRecord(_Base):
+    """Tests for extract_class() with records."""
+
+    def test_basic(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a basic record."""
+        name: str = "RecordBasic"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CClass | None = self.basic_record(declaring_type)
+        actual: CClass | None = extract_class(record)
+
+        assert actual == expected
+
+    def test_generic(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a generic record."""
+        name: str = "RecordGeneric"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(
+            name=name,
+            namespace=TEST_LIB,
+            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
         )
 
-        self.assertEqual(expected, extracted)
+        expected: CClass | None = self.basic_record(declaring_type)
+        actual: CClass | None = extract_class(record)
 
-    def test_extract_struct_nested(self) -> None:
-        type_info: TypeInfo = self.get_type("StructWithNested")
+        assert actual == expected
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CStruct = CStruct(
-            name="StructWithNested",
-            namespace=TEST_LIB,
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="ValueType", namespace="System"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
+    def test_interfaces(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with interfaces."""
+        name: str = "RecordInterfaces"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        basic: CClass = self.basic_record(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            interfaces=[
+                replace(COMPARABLE, inner=[OBJECT]),
+                *basic.interfaces,
+            ],
             methods={
-                "System:Object.Equals(System:Object)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(
-                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System:Object.GetHashCode()": CMethod(
-                    name="GetHashCode",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System:Object.GetType()": CMethod(
-                    name="GetType",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="Type", namespace="System"),),
-                ),
-                "System:Object.ToString()": CMethod(
-                    name="ToString",
-                    declaring_type=CType(name="Object", namespace="System"),
-                    parameters=(),
-                    return_types=(CType(name="String", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={
-                "TestLib:StructWithNested.INestedInterface": CInterface(
-                    name="INestedInterface",
-                    namespace=TEST_LIB,
-                    nested=CType(name="StructWithNested", namespace=TEST_LIB),
-                    generic_args=(),
-                    interfaces=(),
-                    fields={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "TestLib:StructWithNested.NestedClass": CClass(
-                    name="NestedClass",
-                    namespace=TEST_LIB,
-                    nested=CType(name="StructWithNested", namespace=TEST_LIB),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=CType(name="Object", namespace="System"),
-                    interfaces=(),
-                    fields={},
-                    constructors={
-                        "TestLib:StructWithNested.NestedClass.__init__()": CConstructor(
-                            declaring_type=CType(
-                                name="StructWithNested.NestedClass",
-                                namespace=TEST_LIB,
-                            ),
-                            parameters=(),
-                        )
-                    },
-                    properties={},
-                    methods={
-                        "System:Object.Equals(System:Object)": CMethod(
-                            name="Equals",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(
-                                CParameter(
-                                    name="obj",
-                                    type=CType(name="Object", namespace="System"),
-                                ),
-                            ),
-                            return_types=(CType(name="Boolean", namespace="System"),),
-                        ),
-                        "System:Object.GetHashCode()": CMethod(
-                            name="GetHashCode",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Int32", namespace="System"),),
-                        ),
-                        "System:Object.GetType()": CMethod(
-                            name="GetType",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Type", namespace="System"),),
-                        ),
-                        "System:Object.ToString()": CMethod(
-                            name="ToString",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="String", namespace="System"),),
-                        ),
-                    },
-                    events={},
-                    nested_types={},
-                ),
-                "TestLib:StructWithNested.NestedDelegate()": CDelegate(
-                    name="NestedDelegate",
-                    namespace=TEST_LIB,
-                    nested=CType(name="StructWithNested", namespace=TEST_LIB),
-                    parameters=(),
-                    return_type=CType(name="Void", namespace="System"),
-                ),
-                "TestLib:StructWithNested.NestedEnum": CEnum(
-                    name="NestedEnum",
-                    namespace=TEST_LIB,
-                    nested=CType(name="StructWithNested", namespace=TEST_LIB),
-                    fields=(),
-                ),
-                "TestLib:StructWithNested.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace=TEST_LIB,
-                    nested=CType(name="StructWithNested", namespace=TEST_LIB),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=CType(name="ValueType", namespace="System"),
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={
-                        "System:Object.Equals(System:Object)": CMethod(
-                            name="Equals",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(
-                                CParameter(
-                                    name="obj",
-                                    type=CType(name="Object", namespace="System"),
-                                ),
-                            ),
-                            return_types=(CType(name="Boolean", namespace="System"),),
-                        ),
-                        "System:Object.GetHashCode()": CMethod(
-                            name="GetHashCode",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Int32", namespace="System"),),
-                        ),
-                        "System:Object.GetType()": CMethod(
-                            name="GetType",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Type", namespace="System"),),
-                        ),
-                        "System:Object.ToString()": CMethod(
-                            name="ToString",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="String", namespace="System"),),
-                        ),
-                    },
-                    events={},
-                    nested_types={},
+                **basic.methods,
+                "CompareTo(System:Object)": CMethod(
+                    name="CompareTo",
+                    declaring_type=COMPARABLE,
+                    parameters=[CParameter(name="other", type=OBJECT)],
+                    return_types=[INT32],
                 ),
             },
         )
+        actual: CClass | None = extract_class(record)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
+    def test_fields(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with fields."""
+        name: str = "RecordFields"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-class TestCInterface:
-    def test_extract_interface_generic(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithGeneric")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithGeneric",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(CType(name="T", generic=True),),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={
-                "TestLib:IInterfaceWithGeneric[$T].MethodWithGeneric($T)": CMethod(
-                    name="MethodWithGeneric",
-                    declaring_type=CType(
-                        name="IInterfaceWithGeneric",
-                        namespace=TEST_LIB,
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_interface_generic_multi(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithMultiGeneric")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithMultiGeneric",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(
-                CType(name="U", generic=True),
-                CType(name="V", generic=True),
-            ),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_interface_interfaces(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithInterface")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithInterface",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(
-                CType(
-                    name="IEquatable",
-                    namespace="System",
-                    inner=(CType(name="IInterfaceWithInterface", namespace=TEST_LIB),),
-                ),
-            ),
-            fields={},
-            properties={},
-            methods={
-                "System:IEquatable[$T].Equals(TestLib:IInterfaceWithInterface)": CMethod(
-                    name="Equals",
-                    declaring_type=CType(
-                        name="IEquatable",
-                        namespace="System",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(name="IInterfaceWithInterface", namespace=TEST_LIB),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-
-        self.assertEqual(expected, extracted)
-
-    def test_extract_interface_fields(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithFields")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithFields",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(),
+        expected: CClass | None = replace(
+            self.basic_record(declaring_type),
             fields={
-                "TestLib:IInterfaceWithFields.StaticFieldA": CField(
-                    name="StaticFieldA",
-                    declaring_type=CType(name="IInterfaceWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithFields.StaticFieldB": CField(
-                    name="StaticFieldB",
-                    declaring_type=CType(name="IInterfaceWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithFields.StaticFieldC": CField(
-                    name="StaticFieldC",
-                    declaring_type=CType(name="IInterfaceWithFields", namespace=TEST_LIB),
-                    return_type=CType(name="Int32", namespace="System"),
-                    static=True,
+                "A": CField(name="A", declaring_type=declaring_type, return_type=INT32),
+                "B": CField(name="B", declaring_type=declaring_type, return_type=INT32),
+            },
+        )
+        actual: CClass | None = extract_class(record)
+
+        assert actual == expected
+
+    def test_constructors(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with constructors."""
+        name: str = "RecordConstructors"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        basic: CClass = self.basic_record(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            constructors={
+                **basic.constructors,
+                "__init__(System:Int32, System:Int32)": CConstructor(
+                    declaring_type=declaring_type,
+                    parameters=[
+                        CParameter(name="param0", type=INT32),
+                        CParameter(name="param1", type=INT32),
+                    ],
                 ),
             },
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(record)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_interface_properties(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithProperties")
+    def test_properties(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with properties."""
+        name: str = "RecordProperties"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithProperties",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
+        expected: CClass | None = replace(
+            self.basic_record(declaring_type),
             properties={
-                "TestLib:IInterfaceWithProperties.InstanceProperty0": CProperty(
-                    name="InstanceProperty0",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:IInterfaceWithProperties.InstanceProperty1": CProperty(
-                    name="InstanceProperty1",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:IInterfaceWithProperties.InstanceProperty2": CProperty(
-                    name="InstanceProperty2",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
-                "TestLib:IInterfaceWithProperties.InstanceReadOnlyProperty0": CProperty(
-                    name="InstanceReadOnlyProperty0",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:IInterfaceWithProperties.InstanceReadOnlyProperty1": CProperty(
-                    name="InstanceReadOnlyProperty1",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:IInterfaceWithProperties.InstanceReadOnlyProperty2": CProperty(
-                    name="InstanceReadOnlyProperty2",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "TestLib:IInterfaceWithProperties.StaticProperty0": CProperty(
-                    name="StaticProperty0",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithProperties.StaticProperty1": CProperty(
-                    name="StaticProperty1",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithProperties.StaticProperty2": CProperty(
-                    name="StaticProperty2",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithProperties.StaticReadOnlyProperty0": CProperty(
-                    name="StaticReadOnlyProperty0",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithProperties.StaticReadOnlyProperty1": CProperty(
-                    name="StaticReadOnlyProperty1",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithProperties.StaticReadOnlyProperty2": CProperty(
-                    name="StaticReadOnlyProperty2",
-                    declaring_type=CType(name="IInterfaceWithProperties", namespace=TEST_LIB),
-                    type=CType(name="Int32", namespace="System"),
-                    static=True,
-                ),
+                "A": CProperty(name="A", declaring_type=declaring_type, type=INT32),
+                "B": CProperty(name="B", declaring_type=declaring_type, type=INT32, setter=True),
             },
-            methods={},
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(record)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_interface_methods(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithMethods")
+    def test_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with methods."""
+        name: str = "RecordMethods"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
+        basic: CClass = self.basic_record(declaring_type)
+        expected: CClass | None = replace(
+            basic,
             methods={
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
-                    name="InstanceMethodWithDefaultParam",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System"),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
-                    name="InstanceMethodWithNullableDefaultParam",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(
-                                name="Int32",
-                                namespace="System",
-                                nullable=True,
-                            ),
-                            default=True,
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
-                    name="InstanceMethodWithNullableOutParam",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(
-                                name="Int32",
-                                namespace="System",
-                                reference=True,
-                                nullable=True,
-                            ),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(
-                            name="Int32",
-                            namespace="System",
-                            reference=True,
-                            nullable=True,
-                        ),
-                    ),
-                ),
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
-                    name="InstanceMethodWithNullableParam",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", nullable=True),
-                        ),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
-                    name="InstanceMethodWithOutParam",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="param0",
-                            type=CType(name="Int32", namespace="System", reference=True),
-                            out=True,
-                        ),
-                    ),
-                    return_types=(
-                        CType(name="Int32", namespace="System"),
-                        CType(name="Int32", namespace="System", reference=True),
-                    ),
-                ),
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithParams()": CMethod(
-                    name="InstanceMethodWithParams",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithParams(System:Int32)": CMethod(
-                    name="InstanceMethodWithParams",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithMethods.InstanceMethodWithParams(System:Int32, System:Int32)": CMethod(
-                    name="InstanceMethodWithParams",
-                    declaring_type=CType(name="IInterfaceWithMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
+                **basic.methods,
+                "A()": CMethod(name="A", declaring_type=declaring_type, return_types=[CType.VOID]),
+                "B()": CMethod(name="B", declaring_type=declaring_type, return_types=[INT32]),
             },
-            events={},
-            nested_types={},
         )
+        actual: CClass | None = extract_class(record)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_interface_methods_dunder(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithOperatorMethods")
+    def test_dunder_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with dunder methods."""
+        name: str = "RecordDunderMethods"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithOperatorMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={
-                "TestLib:IInterfaceWithOperatorMethods.op_Addition(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_Addition",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_BitwiseAnd(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_BitwiseAnd",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_BitwiseOr(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_BitwiseOr",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_Decrement(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_Decrement",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_Division(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_Division",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_ExclusiveOr(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_ExclusiveOr",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_False(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_False",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_GreaterThan(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_GreaterThan",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_GreaterThanOrEqual(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_GreaterThanOrEqual",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_Increment(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_Increment",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_LessThan(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_LessThan",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_LessThanOrEqual(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_LessThanOrEqual",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_LogicalNot(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_LogicalNot",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_Modulus(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_Modulus",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_Multiply(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_Multiply",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_OnesComplement(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_OnesComplement",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_Subtraction(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_Subtraction",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_True(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_True",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_UnaryNegation(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_UnaryNegation",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.op_UnaryPlus(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="op_UnaryPlus",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="self",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                    static=True,
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__add__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__add__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__and__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__and__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__ge__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__ge__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__gt__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__gt__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__invert__()": CMethod(
-                    name="__invert__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__le__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__le__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__lt__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__lt__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__mod__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__mod__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__mul__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__mul__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__neg__()": CMethod(
-                    name="__neg__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__or__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__or__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__pos__()": CMethod(
-                    name="__pos__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__sub__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__sub__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__truediv__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__truediv__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-                "TestLib:IInterfaceWithOperatorMethods.__xor__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
-                    name="__xor__",
-                    declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),
-                    parameters=(
-                        CParameter(
-                            name="other",
-                            type=CType(
-                                name="IInterfaceWithOperatorMethods",
-                                namespace=TEST_LIB,
-                            ),
-                        ),
-                    ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace=TEST_LIB),),
-                ),
-            },
-            events={},
-            nested_types={},
+        basic: CClass = self.basic_record(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            methods={**basic.methods, **self.dunder_methods(declaring_type)},
         )
+        actual: CClass | None = extract_class(record)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_interface_methods_list(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithListMethods")
+    def test_list_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with list methods."""
+        name: str = "RecordListMethods"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithListMethods",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(
+        basic: CClass = self.basic_record(declaring_type)
+        expected: CClass | None = replace(
+            basic,
+            interfaces=[
+                *basic.interfaces,
                 CType(name="IEnumerable", namespace="System.Collections"),
-                CType(
-                    name="ICollection",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-                CType(
-                    name="IEnumerable",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-                CType(
-                    name="IList",
-                    namespace="System.Collections.Generic",
-                    inner=(CType(name="Int32", namespace="System"),),
-                ),
-            ),
-            fields={},
-            properties={
-                "System.Collections.Generic:ICollection[$T].Count": CProperty(
-                    name="Count",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Int32", namespace="System"),
-                ),
-                "System.Collections.Generic:ICollection[$T].IsReadOnly": CProperty(
-                    name="IsReadOnly",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Boolean", namespace="System"),
-                ),
-            },
-            methods={
-                "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
-                    name="Add",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Clear()": CMethod(
-                    name="Clear",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Contains(System:Int32)": CMethod(
-                    name="Contains",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].CopyTo(System:Array[System:Int32], System:Int32)": CMethod(
-                    name="CopyTo",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(
-                            name="array",
-                            type=CType(
-                                name="Array",
-                                namespace="System",
-                                inner=(CType(name="Int32", namespace="System"),),
-                            ),
-                        ),
-                        CParameter(
-                            name="arrayIndex",
-                            type=CType(name="Int32", namespace="System"),
-                        ),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections:IEnumerable.GetEnumerator()": CMethod(
-                    name="GetEnumerator",
-                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="IEnumerator",
-                            namespace="System.Collections.Generic",
-                            inner=(CType(name="Int32", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System.Collections.Generic:IList[$T].IndexOf(System:Int32)": CMethod(
-                    name="IndexOf",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].Insert(System:Int32, System:Int32)": CMethod(
-                    name="Insert",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].Remove(System:Int32)": CMethod(
-                    name="Remove",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].RemoveAt(System:Int32)": CMethod(
-                    name="RemoveAt",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].__contains__(System:Int32)": CMethod(
-                    name="__contains__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": CMethod(
-                    name="__delitem__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Boolean", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].__getitem__(System:Int32)": CMethod(
-                    name="__getitem__",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections:IEnumerable.__iter__()": CMethod(
-                    name="__iter__",
-                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="Iterator",
-                            namespace="typing",
-                            inner=(CType(name="Int32", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System.Collections.Generic:ICollection[$T].__len__()": CMethod(
-                    name="__len__",
-                    declaring_type=CType(
-                        name="ICollection",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(),
-                    return_types=(CType(name="Int32", namespace="System"),),
-                ),
-                "System.Collections.Generic:IList[$T].__setitem__(System:Int32, System:Int32)": CMethod(
-                    name="__setitem__",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    parameters=(
-                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
-                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
-                    ),
-                    return_types=(CType(name="Void", namespace="System"),),
-                ),
-            },
-            events={},
-            nested_types={},
+                replace(COLLECTION, inner=[INT32]),
+                replace(ENUMERABLE, inner=[INT32]),
+                replace(LIST, inner=[INT32]),
+            ],
+            properties=self.list_properties(),
+            methods={**basic.methods, **self.list_methods(INT32)},
         )
+        actual: CClass | None = extract_class(record)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_interface_events(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithEvents")
+    def test_events(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with events."""
+        name: str = "RecordEvents"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithEvents",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
+        expected: CClass | None = replace(
+            self.basic_record(declaring_type),
             events={
-                "TestLib:IInterfaceWithEvents.Event": CEvent(
-                    name="Event",
-                    declaring_type=CType(name="IInterfaceWithEvents", namespace=TEST_LIB),
-                    type=CType(name="EventHandler", namespace="System"),
+                "A": CEvent(name="A", declaring_type=declaring_type, type=EVENT_HANDLER),
+                "B": CEvent(name="B", declaring_type=declaring_type, type=EVENT_HANDLER_ARGS),
+            },
+        )
+        actual: CClass | None = extract_class(record)
+
+        assert actual == expected
+
+    def test_nested(self, assembly: Assembly) -> None:
+        """Tests for extract_class() with a record with events."""
+        name: str = "RecordNested"
+        record: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CClass | None = replace(
+            self.basic_record(declaring_type),
+            nested_types=self.nested_types(declaring_type),
+        )
+        actual: CClass | None = extract_class(record)
+
+        assert actual == expected
+
+
+class TestExtractInterface(_Base):
+    """Tests for extract_interface() with structs."""
+
+    def test_basic(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with a basic interface."""
+        name: str = "IBasic"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CInterface | None = self.basic_interface(declaring_type)
+        actual: CInterface | None = extract_interface(interface)
+
+        assert actual == expected
+
+    def test_generic(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with a generic record."""
+        name: str = "IGeneric"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(
+            name=name,
+            namespace=TEST_LIB,
+            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+        )
+
+        expected: CInterface | None = self.basic_interface(declaring_type)
+        actual: CInterface | None = extract_interface(interface)
+
+        assert actual == expected
+
+    def test_interfaces(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with interfaces."""
+        name: str = "IInterfaces"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        basic: CInterface = self.basic_interface(declaring_type)
+        expected: CInterface | None = replace(
+            basic,
+            interfaces=[replace(COMPARABLE, inner=[OBJECT]), replace(EQUATABLE, inner=[OBJECT])],
+            methods={
+                **basic.methods,
+                "CompareTo(System:Object)": CMethod(
+                    name="CompareTo",
+                    declaring_type=COMPARABLE,
+                    parameters=[CParameter(name="other", type=OBJECT)],
+                    return_types=[INT32],
                 ),
-                "TestLib:IInterfaceWithEvents.EventWithArgs": CEvent(
-                    name="EventWithArgs",
-                    declaring_type=CType(name="IInterfaceWithEvents", namespace=TEST_LIB),
-                    type=CType(
-                        name="EventHandler",
-                        namespace="System",
-                        inner=(CType(name="EventArgs", namespace="System"),),
+                "Equals(System:Object)": replace(
+                    CMethod(
+                        name="Equals",
+                        declaring_type=EQUATABLE,
+                        parameters=[CParameter(name="other", type=OBJECT)],
+                        return_types=[BOOLEAN],
                     ),
                 ),
             },
-            nested_types={},
         )
+        actual: CInterface | None = extract_interface(interface)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_interface_nested(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithNested")
+    def test_fields(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with fields."""
+        name: str = "IFields"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CInterface = CInterface(
-            name="IInterfaceWithNested",
-            namespace=TEST_LIB,
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={
-                "TestLib:IInterfaceWithNested.INestedInterface": CInterface(
-                    name="INestedInterface",
-                    namespace=TEST_LIB,
-                    nested=CType(name="IInterfaceWithNested", namespace=TEST_LIB),
-                    generic_args=(),
-                    interfaces=(),
-                    fields={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
+        expected: CInterface | None = replace(
+            self.basic_interface(declaring_type),
+            fields={
+                "A": CField(
+                    name="A",
+                    declaring_type=declaring_type,
+                    return_type=INT32,
+                    static=True,
                 ),
-                "TestLib:IInterfaceWithNested.NestedClass": CClass(
-                    name="NestedClass",
-                    namespace=TEST_LIB,
-                    nested=CType(name="IInterfaceWithNested", namespace=TEST_LIB),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=CType(name="Object", namespace="System"),
-                    interfaces=(),
-                    fields={},
-                    constructors={
-                        "TestLib:IInterfaceWithNested.NestedClass.__init__()": CConstructor(
-                            declaring_type=CType(
-                                name="IInterfaceWithNested.NestedClass",
-                                namespace=TEST_LIB,
-                            ),
-                            parameters=(),
-                        ),
-                    },
-                    properties={},
-                    methods={
-                        "System:Object.Equals(System:Object)": CMethod(
-                            name="Equals",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(
-                                CParameter(
-                                    name="obj",
-                                    type=CType(name="Object", namespace="System"),
-                                ),
-                            ),
-                            return_types=(CType(name="Boolean", namespace="System"),),
-                        ),
-                        "System:Object.GetHashCode()": CMethod(
-                            name="GetHashCode",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Int32", namespace="System"),),
-                        ),
-                        "System:Object.GetType()": CMethod(
-                            name="GetType",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Type", namespace="System"),),
-                        ),
-                        "System:Object.ToString()": CMethod(
-                            name="ToString",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="String", namespace="System"),),
-                        ),
-                    },
-                    events={},
-                    nested_types={},
-                ),
-                "TestLib:IInterfaceWithNested.NestedDelegate()": CDelegate(
-                    name="NestedDelegate",
-                    namespace=TEST_LIB,
-                    nested=CType(name="IInterfaceWithNested", namespace=TEST_LIB),
-                    parameters=(),
-                    return_type=CType(name="Void", namespace="System"),
-                ),
-                "TestLib:IInterfaceWithNested.NestedEnum": CEnum(
-                    name="NestedEnum",
-                    namespace=TEST_LIB,
-                    nested=CType(name="IInterfaceWithNested", namespace=TEST_LIB),
-                    fields=(),
-                ),
-                "TestLib:IInterfaceWithNested.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace=TEST_LIB,
-                    nested=CType(name="IInterfaceWithNested", namespace=TEST_LIB),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=CType(name="ValueType", namespace="System"),
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={
-                        "System:Object.Equals(System:Object)": CMethod(
-                            name="Equals",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(
-                                CParameter(
-                                    name="obj",
-                                    type=CType(name="Object", namespace="System"),
-                                ),
-                            ),
-                            return_types=(CType(name="Boolean", namespace="System"),),
-                        ),
-                        "System:Object.GetHashCode()": CMethod(
-                            name="GetHashCode",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Int32", namespace="System"),),
-                        ),
-                        "System:Object.GetType()": CMethod(
-                            name="GetType",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="Type", namespace="System"),),
-                        ),
-                        "System:Object.ToString()": CMethod(
-                            name="ToString",
-                            declaring_type=CType(name="Object", namespace="System"),
-                            parameters=(),
-                            return_types=(CType(name="String", namespace="System"),),
-                        ),
-                    },
-                    events={},
-                    nested_types={},
+                "B": CField(
+                    name="B",
+                    declaring_type=declaring_type,
+                    return_type=INT32,
+                    static=True,
                 ),
             },
         )
+        actual: CInterface | None = extract_interface(interface)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
+    def test_properties(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with properties."""
+        name: str = "IProperties"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-class TestCEnum:
-    def test_extract_enum(self) -> None:
-        type_info: TypeInfo = self.get_type("EnumWithFields")
-
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CEnum = CEnum(
-            name="EnumWithFields",
-            namespace=TEST_LIB,
-            nested=None,
-            fields=("Field0", "Field1", "Field2", "Field3"),
+        expected: CInterface | None = replace(
+            self.basic_interface(declaring_type),
+            properties={
+                "A": CProperty(name="A", declaring_type=declaring_type, type=INT32),
+                "B": CProperty(name="B", declaring_type=declaring_type, type=INT32, setter=True),
+            },
         )
+        actual: CInterface | None = extract_interface(interface)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_enum_no_fields(self) -> None:
-        type_info: TypeInfo = self.get_type("EnumWithNoFields")
+    def test_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with methods."""
+        name: str = "IMethods"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CEnum = CEnum(
-            name="EnumWithNoFields",
-            namespace=TEST_LIB,
-            nested=None,
-            fields=(),
+        basic: CInterface = self.basic_interface(declaring_type)
+        expected: CInterface | None = replace(
+            basic,
+            methods={
+                **basic.methods,
+                "A()": CMethod(name="A", declaring_type=declaring_type, return_types=[CType.VOID]),
+                "B()": CMethod(name="B", declaring_type=declaring_type, return_types=[INT32]),
+            },
         )
+        actual: CInterface | None = extract_interface(interface)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
+    def test_dunder_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with dunder methods."""
+        name: str = "IDunderMethods"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-class TestCDelegate:
-    def test_extract_delegate_no_params_no_return(self) -> None:
-        type_info: TypeInfo = self.get_type("DelegateWithNoParametersNoReturn")
+        basic: CInterface = self.basic_interface(declaring_type)
+        methods: dict[str, CMethod] = {**basic.methods, **self.dunder_methods(declaring_type)}
+        del methods[f"op_Equality({declaring_type.full_name}, {declaring_type.full_name})"]
+        del methods[f"op_Inequality({declaring_type.full_name}, {declaring_type.full_name})"]
+        del methods[f"__eq__({declaring_type.full_name})"]
+        del methods[f"__ne__({declaring_type.full_name})"]
+        expected: CInterface | None = replace(basic, methods=methods)
+        actual: CInterface | None = extract_interface(interface)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CDelegate = CDelegate(
-            name="DelegateWithNoParametersNoReturn",
-            namespace=TEST_LIB,
-            nested=None,
-            parameters=(),
-            return_type=CType(name="Void", namespace="System"),
+        assert actual == expected
+
+    def test_list_methods(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with list methods."""
+        name: str = "IListMethods"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        basic: CInterface = self.basic_interface(declaring_type)
+        expected: CInterface | None = replace(
+            basic,
+            interfaces=[
+                CType(name="IEnumerable", namespace="System.Collections"),
+                replace(COLLECTION, inner=[INT32]),
+                replace(ENUMERABLE, inner=[INT32]),
+                replace(LIST, inner=[INT32]),
+            ],
+            properties=self.list_properties(),
+            methods={**basic.methods, **self.list_methods(INT32)},
         )
+        actual: CInterface | None = extract_interface(interface)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_delegate_no_params_return(self) -> None:
-        type_info: TypeInfo = self.get_type("DelegateWithNoParametersReturn")
+    def test_events(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with events."""
+        name: str = "IEvents"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CDelegate = CDelegate(
-            name="DelegateWithNoParametersReturn",
-            namespace=TEST_LIB,
-            nested=None,
-            parameters=(),
-            return_type=CType(name="Int32", namespace="System"),
+        expected: CInterface | None = replace(
+            self.basic_interface(declaring_type),
+            events={
+                "A": CEvent(name="A", declaring_type=declaring_type, type=EVENT_HANDLER),
+                "B": CEvent(name="B", declaring_type=declaring_type, type=EVENT_HANDLER_ARGS),
+            },
         )
+        actual: CInterface | None = extract_interface(interface)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_delegate_params_no_return(self) -> None:
-        type_info: TypeInfo = self.get_type("DelegateWithParametersNoReturn")
+    def test_nested(self, assembly: Assembly) -> None:
+        """Tests for extract_interface() with an interface with events."""
+        name: str = "INested"
+        interface: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CDelegate = CDelegate(
-            name="DelegateWithParametersNoReturn",
-            namespace=TEST_LIB,
-            nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-            ),
-            return_type=CType(name="Void", namespace="System"),
+        expected: CInterface | None = replace(
+            self.basic_interface(declaring_type),
+            nested_types=self.nested_types(declaring_type),
         )
+        actual: CInterface | None = extract_interface(interface)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
 
-    def test_extract_delegate_params_return(self) -> None:
-        type_info: TypeInfo = self.get_type("DelegateWithParametersReturn")
 
-        extracted: CTypeDefinition = extract_type_def(type_info)
-        expected: CDelegate = CDelegate(
-            name="DelegateWithParametersReturn",
-            namespace=TEST_LIB,
-            nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="Int32", namespace="System")),
-                CParameter(name="param1", type=CType(name="Int32", namespace="System")),
-            ),
-            return_type=CType(name="Int32", namespace="System"),
+class TestExtractEnum(_Base):
+    """Tests for extract_enum()."""
+
+    def test_basic(self, assembly: Assembly) -> None:
+        """Tests for extract_enum() with a basic enum."""
+        name: str = "EnumBasic"
+        enum: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CEnum | None = self.basic_enum(declaring_type)
+        actual: CEnum | None = extract_enum(enum)
+
+        assert actual == expected
+
+    def test_fields(self, assembly: Assembly) -> None:
+        """Tests for extract_enum() with an enum with fields."""
+        name: str = "EnumFields"
+        enum: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CEnum | None = replace(
+            self.basic_enum(declaring_type),
+            fields=["Field0", "Field1", "Field2", "Field3"],
         )
+        actual: CEnum | None = extract_enum(enum)
 
-        self.assertEqual(expected, extracted)
+        assert actual == expected
+
+
+class TestExtractDelegate(_Base):
+    """Tests for extract_delegate()."""
+
+    def test_basic(self, assembly: Assembly) -> None:
+        """Tests for extract_delegate() with a basic delegate."""
+        name: str = "DelegateBasic"
+        delegate: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CDelegate | None = self.basic_delegate(declaring_type)
+        actual: CDelegate | None = extract_delegate(delegate)
+
+        assert actual == expected
+
+    def test_parameters(self, assembly: Assembly) -> None:
+        """Tests for extract_delegate() with a delegate with parameters."""
+        name: str = "DelegateParameters"
+        delegate: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CDelegate | None = replace(
+            self.basic_delegate(declaring_type),
+            parameters=[
+                CParameter(name="param0", type=INT32),
+                CParameter(name="param1", type=INT32),
+            ],
+        )
+        actual: CDelegate | None = extract_delegate(delegate)
+
+        assert actual == expected
+
+    def test_return(self, assembly: Assembly) -> None:
+        """Tests for extract_delegate() with a delegate with a return."""
+        name: str = "DelegateReturn"
+        delegate: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CDelegate | None = replace(
+            self.basic_delegate(declaring_type),
+            return_type=INT32,
+        )
+        actual: CDelegate | None = extract_delegate(delegate)
+
+        assert actual == expected
 
 
 class TestExtractAssembly:

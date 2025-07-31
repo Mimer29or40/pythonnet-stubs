@@ -10,6 +10,7 @@ from collections import defaultdict
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
+from dataclasses import replace
 from pathlib import Path
 from typing import TYPE_CHECKING
 from typing import override
@@ -18,15 +19,8 @@ import clr
 from System import Delegate
 from System import MulticastDelegate
 from System import Nullable
-from System.Reflection import Assembly
-from System.Reflection import AssemblyName
+from System import TypeLoadException
 from System.Reflection import BindingFlags
-from System.Reflection import ConstructorInfo
-from System.Reflection import EventInfo
-from System.Reflection import FieldInfo
-from System.Reflection import MethodInfo
-from System.Reflection import ParameterInfo
-from System.Reflection import PropertyInfo
 from System.Reflection import TypeInfo
 
 from stubgen.command import CommandArguments
@@ -34,6 +28,7 @@ from stubgen.defaults import ASSEMBLIES
 from stubgen.defaults import BUILT_INS
 from stubgen.defaults import CORE
 from stubgen.log import get_logger
+from stubgen.model import CAssembly
 from stubgen.model import CClass
 from stubgen.model import CConstructor
 from stubgen.model import CDelegate
@@ -45,7 +40,6 @@ from stubgen.model import CMethod
 from stubgen.model import CNamespace
 from stubgen.model import CParameter
 from stubgen.model import CProperty
-from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
 from stubgen.util import _is_valid_python_name
@@ -57,20 +51,30 @@ if TYPE_CHECKING:  # pragma: no cover
     # noinspection PyProtectedMember
     from argparse import _SubParsersAction
     from collections.abc import Callable
-    from collections.abc import Collection
+    from collections.abc import Iterable
     from collections.abc import Mapping
     from collections.abc import Sequence
     from logging import Logger
-    from typing import TypeVar
+
+    from System.Reflection import Assembly
+    from System.Reflection import ConstructorInfo
+    from System.Reflection import EventInfo
+    from System.Reflection import FieldInfo
+    from System.Reflection import MethodInfo
+    from System.Reflection import ParameterInfo
+    from System.Reflection import PropertyInfo
 
     from stubgen.command import CommandResult
+    from stubgen.model import CWrapper
 
-    T = TypeVar("T")
+    type ExtractFunc[M, T] = Callable[[M], T]
+    type MemberFunc[T] = Callable[[TypeInfo, BindingFlags], Iterable[T]]
 
 logger: Logger = get_logger(__name__)
 
 
 def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | None:
+    """Extract a TypeInfo object into a CType."""
     if info is None:
         return None
 
@@ -87,12 +91,6 @@ def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | No
         info = underlying_type
         name = make_python_name(info.Name)
         nullable = True
-    elif name == "Nullable":
-        args = info.GetGenericArguments()
-        if len(args) > 0:
-            info = args[0]
-            name = make_python_name(info.Name)
-            nullable = True
 
     generic: bool = info.IsGenericParameter
     if info.IsNested and not generic:
@@ -101,46 +99,57 @@ def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | No
             name = f"{make_python_name(parent.Name)}.{name}"
             parent = parent.DeclaringType
 
-    extracted = CType(
+    extracted: CType = CType(
         name=name,
         namespace=None if generic else info.Namespace,
-        inner=tuple(map(extract_type, info.GetGenericArguments())),
+        inner=list(map(extract_type, info.GetGenericArguments())),
         reference=reference,
         generic=generic,
         nullable=nullable,
     )
 
     if info.IsArray and extracted.name != "Array":
-        return CType(name="Array", namespace="System", inner=(extracted,))
+        return CType(name="Array", namespace="System", inner=[extracted])
     return extracted
 
 
 def extract_parameter(info: ParameterInfo) -> CParameter:
+    """Extract a ParameterInfo object into a CParameter."""
+    default: bool
+    try:
+        # This is here because record methods don't have "HasDefaultValue"
+        default = info.HasDefaultValue
+    except TypeLoadException:
+        default = info.IsOptional
+
     return CParameter(
         name="param" if info.Name is None else make_python_name(info.Name),
         type=extract_type(info.ParameterType),
-        default=info.HasDefaultValue,
+        default=default,
         out=info.IsOut,
     )
 
 
 def extract_field(info: FieldInfo) -> CField:
+    """Extract a FieldInfo object into a CField."""
     return CField(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.DeclaringType),
+        declaring_type=extract_type(info.DeclaringType, use_generic=True),
         return_type=extract_type(info.FieldType),
         static=info.IsStatic,
     )
 
 
 def extract_constructor(info: ConstructorInfo) -> CConstructor:
+    """Extract a ConstructorInfo object into a CConstructor."""
     return CConstructor(
-        declaring_type=extract_type(info.DeclaringType),
-        parameters=tuple(map(extract_parameter, info.GetParameters())),
+        declaring_type=extract_type(info.DeclaringType, use_generic=True),
+        parameters=list(map(extract_parameter, info.GetParameters())),
     )
 
 
 def extract_property(info: PropertyInfo) -> CProperty:
+    """Extract a PropertyInfo object into a CProperty."""
     get_method: MethodInfo = info.GetGetMethod()
     set_method: MethodInfo = info.GetSetMethod()
 
@@ -158,6 +167,7 @@ def extract_property(info: PropertyInfo) -> CProperty:
 
 
 def extract_method(info: MethodInfo) -> CMethod:
+    """Extract a MethodInfo object into a CMethod."""
     return_types: list[CType] = [extract_type(info.ReturnType)]
 
     parameters: list[CParameter] = []
@@ -170,13 +180,14 @@ def extract_method(info: MethodInfo) -> CMethod:
     return CMethod(
         name=make_python_name(info.Name),
         declaring_type=extract_type(info.GetBaseDefinition().DeclaringType, use_generic=True),
-        parameters=tuple(parameters),
-        return_types=tuple(return_types),
+        parameters=parameters,
+        return_types=return_types,
         static=info.IsStatic,
     )
 
 
 def extract_event(info: EventInfo) -> CEvent:
+    """Extract a EventInfo object into a CEvent."""
     return CEvent(
         name=make_python_name(info.Name),
         declaring_type=extract_type(info.DeclaringType),
@@ -184,425 +195,301 @@ def extract_event(info: EventInfo) -> CEvent:
     )
 
 
-def extract_base_members(
-    type_info: TypeInfo,
-    found: dict[str, T],
-    extract: Callable[[TypeInfo, BindingFlags], Collection[T]],
-) -> None:
-    bases: list[T] = []
-    base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
-    if type_info.BaseType is not None:
-        bases.extend(extract(type_info.BaseType, base_binding_flags))
-    interface: TypeInfo
-    for interface in type_info.GetInterfaces():
-        bases.extend(extract(interface, base_binding_flags))
+def _extract_members[T: CWrapper](
+    type_info: TypeInfo, member_func: MemberFunc, skip_parents: bool = False
+) -> dict[str, T]:
+    binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+    # TODO(Ryan): This is probably a bug in PyCharm
+    # noinspection PyTypeChecker
+    found: dict[str, T] = {obj.unique_name: obj for obj in member_func(type_info, binding_flags)}
 
-    base: T
-    for base in bases:
-        key: str = base.doc_node()[0]
-        new: T
-        if key in found:
-            new = dataclasses.replace(found[key], declaring_type=base.declaring_type)
-        else:
-            new = base
-        found[key] = new
+    def get_parents(type_info: TypeInfo) -> list[TypeInfo]:
+        parents: list[TypeInfo] = []
+        if type_info.BaseType is not None:
+            parents.append(type_info.BaseType)
+            parents.extend(get_parents(type_info.BaseType))
+        interface: TypeInfo
+        for interface in type_info.GetInterfaces():
+            parents.append(interface)
+            parents.extend(get_parents(interface))
+        return parents
 
+    if skip_parents:
+        return found
 
-def extract_fields(type_info: TypeInfo) -> Mapping[str, CField]:
-    def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CField]:
-        found: dict[str, CField] = {}
+    binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
+    parent: TypeInfo
+    for parent in get_parents(type_info):
+        member: T
+        for member in member_func(parent, binding_flags):
+            # TODO(Ryan): This is probably a bug in PyCharm
+            # noinspection PyTypeChecker
+            key: str = member.unique_name
+            try:
+                found[key] = replace(found[key], declaring_type=member.declaring_type)
+            except KeyError:
+                found[key] = member
 
-        info: FieldInfo
-        if binding_flags is None:
-            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-        for info in type_info.GetFields(binding_flags):
-            obj: CField = extract_field(info)
-            key: str = obj.doc_node()[0]
-            found[key] = obj
-
-        extract_base_members(type_info, found, extract_raw)
-
-        return found.values()
-
-    raw_members: Collection[CField] = extract_raw(type_info)
-
-    sorted_members: Sequence[CField] = sorted(raw_members)
-
-    return {str(member): member for member in sorted_members}
+    return found
 
 
-def extract_constructors(type_info: TypeInfo) -> Mapping[str, CConstructor]:
-    def extract_raw(
-        type_info: TypeInfo, binding_flags: BindingFlags = None
-    ) -> Collection[CConstructor]:
-        found: dict[str, CConstructor] = {}
-
-        info: ConstructorInfo
-        if binding_flags is None:
-            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-        for info in type_info.GetConstructors(binding_flags):
-            obj: CConstructor = extract_constructor(info)
-            key: str = obj.doc_node()[0]
-            found[key] = obj
-
-        return found.values()
-
-    raw_members: Collection[CConstructor] = extract_raw(type_info)
-
-    sorted_members: Sequence[CConstructor] = sorted(raw_members)
-
-    return {str(member): member for member in sorted_members}
+def _get_fields(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CField]:
+    return map(extract_field, type_info.GetFields(binding_flags))
 
 
-def extract_properties(type_info: TypeInfo) -> Mapping[str, CProperty]:
-    def extract_raw(
-        type_info: TypeInfo, binding_flags: BindingFlags = None
-    ) -> Collection[CProperty]:
-        found: dict[str, CProperty] = {}
-
-        info: PropertyInfo
-        if binding_flags is None:
-            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-        for info in type_info.GetProperties(binding_flags):
-            obj: CProperty = extract_property(info)
-            key: str = obj.doc_node()[0]
-            found[key] = obj
-
-        extract_base_members(type_info, found, extract_raw)
-
-        return found.values()
-
-    raw_members: Collection[CProperty] = extract_raw(type_info)
-
-    sorted_members: Sequence[CProperty] = sorted(raw_members)
-
-    # TODO - Item property will need a special type to handle get/set of different types
-    excluded: Collection[str] = ("Item",)
-
-    def filter_func(member: CProperty) -> bool:
-        return member.name not in excluded
-
-    return {str(member): member for member in sorted_members if filter_func(member)}
+def _get_constructors(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CConstructor]:
+    return map(extract_constructor, type_info.GetConstructors(binding_flags))
 
 
-def extract_methods(type_info: TypeInfo) -> Mapping[str, CMethod]:
-    def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CMethod]:
-        found: dict[str, CMethod] = {}
+def _get_properties(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CProperty]:
+    return map(extract_property, type_info.GetProperties(binding_flags))
 
-        info: MethodInfo
-        if binding_flags is None:
-            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-        for info in type_info.GetMethods(binding_flags):
-            obj: CMethod = extract_method(info)
-            key: str = obj.doc_node()[0]
-            found[key] = obj
 
-        extract_base_members(type_info, found, extract_raw)
+DUNDER_METHODS: Mapping[str, tuple[str, bool]] = {
+    "op_Addition": ("__add__", True),
+    "op_BitwiseAnd": ("__and__", True),
+    "op_BitwiseOr": ("__or__", True),
+    # op_Decrement
+    "op_Division": ("__truediv__", True),
+    "op_Equality": ("__eq__", True),
+    "op_ExclusiveOr": ("__xor__", True),
+    "op_GreaterThan": ("__gt__", True),
+    "op_GreaterThanOrEqual": ("__ge__", True),
+    # op_Implicit
+    # op_Increment
+    "op_Inequality": ("__ne__", True),
+    "op_LeftShift": ("__lshift__", True),
+    "op_LessThan": ("__lt__", True),
+    "op_LessThanOrEqual": ("__le__", True),
+    "op_Modulus": ("__mod__", True),
+    "op_Multiply": ("__mul__", True),
+    "op_OnesComplement": ("__invert__", True),
+    "op_RightShift": ("__rshift__", True),
+    "op_Subtraction": ("__sub__", True),
+    "op_UnaryNegation": ("__neg__", True),
+    "op_UnaryPlus": ("__pos__", True),
+    # op_UnsignedRightShift
+    "get_Item": ("__getitem__", False),
+    "set_Item": ("__setitem__", False),
+    "Remove": ("__delitem__", False),
+    "get_Count": ("__len__", False),
+    "Contains": ("__contains__", False),
+    "ContainsKey": ("__contains__", False),
+}
 
-        return found.values()
 
-    raw_members: list[CMethod] = list(extract_raw(type_info))
+def _get_methods(type_info: TypeInfo) -> dict[str, CMethod]:
+    def _get(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CMethod]:
+        return map(extract_method, type_info.GetMethods(binding_flags))
 
-    supported_methods: Mapping[str, tuple[str, bool]] = {
-        "op_Addition": ("__add__", True),
-        "op_BitwiseAnd": ("__and__", True),
-        "op_BitwiseOr": ("__or__", True),
-        # "op_Decrement": "",
-        "op_Division": ("__truediv__", True),
-        "op_Equality": ("__eq__", True),
-        "op_ExclusiveOr": ("__xor__", True),
-        "op_GreaterThan": ("__gt__", True),
-        "op_GreaterThanOrEqual": ("__ge__", True),
-        # "op_Implicit": ""
-        # "op_Increment": "",
-        "op_Inequality": ("__ne__", True),
-        "op_LeftShift": ("__lshift__", True),
-        "op_LessThan": ("__lt__", True),
-        "op_LessThanOrEqual": ("__le__", True),
-        "op_Modulus": ("__mod__", True),
-        "op_Multiply": ("__mul__", True),
-        "op_OnesComplement": ("__invert__", True),
-        "op_RightShift": ("__rshift__", True),
-        "op_Subtraction": ("__sub__", True),
-        "op_UnaryNegation": ("__neg__", True),
-        "op_UnaryPlus": ("__pos__", True),
-        # "op_UnsignedRightShift": "",
-        "get_Item": ("__getitem__", False),
-        "set_Item": ("__setitem__", False),
-        "Remove": ("__delitem__", False),
-        "get_Count": ("__len__", False),
-        "Contains": ("__contains__", False),
-        "ContainsKey": ("__contains__", False),
+    methods: dict[str, CMethod] = _extract_members(type_info, _get)
+
+    dunder_methods: list[CMethod] = []
+    method: CMethod
+    for method in methods.values():
+        if method.name in DUNDER_METHODS:
+            dunder_name: str
+            remove_param: bool
+            dunder_name, remove_param = DUNDER_METHODS[method.name]
+            dunder_methods.append(
+                replace(
+                    method,
+                    name=dunder_name,
+                    parameters=(
+                        [replace(p, name="other") for p in method.parameters[1:]]
+                        if remove_param
+                        else method.parameters
+                    ),
+                    static=False,
+                )
+            )
+        elif method.name == "GetEnumerator":
+            dunder_methods.append(
+                replace(
+                    method,
+                    name="__iter__",
+                    return_types=[
+                        replace(
+                            method.return_types[0],
+                            name="Iterator",
+                            namespace="collections.abc",
+                        )
+                    ],
+                )
+            )
+    methods.update({m.unique_name: m for m in dunder_methods})
+
+    return {
+        k: m
+        for k, m in methods.items()
+        if not m.name.startswith(("get_", "set_", "add_", "remove_"))
     }
 
-    method: CMethod
-    for method in tuple(raw_members):
-        if method.name in supported_methods:
-            new_name, remove_param = supported_methods[method.name]
-            parameters: Sequence[CParameter] = method.parameters
-            if remove_param:
-                parameters = tuple(
-                    map(
-                        lambda p: dataclasses.replace(p, name="other"),
-                        method.parameters[1:],
-                    )
-                )
 
-            method: CMethod = dataclasses.replace(
-                method,
-                name=new_name,
-                parameters=parameters,
-                static=False,
-            )
-            raw_members.append(method)
-        if method.name == "GetEnumerator":
-            return_types: Sequence[CType] = (
-                dataclasses.replace(
-                    method.return_types[0],
-                    name="Iterator",
-                    namespace="typing",
-                ),
-            )
-            method: CMethod = dataclasses.replace(
-                method,
-                name="__iter__",
-                return_types=return_types,
-            )
-            raw_members.append(method)
-
-    sorted_members: Sequence[CMethod] = sorted(raw_members)
-
-    def filter_func(member: CMethod) -> bool:
-        return not (
-            member.name.startswith("get_")
-            or member.name.startswith("set_")
-            or member.name.startswith("add_")
-            or member.name.startswith("remove_")
-        )
-
-    return {str(member): member for member in sorted_members if filter_func(member)}
+def _get_events(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CEvent]:
+    return map(extract_event, type_info.GetEvents(binding_flags))
 
 
-def extract_events(type_info: TypeInfo) -> Mapping[str, CEvent]:
-    def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CEvent]:
-        found: dict[str, CEvent] = {}
-
-        info: EventInfo
-        if binding_flags is None:
-            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-        for info in type_info.GetEvents(binding_flags):
-            obj: CEvent = extract_event(info)
-            key: str = obj.doc_node()[0]
-            found[key] = obj
-
-        extract_base_members(type_info, found, extract_raw)
-
-        return found.values()
-
-    raw_members: Collection[CEvent] = extract_raw(type_info)
-
-    sorted_members: Sequence[CEvent] = sorted(raw_members)
-
-    return {str(member): member for member in sorted_members}
-
-
-def extract_nested_types(type_info: TypeInfo) -> Mapping[str, CTypeDefinition]:
-    def extract_raw(
-        type_info: TypeInfo, binding_flags: BindingFlags = None
-    ) -> Collection[CTypeDefinition]:
-        found: dict[str, CTypeDefinition] = {}
-
-        info: TypeInfo
-        if binding_flags is None:
-            binding_flags = BindingFlags.Public
-        for info in type_info.GetNestedTypes(binding_flags):
-            obj: CTypeDefinition = extract_type_def(info)
-            key: str = obj.doc_node()[0]
-            found[key] = obj
-
-        return found.values()
-
-    raw_members: Collection[CTypeDefinition] = extract_raw(type_info)
-
-    sorted_members: Sequence[CTypeDefinition] = sorted(raw_members)
-
-    return {str(member): member for member in sorted_members}
+def _get_nested(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CTypeDefinition]:
+    return map(extract_type_def, type_info.GetNestedTypes(binding_flags))
 
 
 def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
-    def is_delegate() -> bool:
-        if info in (Delegate, MulticastDelegate):
-            return False
-        # noinspection PyTypeChecker
-        return info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
-
-    if "." in info.Namespace:
-        if not all(map(_is_valid_python_name, info.Namespace.split("."))):
-            return None
-    elif not _is_valid_python_name(info.Namespace):
-        return None
-
+    """Extract a TypeInfo into a wrapper."""
     if info.IsValueType:
         if info.IsEnum:
             return extract_enum(info)
-        return extract_struct(info)
+        return extract_class(info)
     if info.IsInterface:
         return extract_interface(info)
-    if is_delegate():
+    # noinspection PyTypeChecker
+    if info not in (Delegate, MulticastDelegate) and info.IsSubclassOf(Delegate):
         return extract_delegate(info)
     if info.IsClass:
         return extract_class(info)
-    return None
+    # This should never be reached unless C# adds a new fundamental type
+    return None  # pragma: no cover
 
 
-def extract_class(info: TypeInfo) -> CClass | None:
+def extract_class(info: TypeInfo) -> CClass:
+    """Extract a TypeInfo object into a CClass."""
     logger.info("Extracting class '%s.%s'", info.Namespace, info.Name)
+
     return CClass(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
+        parent=extract_type(info.DeclaringType),
         abstract=info.IsAbstract,
-        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
+        generic_args=list(map(extract_type, info.GetGenericArguments())),
         super_class=extract_type(info.BaseType),
-        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
-        fields=extract_fields(info),
-        constructors=extract_constructors(info),
-        properties=extract_properties(info),
-        methods=extract_methods(info),
-        events=extract_events(info),
-        nested_types=extract_nested_types(info),
+        interfaces=sorted(map(extract_type, info.GetInterfaces())),
+        fields=_extract_members(info, _get_fields),
+        constructors=_extract_members(info, _get_constructors, skip_parents=True),
+        properties=_extract_members(info, _get_properties),
+        methods=_get_methods(info),
+        events=_extract_members(info, _get_events),
+        nested_types=_extract_members(info, _get_nested),
     )
 
 
-def extract_struct(info: TypeInfo) -> CStruct | None:
-    logger.info(f'Extracting struct "{info.Namespace}.{info.Name}"')
-    return CStruct(
-        name=make_python_name(info.Name),
-        namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        abstract=info.IsAbstract,
-        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
-        super_class=extract_type(info.BaseType),
-        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
-        fields=extract_fields(info),
-        constructors=extract_constructors(info),
-        properties=extract_properties(info),
-        methods=extract_methods(info),
-        events=extract_events(info),
-        nested_types=extract_nested_types(info),
-    )
+def extract_interface(info: TypeInfo) -> CInterface:
+    """Extract a TypeInfo object into a CInterface."""
+    logger.info("Extracting interface '%s.%s'", info.Namespace, info.Name)
 
-
-def extract_interface(info: TypeInfo) -> CInterface | None:
-    logger.info(f'Extracting interface "{info.Namespace}.{info.Name}"')
     return CInterface(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
-        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
-        fields=extract_fields(info),
-        properties=extract_properties(info),
-        methods=extract_methods(info),
-        events=extract_events(info),
-        nested_types=extract_nested_types(info),
+        parent=extract_type(info.DeclaringType),
+        generic_args=list(map(extract_type, info.GetGenericArguments())),
+        interfaces=sorted(map(extract_type, info.GetInterfaces())),
+        fields=_extract_members(info, _get_fields),
+        properties=_extract_members(info, _get_properties),
+        methods=_get_methods(info),
+        events=_extract_members(info, _get_events),
+        nested_types=_extract_members(info, _get_nested),
     )
 
 
-def extract_enum(info: TypeInfo) -> CEnum | None:
-    logger.info(f'Extracting enum "{info.Namespace}.{info.Name}"')
+def extract_enum(info: TypeInfo) -> CEnum:
+    """Extract a TypeInfo object into a CEnum."""
+    logger.info("Extracting enum '%s.%s'", info.Namespace, info.Name)
+
     return CEnum(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        fields=tuple(map(make_python_name, info.GetEnumNames())),
+        parent=extract_type(info.DeclaringType),
+        fields=list(map(make_python_name, info.GetEnumNames())),
     )
 
 
-def extract_delegate(info: TypeInfo) -> CDelegate | None:
-    logger.info(f'Extracting delegate "{info.Namespace}.{info.Name}"')
+def extract_delegate(info: TypeInfo) -> CDelegate:
+    """Extract a TypeInfo object into a CDelegate."""
+    logger.info("Extracting delegate '%s.%s'", info.Namespace, info.Name)
 
     invoke: MethodInfo = info.GetMethod("Invoke")
 
     return CDelegate(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
-        nested=extract_type(info.DeclaringType),
-        parameters=tuple(map(extract_parameter, invoke.GetParameters())),
+        parent=extract_type(info.DeclaringType),
+        parameters=list(map(extract_parameter, invoke.GetParameters())),
         return_type=extract_type(invoke.ReturnType),
     )
 
 
-def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> int | str:
-    logger.info("Extracting assembly: %r", assembly_name)
+def extract_assemblies(
+    assemblies: Sequence[str],
+    output_dir: Path,
+    threads: int,
+) -> None:
+    """Extract type information from the provided assemblies."""
 
-    assembly: Assembly = clr.AddReference(assembly_name)
-    name: AssemblyName = assembly.GetName()
+    def extract_assembly(assembly_name: str, output_dir: Path = output_dir) -> None:
+        logger.info("Extracting assembly: %r", assembly_name)
 
-    assembly_name: str = name.Name
-    assembly_version: str = name.Version.ToString()
+        # noinspection PyUnresolvedReferences
+        cs_assembly: Assembly = clr.AddReference(assembly_name)
 
-    extract_file: Path = output_dir / f"{assembly_name}_{assembly_version}_skeleton.json"
-    if extract_file.exists() and not overwrite:
-        logger.critical("Extract file already exists: %r", str(extract_file))
-        return 1
+        def valid_type(type_info: TypeInfo) -> bool:
+            if type_info.Namespace is None or type_info.IsNested:
+                return False
+            if "." in type_info.Namespace:
+                return all(map(_is_valid_python_name, type_info.Namespace.split(".")))
+            return _is_valid_python_name(type_info.Namespace)
 
-    doc_file: Path = output_dir / f"{assembly_name}_{assembly_version}_doc.json"
-    if doc_file.exists() and not overwrite:
-        logger.critical("Doc file already exists: %r", str(doc_file))
-        return 1
+        type_definitions: dict[str, list[CTypeDefinition]] = defaultdict(list)
+        info: TypeInfo
+        for info in (t for t in cs_assembly.GetTypes() if valid_type(t)):
+            type_definition: CTypeDefinition = extract_type_def(info)
+            if type_definition is None:
+                logger.warning("Unable to parse type: %s", info.FullName)
+                continue
+            type_definitions[type_definition.namespace].append(type_definition)
 
-    logger.debug("Parsing types")
-    type_definitions: dict[str, list[CTypeDefinition]] = defaultdict(list)
-    info: TypeInfo
-    for info in assembly.GetTypes():
-        if info.Namespace is None or info.IsNested:
-            continue
-        type_definition: CTypeDefinition = extract_type_def(info)
-        if type_definition is None:
-            logger.warning("Unable to parse type: %s", info.FullName)
-            continue
-        type_definitions[type_definition.namespace].append(type_definition)
-
-    namespaces: Sequence[CNamespace] = tuple(
-        CNamespace(name=namespace, types={str(t): t for t in sorted(type_list)})
-        for namespace, type_list in type_definitions.items()
-    )
-
-    logger.debug("Saving types to file: %r", str(extract_file))
-    with extract_file.open("w") as file:
-        json.dump(
-            {
-                "name": assembly_name,
-                "version": assembly_version,
-                "namespaces": {
-                    str(namespace): namespace.to_json() for namespace in sorted(namespaces)
-                },
+        assembly: CAssembly = CAssembly(
+            name=cs_assembly.GetName().Name,
+            version=cs_assembly.GetName().Version.ToString(),
+            namespaces={
+                namespace.name: namespace
+                for namespace in sorted(
+                    CNamespace(name=name, types={t.unique_name: t for t in sorted(types)})
+                    for name, types in type_definitions.items()
+                )
             },
-            file,
-            indent=2,
         )
+        skeleton_file: Path = output_dir / f"{assembly.name}_{assembly.version}_skeleton.json"
+        logger.debug("Generating skeleton file: '%s'", skeleton_file)
+        skeleton_file.write_text(json.dumps(assembly.to_json(), indent=2))
 
-    logger.debug("Generating doc file: %r", str(doc_file))
-    main_doc_namespace = {}
-    for namespace in namespaces:
-        curr = main_doc_namespace
-        for n in namespace.name.split("."):
-            if n not in curr:
-                curr[n] = {"doc": ""}
-            curr = curr[n]
-        for type in namespace.types.values():
-            name, doc_json = type.doc_node()
-            curr[name] = doc_json
+        doc_file: Path = output_dir / f"{assembly.name}_{assembly.version}_doc.json"
+        logger.debug("Generating doc file: '%s'", doc_file)
+        # doc_tree: DocTree = DocTree(children=[ns. for ns in assembly.namespaces.values()])
+        main_doc_namespace = {}
+        for namespace in namespaces:
+            curr = main_doc_namespace
+            for n in namespace.name.split("."):
+                if n not in curr:
+                    curr[n] = {"doc": ""}
+                curr = curr[n]
+            for type in namespace.types.values():
+                name, doc_json = type.doc_node()
+                curr[name] = doc_json
 
-    with doc_file.open("w") as file:
-        json.dump(
-            main_doc_namespace,
-            file,
-            indent=2,
-        )
+        with doc_file.open("w") as file:
+            json.dump(
+                main_doc_namespace,
+                file,
+                indent=2,
+            )
 
-    return 0
+    if threads > 1:
+        executor: Executor
+        with ThreadPoolExecutor(max_workers=threads, thread_name_prefix="Worker") as executor:
+            executor.map(extract_assembly, assemblies)
+    else:
+        assembly_name: str
+        for assembly_name in assemblies:
+            extract_assembly(assembly_name, output_dir)
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -613,7 +500,6 @@ class ExtractArguments(CommandArguments):
 
     skip_failed: bool = False
     paths: Sequence[Path] = ()
-    overwrite: bool = False
 
     use_all: bool = False
     use_built_in: bool = False
@@ -643,12 +529,6 @@ class ExtractArguments(CommandArguments):
             type=Path,
             help="additional directories to add to the path",
             dest="paths",
-        )
-        extract_command.add_argument(
-            "-w",
-            "--overwrite",
-            action="store_true",
-            help="overwrite existing files",
         )
 
         assembly_group = extract_command.add_mutually_exclusive_group()
@@ -703,7 +583,7 @@ def command_extract(args: ExtractArguments) -> CommandResult:
     assembly_names = sorted(set(assembly_names))
 
     exit_code: CommandResult
-    if args.multi_threaded:
+    if args.threads > 1:
         executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
         for exit_code in executor.map(
             extract_assembly,
@@ -728,4 +608,10 @@ def command_extract(args: ExtractArguments) -> CommandResult:
                 else:
                     raise e from None
 
-    return 0
+    return extract_assemblies(
+        assembly_names,
+        args.output_dir,
+        args.threads,
+        args.skip_failed,
+        args.overwrite,
+    )

@@ -33,12 +33,11 @@ from stubgen.model import CMethod
 from stubgen.model import CNamespace
 from stubgen.model import CParameter
 from stubgen.model import CProperty
-from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
 from stubgen.model import DocNode
 from stubgen.model import DocTree
-from stubgen.util import _merge_mapping
+from stubgen.util import merge_mapping
 
 if TYPE_CHECKING:  # pragma: no cover
     from argparse import ArgumentParser
@@ -51,7 +50,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
     from stubgen.command import CommandResult
 
-    type TypeDef = CClass | CStruct | CInterface
+    type TypeDef = CClass | CInterface
 
 logger: Logger = get_logger(__name__)
 
@@ -327,8 +326,6 @@ class NamespaceBuilder:
         match obj:
             case CClass():
                 return self.build_class(obj, indent=indent)
-            case CStruct():
-                return self.build_struct(obj, indent=indent)
             case CInterface():
                 return self.build_interface(obj, indent=indent)
             case CEnum():
@@ -340,35 +337,6 @@ class NamespaceBuilder:
     def build_class(self, obj: CClass, indent: int = 0) -> Sequence[str]:
         """Build a list of strings to represent a CClass python stub."""
         logger.debug("Building class: %s", obj.unique_name)
-
-        parents: list[str] = []
-        if obj.abstract:
-            self.import_set.add(self.ABC)
-            parents.append("ABC")
-        if obj.super_class is not None:
-            parents.append(self.build_type(obj.super_class))
-        parents.extend(self.build_type(_obj) for _obj in obj.interfaces)
-
-        lines: list[str] = [
-            f"{'    ' * indent}class {obj.name}"
-            f"{self.build_generic_args_str(obj)}{self.build_parents_str(parents)}:"
-        ]
-
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
-        lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
-
-        lines.extend(self.build_fields(obj, indent=indent + 1))
-        lines.extend(self.build_constructors(obj, indent=indent + 1))
-        lines.extend(self.build_properties(obj, indent=indent + 1))
-        lines.extend(self.build_methods(obj, indent=indent + 1))
-        lines.extend(self.build_events(obj, indent=indent + 1))
-        lines.extend(self.build_nested_types(obj, indent=indent + 1))
-
-        return lines
-
-    def build_struct(self, obj: CStruct, indent: int = 0) -> Sequence[str]:
-        """Build a list of strings to represent a CStruct python stub."""
-        logger.debug("Building struct: %s", obj.unique_name)
 
         parents: list[str] = []
         if obj.abstract:
@@ -482,7 +450,6 @@ class NamespaceBuilder:
 
     def build(self, obj: CNamespace) -> Sequence[str]:
         """Build a list of strings to represent a python stub."""
-        logger.info("Building namespace: %s", obj.name)
         self.import_set.clear()
 
         built_type_lines: list[str] = []
@@ -502,7 +469,7 @@ def build_stubs(
     builder: NamespaceBuilder,
     namespaces: Sequence[CNamespace],
     output_dir: Path,
-    threads: int = 1,
+    threads: int,
 ) -> None:
     """Build stub files for the provided namespaces."""
     logger.info("Building stub files.")
@@ -512,6 +479,8 @@ def build_stubs(
         builder: NamespaceBuilder = builder,
         output_dir: Path = output_dir,
     ) -> None:
+        logger.info("Building namespace: %s", namespace.name)
+
         namespace_dir: Path = output_dir
         namespace_file: Path = Path()
         for name in namespace.name.split("."):
@@ -640,7 +609,7 @@ def command_build(args: BuildArguments) -> CommandResult:
     for skeleton_file in Path().glob(args.skeletons):
         logger.info("Loading skeletons file: '%s'", skeleton_file)
         skeleton: CAssembly = CAssembly.from_json(json.loads(skeleton_file.read_text()))
-        namespaces = _merge_mapping(namespaces, skeleton.namespaces, CNamespace.merge)
+        namespaces = merge_mapping(namespaces, skeleton.namespaces, CNamespace.merge)
 
     build_stubs(
         builder,

@@ -18,7 +18,6 @@ from stubgen.model import CMethod
 from stubgen.model import CNamespace
 from stubgen.model import CParameter
 from stubgen.model import CProperty
-from stubgen.model import CStruct
 from stubgen.model import CType
 
 
@@ -29,7 +28,6 @@ class TestBase(unittest.TestCase):
         self.addTypeEqualityFunc(CNamespace, self.assertCNamespace)
 
         self.addTypeEqualityFunc(CClass, self.assertCClass)
-        self.addTypeEqualityFunc(CStruct, self.assertCStruct)
         self.addTypeEqualityFunc(CInterface, self.assertCInterface)
         self.addTypeEqualityFunc(CEnum, self.assertCEnum)
         self.addTypeEqualityFunc(CDelegate, self.assertCDelegate)
@@ -124,23 +122,6 @@ class TestBase(unittest.TestCase):
     def assertCClass(self, first: CClass, second: CClass, msg: str = None) -> None:
         self.assertIsInstance(first, CClass, "First argument is not a CClass")
         self.assertIsInstance(second, CClass, "Second argument is not a CClass")
-
-        self.assertEqual(first.name, second.name, "Names are not equal")
-        self.assertEqual(first.namespace, second.namespace, "Namespaces are not equal")
-        self.assertEqual(first.generic_args, second.generic_args, "Generic args are not equal")
-        self.assertEqual(first.super_class, second.super_class, "Super class are not equal")
-        self.assertEqual(first.interfaces, second.interfaces, "Interfaces are not equal")
-
-        self.assertMapping(first.fields, second.fields, "Fields are not equal")
-        self.assertMapping(first.constructors, second.constructors, "Constructors are not equal")
-        self.assertMapping(first.properties, second.properties, "Properties are not equal")
-        self.assertMapping(first.methods, second.methods, "Methods are not equal")
-        self.assertMapping(first.events, second.events, "Events are not equal")
-        self.assertMapping(first.nested_types, second.nested_types, "nested_types are not equal")
-
-    def assertCStruct(self, first: CStruct, second: CStruct, msg: str = None) -> None:
-        self.assertIsInstance(first, CStruct, "First argument is not a CStruct")
-        self.assertIsInstance(second, CStruct, "Second argument is not a CStruct")
 
         self.assertEqual(first.name, second.name, "Names are not equal")
         self.assertEqual(first.namespace, second.namespace, "Namespaces are not equal")
