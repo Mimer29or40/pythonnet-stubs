@@ -1,85 +1,25 @@
 {
-  "Microsoft": {
-    "doc": "",
-    "CodeAnalysis": {
-      "doc": "",
-      "EmbeddedAttribute": {
-        "doc": "",
-        "doc_formatted": {},
-        "__init__()": {
-          "doc": "",
-          "doc_formatted": {}
-        }
-      }
-    }
-  },
-  "System": {
-    "doc": "",
-    "Runtime": {
-      "doc": "",
-      "CompilerServices": {
-        "doc": "",
-        "NullableAttribute": {
-          "doc": "",
-          "doc_formatted": {},
-          "NullableFlags": {
-            "doc": "",
-            "doc_formatted": {},
-            "return": ""
-          },
-          "__init__(System:Array[System:Byte])": {
-            "doc": "",
-            "doc_formatted": {},
-            "parameters": {
-              "param": ""
-            }
-          },
-          "__init__(System:Byte)": {
-            "doc": "",
-            "doc_formatted": {},
-            "parameters": {
-              "param": ""
-            }
-          }
-        },
-        "NullableContextAttribute": {
-          "doc": "",
-          "doc_formatted": {},
-          "Flag": {
-            "doc": "",
-            "doc_formatted": {},
-            "return": ""
-          },
-          "__init__(System:Byte)": {
-            "doc": "",
-            "doc_formatted": {},
-            "parameters": {
-              "param": ""
-            }
-          }
-        }
-      }
-    }
-  },
   "TestLib": {
     "doc": "",
-    "ClassThatsAbstract": {
+    "doc_formatted": {},
+    "ClassAbstract": {
       "doc": "",
       "doc_formatted": {}
     },
-    "ClassWithConstructors": {
+    "ClassBasic": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
         "doc": "",
         "doc_formatted": {}
-      },
-      "__init__(System:Int32)": {
+      }
+    },
+    "ClassConstructors": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
         "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "param0": ""
-        }
+        "doc_formatted": {}
       },
       "__init__(System:Int32, System:Int32)": {
         "doc": "",
@@ -88,62 +28,426 @@
           "param0": "",
           "param1": ""
         }
-      },
-      "__init__(System:Int32, System:Int32, System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "param0": "",
-          "param1": "",
-          "param2": ""
-        }
       }
     },
-    "ClassWithEvents": {
+    "ClassDunderMethods": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
-      "Event": {
+      "op_UnaryPlus(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryNegation(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Increment(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Decrement(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Addition(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Subtraction(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Multiply(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Division(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_OnesComplement(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseAnd(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseOr(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_ExclusiveOr(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LeftShift(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LogicalNot(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_False(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Inequality(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThan(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThanOrEqual(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThan(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThanOrEqual(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__add__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mul__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__truediv__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mod__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__and__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__or__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__xor__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lshift__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lt__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__le__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__gt__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ge__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "ClassEvents": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
-      "EventWithArgs": {
+      "A": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "B": {
         "doc": "",
         "doc_formatted": {}
       }
     },
-    "ClassWithFields": {
+    "ClassFields": {
       "doc": "",
       "doc_formatted": {},
-      "InstanceFieldA": {
+      "A": {
         "doc": "",
         "doc_formatted": {},
         "return": ""
       },
-      "InstanceFieldB": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceFieldC": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldA": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldB": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldC": {
+      "B": {
         "doc": "",
         "doc_formatted": {},
         "return": ""
@@ -153,23 +457,7 @@
         "doc_formatted": {}
       }
     },
-    "ClassWithGeneric[$T]": {
-      "doc": "",
-      "doc_formatted": {},
-      "__init__()": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "MethodWithGeneric($T)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        }
-      }
-    },
-    "ClassWithInterface": {
+    "ClassGeneric[$TA, $TB]": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
@@ -177,7 +465,7 @@
         "doc_formatted": {}
       }
     },
-    "ClassWithListMethods": {
+    "ClassInterfaces": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
@@ -185,155 +473,7 @@
         "doc_formatted": {}
       }
     },
-    "ClassWithMethods": {
-      "doc": "",
-      "doc_formatted": {},
-      "__init__()": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "InstanceMethodWithDefaultParam(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithNullableDefaultParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithNullableOutParam(System:*Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithNullableParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithOutParam(System:*Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithParams0()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "InstanceMethodWithParams1(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithParams2(System:Int32, System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": "",
-          "param1": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithDefaultParam(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithNullableDefaultParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithNullableOutParam(System:*Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithNullableParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithOutParam(System:*Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithParams0()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "StaticMethodWithParams1(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithParams2(System:Int32, System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": "",
-          "param1": ""
-        },
-        "return": ""
-      }
-    },
-    "ClassWithMultiGeneric[$U, $V]": {
+    "ClassListMethods": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
@@ -341,14 +481,29 @@
         "doc_formatted": {}
       }
     },
-    "ClassWithNested": {
+    "ClassMethods": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
-      "INestedInterface": {
+      "A()": {
+        "doc": "",
+        "doc_formatted": {},
+        "exceptions": {}
+      },
+      "B()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "ClassNested": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -356,7 +511,15 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedDelegate()": {
+      "NestedStruct": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "INested": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -364,731 +527,713 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedStruct": {
+      "NestedDelegate()": {
         "doc": "",
         "doc_formatted": {}
       }
     },
-    "ClassWithOperatorMethods": {
+    "ClassProperties": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
-      "__add__(TestLib:ClassWithOperatorMethods)": {
+      "A": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
         "return": ""
       },
-      "__and__(TestLib:ClassWithOperatorMethods)": {
+      "B": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__eq__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__ge__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__gt__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__invert__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__le__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__lt__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__mod__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__mul__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__ne__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__neg__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__or__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__pos__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__sub__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__truediv__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__xor__(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Addition(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_BitwiseAnd(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_BitwiseOr(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Decrement(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Division(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Equality(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_ExclusiveOr(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_False(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_GreaterThan(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_GreaterThanOrEqual(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Increment(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Inequality(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LessThan(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LessThanOrEqual(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LogicalNot(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Modulus(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Multiply(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_OnesComplement(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Subtraction(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_True(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_UnaryNegation(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_UnaryPlus(TestLib:ClassWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
         "return": ""
       }
     },
-    "ClassWithProperties": {
+    "DelegateBasic()": {
+      "doc": "",
+      "doc_formatted": {}
+    },
+    "DelegateParameters(System:Int32, System:Int32)": {
+      "doc": "",
+      "doc_formatted": {},
+      "parameters": {
+        "param0": "",
+        "param1": ""
+      }
+    },
+    "DelegateReturn()": {
+      "doc": "",
+      "doc_formatted": {},
+      "return": ""
+    },
+    "EnumBasic": {
+      "doc": "",
+      "doc_formatted": {}
+    },
+    "EnumFields": {
+      "doc": "",
+      "doc_formatted": {},
+      "Field0": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "Field1": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "Field2": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "Field3": {
+        "doc": "",
+        "doc_formatted": {}
+      }
+    },
+    "ExtractConstructor": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
-      "InstanceProperty0": {
+      "__init__(System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
+        "parameters": {
+          "param0": "",
+          "param1": ""
+        }
       }
     },
-    "ClassWithSuper": {
+    "ExtractEvent": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
         "doc": "",
         "doc_formatted": {}
+      },
+      "Basic": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "Arguments": {
+        "doc": "",
+        "doc_formatted": {}
       }
     },
-    "ClassWithTypes": {
+    "ExtractField": {
       "doc": "",
       "doc_formatted": {},
-      "MethodReturnsBoolean()": {
+      "Basic": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "return": ""
       },
-      "MethodReturnsByte()": {
+      "Readonly": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "return": ""
       },
-      "MethodReturnsChar()": {
+      "Static": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "return": ""
       },
-      "MethodReturnsDouble()": {
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      }
+    },
+    "ExtractMethod": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "Basic()": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
+        "exceptions": {}
       },
-      "MethodReturnsInt16()": {
+      "Parameters(System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
+        "parameters": {
+          "param0": "",
+          "param1": ""
+        },
+        "exceptions": {}
       },
-      "MethodReturnsInt32()": {
+      "Out(System:*Int32)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
+        "parameters": {
+          "param": ""
+        },
+        "return": "",
+        "exceptions": {}
       },
-      "MethodReturnsInt64()": {
+      "VoidOut(System:*Int32)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
+        "parameters": {
+          "param": ""
+        },
+        "exceptions": {}
       },
-      "MethodReturnsObject()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "MethodReturnsSByte()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "MethodReturnsSingle()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "MethodReturnsString()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "MethodReturnsUInt16()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "MethodReturnsUInt32()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "MethodReturnsUInt64()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "MethodReturnsVoid()": {
+      "Static()": {
         "doc": "",
         "doc_formatted": {},
         "exceptions": {}
       }
     },
-    "DelegateWithNoParametersNoReturn()": {
-      "doc": "",
-      "doc_formatted": {}
-    },
-    "DelegateWithNoParametersReturn()": {
+    "ExtractParameter": {
       "doc": "",
       "doc_formatted": {},
-      "return": ""
-    },
-    "DelegateWithParametersNoReturn(System:Int32, System:Int32)": {
-      "doc": "",
-      "doc_formatted": {},
-      "parameters": {
-        "param0": "",
-        "param1": ""
-      }
-    },
-    "DelegateWithParametersReturn(System:Int32, System:Int32)": {
-      "doc": "",
-      "doc_formatted": {},
-      "parameters": {
-        "param0": "",
-        "param1": ""
-      },
-      "return": ""
-    },
-    "EnumWithFields": {
-      "doc": "",
-      "doc_formatted": {},
-      "Field0": {
-        "doc": ""
-      },
-      "Field1": {
-        "doc": ""
-      },
-      "Field2": {
-        "doc": ""
-      },
-      "Field3": {
-        "doc": ""
-      }
-    },
-    "EnumWithNoFields": {
-      "doc": "",
-      "doc_formatted": {}
-    },
-    "IInterfaceWithEvents": {
-      "doc": "",
-      "doc_formatted": {},
-      "Event": {
+      "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
-      "EventWithArgs": {
+      "Basic(System:Int32)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param": ""
+        },
+        "exceptions": {}
+      },
+      "Default(System:Int32)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param": ""
+        },
+        "exceptions": {}
+      },
+      "Out(System:*Int32)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param": ""
+        },
+        "exceptions": {}
+      }
+    },
+    "ExtractProperty": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "Basic": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "Readonly": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "Static": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "StaticReadOnly": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      }
+    },
+    "ExtractType": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "Basic(System:Int32)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": ""
+        },
+        "exceptions": {}
+      },
+      "Reference(System:*Int32)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": ""
+        },
+        "exceptions": {}
+      },
+      "Generic($T)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": ""
+        },
+        "exceptions": {}
+      },
+      "Nullable(System:Int32?)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": ""
+        },
+        "exceptions": {}
+      },
+      "UseGeneric(System:IEquatable[System:Object])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": ""
+        },
+        "exceptions": {}
+      },
+      "Array(System:Array[System:Int32])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": ""
+        },
+        "exceptions": {}
+      },
+      "Nested": {
         "doc": "",
         "doc_formatted": {}
       }
     },
-    "IInterfaceWithFields": {
-      "doc": "",
-      "doc_formatted": {},
-      "StaticFieldA": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldB": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldC": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      }
-    },
-    "IInterfaceWithGeneric[$T]": {
-      "doc": "",
-      "doc_formatted": {},
-      "MethodWithGeneric($T)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        }
-      }
-    },
-    "IInterfaceWithInterface": {
+    "IBasic": {
       "doc": "",
       "doc_formatted": {}
     },
-    "IInterfaceWithListMethods": {
-      "doc": "",
-      "doc_formatted": {}
-    },
-    "IInterfaceWithMethods": {
+    "IDunderMethods": {
       "doc": "",
       "doc_formatted": {},
-      "InstanceMethodWithDefaultParam(System:Int32)": {
+      "op_UnaryPlus(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "parameters": {
-          "param0": ""
+          "self": ""
         },
-        "return": ""
+        "return": "",
+        "exceptions": {}
       },
-      "InstanceMethodWithNullableDefaultParam(System:Int32?)": {
+      "op_UnaryNegation(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "parameters": {
-          "param0": ""
+          "self": ""
         },
-        "return": ""
+        "return": "",
+        "exceptions": {}
       },
-      "InstanceMethodWithNullableOutParam(System:*Int32?)": {
+      "op_Increment(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "parameters": {
-          "param0": ""
+          "self": ""
         },
-        "return": ""
+        "return": "",
+        "exceptions": {}
       },
-      "InstanceMethodWithNullableParam(System:Int32?)": {
+      "op_Decrement(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "parameters": {
-          "param0": ""
+          "self": ""
         },
-        "return": ""
+        "return": "",
+        "exceptions": {}
       },
-      "InstanceMethodWithOutParam(System:*Int32)": {
+      "op_Addition(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "parameters": {
-          "param0": ""
+          "left": "",
+          "right": ""
         },
-        "return": ""
+        "return": "",
+        "exceptions": {}
       },
-      "InstanceMethodWithParams()": {
+      "op_Subtraction(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "InstanceMethodWithParams(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
         "parameters": {
-          "param0": ""
+          "left": "",
+          "right": ""
         },
-        "return": ""
+        "return": "",
+        "exceptions": {}
       },
-      "InstanceMethodWithParams(System:Int32, System:Int32)": {
+      "op_Multiply(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
-        "exceptions": {},
         "parameters": {
-          "param0": "",
-          "param1": ""
+          "left": "",
+          "right": ""
         },
-        "return": ""
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Division(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_OnesComplement(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseAnd(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseOr(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_ExclusiveOr(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LeftShift(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LogicalNot(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_False(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThan(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThanOrEqual(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThan(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThanOrEqual(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__add__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mul__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__truediv__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mod__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__and__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__or__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__xor__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lshift__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lt__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__le__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__gt__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ge__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
       }
     },
-    "IInterfaceWithMultiGeneric[$U, $V]": {
-      "doc": "",
-      "doc_formatted": {}
-    },
-    "IInterfaceWithNested": {
+    "IEvents": {
       "doc": "",
       "doc_formatted": {},
-      "INestedInterface": {
+      "A": {
         "doc": "",
         "doc_formatted": {}
       },
+      "B": {
+        "doc": "",
+        "doc_formatted": {}
+      }
+    },
+    "IFields": {
+      "doc": "",
+      "doc_formatted": {},
+      "A": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "B": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      }
+    },
+    "IGeneric[$TA, $TB]": {
+      "doc": "",
+      "doc_formatted": {}
+    },
+    "IInterfaces": {
+      "doc": "",
+      "doc_formatted": {}
+    },
+    "IListMethods": {
+      "doc": "",
+      "doc_formatted": {}
+    },
+    "IMethods": {
+      "doc": "",
+      "doc_formatted": {},
+      "A()": {
+        "doc": "",
+        "doc_formatted": {},
+        "exceptions": {}
+      },
+      "B()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "INested": {
+      "doc": "",
+      "doc_formatted": {},
       "NestedClass": {
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedDelegate()": {
+      "NestedStruct": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "INested": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -1096,418 +1241,83 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedStruct": {
+      "NestedDelegate()": {
         "doc": "",
         "doc_formatted": {}
       }
     },
-    "IInterfaceWithOperatorMethods": {
+    "IProperties": {
       "doc": "",
       "doc_formatted": {},
-      "__add__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__and__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__ge__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__gt__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__invert__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__le__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__lt__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__mod__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__mul__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__neg__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__or__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__pos__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__sub__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__truediv__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__xor__(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Addition(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_BitwiseAnd(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_BitwiseOr(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Decrement(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Division(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_ExclusiveOr(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_False(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_GreaterThan(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_GreaterThanOrEqual(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Increment(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_LessThan(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LessThanOrEqual(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LogicalNot(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Modulus(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Multiply(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_OnesComplement(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Subtraction(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_True(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_UnaryNegation(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_UnaryPlus(TestLib:IInterfaceWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      }
-    },
-    "IInterfaceWithProperties": {
-      "doc": "",
-      "doc_formatted": {},
-      "InstanceProperty0": {
+      "A": {
         "doc": "",
         "doc_formatted": {},
         "return": ""
       },
-      "InstanceProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty2": {
+      "B": {
         "doc": "",
         "doc_formatted": {},
         "return": ""
       }
     },
-    "OverriddenProperty": {
-      "doc": "",
-      "doc_formatted": {},
-      "__init__()": {
-        "doc": "",
-        "doc_formatted": {}
-      }
-    },
-    "StructWithConstructors": {
+    "RecordBasic": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
         "doc": "",
         "doc_formatted": {}
       },
-      "__init__(System:Int32)": {
+      "op_Inequality(TestLib:RecordBasic, TestLib:RecordBasic)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
-          "param0": ""
-        }
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordBasic, TestLib:RecordBasic)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordBasic)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordBasic)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordConstructors": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
       },
       "__init__(System:Int32, System:Int32)": {
         "doc": "",
@@ -1517,57 +1327,1359 @@
           "param1": ""
         }
       },
-      "__init__(System:Int32, System:Int32, System:Int32)": {
+      "op_Inequality(TestLib:RecordConstructors, TestLib:RecordConstructors)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordConstructors, TestLib:RecordConstructors)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordConstructors)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordConstructors)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordDunderMethods": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "op_UnaryPlus(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryNegation(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Increment(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Decrement(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Addition(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Subtraction(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Multiply(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Division(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_OnesComplement(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseAnd(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseOr(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_ExclusiveOr(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LeftShift(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LogicalNot(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_False(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThan(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThanOrEqual(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThan(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThanOrEqual(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Inequality(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__add__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mul__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__truediv__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mod__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__and__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__or__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__xor__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lshift__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lt__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__le__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__gt__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ge__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordEvents": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "op_Inequality(TestLib:RecordEvents, TestLib:RecordEvents)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordEvents, TestLib:RecordEvents)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordEvents)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordEvents)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "A": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "B": {
+        "doc": "",
+        "doc_formatted": {}
+      }
+    },
+    "RecordFields": {
+      "doc": "",
+      "doc_formatted": {},
+      "A": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "B": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "op_Inequality(TestLib:RecordFields, TestLib:RecordFields)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordFields, TestLib:RecordFields)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordFields)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordFields)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordGeneric[$TA, $TB]": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "op_Inequality(TestLib:RecordGeneric[$TA, $TB], TestLib:RecordGeneric[$TA, $TB])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordGeneric[$TA, $TB], TestLib:RecordGeneric[$TA, $TB])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordGeneric[$TA, $TB])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordGeneric[$TA, $TB])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordInterfaces": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "op_Inequality(TestLib:RecordInterfaces, TestLib:RecordInterfaces)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordInterfaces, TestLib:RecordInterfaces)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordInterfaces)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordInterfaces)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordListMethods": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "op_Inequality(TestLib:RecordListMethods, TestLib:RecordListMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordListMethods, TestLib:RecordListMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordListMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordListMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordMethods": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "A()": {
+        "doc": "",
+        "doc_formatted": {},
+        "exceptions": {}
+      },
+      "B()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Inequality(TestLib:RecordMethods, TestLib:RecordMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordMethods, TestLib:RecordMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "RecordNested": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "op_Inequality(TestLib:RecordNested, TestLib:RecordNested)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordNested, TestLib:RecordNested)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordNested)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordNested)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "NestedClass": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedStruct": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "INested": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedEnum": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedDelegate()": {
+        "doc": "",
+        "doc_formatted": {}
+      }
+    },
+    "RecordProperties": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "A": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "B": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": ""
+      },
+      "op_Inequality(TestLib:RecordProperties, TestLib:RecordProperties)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordProperties, TestLib:RecordProperties)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "Clone()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:RecordProperties)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordProperties)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "StructBasic": {
+      "doc": "",
+      "doc_formatted": {}
+    },
+    "StructConstructors": {
+      "doc": "",
+      "doc_formatted": {},
+      "__init__()": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "__init__(System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "param0": "",
-          "param1": "",
-          "param2": ""
+          "param1": ""
         }
       }
     },
-    "StructWithEvents": {
+    "StructDunderMethods": {
       "doc": "",
       "doc_formatted": {},
-      "Event": {
+      "op_UnaryPlus(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryNegation(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Increment(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Decrement(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Addition(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Subtraction(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Multiply(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Division(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_OnesComplement(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseAnd(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_BitwiseOr(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_ExclusiveOr(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LeftShift(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LogicalNot(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_False(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Inequality(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThan(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThanOrEqual(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThan(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThanOrEqual(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__add__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mul__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__truediv__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mod__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__and__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__or__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__xor__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lshift__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ne__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lt__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__le__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__gt__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ge__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "StructEvents": {
+      "doc": "",
+      "doc_formatted": {},
+      "A": {
         "doc": "",
         "doc_formatted": {}
       },
-      "EventWithArgs": {
+      "B": {
         "doc": "",
         "doc_formatted": {}
       }
     },
-    "StructWithFields": {
+    "StructFields": {
       "doc": "",
       "doc_formatted": {},
-      "InstanceFieldA": {
+      "A": {
         "doc": "",
         "doc_formatted": {},
         "return": ""
       },
-      "InstanceFieldB": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceFieldC": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldA": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldB": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticFieldC": {
+      "B": {
         "doc": "",
         "doc_formatted": {},
         "return": ""
@@ -1577,233 +2689,49 @@
         "doc_formatted": {}
       }
     },
-    "StructWithGeneric[$T]": {
-      "doc": "",
-      "doc_formatted": {},
-      "MethodWithGeneric($T)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        }
-      }
-    },
-    "StructWithInterface": {
-      "doc": "",
-      "doc_formatted": {},
-      "Equals(TestLib:StructWithInterface?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__eq__(TestLib:StructWithInterface)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__ne__(TestLib:StructWithInterface)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Equality(TestLib:StructWithInterface, TestLib:StructWithInterface)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": ""
-      },
-      "op_Inequality(TestLib:StructWithInterface, TestLib:StructWithInterface)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": ""
-      }
-    },
-    "StructWithListMethods": {
+    "StructGeneric[$TA, $TB]": {
       "doc": "",
       "doc_formatted": {}
     },
-    "StructWithMethods": {
-      "doc": "",
-      "doc_formatted": {},
-      "InstanceMethodWithDefaultParam(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithNullableDefaultParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithNullableOutParam(System:*Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithNullableParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithOutParam(System:*Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithParams0()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "InstanceMethodWithParams1(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "InstanceMethodWithParams2(System:Int32, System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": "",
-          "param1": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithDefaultParam(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithNullableDefaultParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithNullableOutParam(System:*Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithNullableParam(System:Int32?)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithOutParam(System:*Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithParams0()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "StaticMethodWithParams1(System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": ""
-        },
-        "return": ""
-      },
-      "StaticMethodWithParams2(System:Int32, System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "param0": "",
-          "param1": ""
-        },
-        "return": ""
-      }
-    },
-    "StructWithMultiGeneric[$U, $V]": {
+    "StructInterfaces": {
       "doc": "",
       "doc_formatted": {}
     },
-    "StructWithNested": {
+    "StructListMethods": {
+      "doc": "",
+      "doc_formatted": {}
+    },
+    "StructMethods": {
       "doc": "",
       "doc_formatted": {},
-      "INestedInterface": {
+      "A()": {
         "doc": "",
-        "doc_formatted": {}
+        "doc_formatted": {},
+        "exceptions": {}
       },
+      "B()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      }
+    },
+    "StructNested": {
+      "doc": "",
+      "doc_formatted": {},
       "NestedClass": {
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedDelegate()": {
+      "NestedStruct": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "INested": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -1811,430 +2739,20 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedStruct": {
+      "NestedDelegate()": {
         "doc": "",
         "doc_formatted": {}
       }
     },
-    "StructWithOperatorMethods": {
+    "StructProperties": {
       "doc": "",
       "doc_formatted": {},
-      "__add__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__and__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__eq__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__ge__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__gt__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__invert__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__le__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__lt__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__mod__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__mul__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__ne__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__neg__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__or__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__pos__()": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "return": ""
-      },
-      "__sub__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__truediv__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "__xor__(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Addition(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_BitwiseAnd(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_BitwiseOr(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Decrement(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Division(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Equality(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_ExclusiveOr(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_False(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_GreaterThan(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_GreaterThanOrEqual(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Increment(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Inequality(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LessThan(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LessThanOrEqual(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_LogicalNot(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Modulus(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_Multiply(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_OnesComplement(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_Subtraction(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": "",
-          "other": ""
-        },
-        "return": ""
-      },
-      "op_True(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_UnaryNegation(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      },
-      "op_UnaryPlus(TestLib:StructWithOperatorMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "exceptions": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": ""
-      }
-    },
-    "StructWithProperties": {
-      "doc": "",
-      "doc_formatted": {},
-      "InstanceProperty0": {
+      "A": {
         "doc": "",
         "doc_formatted": {},
         "return": ""
       },
-      "InstanceProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "InstanceReadOnlyProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticProperty2": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty0": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty1": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": ""
-      },
-      "StaticReadOnlyProperty2": {
+      "B": {
         "doc": "",
         "doc_formatted": {},
         "return": ""

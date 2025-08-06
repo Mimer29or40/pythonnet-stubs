@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import itertools
 import json
 import sys
 from argparse import ZERO_OR_MORE
@@ -24,9 +23,6 @@ from System.Reflection import BindingFlags
 from System.Reflection import TypeInfo
 
 from stubgen.command import CommandArguments
-from stubgen.defaults import ASSEMBLIES
-from stubgen.defaults import BUILT_INS
-from stubgen.defaults import CORE
 from stubgen.log import get_logger
 from stubgen.model import CAssembly
 from stubgen.model import CClass
@@ -199,8 +195,6 @@ def _extract_members[T: CWrapper](
     type_info: TypeInfo, member_func: MemberFunc, skip_parents: bool = False
 ) -> dict[str, T]:
     binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-    # TODO(Ryan): This is probably a bug in PyCharm
-    # noinspection PyTypeChecker
     found: dict[str, T] = {obj.unique_name: obj for obj in member_func(type_info, binding_flags)}
 
     def get_parents(type_info: TypeInfo) -> list[TypeInfo]:
@@ -222,8 +216,6 @@ def _extract_members[T: CWrapper](
     for parent in get_parents(type_info):
         member: T
         for member in member_func(parent, binding_flags):
-            # TODO(Ryan): This is probably a bug in PyCharm
-            # noinspection PyTypeChecker
             key: str = member.unique_name
             try:
                 found[key] = replace(found[key], declaring_type=member.declaring_type)
@@ -463,24 +455,7 @@ def extract_assemblies(
 
         doc_file: Path = output_dir / f"{assembly.name}_{assembly.version}_doc.json"
         logger.debug("Generating doc file: '%s'", doc_file)
-        # doc_tree: DocTree = DocTree(children=[ns. for ns in assembly.namespaces.values()])
-        main_doc_namespace = {}
-        for namespace in namespaces:
-            curr = main_doc_namespace
-            for n in namespace.name.split("."):
-                if n not in curr:
-                    curr[n] = {"doc": ""}
-                curr = curr[n]
-            for type in namespace.types.values():
-                name, doc_json = type.doc_node()
-                curr[name] = doc_json
-
-        with doc_file.open("w") as file:
-            json.dump(
-                main_doc_namespace,
-                file,
-                indent=2,
-            )
+        doc_file.write_text(json.dumps(assembly.doc_tree().to_json(), indent=2))
 
     if threads > 1:
         executor: Executor
@@ -572,46 +547,30 @@ def command_extract(args: ExtractArguments) -> CommandResult:
 
     assembly_names: list[str] = []
     if args.use_all:
+        from stubgen.defaults import ASSEMBLIES
+        from stubgen.defaults import BUILT_INS
+        from stubgen.defaults import CORE
+
         assembly_names.extend(ASSEMBLIES)
         assembly_names.extend(BUILT_INS)
         assembly_names.extend(CORE)
     elif args.use_built_in:
+        from stubgen.defaults import BUILT_INS
+
         assembly_names.extend(BUILT_INS)
     elif args.use_core:
+        from stubgen.defaults import CORE
+
         assembly_names.extend(CORE)
     assembly_names.extend(args.assemblies)
     assembly_names = sorted(set(assembly_names))
 
-    exit_code: CommandResult
-    if args.threads > 1:
-        executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
-        for exit_code in executor.map(
-            extract_assembly,
-            assembly_names,
-            itertools.repeat(args.output_dir),
-            itertools.repeat(args.overwrite),
-        ):
-            if exit_code != 0 and not args.skip_failed:
-                executor.shutdown(cancel_futures=True)
-                return exit_code
-        executor.shutdown(wait=True)
-    else:
-        assembly_name: str
-        for assembly_name in assembly_names:
-            try:
-                exit_code = extract_assembly(assembly_name, args.output_dir, args.overwrite)
-                if exit_code != 0 and not args.skip_failed:
-                    return exit_code
-            except Exception as e:
-                if args.skip_failed:
-                    logger.warning("Could not extract assembly: %s", assembly_name, exc_info=e)
-                else:
-                    raise e from None
-
-    return extract_assemblies(
+    extract_assemblies(
         assembly_names,
         args.output_dir,
         args.threads,
         args.skip_failed,
         args.overwrite,
     )
+
+    return 0

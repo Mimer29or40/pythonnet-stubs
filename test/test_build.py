@@ -2,15 +2,17 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+import json
 from typing import TYPE_CHECKING
 
 import pytest
+from conftest import TL_SKELETON
 from conftest import make_params
 
 from stubgen.build_stubs import NamespaceBuilder
 from stubgen.build_stubs import build_stubs
 from stubgen.build_stubs import format_stubs
+from stubgen.model import CAssembly
 from stubgen.model import CClass
 from stubgen.model import CConstructor
 from stubgen.model import CDelegate
@@ -26,20 +28,13 @@ from stubgen.model import CType
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Sequence
+    from pathlib import Path
 
 
 @pytest.fixture
 def builder() -> NamespaceBuilder:
     """NamespaceBuilder fixture."""
     return NamespaceBuilder(line_length=100)
-
-
-@pytest.fixture
-def output_dir() -> Path:
-    """Output directory fixture."""
-    output_dir: Path = Path("output")
-    output_dir.mkdir(parents=True, exist_ok=True)
-    return output_dir
 
 
 class TestImportType:
@@ -209,7 +204,7 @@ class TestBuildField:
         )
 
         expected: Sequence[str] = [
-            "Name: Final[Type] = ...",
+            "Name: Final[Type]",
             '""""""',
         ]
         actual: Sequence[str] = builder.build_field(obj)
@@ -227,14 +222,13 @@ class TestBuildField:
         )
 
         expected: Sequence[str] = [
-            "Name: Final[ClassVar[Type]] = ...",
+            "Name: ClassVar[Type]",
             '""""""',
         ]
         actual: Sequence[str] = builder.build_field(obj)
 
         assert actual == expected
         assert builder.import_set == {
-            NamespaceBuilder.FINAL,
             NamespaceBuilder.CLASS_VAR,
             "Namespace.Type",
         }
@@ -342,17 +336,15 @@ class TestBuildProperty:
         )
 
         expected: Sequence[str] = [
-            "Name: Final[ClassVar[Type]] = ...",
-            '""""""',
+            "@classmethod",
+            "@property",
+            "def Name(cls) -> Type:",
+            '    """"""',
         ]
         actual: Sequence[str] = builder.build_property(obj)
 
         assert actual == expected
-        assert builder.import_set == {
-            NamespaceBuilder.CLASS_VAR,
-            "Namespace.Type",
-            NamespaceBuilder.FINAL,
-        }
+        assert builder.import_set == {"Namespace.Type"}
 
     def test_static_setter(self, builder: NamespaceBuilder) -> None:
         """Test for NamespaceBuilder.build_property() with a static property with a setter."""
@@ -365,13 +357,18 @@ class TestBuildProperty:
         )
 
         expected: Sequence[str] = [
-            "Name: ClassVar[Type] = ...",
-            '""""""',
+            "@classmethod",
+            "@property",
+            "def Name(cls) -> Type:",
+            '    """"""',
+            "@classmethod",
+            "@Name.setter",
+            "def Name(cls, value: Type) -> None: ...",
         ]
         actual: Sequence[str] = builder.build_property(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.CLASS_VAR, "Namespace.Type"}
+        assert builder.import_set == {"Namespace.Type"}
 
 
 class TestBuildMethod:
@@ -556,7 +553,11 @@ class TestBuildEvent:
         actual: Sequence[str] = builder.build_event(obj)
 
         assert actual == expected
-        assert builder.import_set == {"Namespace.Type", NamespaceBuilder.EVENT_TYPE}
+        assert builder.import_set == {
+            "Namespace.Type",
+            NamespaceBuilder.SELF,
+            NamespaceBuilder.EVENT_TYPE,
+        }
 
 
 class TestBuildClass:
@@ -662,9 +663,9 @@ class TestBuildClass:
         expected: Sequence[str] = [
             "class Name:",
             '    """"""',
-            "    FieldA: Final[Type] = ...",
+            "    FieldA: Final[Type]",
             '    """"""',
-            "    FieldB: Final[Type] = ...",
+            "    FieldB: Final[Type]",
             '    """"""',
         ]
         actual: Sequence[str] = builder.build_class(obj)
@@ -873,7 +874,11 @@ class TestBuildClass:
         actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
-        assert builder.import_set == {"Namespace.Type", NamespaceBuilder.EVENT_TYPE}
+        assert builder.import_set == {
+            "Namespace.Type",
+            NamespaceBuilder.SELF,
+            NamespaceBuilder.EVENT_TYPE,
+        }
 
     def test_nested_types(self, builder: NamespaceBuilder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with nested types."""
@@ -1001,9 +1006,9 @@ class TestBuildInterface:
         expected: Sequence[str] = [
             "class Name:",
             '    """"""',
-            "    FieldA: Final[Type] = ...",
+            "    FieldA: Final[Type]",
             '    """"""',
-            "    FieldB: Final[Type] = ...",
+            "    FieldB: Final[Type]",
             '    """"""',
         ]
         actual: Sequence[str] = builder.build_interface(obj)
@@ -1156,7 +1161,11 @@ class TestBuildInterface:
         actual: Sequence[str] = builder.build_interface(obj)
 
         assert actual == expected
-        assert builder.import_set == {"Namespace.Type", NamespaceBuilder.EVENT_TYPE}
+        assert builder.import_set == {
+            "Namespace.Type",
+            NamespaceBuilder.SELF,
+            NamespaceBuilder.EVENT_TYPE,
+        }
 
     def test_nested_types(self, builder: NamespaceBuilder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with nested types."""
@@ -1450,7 +1459,7 @@ class TestBuildStubs:
         files: Sequence[str],
     ) -> None:
         """Test for build_stubs()."""
-        build_stubs(builder, namespaces, tmp_path)
+        build_stubs(builder, namespaces, tmp_path, threads=1)
 
         for file in files:
             stub_file: Path = tmp_path / file / "__init__.pyi"
@@ -1473,20 +1482,11 @@ class TestBuildStubs:
 
             assert stub_file.exists()
 
-    # def test_build_test_lib(self) -> None:
-    #     skeleton_name: str = "TestLib_1.0.0.0_skeleton.json"
-    #     doc_name: str = "TestLib_1.0.0.0_doc.json"
-    #
-    #     result = build_stubs(
-    #         skeleton_files=(Path(skeleton_name),),
-    #         doc_files=(Path(doc_name),),
-    #         output_dir=self.output_dir,
-    #         line_length=100,
-    #         multi_threaded=False,
-    #         format_files=True,
-    #     )
-    #
-    #     self.assertEqual(0, result)
+    def test_test_lib(self, builder: NamespaceBuilder, output_dir: Path) -> None:
+        """Test for build_stubs() with TestLib."""
+        skeleton_file: Path = output_dir / TL_SKELETON
+        skeleton: CAssembly = CAssembly.from_json(json.loads(skeleton_file.read_text()))
+        build_stubs(builder, list(skeleton.namespaces.values()), output_dir, threads=1)
 
 
 class TestFormatStubs:

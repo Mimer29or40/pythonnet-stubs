@@ -36,7 +36,7 @@ def _is_valid_python_name(name: str) -> bool:  # pragma: no cover
     return name.isidentifier() and not keyword.iskeyword(name)
 
 
-illegal_chars: Pattern[str] = re.compile(r"`\d+|&|\[|]|\*|<|>")
+illegal_chars: Pattern[str] = re.compile(r"`\d+|&|\[|]|\*|<|>|\$")
 
 
 def make_python_name(string: str) -> str:

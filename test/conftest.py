@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
+
+import pytest
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
@@ -11,9 +14,22 @@ if TYPE_CHECKING:  # pragma: no cover
     type ParamSequence[T] = Sequence[tuple[str, T]]
 
 
+TEST_LIB: str = "TestLib"
+TL_SKELETON: str = f"{TEST_LIB}_1.0.0.0_skeleton.json"
+TL_DOC: str = f"{TEST_LIB}_1.0.0.0_doc.json"
+
+
 def make_params[T](o: ParamSequence[T]) -> Mapping[str, ...]:
     """Make pytest.mark.parametrize arguments with a ParamSequence."""
     return {
         "argvalues": [payload for _, payload in o],
         "ids": [identifier for identifier, _ in o],
     }
+
+
+@pytest.fixture
+def output_dir() -> Path:
+    """Output directory fixture."""
+    output_dir: Path = Path("output")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    return output_dir

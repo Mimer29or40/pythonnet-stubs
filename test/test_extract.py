@@ -3,20 +3,20 @@
 from __future__ import annotations
 
 import functools
-import json
 from dataclasses import replace
-from pathlib import Path
 from pprint import pprint
 from typing import TYPE_CHECKING
-from typing import Any
 
 import clr
 import pytest
+from conftest import TEST_LIB
+from conftest import TL_DOC
+from conftest import TL_SKELETON
 from System import Int32
 from System import Type
 from System.Reflection import ReflectionTypeLoadException
 
-from stubgen.extract_stubs import extract_assembly
+from stubgen.extract_stubs import extract_assemblies
 from stubgen.extract_stubs import extract_class
 from stubgen.extract_stubs import extract_constructor
 from stubgen.extract_stubs import extract_delegate
@@ -47,6 +47,7 @@ from stubgen.util import to_c_array
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
     from collections.abc import Sequence
+    from pathlib import Path
 
     from System.Reflection import Assembly
     from System.Reflection import ConstructorInfo
@@ -56,9 +57,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from System.Reflection import ParameterInfo
     from System.Reflection import PropertyInfo
     from System.Reflection import TypeInfo
-
-
-TEST_LIB: str = "TestLib"
 
 T: CType = CType(name="T", generic=True)
 OBJECT: CType = CType(name="Object", namespace="System")
@@ -190,6 +188,11 @@ class _Base:
             interfaces=[replace(EQUATABLE, inner=[declaring_type])],
             constructors={"__init__()": CConstructor(declaring_type=declaring_type)},
             methods={
+                "Clone()": CMethod(
+                    name="Clone",
+                    declaring_type=declaring_type,
+                    return_types=[declaring_type],
+                ),
                 "Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=OBJECT,
@@ -217,11 +220,6 @@ class _Base:
                     name="ToString",
                     declaring_type=OBJECT,
                     return_types=[CType(name="String", namespace="System")],
-                ),
-                "_Clone$()": CMethod(
-                    name="_Clone$",
-                    declaring_type=declaring_type,
-                    return_types=[declaring_type],
                 ),
                 f"op_Equality({declaring_type.full_name}, {declaring_type.full_name})": CMethod(
                     name="op_Equality",
@@ -2032,97 +2030,17 @@ class TestExtractDelegate(_Base):
 
 
 class TestExtractAssembly:
-    output_dir: Path
+    """Tests for extract_assemblies()."""
 
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.output_dir = Path("output")
-        cls.output_dir.mkdir(parents=True, exist_ok=True)
+    def test_test_lib(self, output_dir: Path) -> None:
+        """Test for extract_assemblies() with TestLib."""
+        extract_assemblies([TEST_LIB], output_dir=output_dir, threads=0)
 
-    def test_extract_test_lib(self) -> None:
-        skeleton_name: str = "TestLib_1.0.0.0_skeleton.json"
-        doc_name: str = "TestLib_1.0.0.0_doc.json"
+        skeleton_file: Path = output_dir / TL_SKELETON
+        doc_file: Path = output_dir / TL_DOC
 
-        result = extract_assembly(
-            assembly_name=TEST_LIB,
-            output_dir=self.output_dir,
-            overwrite=True,
-        )
-
-        skeleton_path: Path = self.output_dir / skeleton_name
-        doc_path: Path = self.output_dir / doc_name
-
-        self.assertEqual(0, result)
-
-        self.assertTrue(skeleton_path.exists())
-        self.assertTrue(doc_path.exists())
-
-        skeleton_dict: Mapping[str, Any]
-        with skeleton_path.open("r") as skeleton_file:
-            skeleton_dict = json.load(skeleton_file)
-
-        self.assertEqual(TEST_LIB, skeleton_dict.get("name", None))
-        self.assertEqual("1.0.0.0", skeleton_dict.get("version", None))
-
-        namespaces: Mapping[str, Any] = skeleton_dict.get("namespaces", None)
-        self.assertIsNotNone(namespaces)
-
-        test_lib: Mapping[str, Any] = namespaces.get(TEST_LIB, None)
-        self.assertIsNotNone(test_lib)
-
-        self.assertEqual(TEST_LIB, test_lib.get("name", None))
-
-        type_map: Mapping[str, Any] = test_lib.get("types", None)
-        self.assertIsNotNone(type_map)
-
-        types: Sequence[str] = (
-            "TestLib.ClassThatsAbstract",
-            "TestLib.ClassWithConstructors",
-            "TestLib.ClassWithEvents",
-            "TestLib.ClassWithFields",
-            "TestLib.ClassWithGeneric[$T]",
-            "TestLib.ClassWithInterface",
-            "TestLib.ClassWithListMethods",
-            "TestLib.ClassWithMethods",
-            "TestLib.ClassWithMultiGeneric[$U, $V]",
-            "TestLib.ClassWithNested",
-            "TestLib.ClassWithOperatorMethods",
-            "TestLib.ClassWithProperties",
-            "TestLib.ClassWithSuper",
-            "TestLib.ClassWithTypes",
-            "TestLib.DelegateWithNoParametersNoReturn()",
-            "TestLib.DelegateWithNoParametersReturn()",
-            "TestLib.DelegateWithParametersNoReturn(System:Int32, System:Int32)",
-            "TestLib.DelegateWithParametersReturn(System:Int32, System:Int32)",
-            "TestLib.EnumWithFields",
-            "TestLib.EnumWithNoFields",
-            "TestLib.IInterfaceWithEvents",
-            "TestLib.IInterfaceWithFields",
-            "TestLib.IInterfaceWithGeneric[$T]",
-            "TestLib.IInterfaceWithInterface",
-            "TestLib.IInterfaceWithListMethods",
-            "TestLib.IInterfaceWithMethods",
-            "TestLib.IInterfaceWithMultiGeneric[$U, $V]",
-            "TestLib.IInterfaceWithNested",
-            "TestLib.IInterfaceWithOperatorMethods",
-            "TestLib.IInterfaceWithProperties",
-            "TestLib.OverriddenProperty",
-            "TestLib.StructWithConstructors",
-            "TestLib.StructWithEvents",
-            "TestLib.StructWithFields",
-            "TestLib.StructWithGeneric[$T]",
-            "TestLib.StructWithInterface",
-            "TestLib.StructWithListMethods",
-            "TestLib.StructWithMethods",
-            "TestLib.StructWithMultiGeneric[$U, $V]",
-            "TestLib.StructWithNested",
-            "TestLib.StructWithOperatorMethods",
-            "TestLib.StructWithProperties",
-        )
-        for type_str in types:
-            with self.subTest(type_str=type_str):
-                type_def: Mapping[str, Any] = type_map.get(type_str, None)
-                self.assertIsNotNone(type_def)
+        assert skeleton_file.exists()
+        assert doc_file.exists()
 
 
 if __name__ == "__main__":

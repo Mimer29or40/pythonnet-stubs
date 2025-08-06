@@ -49,6 +49,7 @@ if TYPE_CHECKING:  # pragma: no cover
             ("*", ("Type*", "Type")),
             ("<", ("Type<", "Type")),
             (">", ("Type>", "Type")),
+            ("$", ("Type$", "Type")),
             ("None", ("None", "_None")),
             ("empty", ("", "_")),
         ]

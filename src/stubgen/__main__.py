@@ -83,7 +83,7 @@ def main(*args: str) -> CommandResult:
 
             root_handler.setLevel(logging.DEBUG)
 
-        match parsed_args.commands:
+        match parsed_args.command:
             case "extract":
                 command_args: ExtractArguments = ExtractArguments(**parsed_args.__dict__)
                 exit_code = command_extract(command_args)

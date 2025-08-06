@@ -62,13 +62,14 @@ logger: Logger = get_logger(__name__)
 class NamespaceBuilder:
     """Class that builds the stub files for C# libraries."""
 
-    EVENT_TYPE: ClassVar[str] = "--[EVENT_TYPE]--"
     ABC: ClassVar[str] = "abc.ABC"
-    FINAL: ClassVar[str] = "typing.Final"
-    CLASS_VAR: ClassVar[str] = "typing.ClassVar"
-    OVERLOAD: ClassVar[str] = "typing.overload"
-    ENUM: ClassVar[str] = "System.Enum"
     CALLABLE: ClassVar[str] = "collections.abc.Callable"
+    CLASS_VAR: ClassVar[str] = "typing.ClassVar"
+    ENUM: ClassVar[str] = "System.Enum"
+    EVENT_TYPE: ClassVar[str] = "--[EVENT_TYPE]--"
+    FINAL: ClassVar[str] = "typing.Final"
+    OVERLOAD: ClassVar[str] = "typing.overload"
+    SELF: ClassVar[str] = "typing.Self"
 
     line_length: int
     doc_tree: DocTree = field(default_factory=DocTree)
@@ -76,8 +77,10 @@ class NamespaceBuilder:
 
     def import_type(self, obj: CType) -> None:
         """Add a type to the import list."""
-        if obj == CType.VOID or obj.generic:
+        if obj == CType.VOID or obj.generic or "." in obj.name:
+            # VOID does NOT need to be imported.
             # No longer need to declare TypeVar.
+            # Nested types have a "." in the name and do not need to be imported.
             return
         self.import_set.add(obj.import_name)
         inner: CType
@@ -92,7 +95,8 @@ class NamespaceBuilder:
             return "None"
 
         type_str: str
-        if convert:
+        if convert and not obj.reference:
+            # Don't convert if object is a reference because basic python objects are only by value
             type_map: Mapping[str, str] = {
                 "Boolean": "bool",
                 "SByte": "int",
@@ -135,7 +139,7 @@ class NamespaceBuilder:
         """Build a string representation for a CParameter."""
         logger.debug("Building parameter: %s", obj.unique_name)
 
-        param_str: str = f"{obj.name}: {self.build_type(obj.type)}"
+        param_str: str = f"{obj.name}: {self.build_type(obj.type, convert=True)}"
         if obj.default:
             param_str = param_str + " = ..."
         return param_str
@@ -156,14 +160,17 @@ class NamespaceBuilder:
         """Build a list of strings to represent a CField."""
         logger.debug("Building field: %s", obj.unique_name)
 
-        self.import_set.add(self.FINAL)
-
-        type_str: str = self.build_type(obj.return_type)
+        type_str: str = self.build_type(obj.return_type, convert=True)
         if obj.static:
+            # This code is disabled as Final and ClassVar do not play nicely together
+            # Final implies ClassVar
             self.import_set.add(self.CLASS_VAR)
             type_str = f"ClassVar[{type_str}]"
+        else:
+            self.import_set.add(self.FINAL)
+            type_str = f"Final[{type_str}]"
 
-        lines: list[str] = [f"{'    ' * indent}{obj.name}: Final[{type_str}] = ..."]
+        lines: list[str] = [f"{'    ' * indent}{obj.name}: {type_str}"]
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent))
@@ -214,31 +221,29 @@ class NamespaceBuilder:
 
         indent_str: str = "    " * indent
 
+        lines: list[str] = []
+        self_cls: str = "self"
         if obj.static:
-            self.import_set.add(self.CLASS_VAR)
-            type_str: str = f"ClassVar[{self.build_type(obj.type)}]"
-            if not obj.setter:
-                self.import_set.add(self.FINAL)
-                type_str = f"Final[{type_str}]"
+            self_cls = "cls"
+            lines.append(f"{indent_str}@classmethod")
 
-            lines: list[str] = [f"{indent_str}{obj.name}: {type_str} = ..."]
+        lines.append(f"{indent_str}@property")
 
-            doc_node: DocNode = self.doc_tree[obj.unique_name]
-            lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent))
-
-            return lines
-
-        lines: list[str] = [f"{indent_str}@property"]
-
-        property_type: str = self.build_type(obj.type)
-        lines.append(f"{indent_str}def {obj.name}(self) -> {property_type}:")
+        property_type: str = self.build_type(obj.type, convert=True)
+        lines.append(f"{indent_str}def {obj.name}({self_cls}) -> {property_type}:")
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         if obj.setter:
-            lines.append(f"{indent_str}@{obj.name}.setter")
-            lines.append(f"{indent_str}def {obj.name}(self, value: {property_type}) -> None: ...")
+            if obj.static:
+                lines.append(f"{indent_str}@classmethod")
+            lines.extend(
+                (
+                    f"{indent_str}@{obj.name}.setter",
+                    f"{indent_str}def {obj.name}({self_cls}, value: {property_type}) -> None: ...",
+                )
+            )
 
         return lines
 
@@ -271,12 +276,22 @@ class NamespaceBuilder:
 
         return_str: str
         if len(obj.return_types) > 1:
-            return_types: list[str] = [self.build_type(t) for t in obj.return_types]
+            return_types: list[str] = [self.build_type(t, convert=True) for t in obj.return_types]
             return_str = f"tuple[{', '.join(return_types)}]"
         else:
-            return_str = self.build_type(obj.return_types[0])
+            return_str = self.build_type(obj.return_types[0], convert=True)
 
-        lines.append(f"{'    ' * indent}def {obj.name}({', '.join(parameters)}) -> {return_str}:")
+        generic_types: Sequence[CType] = [
+            *(param.type for param in obj.parameters if param.type.generic),
+            *(ret for ret in obj.return_types if ret.generic),
+        ]
+        generic_params: str = ""
+        if len(generic_types) > 0:
+            generic_params = f"[{', '.join(gt.name for gt in generic_types)}]"
+
+        lines.append(
+            f"{'    ' * indent}def {obj.name}{generic_params}({', '.join(parameters)}) -> {return_str}:"
+        )
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
@@ -299,8 +314,11 @@ class NamespaceBuilder:
         indent_str: str = "    " * indent
 
         self.import_set.add(self.EVENT_TYPE)
+        self.import_set.add(self.SELF)
 
-        lines: list[str] = [f"{indent_str}{obj.name}: EventType[{self.build_type(obj.type)}] = ..."]
+        lines: list[str] = [
+            f"{indent_str}{obj.name}: EventType[{self.build_type(obj.type, convert=True)}] = ..."
+        ]
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent))
@@ -412,7 +430,7 @@ class NamespaceBuilder:
 
         parameters: Sequence[str] = [self.build_type(p.type, convert=True) for p in obj.parameters]
 
-        return_str: str = self.build_type(obj.return_type)
+        return_str: str = self.build_type(obj.return_type, convert=True)
 
         lines: list[str] = [
             f"{'    ' * indent}{obj.name}: Callable[[{', '.join(parameters)}], {return_str}] = ...",

@@ -717,6 +717,23 @@ class TestCType:
             (CType(name="Name", reference=True, generic=True, nullable=True), "$*Name?"),
         ),
         ("inner", (CType(name="Name", inner=[CType(name="A"), CType(name="B")]), "Name[A, B]")),
+        (
+            "complex",
+            (
+                CType(
+                    name="IEquatable",
+                    namespace="System",
+                    inner=[
+                        CType(
+                            name="RecordGeneric",
+                            namespace="TestLib",
+                            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+                        )
+                    ],
+                ),
+                "System:IEquatable[TestLib:RecordGeneric[$TA, $TB]]",
+            ),
+        ),
     ]
 
     @pytest.mark.parametrize(("obj", "json"), **make_params(json_objects))
@@ -3449,6 +3466,25 @@ class TestCNamespace:
 
         assert actual == expected
 
+    doc_objects: ClassVar[ParamSequence[tuple[CNamespace, DocNode]]] = [
+        ("basic", (CNamespace(name="Name"), DocNode(name="Name"))),
+        (
+            "nested",
+            (
+                CNamespace(name="A.B.C"),
+                DocNode(name="A", children=[DocNode(name="B", children=[DocNode(name="C")])]),
+            ),
+        ),
+    ]
+
+    @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
+    def test_doc_node(self, obj: CNamespace, doc: DocNode) -> None:
+        """Test for CNamespace.doc_node()."""
+        expected: DocNode = doc
+        actual: DocNode = obj.doc_node()
+
+        assert actual == expected
+
     compare_list: ClassVar[ParamSequence[tuple[CNamespace, CNamespace]]] = [
         ("name", (CNamespace(name="A"), CNamespace(name="B"))),
     ]
@@ -3513,7 +3549,7 @@ class TestCNamespace:
 class TestCAssembly:
     """Tests for CAssembly."""
 
-    unique_name_objects: ClassVar[ParamSequence[tuple[CNamespace, str]]] = [
+    unique_name_objects: ClassVar[ParamSequence[tuple[CAssembly, str]]] = [
         ("basic", (CAssembly(name="Name", version="0.0.0.0"), "Name")),
     ]
 
@@ -3565,6 +3601,47 @@ class TestCAssembly:
         """Test for CAssembly.from_json()."""
         expected: CAssembly = obj
         actual: CAssembly = CAssembly.from_json(json)
+
+        assert actual == expected
+
+    doc_objects: ClassVar[ParamSequence[tuple[CAssembly, DocTree]]] = [
+        (
+            "basic",
+            (
+                CAssembly(
+                    name="Name",
+                    namespaces={"A": CNamespace(name="A"), "B": CNamespace(name="B")},
+                ),
+                DocTree(children=[DocNode(name="A"), DocNode(name="B")]),
+            ),
+        ),
+        (
+            "nested",
+            (
+                CAssembly(
+                    name="Name",
+                    namespaces={
+                        "A": CNamespace(name="A"),
+                        "A.B": CNamespace(name="A.B"),
+                        "A.B.C": CNamespace(name="A.B.C"),
+                    },
+                ),
+                DocTree(
+                    children=[
+                        DocNode(
+                            name="A", children=[DocNode(name="B", children=[DocNode(name="C")])]
+                        )
+                    ]
+                ),
+            ),
+        ),
+    ]
+
+    @pytest.mark.parametrize(("obj", "doc"), **make_params(doc_objects))
+    def test_doc_node(self, obj: CAssembly, doc: DocTree) -> None:
+        """Test for CAssembly.doc_tree()."""
+        expected: DocTree = doc
+        actual: DocTree = obj.doc_tree()
 
         assert actual == expected
 

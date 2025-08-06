@@ -13202,13 +13202,13 @@ class EventArgs(Object):
     def ToString(self) -> str:
         """:return:"""
 
-EventHandler: Callable[[object, TEventArgs], None] = ...
+type EventHandler[TEventArgs] = Callable[[object, TEventArgs], None]
 """
 
 :param sender: 
 :param e: 
 """
-EventHandler: Callable[[object, EventArgs], None] = ...
+type EventHandler = Callable[[object, EventArgs], None]
 """
 
 :param sender: 

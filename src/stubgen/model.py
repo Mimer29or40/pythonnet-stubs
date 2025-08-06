@@ -397,7 +397,8 @@ class CType(CWrapper):
         name: str = match.group(2)
         inner: Sequence[CType] = []
         if (inner_str := match.group(3)) is not None:
-            inner = list(map(CType.from_json, inner_str.split(", ")))
+            # Split inner types on comma-space pairs that are not between brackets
+            inner = list(map(CType.from_json, re.split(r", (?![^\[\]]*])", inner_str)))
         return cls(
             name=re.sub(r"[?$*]", "", name),
             namespace=match.group(1),
@@ -1076,10 +1077,14 @@ class CNamespace(CWrapper, DocNodeMixin, MergeMixin):
 
     @override
     def doc_node(self) -> DocNode:
-        return DocNode(
-            self.unique_name.split(".")[-1],
+        namespaces: Sequence[str] = self.unique_name.split(".")
+        node: DocNode = DocNode(
+            namespaces[-1],
             children=[t.doc_node() for t in self.types.values()],
         )
+        for ns in reversed(namespaces[:-1]):
+            node = DocNode(ns, children=[node])
+        return node
 
     @classmethod
     @override
@@ -1112,7 +1117,7 @@ class CNamespace(CWrapper, DocNodeMixin, MergeMixin):
 class CAssembly(CWrapper):
     """C# Assembly wrapper."""
 
-    version: str
+    version: str = "0.0.0.0"
     namespaces: Mapping[str, CNamespace] = field(default_factory=dict)
 
     @override
@@ -1125,8 +1130,14 @@ class CAssembly(CWrapper):
 
     def doc_tree(self) -> DocTree:
         """Create a DocTree for this CAssembly."""
-        # This will have to handle deep namespaces A.B.C
-        # TODO(Ryan): Do this
+        nodes: dict[str, DocNode] = {}
+        namespace: CNamespace
+        for namespace in self.namespaces.values():
+            ns_node: DocNode = namespace.doc_node()
+            if ns_node.name in nodes:
+                ns_node = DocNode.merge(ns_node, nodes[ns_node.name])
+            nodes[ns_node.name] = ns_node
+        return DocTree(children=list(nodes.values()))
 
     @classmethod
     @override
