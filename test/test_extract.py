@@ -23,7 +23,6 @@ from stubgen.extract_stubs import extract_delegate
 from stubgen.extract_stubs import extract_enum
 from stubgen.extract_stubs import extract_event
 from stubgen.extract_stubs import extract_field
-from stubgen.extract_stubs import extract_interface
 from stubgen.extract_stubs import extract_method
 from stubgen.extract_stubs import extract_parameter
 from stubgen.extract_stubs import extract_property
@@ -35,7 +34,6 @@ from stubgen.model import CDelegate
 from stubgen.model import CEnum
 from stubgen.model import CEvent
 from stubgen.model import CField
-from stubgen.model import CInterface
 from stubgen.model import CMethod
 from stubgen.model import CParameter
 from stubgen.model import CProperty
@@ -257,11 +255,12 @@ class _Base:
         )
 
     @classmethod
-    def basic_interface(cls, declaring_type: CType, parent: CType | None = None) -> CInterface:
-        return CInterface(
+    def basic_interface(cls, declaring_type: CType, parent: CType | None = None) -> CClass:
+        return CClass(
             name=declaring_type.name,
             namespace=declaring_type.namespace,
             parent=parent,
+            abstract=True,
             generic_args=declaring_type.inner,
         )
 
@@ -1108,7 +1107,7 @@ class TestExtractTypeDef(_Base):
 
         actual: CTypeDefinition | None = extract_type_def(interface)
 
-        assert isinstance(actual, CInterface)
+        assert isinstance(actual, CClass)
 
     def test_enum(self, assembly: Assembly) -> None:
         """Tests for extract_type_def() with an enum."""
@@ -1760,21 +1759,21 @@ class TestExtractRecord(_Base):
 
 
 class TestExtractInterface(_Base):
-    """Tests for extract_interface() with structs."""
+    """Tests for extract_class() with interfaces."""
 
     def test_basic(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with a basic interface."""
+        """Tests for extract_class() with a basic interface."""
         name: str = "IBasic"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        expected: CInterface | None = self.basic_interface(declaring_type)
-        actual: CInterface | None = extract_interface(interface)
+        expected: CClass | None = self.basic_interface(declaring_type)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_generic(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with a generic record."""
+        """Tests for extract_class() with a generic record."""
         name: str = "IGeneric"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(
@@ -1783,19 +1782,19 @@ class TestExtractInterface(_Base):
             inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
         )
 
-        expected: CInterface | None = self.basic_interface(declaring_type)
-        actual: CInterface | None = extract_interface(interface)
+        expected: CClass | None = self.basic_interface(declaring_type)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_interfaces(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with interfaces."""
+        """Tests for extract_class() with an interface with interfaces."""
         name: str = "IInterfaces"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        basic: CInterface = self.basic_interface(declaring_type)
-        expected: CInterface | None = replace(
+        basic: CClass = self.basic_interface(declaring_type)
+        expected: CClass | None = replace(
             basic,
             interfaces=[replace(COMPARABLE, inner=[OBJECT]), replace(EQUATABLE, inner=[OBJECT])],
             methods={
@@ -1816,17 +1815,17 @@ class TestExtractInterface(_Base):
                 ),
             },
         )
-        actual: CInterface | None = extract_interface(interface)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_fields(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with fields."""
+        """Tests for extract_class() with an interface with fields."""
         name: str = "IFields"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        expected: CInterface | None = replace(
+        expected: CClass | None = replace(
             self.basic_interface(declaring_type),
             fields={
                 "A": CField(
@@ -1843,35 +1842,35 @@ class TestExtractInterface(_Base):
                 ),
             },
         )
-        actual: CInterface | None = extract_interface(interface)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_properties(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with properties."""
+        """Tests for extract_class() with an interface with properties."""
         name: str = "IProperties"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        expected: CInterface | None = replace(
+        expected: CClass | None = replace(
             self.basic_interface(declaring_type),
             properties={
                 "A": CProperty(name="A", declaring_type=declaring_type, type=INT32),
                 "B": CProperty(name="B", declaring_type=declaring_type, type=INT32, setter=True),
             },
         )
-        actual: CInterface | None = extract_interface(interface)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_methods(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with methods."""
+        """Tests for extract_class() with an interface with methods."""
         name: str = "IMethods"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        basic: CInterface = self.basic_interface(declaring_type)
-        expected: CInterface | None = replace(
+        basic: CClass = self.basic_interface(declaring_type)
+        expected: CClass | None = replace(
             basic,
             methods={
                 **basic.methods,
@@ -1879,35 +1878,35 @@ class TestExtractInterface(_Base):
                 "B()": CMethod(name="B", declaring_type=declaring_type, return_types=[INT32]),
             },
         )
-        actual: CInterface | None = extract_interface(interface)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_dunder_methods(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with dunder methods."""
+        """Tests for extract_class() with an interface with dunder methods."""
         name: str = "IDunderMethods"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        basic: CInterface = self.basic_interface(declaring_type)
+        basic: CClass = self.basic_interface(declaring_type)
         methods: dict[str, CMethod] = {**basic.methods, **self.dunder_methods(declaring_type)}
         del methods[f"op_Equality({declaring_type.full_name}, {declaring_type.full_name})"]
         del methods[f"op_Inequality({declaring_type.full_name}, {declaring_type.full_name})"]
         del methods[f"__eq__({declaring_type.full_name})"]
         del methods[f"__ne__({declaring_type.full_name})"]
-        expected: CInterface | None = replace(basic, methods=methods)
-        actual: CInterface | None = extract_interface(interface)
+        expected: CClass | None = replace(basic, methods=methods)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_list_methods(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with list methods."""
+        """Tests for extract_class() with an interface with list methods."""
         name: str = "IListMethods"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        basic: CInterface = self.basic_interface(declaring_type)
-        expected: CInterface | None = replace(
+        basic: CClass = self.basic_interface(declaring_type)
+        expected: CClass | None = replace(
             basic,
             interfaces=[
                 CType(name="IEnumerable", namespace="System.Collections"),
@@ -1918,38 +1917,38 @@ class TestExtractInterface(_Base):
             properties=self.list_properties(),
             methods={**basic.methods, **self.list_methods(INT32)},
         )
-        actual: CInterface | None = extract_interface(interface)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_events(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with events."""
+        """Tests for extract_class() with an interface with events."""
         name: str = "IEvents"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        expected: CInterface | None = replace(
+        expected: CClass | None = replace(
             self.basic_interface(declaring_type),
             events={
                 "A": CEvent(name="A", declaring_type=declaring_type, type=EVENT_HANDLER),
                 "B": CEvent(name="B", declaring_type=declaring_type, type=EVENT_HANDLER_ARGS),
             },
         )
-        actual: CInterface | None = extract_interface(interface)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 
     def test_nested(self, assembly: Assembly) -> None:
-        """Tests for extract_interface() with an interface with events."""
+        """Tests for extract_class() with an interface with events."""
         name: str = "INested"
         interface: TypeInfo = self.get_type(assembly, name)
         declaring_type: CType = CType(name=name, namespace=TEST_LIB)
 
-        expected: CInterface | None = replace(
+        expected: CClass | None = replace(
             self.basic_interface(declaring_type),
             nested_types=self.nested_types(declaring_type),
         )
-        actual: CInterface | None = extract_interface(interface)
+        actual: CClass | None = extract_class(interface)
 
         assert actual == expected
 

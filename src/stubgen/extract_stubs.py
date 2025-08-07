@@ -31,7 +31,6 @@ from stubgen.model import CDelegate
 from stubgen.model import CEnum
 from stubgen.model import CEvent
 from stubgen.model import CField
-from stubgen.model import CInterface
 from stubgen.model import CMethod
 from stubgen.model import CNamespace
 from stubgen.model import CParameter
@@ -333,7 +332,7 @@ def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
             return extract_enum(info)
         return extract_class(info)
     if info.IsInterface:
-        return extract_interface(info)
+        return extract_class(info)
     # noinspection PyTypeChecker
     if info not in (Delegate, MulticastDelegate) and info.IsSubclassOf(Delegate):
         return extract_delegate(info)
@@ -357,24 +356,6 @@ def extract_class(info: TypeInfo) -> CClass:
         interfaces=sorted(map(extract_type, info.GetInterfaces())),
         fields=_extract_members(info, _get_fields),
         constructors=_extract_members(info, _get_constructors, skip_parents=True),
-        properties=_extract_members(info, _get_properties),
-        methods=_get_methods(info),
-        events=_extract_members(info, _get_events),
-        nested_types=_extract_members(info, _get_nested),
-    )
-
-
-def extract_interface(info: TypeInfo) -> CInterface:
-    """Extract a TypeInfo object into a CInterface."""
-    logger.info("Extracting interface '%s.%s'", info.Namespace, info.Name)
-
-    return CInterface(
-        name=make_python_name(info.Name),
-        namespace=info.Namespace,
-        parent=extract_type(info.DeclaringType),
-        generic_args=list(map(extract_type, info.GetGenericArguments())),
-        interfaces=sorted(map(extract_type, info.GetInterfaces())),
-        fields=_extract_members(info, _get_fields),
         properties=_extract_members(info, _get_properties),
         methods=_get_methods(info),
         events=_extract_members(info, _get_events),

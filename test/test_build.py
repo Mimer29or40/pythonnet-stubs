@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from typing import TYPE_CHECKING
 
 import pytest
 from conftest import TL_SKELETON
 from conftest import make_params
 
+from stubgen.build_stubs import BuildArguments
 from stubgen.build_stubs import Builder
 from stubgen.build_stubs import build_stubs
 from stubgen.build_stubs import format_stubs
@@ -19,7 +21,6 @@ from stubgen.model import CDelegate
 from stubgen.model import CEnum
 from stubgen.model import CEvent
 from stubgen.model import CField
-from stubgen.model import CInterface
 from stubgen.model import CMethod
 from stubgen.model import CNamespace
 from stubgen.model import CParameter
@@ -31,10 +32,19 @@ if TYPE_CHECKING:  # pragma: no cover
     from pathlib import Path
 
 
+LINE_LENGTH: int = 100
+
+
 @pytest.fixture
 def builder() -> Builder:
-    """NamespaceBuilder fixture."""
-    return Builder(line_length=100)
+    """Builder fixture."""
+    return Builder(line_length=LINE_LENGTH)
+
+
+@pytest.fixture
+def args() -> BuildArguments:
+    """BuildArguments fixture."""
+    return BuildArguments(line_length=LINE_LENGTH, format_files=True, skeletons="", docs="")
 
 
 class TestImportType:
@@ -885,7 +895,7 @@ class TestBuildClass:
                     namespace="Namespace",
                     parent=CType(name="Name", namespace="Namespace"),
                 ),
-                "INestedInterface": CInterface(
+                "INestedInterface": CClass(
                     name="INestedInterface",
                     namespace="Namespace",
                     parent=CType(name="Name", namespace="Namespace"),
@@ -928,23 +938,23 @@ class TestBuildClass:
 
 
 class TestBuildInterface:
-    """Tests for NamespaceBuilder.build_interface()."""
+    """Tests for NamespaceBuilder.build_class() with interfaces."""
 
     def test_basic(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with a basic interface."""
-        obj: CInterface = CInterface(name="Name", namespace="Namespace")
+        """Test for NamespaceBuilder.build_class() with a basic interface."""
+        obj: CClass = CClass(name="Name", namespace="Namespace")
 
         expected: Sequence[str] = [
             "class Name:",
             '    """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
 
     def test_generic(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with generic arguments."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with generic arguments."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
@@ -954,13 +964,13 @@ class TestBuildInterface:
             "class Name[A, B]:",
             '    """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
 
     def test_interfaces(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with interfaces."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with interfaces."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             interfaces=[
@@ -973,14 +983,14 @@ class TestBuildInterface:
             "class Name(InterfaceA, InterfaceB):",
             '    """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
         assert builder.import_set == {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
     def test_fields(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with fields."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with fields."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             fields={
@@ -1005,14 +1015,14 @@ class TestBuildInterface:
             "    FieldB: Final[Type]",
             '    """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
         assert builder.import_set == {Builder.FINAL, "Namespace.Type"}
 
     def test_properties(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with properties."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with properties."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             properties={
@@ -1039,14 +1049,14 @@ class TestBuildInterface:
             "    def PropertyB(self) -> Type:",
             '        """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
     def test_methods(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with methods."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with methods."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             methods={
@@ -1079,14 +1089,14 @@ class TestBuildInterface:
             "    def MethodB(self, param0: Type, param1: Type) -> Type:",
             '        """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
     def test_methods_overload(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with overloaded methods."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with overloaded methods."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             methods={
@@ -1120,14 +1130,14 @@ class TestBuildInterface:
             "    def Method(self, param0: Type, param1: Type) -> Type:",
             '        """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
         assert builder.import_set == {Builder.OVERLOAD, "Namespace.Type"}
 
     def test_events(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with events."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with events."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             events={
@@ -1152,7 +1162,7 @@ class TestBuildInterface:
             "    EventB: EventType[Type] = ...",
             '    """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
         assert builder.import_set == {
@@ -1162,8 +1172,8 @@ class TestBuildInterface:
         }
 
     def test_nested_types(self, builder: Builder) -> None:
-        """Test for NamespaceBuilder.build_interface() with an interface with nested types."""
-        obj: CInterface = CInterface(
+        """Test for NamespaceBuilder.build_class() with an interface with nested types."""
+        obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
             nested_types={
@@ -1177,7 +1187,7 @@ class TestBuildInterface:
                     namespace="Namespace",
                     parent=CType(name="Name", namespace="Namespace"),
                 ),
-                "INestedInterface": CInterface(
+                "INestedInterface": CClass(
                     name="INestedInterface",
                     namespace="Namespace",
                     parent=CType(name="Name", namespace="Namespace"),
@@ -1211,7 +1221,7 @@ class TestBuildInterface:
             "    NestedDelegate: Callable[[], Type] = ...",
             '    """"""',
         ]
-        actual: Sequence[str] = builder.build_interface(obj)
+        actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
         assert builder.import_set == {
@@ -1398,7 +1408,7 @@ class TestBuildNamespace:
             name="Name",
             types={
                 "Name:Class": CClass(name="Class", namespace="Name"),
-                "Name:IInterface": CInterface(name="IInterface", namespace="Name"),
+                "Name:IInterface": CClass(name="IInterface", namespace="Name"),
                 "Name:Enum": CEnum(name="Enum", namespace="Name"),
                 "Name:Delegate": CDelegate(name="Delegate", namespace="Name"),
             },
@@ -1486,13 +1496,13 @@ class TestBuildStubs:
 class TestFormatStubs:
     """Tests for format_stubs()."""
 
-    def test_basic(self, output_dir: Path) -> None:
+    def test_basic(self, args: BuildArguments) -> None:
         """Test for format_stubs()."""
-        format_stubs(100, output_dir)
+        format_stubs(args)
 
-    def test_multi_threaded(self, output_dir: Path) -> None:
+    def test_multi_threaded(self, args: BuildArguments) -> None:
         """Test for format_stubs()."""
-        format_stubs(100, output_dir, threads=4)
+        format_stubs(replace(args, threads=4))
 
 
 class TestCommandBuild:

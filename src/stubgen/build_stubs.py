@@ -22,7 +22,6 @@ from stubgen.model import CDelegate
 from stubgen.model import CEnum
 from stubgen.model import CEvent
 from stubgen.model import CField
-from stubgen.model import CInterface
 from stubgen.model import CMethod
 from stubgen.model import CNamespace
 from stubgen.model import CParameter
@@ -43,8 +42,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from logging import Logger
 
     from stubgen.command import CommandResult
-
-    type TypeDef = CClass | CInterface
 
 logger: Logger = get_logger(__name__)
 
@@ -138,8 +135,8 @@ class Builder:
             param_str = param_str + " = ..."
         return param_str
 
-    def build_generic_args_str(self, obj: TypeDef) -> str:
-        """Build the generic args string for a CClass, CStruct, or CInterface."""
+    def build_generic_args_str(self, obj: CClass) -> str:
+        """Build the generic args string for a CClass."""
         generic_arg_str: str = ""
         if len(obj.generic_args) > 0:
             args: list[str] = [self.build_type(_obj) for _obj in obj.generic_args]
@@ -147,7 +144,7 @@ class Builder:
         return generic_arg_str
 
     def build_parents_str(self, parents: list[str]) -> str:
-        """Build the parents string for a CClass, CStruct, or CInterface."""
+        """Build the parents string for a CClass."""
         return f"({', '.join(parents)})" if len(parents) > 0 else ""
 
     def build_field(self, obj: CField, indent: int = 0) -> Sequence[str]:
@@ -171,8 +168,8 @@ class Builder:
 
         return lines
 
-    def build_fields(self, obj: TypeDef, indent: int = 0) -> Sequence[str]:
-        """Build the fields for a CClass, CStruct, or CInterface."""
+    def build_fields(self, obj: CClass, indent: int = 0) -> Sequence[str]:
+        """Build the fields for a CClass."""
         lines: list[str] = []
         for _obj in obj.fields.values():
             lines.extend(self.build_field(_obj, indent=indent))
@@ -201,8 +198,8 @@ class Builder:
 
         return lines
 
-    def build_constructors(self, obj: TypeDef, indent: int = 0) -> Sequence[str]:
-        """Build the constructors for a CClass, CStruct, or CInterface."""
+    def build_constructors(self, obj: CClass, indent: int = 0) -> Sequence[str]:
+        """Build the constructors for a CClass."""
         lines: list[str] = []
         overload_c: bool = len(obj.constructors) > 1
         for _obj in obj.constructors.values():
@@ -241,8 +238,8 @@ class Builder:
 
         return lines
 
-    def build_properties(self, obj: TypeDef, indent: int = 0) -> Sequence[str]:
-        """Build the properties for a CClass, CStruct, or CInterface."""
+    def build_properties(self, obj: CClass, indent: int = 0) -> Sequence[str]:
+        """Build the properties for a CClass."""
         lines: list[str] = []
         for _obj in obj.properties.values():
             lines.extend(self.build_property(_obj, indent=indent))
@@ -294,8 +291,8 @@ class Builder:
 
         return lines
 
-    def build_methods(self, obj: TypeDef, indent: int = 0) -> Sequence[str]:
-        """Build the methods for a CClass, CStruct, or CInterface."""
+    def build_methods(self, obj: CClass, indent: int = 0) -> Sequence[str]:
+        """Build the methods for a CClass."""
         lines: list[str] = []
         method_names: Sequence[str] = [m.name for m in obj.methods.values()]
         for _obj in obj.methods.values():
@@ -321,15 +318,15 @@ class Builder:
 
         return lines
 
-    def build_events(self, obj: TypeDef, indent: int = 0) -> Sequence[str]:
-        """Build the events for a CClass, CStruct, or CInterface."""
+    def build_events(self, obj: CClass, indent: int = 0) -> Sequence[str]:
+        """Build the events for a CClass."""
         lines: list[str] = []
         for _obj in obj.events.values():
             lines.extend(self.build_event(_obj, indent=indent))
         return lines
 
-    def build_nested_types(self, obj: TypeDef, indent: int = 0) -> Sequence[str]:
-        """Build the nested types for a CClass, CStruct, or CInterface."""
+    def build_nested_types(self, obj: CClass, indent: int = 0) -> Sequence[str]:
+        """Build the nested types for a CClass."""
         lines: list[str] = []
         for _obj in obj.nested_types.values():
             lines.extend(self.build_type_def(_obj, indent=indent))
@@ -340,8 +337,6 @@ class Builder:
         match obj:
             case CClass():
                 return self.build_class(obj, indent=indent)
-            case CInterface():
-                return self.build_interface(obj, indent=indent)
             case CEnum():
                 return self.build_enum(obj, indent=indent)
             case CDelegate():
@@ -370,28 +365,6 @@ class Builder:
 
         lines.extend(self.build_fields(obj, indent=indent + 1))
         lines.extend(self.build_constructors(obj, indent=indent + 1))
-        lines.extend(self.build_properties(obj, indent=indent + 1))
-        lines.extend(self.build_methods(obj, indent=indent + 1))
-        lines.extend(self.build_events(obj, indent=indent + 1))
-        lines.extend(self.build_nested_types(obj, indent=indent + 1))
-
-        return lines
-
-    def build_interface(self, obj: CInterface, indent: int = 0) -> Sequence[str]:
-        """Build a list of strings to represent a CInterface python stub."""
-        logger.debug("Building interface: %s", obj.unique_name)
-
-        parents: list[str] = [self.build_type(_obj) for _obj in obj.interfaces]
-
-        lines: list[str] = [
-            f"{'    ' * indent}class {obj.name}"
-            f"{self.build_generic_args_str(obj)}{self.build_parents_str(parents)}:"
-        ]
-
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
-        lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
-
-        lines.extend(self.build_fields(obj, indent=indent + 1))
         lines.extend(self.build_properties(obj, indent=indent + 1))
         lines.extend(self.build_methods(obj, indent=indent + 1))
         lines.extend(self.build_events(obj, indent=indent + 1))

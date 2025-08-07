@@ -37,97 +37,12 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_UnaryPlus(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnaryNegation(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Increment(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Decrement(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
       "op_Addition(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "left": "",
           "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Subtraction(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Multiply(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Division(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Modulus(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_OnesComplement(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
         },
         "return": "",
         "exceptions": {}
@@ -152,37 +67,7 @@
         "return": "",
         "exceptions": {}
       },
-      "op_ExclusiveOr(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LeftShift(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnsignedRightShift(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LogicalNot(TestLib:ClassDunderMethods)": {
+      "op_Decrement(TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -191,20 +76,12 @@
         "return": "",
         "exceptions": {}
       },
-      "op_True(TestLib:ClassDunderMethods)": {
+      "op_Division(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_False(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
+          "left": "",
+          "right": ""
         },
         "return": "",
         "exceptions": {}
@@ -219,7 +96,65 @@
         "return": "",
         "exceptions": {}
       },
+      "op_ExclusiveOr(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_False(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThan(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThanOrEqual(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Increment(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "op_Inequality(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LeftShift(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -249,7 +184,16 @@
         "return": "",
         "exceptions": {}
       },
-      "op_GreaterThan(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+      "op_LogicalNot(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -259,7 +203,7 @@
         "return": "",
         "exceptions": {}
       },
-      "op_GreaterThanOrEqual(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+      "op_Multiply(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -269,15 +213,59 @@
         "return": "",
         "exceptions": {}
       },
-      "__pos__()": {
+      "op_OnesComplement(TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__neg__()": {
+      "op_Subtraction(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryNegation(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryPlus(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:ClassDunderMethods, TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
@@ -287,48 +275,6 @@
         "parameters": {
           "other": ""
         },
-        "return": "",
-        "exceptions": {}
-      },
-      "__sub__(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mul__(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__truediv__(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mod__(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__invert__()": {
-        "doc": "",
-        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       },
@@ -350,16 +296,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__xor__(TestLib:ClassDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__lshift__(TestLib:ClassDunderMethods)": {
+      "__truediv__(TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -377,7 +314,43 @@
         "return": "",
         "exceptions": {}
       },
+      "__xor__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__gt__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ge__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "__ne__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lshift__(TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -404,7 +377,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__gt__(TestLib:ClassDunderMethods)": {
+      "__mod__(TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -413,12 +386,39 @@
         "return": "",
         "exceptions": {}
       },
-      "__ge__(TestLib:ClassDunderMethods)": {
+      "__mul__(TestLib:ClassDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "other": ""
         },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:ClassDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       }
@@ -507,19 +507,15 @@
         "doc": "",
         "doc_formatted": {}
       },
+      "INested": {
+        "doc": "",
+        "doc_formatted": {}
+      },
       "NestedClass": {
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedStruct": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "NestedRecord": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "INested": {
+      "NestedDelegate()": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -527,7 +523,11 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedDelegate()": {
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedStruct": {
         "doc": "",
         "doc_formatted": {}
       }
@@ -614,11 +614,11 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "Basic": {
+      "Arguments": {
         "doc": "",
         "doc_formatted": {}
       },
-      "Arguments": {
+      "Basic": {
         "doc": "",
         "doc_formatted": {}
       }
@@ -658,15 +658,6 @@
         "doc_formatted": {},
         "exceptions": {}
       },
-      "Parameters(System:Int32, System:Int32)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "param0": "",
-          "param1": ""
-        },
-        "exceptions": {}
-      },
       "Out(System:*Int32)": {
         "doc": "",
         "doc_formatted": {},
@@ -676,17 +667,26 @@
         "return": "",
         "exceptions": {}
       },
-      "VoidOut(System:*Int32)": {
+      "Parameters(System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
-          "param": ""
+          "param0": "",
+          "param1": ""
         },
         "exceptions": {}
       },
       "Static()": {
         "doc": "",
         "doc_formatted": {},
+        "exceptions": {}
+      },
+      "VoidOut(System:*Int32)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param": ""
+        },
         "exceptions": {}
       }
     },
@@ -757,7 +757,7 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "Basic(System:Int32)": {
+      "Array(System:Array[System:Int32])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -765,7 +765,7 @@
         },
         "exceptions": {}
       },
-      "Reference(System:*Int32)": {
+      "Basic(System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -789,7 +789,7 @@
         },
         "exceptions": {}
       },
-      "UseGeneric(System:IEquatable[System:Object])": {
+      "Reference(System:*Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -797,7 +797,7 @@
         },
         "exceptions": {}
       },
-      "Array(System:Array[System:Int32])": {
+      "UseGeneric(System:IEquatable[System:Object])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -817,97 +817,12 @@
     "IDunderMethods": {
       "doc": "",
       "doc_formatted": {},
-      "op_UnaryPlus(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnaryNegation(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Increment(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Decrement(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
       "op_Addition(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "left": "",
           "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Subtraction(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Multiply(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Division(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Modulus(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_OnesComplement(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
         },
         "return": "",
         "exceptions": {}
@@ -932,6 +847,25 @@
         "return": "",
         "exceptions": {}
       },
+      "op_Decrement(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Division(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "op_ExclusiveOr(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
@@ -942,69 +876,11 @@
         "return": "",
         "exceptions": {}
       },
-      "op_LeftShift(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnsignedRightShift(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LogicalNot(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_True(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
       "op_False(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LessThan(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LessThanOrEqual(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
         },
         "return": "",
         "exceptions": {}
@@ -1029,15 +905,127 @@
         "return": "",
         "exceptions": {}
       },
-      "__pos__()": {
+      "op_Increment(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__neg__()": {
+      "op_LeftShift(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThan(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LessThanOrEqual(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LogicalNot(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Multiply(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_OnesComplement(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Subtraction(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryNegation(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryPlus(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:IDunderMethods, TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
@@ -1047,48 +1035,6 @@
         "parameters": {
           "other": ""
         },
-        "return": "",
-        "exceptions": {}
-      },
-      "__sub__(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mul__(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__truediv__(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mod__(TestLib:IDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__invert__()": {
-        "doc": "",
-        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       },
@@ -1110,7 +1056,34 @@
         "return": "",
         "exceptions": {}
       },
+      "__truediv__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "__xor__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__gt__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ge__(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1146,7 +1119,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__gt__(TestLib:IDunderMethods)": {
+      "__mod__(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1155,12 +1128,39 @@
         "return": "",
         "exceptions": {}
       },
-      "__ge__(TestLib:IDunderMethods)": {
+      "__mul__(TestLib:IDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "other": ""
         },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:IDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       }
@@ -1221,19 +1221,15 @@
     "INested": {
       "doc": "",
       "doc_formatted": {},
+      "INested": {
+        "doc": "",
+        "doc_formatted": {}
+      },
       "NestedClass": {
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedStruct": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "NestedRecord": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "INested": {
+      "NestedDelegate()": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -1241,7 +1237,11 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedDelegate()": {
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedStruct": {
         "doc": "",
         "doc_formatted": {}
       }
@@ -1267,13 +1267,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_Inequality(TestLib:RecordBasic, TestLib:RecordBasic)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -1287,13 +1283,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordBasic, TestLib:RecordBasic)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordBasic)": {
+      "__eq__(TestLib:RecordBasic)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1302,7 +1302,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordBasic)": {
+      "__ne__(TestLib:RecordBasic)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1327,13 +1327,9 @@
           "param1": ""
         }
       },
-      "op_Inequality(TestLib:RecordConstructors, TestLib:RecordConstructors)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -1347,13 +1343,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordConstructors, TestLib:RecordConstructors)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordConstructors)": {
+      "__eq__(TestLib:RecordConstructors)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1362,7 +1362,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordConstructors)": {
+      "__ne__(TestLib:RecordConstructors)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1379,39 +1379,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_UnaryPlus(TestLib:RecordDunderMethods)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnaryNegation(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Increment(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Decrement(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -1421,55 +1391,6 @@
         "parameters": {
           "left": "",
           "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Subtraction(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Multiply(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Division(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Modulus(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_OnesComplement(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
         },
         "return": "",
         "exceptions": {}
@@ -1494,6 +1415,35 @@
         "return": "",
         "exceptions": {}
       },
+      "op_Decrement(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Division(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Equality(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "op_ExclusiveOr(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
@@ -1504,69 +1454,11 @@
         "return": "",
         "exceptions": {}
       },
-      "op_LeftShift(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnsignedRightShift(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LogicalNot(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_True(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
       "op_False(TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LessThan(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LessThanOrEqual(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
         },
         "return": "",
         "exceptions": {}
@@ -1591,6 +1483,15 @@
         "return": "",
         "exceptions": {}
       },
+      "op_Increment(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "op_Inequality(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
@@ -1601,7 +1502,7 @@
         "return": "",
         "exceptions": {}
       },
-      "op_Equality(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+      "op_LeftShift(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1611,21 +1512,108 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_LessThan(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__pos__()": {
+      "op_LessThanOrEqual(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__neg__()": {
+      "op_LogicalNot(TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Multiply(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_OnesComplement(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Subtraction(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryNegation(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryPlus(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:RecordDunderMethods, TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
@@ -1635,48 +1623,6 @@
         "parameters": {
           "other": ""
         },
-        "return": "",
-        "exceptions": {}
-      },
-      "__sub__(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mul__(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__truediv__(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mod__(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__invert__()": {
-        "doc": "",
-        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       },
@@ -1698,34 +1644,25 @@
         "return": "",
         "exceptions": {}
       },
+      "__truediv__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__eq__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "__xor__(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__lshift__(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__lt__(TestLib:RecordDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__le__(TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1761,12 +1698,75 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordDunderMethods)": {
+      "__lshift__(TestLib:RecordDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "other": ""
         },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lt__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__le__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mod__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__mul__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:RecordDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       }
@@ -1778,13 +1778,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_Inequality(TestLib:RecordEvents, TestLib:RecordEvents)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -1798,13 +1794,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordEvents, TestLib:RecordEvents)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordEvents)": {
+      "__eq__(TestLib:RecordEvents)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1813,7 +1813,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordEvents)": {
+      "__ne__(TestLib:RecordEvents)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1848,13 +1848,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_Inequality(TestLib:RecordFields, TestLib:RecordFields)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -1868,13 +1864,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordFields, TestLib:RecordFields)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordFields)": {
+      "__eq__(TestLib:RecordFields)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1883,7 +1883,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordFields)": {
+      "__ne__(TestLib:RecordFields)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1900,13 +1900,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_Inequality(TestLib:RecordGeneric[$TA, $TB], TestLib:RecordGeneric[$TA, $TB])": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -1920,13 +1916,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordGeneric[$TA, $TB], TestLib:RecordGeneric[$TA, $TB])": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordGeneric[$TA, $TB])": {
+      "__eq__(TestLib:RecordGeneric[$TA, $TB])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1935,7 +1935,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordGeneric[$TA, $TB])": {
+      "__ne__(TestLib:RecordGeneric[$TA, $TB])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1952,13 +1952,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_Inequality(TestLib:RecordInterfaces, TestLib:RecordInterfaces)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -1972,13 +1968,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordInterfaces, TestLib:RecordInterfaces)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordInterfaces)": {
+      "__eq__(TestLib:RecordInterfaces)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -1987,7 +1987,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordInterfaces)": {
+      "__ne__(TestLib:RecordInterfaces)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2004,13 +2004,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_Inequality(TestLib:RecordListMethods, TestLib:RecordListMethods)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -2024,13 +2020,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordListMethods, TestLib:RecordListMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordListMethods)": {
+      "__eq__(TestLib:RecordListMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2039,7 +2039,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordListMethods)": {
+      "__ne__(TestLib:RecordListMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2067,13 +2067,9 @@
         "return": "",
         "exceptions": {}
       },
-      "op_Inequality(TestLib:RecordMethods, TestLib:RecordMethods)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -2087,13 +2083,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordMethods, TestLib:RecordMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordMethods)": {
+      "__eq__(TestLib:RecordMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2102,7 +2102,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordMethods)": {
+      "__ne__(TestLib:RecordMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2119,13 +2119,9 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "op_Inequality(TestLib:RecordNested, TestLib:RecordNested)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -2139,17 +2135,12 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
-        "doc": "",
-        "doc_formatted": {},
-        "return": "",
-        "exceptions": {}
-      },
-      "__ne__(TestLib:RecordNested)": {
+      "op_Inequality(TestLib:RecordNested, TestLib:RecordNested)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
-          "other": ""
+          "left": "",
+          "right": ""
         },
         "return": "",
         "exceptions": {}
@@ -2163,19 +2154,24 @@
         "return": "",
         "exceptions": {}
       },
+      "__ne__(TestLib:RecordNested)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "INested": {
+        "doc": "",
+        "doc_formatted": {}
+      },
       "NestedClass": {
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedStruct": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "NestedRecord": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "INested": {
+      "NestedDelegate()": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -2183,7 +2179,11 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedDelegate()": {
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedStruct": {
         "doc": "",
         "doc_formatted": {}
       }
@@ -2205,13 +2205,9 @@
         "doc_formatted": {},
         "return": ""
       },
-      "op_Inequality(TestLib:RecordProperties, TestLib:RecordProperties)": {
+      "Clone()": {
         "doc": "",
         "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
         "return": "",
         "exceptions": {}
       },
@@ -2225,13 +2221,17 @@
         "return": "",
         "exceptions": {}
       },
-      "Clone()": {
+      "op_Inequality(TestLib:RecordProperties, TestLib:RecordProperties)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__ne__(TestLib:RecordProperties)": {
+      "__eq__(TestLib:RecordProperties)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2240,7 +2240,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__eq__(TestLib:RecordProperties)": {
+      "__ne__(TestLib:RecordProperties)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2273,97 +2273,12 @@
     "StructDunderMethods": {
       "doc": "",
       "doc_formatted": {},
-      "op_UnaryPlus(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnaryNegation(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Increment(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Decrement(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
       "op_Addition(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "left": "",
           "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Subtraction(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Multiply(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Division(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_Modulus(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_OnesComplement(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
         },
         "return": "",
         "exceptions": {}
@@ -2388,37 +2303,7 @@
         "return": "",
         "exceptions": {}
       },
-      "op_ExclusiveOr(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LeftShift(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_UnsignedRightShift(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "left": "",
-          "right": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_LogicalNot(TestLib:StructDunderMethods)": {
+      "op_Decrement(TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2427,20 +2312,12 @@
         "return": "",
         "exceptions": {}
       },
-      "op_True(TestLib:StructDunderMethods)": {
+      "op_Division(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
-          "self": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "op_False(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "self": ""
+          "left": "",
+          "right": ""
         },
         "return": "",
         "exceptions": {}
@@ -2455,7 +2332,65 @@
         "return": "",
         "exceptions": {}
       },
+      "op_ExclusiveOr(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_False(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThan(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_GreaterThanOrEqual(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Increment(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "op_Inequality(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_LeftShift(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2485,7 +2420,16 @@
         "return": "",
         "exceptions": {}
       },
-      "op_GreaterThan(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+      "op_LogicalNot(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_Modulus(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2495,7 +2439,7 @@
         "return": "",
         "exceptions": {}
       },
-      "op_GreaterThanOrEqual(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+      "op_Multiply(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2505,15 +2449,59 @@
         "return": "",
         "exceptions": {}
       },
-      "__pos__()": {
+      "op_OnesComplement(TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
         "return": "",
         "exceptions": {}
       },
-      "__neg__()": {
+      "op_Subtraction(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_True(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryNegation(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnaryPlus(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "self": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "op_UnsignedRightShift(TestLib:StructDunderMethods, TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "left": "",
+          "right": ""
+        },
         "return": "",
         "exceptions": {}
       },
@@ -2523,48 +2511,6 @@
         "parameters": {
           "other": ""
         },
-        "return": "",
-        "exceptions": {}
-      },
-      "__sub__(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mul__(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__truediv__(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__mod__(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__invert__()": {
-        "doc": "",
-        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       },
@@ -2586,16 +2532,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__xor__(TestLib:StructDunderMethods)": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "other": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "__lshift__(TestLib:StructDunderMethods)": {
+      "__truediv__(TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2613,7 +2550,43 @@
         "return": "",
         "exceptions": {}
       },
+      "__xor__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__gt__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__ge__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
       "__ne__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__lshift__(TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2640,7 +2613,7 @@
         "return": "",
         "exceptions": {}
       },
-      "__gt__(TestLib:StructDunderMethods)": {
+      "__mod__(TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -2649,12 +2622,39 @@
         "return": "",
         "exceptions": {}
       },
-      "__ge__(TestLib:StructDunderMethods)": {
+      "__mul__(TestLib:StructDunderMethods)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "other": ""
         },
+        "return": "",
+        "exceptions": {}
+      },
+      "__invert__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__sub__(TestLib:StructDunderMethods)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "other": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "__neg__()": {
+        "doc": "",
+        "doc_formatted": {},
+        "return": "",
+        "exceptions": {}
+      },
+      "__pos__()": {
+        "doc": "",
+        "doc_formatted": {},
         "return": "",
         "exceptions": {}
       }
@@ -2719,19 +2719,15 @@
     "StructNested": {
       "doc": "",
       "doc_formatted": {},
+      "INested": {
+        "doc": "",
+        "doc_formatted": {}
+      },
       "NestedClass": {
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedStruct": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "NestedRecord": {
-        "doc": "",
-        "doc_formatted": {}
-      },
-      "INested": {
+      "NestedDelegate()": {
         "doc": "",
         "doc_formatted": {}
       },
@@ -2739,7 +2735,11 @@
         "doc": "",
         "doc_formatted": {}
       },
-      "NestedDelegate()": {
+      "NestedRecord": {
+        "doc": "",
+        "doc_formatted": {}
+      },
+      "NestedStruct": {
         "doc": "",
         "doc_formatted": {}
       }

@@ -696,8 +696,6 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
         match json["type"]:
             case "class":
                 return CClass.from_json(json)
-            case "interface":
-                return CInterface.from_json(json)
             case "enum":
                 return CEnum.from_json(json)
             case "delegate":
@@ -710,12 +708,11 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
         match obj1, obj2:
             case CClass(), CClass():
                 return CClass.merge(obj1, obj2)
-            case CInterface(), CInterface():
-                return CInterface.merge(obj1, obj2)
             case CEnum(), CEnum():
                 return CEnum.merge(obj1, obj2)
             case CDelegate(), CDelegate():
                 return CDelegate.merge(obj1, obj2)
+        # noinspection PyUnreachableCode
         raise TypeError(
             f"Type definitions are not the same: {type(obj1)} != {type(obj2)}"
         )  # pragma: no cover
@@ -841,115 +838,6 @@ class CClass(CTypeDefinition):
             interfaces=sorted(interfaces),
             fields=dict(sorted(fields.items())),
             constructors=dict(sorted(constructors.items())),
-            properties=dict(sorted(properties.items())),
-            methods=dict(sorted(methods.items())),
-            events=dict(sorted(events.items())),
-            nested_types=dict(sorted(nested_types.items())),
-        )
-
-
-@dataclass(frozen=True, kw_only=True)
-class CInterface(CTypeDefinition):
-    """C# Interface wrapper."""
-
-    generic_args: Sequence[CType] = field(default_factory=list)
-    interfaces: Sequence[CType] = field(default_factory=list)
-    fields: Mapping[str, CField] = field(default_factory=dict)
-    properties: Mapping[str, CProperty] = field(default_factory=dict)
-    methods: Mapping[str, CMethod] = field(default_factory=dict)
-    events: Mapping[str, CEvent] = field(default_factory=dict)
-    nested_types: Mapping[str, CTypeDefinition] = field(default_factory=dict)
-
-    @override
-    def to_json(self) -> JsonType:
-        return {
-            "type": "interface",
-            "name": self.name,
-            "namespace": self.namespace,
-            "parent": None if self.parent is None else self.parent.to_json(),
-            "generic_args": [a.to_json() for a in self.generic_args],
-            "interfaces": sorted(i.to_json() for i in self.interfaces),
-            "fields": {k: v.to_json() for k, v in self.fields.items()},
-            "properties": {k: v.to_json() for k, v in self.properties.items()},
-            "methods": {k: v.to_json() for k, v in self.methods.items()},
-            "events": {k: v.to_json() for k, v in self.events.items()},
-            "nested_types": {k: v.to_json() for k, v in self.nested_types.items()},
-        }
-
-    @override
-    def doc_node(self) -> DocNode:
-        members: Sequence[CMember] = (
-            *self.fields.values(),
-            *self.properties.values(),
-            *self.methods.values(),
-            *self.events.values(),
-        )
-        return DocNode(
-            self.unique_name,
-            children=[
-                *(m.doc_node() for m in members if m.declaring_type.name == self.name),
-                *(c.doc_node() for c in self.nested_types.values()),
-            ],
-        )
-
-    @classmethod
-    @override
-    def from_json(cls, json: JsonType) -> Self:
-        return cls(
-            name=json["name"],
-            namespace=json["namespace"],
-            parent=CType.from_json(json["parent"]),
-            generic_args=sorted(map(CType.from_json, json["generic_args"])),
-            interfaces=list(map(CType.from_json, json["interfaces"])),
-            fields={k: CField.from_json(v) for k, v in json["fields"].items()},
-            properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
-            methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
-            events={k: CEvent.from_json(v) for k, v in json["events"].items()},
-            nested_types={k: CTypeDefinition.from_json(v) for k, v in json["nested_types"].items()},
-        )
-
-    @classmethod
-    @override
-    def merge(cls, obj1: Self, obj2: Self) -> Self:
-        logger.debug("Merging CInterfaces %r and %r", obj1.name, obj2.name)
-
-        def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
-            return o1
-
-        interfaces: Sequence[CType] = merge_sequence(obj1.interfaces, obj2.interfaces, first)
-        fields: Mapping[str, CField] = merge_mapping(
-            obj1.fields,
-            obj2.fields,
-            first,
-        )
-        properties: Mapping[str, CProperty] = merge_mapping(
-            obj1.properties,
-            obj2.properties,
-            first,
-        )
-        methods: Mapping[str, CMethod] = merge_mapping(
-            obj1.methods,
-            obj2.methods,
-            first,
-        )
-        events: Mapping[str, CEvent] = merge_mapping(
-            obj1.events,
-            obj2.events,
-            first,
-        )
-        nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
-            obj1.nested_types,
-            obj2.nested_types,
-            CTypeDefinition.merge,
-        )
-
-        return CInterface(
-            name=obj1.name,
-            namespace=obj1.namespace,
-            parent=obj1.parent,
-            generic_args=obj1.generic_args,
-            interfaces=sorted(interfaces),
-            fields=dict(sorted(fields.items())),
             properties=dict(sorted(properties.items())),
             methods=dict(sorted(methods.items())),
             events=dict(sorted(events.items())),
