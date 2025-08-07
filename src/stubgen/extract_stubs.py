@@ -222,7 +222,7 @@ def _extract_members[T: CWrapper](
             except KeyError:
                 found[key] = member
 
-    return found
+    return dict(sorted(found.items()))
 
 
 def _get_fields(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CField]:
@@ -569,8 +569,6 @@ def command_extract(args: ExtractArguments) -> CommandResult:
         assembly_names,
         args.output_dir,
         args.threads,
-        args.skip_failed,
-        args.overwrite,
     )
 
     return 0

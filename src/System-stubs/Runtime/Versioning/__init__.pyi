@@ -1,3 +1,5 @@
+"""Automatically generated stubs for C# namespace: System.Runtime.Versioning."""
+
 from abc import ABC
 from typing import overload
 
@@ -8,82 +10,62 @@ from System import IEquatable
 from System import IntPtr
 from System import Object
 from System import Type
+from System import UInt32
 from System import Version
 from System.Runtime.InteropServices import _Attribute
 
 class BinaryCompatibility(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class CompatibilitySwitch(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def GetValue(cls, compatibilitySwitchName: str) -> str:
-        """:param compatibilitySwitchName:
-        :return:
-        """
+        """"""
     @classmethod
     def IsEnabled(cls, compatibilitySwitchName: str) -> bool:
-        """:param compatibilitySwitchName:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class ComponentGuaranteesAttribute(Attribute, _Attribute):
     """"""
-
-    def __init__(self, guarantees: ComponentGuaranteesOptions):
-        """:param guarantees:"""
+    def __init__(self, guarantees: ComponentGuaranteesOptions) -> None:
+        """"""
     @property
     def Guarantees(self) -> ComponentGuaranteesOptions:
-        """:return:"""
+        """"""
     @property
     def TypeId(self) -> object:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """:param riid:
-        :param rgszNames:
-        :param cNames:
-        :param lcid:
-        :param rgDispId:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """:param iTInfo:
-        :param lcid:
-        :param ppTInfo:
-        """
-    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
-        """:param pcTInfo:"""
+        """"""
+    def GetTypeInfoCount(self, pcTInfo: UInt32) -> tuple[None, UInt32]:
+        """"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -95,23 +77,13 @@ class ComponentGuaranteesAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """:param dispIdMember:
-        :param riid:
-        :param lcid:
-        :param wFlags:
-        :param pDispParams:
-        :param pVarResult:
-        :param pExcepInfo:
-        :param puArgErr:
-        """
+        """"""
     def IsDefaultAttribute(self) -> bool:
-        """:return:"""
+        """"""
     def Match(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class ComponentGuaranteesOptions(Enum):
     """"""
@@ -127,116 +99,82 @@ class ComponentGuaranteesOptions(Enum):
 
 class FrameworkName(Object, IEquatable[FrameworkName]):
     """"""
-
     @overload
-    def __init__(self, frameworkName: str):
-        """:param frameworkName:"""
+    def __init__(self, identifier: str, version: Version) -> None:
+        """"""
     @overload
-    def __init__(self, identifier: str, version: Version):
-        """:param identifier:
-        :param version:
-        """
+    def __init__(self, identifier: str, version: Version, profile: str) -> None:
+        """"""
     @overload
-    def __init__(self, identifier: str, version: Version, profile: str):
-        """:param identifier:
-        :param version:
-        :param profile:
-        """
+    def __init__(self, frameworkName: str) -> None:
+        """"""
     @property
     def FullName(self) -> str:
-        """:return:"""
+        """"""
     @property
     def Identifier(self) -> str:
-        """:return:"""
+        """"""
     @property
     def Profile(self) -> str:
-        """:return:"""
+        """"""
     @property
     def Version(self) -> Version:
-        """:return:"""
+        """"""
     @overload
     def Equals(self, other: FrameworkName) -> bool:
-        """:param other:
-        :return:
-        """
+        """"""
     @overload
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    def __eq__(self, other: FrameworkName) -> bool:
-        """:param other:
-        :return:
-        """
-    def __ne__(self, other: FrameworkName) -> bool:
-        """:param other:
-        :return:
-        """
+        """"""
     @classmethod
     def op_Equality(cls, left: FrameworkName, right: FrameworkName) -> bool:
-        """:param left:
-        :param right:
-        :return:
-        """
+        """"""
     @classmethod
     def op_Inequality(cls, left: FrameworkName, right: FrameworkName) -> bool:
-        """:param left:
-        :param right:
-        :return:
-        """
+        """"""
+    def __eq__(self, other: FrameworkName) -> bool:
+        """"""
+    def __ne__(self, other: FrameworkName) -> bool:
+        """"""
 
 class MultitargetingHelpers(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class NonVersionableAttribute(Attribute, _Attribute):
     """"""
-
-    def __init__(self):
+    def __init__(self) -> None:
         """"""
     @property
     def TypeId(self) -> object:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """:param riid:
-        :param rgszNames:
-        :param cNames:
-        :param lcid:
-        :param rgDispId:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """:param iTInfo:
-        :param lcid:
-        :param ppTInfo:
-        """
-    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
-        """:param pcTInfo:"""
+        """"""
+    def GetTypeInfoCount(self, pcTInfo: UInt32) -> tuple[None, UInt32]:
+        """"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -248,68 +186,45 @@ class NonVersionableAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """:param dispIdMember:
-        :param riid:
-        :param lcid:
-        :param wFlags:
-        :param pDispParams:
-        :param pVarResult:
-        :param pExcepInfo:
-        :param puArgErr:
-        """
+        """"""
     def IsDefaultAttribute(self) -> bool:
-        """:return:"""
+        """"""
     def Match(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class ResourceConsumptionAttribute(Attribute, _Attribute):
     """"""
-
     @overload
-    def __init__(self, resourceScope: ResourceScope):
-        """:param resourceScope:"""
+    def __init__(self, resourceScope: ResourceScope) -> None:
+        """"""
     @overload
-    def __init__(self, resourceScope: ResourceScope, consumptionScope: ResourceScope):
-        """:param resourceScope:
-        :param consumptionScope:
-        """
+    def __init__(self, resourceScope: ResourceScope, consumptionScope: ResourceScope) -> None:
+        """"""
     @property
     def ConsumptionScope(self) -> ResourceScope:
-        """:return:"""
+        """"""
     @property
     def ResourceScope(self) -> ResourceScope:
-        """:return:"""
+        """"""
     @property
     def TypeId(self) -> object:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """:param riid:
-        :param rgszNames:
-        :param cNames:
-        :param lcid:
-        :param rgDispId:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """:param iTInfo:
-        :param lcid:
-        :param ppTInfo:
-        """
-    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
-        """:param pcTInfo:"""
+        """"""
+    def GetTypeInfoCount(self, pcTInfo: UInt32) -> tuple[None, UInt32]:
+        """"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -321,59 +236,38 @@ class ResourceConsumptionAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """:param dispIdMember:
-        :param riid:
-        :param lcid:
-        :param wFlags:
-        :param pDispParams:
-        :param pVarResult:
-        :param pExcepInfo:
-        :param puArgErr:
-        """
+        """"""
     def IsDefaultAttribute(self) -> bool:
-        """:return:"""
+        """"""
     def Match(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class ResourceExposureAttribute(Attribute, _Attribute):
     """"""
-
-    def __init__(self, exposureLevel: ResourceScope):
-        """:param exposureLevel:"""
+    def __init__(self, exposureLevel: ResourceScope) -> None:
+        """"""
     @property
     def ResourceExposureLevel(self) -> ResourceScope:
-        """:return:"""
+        """"""
     @property
     def TypeId(self) -> object:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """:param riid:
-        :param rgszNames:
-        :param cNames:
-        :param lcid:
-        :param rgDispId:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """:param iTInfo:
-        :param lcid:
-        :param ppTInfo:
-        """
-    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
-        """:param pcTInfo:"""
+        """"""
+    def GetTypeInfoCount(self, pcTInfo: UInt32) -> tuple[None, UInt32]:
+        """"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -385,23 +279,13 @@ class ResourceExposureAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """:param dispIdMember:
-        :param riid:
-        :param lcid:
-        :param wFlags:
-        :param pDispParams:
-        :param pVarResult:
-        :param pExcepInfo:
-        :param puArgErr:
-        """
+        """"""
     def IsDefaultAttribute(self) -> bool:
-        """:return:"""
+        """"""
     def Match(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class ResourceScope(Enum):
     """"""
@@ -439,44 +323,33 @@ class SxSRequirements(Enum):
 
 class TargetFrameworkAttribute(Attribute, _Attribute):
     """"""
-
-    def __init__(self, frameworkName: str):
-        """:param frameworkName:"""
+    def __init__(self, frameworkName: str) -> None:
+        """"""
     @property
     def FrameworkDisplayName(self) -> str:
-        """:return:"""
+        """"""
     @FrameworkDisplayName.setter
     def FrameworkDisplayName(self, value: str) -> None: ...
     @property
     def FrameworkName(self) -> str:
-        """:return:"""
+        """"""
     @property
     def TypeId(self) -> object:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """:param riid:
-        :param rgszNames:
-        :param cNames:
-        :param lcid:
-        :param rgDispId:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """:param iTInfo:
-        :param lcid:
-        :param ppTInfo:
-        """
-    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
-        """:param pcTInfo:"""
+        """"""
+    def GetTypeInfoCount(self, pcTInfo: UInt32) -> tuple[None, UInt32]:
+        """"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -488,23 +361,13 @@ class TargetFrameworkAttribute(Attribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """:param dispIdMember:
-        :param riid:
-        :param lcid:
-        :param wFlags:
-        :param pDispParams:
-        :param pVarResult:
-        :param pExcepInfo:
-        :param puArgErr:
-        """
+        """"""
     def IsDefaultAttribute(self) -> bool:
-        """:return:"""
+        """"""
     def Match(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class TargetFrameworkId(Enum):
     """"""
@@ -528,33 +391,21 @@ class TargetFrameworkId(Enum):
 
 class VersioningHelper(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     @overload
     def MakeVersionSafeName(cls, name: str, _from: ResourceScope, to: ResourceScope) -> str:
-        """:param name:
-        :param _from:
-        :param to:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def MakeVersionSafeName(
         cls, name: str, _from: ResourceScope, to: ResourceScope, type: Type
     ) -> str:
-        """:param name:
-        :param _from:
-        :param to:
-        :param type:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -11,13 +12,6 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from typing import ClassVar
 from typing import override
-
-import black
-import isort
-from black import Mode
-from black import TargetVersion
-from black import WriteBack
-from isort import Config
 
 from stubgen.command import CommandArguments
 from stubgen.log import get_logger
@@ -59,7 +53,7 @@ logger: Logger = get_logger(__name__)
 
 
 @dataclass(frozen=True)
-class NamespaceBuilder:
+class Builder:
     """Class that builds the stub files for C# libraries."""
 
     ABC: ClassVar[str] = "abc.ABC"
@@ -281,6 +275,7 @@ class NamespaceBuilder:
         else:
             return_str = self.build_type(obj.return_types[0], convert=True)
 
+        # TODO(Ryan): Need to extract all generic types, including those from inner.
         generic_types: Sequence[CType] = [
             *(param.type for param in obj.parameters if param.type.generic),
             *(ret for ret in obj.return_types if ret.generic),
@@ -290,7 +285,8 @@ class NamespaceBuilder:
             generic_params = f"[{', '.join(gt.name for gt in generic_types)}]"
 
         lines.append(
-            f"{'    ' * indent}def {obj.name}{generic_params}({', '.join(parameters)}) -> {return_str}:"
+            f"{'    ' * indent}def {obj.name}{generic_params}"
+            f"({', '.join(parameters)}) -> {return_str}:"
         )
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
@@ -484,7 +480,7 @@ class NamespaceBuilder:
 
 
 def build_stubs(
-    builder: NamespaceBuilder,
+    builder: Builder,
     namespaces: Sequence[CNamespace],
     output_dir: Path,
     threads: int,
@@ -494,7 +490,7 @@ def build_stubs(
 
     def build_stub(
         namespace: CNamespace,
-        builder: NamespaceBuilder = builder,
+        builder: Builder = builder,
         output_dir: Path = output_dir,
     ) -> None:
         logger.info("Building namespace: %s", namespace.name)
@@ -523,49 +519,50 @@ def build_stubs(
             build_stub(namespace)
 
 
-def format_stubs(
-    line_length: int,
-    output_dir: Path,
-    threads: int = 1,
-) -> None:
+def format_stubs(args: BuildArguments) -> None:
     """Format stub files for the provided namespaces."""
     logger.info("Formatting stub files.")
 
-    mode: Mode = Mode(
-        target_versions={TargetVersion.PY313},
-        line_length=line_length,
-        is_pyi=True,
+    from ruff.__main__ import find_ruff_bin
+
+    process = subprocess.run(
+        [
+            find_ruff_bin(),
+            "check",
+            "--verbose",
+            "--fix",
+            "--target-version",
+            "py313",
+            "--line-length",
+            str(args.line_length),
+        ],
+        capture_output=True,
+        cwd=args.output_dir,
+        text=True,
     )
-    config: Config = Config(
-        profile="black",
-        line_length=line_length,
-        force_single_line=True,
+    if process.stdout:
+        logger.info(process.stdout)
+    if process.stderr:
+        logger.error(process.stderr)
+
+    process = subprocess.run(
+        [
+            find_ruff_bin(),
+            "format",
+            "--verbose",
+            "--target-version",
+            "py313",
+            "--line-length",
+            str(args.line_length),
+        ],
+        capture_output=True,
+        cwd=args.output_dir,
+        text=True,
     )
-
-    def format_file(file: Path, mode: Mode = mode, config: Config = config) -> None:
-        logger.debug("Formatting file: %s", file)
-        try:
-            isort.file(file, config=config)
-        except Exception as e:
-            logger.warning("Unable to run isort on file '%s':", file, exc_info=e)
-
-        try:
-            black.format_file_in_place(
-                file,
-                fast=False,
-                mode=mode,
-                write_back=WriteBack.YES,
-            )
-        except Exception as e:
-            logger.warning("Unable to run black on file '%s':", file, exc_info=e)
-
-    if threads > 1:
-        executor: Executor
-        with ThreadPoolExecutor(max_workers=threads, thread_name_prefix="Worker") as executor:
-            executor.map(format_file, output_dir.glob("*.pyi"))
-    else:
-        for file in output_dir.rglob("*.pyi"):
-            format_file(file)
+    if process.stdout:
+        logger.info(process.stdout)
+    if process.stderr:
+        logger.error(process.stderr)
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -621,7 +618,7 @@ def command_build(args: BuildArguments) -> CommandResult:
         new_doc_tree: DocTree = DocTree.from_json(json.loads(doc_tree_file.read_text()))
         doc_tree = DocTree.merge(doc_tree, new_doc_tree)
 
-    builder: NamespaceBuilder = NamespaceBuilder(line_length=args.line_length, doc_tree=doc_tree)
+    builder: Builder = Builder(line_length=args.line_length, doc_tree=doc_tree)
 
     namespaces: Mapping[str, CNamespace] = {}
     for skeleton_file in Path().glob(args.skeletons):
@@ -637,10 +634,6 @@ def command_build(args: BuildArguments) -> CommandResult:
     )
 
     if args.format_files:
-        format_stubs(
-            args.line_length,
-            args.output_dir,
-            args.threads,
-        )
+        format_stubs(args)
 
     return 0

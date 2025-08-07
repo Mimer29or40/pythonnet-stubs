@@ -1,6 +1,7 @@
+"""Automatically generated stubs for C# namespace: System.Reflection.Metadata.Ecma335."""
+
 from abc import ABC
 from typing import ClassVar
-from typing import Final
 
 from System import Enum
 from System import Object
@@ -14,77 +15,60 @@ from System.Reflection.Metadata import MethodDefinitionHandle
 
 class BlobHeap(ValueType):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetDocumentName(self, handle: DocumentNameBlobHandle) -> str:
-        """:param handle:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class COR20Constants(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class DocumentTableReader(ValueType):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class HandleType(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class HeapHandleType(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class HeapSizeFlag(Enum):
     """"""
@@ -114,17 +98,14 @@ class HeapSizes(Enum):
 
 class MetadataStreamConstants(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class MetadataStreamKind(Enum):
     """"""
@@ -139,94 +120,67 @@ class MetadataStreamKind(Enum):
 class MetadataTokens(ABC, Object):
     """"""
 
-    TableCount: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    TableCount: ClassVar[int]
+    """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     @classmethod
     def GetHeapOffset(cls, handle: Handle) -> int:
-        """:param handle:
-        :return:
-        """
+        """"""
     @classmethod
     def GetToken(cls, handle: Handle) -> int:
-        """:param handle:
-        :return:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def Handle(cls, token: int) -> Handle:
-        """:param token:
-        :return:
-        """
+        """"""
     @classmethod
     def MethodDebugInformationHandle(cls, rowNumber: int) -> MethodDebugInformationHandle:
-        """:param rowNumber:
-        :return:
-        """
+        """"""
     @classmethod
     def MethodDefinitionHandle(cls, rowNumber: int) -> MethodDefinitionHandle:
-        """:param rowNumber:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     @classmethod
     def TryGetTableIndex(cls, type: HandleKind, index: TableIndex) -> tuple[bool, TableIndex]:
-        """:param type:
-        :param index:
-        :return:
-        """
+        """"""
 
 class MethodDebugInformationTableReader(ValueType):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class StreamHeader(ValueType):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class StringHandleType(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class StringKind(Enum):
     """"""
@@ -466,14 +420,11 @@ class TableMask(Enum):
 
 class TokenTypeIds(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""

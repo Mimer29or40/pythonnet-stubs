@@ -1,3 +1,5 @@
+"""Automatically generated stubs for C# namespace: System.Diagnostics.Contracts.Internal."""
+
 from abc import ABC
 
 from System import Exception
@@ -7,15 +9,12 @@ from System.Diagnostics.Contracts import ContractFailureKind
 
 class ContractHelper(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def RaiseContractFailedEvent(
         cls,
@@ -24,14 +23,9 @@ class ContractHelper(ABC, Object):
         conditionText: str,
         innerException: Exception,
     ) -> str:
-        """:param failureKind:
-        :param userMessage:
-        :param conditionText:
-        :param innerException:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     @classmethod
     def TriggerFailure(
         cls,
@@ -41,9 +35,4 @@ class ContractHelper(ABC, Object):
         conditionText: str,
         innerException: Exception,
     ) -> None:
-        """:param kind:
-        :param displayMessage:
-        :param userMessage:
-        :param conditionText:
-        :param innerException:
-        """
+        """"""

@@ -1,3 +1,5 @@
+"""Automatically generated stubs for C# namespace: System.Security.Cryptography.Xml."""
+
 from typing import overload
 
 from System import Array
@@ -17,11 +19,8 @@ from System.Xml import XmlResolver
 
 class ManifestSignedXml(SignedXml):
     """"""
-
-    def __init__(self, manifestXml: XmlDocument, manifest: ManifestKinds):
-        """:param manifestXml:
-        :param manifest:
-        """
+    def __init__(self, manifestXml: XmlDocument, manifest: ManifestKinds) -> None:
+        """"""
     @property
     def EncryptedXml(self) -> EncryptedXml:
         """"""
@@ -78,13 +77,13 @@ class ManifestSignedXml(SignedXml):
     def CheckSignature(self) -> bool:
         """"""
     @overload
+    def CheckSignature(self, certificate: X509Certificate2, verifySignatureOnly: bool) -> bool:
+        """"""
+    @overload
     def CheckSignature(self, key: AsymmetricAlgorithm) -> bool:
         """"""
     @overload
     def CheckSignature(self, macAlg: KeyedHashAlgorithm) -> bool:
-        """"""
-    @overload
-    def CheckSignature(self, certificate: X509Certificate2, verifySignatureOnly: bool) -> bool:
         """"""
     def CheckSignatureReturningKey(
         self, signingKey: AsymmetricAlgorithm
@@ -97,25 +96,20 @@ class ManifestSignedXml(SignedXml):
     def ComputeSignature(self, macAlg: KeyedHashAlgorithm) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIdElement(self, document: XmlDocument, idValue: str) -> XmlElement:
         """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetXml(self) -> XmlElement:
         """"""
     def LoadXml(self, value: XmlElement) -> None:
         """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     def VerifySignature(
         self, revocationFlag: X509RevocationFlag, revocationMode: X509RevocationMode
     ) -> ManifestSignatureInformation:
-        """:param revocationFlag:
-        :param revocationMode:
-        :return:
-        """
+        """"""

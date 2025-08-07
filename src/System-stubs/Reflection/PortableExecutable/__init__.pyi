@@ -1,3 +1,5 @@
+"""Automatically generated stubs for C# namespace: System.Reflection.PortableExecutable."""
+
 from abc import ABC
 from typing import Final
 from typing import overload
@@ -7,7 +9,9 @@ from System import Enum
 from System import Func
 from System import Guid
 from System import IDisposable
+from System import Int32
 from System import Object
+from System import String
 from System import Type
 from System import ValueType
 from System.Collections.Immutable import ImmutableArray
@@ -51,61 +55,55 @@ class Characteristics(Enum):
 
 class CodeViewDebugDirectoryData(ValueType):
     """"""
-
     @property
     def Age(self) -> int:
-        """:return:"""
+        """"""
     @property
     def Guid(self) -> Guid:
-        """:return:"""
+        """"""
     @property
     def Path(self) -> str:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class CoffHeader(Object):
     """"""
-
     @property
     def Characteristics(self) -> Characteristics:
-        """:return:"""
+        """"""
     @property
     def Machine(self) -> Machine:
-        """:return:"""
+        """"""
     @property
     def NumberOfSections(self) -> int:
-        """:return:"""
+        """"""
     @property
     def NumberOfSymbols(self) -> int:
-        """:return:"""
+        """"""
     @property
     def PointerToSymbolTable(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfOptionalHeader(self) -> int:
-        """:return:"""
+        """"""
     @property
     def TimeDateStamp(self) -> int:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class CorFlags(Enum):
     """"""
@@ -127,54 +125,50 @@ class CorFlags(Enum):
 
 class CorHeader(Object):
     """"""
-
     @property
     def CodeManagerTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def EntryPointTokenOrRelativeVirtualAddress(self) -> int:
-        """:return:"""
+        """"""
     @property
     def ExportAddressTableJumpsDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def Flags(self) -> CorFlags:
-        """:return:"""
+        """"""
     @property
     def MajorRuntimeVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def ManagedNativeHeaderDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def MetadataDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def MinorRuntimeVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def ResourcesDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def StrongNameSignatureDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def VtableFixupsDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class DebugDirectoryEntry(ValueType):
     """"""
-
     def __init__(
         self,
         stamp: int,
@@ -184,49 +178,40 @@ class DebugDirectoryEntry(ValueType):
         dataSize: int,
         dataRelativeVirtualAddress: int,
         dataPointer: int,
-    ):
-        """:param stamp:
-        :param majorVersion:
-        :param minorVersion:
-        :param type:
-        :param dataSize:
-        :param dataRelativeVirtualAddress:
-        :param dataPointer:
-        """
+    ) -> None:
+        """"""
     @property
     def DataPointer(self) -> int:
-        """:return:"""
+        """"""
     @property
     def DataRelativeVirtualAddress(self) -> int:
-        """:return:"""
+        """"""
     @property
     def DataSize(self) -> int:
-        """:return:"""
+        """"""
     @property
     def IsPortableCodeView(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def MajorVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MinorVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def Stamp(self) -> int:
-        """:return:"""
+        """"""
     @property
     def Type(self) -> DebugDirectoryEntryType:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class DebugDirectoryEntryType(Enum):
     """"""
@@ -245,30 +230,20 @@ class DebugDirectoryEntryType(Enum):
 class DirectoryEntry(ValueType):
     """"""
 
-    RelativeVirtualAddress: Final[int] = ...
-    """
-    
-    :return: 
-    """
-    Size: Final[int] = ...
-    """
-    
-    :return: 
-    """
-    def __init__(self, relativeVirtualAddress: int, size: int):
-        """:param relativeVirtualAddress:
-        :param size:
-        """
+    RelativeVirtualAddress: Final[int]
+    """"""
+    Size: Final[int]
+    """"""
+    def __init__(self, relativeVirtualAddress: int, size: int) -> None:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class DllCharacteristics(Enum):
     """"""
@@ -354,265 +329,240 @@ class Machine(Enum):
 
 class PEBinaryReader(ValueType):
     """"""
-
-    def __init__(self, stream: Stream, size: int):
-        """:param stream:
-        :param size:
-        """
+    def __init__(self, stream: Stream, size: int) -> None:
+        """"""
     @property
     def CurrentOffset(self) -> int:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ReadByte(self) -> int:
-        """:return:"""
+        """"""
     def ReadBytes(self, count: int) -> Array[int]:
-        """:param count:
-        :return:
-        """
+        """"""
     def ReadInt16(self) -> int:
-        """:return:"""
+        """"""
     def ReadInt32(self) -> int:
-        """:return:"""
+        """"""
     def ReadNullPaddedUTF8(self, byteCount: int) -> str:
-        """:param byteCount:
-        :return:
-        """
+        """"""
     def ReadUInt16(self) -> int:
-        """:return:"""
+        """"""
     def ReadUInt32(self) -> int:
-        """:return:"""
+        """"""
     def ReadUInt64(self) -> int:
-        """:return:"""
+        """"""
     def Seek(self, offset: int) -> None:
-        """:param offset:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class PEHeader(Object):
     """"""
-
     @property
     def AddressOfEntryPoint(self) -> int:
-        """:return:"""
+        """"""
     @property
     def BaseOfCode(self) -> int:
-        """:return:"""
+        """"""
     @property
     def BaseOfData(self) -> int:
-        """:return:"""
+        """"""
     @property
     def BaseRelocationTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def BoundImportTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def CertificateTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def CheckSum(self) -> int:
-        """:return:"""
+        """"""
     @property
     def CopyrightTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def CorHeaderTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def DebugTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def DelayImportTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def DllCharacteristics(self) -> DllCharacteristics:
-        """:return:"""
+        """"""
     @property
     def ExceptionTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def ExportTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def FileAlignment(self) -> int:
-        """:return:"""
+        """"""
     @property
     def GlobalPointerTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def ImageBase(self) -> int:
-        """:return:"""
+        """"""
     @property
     def ImportAddressTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def ImportTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def LoadConfigTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def Magic(self) -> PEMagic:
-        """:return:"""
+        """"""
     @property
     def MajorImageVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MajorLinkerVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MajorOperatingSystemVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MajorSubsystemVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MinorImageVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MinorLinkerVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MinorOperatingSystemVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MinorSubsystemVersion(self) -> int:
-        """:return:"""
+        """"""
     @property
     def NumberOfRvaAndSizes(self) -> int:
-        """:return:"""
+        """"""
     @property
     def ResourceTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     @property
     def SectionAlignment(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfCode(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfHeaders(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfHeapCommit(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfHeapReserve(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfImage(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfInitializedData(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfStackCommit(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfStackReserve(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SizeOfUninitializedData(self) -> int:
-        """:return:"""
+        """"""
     @property
     def Subsystem(self) -> Subsystem:
-        """:return:"""
+        """"""
     @property
     def ThreadLocalStorageTableDirectory(self) -> DirectoryEntry:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class PEHeaders(Object):
     """"""
-
     @overload
-    def __init__(self, peStream: Stream):
-        """:param peStream:"""
+    def __init__(self, peStream: Stream) -> None:
+        """"""
     @overload
-    def __init__(self, peStream: Stream, size: int):
-        """:param peStream:
-        :param size:
-        """
+    def __init__(self, peStream: Stream, size: int) -> None:
+        """"""
     @overload
-    def __init__(self, peStream: Stream, size: int, isLoadedImage: bool):
-        """:param peStream:
-        :param size:
-        :param isLoadedImage:
-        """
+    def __init__(self, peStream: Stream, size: int, isLoadedImage: bool) -> None:
+        """"""
     @property
     def CoffHeader(self) -> CoffHeader:
-        """:return:"""
+        """"""
     @property
     def CoffHeaderStartOffset(self) -> int:
-        """:return:"""
+        """"""
     @property
     def CorHeader(self) -> CorHeader:
-        """:return:"""
+        """"""
     @property
     def CorHeaderStartOffset(self) -> int:
-        """:return:"""
+        """"""
     @property
     def IsCoffOnly(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def IsConsoleApplication(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def IsDll(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def IsExe(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def MetadataSize(self) -> int:
-        """:return:"""
+        """"""
     @property
     def MetadataStartOffset(self) -> int:
-        """:return:"""
+        """"""
     @property
     def PEHeader(self) -> PEHeader:
-        """:return:"""
+        """"""
     @property
     def PEHeaderStartOffset(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SectionHeaders(self) -> ImmutableArray[SectionHeader]:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetContainingSectionIndex(self, relativeVirtualAddress: int) -> int:
-        """:param relativeVirtualAddress:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    def TryGetDirectoryOffset(self, directory: DirectoryEntry, offset: int) -> tuple[bool, int]:
-        """:param directory:
-        :param offset:
-        :return:
-        """
+        """"""
+    def TryGetDirectoryOffset(self, directory: DirectoryEntry, offset: Int32) -> tuple[bool, Int32]:
+        """"""
 
 class PEMagic(Enum):
     """"""
@@ -624,129 +574,97 @@ class PEMagic(Enum):
 
 class PEMemoryBlock(ValueType):
     """"""
-
     @property
     def Length(self) -> int:
-        """:return:"""
+        """"""
     @property
     def Pointer(self) -> int:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     @overload
     def GetReader(self) -> BlobReader:
-        """:return:"""
+        """"""
     @overload
     def GetReader(self, start: int, length: int) -> BlobReader:
-        """:param start:
-        :param length:
-        :return:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class PEReader(Object, IDisposable):
     """"""
-
     @overload
-    def __init__(self, peImage: ImmutableArray[int]):
-        """:param peImage:"""
+    def __init__(self, peImage: int, size: int) -> None:
+        """"""
     @overload
-    def __init__(self, peStream: Stream):
-        """:param peStream:"""
+    def __init__(self, peImage: int, size: int, isLoadedImage: bool) -> None:
+        """"""
     @overload
-    def __init__(self, peStream: Stream, options: PEStreamOptions):
-        """:param peStream:
-        :param options:
-        """
+    def __init__(self, peStream: Stream) -> None:
+        """"""
     @overload
-    def __init__(self, peImage: int, size: int):
-        """:param peImage:
-        :param size:
-        """
+    def __init__(self, peStream: Stream, options: PEStreamOptions) -> None:
+        """"""
     @overload
-    def __init__(self, peStream: Stream, options: PEStreamOptions, size: int):
-        """:param peStream:
-        :param options:
-        :param size:
-        """
+    def __init__(self, peStream: Stream, options: PEStreamOptions, size: int) -> None:
+        """"""
     @overload
-    def __init__(self, peImage: int, size: int, isLoadedImage: bool):
-        """:param peImage:
-        :param size:
-        :param isLoadedImage:
-        """
+    def __init__(self, peImage: ImmutableArray[int]) -> None:
+        """"""
     @property
     def HasMetadata(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def IsEntireImageAvailable(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def IsLoadedImage(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def PEHeaders(self) -> PEHeaders:
-        """:return:"""
+        """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetEntireImage(self) -> PEMemoryBlock:
-        """:return:"""
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetMetadata(self) -> PEMemoryBlock:
-        """:return:"""
+        """"""
     @overload
     def GetSectionData(self, relativeVirtualAddress: int) -> PEMemoryBlock:
-        """:param relativeVirtualAddress:
-        :return:
-        """
+        """"""
     @overload
     def GetSectionData(self, sectionName: str) -> PEMemoryBlock:
-        """:param sectionName:
-        :return:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ReadCodeViewDebugDirectoryData(
         self, entry: DebugDirectoryEntry
     ) -> CodeViewDebugDirectoryData:
-        """:param entry:
-        :return:
-        """
+        """"""
     def ReadDebugDirectory(self) -> ImmutableArray[DebugDirectoryEntry]:
-        """:return:"""
+        """"""
     def ReadEmbeddedPortablePdbDebugDirectoryData(
         self, entry: DebugDirectoryEntry
     ) -> MetadataReaderProvider:
-        """:param entry:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     def TryOpenAssociatedPortablePdb(
         self,
         peImagePath: str,
         pdbFileStreamProvider: Func[str, Stream],
         pdbReaderProvider: MetadataReaderProvider,
-        pdbPath: str,
-    ) -> tuple[bool, MetadataReaderProvider, str]:
-        """:param peImagePath:
-        :param pdbFileStreamProvider:
-        :param pdbReaderProvider:
-        :param pdbPath:
-        :return:
-        """
+        pdbPath: String,
+    ) -> tuple[bool, MetadataReaderProvider, String]:
+        """"""
 
 class PEStreamOptions(Enum):
     """"""
@@ -764,22 +682,17 @@ class PEStreamOptions(Enum):
 
 class PEStreamOptionsExtensions(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def IsValid(cls, options: PEStreamOptions) -> bool:
-        """:param options:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class SectionCharacteristics(Enum):
     """"""
@@ -879,47 +792,44 @@ class SectionCharacteristics(Enum):
 
 class SectionHeader(ValueType):
     """"""
-
     @property
     def Name(self) -> str:
-        """:return:"""
+        """"""
     @property
     def NumberOfLineNumbers(self) -> int:
-        """:return:"""
+        """"""
     @property
     def NumberOfRelocations(self) -> int:
-        """:return:"""
+        """"""
     @property
     def PointerToLineNumbers(self) -> int:
-        """:return:"""
+        """"""
     @property
     def PointerToRawData(self) -> int:
-        """:return:"""
+        """"""
     @property
     def PointerToRelocations(self) -> int:
-        """:return:"""
+        """"""
     @property
     def SectionCharacteristics(self) -> SectionCharacteristics:
-        """:return:"""
+        """"""
     @property
     def SizeOfRawData(self) -> int:
-        """:return:"""
+        """"""
     @property
     def VirtualAddress(self) -> int:
-        """:return:"""
+        """"""
     @property
     def VirtualSize(self) -> int:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class Subsystem(Enum):
     """"""

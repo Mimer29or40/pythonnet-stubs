@@ -1,3 +1,5 @@
+"""Automatically generated stubs for C# namespace: Windows.Foundation.Diagnostics."""
+
 from System import Enum
 from System import Guid
 from System import Type
@@ -62,7 +64,6 @@ class CausalityTraceLevel(Enum):
 
 class IAsyncCausalityTracerStatics:
     """"""
-
     def TraceOperationCompletion(
         self,
         traceLevel: CausalityTraceLevel,
@@ -71,12 +72,7 @@ class IAsyncCausalityTracerStatics:
         operationId: int,
         status: AsyncCausalityStatus,
     ) -> None:
-        """:param traceLevel:
-        :param source:
-        :param platformId:
-        :param operationId:
-        :param status:
-        """
+        """"""
     def TraceOperationCreation(
         self,
         traceLevel: CausalityTraceLevel,
@@ -86,13 +82,7 @@ class IAsyncCausalityTracerStatics:
         operationName: str,
         relatedContext: int,
     ) -> None:
-        """:param traceLevel:
-        :param source:
-        :param platformId:
-        :param operationId:
-        :param operationName:
-        :param relatedContext:
-        """
+        """"""
     def TraceOperationRelation(
         self,
         traceLevel: CausalityTraceLevel,
@@ -101,22 +91,14 @@ class IAsyncCausalityTracerStatics:
         operationId: int,
         relation: CausalityRelation,
     ) -> None:
-        """:param traceLevel:
-        :param source:
-        :param platformId:
-        :param operationId:
-        :param relation:
-        """
+        """"""
     def TraceSynchronousWorkCompletion(
         self,
         traceLevel: CausalityTraceLevel,
         source: CausalitySource,
         work: CausalitySynchronousWork,
     ) -> None:
-        """:param traceLevel:
-        :param source:
-        :param work:
-        """
+        """"""
     def TraceSynchronousWorkStart(
         self,
         traceLevel: CausalityTraceLevel,
@@ -125,49 +107,38 @@ class IAsyncCausalityTracerStatics:
         operationId: int,
         work: CausalitySynchronousWork,
     ) -> None:
-        """:param traceLevel:
-        :param source:
-        :param platformId:
-        :param operationId:
-        :param work:
-        """
+        """"""
 
 class ITracingStatusChangedEventArgs:
     """"""
-
     @property
     def Enabled(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def TraceLevel(self) -> CausalityTraceLevel:
-        """:return:"""
+        """"""
 
 class TracingStatusChangedEventArgs(RuntimeClass, ITracingStatusChangedEventArgs):
     """"""
-
-    def __init__(self):
+    def __init__(self) -> None:
         """"""
     @property
     def Enabled(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def TraceLevel(self) -> CausalityTraceLevel:
-        """:return:"""
+        """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """:param requestedType:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetLifetimeService(self) -> object:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def InitializeLifetimeService(self) -> object:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""

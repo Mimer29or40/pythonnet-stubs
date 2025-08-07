@@ -52,11 +52,13 @@ def _setup_parser() -> ArgumentParser:
         dest="output_dir",
     )
     parser.add_argument(
-        "-m",
-        "--multi-threaded",
-        action="store_true",
-        help="flag to use multi threading",
-        dest="multi_threaded",
+        "-t",
+        "--threads",
+        action="store",
+        default=1,
+        type=int,
+        help="the number of threads to use [default: 1]",
+        dest="threads",
     )
 
     command_parser: _SubParsersAction[ArgumentParser] = parser.add_subparsers(
@@ -83,11 +85,14 @@ def main(*args: str) -> CommandResult:
 
             root_handler.setLevel(logging.DEBUG)
 
+        output_dir: Path = parsed_args.output_dir
+        output_dir.mkdir(parents=True, exist_ok=True)
+
         match parsed_args.command:
             case "extract":
                 command_args: ExtractArguments = ExtractArguments(**parsed_args.__dict__)
                 exit_code = command_extract(command_args)
-            case "extract":
+            case "build":
                 command_args: BuildArguments = BuildArguments(**parsed_args.__dict__)
                 exit_code = command_build(command_args)
     except Exception as e:

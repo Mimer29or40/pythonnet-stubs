@@ -1,13 +1,13 @@
+"""Automatically generated stubs for C# namespace: System.Linq."""
+
 from abc import ABC
 from collections.abc import Iterator
 from typing import ClassVar
-from typing import Final
-from typing import Generic
-from typing import TypeVar
 from typing import overload
 
 from System import Action
 from System import Array
+from System import Boolean
 from System import Decimal
 from System import Enum
 from System import Exception
@@ -16,6 +16,7 @@ from System import Guid
 from System import IntPtr
 from System import Object
 from System import Type
+from System import UInt32
 from System import ValueType
 from System.Collections import IDictionary
 from System.Collections import IEnumerable
@@ -41,381 +42,243 @@ from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 from System.Threading import CancellationToken
 
-T = TypeVar("T")
-TAccumulate = TypeVar("TAccumulate")
-TCollection = TypeVar("TCollection")
-TElement = TypeVar("TElement")
-TFirst = TypeVar("TFirst")
-TInner = TypeVar("TInner")
-TKey = TypeVar("TKey")
-TOuter = TypeVar("TOuter")
-TResult = TypeVar("TResult")
-TSecond = TypeVar("TSecond")
-TSource = TypeVar("TSource")
-
-class AggregationMinMaxHelpers(ABC, Generic[T], Object):
+class AggregationMinMaxHelpers[T](ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class Buffer(Generic[TElement], ValueType):
+class Buffer[TElement](ValueType):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class EmptyEnumerable(Generic[TElement], Object):
+class EmptyEnumerable[TElement](Object):
     """"""
 
-    Instance: Final[ClassVar[Array[TElement]]] = ...
-    """
-    
-    :return: 
-    """
-    def __init__(self):
+    Instance: ClassVar[Array[TElement]]
+    """"""
+    def __init__(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class Enumerable(ABC, Object):
     """"""
-
     @classmethod
     @overload
-    def Aggregate(
-        cls, source: IEnumerable[TSource], func: Func[TSource, TSource, TSource]
-    ) -> TSource:
-        """:param source:
-        :param func:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Aggregate(
+    def Aggregate[TAccumulate, TAccumulate](
         cls,
         source: IEnumerable[TSource],
         seed: TAccumulate,
         func: Func[TAccumulate, TSource, TAccumulate],
     ) -> TAccumulate:
-        """:param source:
-        :param seed:
-        :param func:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Aggregate(
+    def Aggregate[TAccumulate, TResult](
         cls,
         source: IEnumerable[TSource],
         seed: TAccumulate,
         func: Func[TAccumulate, TSource, TAccumulate],
         resultSelector: Func[TAccumulate, TResult],
     ) -> TResult:
-        """:param source:
-        :param seed:
-        :param func:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Aggregate[TSource](
+        cls, source: IEnumerable[TSource], func: Func[TSource, TSource, TSource]
+    ) -> TSource:
+        """"""
     @classmethod
     def All(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> bool:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Any(cls, source: IEnumerable[TSource]) -> bool:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Any(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> bool:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
-    def Append(cls, source: IEnumerable[TSource], element: TSource) -> IEnumerable[TSource]:
-        """:param source:
-        :param element:
-        :return:
-        """
+    def Append[TSource](
+        cls, source: IEnumerable[TSource], element: TSource
+    ) -> IEnumerable[TSource]:
+        """"""
     @classmethod
     def AsEnumerable(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[int | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[int]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[int | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[int]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[int | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[int]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[int | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[int]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IEnumerable[float]) -> float:
+        """"""
     @classmethod
     def Cast(cls, source: IEnumerable) -> IEnumerable[TResult]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     def Concat(
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Contains(cls, source: IEnumerable[TSource], value: TSource) -> bool:
-        """:param source:
-        :param value:
-        :return:
-        """
+    def Contains[TSource](cls, source: IEnumerable[TSource], value: TSource) -> bool:
+        """"""
     @classmethod
     @overload
-    def Contains(
-        cls,
-        source: IEnumerable[TSource],
-        value: TSource,
-        comparer: IEqualityComparer[TSource],
+    def Contains[TSource](
+        cls, source: IEnumerable[TSource], value: TSource, comparer: IEqualityComparer[TSource]
     ) -> bool:
-        """:param source:
-        :param value:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Count(cls, source: IEnumerable[TSource]) -> int:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Count(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> int:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def DefaultIfEmpty(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def DefaultIfEmpty(
+    def DefaultIfEmpty[TSource](
         cls, source: IEnumerable[TSource], defaultValue: TSource
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param defaultValue:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Distinct(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Distinct(
         cls, source: IEnumerable[TSource], comparer: IEqualityComparer[TSource]
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
-    def ElementAt(cls, source: IEnumerable[TSource], index: int) -> TSource:
-        """:param source:
-        :param index:
-        :return:
-        """
+    def ElementAt[TSource](cls, source: IEnumerable[TSource], index: int) -> TSource:
+        """"""
     @classmethod
-    def ElementAtOrDefault(cls, source: IEnumerable[TSource], index: int) -> TSource:
-        """:param source:
-        :param index:
-        :return:
-        """
+    def ElementAtOrDefault[TSource](cls, source: IEnumerable[TSource], index: int) -> TSource:
+        """"""
     @classmethod
     def Empty(cls) -> IEnumerable[TResult]:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Except(
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Except(
@@ -424,52 +287,37 @@ class Enumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> IEnumerable[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def First(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def First[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def First(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
-    @classmethod
-    @overload
-    def FirstOrDefault(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def FirstOrDefault(
+    def First[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def FirstOrDefault[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def FirstOrDefault[TSource](
+        cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
+    ) -> TSource:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     @overload
     def GroupBy(
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
-    ) -> IEnumerable[IGrouping, TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+    ) -> IEnumerable[IGrouping[TKey, TSource]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -477,12 +325,8 @@ class Enumerable(ABC, Object):
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
         comparer: IEqualityComparer[TKey],
-    ) -> IEnumerable[IGrouping, TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+    ) -> IEnumerable[IGrouping[TKey, TSource]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -491,24 +335,7 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         resultSelector: Func[TKey, IEnumerable[TSource], TResult],
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param keySelector:
-        :param resultSelector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def GroupBy(
-        cls,
-        source: IEnumerable[TSource],
-        keySelector: Func[TSource, TKey],
-        elementSelector: Func[TSource, TElement],
-    ) -> IEnumerable[IGrouping, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -518,12 +345,16 @@ class Enumerable(ABC, Object):
         resultSelector: Func[TKey, IEnumerable[TSource], TResult],
         comparer: IEqualityComparer[TKey],
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param keySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def GroupBy(
+        cls,
+        source: IEnumerable[TSource],
+        keySelector: Func[TSource, TKey],
+        elementSelector: Func[TSource, TElement],
+    ) -> IEnumerable[IGrouping[TKey, TElement]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -532,13 +363,8 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         elementSelector: Func[TSource, TElement],
         comparer: IEqualityComparer[TKey],
-    ) -> IEnumerable[IGrouping, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param comparer:
-        :return:
-        """
+    ) -> IEnumerable[IGrouping[TKey, TElement]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -548,12 +374,7 @@ class Enumerable(ABC, Object):
         elementSelector: Func[TSource, TElement],
         resultSelector: Func[TKey, IEnumerable[TElement], TResult],
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -564,13 +385,7 @@ class Enumerable(ABC, Object):
         resultSelector: Func[TKey, IEnumerable[TElement], TResult],
         comparer: IEqualityComparer[TKey],
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupJoin(
@@ -581,13 +396,7 @@ class Enumerable(ABC, Object):
         innerKeySelector: Func[TInner, TKey],
         resultSelector: Func[TOuter, IEnumerable[TInner], TResult],
     ) -> IEnumerable[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupJoin(
@@ -599,23 +408,13 @@ class Enumerable(ABC, Object):
         resultSelector: Func[TOuter, IEnumerable[TInner], TResult],
         comparer: IEqualityComparer[TKey],
     ) -> IEnumerable[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Intersect(
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Intersect(
@@ -624,11 +423,7 @@ class Enumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> IEnumerable[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Join(
@@ -639,13 +434,7 @@ class Enumerable(ABC, Object):
         innerKeySelector: Func[TInner, TKey],
         resultSelector: Func[TOuter, TInner, TResult],
     ) -> IEnumerable[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Join(
@@ -657,365 +446,234 @@ class Enumerable(ABC, Object):
         resultSelector: Func[TOuter, TInner, TResult],
         comparer: IEqualityComparer[TKey],
     ) -> IEnumerable[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Last(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Last[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Last(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+    def Last[TSource](cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def LastOrDefault(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def LastOrDefault[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def LastOrDefault(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+    def LastOrDefault[TSource](
+        cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
+    ) -> TSource:
+        """"""
     @classmethod
     @overload
     def LongCount(cls, source: IEnumerable[TSource]) -> int:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def LongCount(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> int:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Max[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]) -> TResult:
-        """:param source:
-        :param selector:
-        :return:
-        """
+    def Max[TResult](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]
+    ) -> TResult:
+        """"""
     @classmethod
     @overload
     def Max(
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[Decimal]) -> Decimal:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[float]) -> float:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[int | None]) -> int | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[int]) -> int:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[int]) -> int:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[int | None]) -> int | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[int]) -> int:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[int]) -> int:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: IEnumerable[float]) -> float:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
+    def Min[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]) -> TResult:
-        """:param source:
-        :param selector:
-        :return:
-        """
+    def Min[TResult](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]
+    ) -> TResult:
+        """"""
     @classmethod
     @overload
     def Min(
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: IEnumerable[float]) -> float:
+        """"""
     @classmethod
     def OfType(cls, source: IEnumerable) -> IEnumerable[TResult]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderBy(
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderBy(
@@ -1024,20 +682,13 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderByDescending(
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderByDescending(
@@ -1046,72 +697,33 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
-    def Prepend(cls, source: IEnumerable[TSource], element: TSource) -> IEnumerable[TSource]:
-        """:param source:
-        :param element:
-        :return:
-        """
+    def Prepend[TSource](
+        cls, source: IEnumerable[TSource], element: TSource
+    ) -> IEnumerable[TSource]:
+        """"""
     @classmethod
     def Range(cls, start: int, count: int) -> IEnumerable[int]:
-        """:param start:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
-    def Repeat(cls, element: TResult, count: int) -> IEnumerable[TResult]:
-        """:param element:
-        :param count:
-        :return:
-        """
+    def Repeat[TResult](cls, element: TResult, count: int) -> IEnumerable[TResult]:
+        """"""
     @classmethod
     def Reverse(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Select(
         cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Select(
         cls, source: IEnumerable[TSource], selector: Func[TSource, int, TResult]
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SelectMany(
-        cls, source: IEnumerable[TSource], selector: Func[TSource, IEnumerable[TResult]]
-    ) -> IEnumerable[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SelectMany(
-        cls,
-        source: IEnumerable[TSource],
-        selector: Func[TSource, int, IEnumerable[TResult]],
-    ) -> IEnumerable[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SelectMany(
@@ -1120,11 +732,13 @@ class Enumerable(ABC, Object):
         collectionSelector: Func[TSource, IEnumerable[TCollection]],
         resultSelector: Func[TSource, TCollection, TResult],
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param collectionSelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SelectMany(
+        cls, source: IEnumerable[TSource], selector: Func[TSource, IEnumerable[TResult]]
+    ) -> IEnumerable[TResult]:
+        """"""
     @classmethod
     @overload
     def SelectMany(
@@ -1133,18 +747,17 @@ class Enumerable(ABC, Object):
         collectionSelector: Func[TSource, int, IEnumerable[TCollection]],
         resultSelector: Func[TSource, TCollection, TResult],
     ) -> IEnumerable[TResult]:
-        """:param source:
-        :param collectionSelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SelectMany(
+        cls, source: IEnumerable[TSource], selector: Func[TSource, int, IEnumerable[TResult]]
+    ) -> IEnumerable[TResult]:
+        """"""
     @classmethod
     @overload
     def SequenceEqual(cls, first: IEnumerable[TSource], second: IEnumerable[TSource]) -> bool:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SequenceEqual(
@@ -1153,232 +766,149 @@ class Enumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> bool:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Single(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Single[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Single(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SingleOrDefault(cls, source: IEnumerable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SingleOrDefault(
+    def Single[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SingleOrDefault[TSource](cls, source: IEnumerable[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def SingleOrDefault[TSource](
+        cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
+    ) -> TSource:
+        """"""
     @classmethod
     def Skip(cls, source: IEnumerable[TSource], count: int) -> IEnumerable[TSource]:
-        """:param source:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SkipWhile(
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SkipWhile(
         cls, source: IEnumerable[TSource], predicate: Func[TSource, int, bool]
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IEnumerable[float]) -> float:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IEnumerable[float]) -> float:
+        """"""
     @classmethod
     def Take(cls, source: IEnumerable[TSource], count: int) -> IEnumerable[TSource]:
-        """:param source:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def TakeWhile(
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def TakeWhile(
         cls, source: IEnumerable[TSource], predicate: Func[TSource, int, bool]
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenBy(
         cls, source: IOrderedEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenBy(
@@ -1387,20 +917,13 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenByDescending(
         cls, source: IOrderedEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenByDescending(
@@ -1409,25 +932,16 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> IOrderedEnumerable[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     def ToArray(cls, source: IEnumerable[TSource]) -> Array[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> Dictionary[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
@@ -1436,11 +950,7 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IEqualityComparer[TKey],
     ) -> Dictionary[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
@@ -1449,11 +959,7 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         elementSelector: Func[TSource, TElement],
     ) -> Dictionary[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
@@ -1463,41 +969,26 @@ class Enumerable(ABC, Object):
         elementSelector: Func[TSource, TElement],
         comparer: IEqualityComparer[TKey],
     ) -> Dictionary[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToHashSet(cls, source: IEnumerable[TSource]) -> HashSet[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToHashSet(
         cls, source: IEnumerable[TSource], comparer: IEqualityComparer[TSource]
     ) -> HashSet[TSource]:
-        """:param source:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     def ToList(cls, source: IEnumerable[TSource]) -> List[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> ILookup[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
@@ -1506,11 +997,7 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IEqualityComparer[TKey],
     ) -> ILookup[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
@@ -1519,11 +1006,7 @@ class Enumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         elementSelector: Func[TSource, TElement],
     ) -> ILookup[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
@@ -1533,23 +1016,15 @@ class Enumerable(ABC, Object):
         elementSelector: Func[TSource, TElement],
         comparer: IEqualityComparer[TKey],
     ) -> ILookup[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     @classmethod
     @overload
     def Union(
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Union(
@@ -1558,29 +1033,19 @@ class Enumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> IEnumerable[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Where(
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Where(
         cls, source: IEnumerable[TSource], predicate: Func[TSource, int, bool]
     ) -> IEnumerable[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     def Zip(
         cls,
@@ -1588,58 +1053,52 @@ class Enumerable(ABC, Object):
         second: IEnumerable[TSecond],
         resultSelector: Func[TFirst, TSecond, TResult],
     ) -> IEnumerable[TResult]:
-        """:param first:
-        :param second:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @overload
+    def __contains__[TSource](self, source: IEnumerable[TSource], value: TSource) -> bool:
+        """"""
+    @overload
+    def __contains__[TSource](
+        self, source: IEnumerable[TSource], value: TSource, comparer: IEqualityComparer[TSource]
+    ) -> bool:
+        """"""
 
 class EnumerableExecutor(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class EnumerableExecutor(Generic[T], EnumerableExecutor):
+class EnumerableExecutor[T](EnumerableExecutor):
     """"""
-
-    def __init__(self, expression: Expression):
-        """:param expression:"""
+    def __init__(self, expression: Expression) -> None:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class EnumerableQuery(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class EnumerableQuery(
-    Generic[T],
+class EnumerableQuery[T](
     EnumerableQuery,
     IEnumerable[T],
     IEnumerable,
@@ -1650,110 +1109,86 @@ class EnumerableQuery(
     IQueryable[T],
 ):
     """"""
-
     @overload
-    def __init__(self, enumerable: IEnumerable[T]):
-        """:param enumerable:"""
+    def __init__(self, enumerable: IEnumerable[T]) -> None:
+        """"""
     @overload
-    def __init__(self, expression: Expression):
-        """:param expression:"""
+    def __init__(self, expression: Expression) -> None:
+        """"""
     @property
     def ElementType(self) -> Type:
-        """:return:"""
+        """"""
     @property
     def Expression(self) -> Expression:
-        """:return:"""
+        """"""
     @property
     def Provider(self) -> IQueryProvider:
-        """:return:"""
-    def CreateQuery(self, expression: Expression) -> IQueryable[TElement]:
-        """:param expression:
-        :return:
-        """
+        """"""
+    def CreateQuery(self, expression: Expression) -> IQueryable:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def Execute(self, expression: Expression) -> TResult:
-        """:param expression:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def Execute(self, expression: Expression) -> object:
+        """"""
+    def GetEnumerator(self) -> IEnumerator[T]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
     def __iter__(self) -> Iterator[T]:
-        """:return:"""
+        """"""
 
 class EnumerableRewriter(OldExpressionVisitor):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class EnumerableSorter(ABC, Generic[TElement], Object):
+class EnumerableSorter[TElement, TKey](EnumerableSorter[TElement]):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class EnumerableSorter(Generic[TElement, TKey], EnumerableSorter[TElement]):
+class EnumerableSorter[TElement](ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class Error(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class GroupedEnumerable(
-    Generic[TSource, TKey, TElement, TResult], Object, IEnumerable[TResult], IEnumerable
+class GroupedEnumerable[TSource, TKey, TElement, TResult](
+    Object, IEnumerable[TResult], IEnumerable
 ):
     """"""
-
     def __init__(
         self,
         source: IEnumerable[TSource],
@@ -1761,464 +1196,297 @@ class GroupedEnumerable(
         elementSelector: Func[TSource, TElement],
         resultSelector: Func[TKey, IEnumerable[TElement], TResult],
         comparer: IEqualityComparer[TKey],
-    ):
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param resultSelector:
-        :param comparer:
-        """
+    ) -> None:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TResult]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
     def __iter__(self) -> Iterator[TResult]:
-        """:return:"""
+        """"""
 
-class GroupedEnumerable(
-    Generic[TSource, TKey, TElement],
-    Object,
-    IEnumerable[IGrouping, TElement],
-    IEnumerable,
+class GroupedEnumerable[TSource, TKey, TElement](
+    Object, IEnumerable[IGrouping[TKey, TElement]], IEnumerable
 ):
     """"""
-
     def __init__(
         self,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
         elementSelector: Func[TSource, TElement],
         comparer: IEqualityComparer[TKey],
-    ):
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param comparer:
-        """
+    ) -> None:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[IGrouping, TElement]:
-        """:return:"""
+        """"""
+    def __iter__(self) -> Iterator[IGrouping[TKey, TElement]]:
+        """"""
 
-class IGrouping(Generic[TElement, TKey], IEnumerable[TElement], IEnumerable):
+class IGrouping[TElement, TKey](IEnumerable[TElement], IEnumerable):
     """"""
-
     @property
     def Key(self) -> TKey:
-        """:return:"""
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TElement]:
+        """"""
     def __iter__(self) -> Iterator[TElement]:
-        """:return:"""
+        """"""
 
-class IIListProvider(Generic[TElement], IEnumerable[TElement], IEnumerable):
+class IIListProvider[TElement](IEnumerable[TElement], IEnumerable):
     """"""
-
     def GetCount(self, onlyIfCheap: bool) -> int:
-        """:param onlyIfCheap:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TElement]:
+        """"""
     def ToArray(self) -> Array[TElement]:
-        """:return:"""
+        """"""
     def ToList(self) -> List[TElement]:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
     def __iter__(self) -> Iterator[TElement]:
-        """:return:"""
+        """"""
 
-class ILookup(Generic[TElement, TKey], IEnumerable[IGrouping, TElement], IEnumerable):
+class ILookup[TElement, TKey](IEnumerable[IGrouping[TKey, TElement]], IEnumerable):
     """"""
-
     @property
     def Count(self) -> int:
-        """:return:"""
+        """"""
     @property
     def Item(self) -> IEnumerable[TElement]:
-        """:return:"""
-    def Contains(self, key: TKey) -> bool:
-        """:param key:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
-    def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
-        """:param key:
-        :return:
-        """
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[IGrouping, TElement]:
-        """:return:"""
+        """"""
+    def Contains[TKey](self, key: TKey) -> bool:
+        """"""
+    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]:
+        """"""
+    def __contains__[TKey](self, key: TKey) -> bool:
+        """"""
+    def __iter__(self) -> Iterator[IGrouping[TKey, TElement]]:
+        """"""
+    def __len__(self) -> int:
+        """"""
+    def __getitem__[TKey](self, key: TKey) -> IEnumerable[TElement]:
+        """"""
 
-class IOrderedEnumerable(Generic[TElement], IEnumerable[TElement], IEnumerable):
+class IOrderedEnumerable[TElement](IEnumerable[TElement], IEnumerable):
     """"""
-
     def CreateOrderedEnumerable(
-        self,
-        keySelector: Func[TElement, TKey],
-        comparer: IComparer[TKey],
-        descending: bool,
+        self, keySelector: Func[TElement, TKey], comparer: IComparer[TKey], descending: bool
     ) -> IOrderedEnumerable[TElement]:
-        """:param keySelector:
-        :param comparer:
-        :param descending:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TElement]:
+        """"""
     def __iter__(self) -> Iterator[TElement]:
-        """:return:"""
+        """"""
 
 class IOrderedQueryable(IEnumerable, IQueryable):
     """"""
-
     @property
     def ElementType(self) -> Type:
-        """:return:"""
+        """"""
     @property
     def Expression(self) -> Expression:
-        """:return:"""
+        """"""
     @property
     def Provider(self) -> IQueryProvider:
-        """:return:"""
+        """"""
     def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
+        """"""
+    def __iter__(self) -> Iterator:
+        """"""
 
-class IOrderedQueryable(
-    Generic[T],
-    IEnumerable[T],
-    IEnumerable,
-    IOrderedQueryable,
-    IQueryable,
-    IQueryable[T],
+class IOrderedQueryable[T](
+    IEnumerable[T], IEnumerable, IOrderedQueryable, IQueryable, IQueryable[T]
 ):
     """"""
-
     @property
     def ElementType(self) -> Type:
-        """:return:"""
+        """"""
     @property
     def Expression(self) -> Expression:
-        """:return:"""
+        """"""
     @property
     def Provider(self) -> IQueryProvider:
-        """:return:"""
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
+    def GetEnumerator(self) -> IEnumerator[T]:
+        """"""
     def __iter__(self) -> Iterator[T]:
-        """:return:"""
+        """"""
 
 class IQueryProvider:
     """"""
-
     def CreateQuery(self, expression: Expression) -> IQueryable[TElement]:
-        """:param expression:
-        :return:
-        """
-    def Execute(self, expression: Expression) -> TResult:
-        """:param expression:
-        :return:
-        """
+        """"""
+    def Execute[TResult](self, expression: Expression) -> TResult:
+        """"""
 
 class IQueryable(IEnumerable):
     """"""
-
     @property
     def ElementType(self) -> Type:
-        """:return:"""
+        """"""
     @property
     def Expression(self) -> Expression:
-        """:return:"""
+        """"""
     @property
     def Provider(self) -> IQueryProvider:
-        """:return:"""
+        """"""
     def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
+        """"""
+    def __iter__(self) -> Iterator:
+        """"""
 
-class IQueryable(Generic[T], IEnumerable[T], IEnumerable, IQueryable):
+class IQueryable[T](IEnumerable[T], IEnumerable, IQueryable):
     """"""
-
     @property
     def ElementType(self) -> Type:
-        """:return:"""
+        """"""
     @property
     def Expression(self) -> Expression:
-        """:return:"""
+        """"""
     @property
     def Provider(self) -> IQueryProvider:
-        """:return:"""
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
+    def GetEnumerator(self) -> IEnumerator[T]:
+        """"""
     def __iter__(self) -> Iterator[T]:
-        """:return:"""
+        """"""
 
-class IdentityFunction(Generic[TElement], Object):
+class IdentityFunction[TElement](Object):
     """"""
-
-    def __init__(self):
+    def __init__(self) -> None:
         """"""
     @classmethod
     @property
     def Instance(cls) -> Func[TElement, TElement]:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class Lookup(
-    Generic[TKey, TElement],
-    Object,
-    IEnumerable[IGrouping, TElement],
-    IEnumerable,
-    ILookup[TKey, TElement],
+class Lookup[TKey, TElement](
+    Object, IEnumerable[IGrouping[TKey, TElement]], IEnumerable, ILookup[TKey, TElement]
 ):
     """"""
-
     @property
     def Count(self) -> int:
-        """:return:"""
+        """"""
     @property
     def Item(self) -> IEnumerable[TElement]:
-        """:return:"""
+        """"""
     def ApplyResultSelector(
         self, resultSelector: Func[TKey, IEnumerable[TElement], TResult]
     ) -> IEnumerable[TResult]:
-        """:param resultSelector:
-        :return:
-        """
-    def Contains(self, key: TKey) -> bool:
-        """:param key:
-        :return:
-        """
+        """"""
+    def Contains[TKey](self, key: TKey) -> bool:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
-        """:param key:
-        :return:
-        """
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[IGrouping, TElement]:
-        """:return:"""
+        """"""
+    def __contains__[TKey](self, key: TKey) -> bool:
+        """"""
+    def __iter__(self) -> Iterator[IGrouping[TKey, TElement]]:
+        """"""
+    def __len__(self) -> int:
+        """"""
+    def __getitem__[TKey](self, key: TKey) -> IEnumerable[TElement]:
+        """"""
 
-class OrderedEnumerable(
-    ABC,
-    Generic[TElement],
-    Object,
-    IEnumerable[TElement],
-    IEnumerable,
-    IOrderedEnumerable[TElement],
+class OrderedEnumerable[TElement, TKey](
+    OrderedEnumerable[TElement], IEnumerable[TElement], IEnumerable, IOrderedEnumerable[TElement]
 ):
     """"""
-
     def CreateOrderedEnumerable(
-        self,
-        keySelector: Func[TElement, TKey],
-        comparer: IComparer[TKey],
-        descending: bool,
+        self, keySelector: Func[TElement, TKey], comparer: IComparer[TKey], descending: bool
     ) -> IOrderedEnumerable[TElement]:
-        """:param keySelector:
-        :param comparer:
-        :param descending:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TElement]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
     def __iter__(self) -> Iterator[TElement]:
-        """:return:"""
+        """"""
 
-class OrderedEnumerable(
-    Generic[TElement, TKey],
-    OrderedEnumerable[TElement],
-    IEnumerable[TElement],
-    IEnumerable,
-    IOrderedEnumerable[TElement],
+class OrderedEnumerable[TElement](
+    ABC, Object, IEnumerable[TElement], IEnumerable, IOrderedEnumerable[TElement]
 ):
     """"""
-
     def CreateOrderedEnumerable(
-        self,
-        keySelector: Func[TElement, TKey],
-        comparer: IComparer[TKey],
-        descending: bool,
+        self, keySelector: Func[TElement, TKey], comparer: IComparer[TKey], descending: bool
     ) -> IOrderedEnumerable[TElement]:
-        """:param keySelector:
-        :param comparer:
-        :param descending:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TElement]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
     def __iter__(self) -> Iterator[TElement]:
-        """:return:"""
+        """"""
 
-class OrderedParallelQuery(
-    Generic[TSource], ParallelQuery[TSource], IEnumerable[TSource], IEnumerable
-):
+class OrderedParallelQuery[TSource](ParallelQuery[TSource], IEnumerable[TSource], IEnumerable):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TSource]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
     def __iter__(self) -> Iterator[TSource]:
-        """:return:"""
+        """"""
 
 class ParallelEnumerable(ABC, Object):
     """"""
-
     @classmethod
     @overload
-    def Aggregate(
-        cls, source: ParallelQuery[TSource], func: Func[TSource, TSource, TSource]
-    ) -> TSource:
-        """:param source:
-        :param func:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Aggregate(
+    def Aggregate[TAccumulate, TAccumulate](
         cls,
         source: ParallelQuery[TSource],
         seed: TAccumulate,
         func: Func[TAccumulate, TSource, TAccumulate],
     ) -> TAccumulate:
-        """:param source:
-        :param seed:
-        :param func:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Aggregate(
-        cls,
-        source: ParallelQuery[TSource],
-        seed: TAccumulate,
-        func: Func[TAccumulate, TSource, TAccumulate],
-        resultSelector: Func[TAccumulate, TResult],
-    ) -> TResult:
-        """:param source:
-        :param seed:
-        :param func:
-        :param resultSelector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Aggregate(
+    def Aggregate[TAccumulate, TResult](
         cls,
         source: ParallelQuery[TSource],
         seed: TAccumulate,
@@ -2226,16 +1494,20 @@ class ParallelEnumerable(ABC, Object):
         combineAccumulatorsFunc: Func[TAccumulate, TAccumulate, TAccumulate],
         resultSelector: Func[TAccumulate, TResult],
     ) -> TResult:
-        """:param source:
-        :param seed:
-        :param updateAccumulatorFunc:
-        :param combineAccumulatorsFunc:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Aggregate(
+    def Aggregate[TAccumulate, TResult](
+        cls,
+        source: ParallelQuery[TSource],
+        seed: TAccumulate,
+        func: Func[TAccumulate, TSource, TAccumulate],
+        resultSelector: Func[TAccumulate, TResult],
+    ) -> TResult:
+        """"""
+    @classmethod
+    @overload
+    def Aggregate[TResult](
         cls,
         source: ParallelQuery[TSource],
         seedFactory: Func[TAccumulate],
@@ -2243,340 +1515,213 @@ class ParallelEnumerable(ABC, Object):
         combineAccumulatorsFunc: Func[TAccumulate, TAccumulate, TAccumulate],
         resultSelector: Func[TAccumulate, TResult],
     ) -> TResult:
-        """:param source:
-        :param seedFactory:
-        :param updateAccumulatorFunc:
-        :param combineAccumulatorsFunc:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Aggregate[TSource](
+        cls, source: ParallelQuery[TSource], func: Func[TSource, TSource, TSource]
+    ) -> TSource:
+        """"""
     @classmethod
     def All(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> bool:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Any(cls, source: ParallelQuery[TSource]) -> bool:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Any(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> bool:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     def AsEnumerable(cls, source: ParallelQuery[TSource]) -> IEnumerable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def AsOrdered(cls, source: ParallelQuery) -> ParallelQuery:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def AsOrdered(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def AsParallel(cls, source: Partitioner[TSource]) -> ParallelQuery[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def AsParallel(cls, source: IEnumerable[TSource]) -> ParallelQuery[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def AsParallel(cls, source: IEnumerable) -> ParallelQuery:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     def AsSequential(cls, source: ParallelQuery[TSource]) -> IEnumerable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     def AsUnordered(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[int | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[int]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[int | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[int]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[int | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[int]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[int | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[int]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: ParallelQuery[float]) -> float:
+        """"""
     @classmethod
     def Cast(cls, source: ParallelQuery) -> ParallelQuery[TResult]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Concat(
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Concat(
         cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Contains(cls, source: ParallelQuery[TSource], value: TSource) -> bool:
-        """:param source:
-        :param value:
-        :return:
-        """
+    def Contains[TSource](cls, source: ParallelQuery[TSource], value: TSource) -> bool:
+        """"""
     @classmethod
     @overload
-    def Contains(
-        cls,
-        source: ParallelQuery[TSource],
-        value: TSource,
-        comparer: IEqualityComparer[TSource],
+    def Contains[TSource](
+        cls, source: ParallelQuery[TSource], value: TSource, comparer: IEqualityComparer[TSource]
     ) -> bool:
-        """:param source:
-        :param value:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Count(cls, source: ParallelQuery[TSource]) -> int:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Count(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> int:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def DefaultIfEmpty(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def DefaultIfEmpty(
+    def DefaultIfEmpty[TSource](
         cls, source: ParallelQuery[TSource], defaultValue: TSource
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param defaultValue:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Distinct(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Distinct(
         cls, source: ParallelQuery[TSource], comparer: IEqualityComparer[TSource]
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
-    def ElementAt(cls, source: ParallelQuery[TSource], index: int) -> TSource:
-        """:param source:
-        :param index:
-        :return:
-        """
+    def ElementAt[TSource](cls, source: ParallelQuery[TSource], index: int) -> TSource:
+        """"""
     @classmethod
-    def ElementAtOrDefault(cls, source: ParallelQuery[TSource], index: int) -> TSource:
-        """:param source:
-        :param index:
-        :return:
-        """
+    def ElementAtOrDefault[TSource](cls, source: ParallelQuery[TSource], index: int) -> TSource:
+        """"""
     @classmethod
     def Empty(cls) -> ParallelQuery[TResult]:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Except(
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Except(
-        cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
-    ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Except(
@@ -2585,11 +1730,13 @@ class ParallelEnumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Except(
+        cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
+    ) -> ParallelQuery[TSource]:
+        """"""
     @classmethod
     @overload
     def Except(
@@ -2598,57 +1745,40 @@ class ParallelEnumerable(ABC, Object):
         second: ParallelQuery[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def First(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def First[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def First(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
-    @classmethod
-    @overload
-    def FirstOrDefault(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def FirstOrDefault(
+    def First[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def FirstOrDefault[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def FirstOrDefault[TSource](
+        cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
+    ) -> TSource:
+        """"""
     @classmethod
     def ForAll(cls, source: ParallelQuery[TSource], action: Action[TSource]) -> None:
-        """:param source:
-        :param action:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     @overload
     def GroupBy(
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
-    ) -> ParallelQuery[IGrouping, TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+    ) -> ParallelQuery[IGrouping[TKey, TSource]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -2656,12 +1786,8 @@ class ParallelEnumerable(ABC, Object):
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
         comparer: IEqualityComparer[TKey],
-    ) -> ParallelQuery[IGrouping, TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+    ) -> ParallelQuery[IGrouping[TKey, TSource]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -2670,24 +1796,7 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         resultSelector: Func[TKey, IEnumerable[TSource], TResult],
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param keySelector:
-        :param resultSelector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def GroupBy(
-        cls,
-        source: ParallelQuery[TSource],
-        keySelector: Func[TSource, TKey],
-        elementSelector: Func[TSource, TElement],
-    ) -> ParallelQuery[IGrouping, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -2697,12 +1806,16 @@ class ParallelEnumerable(ABC, Object):
         resultSelector: Func[TKey, IEnumerable[TSource], TResult],
         comparer: IEqualityComparer[TKey],
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param keySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def GroupBy(
+        cls,
+        source: ParallelQuery[TSource],
+        keySelector: Func[TSource, TKey],
+        elementSelector: Func[TSource, TElement],
+    ) -> ParallelQuery[IGrouping[TKey, TElement]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -2711,13 +1824,8 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         elementSelector: Func[TSource, TElement],
         comparer: IEqualityComparer[TKey],
-    ) -> ParallelQuery[IGrouping, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param comparer:
-        :return:
-        """
+    ) -> ParallelQuery[IGrouping[TKey, TElement]]:
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -2727,12 +1835,7 @@ class ParallelEnumerable(ABC, Object):
         elementSelector: Func[TSource, TElement],
         resultSelector: Func[TKey, IEnumerable[TElement], TResult],
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupBy(
@@ -2743,13 +1846,7 @@ class ParallelEnumerable(ABC, Object):
         resultSelector: Func[TKey, IEnumerable[TElement], TResult],
         comparer: IEqualityComparer[TKey],
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupJoin(
@@ -2760,30 +1857,7 @@ class ParallelEnumerable(ABC, Object):
         innerKeySelector: Func[TInner, TKey],
         resultSelector: Func[TOuter, IEnumerable[TInner], TResult],
     ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def GroupJoin(
-        cls,
-        outer: ParallelQuery[TOuter],
-        inner: ParallelQuery[TInner],
-        outerKeySelector: Func[TOuter, TKey],
-        innerKeySelector: Func[TInner, TKey],
-        resultSelector: Func[TOuter, IEnumerable[TInner], TResult],
-    ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GroupJoin(
@@ -2795,14 +1869,18 @@ class ParallelEnumerable(ABC, Object):
         resultSelector: Func[TOuter, IEnumerable[TInner], TResult],
         comparer: IEqualityComparer[TKey],
     ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def GroupJoin(
+        cls,
+        outer: ParallelQuery[TOuter],
+        inner: ParallelQuery[TInner],
+        outerKeySelector: Func[TOuter, TKey],
+        innerKeySelector: Func[TInner, TKey],
+        resultSelector: Func[TOuter, IEnumerable[TInner], TResult],
+    ) -> ParallelQuery[TResult]:
+        """"""
     @classmethod
     @overload
     def GroupJoin(
@@ -2814,32 +1892,13 @@ class ParallelEnumerable(ABC, Object):
         resultSelector: Func[TOuter, IEnumerable[TInner], TResult],
         comparer: IEqualityComparer[TKey],
     ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Intersect(
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Intersect(
-        cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
-    ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Intersect(
@@ -2848,11 +1907,13 @@ class ParallelEnumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Intersect(
+        cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
+    ) -> ParallelQuery[TSource]:
+        """"""
     @classmethod
     @overload
     def Intersect(
@@ -2861,11 +1922,7 @@ class ParallelEnumerable(ABC, Object):
         second: ParallelQuery[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Join(
@@ -2876,30 +1933,7 @@ class ParallelEnumerable(ABC, Object):
         innerKeySelector: Func[TInner, TKey],
         resultSelector: Func[TOuter, TInner, TResult],
     ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Join(
-        cls,
-        outer: ParallelQuery[TOuter],
-        inner: ParallelQuery[TInner],
-        outerKeySelector: Func[TOuter, TKey],
-        innerKeySelector: Func[TInner, TKey],
-        resultSelector: Func[TOuter, TInner, TResult],
-    ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Join(
@@ -2911,14 +1945,18 @@ class ParallelEnumerable(ABC, Object):
         resultSelector: Func[TOuter, TInner, TResult],
         comparer: IEqualityComparer[TKey],
     ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Join(
+        cls,
+        outer: ParallelQuery[TOuter],
+        inner: ParallelQuery[TInner],
+        outerKeySelector: Func[TOuter, TKey],
+        innerKeySelector: Func[TInner, TKey],
+        resultSelector: Func[TOuter, TInner, TResult],
+    ) -> ParallelQuery[TResult]:
+        """"""
     @classmethod
     @overload
     def Join(
@@ -2930,367 +1968,236 @@ class ParallelEnumerable(ABC, Object):
         resultSelector: Func[TOuter, TInner, TResult],
         comparer: IEqualityComparer[TKey],
     ) -> ParallelQuery[TResult]:
-        """:param outer:
-        :param inner:
-        :param outerKeySelector:
-        :param innerKeySelector:
-        :param resultSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Last(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Last[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Last(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
-    @classmethod
-    @overload
-    def LastOrDefault(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def LastOrDefault(
+    def Last[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def LastOrDefault[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def LastOrDefault[TSource](
+        cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
+    ) -> TSource:
+        """"""
     @classmethod
     @overload
     def LongCount(cls, source: ParallelQuery[TSource]) -> int:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def LongCount(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> int:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Max[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]) -> TResult:
-        """:param source:
-        :param selector:
-        :return:
-        """
+    def Max[TResult](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]
+    ) -> TResult:
+        """"""
     @classmethod
     @overload
     def Max(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[Decimal]) -> Decimal:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[float]) -> float:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[int | None]) -> int | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[int]) -> int:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[int]) -> int:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[int | None]) -> int | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[int]) -> int:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[int]) -> int:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
+    def Max(cls, source: ParallelQuery[float]) -> float:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
+    def Min[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]) -> TResult:
-        """:param source:
-        :param selector:
-        :return:
-        """
+    def Min[TResult](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]
+    ) -> TResult:
+        """"""
     @classmethod
     @overload
     def Min(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Min(cls, source: ParallelQuery[float]) -> float:
+        """"""
     @classmethod
     def OfType(cls, source: ParallelQuery) -> ParallelQuery[TResult]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderBy(
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderBy(
@@ -3299,20 +2206,13 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderByDescending(
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderByDescending(
@@ -3321,68 +2221,28 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     def Range(cls, start: int, count: int) -> ParallelQuery[int]:
-        """:param start:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
-    def Repeat(cls, element: TResult, count: int) -> ParallelQuery[TResult]:
-        """:param element:
-        :param count:
-        :return:
-        """
+    def Repeat[TResult](cls, element: TResult, count: int) -> ParallelQuery[TResult]:
+        """"""
     @classmethod
     def Reverse(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Select(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Select(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, int, TResult]
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SelectMany(
-        cls,
-        source: ParallelQuery[TSource],
-        selector: Func[TSource, IEnumerable[TResult]],
-    ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SelectMany(
-        cls,
-        source: ParallelQuery[TSource],
-        selector: Func[TSource, int, IEnumerable[TResult]],
-    ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SelectMany(
@@ -3391,11 +2251,13 @@ class ParallelEnumerable(ABC, Object):
         collectionSelector: Func[TSource, IEnumerable[TCollection]],
         resultSelector: Func[TSource, TCollection, TResult],
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param collectionSelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SelectMany(
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, IEnumerable[TResult]]
+    ) -> ParallelQuery[TResult]:
+        """"""
     @classmethod
     @overload
     def SelectMany(
@@ -3404,25 +2266,17 @@ class ParallelEnumerable(ABC, Object):
         collectionSelector: Func[TSource, int, IEnumerable[TCollection]],
         resultSelector: Func[TSource, TCollection, TResult],
     ) -> ParallelQuery[TResult]:
-        """:param source:
-        :param collectionSelector:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SelectMany(
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int, IEnumerable[TResult]]
+    ) -> ParallelQuery[TResult]:
+        """"""
     @classmethod
     @overload
     def SequenceEqual(cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]) -> bool:
-        """:param first:
-        :param second:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SequenceEqual(cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]) -> bool:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SequenceEqual(
@@ -3431,11 +2285,11 @@ class ParallelEnumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> bool:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SequenceEqual(cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]) -> bool:
+        """"""
     @classmethod
     @overload
     def SequenceEqual(
@@ -3444,232 +2298,149 @@ class ParallelEnumerable(ABC, Object):
         second: ParallelQuery[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> bool:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Single(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Single[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Single(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SingleOrDefault(cls, source: ParallelQuery[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SingleOrDefault(
+    def Single[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> TSource:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SingleOrDefault[TSource](cls, source: ParallelQuery[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def SingleOrDefault[TSource](
+        cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
+    ) -> TSource:
+        """"""
     @classmethod
     def Skip(cls, source: ParallelQuery[TSource], count: int) -> ParallelQuery[TSource]:
-        """:param source:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SkipWhile(
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SkipWhile(
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, int, bool]
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: ParallelQuery[float]) -> float:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
-        """:param source:
-        :param selector:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: ParallelQuery[float]) -> float:
+        """"""
     @classmethod
     def Take(cls, source: ParallelQuery[TSource], count: int) -> ParallelQuery[TSource]:
-        """:param source:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def TakeWhile(
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def TakeWhile(
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, int, bool]
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenBy(
         cls, source: OrderedParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenBy(
@@ -3678,20 +2449,13 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenByDescending(
         cls, source: OrderedParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ThenByDescending(
@@ -3700,25 +2464,16 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IComparer[TKey],
     ) -> OrderedParallelQuery[TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     def ToArray(cls, source: ParallelQuery[TSource]) -> Array[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> Dictionary[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
@@ -3727,11 +2482,7 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IEqualityComparer[TKey],
     ) -> Dictionary[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
@@ -3740,11 +2491,7 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         elementSelector: Func[TSource, TElement],
     ) -> Dictionary[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToDictionary(
@@ -3754,26 +2501,16 @@ class ParallelEnumerable(ABC, Object):
         elementSelector: Func[TSource, TElement],
         comparer: IEqualityComparer[TKey],
     ) -> Dictionary[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     def ToList(cls, source: ParallelQuery[TSource]) -> List[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> ILookup[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
@@ -3782,11 +2519,7 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         comparer: IEqualityComparer[TKey],
     ) -> ILookup[TKey, TSource]:
-        """:param source:
-        :param keySelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
@@ -3795,11 +2528,7 @@ class ParallelEnumerable(ABC, Object):
         keySelector: Func[TSource, TKey],
         elementSelector: Func[TSource, TElement],
     ) -> ILookup[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def ToLookup(
@@ -3809,32 +2538,15 @@ class ParallelEnumerable(ABC, Object):
         elementSelector: Func[TSource, TElement],
         comparer: IEqualityComparer[TKey],
     ) -> ILookup[TKey, TElement]:
-        """:param source:
-        :param keySelector:
-        :param elementSelector:
-        :param comparer:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     @classmethod
     @overload
     def Union(
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Union(
-        cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
-    ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Union(
@@ -3843,11 +2555,13 @@ class ParallelEnumerable(ABC, Object):
         second: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def Union(
+        cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
+    ) -> ParallelQuery[TSource]:
+        """"""
     @classmethod
     @overload
     def Union(
@@ -3856,61 +2570,39 @@ class ParallelEnumerable(ABC, Object):
         second: ParallelQuery[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> ParallelQuery[TSource]:
-        """:param first:
-        :param second:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Where(
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Where(
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, int, bool]
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param predicate:
-        :return:
-        """
+        """"""
     @classmethod
     def WithCancellation(
         cls, source: ParallelQuery[TSource], cancellationToken: CancellationToken
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param cancellationToken:
-        :return:
-        """
+        """"""
     @classmethod
     def WithDegreeOfParallelism(
         cls, source: ParallelQuery[TSource], degreeOfParallelism: int
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param degreeOfParallelism:
-        :return:
-        """
+        """"""
     @classmethod
     def WithExecutionMode(
         cls, source: ParallelQuery[TSource], executionMode: ParallelExecutionMode
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param executionMode:
-        :return:
-        """
+        """"""
     @classmethod
     def WithMergeOptions(
         cls, source: ParallelQuery[TSource], mergeOptions: ParallelMergeOptions
     ) -> ParallelQuery[TSource]:
-        """:param source:
-        :param mergeOptions:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Zip(
@@ -3919,11 +2611,7 @@ class ParallelEnumerable(ABC, Object):
         second: IEnumerable[TSecond],
         resultSelector: Func[TFirst, TSecond, TResult],
     ) -> ParallelQuery[TResult]:
-        """:param first:
-        :param second:
-        :param resultSelector:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Zip(
@@ -3932,11 +2620,15 @@ class ParallelEnumerable(ABC, Object):
         second: ParallelQuery[TSecond],
         resultSelector: Func[TFirst, TSecond, TResult],
     ) -> ParallelQuery[TResult]:
-        """:param first:
-        :param second:
-        :param resultSelector:
-        :return:
-        """
+        """"""
+    @overload
+    def __contains__[TSource](self, source: ParallelQuery[TSource], value: TSource) -> bool:
+        """"""
+    @overload
+    def __contains__[TSource](
+        self, source: ParallelQuery[TSource], value: TSource, comparer: IEqualityComparer[TSource]
+    ) -> bool:
+        """"""
 
 class ParallelExecutionMode(Enum):
     """"""
@@ -3960,309 +2652,240 @@ class ParallelMergeOptions(Enum):
 
 class ParallelQuery(Object, IEnumerable):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
+        """"""
+    def __iter__(self) -> Iterator:
+        """"""
 
-class ParallelQuery(Generic[TSource], ParallelQuery, IEnumerable[TSource], IEnumerable):
+class ParallelQuery[TSource](ParallelQuery, IEnumerable[TSource], IEnumerable):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetEnumerator(self) -> IEnumerator:
-        """:return:"""
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TSource]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def __iter__(self) -> Iterator[object]:
-        """:return:"""
-    @overload
+        """"""
     def __iter__(self) -> Iterator[TSource]:
-        """:return:"""
+        """"""
 
 class Queryable(ABC, Object):
     """"""
-
     @classmethod
     @overload
-    def Aggregate(
-        cls, source: IQueryable[TSource], func: Expression[Func, TSource, TSource]
-    ) -> TSource:
-        """"""
-    @classmethod
-    @overload
-    def Aggregate(
+    def Aggregate[TAccumulate, TAccumulate](
         cls,
         source: IQueryable[TSource],
         seed: TAccumulate,
-        func: Expression[Func, TSource, TAccumulate],
+        func: Expression[Func[TAccumulate, TSource, TAccumulate]],
     ) -> TAccumulate:
         """"""
     @classmethod
     @overload
-    def Aggregate(
+    def Aggregate[TAccumulate, TResult](
         cls,
         source: IQueryable[TSource],
         seed: TAccumulate,
-        func: Expression[Func, TSource, TAccumulate],
-        selector: Expression[Func, TResult],
+        func: Expression[Func[TAccumulate, TSource, TAccumulate]],
+        selector: Expression[Func[TAccumulate, TResult]],
     ) -> TResult:
         """"""
     @classmethod
-    def All(cls, source: IQueryable[TSource], predicate: Expression[Func, bool]) -> bool:
+    @overload
+    def Aggregate[TSource](
+        cls, source: IQueryable[TSource], func: Expression[Func[TSource, TSource, TSource]]
+    ) -> TSource:
+        """"""
+    @classmethod
+    def All(cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]) -> bool:
         """"""
     @classmethod
     @overload
     def Any(cls, source: IQueryable[TSource]) -> bool:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Any(cls, source: IQueryable[TSource], predicate: Expression[Func, bool]) -> bool:
-        """:param source:
-        :return:
-        """
+    def Any(cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]) -> bool:
+        """"""
     @classmethod
     @overload
     def AsQueryable(cls, source: IEnumerable[TElement]) -> IQueryable[TElement]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def AsQueryable(cls, source: IEnumerable) -> IQueryable:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[int | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[int]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[int | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[int]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[float]) -> float:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Average(
-        cls, source: IQueryable[TSource], selector: Expression[Func, Decimal | None]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal | None]]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: IQueryable[TSource], selector: Expression[Func, Decimal]) -> Decimal:
+    def Average(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal]]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
     def Average(
-        cls, source: IQueryable[TSource], selector: Expression[Func, float | None]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
     ) -> float | None:
-        """"""
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[TSource], selector: Expression[Func, float]) -> float:
         """"""
     @classmethod
     @overload
     def Average(
-        cls, source: IQueryable[TSource], selector: Expression[Func, int | None]
-    ) -> float | None:
-        """"""
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[TSource], selector: Expression[Func, int]) -> float:
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]
+    ) -> float:
         """"""
     @classmethod
     @overload
     def Average(
-        cls, source: IQueryable[TSource], selector: Expression[Func, int | None]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
     ) -> float | None:
-        """"""
-    @classmethod
-    @overload
-    def Average(cls, source: IQueryable[TSource], selector: Expression[Func, int]) -> float:
         """"""
     @classmethod
     @overload
     def Average(
-        cls, source: IQueryable[TSource], selector: Expression[Func, float | None]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]
+    ) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: IQueryable[TSource], selector: Expression[Func, float]) -> float:
+    def Average(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]
+    ) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
+    ) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]
+    ) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[int | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[int]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[int | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[int]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Average(cls, source: IQueryable[float]) -> float:
         """"""
     @classmethod
     def Cast(cls, source: IQueryable) -> IQueryable[TResult]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     def Concat(
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
-        """:param source1:
-        :param source2:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Contains(cls, source: IQueryable[TSource], item: TSource) -> bool:
-        """:param source:
-        :param item:
-        :return:
-        """
+    def Contains[TSource](cls, source: IQueryable[TSource], item: TSource) -> bool:
+        """"""
     @classmethod
     @overload
-    def Contains(
-        cls,
-        source: IQueryable[TSource],
-        item: TSource,
-        comparer: IEqualityComparer[TSource],
+    def Contains[TSource](
+        cls, source: IQueryable[TSource], item: TSource, comparer: IEqualityComparer[TSource]
     ) -> bool:
-        """:param source:
-        :param item:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Count(cls, source: IQueryable[TSource]) -> int:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Count(cls, source: IQueryable[TSource], predicate: Expression[Func, bool]) -> int:
-        """:param source:
-        :return:
-        """
+    def Count(cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]) -> int:
+        """"""
     @classmethod
     @overload
     def DefaultIfEmpty(cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def DefaultIfEmpty(
+    def DefaultIfEmpty[TSource](
         cls, source: IQueryable[TSource], defaultValue: TSource
     ) -> IQueryable[TSource]:
-        """:param source:
-        :param defaultValue:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Distinct(cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Distinct(
         cls, source: IQueryable[TSource], comparer: IEqualityComparer[TSource]
     ) -> IQueryable[TSource]:
-        """:param source:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
-    def ElementAt(cls, source: IQueryable[TSource], index: int) -> TSource:
-        """:param source:
-        :param index:
-        :return:
-        """
+    def ElementAt[TSource](cls, source: IQueryable[TSource], index: int) -> TSource:
+        """"""
     @classmethod
-    def ElementAtOrDefault(cls, source: IQueryable[TSource], index: int) -> TSource:
-        """:param source:
-        :param index:
-        :return:
-        """
+    def ElementAtOrDefault[TSource](cls, source: IQueryable[TSource], index: int) -> TSource:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Except(
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
-        """:param source1:
-        :param source2:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Except(
@@ -4271,63 +2894,53 @@ class Queryable(ABC, Object):
         source2: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> IQueryable[TSource]:
-        """:param source1:
-        :param source2:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def First(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def First[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def First(cls, source: IQueryable[TSource], predicate: Expression[Func, bool]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def FirstOrDefault(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def FirstOrDefault(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, bool]
+    def First[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> TSource:
-        """:param source:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def FirstOrDefault[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def FirstOrDefault[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
+    ) -> TSource:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     @overload
     def GroupBy(
-        cls, source: IQueryable[TSource], keySelector: Expression[Func, TKey]
-    ) -> IQueryable[IGrouping, TSource]:
+        cls, source: IQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
+    ) -> IQueryable[IGrouping[TKey, TSource]]:
         """"""
     @classmethod
     @overload
     def GroupBy(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
+        keySelector: Expression[Func[TSource, TKey]],
         comparer: IEqualityComparer[TKey],
-    ) -> IQueryable[IGrouping, TSource]:
+    ) -> IQueryable[IGrouping[TKey, TSource]]:
         """"""
     @classmethod
     @overload
     def GroupBy(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
-        resultSelector: Expression[Func, IEnumerable[TSource], TResult],
+        keySelector: Expression[Func[TSource, TKey]],
+        resultSelector: Expression[Func, IEnumerable[TSource, TResult]],
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
@@ -4335,17 +2948,8 @@ class Queryable(ABC, Object):
     def GroupBy(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
-        elementSelector: Expression[Func, TElement],
-    ) -> IQueryable[IGrouping, TElement]:
-        """"""
-    @classmethod
-    @overload
-    def GroupBy(
-        cls,
-        source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
-        resultSelector: Expression[Func, IEnumerable[TSource], TResult],
+        keySelector: Expression[Func[TSource, TKey]],
+        resultSelector: Expression[Func, IEnumerable[TSource, TResult]],
         comparer: IEqualityComparer[TKey],
     ) -> IQueryable[TResult]:
         """"""
@@ -4354,19 +2958,28 @@ class Queryable(ABC, Object):
     def GroupBy(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
-        elementSelector: Expression[Func, TElement],
-        comparer: IEqualityComparer[TKey],
-    ) -> IQueryable[IGrouping, TElement]:
+        keySelector: Expression[Func[TSource, TKey]],
+        elementSelector: Expression[Func[TSource, TElement]],
+    ) -> IQueryable[IGrouping[TKey, TElement]]:
         """"""
     @classmethod
     @overload
     def GroupBy(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
-        elementSelector: Expression[Func, TElement],
-        resultSelector: Expression[Func, IEnumerable[TElement], TResult],
+        keySelector: Expression[Func[TSource, TKey]],
+        elementSelector: Expression[Func[TSource, TElement]],
+        comparer: IEqualityComparer[TKey],
+    ) -> IQueryable[IGrouping[TKey, TElement]]:
+        """"""
+    @classmethod
+    @overload
+    def GroupBy(
+        cls,
+        source: IQueryable[TSource],
+        keySelector: Expression[Func[TSource, TKey]],
+        elementSelector: Expression[Func[TSource, TElement]],
+        resultSelector: Expression[Func, IEnumerable[TElement, TResult]],
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
@@ -4374,9 +2987,9 @@ class Queryable(ABC, Object):
     def GroupBy(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
-        elementSelector: Expression[Func, TElement],
-        resultSelector: Expression[Func, IEnumerable[TElement], TResult],
+        keySelector: Expression[Func[TSource, TKey]],
+        elementSelector: Expression[Func[TSource, TElement]],
+        resultSelector: Expression[Func, IEnumerable[TElement, TResult]],
         comparer: IEqualityComparer[TKey],
     ) -> IQueryable[TResult]:
         """"""
@@ -4386,9 +2999,9 @@ class Queryable(ABC, Object):
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
-        outerKeySelector: Expression[Func, TKey],
-        innerKeySelector: Expression[Func, TKey],
-        resultSelector: Expression[Func, IEnumerable[TInner], TResult],
+        outerKeySelector: Expression[Func[TOuter, TKey]],
+        innerKeySelector: Expression[Func[TInner, TKey]],
+        resultSelector: Expression[Func, IEnumerable[TInner, TResult]],
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
@@ -4397,9 +3010,9 @@ class Queryable(ABC, Object):
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
-        outerKeySelector: Expression[Func, TKey],
-        innerKeySelector: Expression[Func, TKey],
-        resultSelector: Expression[Func, IEnumerable[TInner], TResult],
+        outerKeySelector: Expression[Func[TOuter, TKey]],
+        innerKeySelector: Expression[Func[TInner, TKey]],
+        resultSelector: Expression[Func, IEnumerable[TInner, TResult]],
         comparer: IEqualityComparer[TKey],
     ) -> IQueryable[TResult]:
         """"""
@@ -4408,10 +3021,7 @@ class Queryable(ABC, Object):
     def Intersect(
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
-        """:param source1:
-        :param source2:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Intersect(
@@ -4420,20 +3030,16 @@ class Queryable(ABC, Object):
         source2: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> IQueryable[TSource]:
-        """:param source1:
-        :param source2:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Join(
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
-        outerKeySelector: Expression[Func, TKey],
-        innerKeySelector: Expression[Func, TKey],
-        resultSelector: Expression[Func, TInner, TResult],
+        outerKeySelector: Expression[Func[TOuter, TKey]],
+        innerKeySelector: Expression[Func[TInner, TKey]],
+        resultSelector: Expression[Func[TOuter, TInner, TResult]],
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
@@ -4442,83 +3048,69 @@ class Queryable(ABC, Object):
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
-        outerKeySelector: Expression[Func, TKey],
-        innerKeySelector: Expression[Func, TKey],
-        resultSelector: Expression[Func, TInner, TResult],
+        outerKeySelector: Expression[Func[TOuter, TKey]],
+        innerKeySelector: Expression[Func[TInner, TKey]],
+        resultSelector: Expression[Func[TOuter, TInner, TResult]],
         comparer: IEqualityComparer[TKey],
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
-    def Last(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Last[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Last(cls, source: IQueryable[TSource], predicate: Expression[Func, bool]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def LastOrDefault(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def LastOrDefault(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, bool]
+    def Last[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> TSource:
-        """:param source:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def LastOrDefault[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def LastOrDefault[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
+    ) -> TSource:
+        """"""
     @classmethod
     @overload
     def LongCount(cls, source: IQueryable[TSource]) -> int:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def LongCount(cls, source: IQueryable[TSource], predicate: Expression[Func, bool]) -> int:
-        """:param source:
-        :return:
-        """
+    def LongCount(
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
+    ) -> int:
+        """"""
     @classmethod
     @overload
-    def Max(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Max[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Max(cls, source: IQueryable[TSource], selector: Expression[Func, TResult]) -> TResult:
-        """:param source:
-        :return:
-        """
+    def Max[TResult](
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, TResult]]
+    ) -> TResult:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Min[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Min(cls, source: IQueryable[TSource], selector: Expression[Func, TResult]) -> TResult:
-        """:param source:
-        :return:
-        """
+    def Min[TResult](
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, TResult]]
+    ) -> TResult:
+        """"""
     @classmethod
     def OfType(cls, source: IQueryable) -> IQueryable[TResult]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OrderBy(
-        cls, source: IQueryable[TSource], keySelector: Expression[Func, TKey]
+        cls, source: IQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
@@ -4526,14 +3118,14 @@ class Queryable(ABC, Object):
     def OrderBy(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
+        keySelector: Expression[Func[TSource, TKey]],
         comparer: IComparer[TKey],
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
     @overload
     def OrderByDescending(
-        cls, source: IQueryable[TSource], keySelector: Expression[Func, TKey]
+        cls, source: IQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
@@ -4541,41 +3133,23 @@ class Queryable(ABC, Object):
     def OrderByDescending(
         cls,
         source: IQueryable[TSource],
-        keySelector: Expression[Func, TKey],
+        keySelector: Expression[Func[TSource, TKey]],
         comparer: IComparer[TKey],
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
     def Reverse(cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
-        """:param source:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Select(
-        cls, source: IQueryable[TSource], selector: Expression[Func, TResult]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
     def Select(
-        cls, source: IQueryable[TSource], selector: Expression[Func, int, TResult]
-    ) -> IQueryable[TResult]:
-        """"""
-    @classmethod
-    @overload
-    def SelectMany(
-        cls,
-        source: IQueryable[TSource],
-        selector: Expression[Func, IEnumerable[TResult]],
-    ) -> IQueryable[TResult]:
-        """"""
-    @classmethod
-    @overload
-    def SelectMany(
-        cls,
-        source: IQueryable[TSource],
-        selector: Expression[Func, int, IEnumerable[TResult]],
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int, TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
@@ -4584,7 +3158,13 @@ class Queryable(ABC, Object):
         cls,
         source: IQueryable[TSource],
         collectionSelector: Expression[Func, IEnumerable[TCollection]],
-        resultSelector: Expression[Func, TCollection, TResult],
+        resultSelector: Expression[Func[TSource, TCollection, TResult]],
+    ) -> IQueryable[TResult]:
+        """"""
+    @classmethod
+    @overload
+    def SelectMany(
+        cls, source: IQueryable[TSource], selector: Expression[Func, IEnumerable[TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
@@ -4593,16 +3173,19 @@ class Queryable(ABC, Object):
         cls,
         source: IQueryable[TSource],
         collectionSelector: Expression[Func, int, IEnumerable[TCollection]],
-        resultSelector: Expression[Func, TCollection, TResult],
+        resultSelector: Expression[Func[TSource, TCollection, TResult]],
+    ) -> IQueryable[TResult]:
+        """"""
+    @classmethod
+    @overload
+    def SelectMany(
+        cls, source: IQueryable[TSource], selector: Expression[Func, int, IEnumerable[TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
     def SequenceEqual(cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]) -> bool:
-        """:param source1:
-        :param source2:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SequenceEqual(
@@ -4611,183 +3194,153 @@ class Queryable(ABC, Object):
         source2: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> bool:
-        """:param source1:
-        :param source2:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def Single(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
+    def Single[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
     @classmethod
     @overload
-    def Single(cls, source: IQueryable[TSource], predicate: Expression[Func, bool]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SingleOrDefault(cls, source: IQueryable[TSource]) -> TSource:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def SingleOrDefault(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, bool]
+    def Single[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> TSource:
-        """:param source:
-        :return:
-        """
+        """"""
+    @classmethod
+    @overload
+    def SingleOrDefault[TSource](cls, source: IQueryable[TSource]) -> TSource:
+        """"""
+    @classmethod
+    @overload
+    def SingleOrDefault[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
+    ) -> TSource:
+        """"""
     @classmethod
     def Skip(cls, source: IQueryable[TSource], count: int) -> IQueryable[TSource]:
-        """:param source:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SkipWhile(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, bool]
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
     def SkipWhile(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, int, bool]
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, int, bool]]
     ) -> IQueryable[TSource]:
         """"""
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[Decimal | None]) -> Decimal | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[Decimal]) -> Decimal:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[float]) -> float:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[int | None]) -> int | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[int]) -> int:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[float | None]) -> float | None:
-        """:param source:
-        :return:
-        """
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[float]) -> float:
-        """:param source:
-        :return:
-        """
     @classmethod
     @overload
     def Sum(
-        cls, source: IQueryable[TSource], selector: Expression[Func, Decimal | None]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal | None]]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func, Decimal]) -> Decimal:
+    def Sum(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal]]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
     def Sum(
-        cls, source: IQueryable[TSource], selector: Expression[Func, float | None]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func, float]) -> float:
-        """"""
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func, int | None]) -> int | None:
-        """"""
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func, int]) -> int:
-        """"""
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func, int | None]) -> int | None:
-        """"""
-    @classmethod
-    @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func, int]) -> int:
+    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]) -> float:
         """"""
     @classmethod
     @overload
     def Sum(
-        cls, source: IQueryable[TSource], selector: Expression[Func, float | None]
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
+    ) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
+    ) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func, float]) -> float:
+    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[Decimal | None]) -> Decimal | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[Decimal]) -> Decimal:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[float]) -> float:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[int | None]) -> int | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[int]) -> int:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[float | None]) -> float | None:
+        """"""
+    @classmethod
+    @overload
+    def Sum(cls, source: IQueryable[float]) -> float:
         """"""
     @classmethod
     def Take(cls, source: IQueryable[TSource], count: int) -> IQueryable[TSource]:
-        """:param source:
-        :param count:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def TakeWhile(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, bool]
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
     def TakeWhile(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, int, bool]
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, int, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
     def ThenBy(
-        cls, source: IOrderedQueryable[TSource], keySelector: Expression[Func, TKey]
+        cls, source: IOrderedQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
@@ -4795,14 +3348,14 @@ class Queryable(ABC, Object):
     def ThenBy(
         cls,
         source: IOrderedQueryable[TSource],
-        keySelector: Expression[Func, TKey],
+        keySelector: Expression[Func[TSource, TKey]],
         comparer: IComparer[TKey],
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
     @overload
     def ThenByDescending(
-        cls, source: IOrderedQueryable[TSource], keySelector: Expression[Func, TKey]
+        cls, source: IOrderedQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
@@ -4810,21 +3363,18 @@ class Queryable(ABC, Object):
     def ThenByDescending(
         cls,
         source: IOrderedQueryable[TSource],
-        keySelector: Expression[Func, TKey],
+        keySelector: Expression[Func[TSource, TKey]],
         comparer: IComparer[TKey],
     ) -> IOrderedQueryable[TSource]:
         """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     @classmethod
     @overload
     def Union(
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
-        """:param source1:
-        :param source2:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Union(
@@ -4833,21 +3383,17 @@ class Queryable(ABC, Object):
         source2: IEnumerable[TSource],
         comparer: IEqualityComparer[TSource],
     ) -> IQueryable[TSource]:
-        """:param source1:
-        :param source2:
-        :param comparer:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def Where(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, bool]
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
     def Where(
-        cls, source: IQueryable[TSource], predicate: Expression[Func, int, bool]
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, int, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
@@ -4855,144 +3401,72 @@ class Queryable(ABC, Object):
         cls,
         source1: IQueryable[TFirst],
         source2: IEnumerable[TSecond],
-        resultSelector: Expression[Func, TSecond, TResult],
+        resultSelector: Expression[Func[TFirst, TSecond, TResult]],
     ) -> IQueryable[TResult]:
+        """"""
+    @overload
+    def __contains__[TSource](self, source: IQueryable[TSource], item: TSource) -> bool:
+        """"""
+    @overload
+    def __contains__[TSource](
+        self, source: IQueryable[TSource], item: TSource, comparer: IEqualityComparer[TSource]
+    ) -> bool:
         """"""
 
 class SR(Object):
     """"""
-
     @classmethod
     @property
     def Resources(cls) -> ResourceManager:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     @classmethod
     def GetObject(cls, name: str) -> object:
-        """:param name:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GetString(cls, name: str) -> str:
-        """:param name:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
-    def GetString(cls, name: str, usedFallback: bool) -> tuple[str, bool]:
-        """:param name:
-        :param usedFallback:
-        :return:
-        """
+    def GetString(cls, name: str, usedFallback: Boolean) -> tuple[str, Boolean]:
+        """"""
     @classmethod
     @overload
     def GetString(cls, name: str, args: Array[object]) -> str:
-        """:param name:
-        :param args:
-        :return:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class SRCategoryAttribute(CategoryAttribute, _Attribute):
     """"""
-
-    def __init__(self, category: str):
-        """:param category:"""
-    @classmethod
-    @property
-    def Action(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Appearance(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Asynchronous(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Behavior(cls) -> CategoryAttribute:
-        """:return:"""
+    def __init__(self, category: str) -> None:
+        """"""
     @property
     def Category(self) -> str:
-        """:return:"""
-    @classmethod
-    @property
-    def Data(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Default(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Design(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def DragDrop(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Focus(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Format(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Key(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Layout(cls) -> CategoryAttribute:
-        """:return:"""
-    @classmethod
-    @property
-    def Mouse(cls) -> CategoryAttribute:
-        """:return:"""
+        """"""
     @property
     def TypeId(self) -> object:
-        """:return:"""
-    @classmethod
-    @property
-    def WindowStyle(cls) -> CategoryAttribute:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """:param riid:
-        :param rgszNames:
-        :param cNames:
-        :param lcid:
-        :param rgDispId:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """:param iTInfo:
-        :param lcid:
-        :param ppTInfo:
-        """
-    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
-        """:param pcTInfo:"""
+        """"""
+    def GetTypeInfoCount(self, pcTInfo: UInt32) -> tuple[None, UInt32]:
+        """"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5004,59 +3478,38 @@ class SRCategoryAttribute(CategoryAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """:param dispIdMember:
-        :param riid:
-        :param lcid:
-        :param wFlags:
-        :param pDispParams:
-        :param pVarResult:
-        :param pExcepInfo:
-        :param puArgErr:
-        """
+        """"""
     def IsDefaultAttribute(self) -> bool:
-        """:return:"""
+        """"""
     def Match(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class SRDescriptionAttribute(DescriptionAttribute, _Attribute):
     """"""
-
-    def __init__(self, description: str):
-        """:param description:"""
+    def __init__(self, description: str) -> None:
+        """"""
     @property
     def Description(self) -> str:
-        """:return:"""
+        """"""
     @property
     def TypeId(self) -> object:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
     ) -> None:
-        """:param riid:
-        :param rgszNames:
-        :param cNames:
-        :param lcid:
-        :param rgDispId:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
-        """:param iTInfo:
-        :param lcid:
-        :param ppTInfo:
-        """
-    def GetTypeInfoCount(self, pcTInfo: int) -> tuple[None, int]:
-        """:param pcTInfo:"""
+        """"""
+    def GetTypeInfoCount(self, pcTInfo: UInt32) -> tuple[None, UInt32]:
+        """"""
     def Invoke(
         self,
         dispIdMember: int,
@@ -5068,237 +3521,172 @@ class SRDescriptionAttribute(DescriptionAttribute, _Attribute):
         pExcepInfo: IntPtr,
         puArgErr: IntPtr,
     ) -> None:
-        """:param dispIdMember:
-        :param riid:
-        :param lcid:
-        :param wFlags:
-        :param pDispParams:
-        :param pVarResult:
-        :param pExcepInfo:
-        :param puArgErr:
-        """
+        """"""
     def IsDefaultAttribute(self) -> bool:
-        """:return:"""
+        """"""
     def Match(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
-class Set(Generic[TElement], Object):
+class Set[TElement](Object):
     """"""
-
     @overload
-    def __init__(self):
+    def __init__(self) -> None:
         """"""
     @overload
-    def __init__(self, comparer: IEqualityComparer[TElement]):
-        """:param comparer:"""
-    def Add(self, value: TElement) -> bool:
-        """:param value:
-        :return:
-        """
-    def Contains(self, value: TElement) -> bool:
-        """:param value:
-        :return:
-        """
+    def __init__(self, comparer: IEqualityComparer[TElement]) -> None:
+        """"""
+    def Add[TElement](self, value: TElement) -> bool:
+        """"""
+    def Contains[TElement](self, value: TElement) -> bool:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
-    def Remove(self, value: TElement) -> bool:
-        """:param value:
-        :return:
-        """
+        """"""
+    def Remove[TElement](self, value: TElement) -> bool:
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
+    def __contains__[TElement](self, value: TElement) -> bool:
+        """"""
+    def __delitem__[TElement](self, value: TElement) -> bool:
+        """"""
 
-class SingleLinkedNode(Generic[TSource], Object):
+class SingleLinkedNode[TSource](Object):
     """"""
-
-    def __init__(self, item: TSource):
-        """:param item:"""
+    def __init__(self, item: TSource) -> None:
+        """"""
     @property
     def Item(self) -> TSource:
-        """:return:"""
+        """"""
     @property
     def Linked(self) -> SingleLinkedNode[TSource]:
-        """:return:"""
-    def Add(self, item: TSource) -> SingleLinkedNode[TSource]:
-        """:param item:
-        :return:
-        """
+        """"""
+    def Add[TSource](self, item: TSource) -> SingleLinkedNode[TSource]:
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetCount(self) -> int:
-        """:return:"""
+        """"""
     def GetEnumerator(self, count: int) -> IEnumerator[TSource]:
-        """:param count:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetNode(self, index: int) -> SingleLinkedNode[TSource]:
-        """:param index:
-        :return:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToArray(self, count: int) -> Array[TSource]:
-        """:param count:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    def __getitem__(self) -> TSource:
-        """:return:"""
+        """"""
+    def __iter__(self, count: int) -> Iterator[TSource]:
+        """"""
+    def __getitem__[TSource](self) -> TSource:
+        """"""
 
 class Strings(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-
-class SystemCore_EnumerableDebugView(Generic[T], Object):
-    """"""
-
-    def __init__(self, enumerable: IEnumerable[T]):
-        """:param enumerable:"""
-    @property
-    def Items(self) -> Array[T]:
-        """:return:"""
-    def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetHashCode(self) -> int:
-        """:return:"""
-    def GetType(self) -> Type:
-        """:return:"""
-    def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class SystemCore_EnumerableDebugView(Object):
     """"""
-
-    def __init__(self, enumerable: IEnumerable):
-        """:param enumerable:"""
+    def __init__(self, enumerable: IEnumerable) -> None:
+        """"""
     @property
     def Items(self) -> Array[object]:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class SystemCore_EnumerableDebugViewEmptyException(Exception, _Exception, ISerializable):
     """"""
-
-    def __init__(self):
+    def __init__(self) -> None:
         """"""
     @property
     def Data(self) -> IDictionary:
-        """:return:"""
+        """"""
     @property
     def Empty(self) -> str:
-        """:return:"""
+        """"""
     @property
     def HResult(self) -> int:
-        """:return:"""
+        """"""
     @property
     def HelpLink(self) -> str:
-        """:return:"""
+        """"""
     @HelpLink.setter
     def HelpLink(self, value: str) -> None: ...
     @property
     def InnerException(self) -> Exception:
-        """:return:"""
+        """"""
     @property
     def Message(self) -> str:
-        """:return:"""
+        """"""
     @property
     def Source(self) -> str:
-        """:return:"""
+        """"""
     @Source.setter
     def Source(self, value: str) -> None: ...
     @property
     def StackTrace(self) -> str:
-        """:return:"""
+        """"""
     @property
     def TargetSite(self) -> MethodBase:
-        """:return:"""
-    @overload
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    @overload
-    def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetBaseException(self) -> Exception:
-        """:return:"""
-    @overload
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
-    @overload
+        """"""
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """"""
+    def GetType(self) -> Type:
+        """"""
+    def ToString(self) -> str:
+        """"""
+
+class SystemCore_EnumerableDebugView[T](Object):
+    """"""
+    def __init__(self, enumerable: IEnumerable[T]) -> None:
+        """"""
+    @property
+    def Items(self) -> Array[T]:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
-    @overload
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """:param info:
-        :param context:
-        """
-    @overload
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-        """:param info:
-        :param context:
-        """
-    @overload
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
-    @overload
-    def GetType(self) -> Type:
-        """:return:"""
-    @overload
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-    @overload
-    def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class TypeHelper(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""

@@ -1,8 +1,7 @@
+"""Automatically generated stubs for C# namespace: System.Collections.Immutable."""
+
 from abc import ABC
 from typing import ClassVar
-from typing import Final
-from typing import Generic
-from typing import TypeVar
 
 from System import Array
 from System import Func
@@ -10,83 +9,57 @@ from System import Object
 from System import Type
 from System import ValueType
 
-T = TypeVar("T")
-
 class ImmutableArray(ABC, Object):
     """"""
-
     @classmethod
     def CreateBuilder(cls, capacity: int) -> ImmutableArray.Builder[T]:
-        """:param capacity:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
-
-class ImmutableArray(Generic[T], ValueType):
-    """"""
-
-    Empty: Final[ClassVar[ImmutableArray[T]]] = ...
-    """
-    
-    :return: 
-    """
-    def __init__(self, array: Array[T]):
-        """:param array:"""
-    @property
-    def IsDefault(self) -> bool:
-        """:return:"""
-    @property
-    def Item(self) -> T:
-        """:return:"""
-    @property
-    def Length(self) -> int:
-        """:return:"""
-    @property
-    def UnderlyingArray(self) -> Array[T]:
-        """:return:"""
-    def CopyTo(
-        self,
-        sourceIndex: int,
-        destination: Array[T],
-        destinationIndex: int,
-        length: int,
-    ) -> None:
-        """:param sourceIndex:
-        :param destination:
-        :param destinationIndex:
-        :param length:
-        """
-    def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def FirstOrDefault(self, predicate: Func[T, bool]) -> T:
-        """:param predicate:
-        :return:
-        """
-    def GetHashCode(self) -> int:
-        """:return:"""
-    def GetType(self) -> Type:
-        """:return:"""
-    def ToString(self) -> str:
-        """:return:"""
-    def __getitem__(self, index: int) -> T:
-        """:param index:
-        :return:
-        """
-
-    class Builder(Generic[T], Object):
         """"""
 
+class ImmutableArray[T](ValueType):
+    """"""
+
+    Empty: ClassVar[ImmutableArray[T]]
+    """"""
+    def __init__(self, array: Array[T]) -> None:
+        """"""
+    @property
+    def IsDefault(self) -> bool:
+        """"""
+    @property
+    def Item(self) -> T:
+        """"""
+    @property
+    def Length(self) -> int:
+        """"""
+    @property
+    def UnderlyingArray(self) -> Array[T]:
+        """"""
+    def CopyTo(
+        self, sourceIndex: int, destination: Array[T], destinationIndex: int, length: int
+    ) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """"""
+    def FirstOrDefault[T](self, predicate: Func[T, bool]) -> T:
+        """"""
+    def GetHashCode(self) -> int:
+        """"""
+    def GetType(self) -> Type:
+        """"""
+    def ToString(self) -> str:
+        """"""
+    def __getitem__[T](self, index: int) -> T:
+        """"""
+    class Builder[T](Object):
+        """"""
         @property
         def Capacity(self) -> int:
             """"""
@@ -98,21 +71,21 @@ class ImmutableArray(Generic[T], ValueType):
             """"""
         @Item.setter
         def Item(self, value: T) -> None: ...
-        def Add(self, item: T) -> None:
+        def Add[T](self, item: T) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
-            """:param obj:
-            :return:
-            """
+            """"""
         def GetHashCode(self) -> int:
-            """:return:"""
+            """"""
         def GetType(self) -> Type:
-            """:return:"""
+            """"""
         def MoveToImmutable(self) -> ImmutableArray[T]:
             """"""
         def ToString(self) -> str:
-            """:return:"""
-        def __getitem__(self, index: int) -> T:
             """"""
-        def __setitem__(self, index: int, value: T) -> None:
+        def __len__(self) -> int:
+            """"""
+        def __getitem__[T](self, index: int) -> T:
+            """"""
+        def __setitem__[T](self, index: int, value: T) -> None:
             """"""

@@ -1,9 +1,10 @@
+"""Automatically generated stubs for C# namespace: Microsoft.Win32."""
+
 from abc import ABC
 from collections.abc import Callable
 from typing import ClassVar
 from typing import Final
-from typing import Generic
-from typing import TypeVar
+from typing import Self
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeFileHandle
@@ -14,15 +15,19 @@ from Microsoft.Win32.SafeHandles import SafeRegistryHandle
 from Microsoft.Win32.SafeHandles import SafeThreadHandle
 from Microsoft.Win32.SafeHandles import SafeWaitHandle
 from System import Array
+from System import Boolean
 from System import Delegate
 from System import Enum
 from System import EventArgs
 from System import EventHandler
 from System import IDisposable
+from System import Int32
+from System import Int64
 from System import IntPtr
 from System import MarshalByRefObject
 from System import Object
 from System import Type
+from System import UInt32
 from System import Uri
 from System import ValueType
 from System import __ComObject
@@ -41,254 +46,142 @@ from System.Security.AccessControl import RegistrySecurity
 from System.Text import StringBuilder
 from System.Threading import NativeOverlapped
 
-T = TypeVar("T")
-
-class EventType(Generic[T]):
-    def __iadd__(self, other: T): ...
-    def __isub__(self, other: T): ...
+class EventType[T]:
+    def __iadd__(self, other: T) -> Self: ...
+    def __isub__(self, other: T) -> Self: ...
 
 class ASM_CACHE(ABC, Object):
     """"""
 
-    DOWNLOAD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GAC: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ZAP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    DOWNLOAD: ClassVar[int]
+    """"""
+    GAC: ClassVar[int]
+    """"""
+    ZAP: ClassVar[int]
+    """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class ASM_NAME(ABC, Object):
     """"""
 
-    ALIAS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    BUILD_NUMBER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CODEBASE_LASTMOD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CODEBASE_URL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CULTURE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CUSTOM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    HASH_ALGID: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    HASH_VALUE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MAJOR_VERSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MAX_PARAMS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MINOR_VERSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MVID: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NULL_CUSTOM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NULL_PUBLIC_KEY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NULL_PUBLIC_KEY_TOKEN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    OSINFO_ARRAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESSOR_ID_ARRAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PUBLIC_KEY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PUBLIC_KEY_TOKEN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    REVISION_NUMBER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    _32_BIT_ONLY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    ALIAS: ClassVar[int]
+    """"""
+    BUILD_NUMBER: ClassVar[int]
+    """"""
+    CODEBASE_LASTMOD: ClassVar[int]
+    """"""
+    CODEBASE_URL: ClassVar[int]
+    """"""
+    CULTURE: ClassVar[int]
+    """"""
+    CUSTOM: ClassVar[int]
+    """"""
+    HASH_ALGID: ClassVar[int]
+    """"""
+    HASH_VALUE: ClassVar[int]
+    """"""
+    MAJOR_VERSION: ClassVar[int]
+    """"""
+    MAX_PARAMS: ClassVar[int]
+    """"""
+    MINOR_VERSION: ClassVar[int]
+    """"""
+    MVID: ClassVar[int]
+    """"""
+    NAME: ClassVar[int]
+    """"""
+    NULL_CUSTOM: ClassVar[int]
+    """"""
+    NULL_PUBLIC_KEY: ClassVar[int]
+    """"""
+    NULL_PUBLIC_KEY_TOKEN: ClassVar[int]
+    """"""
+    OSINFO_ARRAY: ClassVar[int]
+    """"""
+    PROCESSOR_ID_ARRAY: ClassVar[int]
+    """"""
+    PUBLIC_KEY: ClassVar[int]
+    """"""
+    PUBLIC_KEY_TOKEN: ClassVar[int]
+    """"""
+    REVISION_NUMBER: ClassVar[int]
+    """"""
+    _32_BIT_ONLY: ClassVar[int]
+    """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class CANOF(ABC, Object):
     """"""
 
-    PARSE_DISPLAY_NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SET_DEFAULT_VALUES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    PARSE_DISPLAY_NAME: ClassVar[int]
+    """"""
+    SET_DEFAULT_VALUES: ClassVar[int]
+    """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class Fusion(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def ReadCache(cls, alAssems: ArrayList, name: str, nFlag: int) -> None:
-        """:param alAssems:
-        :param name:
-        :param nFlag:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class IApplicationContext:
     """"""
-
-    def Get(self, szName: str, pvValue: int, pcbValue: int, dwFlags: int) -> tuple[None, int]:
-        """:param szName:
-        :param pvValue:
-        :param pcbValue:
-        :param dwFlags:
-        """
+    def Get(
+        self, szName: str, pvValue: Int32, pcbValue: UInt32, dwFlags: int
+    ) -> tuple[None, Int32]:
+        """"""
     def GetContextNameObject(self, ppName: IAssemblyName) -> tuple[None, IAssemblyName]:
-        """:param ppName:"""
-    def GetDynamicDirectory(self, wzDynamicDir: int, pdwSize: int) -> tuple[None, int]:
-        """:param wzDynamicDir:
-        :param pdwSize:
-        """
+        """"""
+    def GetDynamicDirectory(self, wzDynamicDir: Int32, pdwSize: UInt32) -> tuple[None, Int32]:
+        """"""
     def Set(self, szName: str, pvValue: int, cbValue: int, dwFlags: int) -> None:
-        """:param szName:
-        :param pvValue:
-        :param cbValue:
-        :param dwFlags:
-        """
+        """"""
     def SetContextNameObject(self, pName: IAssemblyName) -> None:
-        """:param pName:"""
+        """"""
 
 class IAssemblyEnum:
     """"""
-
     def Clone(self, ppEnum: IAssemblyEnum) -> tuple[int, IAssemblyEnum]:
-        """:param ppEnum:
-        :return:
-        """
+        """"""
     def GetNextAssembly(
         self, ppAppCtx: IApplicationContext, ppName: IAssemblyName, dwFlags: int
     ) -> tuple[int, IApplicationContext, IAssemblyName]:
-        """:param ppAppCtx:
-        :param ppName:
-        :param dwFlags:
-        :return:
-        """
+        """"""
     def Reset(self) -> int:
-        """:return:"""
+        """"""
 
 class IAssemblyName:
     """"""
-
     def BindToObject(
         self,
         refIID: object,
@@ -298,83 +191,40 @@ class IAssemblyName:
         llFlags: int,
         pvReserved: int,
         cbReserved: int,
-        ppv: int,
-    ) -> tuple[int, int]:
-        """:param refIID:
-        :param pAsmBindSink:
-        :param pApplicationContext:
-        :param szCodeBase:
-        :param llFlags:
-        :param pvReserved:
-        :param cbReserved:
-        :param ppv:
-        :return:
-        """
+        ppv: Int32,
+    ) -> tuple[int, Int32]:
+        """"""
     def Clone(self, pName: IAssemblyName) -> tuple[int, IAssemblyName]:
-        """:param pName:
-        :return:
-        """
+        """"""
     def Finalize(self) -> int:
-        """:return:"""
+        """"""
     def GetDisplayName(
-        self, szDisplayName: IntPtr, pccDisplayName: int, dwDisplayFlags: int
+        self, szDisplayName: IntPtr, pccDisplayName: UInt32, dwDisplayFlags: int
     ) -> int:
-        """:param szDisplayName:
-        :param pccDisplayName:
-        :param dwDisplayFlags:
-        :return:
-        """
-    def GetName(self, lpcwBuffer: int, pwzName: int) -> tuple[int, int, int]:
-        """:param lpcwBuffer:
-        :param pwzName:
-        :return:
-        """
-    def GetProperty(self, PropertyId: int, pvProperty: IntPtr, pcbProperty: int) -> int:
-        """:param PropertyId:
-        :param pvProperty:
-        :param pcbProperty:
-        :return:
-        """
-    def GetVersion(self, pdwVersionHi: int, pdwVersionLow: int) -> tuple[int, int, int]:
-        """:param pdwVersionHi:
-        :param pdwVersionLow:
-        :return:
-        """
+        """"""
+    def GetName(self, lpcwBuffer: UInt32, pwzName: Int32) -> tuple[int, UInt32, Int32]:
+        """"""
+    def GetProperty(self, PropertyId: int, pvProperty: IntPtr, pcbProperty: UInt32) -> int:
+        """"""
+    def GetVersion(self, pdwVersionHi: UInt32, pdwVersionLow: UInt32) -> tuple[int, UInt32, UInt32]:
+        """"""
     def IsEqual(self, pName: IAssemblyName, dwCmpFlags: int) -> int:
-        """:param pName:
-        :param dwCmpFlags:
-        :return:
-        """
+        """"""
     def SetProperty(self, PropertyId: int, pvProperty: IntPtr, cbProperty: int) -> int:
-        """:param PropertyId:
-        :param pvProperty:
-        :param cbProperty:
-        :return:
-        """
+        """"""
 
 class IInternetSecurityManager:
     """"""
-
     def GetSecurityId(
         self, pwszUrl: str, pbSecurityId: int, pcbSecurityId: int, dwReserved: int
     ) -> None:
-        """:param pwszUrl:
-        :param pbSecurityId:
-        :param pcbSecurityId:
-        :param dwReserved:
-        """
+        """"""
     def GetSecuritySite(self, ppSite: None) -> None:
-        """:param ppSite:"""
+        """"""
     def GetZoneMappings(self, dwZone: int, ppenumString: None, dwFlags: int) -> None:
-        """:param dwZone:
-        :param ppenumString:
-        :param dwFlags:
-        """
-    def MapUrlToZone(self, pwszUrl: str, pdwZone: int, dwFlags: int) -> tuple[None, int]:
-        """:param pwszUrl:
-        :param pdwZone:
-        :param dwFlags:
-        """
+        """"""
+    def MapUrlToZone(self, pwszUrl: str, pdwZone: Int32, dwFlags: int) -> tuple[None, Int32]:
+        """"""
     def ProcessUrlAction(
         self,
         pwszUrl: str,
@@ -386,15 +236,7 @@ class IInternetSecurityManager:
         dwFlags: int,
         dwReserved: int,
     ) -> None:
-        """:param pwszUrl:
-        :param dwAction:
-        :param pPolicy:
-        :param cbPolicy:
-        :param pContext:
-        :param cbContext:
-        :param dwFlags:
-        :param dwReserved:
-        """
+        """"""
     def QueryCustomPolicy(
         self,
         pwszUrl: str,
@@ -405,2928 +247,1195 @@ class IInternetSecurityManager:
         cbContext: int,
         dwReserved: int,
     ) -> None:
-        """:param pwszUrl:
-        :param guidKey:
-        :param ppPolicy:
-        :param pcbPolicy:
-        :param pContext:
-        :param cbContext:
-        :param dwReserved:
-        """
+        """"""
     def SetSecuritySite(self, pSite: None) -> None:
-        """:param pSite:"""
+        """"""
     def SetZoneMapping(self, dwZone: int, lpszPattern: str, dwFlags: int) -> None:
-        """:param dwZone:
-        :param lpszPattern:
-        :param dwFlags:
-        """
+        """"""
 
 class InternetSecurityManager(__ComObject):
     """"""
-
-    def __init__(self):
+    def __init__(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """:param requestedType:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetLifetimeService(self) -> object:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def InitializeLifetimeService(self) -> object:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class IntranetZoneCredentialPolicy(Object, ICredentialPolicy):
     """"""
-
-    def __init__(self):
+    def __init__(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ShouldSendCredential(
         self,
         challengeUri: Uri,
         request: WebRequest,
         credential: NetworkCredential,
-        authenticationModule: IAuthenticationModule,
+        authModule: IAuthenticationModule,
     ) -> bool:
-        """:param challengeUri:
-        :param request:
-        :param credential:
-        :param authenticationModule:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class NativeMethods(ABC, Object):
     """"""
 
-    BACKWARDS_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    COLOR_WINDOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CREATE_ALWAYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CREATE_NO_WINDOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CREATE_SUSPENDED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CREATE_UNICODE_ENVIRONMENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CTRL_BREAK_EVENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CTRL_CLOSE_EVENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CTRL_C_EVENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CTRL_LOGOFF_EVENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CTRL_SHUTDOWN_EVENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    DEFAULT_GUI_FONT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    DUPLICATE_CLOSE_SOURCE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    DUPLICATE_SAME_ACCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    DWORD_SIZE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ENDSESSION_LOGOFF: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_ACCESS_DENIED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_ALREADY_EXISTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_BAD_COMMAND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_BAD_EXE_FORMAT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_BROKEN_PIPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_BUSY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_CANCELLED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_CLASS_ALREADY_EXISTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_COUNTER_TIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_DDE_FAIL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_DLL_NOT_FOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_EVENTLOG_FILE_CHANGED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_EXE_MACHINE_TYPE_MISMATCH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_FILENAME_EXCED_RANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_FILE_EXISTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_FILE_NOT_FOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_HANDLE_EOF: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_INSUFFICIENT_BUFFER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_INVALID_HANDLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_INVALID_NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_INVALID_PARAMETER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_IO_INCOMPLETE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_IO_PENDING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_LOCK_FAILED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_MORE_DATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_NONE_MAPPED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_NOT_ENOUGH_MEMORY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_NOT_READY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_NO_ASSOCIATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_NO_DATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_OPERATION_ABORTED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_PARTIAL_COPY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_PATH_NOT_FOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_PROC_NOT_FOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_SHARING_VIOLATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    ERROR_SUCCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    E_ABORT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    E_NOTIMPL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_NORMAL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_OVERLAPPED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_MAP_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_MAP_WRITE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_SHARE_DELETE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_SHARE_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_SHARE_WRITE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_ALLOCATE_BUFFER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_ARGUMENT_ARRAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_FROM_HMODULE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_FROM_STRING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_FROM_SYSTEM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_IGNORE_INSERTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_MAX_WIDTH_MASK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORWARDS_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GCL_WNDPROC: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GENERIC_ALL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GENERIC_EXECUTE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GENERIC_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GENERIC_WRITE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GHND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_DDESHARE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_DISCARDABLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_DISCARDED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_FIXED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_INVALID_HANDLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_LOCKCOUNT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_LOWER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_MODIFY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_MOVEABLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_NOCOMPACT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_NODISCARD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_NOTIFY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_NOT_BANKED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_SHARE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_VALID_FLAGS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GMEM_ZEROINIT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GPTR: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GWL_STYLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GWL_WNDPROC: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GW_OWNER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    HKEY_LOCAL_MACHINE: Final[ClassVar[IntPtr]] = ...
-    """
-    
-    :return: 
-    """
-    HKEY_PERFORMANCE_DATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    IMPERSONATION_LEVEL_SecurityAnonymous: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    IMPERSONATION_LEVEL_SecurityDelegation: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    IMPERSONATION_LEVEL_SecurityIdentification: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    IMPERSONATION_LEVEL_SecurityImpersonation: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    INVALID_HANDLE_VALUE: Final[ClassVar[IntPtr]] = ...
-    """
-    
-    :return: 
-    """
-    KEY_ENUMERATE_SUB_KEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    KEY_NOTIFY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    KEY_QUERY_VALUE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    KEY_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    LARGE_INTEGER_SIZE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    LOAD_LIBRARY_AS_DATAFILE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    LOAD_WITH_ALTERED_SEARCH_PATH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    LOGON32_LOGON_BATCH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    LOGON32_LOGON_INTERACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    LOGON32_PROVIDER_DEFAULT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MAX_PATH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MOVEFILE_REPLACE_EXISTING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MWMO_INPUTAVAILABLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NOTIFY_FOR_THIS_SESSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NtPerfCounterSizeDword: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NtPerfCounterSizeLarge: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NtQueryProcessBasicInfo: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NtQuerySystemProcessInformation: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NullHandleRef: Final[ClassVar[HandleRef]] = ...
-    """
-    
-    :return: 
-    """
-    PAGE_READWRITE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMBATTERYLOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMOEMEVENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMPOWERSTATUSCHANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMQUERYSTANDBY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMQUERYSTANDBYFAILED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMQUERYSUSPEND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMQUERYSUSPENDFAILED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMRESUMECRITICAL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMRESUMESTANDBY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMRESUMESUSPEND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMSTANDBY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PBT_APMSUSPEND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PDH_CALC_NEGATIVE_DENOMINATOR: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PDH_CALC_NEGATIVE_VALUE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PDH_FMT_DOUBLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PDH_FMT_NOCAP100: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PDH_FMT_NOSCALE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PDH_NO_DATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_100NSEC_MULTI_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_100NSEC_MULTI_TIMER_INV: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_100NSEC_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_100NSEC_TIMER_INV: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_AVERAGE_BASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_AVERAGE_BULK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_AVERAGE_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_100NS_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_BASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_BULK_COUNT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_COUNTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_DELTA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_ELAPSED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_FRACTION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_HISTOGRAM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_LARGE_DELTA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_LARGE_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_LARGE_RAWCOUNT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_LARGE_RAWCOUNT_HEX: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_MULTI_BASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_MULTI_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_MULTI_TIMER_INV: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_NODATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_OBJ_TIME_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_PRECISION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_QUEUELEN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_RATE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_RAWCOUNT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_RAWCOUNT_HEX: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_TEXT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_TIMER_INV: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_COUNTER_VALUE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DELTA_BASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DELTA_COUNTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DETAIL_ADVANCED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DETAIL_EXPERT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DETAIL_NOVICE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DETAIL_WIZARD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DISPLAY_NOSHOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DISPLAY_NO_SUFFIX: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DISPLAY_PERCENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DISPLAY_PER_SEC: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_DISPLAY_SECONDS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_ELAPSED_TIME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_INVERSE_COUNTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_LARGE_RAW_BASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_LARGE_RAW_FRACTION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_MULTI_COUNTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_NO_INSTANCES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_NO_UNIQUE_ID: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_NUMBER_DECIMAL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_NUMBER_DEC_1000: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_NUMBER_HEX: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_OBJECT_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_OBJ_TIME_TIME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_OBJ_TIME_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_PRECISION_100NS_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_PRECISION_OBJECT_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_PRECISION_SYSTEM_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_RAW_BASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_RAW_FRACTION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_SAMPLE_BASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_SAMPLE_COUNTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_SAMPLE_FRACTION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_SIZE_DWORD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_SIZE_LARGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_SIZE_VARIABLE_LEN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_SIZE_ZERO: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TEXT_ASCII: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TEXT_UNICODE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TIMER_100NS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TIMER_TICK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TYPE_COUNTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TYPE_NUMBER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TYPE_TEXT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PERF_TYPE_ZERO: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_ACCESS_DUPLEX: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_ACCESS_INBOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_ACCESS_OUTBOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_NOWAIT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_READMODE_BYTE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_READMODE_MESSAGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_SINGLE_INSTANCES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_TYPE_BYTE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_TYPE_MESSAGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_UNLIMITED_INSTANCES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PIPE_WAIT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PM_REMOVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_ALL_ACCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_CREATE_PROCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_CREATE_THREAD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_DUP_HANDLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_QUERY_INFORMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_QUERY_LIMITED_INFORMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_SET_INFORMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_SET_QUOTA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_SET_SESSIONID: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_TERMINATE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_VM_OPERATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_VM_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    PROCESS_VM_WRITE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_ALLEVENTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_ALLINPUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_ALLPOSTMESSAGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_HOTKEY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_INPUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_KEY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_MOUSE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_MOUSEBUTTON: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_MOUSEMOVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_PAINT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_POSTMESSAGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_SENDMESSAGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    QS_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    READ_CONTROL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    REG_BINARY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    REG_MULTI_SZ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    RPC_S_CALL_FAILED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    RPC_S_SERVER_UNAVAILABLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SECURITY_DESCRIPTOR_REVISION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEEK_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_ASYNCOK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_CLASSKEY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_CLASSNAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_CONNECTNETDRV: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_DOENVSUBST: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_FLAG_DDEWAIT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_FLAG_NO_UI: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_HOTKEY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_ICON: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_IDLIST: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_INVOKEIDLIST: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_NOCLOSEPROCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_NO_CONSOLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SEE_MASK_UNICODE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_ACCESSDENIED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_ASSOCINCOMPLETE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_DDEBUSY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_DDEFAIL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_DDETIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_DLLNOTFOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_FNF: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_NOASSOC: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_OOM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_PNF: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_ERR_SHARE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SE_PRIVILEGE_ENABLED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SHGFI_TYPENAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SHGFI_USEFILEATTRIBUTES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SMTO_ABORTIFHUNG: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SM_CYSCREEN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETACCESSTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETACTIVEWINDOWTRACKING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETACTIVEWNDTRKTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETACTIVEWNDTRKZORDER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETBEEP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETBORDER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETCARETWIDTH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETCOMBOBOXANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETCURSORSHADOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETDEFAULTINPUTLANG: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETDESKWALLPAPER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETDRAGFULLWINDOWS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETFASTTASKSWITCH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETFILTERKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETFONTSMOOTHING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETFOREGROUNDFLASHCOUNT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETFOREGROUNDLOCKTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETGRADIENTCAPTIONS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETGRIDGRANULARITY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETHIGHCONTRAST: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETHOTTRACKING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETICONMETRICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETICONTITLELOGFONT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETICONTITLEWRAP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETKEYBOARDCUES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETKEYBOARDDELAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETKEYBOARDPREF: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETKEYBOARDSPEED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETLISTBOXSMOOTHSCROLLING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETLOWPOWERACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETLOWPOWERTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMENUANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMENUDROPALIGNMENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMENUFADE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMENUSHOWDELAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMENUUNDERLINES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMINIMIZEDMETRICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMOUSE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMOUSEHOVERHEIGHT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMOUSEHOVERTIME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMOUSEHOVERWIDTH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMOUSEKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMOUSESPEED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETMOUSETRAILS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETNONCLIENTMETRICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETPOWEROFFACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETPOWEROFFTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSCREENREADER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSCREENSAVEACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSCREENSAVERRUNNING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSCREENSAVETIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSELECTIONFADE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSERIALKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSHOWIMEUI: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSHOWSOUNDS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSNAPTODEFBUTTON: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSOUNDSENTRY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETSTICKYKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETTOGGLEKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETTOOLTIPANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETTOOLTIPFADE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETUIEFFECTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETWHEELSCROLLLINES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETWINDOWSEXTENSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_GETWORKAREA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_ICONHORIZONTALSPACING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_ICONVERTICALSPACING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_LANGDRIVER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SCREENSAVERRUNNING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETACCESSTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETACTIVEWINDOWTRACKING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETACTIVEWNDTRKTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETACTIVEWNDTRKZORDER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETBEEP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETBORDER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETCARETWIDTH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETCOMBOBOXANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETCURSORS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETCURSORSHADOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDEFAULTINPUTLANG: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDESKPATTERN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDESKWALLPAPER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDOUBLECLICKTIME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDOUBLECLKHEIGHT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDOUBLECLKWIDTH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDRAGFULLWINDOWS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDRAGHEIGHT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETDRAGWIDTH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETFASTTASKSWITCH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETFILTERKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETFONTSMOOTHING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETFOREGROUNDFLASHCOUNT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETFOREGROUNDLOCKTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETGRADIENTCAPTIONS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETGRIDGRANULARITY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETHANDHELD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETHIGHCONTRAST: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETHOTTRACKING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETICONMETRICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETICONS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETICONTITLELOGFONT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETICONTITLEWRAP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETKEYBOARDCUES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETKEYBOARDDELAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETKEYBOARDPREF: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETKEYBOARDSPEED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETLANGTOGGLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETLISTBOXSMOOTHSCROLLING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETLOWPOWERACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETLOWPOWERTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMENUANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMENUDROPALIGNMENT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMENUFADE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMENUSHOWDELAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMENUUNDERLINES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMINIMIZEDMETRICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSEBUTTONSWAP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSEHOVERHEIGHT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSEHOVERTIME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSEHOVERWIDTH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSEKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSESPEED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETMOUSETRAILS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETNONCLIENTMETRICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETPENWINDOWS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETPOWEROFFACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETPOWEROFFTIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSCREENREADER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSCREENSAVEACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSCREENSAVERRUNNING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSCREENSAVETIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSELECTIONFADE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSERIALKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSHOWIMEUI: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSHOWSOUNDS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSNAPTODEFBUTTON: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSOUNDSENTRY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETSTICKYKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETTOGGLEKEYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETTOOLTIPANIMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETTOOLTIPFADE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETUIEFFECTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETWHEELSCROLLLINES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SPI_SETWORKAREA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STANDARD_RIGHTS_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STANDARD_RIGHTS_REQUIRED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STARTF_USESHOWWINDOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STARTF_USESTDHANDLES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STATUS_INFO_LENGTH_MISMATCH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STD_ERROR_HANDLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STD_INPUT_HANDLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STD_OUTPUT_HANDLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    STILL_ACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_HIDE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_MAX: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_MAXIMIZE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_MINIMIZE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_NORMAL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_RESTORE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOW: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOWDEFAULT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOWMAXIMIZED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOWMINIMIZED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOWMINNOACTIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOWNA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOWNOACTIVATE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SW_SHOWNORMAL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    SYNCHRONIZE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    S_OK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TH32CS_INHERIT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TH32CS_SNAPHEAPLIST: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TH32CS_SNAPMODULE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TH32CS_SNAPPROCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TH32CS_SNAPTHREAD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_DIRECT_IMPERSONATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_GET_CONTEXT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_IMPERSONATE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_QUERY_INFORMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_SET_CONTEXT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_SET_INFORMATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_SET_THREAD_TOKEN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_SUSPEND_RESUME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    THREAD_TERMINATE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_ADJUST_PRIVILEGES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_ALL_ACCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_EXECUTE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_IMPERSONATE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_QUERY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_TYPE_TokenImpersonation: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    TOKEN_TYPE_TokenPrimary: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UISF_HIDEACCEL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UISF_HIDEFOCUS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UIS_CLEAR: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UIS_SET: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UOI_FLAGS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UOI_NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UOI_TYPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    UOI_USER_SID: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    USERCLASSTYPE_FULL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VER_PLATFORM_WIN32_NT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_COMM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_DISPLAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_INPUTMETHOD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_INSTALLABLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_KEYBOARD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_LANGUAGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_MOUSE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_NETWORK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_PRINTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_SOUND: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_DRV_SYSTEM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_FONT_RASTER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_FONT_TRUETYPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_FONT_VECTOR: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT2_UNKNOWN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT_APP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT_DLL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT_DRV: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT_FONT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT_STATIC_LIB: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT_UNKNOWN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VFT_VXD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FFI_FILEFLAGSMASK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FFI_SIGNATURE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FFI_STRUCVERSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FF_DEBUG: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FF_INFOINFERRED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FF_PATCHED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FF_PRERELEASE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FF_PRIVATEBUILD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FF_SPECIALBUILD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_FILE_INFO: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_USER_DEFINED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    VS_VERSION_INFO: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WAIT_ABANDONED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WAIT_ABANDONED_0: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WAIT_FAILED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WAIT_OBJECT_0: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WAIT_TIMEOUT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WHITENESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_CLOSE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_COMPACTING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_CREATETIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_DISPLAYCHANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_ENDSESSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_FONTCHANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_KILLTIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_NULL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_PALETTECHANGED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_POWERBROADCAST: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_QUERYENDSESSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_QUIT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_REFLECT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_SETTINGCHANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_SYSCOLORCHANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_THEMECHANGED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_TIMECHANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_TIMER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_USER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WM_WTSSESSION_CHANGE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WSF_VISIBLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WS_DISABLED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WS_POPUP: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WS_VISIBLE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_CONSOLE_CONNECT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_CONSOLE_DISCONNECT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_REMOTE_CONNECT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_REMOTE_DISCONNECT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_SESSION_LOCK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_SESSION_LOGOFF: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_SESSION_LOGON: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_SESSION_REMOTE_CONTROL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    WTS_SESSION_UNLOCK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    BACKWARDS_READ: ClassVar[int]
+    """"""
+    COLOR_WINDOW: ClassVar[int]
+    """"""
+    CREATE_ALWAYS: ClassVar[int]
+    """"""
+    CREATE_NO_WINDOW: ClassVar[int]
+    """"""
+    CREATE_SUSPENDED: ClassVar[int]
+    """"""
+    CREATE_UNICODE_ENVIRONMENT: ClassVar[int]
+    """"""
+    CTRL_BREAK_EVENT: ClassVar[int]
+    """"""
+    CTRL_CLOSE_EVENT: ClassVar[int]
+    """"""
+    CTRL_C_EVENT: ClassVar[int]
+    """"""
+    CTRL_LOGOFF_EVENT: ClassVar[int]
+    """"""
+    CTRL_SHUTDOWN_EVENT: ClassVar[int]
+    """"""
+    DEFAULT_GUI_FONT: ClassVar[int]
+    """"""
+    DUPLICATE_CLOSE_SOURCE: ClassVar[int]
+    """"""
+    DUPLICATE_SAME_ACCESS: ClassVar[int]
+    """"""
+    DWORD_SIZE: ClassVar[int]
+    """"""
+    ENDSESSION_LOGOFF: ClassVar[int]
+    """"""
+    ERROR_ACCESS_DENIED: ClassVar[int]
+    """"""
+    ERROR_ALREADY_EXISTS: ClassVar[int]
+    """"""
+    ERROR_BAD_COMMAND: ClassVar[int]
+    """"""
+    ERROR_BAD_EXE_FORMAT: ClassVar[int]
+    """"""
+    ERROR_BROKEN_PIPE: ClassVar[int]
+    """"""
+    ERROR_BUSY: ClassVar[int]
+    """"""
+    ERROR_CANCELLED: ClassVar[int]
+    """"""
+    ERROR_CLASS_ALREADY_EXISTS: ClassVar[int]
+    """"""
+    ERROR_COUNTER_TIMEOUT: ClassVar[int]
+    """"""
+    ERROR_DDE_FAIL: ClassVar[int]
+    """"""
+    ERROR_DLL_NOT_FOUND: ClassVar[int]
+    """"""
+    ERROR_EVENTLOG_FILE_CHANGED: ClassVar[int]
+    """"""
+    ERROR_EXE_MACHINE_TYPE_MISMATCH: ClassVar[int]
+    """"""
+    ERROR_FILENAME_EXCED_RANGE: ClassVar[int]
+    """"""
+    ERROR_FILE_EXISTS: ClassVar[int]
+    """"""
+    ERROR_FILE_NOT_FOUND: ClassVar[int]
+    """"""
+    ERROR_HANDLE_EOF: ClassVar[int]
+    """"""
+    ERROR_INSUFFICIENT_BUFFER: ClassVar[int]
+    """"""
+    ERROR_INVALID_HANDLE: ClassVar[int]
+    """"""
+    ERROR_INVALID_NAME: ClassVar[int]
+    """"""
+    ERROR_INVALID_PARAMETER: ClassVar[int]
+    """"""
+    ERROR_IO_INCOMPLETE: ClassVar[int]
+    """"""
+    ERROR_IO_PENDING: ClassVar[int]
+    """"""
+    ERROR_LOCK_FAILED: ClassVar[int]
+    """"""
+    ERROR_MORE_DATA: ClassVar[int]
+    """"""
+    ERROR_NONE_MAPPED: ClassVar[int]
+    """"""
+    ERROR_NOT_ENOUGH_MEMORY: ClassVar[int]
+    """"""
+    ERROR_NOT_READY: ClassVar[int]
+    """"""
+    ERROR_NO_ASSOCIATION: ClassVar[int]
+    """"""
+    ERROR_NO_DATA: ClassVar[int]
+    """"""
+    ERROR_OPERATION_ABORTED: ClassVar[int]
+    """"""
+    ERROR_PARTIAL_COPY: ClassVar[int]
+    """"""
+    ERROR_PATH_NOT_FOUND: ClassVar[int]
+    """"""
+    ERROR_PROC_NOT_FOUND: ClassVar[int]
+    """"""
+    ERROR_SHARING_VIOLATION: ClassVar[int]
+    """"""
+    ERROR_SUCCESS: ClassVar[int]
+    """"""
+    E_ABORT: ClassVar[int]
+    """"""
+    E_NOTIMPL: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_NORMAL: ClassVar[int]
+    """"""
+    FILE_FLAG_OVERLAPPED: ClassVar[int]
+    """"""
+    FILE_MAP_READ: ClassVar[int]
+    """"""
+    FILE_MAP_WRITE: ClassVar[int]
+    """"""
+    FILE_SHARE_DELETE: ClassVar[int]
+    """"""
+    FILE_SHARE_READ: ClassVar[int]
+    """"""
+    FILE_SHARE_WRITE: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_ALLOCATE_BUFFER: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_ARGUMENT_ARRAY: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_FROM_HMODULE: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_FROM_STRING: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_FROM_SYSTEM: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_IGNORE_INSERTS: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_MAX_WIDTH_MASK: ClassVar[int]
+    """"""
+    FORWARDS_READ: ClassVar[int]
+    """"""
+    GCL_WNDPROC: ClassVar[int]
+    """"""
+    GENERIC_ALL: ClassVar[int]
+    """"""
+    GENERIC_EXECUTE: ClassVar[int]
+    """"""
+    GENERIC_READ: ClassVar[int]
+    """"""
+    GENERIC_WRITE: ClassVar[int]
+    """"""
+    GHND: ClassVar[int]
+    """"""
+    GMEM_DDESHARE: ClassVar[int]
+    """"""
+    GMEM_DISCARDABLE: ClassVar[int]
+    """"""
+    GMEM_DISCARDED: ClassVar[int]
+    """"""
+    GMEM_FIXED: ClassVar[int]
+    """"""
+    GMEM_INVALID_HANDLE: ClassVar[int]
+    """"""
+    GMEM_LOCKCOUNT: ClassVar[int]
+    """"""
+    GMEM_LOWER: ClassVar[int]
+    """"""
+    GMEM_MODIFY: ClassVar[int]
+    """"""
+    GMEM_MOVEABLE: ClassVar[int]
+    """"""
+    GMEM_NOCOMPACT: ClassVar[int]
+    """"""
+    GMEM_NODISCARD: ClassVar[int]
+    """"""
+    GMEM_NOTIFY: ClassVar[int]
+    """"""
+    GMEM_NOT_BANKED: ClassVar[int]
+    """"""
+    GMEM_SHARE: ClassVar[int]
+    """"""
+    GMEM_VALID_FLAGS: ClassVar[int]
+    """"""
+    GMEM_ZEROINIT: ClassVar[int]
+    """"""
+    GPTR: ClassVar[int]
+    """"""
+    GWL_STYLE: ClassVar[int]
+    """"""
+    GWL_WNDPROC: ClassVar[int]
+    """"""
+    GW_OWNER: ClassVar[int]
+    """"""
+    HKEY_LOCAL_MACHINE: ClassVar[IntPtr]
+    """"""
+    HKEY_PERFORMANCE_DATA: ClassVar[int]
+    """"""
+    IMPERSONATION_LEVEL_SecurityAnonymous: ClassVar[int]
+    """"""
+    IMPERSONATION_LEVEL_SecurityDelegation: ClassVar[int]
+    """"""
+    IMPERSONATION_LEVEL_SecurityIdentification: ClassVar[int]
+    """"""
+    IMPERSONATION_LEVEL_SecurityImpersonation: ClassVar[int]
+    """"""
+    INVALID_HANDLE_VALUE: ClassVar[IntPtr]
+    """"""
+    KEY_ENUMERATE_SUB_KEYS: ClassVar[int]
+    """"""
+    KEY_NOTIFY: ClassVar[int]
+    """"""
+    KEY_QUERY_VALUE: ClassVar[int]
+    """"""
+    KEY_READ: ClassVar[int]
+    """"""
+    LARGE_INTEGER_SIZE: ClassVar[int]
+    """"""
+    LOAD_LIBRARY_AS_DATAFILE: ClassVar[int]
+    """"""
+    LOAD_WITH_ALTERED_SEARCH_PATH: ClassVar[int]
+    """"""
+    LOGON32_LOGON_BATCH: ClassVar[int]
+    """"""
+    LOGON32_LOGON_INTERACTIVE: ClassVar[int]
+    """"""
+    LOGON32_PROVIDER_DEFAULT: ClassVar[int]
+    """"""
+    MAX_PATH: ClassVar[int]
+    """"""
+    MOVEFILE_REPLACE_EXISTING: ClassVar[int]
+    """"""
+    MWMO_INPUTAVAILABLE: ClassVar[int]
+    """"""
+    NOTIFY_FOR_THIS_SESSION: ClassVar[int]
+    """"""
+    NtPerfCounterSizeDword: ClassVar[int]
+    """"""
+    NtPerfCounterSizeLarge: ClassVar[int]
+    """"""
+    NtQueryProcessBasicInfo: ClassVar[int]
+    """"""
+    NtQuerySystemProcessInformation: ClassVar[int]
+    """"""
+    NullHandleRef: ClassVar[HandleRef]
+    """"""
+    PAGE_READWRITE: ClassVar[int]
+    """"""
+    PBT_APMBATTERYLOW: ClassVar[int]
+    """"""
+    PBT_APMOEMEVENT: ClassVar[int]
+    """"""
+    PBT_APMPOWERSTATUSCHANGE: ClassVar[int]
+    """"""
+    PBT_APMQUERYSTANDBY: ClassVar[int]
+    """"""
+    PBT_APMQUERYSTANDBYFAILED: ClassVar[int]
+    """"""
+    PBT_APMQUERYSUSPEND: ClassVar[int]
+    """"""
+    PBT_APMQUERYSUSPENDFAILED: ClassVar[int]
+    """"""
+    PBT_APMRESUMECRITICAL: ClassVar[int]
+    """"""
+    PBT_APMRESUMESTANDBY: ClassVar[int]
+    """"""
+    PBT_APMRESUMESUSPEND: ClassVar[int]
+    """"""
+    PBT_APMSTANDBY: ClassVar[int]
+    """"""
+    PBT_APMSUSPEND: ClassVar[int]
+    """"""
+    PDH_CALC_NEGATIVE_DENOMINATOR: ClassVar[int]
+    """"""
+    PDH_CALC_NEGATIVE_VALUE: ClassVar[int]
+    """"""
+    PDH_FMT_DOUBLE: ClassVar[int]
+    """"""
+    PDH_FMT_NOCAP100: ClassVar[int]
+    """"""
+    PDH_FMT_NOSCALE: ClassVar[int]
+    """"""
+    PDH_NO_DATA: ClassVar[int]
+    """"""
+    PERF_100NSEC_MULTI_TIMER: ClassVar[int]
+    """"""
+    PERF_100NSEC_MULTI_TIMER_INV: ClassVar[int]
+    """"""
+    PERF_100NSEC_TIMER: ClassVar[int]
+    """"""
+    PERF_100NSEC_TIMER_INV: ClassVar[int]
+    """"""
+    PERF_AVERAGE_BASE: ClassVar[int]
+    """"""
+    PERF_AVERAGE_BULK: ClassVar[int]
+    """"""
+    PERF_AVERAGE_TIMER: ClassVar[int]
+    """"""
+    PERF_COUNTER_100NS_QUEUELEN_TYPE: ClassVar[int]
+    """"""
+    PERF_COUNTER_BASE: ClassVar[int]
+    """"""
+    PERF_COUNTER_BULK_COUNT: ClassVar[int]
+    """"""
+    PERF_COUNTER_COUNTER: ClassVar[int]
+    """"""
+    PERF_COUNTER_DELTA: ClassVar[int]
+    """"""
+    PERF_COUNTER_ELAPSED: ClassVar[int]
+    """"""
+    PERF_COUNTER_FRACTION: ClassVar[int]
+    """"""
+    PERF_COUNTER_HISTOGRAM: ClassVar[int]
+    """"""
+    PERF_COUNTER_LARGE_DELTA: ClassVar[int]
+    """"""
+    PERF_COUNTER_LARGE_QUEUELEN_TYPE: ClassVar[int]
+    """"""
+    PERF_COUNTER_LARGE_RAWCOUNT: ClassVar[int]
+    """"""
+    PERF_COUNTER_LARGE_RAWCOUNT_HEX: ClassVar[int]
+    """"""
+    PERF_COUNTER_MULTI_BASE: ClassVar[int]
+    """"""
+    PERF_COUNTER_MULTI_TIMER: ClassVar[int]
+    """"""
+    PERF_COUNTER_MULTI_TIMER_INV: ClassVar[int]
+    """"""
+    PERF_COUNTER_NODATA: ClassVar[int]
+    """"""
+    PERF_COUNTER_OBJ_TIME_QUEUELEN_TYPE: ClassVar[int]
+    """"""
+    PERF_COUNTER_PRECISION: ClassVar[int]
+    """"""
+    PERF_COUNTER_QUEUELEN: ClassVar[int]
+    """"""
+    PERF_COUNTER_QUEUELEN_TYPE: ClassVar[int]
+    """"""
+    PERF_COUNTER_RATE: ClassVar[int]
+    """"""
+    PERF_COUNTER_RAWCOUNT: ClassVar[int]
+    """"""
+    PERF_COUNTER_RAWCOUNT_HEX: ClassVar[int]
+    """"""
+    PERF_COUNTER_TEXT: ClassVar[int]
+    """"""
+    PERF_COUNTER_TIMER: ClassVar[int]
+    """"""
+    PERF_COUNTER_TIMER_INV: ClassVar[int]
+    """"""
+    PERF_COUNTER_VALUE: ClassVar[int]
+    """"""
+    PERF_DELTA_BASE: ClassVar[int]
+    """"""
+    PERF_DELTA_COUNTER: ClassVar[int]
+    """"""
+    PERF_DETAIL_ADVANCED: ClassVar[int]
+    """"""
+    PERF_DETAIL_EXPERT: ClassVar[int]
+    """"""
+    PERF_DETAIL_NOVICE: ClassVar[int]
+    """"""
+    PERF_DETAIL_WIZARD: ClassVar[int]
+    """"""
+    PERF_DISPLAY_NOSHOW: ClassVar[int]
+    """"""
+    PERF_DISPLAY_NO_SUFFIX: ClassVar[int]
+    """"""
+    PERF_DISPLAY_PERCENT: ClassVar[int]
+    """"""
+    PERF_DISPLAY_PER_SEC: ClassVar[int]
+    """"""
+    PERF_DISPLAY_SECONDS: ClassVar[int]
+    """"""
+    PERF_ELAPSED_TIME: ClassVar[int]
+    """"""
+    PERF_INVERSE_COUNTER: ClassVar[int]
+    """"""
+    PERF_LARGE_RAW_BASE: ClassVar[int]
+    """"""
+    PERF_LARGE_RAW_FRACTION: ClassVar[int]
+    """"""
+    PERF_MULTI_COUNTER: ClassVar[int]
+    """"""
+    PERF_NO_INSTANCES: ClassVar[int]
+    """"""
+    PERF_NO_UNIQUE_ID: ClassVar[int]
+    """"""
+    PERF_NUMBER_DECIMAL: ClassVar[int]
+    """"""
+    PERF_NUMBER_DEC_1000: ClassVar[int]
+    """"""
+    PERF_NUMBER_HEX: ClassVar[int]
+    """"""
+    PERF_OBJECT_TIMER: ClassVar[int]
+    """"""
+    PERF_OBJ_TIME_TIME: ClassVar[int]
+    """"""
+    PERF_OBJ_TIME_TIMER: ClassVar[int]
+    """"""
+    PERF_PRECISION_100NS_TIMER: ClassVar[int]
+    """"""
+    PERF_PRECISION_OBJECT_TIMER: ClassVar[int]
+    """"""
+    PERF_PRECISION_SYSTEM_TIMER: ClassVar[int]
+    """"""
+    PERF_RAW_BASE: ClassVar[int]
+    """"""
+    PERF_RAW_FRACTION: ClassVar[int]
+    """"""
+    PERF_SAMPLE_BASE: ClassVar[int]
+    """"""
+    PERF_SAMPLE_COUNTER: ClassVar[int]
+    """"""
+    PERF_SAMPLE_FRACTION: ClassVar[int]
+    """"""
+    PERF_SIZE_DWORD: ClassVar[int]
+    """"""
+    PERF_SIZE_LARGE: ClassVar[int]
+    """"""
+    PERF_SIZE_VARIABLE_LEN: ClassVar[int]
+    """"""
+    PERF_SIZE_ZERO: ClassVar[int]
+    """"""
+    PERF_TEXT_ASCII: ClassVar[int]
+    """"""
+    PERF_TEXT_UNICODE: ClassVar[int]
+    """"""
+    PERF_TIMER_100NS: ClassVar[int]
+    """"""
+    PERF_TIMER_TICK: ClassVar[int]
+    """"""
+    PERF_TYPE_COUNTER: ClassVar[int]
+    """"""
+    PERF_TYPE_NUMBER: ClassVar[int]
+    """"""
+    PERF_TYPE_TEXT: ClassVar[int]
+    """"""
+    PERF_TYPE_ZERO: ClassVar[int]
+    """"""
+    PIPE_ACCESS_DUPLEX: ClassVar[int]
+    """"""
+    PIPE_ACCESS_INBOUND: ClassVar[int]
+    """"""
+    PIPE_ACCESS_OUTBOUND: ClassVar[int]
+    """"""
+    PIPE_NOWAIT: ClassVar[int]
+    """"""
+    PIPE_READMODE_BYTE: ClassVar[int]
+    """"""
+    PIPE_READMODE_MESSAGE: ClassVar[int]
+    """"""
+    PIPE_SINGLE_INSTANCES: ClassVar[int]
+    """"""
+    PIPE_TYPE_BYTE: ClassVar[int]
+    """"""
+    PIPE_TYPE_MESSAGE: ClassVar[int]
+    """"""
+    PIPE_UNLIMITED_INSTANCES: ClassVar[int]
+    """"""
+    PIPE_WAIT: ClassVar[int]
+    """"""
+    PM_REMOVE: ClassVar[int]
+    """"""
+    PROCESS_ALL_ACCESS: ClassVar[int]
+    """"""
+    PROCESS_CREATE_PROCESS: ClassVar[int]
+    """"""
+    PROCESS_CREATE_THREAD: ClassVar[int]
+    """"""
+    PROCESS_DUP_HANDLE: ClassVar[int]
+    """"""
+    PROCESS_QUERY_INFORMATION: ClassVar[int]
+    """"""
+    PROCESS_QUERY_LIMITED_INFORMATION: ClassVar[int]
+    """"""
+    PROCESS_SET_INFORMATION: ClassVar[int]
+    """"""
+    PROCESS_SET_QUOTA: ClassVar[int]
+    """"""
+    PROCESS_SET_SESSIONID: ClassVar[int]
+    """"""
+    PROCESS_TERMINATE: ClassVar[int]
+    """"""
+    PROCESS_VM_OPERATION: ClassVar[int]
+    """"""
+    PROCESS_VM_READ: ClassVar[int]
+    """"""
+    PROCESS_VM_WRITE: ClassVar[int]
+    """"""
+    QS_ALLEVENTS: ClassVar[int]
+    """"""
+    QS_ALLINPUT: ClassVar[int]
+    """"""
+    QS_ALLPOSTMESSAGE: ClassVar[int]
+    """"""
+    QS_HOTKEY: ClassVar[int]
+    """"""
+    QS_INPUT: ClassVar[int]
+    """"""
+    QS_KEY: ClassVar[int]
+    """"""
+    QS_MOUSE: ClassVar[int]
+    """"""
+    QS_MOUSEBUTTON: ClassVar[int]
+    """"""
+    QS_MOUSEMOVE: ClassVar[int]
+    """"""
+    QS_PAINT: ClassVar[int]
+    """"""
+    QS_POSTMESSAGE: ClassVar[int]
+    """"""
+    QS_SENDMESSAGE: ClassVar[int]
+    """"""
+    QS_TIMER: ClassVar[int]
+    """"""
+    READ_CONTROL: ClassVar[int]
+    """"""
+    REG_BINARY: ClassVar[int]
+    """"""
+    REG_MULTI_SZ: ClassVar[int]
+    """"""
+    RPC_S_CALL_FAILED: ClassVar[int]
+    """"""
+    RPC_S_SERVER_UNAVAILABLE: ClassVar[int]
+    """"""
+    SECURITY_DESCRIPTOR_REVISION: ClassVar[int]
+    """"""
+    SEEK_READ: ClassVar[int]
+    """"""
+    SEE_MASK_ASYNCOK: ClassVar[int]
+    """"""
+    SEE_MASK_CLASSKEY: ClassVar[int]
+    """"""
+    SEE_MASK_CLASSNAME: ClassVar[int]
+    """"""
+    SEE_MASK_CONNECTNETDRV: ClassVar[int]
+    """"""
+    SEE_MASK_DOENVSUBST: ClassVar[int]
+    """"""
+    SEE_MASK_FLAG_DDEWAIT: ClassVar[int]
+    """"""
+    SEE_MASK_FLAG_NO_UI: ClassVar[int]
+    """"""
+    SEE_MASK_HOTKEY: ClassVar[int]
+    """"""
+    SEE_MASK_ICON: ClassVar[int]
+    """"""
+    SEE_MASK_IDLIST: ClassVar[int]
+    """"""
+    SEE_MASK_INVOKEIDLIST: ClassVar[int]
+    """"""
+    SEE_MASK_NOCLOSEPROCESS: ClassVar[int]
+    """"""
+    SEE_MASK_NO_CONSOLE: ClassVar[int]
+    """"""
+    SEE_MASK_UNICODE: ClassVar[int]
+    """"""
+    SE_ERR_ACCESSDENIED: ClassVar[int]
+    """"""
+    SE_ERR_ASSOCINCOMPLETE: ClassVar[int]
+    """"""
+    SE_ERR_DDEBUSY: ClassVar[int]
+    """"""
+    SE_ERR_DDEFAIL: ClassVar[int]
+    """"""
+    SE_ERR_DDETIMEOUT: ClassVar[int]
+    """"""
+    SE_ERR_DLLNOTFOUND: ClassVar[int]
+    """"""
+    SE_ERR_FNF: ClassVar[int]
+    """"""
+    SE_ERR_NOASSOC: ClassVar[int]
+    """"""
+    SE_ERR_OOM: ClassVar[int]
+    """"""
+    SE_ERR_PNF: ClassVar[int]
+    """"""
+    SE_ERR_SHARE: ClassVar[int]
+    """"""
+    SE_PRIVILEGE_ENABLED: ClassVar[int]
+    """"""
+    SHGFI_TYPENAME: ClassVar[int]
+    """"""
+    SHGFI_USEFILEATTRIBUTES: ClassVar[int]
+    """"""
+    SMTO_ABORTIFHUNG: ClassVar[int]
+    """"""
+    SM_CYSCREEN: ClassVar[int]
+    """"""
+    SPI_GETACCESSTIMEOUT: ClassVar[int]
+    """"""
+    SPI_GETACTIVEWINDOWTRACKING: ClassVar[int]
+    """"""
+    SPI_GETACTIVEWNDTRKTIMEOUT: ClassVar[int]
+    """"""
+    SPI_GETACTIVEWNDTRKZORDER: ClassVar[int]
+    """"""
+    SPI_GETANIMATION: ClassVar[int]
+    """"""
+    SPI_GETBEEP: ClassVar[int]
+    """"""
+    SPI_GETBORDER: ClassVar[int]
+    """"""
+    SPI_GETCARETWIDTH: ClassVar[int]
+    """"""
+    SPI_GETCOMBOBOXANIMATION: ClassVar[int]
+    """"""
+    SPI_GETCURSORSHADOW: ClassVar[int]
+    """"""
+    SPI_GETDEFAULTINPUTLANG: ClassVar[int]
+    """"""
+    SPI_GETDESKWALLPAPER: ClassVar[int]
+    """"""
+    SPI_GETDRAGFULLWINDOWS: ClassVar[int]
+    """"""
+    SPI_GETFASTTASKSWITCH: ClassVar[int]
+    """"""
+    SPI_GETFILTERKEYS: ClassVar[int]
+    """"""
+    SPI_GETFONTSMOOTHING: ClassVar[int]
+    """"""
+    SPI_GETFOREGROUNDFLASHCOUNT: ClassVar[int]
+    """"""
+    SPI_GETFOREGROUNDLOCKTIMEOUT: ClassVar[int]
+    """"""
+    SPI_GETGRADIENTCAPTIONS: ClassVar[int]
+    """"""
+    SPI_GETGRIDGRANULARITY: ClassVar[int]
+    """"""
+    SPI_GETHIGHCONTRAST: ClassVar[int]
+    """"""
+    SPI_GETHOTTRACKING: ClassVar[int]
+    """"""
+    SPI_GETICONMETRICS: ClassVar[int]
+    """"""
+    SPI_GETICONTITLELOGFONT: ClassVar[int]
+    """"""
+    SPI_GETICONTITLEWRAP: ClassVar[int]
+    """"""
+    SPI_GETKEYBOARDCUES: ClassVar[int]
+    """"""
+    SPI_GETKEYBOARDDELAY: ClassVar[int]
+    """"""
+    SPI_GETKEYBOARDPREF: ClassVar[int]
+    """"""
+    SPI_GETKEYBOARDSPEED: ClassVar[int]
+    """"""
+    SPI_GETLISTBOXSMOOTHSCROLLING: ClassVar[int]
+    """"""
+    SPI_GETLOWPOWERACTIVE: ClassVar[int]
+    """"""
+    SPI_GETLOWPOWERTIMEOUT: ClassVar[int]
+    """"""
+    SPI_GETMENUANIMATION: ClassVar[int]
+    """"""
+    SPI_GETMENUDROPALIGNMENT: ClassVar[int]
+    """"""
+    SPI_GETMENUFADE: ClassVar[int]
+    """"""
+    SPI_GETMENUSHOWDELAY: ClassVar[int]
+    """"""
+    SPI_GETMENUUNDERLINES: ClassVar[int]
+    """"""
+    SPI_GETMINIMIZEDMETRICS: ClassVar[int]
+    """"""
+    SPI_GETMOUSE: ClassVar[int]
+    """"""
+    SPI_GETMOUSEHOVERHEIGHT: ClassVar[int]
+    """"""
+    SPI_GETMOUSEHOVERTIME: ClassVar[int]
+    """"""
+    SPI_GETMOUSEHOVERWIDTH: ClassVar[int]
+    """"""
+    SPI_GETMOUSEKEYS: ClassVar[int]
+    """"""
+    SPI_GETMOUSESPEED: ClassVar[int]
+    """"""
+    SPI_GETMOUSETRAILS: ClassVar[int]
+    """"""
+    SPI_GETNONCLIENTMETRICS: ClassVar[int]
+    """"""
+    SPI_GETPOWEROFFACTIVE: ClassVar[int]
+    """"""
+    SPI_GETPOWEROFFTIMEOUT: ClassVar[int]
+    """"""
+    SPI_GETSCREENREADER: ClassVar[int]
+    """"""
+    SPI_GETSCREENSAVEACTIVE: ClassVar[int]
+    """"""
+    SPI_GETSCREENSAVERRUNNING: ClassVar[int]
+    """"""
+    SPI_GETSCREENSAVETIMEOUT: ClassVar[int]
+    """"""
+    SPI_GETSELECTIONFADE: ClassVar[int]
+    """"""
+    SPI_GETSERIALKEYS: ClassVar[int]
+    """"""
+    SPI_GETSHOWIMEUI: ClassVar[int]
+    """"""
+    SPI_GETSHOWSOUNDS: ClassVar[int]
+    """"""
+    SPI_GETSNAPTODEFBUTTON: ClassVar[int]
+    """"""
+    SPI_GETSOUNDSENTRY: ClassVar[int]
+    """"""
+    SPI_GETSTICKYKEYS: ClassVar[int]
+    """"""
+    SPI_GETTOGGLEKEYS: ClassVar[int]
+    """"""
+    SPI_GETTOOLTIPANIMATION: ClassVar[int]
+    """"""
+    SPI_GETTOOLTIPFADE: ClassVar[int]
+    """"""
+    SPI_GETUIEFFECTS: ClassVar[int]
+    """"""
+    SPI_GETWHEELSCROLLLINES: ClassVar[int]
+    """"""
+    SPI_GETWINDOWSEXTENSION: ClassVar[int]
+    """"""
+    SPI_GETWORKAREA: ClassVar[int]
+    """"""
+    SPI_ICONHORIZONTALSPACING: ClassVar[int]
+    """"""
+    SPI_ICONVERTICALSPACING: ClassVar[int]
+    """"""
+    SPI_LANGDRIVER: ClassVar[int]
+    """"""
+    SPI_SCREENSAVERRUNNING: ClassVar[int]
+    """"""
+    SPI_SETACCESSTIMEOUT: ClassVar[int]
+    """"""
+    SPI_SETACTIVEWINDOWTRACKING: ClassVar[int]
+    """"""
+    SPI_SETACTIVEWNDTRKTIMEOUT: ClassVar[int]
+    """"""
+    SPI_SETACTIVEWNDTRKZORDER: ClassVar[int]
+    """"""
+    SPI_SETANIMATION: ClassVar[int]
+    """"""
+    SPI_SETBEEP: ClassVar[int]
+    """"""
+    SPI_SETBORDER: ClassVar[int]
+    """"""
+    SPI_SETCARETWIDTH: ClassVar[int]
+    """"""
+    SPI_SETCOMBOBOXANIMATION: ClassVar[int]
+    """"""
+    SPI_SETCURSORS: ClassVar[int]
+    """"""
+    SPI_SETCURSORSHADOW: ClassVar[int]
+    """"""
+    SPI_SETDEFAULTINPUTLANG: ClassVar[int]
+    """"""
+    SPI_SETDESKPATTERN: ClassVar[int]
+    """"""
+    SPI_SETDESKWALLPAPER: ClassVar[int]
+    """"""
+    SPI_SETDOUBLECLICKTIME: ClassVar[int]
+    """"""
+    SPI_SETDOUBLECLKHEIGHT: ClassVar[int]
+    """"""
+    SPI_SETDOUBLECLKWIDTH: ClassVar[int]
+    """"""
+    SPI_SETDRAGFULLWINDOWS: ClassVar[int]
+    """"""
+    SPI_SETDRAGHEIGHT: ClassVar[int]
+    """"""
+    SPI_SETDRAGWIDTH: ClassVar[int]
+    """"""
+    SPI_SETFASTTASKSWITCH: ClassVar[int]
+    """"""
+    SPI_SETFILTERKEYS: ClassVar[int]
+    """"""
+    SPI_SETFONTSMOOTHING: ClassVar[int]
+    """"""
+    SPI_SETFOREGROUNDFLASHCOUNT: ClassVar[int]
+    """"""
+    SPI_SETFOREGROUNDLOCKTIMEOUT: ClassVar[int]
+    """"""
+    SPI_SETGRADIENTCAPTIONS: ClassVar[int]
+    """"""
+    SPI_SETGRIDGRANULARITY: ClassVar[int]
+    """"""
+    SPI_SETHANDHELD: ClassVar[int]
+    """"""
+    SPI_SETHIGHCONTRAST: ClassVar[int]
+    """"""
+    SPI_SETHOTTRACKING: ClassVar[int]
+    """"""
+    SPI_SETICONMETRICS: ClassVar[int]
+    """"""
+    SPI_SETICONS: ClassVar[int]
+    """"""
+    SPI_SETICONTITLELOGFONT: ClassVar[int]
+    """"""
+    SPI_SETICONTITLEWRAP: ClassVar[int]
+    """"""
+    SPI_SETKEYBOARDCUES: ClassVar[int]
+    """"""
+    SPI_SETKEYBOARDDELAY: ClassVar[int]
+    """"""
+    SPI_SETKEYBOARDPREF: ClassVar[int]
+    """"""
+    SPI_SETKEYBOARDSPEED: ClassVar[int]
+    """"""
+    SPI_SETLANGTOGGLE: ClassVar[int]
+    """"""
+    SPI_SETLISTBOXSMOOTHSCROLLING: ClassVar[int]
+    """"""
+    SPI_SETLOWPOWERACTIVE: ClassVar[int]
+    """"""
+    SPI_SETLOWPOWERTIMEOUT: ClassVar[int]
+    """"""
+    SPI_SETMENUANIMATION: ClassVar[int]
+    """"""
+    SPI_SETMENUDROPALIGNMENT: ClassVar[int]
+    """"""
+    SPI_SETMENUFADE: ClassVar[int]
+    """"""
+    SPI_SETMENUSHOWDELAY: ClassVar[int]
+    """"""
+    SPI_SETMENUUNDERLINES: ClassVar[int]
+    """"""
+    SPI_SETMINIMIZEDMETRICS: ClassVar[int]
+    """"""
+    SPI_SETMOUSE: ClassVar[int]
+    """"""
+    SPI_SETMOUSEBUTTONSWAP: ClassVar[int]
+    """"""
+    SPI_SETMOUSEHOVERHEIGHT: ClassVar[int]
+    """"""
+    SPI_SETMOUSEHOVERTIME: ClassVar[int]
+    """"""
+    SPI_SETMOUSEHOVERWIDTH: ClassVar[int]
+    """"""
+    SPI_SETMOUSEKEYS: ClassVar[int]
+    """"""
+    SPI_SETMOUSESPEED: ClassVar[int]
+    """"""
+    SPI_SETMOUSETRAILS: ClassVar[int]
+    """"""
+    SPI_SETNONCLIENTMETRICS: ClassVar[int]
+    """"""
+    SPI_SETPENWINDOWS: ClassVar[int]
+    """"""
+    SPI_SETPOWEROFFACTIVE: ClassVar[int]
+    """"""
+    SPI_SETPOWEROFFTIMEOUT: ClassVar[int]
+    """"""
+    SPI_SETSCREENREADER: ClassVar[int]
+    """"""
+    SPI_SETSCREENSAVEACTIVE: ClassVar[int]
+    """"""
+    SPI_SETSCREENSAVERRUNNING: ClassVar[int]
+    """"""
+    SPI_SETSCREENSAVETIMEOUT: ClassVar[int]
+    """"""
+    SPI_SETSELECTIONFADE: ClassVar[int]
+    """"""
+    SPI_SETSERIALKEYS: ClassVar[int]
+    """"""
+    SPI_SETSHOWIMEUI: ClassVar[int]
+    """"""
+    SPI_SETSHOWSOUNDS: ClassVar[int]
+    """"""
+    SPI_SETSNAPTODEFBUTTON: ClassVar[int]
+    """"""
+    SPI_SETSOUNDSENTRY: ClassVar[int]
+    """"""
+    SPI_SETSTICKYKEYS: ClassVar[int]
+    """"""
+    SPI_SETTOGGLEKEYS: ClassVar[int]
+    """"""
+    SPI_SETTOOLTIPANIMATION: ClassVar[int]
+    """"""
+    SPI_SETTOOLTIPFADE: ClassVar[int]
+    """"""
+    SPI_SETUIEFFECTS: ClassVar[int]
+    """"""
+    SPI_SETWHEELSCROLLLINES: ClassVar[int]
+    """"""
+    SPI_SETWORKAREA: ClassVar[int]
+    """"""
+    STANDARD_RIGHTS_READ: ClassVar[int]
+    """"""
+    STANDARD_RIGHTS_REQUIRED: ClassVar[int]
+    """"""
+    STARTF_USESHOWWINDOW: ClassVar[int]
+    """"""
+    STARTF_USESTDHANDLES: ClassVar[int]
+    """"""
+    STATUS_INFO_LENGTH_MISMATCH: ClassVar[int]
+    """"""
+    STD_ERROR_HANDLE: ClassVar[int]
+    """"""
+    STD_INPUT_HANDLE: ClassVar[int]
+    """"""
+    STD_OUTPUT_HANDLE: ClassVar[int]
+    """"""
+    STILL_ACTIVE: ClassVar[int]
+    """"""
+    SW_HIDE: ClassVar[int]
+    """"""
+    SW_MAX: ClassVar[int]
+    """"""
+    SW_MAXIMIZE: ClassVar[int]
+    """"""
+    SW_MINIMIZE: ClassVar[int]
+    """"""
+    SW_NORMAL: ClassVar[int]
+    """"""
+    SW_RESTORE: ClassVar[int]
+    """"""
+    SW_SHOW: ClassVar[int]
+    """"""
+    SW_SHOWDEFAULT: ClassVar[int]
+    """"""
+    SW_SHOWMAXIMIZED: ClassVar[int]
+    """"""
+    SW_SHOWMINIMIZED: ClassVar[int]
+    """"""
+    SW_SHOWMINNOACTIVE: ClassVar[int]
+    """"""
+    SW_SHOWNA: ClassVar[int]
+    """"""
+    SW_SHOWNOACTIVATE: ClassVar[int]
+    """"""
+    SW_SHOWNORMAL: ClassVar[int]
+    """"""
+    SYNCHRONIZE: ClassVar[int]
+    """"""
+    S_OK: ClassVar[int]
+    """"""
+    TH32CS_INHERIT: ClassVar[int]
+    """"""
+    TH32CS_SNAPHEAPLIST: ClassVar[int]
+    """"""
+    TH32CS_SNAPMODULE: ClassVar[int]
+    """"""
+    TH32CS_SNAPPROCESS: ClassVar[int]
+    """"""
+    TH32CS_SNAPTHREAD: ClassVar[int]
+    """"""
+    THREAD_DIRECT_IMPERSONATION: ClassVar[int]
+    """"""
+    THREAD_GET_CONTEXT: ClassVar[int]
+    """"""
+    THREAD_IMPERSONATE: ClassVar[int]
+    """"""
+    THREAD_QUERY_INFORMATION: ClassVar[int]
+    """"""
+    THREAD_SET_CONTEXT: ClassVar[int]
+    """"""
+    THREAD_SET_INFORMATION: ClassVar[int]
+    """"""
+    THREAD_SET_THREAD_TOKEN: ClassVar[int]
+    """"""
+    THREAD_SUSPEND_RESUME: ClassVar[int]
+    """"""
+    THREAD_TERMINATE: ClassVar[int]
+    """"""
+    TOKEN_ADJUST_PRIVILEGES: ClassVar[int]
+    """"""
+    TOKEN_ALL_ACCESS: ClassVar[int]
+    """"""
+    TOKEN_EXECUTE: ClassVar[int]
+    """"""
+    TOKEN_IMPERSONATE: ClassVar[int]
+    """"""
+    TOKEN_QUERY: ClassVar[int]
+    """"""
+    TOKEN_READ: ClassVar[int]
+    """"""
+    TOKEN_TYPE_TokenImpersonation: ClassVar[int]
+    """"""
+    TOKEN_TYPE_TokenPrimary: ClassVar[int]
+    """"""
+    UISF_HIDEACCEL: ClassVar[int]
+    """"""
+    UISF_HIDEFOCUS: ClassVar[int]
+    """"""
+    UIS_CLEAR: ClassVar[int]
+    """"""
+    UIS_SET: ClassVar[int]
+    """"""
+    UOI_FLAGS: ClassVar[int]
+    """"""
+    UOI_NAME: ClassVar[int]
+    """"""
+    UOI_TYPE: ClassVar[int]
+    """"""
+    UOI_USER_SID: ClassVar[int]
+    """"""
+    USERCLASSTYPE_FULL: ClassVar[int]
+    """"""
+    VER_PLATFORM_WIN32_NT: ClassVar[int]
+    """"""
+    VFT2_DRV_COMM: ClassVar[int]
+    """"""
+    VFT2_DRV_DISPLAY: ClassVar[int]
+    """"""
+    VFT2_DRV_INPUTMETHOD: ClassVar[int]
+    """"""
+    VFT2_DRV_INSTALLABLE: ClassVar[int]
+    """"""
+    VFT2_DRV_KEYBOARD: ClassVar[int]
+    """"""
+    VFT2_DRV_LANGUAGE: ClassVar[int]
+    """"""
+    VFT2_DRV_MOUSE: ClassVar[int]
+    """"""
+    VFT2_DRV_NETWORK: ClassVar[int]
+    """"""
+    VFT2_DRV_PRINTER: ClassVar[int]
+    """"""
+    VFT2_DRV_SOUND: ClassVar[int]
+    """"""
+    VFT2_DRV_SYSTEM: ClassVar[int]
+    """"""
+    VFT2_FONT_RASTER: ClassVar[int]
+    """"""
+    VFT2_FONT_TRUETYPE: ClassVar[int]
+    """"""
+    VFT2_FONT_VECTOR: ClassVar[int]
+    """"""
+    VFT2_UNKNOWN: ClassVar[int]
+    """"""
+    VFT_APP: ClassVar[int]
+    """"""
+    VFT_DLL: ClassVar[int]
+    """"""
+    VFT_DRV: ClassVar[int]
+    """"""
+    VFT_FONT: ClassVar[int]
+    """"""
+    VFT_STATIC_LIB: ClassVar[int]
+    """"""
+    VFT_UNKNOWN: ClassVar[int]
+    """"""
+    VFT_VXD: ClassVar[int]
+    """"""
+    VS_FFI_FILEFLAGSMASK: ClassVar[int]
+    """"""
+    VS_FFI_SIGNATURE: ClassVar[int]
+    """"""
+    VS_FFI_STRUCVERSION: ClassVar[int]
+    """"""
+    VS_FF_DEBUG: ClassVar[int]
+    """"""
+    VS_FF_INFOINFERRED: ClassVar[int]
+    """"""
+    VS_FF_PATCHED: ClassVar[int]
+    """"""
+    VS_FF_PRERELEASE: ClassVar[int]
+    """"""
+    VS_FF_PRIVATEBUILD: ClassVar[int]
+    """"""
+    VS_FF_SPECIALBUILD: ClassVar[int]
+    """"""
+    VS_FILE_INFO: ClassVar[int]
+    """"""
+    VS_USER_DEFINED: ClassVar[int]
+    """"""
+    VS_VERSION_INFO: ClassVar[int]
+    """"""
+    WAIT_ABANDONED: ClassVar[int]
+    """"""
+    WAIT_ABANDONED_0: ClassVar[int]
+    """"""
+    WAIT_FAILED: ClassVar[int]
+    """"""
+    WAIT_OBJECT_0: ClassVar[int]
+    """"""
+    WAIT_TIMEOUT: ClassVar[int]
+    """"""
+    WHITENESS: ClassVar[int]
+    """"""
+    WM_CLOSE: ClassVar[int]
+    """"""
+    WM_COMPACTING: ClassVar[int]
+    """"""
+    WM_CREATETIMER: ClassVar[int]
+    """"""
+    WM_DISPLAYCHANGE: ClassVar[int]
+    """"""
+    WM_ENDSESSION: ClassVar[int]
+    """"""
+    WM_FONTCHANGE: ClassVar[int]
+    """"""
+    WM_KILLTIMER: ClassVar[int]
+    """"""
+    WM_NULL: ClassVar[int]
+    """"""
+    WM_PALETTECHANGED: ClassVar[int]
+    """"""
+    WM_POWERBROADCAST: ClassVar[int]
+    """"""
+    WM_QUERYENDSESSION: ClassVar[int]
+    """"""
+    WM_QUIT: ClassVar[int]
+    """"""
+    WM_REFLECT: ClassVar[int]
+    """"""
+    WM_SETTINGCHANGE: ClassVar[int]
+    """"""
+    WM_SYSCOLORCHANGE: ClassVar[int]
+    """"""
+    WM_THEMECHANGED: ClassVar[int]
+    """"""
+    WM_TIMECHANGE: ClassVar[int]
+    """"""
+    WM_TIMER: ClassVar[int]
+    """"""
+    WM_USER: ClassVar[int]
+    """"""
+    WM_WTSSESSION_CHANGE: ClassVar[int]
+    """"""
+    WSF_VISIBLE: ClassVar[int]
+    """"""
+    WS_DISABLED: ClassVar[int]
+    """"""
+    WS_POPUP: ClassVar[int]
+    """"""
+    WS_VISIBLE: ClassVar[int]
+    """"""
+    WTS_CONSOLE_CONNECT: ClassVar[int]
+    """"""
+    WTS_CONSOLE_DISCONNECT: ClassVar[int]
+    """"""
+    WTS_REMOTE_CONNECT: ClassVar[int]
+    """"""
+    WTS_REMOTE_DISCONNECT: ClassVar[int]
+    """"""
+    WTS_SESSION_LOCK: ClassVar[int]
+    """"""
+    WTS_SESSION_LOGOFF: ClassVar[int]
+    """"""
+    WTS_SESSION_LOGON: ClassVar[int]
+    """"""
+    WTS_SESSION_REMOTE_CONTROL: ClassVar[int]
+    """"""
+    WTS_SESSION_UNLOCK: ClassVar[int]
+    """"""
     @classmethod
     def AdjustTokenPrivileges(
         cls,
@@ -3337,14 +1446,7 @@ class NativeMethods(ABC, Object):
         PreviousState: IntPtr,
         ReturnLength: IntPtr,
     ) -> bool:
-        """:param TokenHandle:
-        :param DisableAllPrivileges:
-        :param NewState:
-        :param BufferLength:
-        :param PreviousState:
-        :param ReturnLength:
-        :return:
-        """
+        """"""
     @classmethod
     def CreateFile(
         cls,
@@ -3356,15 +1458,7 @@ class NativeMethods(ABC, Object):
         dwFlagsAndAttributes: int,
         hTemplateFile: SafeFileHandle,
     ) -> SafeFileHandle:
-        """:param lpFileName:
-        :param dwDesiredAccess:
-        :param dwShareMode:
-        :param lpSecurityAttributes:
-        :param dwCreationDisposition:
-        :param dwFlagsAndAttributes:
-        :param hTemplateFile:
-        :return:
-        """
+        """"""
     @classmethod
     def CreatePipe(
         cls,
@@ -3373,12 +1467,7 @@ class NativeMethods(ABC, Object):
         lpPipeAttributes: NativeMethods.SECURITY_ATTRIBUTES,
         nSize: int,
     ) -> tuple[bool, SafeFileHandle, SafeFileHandle]:
-        """:param hReadPipe:
-        :param hWritePipe:
-        :param lpPipeAttributes:
-        :param nSize:
-        :return:
-        """
+        """"""
     @classmethod
     def CreateProcess(
         cls,
@@ -3393,18 +1482,7 @@ class NativeMethods(ABC, Object):
         lpStartupInfo: NativeMethods.STARTUPINFO,
         lpProcessInformation: SafeNativeMethods.PROCESS_INFORMATION,
     ) -> bool:
-        """:param lpApplicationName:
-        :param lpCommandLine:
-        :param lpProcessAttributes:
-        :param lpThreadAttributes:
-        :param bInheritHandles:
-        :param dwCreationFlags:
-        :param lpEnvironment:
-        :param lpCurrentDirectory:
-        :param lpStartupInfo:
-        :param lpProcessInformation:
-        :return:
-        """
+        """"""
     @classmethod
     def CreateProcessAsUser(
         cls,
@@ -3420,25 +1498,10 @@ class NativeMethods(ABC, Object):
         lpStartupInfo: NativeMethods.STARTUPINFO,
         lpProcessInformation: SafeNativeMethods.PROCESS_INFORMATION,
     ) -> bool:
-        """:param hToken:
-        :param lpApplicationName:
-        :param lpCommandLine:
-        :param lpProcessAttributes:
-        :param lpThreadAttributes:
-        :param bInheritHandles:
-        :param dwCreationFlags:
-        :param lpEnvironment:
-        :param lpCurrentDirectory:
-        :param lpStartupInfo:
-        :param lpProcessInformation:
-        :return:
-        """
+        """"""
     @classmethod
     def CreateToolhelp32Snapshot(cls, flags: int, processId: int) -> IntPtr:
-        """:param flags:
-        :param processId:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def DuplicateHandle(
@@ -3451,15 +1514,7 @@ class NativeMethods(ABC, Object):
         bInheritHandle: bool,
         dwOptions: int,
     ) -> tuple[bool, SafeFileHandle]:
-        """:param hSourceProcessHandle:
-        :param hSourceHandle:
-        :param hTargetProcess:
-        :param targetHandle:
-        :param dwDesiredAccess:
-        :param bInheritHandle:
-        :param dwOptions:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def DuplicateHandle(
@@ -3472,60 +1527,35 @@ class NativeMethods(ABC, Object):
         bInheritHandle: bool,
         dwOptions: int,
     ) -> tuple[bool, SafeWaitHandle]:
-        """:param hSourceProcessHandle:
-        :param hSourceHandle:
-        :param hTargetProcess:
-        :param targetHandle:
-        :param dwDesiredAccess:
-        :param bInheritHandle:
-        :param dwOptions:
-        :return:
-        """
+        """"""
     @classmethod
     def EnumProcessModules(
-        cls, handle: SafeProcessHandle, modules: IntPtr, size: int, needed: int
+        cls, handle: SafeProcessHandle, modules: IntPtr, size: int, needed: Int32
     ) -> bool:
-        """:param handle:
-        :param modules:
-        :param size:
-        :param needed:
-        :return:
-        """
+        """"""
     @classmethod
-    def EnumProcesses(cls, processIds: Array[int], size: int, needed: int) -> tuple[bool, int]:
-        """:param processIds:
-        :param size:
-        :param needed:
-        :return:
-        """
+    def EnumProcesses(cls, processIds: Array[int], size: int, needed: Int32) -> tuple[bool, Int32]:
+        """"""
     @classmethod
     def EnumWindows(
         cls, callback: NativeMethods.EnumThreadWindowsCallback, extraData: IntPtr
     ) -> bool:
-        """:param callback:
-        :param extraData:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     @classmethod
     def GetCurrentProcess(cls) -> IntPtr:
-        """:return:"""
+        """"""
     @classmethod
     def GetCurrentProcessId(cls) -> int:
-        """:return:"""
+        """"""
     @classmethod
     def GetExitCodeProcess(
-        cls, processHandle: SafeProcessHandle, exitCode: int
-    ) -> tuple[bool, int]:
-        """:param processHandle:
-        :param exitCode:
-        :return:
-        """
+        cls, processHandle: SafeProcessHandle, exitCode: Int32
+    ) -> tuple[bool, Int32]:
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     @classmethod
     def GetModuleBaseName(
         cls,
@@ -3534,12 +1564,7 @@ class NativeMethods(ABC, Object):
         baseName: StringBuilder,
         size: int,
     ) -> int:
-        """:param processHandle:
-        :param moduleHandle:
-        :param baseName:
-        :param size:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GetModuleFileNameEx(
@@ -3549,27 +1574,13 @@ class NativeMethods(ABC, Object):
         baseName: StringBuilder,
         size: int,
     ) -> int:
-        """:param processHandle:
-        :param moduleHandle:
-        :param baseName:
-        :param size:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GetModuleFileNameEx(
-        cls,
-        processHandle: HandleRef,
-        moduleHandle: HandleRef,
-        baseName: StringBuilder,
-        size: int,
+        cls, processHandle: HandleRef, moduleHandle: HandleRef, baseName: StringBuilder, size: int
     ) -> int:
-        """:param processHandle:
-        :param moduleHandle:
-        :param baseName:
-        :param size:
-        :return:
-        """
+        """"""
     @classmethod
     def GetModuleInformation(
         cls,
@@ -3578,139 +1589,77 @@ class NativeMethods(ABC, Object):
         ntModuleInfo: NativeMethods.NtModuleInfo,
         size: int,
     ) -> bool:
-        """:param processHandle:
-        :param moduleHandle:
-        :param ntModuleInfo:
-        :param size:
-        :return:
-        """
+        """"""
     @classmethod
     def GetPriorityClass(cls, handle: SafeProcessHandle) -> int:
-        """:param handle:
-        :return:
-        """
+        """"""
     @classmethod
     def GetProcessAffinityMask(
         cls, handle: SafeProcessHandle, processMask: IntPtr, systemMask: IntPtr
     ) -> tuple[bool, IntPtr, IntPtr]:
-        """:param handle:
-        :param processMask:
-        :param systemMask:
-        :return:
-        """
+        """"""
     @classmethod
     def GetProcessPriorityBoost(
-        cls, handle: SafeProcessHandle, disabled: bool
-    ) -> tuple[bool, bool]:
-        """:param handle:
-        :param disabled:
-        :return:
-        """
+        cls, handle: SafeProcessHandle, disabled: Boolean
+    ) -> tuple[bool, Boolean]:
+        """"""
     @classmethod
     def GetProcessTimes(
-        cls, handle: SafeProcessHandle, creation: int, exit: int, kernel: int, user: int
-    ) -> tuple[bool, int, int, int, int]:
-        """:param handle:
-        :param creation:
-        :param exit:
-        :param kernel:
-        :param user:
-        :return:
-        """
+        cls, handle: SafeProcessHandle, creation: Int64, exit: Int64, kernel: Int64, user: Int64
+    ) -> tuple[bool, Int64, Int64, Int64, Int64]:
+        """"""
     @classmethod
     def GetProcessWorkingSetSize(
         cls, handle: SafeProcessHandle, min: IntPtr, max: IntPtr
     ) -> tuple[bool, IntPtr, IntPtr]:
-        """:param handle:
-        :param min:
-        :param max:
-        :return:
-        """
+        """"""
     @classmethod
     def GetStdHandle(cls, whichHandle: int) -> IntPtr:
-        """:param whichHandle:
-        :return:
-        """
+        """"""
     @classmethod
     def GetThreadPriority(cls, handle: SafeThreadHandle) -> int:
-        """:param handle:
-        :return:
-        """
+        """"""
     @classmethod
-    def GetThreadPriorityBoost(cls, handle: SafeThreadHandle, disabled: bool) -> tuple[bool, bool]:
-        """:param handle:
-        :param disabled:
-        :return:
-        """
+    def GetThreadPriorityBoost(
+        cls, handle: SafeThreadHandle, disabled: Boolean
+    ) -> tuple[bool, Boolean]:
+        """"""
     @classmethod
     def GetThreadTimes(
-        cls, handle: SafeThreadHandle, creation: int, exit: int, kernel: int, user: int
-    ) -> tuple[bool, int, int, int, int]:
-        """:param handle:
-        :param creation:
-        :param exit:
-        :param kernel:
-        :param user:
-        :return:
-        """
+        cls, handle: SafeThreadHandle, creation: Int64, exit: Int64, kernel: Int64, user: Int64
+    ) -> tuple[bool, Int64, Int64, Int64, Int64]:
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def GetWindow(cls, hWnd: HandleRef, uCmd: int) -> IntPtr:
-        """:param hWnd:
-        :param uCmd:
-        :return:
-        """
+        """"""
     @classmethod
     def GetWindowLong(cls, hWnd: HandleRef, nIndex: int) -> int:
-        """:param hWnd:
-        :param nIndex:
-        :return:
-        """
+        """"""
     @classmethod
     def GetWindowText(cls, hWnd: HandleRef, lpString: StringBuilder, nMaxCount: int) -> int:
-        """:param hWnd:
-        :param lpString:
-        :param nMaxCount:
-        :return:
-        """
+        """"""
     @classmethod
     def GetWindowTextLength(cls, hWnd: HandleRef) -> int:
-        """:param hWnd:
-        :return:
-        """
+        """"""
     @classmethod
-    def GetWindowThreadProcessId(cls, handle: HandleRef, processId: int) -> tuple[int, int]:
-        """:param handle:
-        :param processId:
-        :return:
-        """
+    def GetWindowThreadProcessId(cls, handle: HandleRef, processId: Int32) -> tuple[int, Int32]:
+        """"""
     @classmethod
     def IsWindowVisible(cls, hWnd: HandleRef) -> bool:
-        """:param hWnd:
-        :return:
-        """
+        """"""
     @classmethod
     def LookupPrivilegeValue(
         cls, lpSystemName: str, lpName: str, lpLuid: LUID
     ) -> tuple[bool, LUID]:
-        """:param lpSystemName:
-        :param lpName:
-        :param lpLuid:
-        :return:
-        """
+        """"""
     @classmethod
     def Module32First(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """:param handle:
-        :param entry:
-        :return:
-        """
+        """"""
     @classmethod
     def Module32Next(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """:param handle:
-        :param entry:
-        :return:
-        """
+        """"""
     @classmethod
     def NtQueryInformationProcess(
         cls,
@@ -3720,73 +1669,37 @@ class NativeMethods(ABC, Object):
         size: int,
         returnedSize: Array[int],
     ) -> int:
-        """:param processHandle:
-        :param query:
-        :param info:
-        :param size:
-        :param returnedSize:
-        :return:
-        """
+        """"""
     @classmethod
     def NtQuerySystemInformation(
-        cls, query: int, dataPtr: IntPtr, size: int, returnedSize: int
-    ) -> tuple[int, int]:
-        """:param query:
-        :param dataPtr:
-        :param size:
-        :param returnedSize:
-        :return:
-        """
+        cls, query: int, dataPtr: IntPtr, size: int, returnedSize: Int32
+    ) -> tuple[int, Int32]:
+        """"""
     @classmethod
     def OpenProcess(cls, access: int, inherit: bool, processId: int) -> SafeProcessHandle:
-        """:param access:
-        :param inherit:
-        :param processId:
-        :return:
-        """
+        """"""
     @classmethod
     def OpenProcessToken(
         cls, ProcessHandle: HandleRef, DesiredAccess: int, TokenHandle: IntPtr
     ) -> tuple[bool, IntPtr]:
-        """:param ProcessHandle:
-        :param DesiredAccess:
-        :param TokenHandle:
-        :return:
-        """
+        """"""
     @classmethod
     def OpenThread(cls, access: int, inherit: bool, threadId: int) -> SafeThreadHandle:
-        """:param access:
-        :param inherit:
-        :param threadId:
-        :return:
-        """
+        """"""
     @classmethod
     def PostMessage(cls, hwnd: HandleRef, msg: int, wparam: IntPtr, lparam: IntPtr) -> int:
-        """:param hwnd:
-        :param msg:
-        :param wparam:
-        :param lparam:
-        :return:
-        """
+        """"""
     @classmethod
     def Process32First(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """:param handle:
-        :param entry:
-        :return:
-        """
+        """"""
     @classmethod
     def Process32Next(cls, handle: HandleRef, entry: IntPtr) -> bool:
-        """:param handle:
-        :param entry:
-        :return:
-        """
+        """"""
     @classmethod
     def RtlGetVersion(
         cls, lpVersionInformation: RTL_OSVERSIONINFOEX
     ) -> tuple[int, RTL_OSVERSIONINFOEX]:
-        """:param lpVersionInformation:
-        :return:
-        """
+        """"""
     @classmethod
     def SendMessageTimeout(
         cls,
@@ -3798,189 +1711,128 @@ class NativeMethods(ABC, Object):
         timeout: int,
         pdwResult: IntPtr,
     ) -> tuple[IntPtr, IntPtr]:
-        """:param hWnd:
-        :param msg:
-        :param wParam:
-        :param lParam:
-        :param flags:
-        :param timeout:
-        :param pdwResult:
-        :return:
-        """
+        """"""
     @classmethod
     def SetPriorityClass(cls, handle: SafeProcessHandle, priorityClass: int) -> bool:
-        """:param handle:
-        :param priorityClass:
-        :return:
-        """
+        """"""
     @classmethod
     def SetProcessAffinityMask(cls, handle: SafeProcessHandle, mask: IntPtr) -> bool:
-        """:param handle:
-        :param mask:
-        :return:
-        """
+        """"""
     @classmethod
     def SetProcessPriorityBoost(cls, handle: SafeProcessHandle, disabled: bool) -> bool:
-        """:param handle:
-        :param disabled:
-        :return:
-        """
+        """"""
     @classmethod
     def SetProcessWorkingSetSize(cls, handle: SafeProcessHandle, min: IntPtr, max: IntPtr) -> bool:
-        """:param handle:
-        :param min:
-        :param max:
-        :return:
-        """
+        """"""
     @classmethod
     def SetThreadAffinityMask(cls, handle: SafeThreadHandle, mask: HandleRef) -> IntPtr:
-        """:param handle:
-        :param mask:
-        :return:
-        """
+        """"""
     @classmethod
     def SetThreadIdealProcessor(cls, handle: SafeThreadHandle, processor: int) -> int:
-        """:param handle:
-        :param processor:
-        :return:
-        """
+        """"""
     @classmethod
     def SetThreadPriority(cls, handle: SafeThreadHandle, priority: int) -> bool:
-        """:param handle:
-        :param priority:
-        :return:
-        """
+        """"""
     @classmethod
     def SetThreadPriorityBoost(cls, handle: SafeThreadHandle, disabled: bool) -> bool:
-        """:param handle:
-        :param disabled:
-        :return:
-        """
+        """"""
     @classmethod
     def ShellExecuteEx(cls, info: NativeMethods.ShellExecuteInfo) -> bool:
-        """:param info:
-        :return:
-        """
+        """"""
     @classmethod
     def TerminateProcess(cls, processHandle: SafeProcessHandle, exitCode: int) -> bool:
-        """:param processHandle:
-        :param exitCode:
-        :return:
-        """
+        """"""
     @classmethod
     def Thread32First(cls, handle: HandleRef, entry: NativeMethods.WinThreadEntry) -> bool:
-        """:param handle:
-        :param entry:
-        :return:
-        """
+        """"""
     @classmethod
     def Thread32Next(cls, handle: HandleRef, entry: NativeMethods.WinThreadEntry) -> bool:
-        """:param handle:
-        :param entry:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     @classmethod
     def WaitForInputIdle(cls, handle: SafeProcessHandle, milliseconds: int) -> int:
-        """:param handle:
-        :param milliseconds:
-        :return:
-        """
+        """"""
     ConHndlr: Callable[[int], int] = ...
-    """
-    
-    :param signalType: 
-    :return: 
-    """
-
+    """"""
     class MSG(ValueType):
         """"""
 
-        hwnd: Final[IntPtr] = ...
+        hwnd: Final[IntPtr]
         """"""
-        lParam: Final[IntPtr] = ...
+        lParam: Final[IntPtr]
         """"""
-        message: Final[int] = ...
+        message: Final[int]
         """"""
-        pt_x: Final[int] = ...
+        pt_x: Final[int]
         """"""
-        pt_y: Final[int] = ...
+        pt_y: Final[int]
         """"""
-        time: Final[int] = ...
+        time: Final[int]
         """"""
-        wParam: Final[IntPtr] = ...
+        wParam: Final[IntPtr]
         """"""
         def Equals(self, obj: object) -> bool:
-            """:param obj:
-            :return:
-            """
+            """"""
         def GetHashCode(self) -> int:
-            """:return:"""
+            """"""
         def GetType(self) -> Type:
-            """:return:"""
+            """"""
         def ToString(self) -> str:
-            """:return:"""
+            """"""
 
     class PDH_FMT_COUNTERVALUE(Object):
         """"""
 
-        CStatus: Final[int] = ...
+        CStatus: Final[int]
         """"""
-        data: Final[float] = ...
+        data: Final[float]
         """"""
-        def __init__(self):
+        def __init__(self) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
-            """:param obj:
-            :return:
-            """
+            """"""
         def GetHashCode(self) -> int:
-            """:return:"""
+            """"""
         def GetType(self) -> Type:
-            """:return:"""
+            """"""
         def ToString(self) -> str:
-            """:return:"""
+            """"""
 
     class PDH_RAW_COUNTER(Object):
         """"""
 
-        CStatus: Final[int] = ...
+        CStatus: Final[int]
         """"""
-        FirstValue: Final[int] = ...
+        FirstValue: Final[int]
         """"""
-        MultiCount: Final[int] = ...
+        MultiCount: Final[int]
         """"""
-        SecondValue: Final[int] = ...
+        SecondValue: Final[int]
         """"""
-        TimeStamp: Final[int] = ...
+        TimeStamp: Final[int]
         """"""
-        def __init__(self):
+        def __init__(self) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
-            """:param obj:
-            :return:
-            """
+            """"""
         def GetHashCode(self) -> int:
-            """:return:"""
+            """"""
         def GetType(self) -> Type:
-            """:return:"""
+            """"""
         def ToString(self) -> str:
-            """:return:"""
+            """"""
 
     class RTL_OSVERSIONINFOEX(ValueType):
         """"""
-
         def Equals(self, obj: object) -> bool:
-            """:param obj:
-            :return:
-            """
+            """"""
         def GetHashCode(self) -> int:
-            """:return:"""
+            """"""
         def GetType(self) -> Type:
-            """:return:"""
+            """"""
         def ToString(self) -> str:
-            """:return:"""
+            """"""
 
     class StructFormat(Enum):
         """"""
@@ -4003,79 +1855,48 @@ class NativeMethods(ABC, Object):
         """"""
 
     WndProc: Callable[[IntPtr, int, IntPtr, IntPtr], IntPtr] = ...
-    """
-    
-    :param hWnd: 
-    :param msg: 
-    :param wParam: 
-    :param lParam: 
-    :return: 
-    """
+    """"""
 
 class OAVariantLib(ABC, Object):
     """"""
 
-    AlphaBool: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    CalendarHijri: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    LocalBool: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NoUserOverride: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    NoValueProp: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    AlphaBool: ClassVar[int]
+    """"""
+    CalendarHijri: ClassVar[int]
+    """"""
+    LocalBool: ClassVar[int]
+    """"""
+    NoUserOverride: ClassVar[int]
+    """"""
+    NoValueProp: ClassVar[int]
+    """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class PowerModeChangedEventArgs(EventArgs):
     """"""
-
-    def __init__(self, mode: PowerModes):
-        """:param mode:"""
+    def __init__(self, mode: PowerModes) -> None:
+        """"""
     @property
     def Mode(self) -> PowerModes:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 PowerModeChangedEventHandler: Callable[[object, PowerModeChangedEventArgs], None] = ...
-"""
-
-:param sender: 
-:param e: 
-"""
+""""""
 
 class PowerModes(Enum):
     """"""
@@ -4090,75 +1911,41 @@ class PowerModes(Enum):
 class Registry(ABC, Object):
     """"""
 
-    ClassesRoot: Final[ClassVar[RegistryKey]] = ...
-    """
-    
-    :return: 
-    """
-    CurrentConfig: Final[ClassVar[RegistryKey]] = ...
-    """
-    
-    :return: 
-    """
-    CurrentUser: Final[ClassVar[RegistryKey]] = ...
-    """
-    
-    :return: 
-    """
-    DynData: Final[ClassVar[RegistryKey]] = ...
-    """
-    
-    :return: 
-    """
-    LocalMachine: Final[ClassVar[RegistryKey]] = ...
-    """
-    
-    :return: 
-    """
-    PerformanceData: Final[ClassVar[RegistryKey]] = ...
-    """
-    
-    :return: 
-    """
-    Users: Final[ClassVar[RegistryKey]] = ...
-    """
-    
-    :return: 
-    """
+    ClassesRoot: ClassVar[RegistryKey]
+    """"""
+    CurrentConfig: ClassVar[RegistryKey]
+    """"""
+    CurrentUser: ClassVar[RegistryKey]
+    """"""
+    DynData: ClassVar[RegistryKey]
+    """"""
+    LocalMachine: ClassVar[RegistryKey]
+    """"""
+    PerformanceData: ClassVar[RegistryKey]
+    """"""
+    Users: ClassVar[RegistryKey]
+    """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def GetValue(cls, keyName: str, valueName: str, defaultValue: object) -> object:
-        """:param keyName:
-        :param valueName:
-        :param defaultValue:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def SetValue(cls, keyName: str, valueName: str, value: object) -> None:
-        """:param keyName:
-        :param valueName:
-        :param value:
-        """
+        """"""
     @classmethod
     @overload
     def SetValue(
         cls, keyName: str, valueName: str, value: object, valueKind: RegistryValueKind
     ) -> None:
-        """:param keyName:
-        :param valueName:
-        :param value:
-        :param valueKind:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class RegistryHive(Enum):
     """"""
@@ -4180,76 +1967,36 @@ class RegistryHive(Enum):
 
 class RegistryKey(MarshalByRefObject, IDisposable):
     """"""
-
     @property
     def Handle(self) -> SafeRegistryHandle:
-        """:return:"""
+        """"""
     @property
     def Name(self) -> str:
-        """:return:"""
+        """"""
     @property
     def SubKeyCount(self) -> int:
-        """:return:"""
+        """"""
     @property
     def ValueCount(self) -> int:
-        """:return:"""
+        """"""
     @property
     def View(self) -> RegistryView:
-        """:return:"""
+        """"""
     def Close(self) -> None:
         """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
-        """:param requestedType:
-        :return:
-        """
+        """"""
     @overload
     def CreateSubKey(self, subkey: str) -> RegistryKey:
-        """:param subkey:
-        :return:
-        """
+        """"""
     @overload
     def CreateSubKey(self, subkey: str, permissionCheck: RegistryKeyPermissionCheck) -> RegistryKey:
-        """:param subkey:
-        :param permissionCheck:
-        :return:
-        """
-    @overload
-    def CreateSubKey(self, subkey: str, writable: bool) -> RegistryKey:
-        """:param subkey:
-        :param writable:
-        :return:
-        """
+        """"""
     @overload
     def CreateSubKey(
-        self,
-        subkey: str,
-        permissionCheck: RegistryKeyPermissionCheck,
-        options: RegistryOptions,
+        self, subkey: str, permissionCheck: RegistryKeyPermissionCheck, options: RegistryOptions
     ) -> RegistryKey:
-        """:param subkey:
-        :param permissionCheck:
-        :param options:
-        :return:
-        """
-    @overload
-    def CreateSubKey(
-        self,
-        subkey: str,
-        permissionCheck: RegistryKeyPermissionCheck,
-        registrySecurity: RegistrySecurity,
-    ) -> RegistryKey:
-        """:param subkey:
-        :param permissionCheck:
-        :param registrySecurity:
-        :return:
-        """
-    @overload
-    def CreateSubKey(self, subkey: str, writable: bool, options: RegistryOptions) -> RegistryKey:
-        """:param subkey:
-        :param writable:
-        :param options:
-        :return:
-        """
+        """"""
     @overload
     def CreateSubKey(
         self,
@@ -4258,172 +2005,122 @@ class RegistryKey(MarshalByRefObject, IDisposable):
         registryOptions: RegistryOptions,
         registrySecurity: RegistrySecurity,
     ) -> RegistryKey:
-        """:param subkey:
-        :param permissionCheck:
-        :param registryOptions:
-        :param registrySecurity:
-        :return:
-        """
+        """"""
+    @overload
+    def CreateSubKey(
+        self,
+        subkey: str,
+        permissionCheck: RegistryKeyPermissionCheck,
+        registrySecurity: RegistrySecurity,
+    ) -> RegistryKey:
+        """"""
+    @overload
+    def CreateSubKey(self, subkey: str, writable: bool) -> RegistryKey:
+        """"""
+    @overload
+    def CreateSubKey(self, subkey: str, writable: bool, options: RegistryOptions) -> RegistryKey:
+        """"""
     @overload
     def DeleteSubKey(self, subkey: str) -> None:
-        """:param subkey:"""
+        """"""
     @overload
     def DeleteSubKey(self, subkey: str, throwOnMissingSubKey: bool) -> None:
-        """:param subkey:
-        :param throwOnMissingSubKey:
-        """
+        """"""
     @overload
     def DeleteSubKeyTree(self, subkey: str) -> None:
-        """:param subkey:"""
+        """"""
     @overload
     def DeleteSubKeyTree(self, subkey: str, throwOnMissingSubKey: bool) -> None:
-        """:param subkey:
-        :param throwOnMissingSubKey:
-        """
+        """"""
     @overload
     def DeleteValue(self, name: str) -> None:
-        """:param name:"""
+        """"""
     @overload
     def DeleteValue(self, name: str, throwOnMissingValue: bool) -> None:
-        """:param name:
-        :param throwOnMissingValue:
-        """
+        """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def Flush(self) -> None:
         """"""
     @classmethod
     @overload
     def FromHandle(cls, handle: SafeRegistryHandle) -> RegistryKey:
-        """:param handle:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def FromHandle(cls, handle: SafeRegistryHandle, view: RegistryView) -> RegistryKey:
-        """:param handle:
-        :param view:
-        :return:
-        """
+        """"""
     @overload
     def GetAccessControl(self) -> RegistrySecurity:
-        """:return:"""
+        """"""
     @overload
     def GetAccessControl(self, includeSections: AccessControlSections) -> RegistrySecurity:
-        """:param includeSections:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetLifetimeService(self) -> object:
-        """:return:"""
+        """"""
     def GetSubKeyNames(self) -> Array[str]:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @overload
     def GetValue(self, name: str) -> object:
-        """:param name:
-        :return:
-        """
+        """"""
     @overload
     def GetValue(self, name: str, defaultValue: object) -> object:
-        """:param name:
-        :param defaultValue:
-        :return:
-        """
+        """"""
     @overload
     def GetValue(self, name: str, defaultValue: object, options: RegistryValueOptions) -> object:
-        """:param name:
-        :param defaultValue:
-        :param options:
-        :return:
-        """
+        """"""
     def GetValueKind(self, name: str) -> RegistryValueKind:
-        """:param name:
-        :return:
-        """
+        """"""
     def GetValueNames(self) -> Array[str]:
-        """:return:"""
+        """"""
     def InitializeLifetimeService(self) -> object:
-        """:return:"""
+        """"""
     @classmethod
     def OpenBaseKey(cls, hKey: RegistryHive, view: RegistryView) -> RegistryKey:
-        """:param hKey:
-        :param view:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OpenRemoteBaseKey(cls, hKey: RegistryHive, machineName: str) -> RegistryKey:
-        """:param hKey:
-        :param machineName:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def OpenRemoteBaseKey(
         cls, hKey: RegistryHive, machineName: str, view: RegistryView
     ) -> RegistryKey:
-        """:param hKey:
-        :param machineName:
-        :param view:
-        :return:
-        """
+        """"""
     @overload
     def OpenSubKey(self, name: str) -> RegistryKey:
-        """:param name:
-        :return:
-        """
+        """"""
     @overload
     def OpenSubKey(self, name: str, permissionCheck: RegistryKeyPermissionCheck) -> RegistryKey:
-        """:param name:
-        :param permissionCheck:
-        :return:
-        """
-    @overload
-    def OpenSubKey(self, name: str, rights: RegistryRights) -> RegistryKey:
-        """:param name:
-        :param rights:
-        :return:
-        """
-    @overload
-    def OpenSubKey(self, name: str, writable: bool) -> RegistryKey:
-        """:param name:
-        :param writable:
-        :return:
-        """
+        """"""
     @overload
     def OpenSubKey(
-        self,
-        name: str,
-        permissionCheck: RegistryKeyPermissionCheck,
-        rights: RegistryRights,
+        self, name: str, permissionCheck: RegistryKeyPermissionCheck, rights: RegistryRights
     ) -> RegistryKey:
-        """:param name:
-        :param permissionCheck:
-        :param rights:
-        :return:
-        """
+        """"""
+    @overload
+    def OpenSubKey(self, name: str, rights: RegistryRights) -> RegistryKey:
+        """"""
+    @overload
+    def OpenSubKey(self, name: str, writable: bool) -> RegistryKey:
+        """"""
     def SetAccessControl(self, registrySecurity: RegistrySecurity) -> None:
-        """:param registrySecurity:"""
+        """"""
     @overload
     def SetValue(self, name: str, value: object) -> None:
-        """:param name:
-        :param value:
-        """
+        """"""
     @overload
     def SetValue(self, name: str, value: object, valueKind: RegistryValueKind) -> None:
-        """:param name:
-        :param value:
-        :param valueKind:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class RegistryKeyPermissionCheck(Enum):
     """"""
@@ -4483,116 +2180,72 @@ class RegistryView(Enum):
 
 class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
-
     @property
     def IsClosed(self) -> bool:
-        """:return:"""
+        """"""
     @property
     def IsInvalid(self) -> bool:
-        """:return:"""
+        """"""
     def Close(self) -> None:
         """"""
-    def DangerousAddRef(self, success: bool) -> None:
-        """:param success:"""
-    def DangerousGetHandle(self) -> IntPtr:
-        """:return:"""
-    def DangerousRelease(self) -> None:
+    def DangerousAddRef(self, success: Boolean) -> None:
         """"""
-    def SetHandleAsInvalid(self) -> None:
+    def DangerousGetHandle(self) -> IntPtr:
+        """"""
+    def DangerousRelease(self) -> None:
         """"""
     def Dispose(self) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class SafeNativeMethods(ABC, Object):
     """"""
 
-    ERROR_INSUFFICIENT_BUFFER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_ALLOCATE_BUFFER: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_ARGUMENT_ARRAY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_FROM_HMODULE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_FROM_STRING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_FROM_SYSTEM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_IGNORE_INSERTS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FORMAT_MESSAGE_MAX_WIDTH_MASK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MB_RIGHT: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    MB_RTLREADING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    ERROR_INSUFFICIENT_BUFFER: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_ALLOCATE_BUFFER: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_ARGUMENT_ARRAY: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_FROM_HMODULE: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_FROM_STRING: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_FROM_SYSTEM: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_IGNORE_INSERTS: ClassVar[int]
+    """"""
+    FORMAT_MESSAGE_MAX_WIDTH_MASK: ClassVar[int]
+    """"""
+    MB_RIGHT: ClassVar[int]
+    """"""
+    MB_RTLREADING: ClassVar[int]
+    """"""
     @classmethod
     def CloseHandle(cls, handle: IntPtr) -> bool:
-        """:param handle:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     @classmethod
     def FormatFromRawValue(
         cls,
         dwCounterType: int,
         dwFormat: int,
-        pTimeBase: int,
+        pTimeBase: Int64,
         pRawValue1: NativeMethods.PDH_RAW_COUNTER,
         pRawValue2: NativeMethods.PDH_RAW_COUNTER,
         pFmtValue: NativeMethods.PDH_FMT_COUNTERVALUE,
     ) -> int:
-        """:param dwCounterType:
-        :param dwFormat:
-        :param pTimeBase:
-        :param pRawValue1:
-        :param pRawValue2:
-        :param pFmtValue:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def FormatMessage(
@@ -4605,15 +2258,7 @@ class SafeNativeMethods(ABC, Object):
         nSize: int,
         arguments: Array[IntPtr],
     ) -> int:
-        """:param dwFlags:
-        :param lpSource:
-        :param dwMessageId:
-        :param dwLanguageId:
-        :param lpBuffer:
-        :param nSize:
-        :param arguments:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def FormatMessage(
@@ -4626,89 +2271,51 @@ class SafeNativeMethods(ABC, Object):
         nSize: int,
         arguments: Array[IntPtr],
     ) -> int:
-        """:param dwFlags:
-        :param lpSource_mustBeNull:
-        :param dwMessageId:
-        :param dwLanguageId:
-        :param lpBuffer:
-        :param nSize:
-        :param arguments:
-        :return:
-        """
+        """"""
     @classmethod
     def FreeLibrary(cls, hModule: HandleRef) -> bool:
-        """:param hModule:
-        :return:
-        """
+        """"""
     @classmethod
     def GetComputerName(cls, lpBuffer: StringBuilder, nSize: Array[int]) -> bool:
-        """:param lpBuffer:
-        :param nSize:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     @classmethod
     def GetStockObject(cls, nIndex: int) -> IntPtr:
-        """:param nIndex:
-        :return:
-        """
+        """"""
     @classmethod
     def GetTextMetrics(
         cls, hDC: IntPtr, tm: NativeMethods.TEXTMETRIC
     ) -> tuple[bool, NativeMethods.TEXTMETRIC]:
-        """:param hDC:
-        :param tm:
-        :return:
-        """
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def InterlockedCompareExchange(cls, pDestination: IntPtr, exchange: int, compare: int) -> int:
-        """:param pDestination:
-        :param exchange:
-        :param compare:
-        :return:
-        """
+        """"""
     @classmethod
-    def IsWow64Process(cls, hProcess: SafeProcessHandle, Wow64Process: bool) -> bool:
-        """:param hProcess:
-        :param Wow64Process:
-        :return:
-        """
+    def IsWow64Process(cls, hProcess: SafeProcessHandle, Wow64Process: Boolean) -> bool:
+        """"""
     @classmethod
     def LoadLibrary(cls, libFilename: str) -> IntPtr:
-        """:param libFilename:
-        :return:
-        """
+        """"""
     @classmethod
     def MessageBox(cls, hWnd: IntPtr, text: str, caption: str, type: int) -> int:
-        """:param hWnd:
-        :param text:
-        :param caption:
-        :param type:
-        :return:
-        """
+        """"""
     @classmethod
     def OutputDebugString(cls, message: str) -> None:
-        """:param message:"""
+        """"""
     @classmethod
-    def QueryPerformanceCounter(cls, value: int) -> tuple[bool, int]:
-        """:param value:
-        :return:
-        """
+    def QueryPerformanceCounter(cls, value: Int64) -> tuple[bool, Int64]:
+        """"""
     @classmethod
-    def QueryPerformanceFrequency(cls, value: int) -> tuple[bool, int]:
-        """:param value:
-        :return:
-        """
+    def QueryPerformanceFrequency(cls, value: Int64) -> tuple[bool, Int64]:
+        """"""
     @classmethod
     def RegisterWindowMessage(cls, msg: str) -> int:
-        """:param msg:
-        :return:
-        """
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class SessionEndReasons(Enum):
     """"""
@@ -4720,86 +2327,65 @@ class SessionEndReasons(Enum):
 
 class SessionEndedEventArgs(EventArgs):
     """"""
-
-    def __init__(self, reason: SessionEndReasons):
-        """:param reason:"""
+    def __init__(self, reason: SessionEndReasons) -> None:
+        """"""
     @property
     def Reason(self) -> SessionEndReasons:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 SessionEndedEventHandler: Callable[[object, SessionEndedEventArgs], None] = ...
-"""
-
-:param sender: 
-:param e: 
-"""
+""""""
 
 class SessionEndingEventArgs(EventArgs):
     """"""
-
-    def __init__(self, reason: SessionEndReasons):
-        """:param reason:"""
+    def __init__(self, reason: SessionEndReasons) -> None:
+        """"""
     @property
     def Cancel(self) -> bool:
-        """:return:"""
+        """"""
     @Cancel.setter
     def Cancel(self, value: bool) -> None: ...
     @property
     def Reason(self) -> SessionEndReasons:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 SessionEndingEventHandler: Callable[[object, SessionEndingEventArgs], None] = ...
-"""
-
-:param sender: 
-:param e: 
-"""
+""""""
 
 class SessionSwitchEventArgs(EventArgs):
     """"""
-
-    def __init__(self, reason: SessionSwitchReason):
-        """:param reason:"""
+    def __init__(self, reason: SessionSwitchReason) -> None:
+        """"""
     @property
     def Reason(self) -> SessionSwitchReason:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 SessionSwitchEventHandler: Callable[[object, SessionSwitchEventArgs], None] = ...
-"""
-
-:param sender: 
-:param e: 
-"""
+""""""
 
 class SessionSwitchReason(Enum):
     """"""
@@ -4825,28 +2411,23 @@ class SessionSwitchReason(Enum):
 
 class SystemEvents(Object):
     """"""
-
     @classmethod
     def CreateTimer(cls, interval: int) -> IntPtr:
-        """:param interval:
-        :return:
-        """
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     @classmethod
     def InvokeOnEventsThread(cls, method: Delegate) -> None:
-        """:param method:"""
+        """"""
     @classmethod
     def KillTimer(cls, timerId: IntPtr) -> None:
-        """:param timerId:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
     DisplaySettingsChanged: EventType[EventHandler] = ...
     """"""
     DisplaySettingsChanging: EventType[EventHandler] = ...
@@ -4878,344 +2459,151 @@ class SystemEvents(Object):
 
 class TimerElapsedEventArgs(EventArgs):
     """"""
-
-    def __init__(self, timerId: IntPtr):
-        """:param timerId:"""
+    def __init__(self, timerId: IntPtr) -> None:
+        """"""
     @property
     def TimerId(self) -> IntPtr:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 TimerElapsedEventHandler: Callable[[object, TimerElapsedEventArgs], None] = ...
-"""
-
-:param sender: 
-:param e: 
-"""
+""""""
 
 class UnsafeNativeMethods(ABC, Object):
     """"""
 
-    FILE_ACTION_ADDED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ACTION_MODIFIED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ACTION_REMOVED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ACTION_RENAMED_NEW_NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ACTION_RENAMED_OLD_NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ADD_FILE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ADD_SUBDIRECTORY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_APPEND_DATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_ARCHIVE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_COMPRESSED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_DIRECTORY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_HIDDEN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_NORMAL: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_OFFLINE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_READONLY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_SYSTEM: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_ATTRIBUTE_TEMPORARY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_CASE_PRESERVED_NAMES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_CASE_SENSITIVE_SEARCH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_CREATE_PIPE_INSTANCE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_DELETE_CHILD: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_EXECUTE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FILE_COMPRESSION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_BACKUP_SEMANTICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_DELETE_ON_CLOSE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_NO_BUFFERING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_OVERLAPPED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_POSIX_SEMANTICS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_RANDOM_ACCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_SEQUENTIAL_SCAN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_FLAG_WRITE_THROUGH: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_LIST_DIRECTORY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_ATTRIBUTES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_CREATION: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_DIR_NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_FILE_NAME: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_LAST_ACCESS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_LAST_WRITE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_SECURITY: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_NOTIFY_CHANGE_SIZE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_PERSISTENT_ACLS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_READ_ATTRIBUTES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_READ_DATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_READ_EA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_SHARE_DELETE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_SHARE_READ: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_SHARE_WRITE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_TRAVERSE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_TYPE_CHAR: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_TYPE_DISK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_TYPE_PIPE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_TYPE_REMOTE: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_TYPE_UNKNOWN: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_UNICODE_ON_DISK: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_VOLUME_IS_COMPRESSED: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_WRITE_ATTRIBUTES: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_WRITE_DATA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    FILE_WRITE_EA: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    GetFileExInfoStandard: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    OPEN_ALWAYS: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
-    OPEN_EXISTING: Final[ClassVar[int]] = ...
-    """
-    
-    :return: 
-    """
+    FILE_ACTION_ADDED: ClassVar[int]
+    """"""
+    FILE_ACTION_MODIFIED: ClassVar[int]
+    """"""
+    FILE_ACTION_REMOVED: ClassVar[int]
+    """"""
+    FILE_ACTION_RENAMED_NEW_NAME: ClassVar[int]
+    """"""
+    FILE_ACTION_RENAMED_OLD_NAME: ClassVar[int]
+    """"""
+    FILE_ADD_FILE: ClassVar[int]
+    """"""
+    FILE_ADD_SUBDIRECTORY: ClassVar[int]
+    """"""
+    FILE_APPEND_DATA: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_ARCHIVE: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_COMPRESSED: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_DIRECTORY: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_HIDDEN: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_NORMAL: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_OFFLINE: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_READONLY: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_SYSTEM: ClassVar[int]
+    """"""
+    FILE_ATTRIBUTE_TEMPORARY: ClassVar[int]
+    """"""
+    FILE_CASE_PRESERVED_NAMES: ClassVar[int]
+    """"""
+    FILE_CASE_SENSITIVE_SEARCH: ClassVar[int]
+    """"""
+    FILE_CREATE_PIPE_INSTANCE: ClassVar[int]
+    """"""
+    FILE_DELETE_CHILD: ClassVar[int]
+    """"""
+    FILE_EXECUTE: ClassVar[int]
+    """"""
+    FILE_FILE_COMPRESSION: ClassVar[int]
+    """"""
+    FILE_FLAG_BACKUP_SEMANTICS: ClassVar[int]
+    """"""
+    FILE_FLAG_DELETE_ON_CLOSE: ClassVar[int]
+    """"""
+    FILE_FLAG_NO_BUFFERING: ClassVar[int]
+    """"""
+    FILE_FLAG_OVERLAPPED: ClassVar[int]
+    """"""
+    FILE_FLAG_POSIX_SEMANTICS: ClassVar[int]
+    """"""
+    FILE_FLAG_RANDOM_ACCESS: ClassVar[int]
+    """"""
+    FILE_FLAG_SEQUENTIAL_SCAN: ClassVar[int]
+    """"""
+    FILE_FLAG_WRITE_THROUGH: ClassVar[int]
+    """"""
+    FILE_LIST_DIRECTORY: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_ATTRIBUTES: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_CREATION: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_DIR_NAME: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_FILE_NAME: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_LAST_ACCESS: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_LAST_WRITE: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_SECURITY: ClassVar[int]
+    """"""
+    FILE_NOTIFY_CHANGE_SIZE: ClassVar[int]
+    """"""
+    FILE_PERSISTENT_ACLS: ClassVar[int]
+    """"""
+    FILE_READ_ATTRIBUTES: ClassVar[int]
+    """"""
+    FILE_READ_DATA: ClassVar[int]
+    """"""
+    FILE_READ_EA: ClassVar[int]
+    """"""
+    FILE_SHARE_DELETE: ClassVar[int]
+    """"""
+    FILE_SHARE_READ: ClassVar[int]
+    """"""
+    FILE_SHARE_WRITE: ClassVar[int]
+    """"""
+    FILE_TRAVERSE: ClassVar[int]
+    """"""
+    FILE_TYPE_CHAR: ClassVar[int]
+    """"""
+    FILE_TYPE_DISK: ClassVar[int]
+    """"""
+    FILE_TYPE_PIPE: ClassVar[int]
+    """"""
+    FILE_TYPE_REMOTE: ClassVar[int]
+    """"""
+    FILE_TYPE_UNKNOWN: ClassVar[int]
+    """"""
+    FILE_UNICODE_ON_DISK: ClassVar[int]
+    """"""
+    FILE_VOLUME_IS_COMPRESSED: ClassVar[int]
+    """"""
+    FILE_WRITE_ATTRIBUTES: ClassVar[int]
+    """"""
+    FILE_WRITE_DATA: ClassVar[int]
+    """"""
+    FILE_WRITE_EA: ClassVar[int]
+    """"""
+    GetFileExInfoStandard: ClassVar[int]
+    """"""
+    OPEN_ALWAYS: ClassVar[int]
+    """"""
+    OPEN_EXISTING: ClassVar[int]
+    """"""
     @classmethod
     def ClearEventLog(cls, hEventLog: SafeHandle, lpctstrBackupFileName: HandleRef) -> bool:
-        """:param hEventLog:
-        :param lpctstrBackupFileName:
-        :return:
-        """
+        """"""
     @classmethod
     def CreateWindowEx(
         cls,
@@ -5232,119 +2620,67 @@ class UnsafeNativeMethods(ABC, Object):
         hInst: HandleRef,
         pvParam: object,
     ) -> IntPtr:
-        """:param exStyle:
-        :param lpszClassName:
-        :param lpszWindowName:
-        :param style:
-        :param x:
-        :param y:
-        :param width:
-        :param height:
-        :param hWndParent:
-        :param hMenu:
-        :param hInst:
-        :param pvParam:
-        :return:
-        """
+        """"""
     @classmethod
     def DefWindowProc(cls, hWnd: IntPtr, msg: int, wParam: IntPtr, lParam: IntPtr) -> IntPtr:
-        """:param hWnd:
-        :param msg:
-        :param wParam:
-        :param lParam:
-        :return:
-        """
+        """"""
     @classmethod
     def DestroyWindow(cls, hWnd: HandleRef) -> bool:
-        """:param hWnd:
-        :return:
-        """
+        """"""
     @classmethod
     def DispatchMessage(cls, msg: MSG) -> int:
-        """:param msg:
-        :return:
-        """
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """"""
     @classmethod
     def GetClassInfo(
         cls, hInst: HandleRef, lpszClass: str, wc: NativeMethods.WNDCLASS_I
     ) -> tuple[bool, NativeMethods.WNDCLASS_I]:
-        """:param hInst:
-        :param lpszClass:
-        :param wc:
-        :return:
-        """
+        """"""
     @classmethod
     def GetDC(cls, hWnd: IntPtr) -> IntPtr:
-        """:param hWnd:
-        :return:
-        """
+        """"""
     @classmethod
     def GetFileVersionInfo(
         cls, lptstrFilename: str, dwHandle: int, dwLen: int, lpData: HandleRef
     ) -> bool:
-        """:param lptstrFilename:
-        :param dwHandle:
-        :param dwLen:
-        :param lpData:
-        :return:
-        """
+        """"""
     @classmethod
-    def GetFileVersionInfoSize(cls, lptstrFilename: str, handle: int) -> tuple[int, int]:
-        """:param lptstrFilename:
-        :param handle:
-        :return:
-        """
+    def GetFileVersionInfoSize(cls, lptstrFilename: str, handle: Int32) -> tuple[int, Int32]:
+        """"""
+    def GetHashCode(self) -> int:
+        """"""
     @classmethod
     def GetModuleFileName(cls, hModule: HandleRef, buffer: StringBuilder, length: int) -> int:
-        """:param hModule:
-        :param buffer:
-        :param length:
-        :return:
-        """
+        """"""
     @classmethod
     def GetModuleHandle(cls, modName: str) -> IntPtr:
-        """:param modName:
-        :return:
-        """
+        """"""
     @classmethod
-    def GetNumberOfEventLogRecords(cls, hEventLog: SafeHandle, count: int) -> tuple[bool, int]:
-        """:param hEventLog:
-        :param count:
-        :return:
-        """
+    def GetNumberOfEventLogRecords(cls, hEventLog: SafeHandle, count: Int32) -> tuple[bool, Int32]:
+        """"""
     @classmethod
-    def GetOldestEventLogRecord(cls, hEventLog: SafeHandle, number: int) -> tuple[bool, int]:
-        """:param hEventLog:
-        :param number:
-        :return:
-        """
+    def GetOldestEventLogRecord(cls, hEventLog: SafeHandle, number: Int32) -> tuple[bool, Int32]:
+        """"""
     @classmethod
     @overload
     def GetProcAddress(cls, hModule: HandleRef, lpProcName: str) -> IntPtr:
-        """:param hModule:
-        :param lpProcName:
-        :return:
-        """
+        """"""
     @classmethod
     @overload
     def GetProcAddress(cls, hModule: IntPtr, methodName: str) -> IntPtr:
-        """:param hModule:
-        :param methodName:
-        :return:
-        """
+        """"""
     @classmethod
     def GetProcessWindowStation(cls) -> IntPtr:
-        """:return:"""
+        """"""
     @classmethod
     def GetStdHandle(cls, type: int) -> IntPtr:
-        """:param type:
-        :return:
-        """
+        """"""
     @classmethod
     def GetSystemMetrics(cls, nIndex: int) -> int:
-        """:param nIndex:
-        :return:
-        """
+        """"""
+    def GetType(self) -> Type:
+        """"""
     @classmethod
     def GetUserObjectInformation(
         cls,
@@ -5352,87 +2688,43 @@ class UnsafeNativeMethods(ABC, Object):
         nIndex: int,
         pvBuffer: NativeMethods.USEROBJECTFLAGS,
         nLength: int,
-        lpnLengthNeeded: int,
+        lpnLengthNeeded: Int32,
     ) -> bool:
-        """:param hObj:
-        :param nIndex:
-        :param pvBuffer:
-        :param nLength:
-        :param lpnLengthNeeded:
-        :return:
-        """
+        """"""
     @classmethod
     def IsWindow(cls, hWnd: HandleRef) -> bool:
-        """:param hWnd:
-        :return:
-        """
+        """"""
     @classmethod
     def KillTimer(cls, hwnd: HandleRef, idEvent: HandleRef) -> bool:
-        """:param hwnd:
-        :param idEvent:
-        :return:
-        """
+        """"""
     @classmethod
     def LookupAccountSid(
         cls,
         systemName: str,
         pSid: Array[int],
         szUserName: StringBuilder,
-        userNameSize: int,
+        userNameSize: Int32,
         szDomainName: StringBuilder,
-        domainNameSize: int,
-        eUse: int,
+        domainNameSize: Int32,
+        eUse: Int32,
     ) -> int:
-        """:param systemName:
-        :param pSid:
-        :param szUserName:
-        :param userNameSize:
-        :param szDomainName:
-        :param domainNameSize:
-        :param eUse:
-        :return:
-        """
+        """"""
     @classmethod
     def MsgWaitForMultipleObjectsEx(
-        cls,
-        nCount: int,
-        pHandles: IntPtr,
-        dwMilliseconds: int,
-        dwWakeMask: int,
-        dwFlags: int,
+        cls, nCount: int, pHandles: IntPtr, dwMilliseconds: int, dwWakeMask: int, dwFlags: int
     ) -> int:
-        """:param nCount:
-        :param pHandles:
-        :param dwMilliseconds:
-        :param dwWakeMask:
-        :param dwFlags:
-        :return:
-        """
+        """"""
     @classmethod
     def NotifyChangeEventLog(cls, hEventLog: SafeHandle, hEvent: SafeWaitHandle) -> bool:
-        """:param hEventLog:
-        :param hEvent:
-        :return:
-        """
+        """"""
     @classmethod
     def PeekMessage(
         cls, msg: MSG, hwnd: HandleRef, msgMin: int, msgMax: int, remove: int
     ) -> tuple[bool, MSG]:
-        """:param msg:
-        :param hwnd:
-        :param msgMin:
-        :param msgMax:
-        :param remove:
-        :return:
-        """
+        """"""
     @classmethod
     def PostMessage(cls, hwnd: HandleRef, msg: int, wparam: IntPtr, lparam: IntPtr) -> bool:
-        """:param hwnd:
-        :param msg:
-        :param wparam:
-        :param lparam:
-        :return:
-        """
+        """"""
     @classmethod
     def ReadDirectoryChangesW(
         cls,
@@ -5441,20 +2733,11 @@ class UnsafeNativeMethods(ABC, Object):
         nBufferLength: int,
         bWatchSubtree: int,
         dwNotifyFilter: int,
-        lpBytesReturned: int,
+        lpBytesReturned: Int32,
         overlappedPointer: NativeOverlapped,
         lpCompletionRoutine: HandleRef,
-    ) -> tuple[bool, int]:
-        """:param hDirectory:
-        :param lpBuffer:
-        :param nBufferLength:
-        :param bWatchSubtree:
-        :param dwNotifyFilter:
-        :param lpBytesReturned:
-        :param overlappedPointer:
-        :param lpCompletionRoutine:
-        :return:
-        """
+    ) -> tuple[bool, Int32]:
+        """"""
     @classmethod
     def ReadEventLog(
         cls,
@@ -5463,29 +2746,16 @@ class UnsafeNativeMethods(ABC, Object):
         dwRecordOffset: int,
         buffer: Array[int],
         numberOfBytesToRead: int,
-        bytesRead: int,
-        minNumOfBytesNeeded: int,
-    ) -> tuple[bool, int, int]:
-        """:param hEventLog:
-        :param dwReadFlags:
-        :param dwRecordOffset:
-        :param buffer:
-        :param numberOfBytesToRead:
-        :param bytesRead:
-        :param minNumOfBytesNeeded:
-        :return:
-        """
+        bytesRead: Int32,
+        minNumOfBytesNeeded: Int32,
+    ) -> tuple[bool, Int32, Int32]:
+        """"""
     @classmethod
     def RegisterClass(cls, wc: NativeMethods.WNDCLASS) -> int:
-        """:param wc:
-        :return:
-        """
+        """"""
     @classmethod
     def ReleaseDC(cls, hWnd: IntPtr, hDC: IntPtr) -> int:
-        """:param hWnd:
-        :param hDC:
-        :return:
-        """
+        """"""
     @classmethod
     def ReportEvent(
         cls,
@@ -5499,177 +2769,85 @@ class UnsafeNativeMethods(ABC, Object):
         strings: HandleRef,
         rawData: Array[int],
     ) -> bool:
-        """:param hEventLog:
-        :param type:
-        :param category:
-        :param eventID:
-        :param userSID:
-        :param numStrings:
-        :param dataLen:
-        :param strings:
-        :param rawData:
-        :return:
-        """
+        """"""
     @classmethod
     def SelectObject(cls, hDC: IntPtr, hObject: IntPtr) -> IntPtr:
-        """:param hDC:
-        :param hObject:
-        :return:
-        """
+        """"""
     @classmethod
     def SendMessage(cls, hWnd: HandleRef, msg: int, wParam: IntPtr, lParam: IntPtr) -> IntPtr:
-        """:param hWnd:
-        :param msg:
-        :param wParam:
-        :param lParam:
-        :return:
-        """
+        """"""
     @classmethod
     def SetClassLong(cls, hWnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
-        """:param hWnd:
-        :param nIndex:
-        :param dwNewLong:
-        :return:
-        """
+        """"""
     @classmethod
     def SetClassLongPtr32(cls, hwnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
-        """:param hwnd:
-        :param nIndex:
-        :param dwNewLong:
-        :return:
-        """
+        """"""
     @classmethod
     def SetClassLongPtr64(cls, hwnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
-        """:param hwnd:
-        :param nIndex:
-        :param dwNewLong:
-        :return:
-        """
+        """"""
     @classmethod
     def SetConsoleCtrlHandler(cls, handler: NativeMethods.ConHndlr, add: int) -> bool:
-        """:param handler:
-        :param add:
-        :return:
-        """
+        """"""
     @classmethod
     def SetTimer(
         cls, hWnd: HandleRef, nIDEvent: HandleRef, uElapse: int, lpTimerProc: HandleRef
     ) -> IntPtr:
-        """:param hWnd:
-        :param nIDEvent:
-        :param uElapse:
-        :param lpTimerProc:
-        :return:
-        """
+        """"""
     @classmethod
     def SetWindowLong(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
-        """:param hWnd:
-        :param nIndex:
-        :param dwNewLong:
-        :return:
-        """
+        """"""
     @classmethod
     def SetWindowLongPtr32(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
-        """:param hWnd:
-        :param nIndex:
-        :param dwNewLong:
-        :return:
-        """
+        """"""
     @classmethod
     def SetWindowLongPtr64(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
-        """:param hWnd:
-        :param nIndex:
-        :param dwNewLong:
-        :return:
-        """
+        """"""
+    def ToString(self) -> str:
+        """"""
     @classmethod
     def TranslateMessage(cls, msg: MSG) -> tuple[bool, MSG]:
-        """:param msg:
-        :return:
-        """
+        """"""
     @classmethod
     def UnregisterClass(cls, lpClassName: str, hInstance: HandleRef) -> int:
-        """:param lpClassName:
-        :param hInstance:
-        :return:
-        """
+        """"""
     @classmethod
     def VerLanguageName(cls, langID: int, lpBuffer: StringBuilder, nSize: int) -> int:
-        """:param langID:
-        :param lpBuffer:
-        :param nSize:
-        :return:
-        """
+        """"""
     @classmethod
     def VerQueryValue(
-        cls, pBlock: HandleRef, lpSubBlock: str, lplpBuffer: IntPtr, len: int
-    ) -> tuple[bool, IntPtr, int]:
-        """:param pBlock:
-        :param lpSubBlock:
-        :param lplpBuffer:
-        :param len:
-        :return:
-        """
+        cls, pBlock: HandleRef, lpSubBlock: str, lplpBuffer: IntPtr, len: Int32
+    ) -> tuple[bool, IntPtr, Int32]:
+        """"""
     @classmethod
     def WTSRegisterSessionNotification(cls, hWnd: HandleRef, dwFlags: int) -> bool:
-        """:param hWnd:
-        :param dwFlags:
-        :return:
-        """
+        """"""
     @classmethod
     def WTSUnRegisterSessionNotification(cls, hWnd: HandleRef) -> bool:
-        """:param hWnd:
-        :return:
-        """
+        """"""
     @classmethod
     def WaitNamedPipe(cls, name: str, timeout: int) -> bool:
-        """:param name:
-        :param timeout:
-        :return:
-        """
+        """"""
     @classmethod
-    def WldpIsDynamicCodePolicyEnabled(cls, enabled: int) -> tuple[int, int]:
-        """:param enabled:
-        :return:
-        """
+    def WldpIsDynamicCodePolicyEnabled(cls, enabled: Int32) -> tuple[int, Int32]:
+        """"""
     @classmethod
     def WldpQueryDynamicCodeTrust(
         cls, fileHandle: SafeFileHandle, image: IntPtr, imageSize: int
     ) -> int:
-        """:param fileHandle:
-        :param image:
-        :param imageSize:
-        :return:
-        """
+        """"""
     @classmethod
     def WldpSetDynamicCodeTrust(cls, fileHandle: SafeFileHandle) -> int:
-        """:param fileHandle:
-        :return:
-        """
-    def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
-    def GetHashCode(self) -> int:
-        """:return:"""
-    def GetType(self) -> Type:
-        """:return:"""
-    def ToString(self) -> str:
-        """:return:"""
-
+        """"""
     class WIN32_FILE_ATTRIBUTE_DATA(ValueType):
         """"""
-
         def Equals(self, obj: object) -> bool:
-            """:param obj:
-            :return:
-            """
+            """"""
         def GetHashCode(self) -> int:
-            """:return:"""
+            """"""
         def GetType(self) -> Type:
-            """:return:"""
+            """"""
         def ToString(self) -> str:
-            """:return:"""
+            """"""
 
 class UserPreferenceCategory(Enum):
     """"""
@@ -5705,80 +2883,60 @@ class UserPreferenceCategory(Enum):
 
 class UserPreferenceChangedEventArgs(EventArgs):
     """"""
-
-    def __init__(self, category: UserPreferenceCategory):
-        """:param category:"""
+    def __init__(self, category: UserPreferenceCategory) -> None:
+        """"""
     @property
     def Category(self) -> UserPreferenceCategory:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 UserPreferenceChangedEventHandler: Callable[[object, UserPreferenceChangedEventArgs], None] = ...
-"""
-
-:param sender: 
-:param e: 
-"""
+""""""
 
 class UserPreferenceChangingEventArgs(EventArgs):
     """"""
-
-    def __init__(self, category: UserPreferenceCategory):
-        """:param category:"""
+    def __init__(self, category: UserPreferenceCategory) -> None:
+        """"""
     @property
     def Category(self) -> UserPreferenceCategory:
-        """:return:"""
+        """"""
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 UserPreferenceChangingEventHandler: Callable[[object, UserPreferenceChangingEventArgs], None] = ...
-"""
-
-:param sender: 
-:param e: 
-"""
+""""""
 
 class Win32Native(ABC, Object):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""
 
 class WinInetCache(RequestCache):
     """"""
-
     def Equals(self, obj: object) -> bool:
-        """:param obj:
-        :return:
-        """
+        """"""
     def GetHashCode(self) -> int:
-        """:return:"""
+        """"""
     def GetType(self) -> Type:
-        """:return:"""
+        """"""
     def ToString(self) -> str:
-        """:return:"""
+        """"""

@@ -15,7 +15,7 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="SCRIPT_NAME" value="stubgen" />
-    <option name="PARAMETERS" value="--verbose -o src build -f src/stubs/skeleton/*_skeleton.json src/stubs/doc/*_doc.json" />
+    <option name="PARAMETERS" value="--verbose -o src build -f src/stubs/*_skeleton.json src/stubs/*_doc.json" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="true" />

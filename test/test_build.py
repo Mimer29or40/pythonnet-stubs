@@ -9,7 +9,7 @@ import pytest
 from conftest import TL_SKELETON
 from conftest import make_params
 
-from stubgen.build_stubs import NamespaceBuilder
+from stubgen.build_stubs import Builder
 from stubgen.build_stubs import build_stubs
 from stubgen.build_stubs import format_stubs
 from stubgen.model import CAssembly
@@ -32,15 +32,15 @@ if TYPE_CHECKING:  # pragma: no cover
 
 
 @pytest.fixture
-def builder() -> NamespaceBuilder:
+def builder() -> Builder:
     """NamespaceBuilder fixture."""
-    return NamespaceBuilder(line_length=100)
+    return Builder(line_length=100)
 
 
 class TestImportType:
     """Tests for NamespaceBuilder.import_type()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.import_type() with a basic type."""
         obj: CType = CType(name="Type")
 
@@ -50,7 +50,7 @@ class TestImportType:
 
         assert builder.import_set == expected
 
-    def test_generic(self, builder: NamespaceBuilder) -> None:
+    def test_generic(self, builder: Builder) -> None:
         """Test for ImportList.add_type() with a generic type."""
         obj: CType = CType(name="Type", generic=True)
 
@@ -60,7 +60,7 @@ class TestImportType:
 
         assert builder.import_set == expected
 
-    def test_inner(self, builder: NamespaceBuilder) -> None:
+    def test_inner(self, builder: Builder) -> None:
         """Test for ImportList.add_type() with inner types."""
         obj: CType = CType(name="Type", inner=[CType(name="InnerA"), CType(name="InnerB")])
 
@@ -70,7 +70,7 @@ class TestImportType:
 
         assert builder.import_set == expected
 
-    def test_void(self, builder: NamespaceBuilder) -> None:
+    def test_void(self, builder: Builder) -> None:
         """Test for ImportList.add_type() with CType.VOID."""
         obj: CType = CType.VOID
 
@@ -93,9 +93,7 @@ class TestBuildType:
             ]
         ),
     )
-    def test_basic(
-        self, obj: CType, expected: str, imported: set[str], builder: NamespaceBuilder
-    ) -> None:
+    def test_basic(self, obj: CType, expected: str, imported: set[str], builder: Builder) -> None:
         """Test for NamespaceBuilder.build_type() with native types."""
         actual: str = builder.build_type(obj, convert=False)
 
@@ -124,9 +122,7 @@ class TestBuildType:
             ]
         ),
     )
-    def test_convert(
-        self, obj: CType, expected: str, imported: set[str], builder: NamespaceBuilder
-    ) -> None:
+    def test_convert(self, obj: CType, expected: str, imported: set[str], builder: Builder) -> None:
         """Test for NamespaceBuilder.build_type() when convert is True."""
         actual: str = builder.build_type(obj, convert=True)
 
@@ -148,9 +144,7 @@ class TestBuildType:
             ]
         ),
     )
-    def test_inner(
-        self, obj: CType, expected: str, imported: set[str], builder: NamespaceBuilder
-    ) -> None:
+    def test_inner(self, obj: CType, expected: str, imported: set[str], builder: Builder) -> None:
         """Test for NamespaceBuilder.build_type() when convert is True."""
         actual: str = builder.build_type(obj, convert=False)
 
@@ -161,7 +155,7 @@ class TestBuildType:
         ("obj", "expected"),
         **make_params([("basic", (CType(name="Type", nullable=True), "Type | None"))]),
     )
-    def test_nullable(self, obj: CType, expected: str, builder: NamespaceBuilder) -> None:
+    def test_nullable(self, obj: CType, expected: str, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_type() when convert is True."""
         actual: str = builder.build_type(obj, convert=False)
 
@@ -171,7 +165,7 @@ class TestBuildType:
 class TestBuildParameter:
     """Tests for NamespaceBuilder.build_parameter()."""
 
-    def test_simple(self, builder: NamespaceBuilder) -> None:
+    def test_simple(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_parameter() with a simple parameter."""
         obj: CParameter = CParameter(name="name", type=CType(name="Type"))
 
@@ -181,7 +175,7 @@ class TestBuildParameter:
         assert actual == expected
         assert builder.import_set == {"Type"}
 
-    def test_default(self, builder: NamespaceBuilder) -> None:
+    def test_default(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_parameter() with a parameter with a default value."""
         obj: CParameter = CParameter(name="name", type=CType(name="Type"), default=True)
 
@@ -195,7 +189,7 @@ class TestBuildParameter:
 class TestBuildField:
     """Tests for NamespaceBuilder.build_field()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_field() with a basic field."""
         obj: CField = CField(
             name="Name",
@@ -210,9 +204,9 @@ class TestBuildField:
         actual: Sequence[str] = builder.build_field(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.FINAL, "Namespace.Type"}
+        assert builder.import_set == {Builder.FINAL, "Namespace.Type"}
 
-    def test_static(self, builder: NamespaceBuilder) -> None:
+    def test_static(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_field() with a static field."""
         obj: CField = CField(
             name="Name",
@@ -229,7 +223,7 @@ class TestBuildField:
 
         assert actual == expected
         assert builder.import_set == {
-            NamespaceBuilder.CLASS_VAR,
+            Builder.CLASS_VAR,
             "Namespace.Type",
         }
 
@@ -237,7 +231,7 @@ class TestBuildField:
 class TestBuildConstructor:
     """Tests for NamespaceBuilder.build_constructor()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_constructor() with a basic constructor."""
         obj: CConstructor = CConstructor(declaring_type=CType(name="Type", namespace="Namespace"))
 
@@ -250,7 +244,7 @@ class TestBuildConstructor:
         assert actual == expected
         assert builder.import_set == set()
 
-    def test_parameters(self, builder: NamespaceBuilder) -> None:
+    def test_parameters(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_constructor() with a constructor with parameters."""
         obj: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -269,7 +263,7 @@ class TestBuildConstructor:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_overload(self, builder: NamespaceBuilder) -> None:
+    def test_overload(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_constructor() with an overloaded constructor."""
         obj: CConstructor = CConstructor(declaring_type=CType(name="Type", namespace="Namespace"))
 
@@ -281,13 +275,13 @@ class TestBuildConstructor:
         actual: Sequence[str] = builder.build_constructor(obj, overload=True)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD}
+        assert builder.import_set == {Builder.OVERLOAD}
 
 
 class TestBuildProperty:
     """Tests for NamespaceBuilder.build_property()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_property() with a basic property."""
         obj: CProperty = CProperty(
             name="Name",
@@ -305,7 +299,7 @@ class TestBuildProperty:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_setter(self, builder: NamespaceBuilder) -> None:
+    def test_setter(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_property() with a property with a setter."""
         obj: CProperty = CProperty(
             name="Name",
@@ -326,7 +320,7 @@ class TestBuildProperty:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_static(self, builder: NamespaceBuilder) -> None:
+    def test_static(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_property() with a static property."""
         obj: CProperty = CProperty(
             name="Name",
@@ -346,7 +340,7 @@ class TestBuildProperty:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_static_setter(self, builder: NamespaceBuilder) -> None:
+    def test_static_setter(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_property() with a static property with a setter."""
         obj: CProperty = CProperty(
             name="Name",
@@ -374,7 +368,7 @@ class TestBuildProperty:
 class TestBuildMethod:
     """Tests for NamespaceBuilder.build_method()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with a basic method."""
         obj: CMethod = CMethod(
             name="Name",
@@ -391,7 +385,7 @@ class TestBuildMethod:
         assert actual == expected
         assert builder.import_set == set()
 
-    def test_parameters(self, builder: NamespaceBuilder) -> None:
+    def test_parameters(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with a method with parameters."""
         obj: CMethod = CMethod(
             name="Name",
@@ -412,7 +406,7 @@ class TestBuildMethod:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_return(self, builder: NamespaceBuilder) -> None:
+    def test_return(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with a method with multiple returns."""
         obj: CMethod = CMethod(
             name="Name",
@@ -432,7 +426,7 @@ class TestBuildMethod:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_overload(self, builder: NamespaceBuilder) -> None:
+    def test_overload(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with an overloaded method."""
         obj: CMethod = CMethod(
             name="Name",
@@ -448,9 +442,9 @@ class TestBuildMethod:
         actual: Sequence[str] = builder.build_method(obj, overload=True)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD}
+        assert builder.import_set == {Builder.OVERLOAD}
 
-    def test_static(self, builder: NamespaceBuilder) -> None:
+    def test_static(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with a static method."""
         obj: CMethod = CMethod(
             name="Name",
@@ -469,7 +463,7 @@ class TestBuildMethod:
         assert actual == expected
         assert builder.import_set == set()
 
-    def test_static_parameters(self, builder: NamespaceBuilder) -> None:
+    def test_static_parameters(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with a static method with parameters."""
         obj: CMethod = CMethod(
             name="Name",
@@ -492,7 +486,7 @@ class TestBuildMethod:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_static_returns(self, builder: NamespaceBuilder) -> None:
+    def test_static_returns(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with a static method with multiple returns."""
         obj: CMethod = CMethod(
             name="Name",
@@ -514,7 +508,7 @@ class TestBuildMethod:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_static_overload(self, builder: NamespaceBuilder) -> None:
+    def test_static_overload(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_method() with an overloaded static method."""
         obj: CMethod = CMethod(
             name="Name",
@@ -532,13 +526,13 @@ class TestBuildMethod:
         actual: Sequence[str] = builder.build_method(obj, overload=True)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD}
+        assert builder.import_set == {Builder.OVERLOAD}
 
 
 class TestBuildEvent:
     """Tests for NamespaceBuilder.build_event()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_event() with a basic event."""
         obj: CEvent = CEvent(
             name="Event",
@@ -555,15 +549,15 @@ class TestBuildEvent:
         assert actual == expected
         assert builder.import_set == {
             "Namespace.Type",
-            NamespaceBuilder.SELF,
-            NamespaceBuilder.EVENT_TYPE,
+            Builder.SELF,
+            Builder.EVENT_TYPE,
         }
 
 
 class TestBuildClass:
     """Tests for NamespaceBuilder.build_class()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a basic class."""
         obj: CClass = CClass(name="Name", namespace="Namespace")
 
@@ -575,7 +569,7 @@ class TestBuildClass:
 
         assert actual == expected
 
-    def test_abstract(self, builder: NamespaceBuilder) -> None:
+    def test_abstract(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with an abstract class."""
         obj: CClass = CClass(name="Name", namespace="Namespace", abstract=True)
 
@@ -586,9 +580,9 @@ class TestBuildClass:
         actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.ABC}
+        assert builder.import_set == {Builder.ABC}
 
-    def test_generic(self, builder: NamespaceBuilder) -> None:
+    def test_generic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with generic arguments."""
         obj: CClass = CClass(
             name="Name",
@@ -604,7 +598,7 @@ class TestBuildClass:
 
         assert actual == expected
 
-    def test_super(self, builder: NamespaceBuilder) -> None:
+    def test_super(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with a suber class."""
         obj: CClass = CClass(
             name="Name",
@@ -621,7 +615,7 @@ class TestBuildClass:
         assert actual == expected
         assert builder.import_set == {"Namespace.Super"}
 
-    def test_interfaces(self, builder: NamespaceBuilder) -> None:
+    def test_interfaces(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with interfaces."""
         obj: CClass = CClass(
             name="Name",
@@ -641,7 +635,7 @@ class TestBuildClass:
         assert actual == expected
         assert builder.import_set == {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
-    def test_fields(self, builder: NamespaceBuilder) -> None:
+    def test_fields(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with fields."""
         obj: CClass = CClass(
             name="Name",
@@ -671,9 +665,9 @@ class TestBuildClass:
         actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.FINAL, "Namespace.Type"}
+        assert builder.import_set == {Builder.FINAL, "Namespace.Type"}
 
-    def test_constructor(self, builder: NamespaceBuilder) -> None:
+    def test_constructor(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with a constructor."""
         obj: CClass = CClass(
             name="Name",
@@ -696,7 +690,7 @@ class TestBuildClass:
         assert actual == expected
         assert builder.import_set == set()
 
-    def test_constructors(self, builder: NamespaceBuilder) -> None:
+    def test_constructors(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with constructors."""
         obj: CClass = CClass(
             name="Name",
@@ -727,9 +721,9 @@ class TestBuildClass:
         actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD, "Namespace.Type"}
+        assert builder.import_set == {Builder.OVERLOAD, "Namespace.Type"}
 
-    def test_properties(self, builder: NamespaceBuilder) -> None:
+    def test_properties(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with properties."""
         obj: CClass = CClass(
             name="Name",
@@ -763,7 +757,7 @@ class TestBuildClass:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_methods(self, builder: NamespaceBuilder) -> None:
+    def test_methods(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with methods."""
         obj: CClass = CClass(
             name="Name",
@@ -803,7 +797,7 @@ class TestBuildClass:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_methods_overload(self, builder: NamespaceBuilder) -> None:
+    def test_methods_overload(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with overloaded methods."""
         obj: CClass = CClass(
             name="Name",
@@ -842,9 +836,9 @@ class TestBuildClass:
         actual: Sequence[str] = builder.build_class(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD, "Namespace.Type"}
+        assert builder.import_set == {Builder.OVERLOAD, "Namespace.Type"}
 
-    def test_events(self, builder: NamespaceBuilder) -> None:
+    def test_events(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with events."""
         obj: CClass = CClass(
             name="Name",
@@ -876,11 +870,11 @@ class TestBuildClass:
         assert actual == expected
         assert builder.import_set == {
             "Namespace.Type",
-            NamespaceBuilder.SELF,
-            NamespaceBuilder.EVENT_TYPE,
+            Builder.SELF,
+            Builder.EVENT_TYPE,
         }
 
-    def test_nested_types(self, builder: NamespaceBuilder) -> None:
+    def test_nested_types(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_class() with a class with nested types."""
         obj: CClass = CClass(
             name="Name",
@@ -927,8 +921,8 @@ class TestBuildClass:
 
         assert actual == expected
         assert builder.import_set == {
-            NamespaceBuilder.CALLABLE,
-            NamespaceBuilder.ENUM,
+            Builder.CALLABLE,
+            Builder.ENUM,
             "Namespace.Type",
         }
 
@@ -936,7 +930,7 @@ class TestBuildClass:
 class TestBuildInterface:
     """Tests for NamespaceBuilder.build_interface()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with a basic interface."""
         obj: CInterface = CInterface(name="Name", namespace="Namespace")
 
@@ -948,7 +942,7 @@ class TestBuildInterface:
 
         assert actual == expected
 
-    def test_generic(self, builder: NamespaceBuilder) -> None:
+    def test_generic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with generic arguments."""
         obj: CInterface = CInterface(
             name="Name",
@@ -964,7 +958,7 @@ class TestBuildInterface:
 
         assert actual == expected
 
-    def test_interfaces(self, builder: NamespaceBuilder) -> None:
+    def test_interfaces(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with interfaces."""
         obj: CInterface = CInterface(
             name="Name",
@@ -984,7 +978,7 @@ class TestBuildInterface:
         assert actual == expected
         assert builder.import_set == {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
-    def test_fields(self, builder: NamespaceBuilder) -> None:
+    def test_fields(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with fields."""
         obj: CInterface = CInterface(
             name="Name",
@@ -1014,9 +1008,9 @@ class TestBuildInterface:
         actual: Sequence[str] = builder.build_interface(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.FINAL, "Namespace.Type"}
+        assert builder.import_set == {Builder.FINAL, "Namespace.Type"}
 
-    def test_properties(self, builder: NamespaceBuilder) -> None:
+    def test_properties(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with properties."""
         obj: CInterface = CInterface(
             name="Name",
@@ -1050,7 +1044,7 @@ class TestBuildInterface:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_methods(self, builder: NamespaceBuilder) -> None:
+    def test_methods(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with methods."""
         obj: CInterface = CInterface(
             name="Name",
@@ -1090,7 +1084,7 @@ class TestBuildInterface:
         assert actual == expected
         assert builder.import_set == {"Namespace.Type"}
 
-    def test_methods_overload(self, builder: NamespaceBuilder) -> None:
+    def test_methods_overload(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with overloaded methods."""
         obj: CInterface = CInterface(
             name="Name",
@@ -1129,9 +1123,9 @@ class TestBuildInterface:
         actual: Sequence[str] = builder.build_interface(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.OVERLOAD, "Namespace.Type"}
+        assert builder.import_set == {Builder.OVERLOAD, "Namespace.Type"}
 
-    def test_events(self, builder: NamespaceBuilder) -> None:
+    def test_events(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with events."""
         obj: CInterface = CInterface(
             name="Name",
@@ -1163,11 +1157,11 @@ class TestBuildInterface:
         assert actual == expected
         assert builder.import_set == {
             "Namespace.Type",
-            NamespaceBuilder.SELF,
-            NamespaceBuilder.EVENT_TYPE,
+            Builder.SELF,
+            Builder.EVENT_TYPE,
         }
 
-    def test_nested_types(self, builder: NamespaceBuilder) -> None:
+    def test_nested_types(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_interface() with an interface with nested types."""
         obj: CInterface = CInterface(
             name="Name",
@@ -1221,8 +1215,8 @@ class TestBuildInterface:
 
         assert actual == expected
         assert builder.import_set == {
-            NamespaceBuilder.CALLABLE,
-            NamespaceBuilder.ENUM,
+            Builder.CALLABLE,
+            Builder.ENUM,
             "Namespace.Type",
         }
 
@@ -1230,7 +1224,7 @@ class TestBuildInterface:
 class TestBuildEnum:
     """Tests for NamespaceBuilder.build_enum()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_enum() with a basic enum."""
         obj: CEnum = CEnum(name="Name", namespace="Namespace")
 
@@ -1241,9 +1235,9 @@ class TestBuildEnum:
         actual: Sequence[str] = builder.build_enum(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.ENUM}
+        assert builder.import_set == {Builder.ENUM}
 
-    def test_fields(self, builder: NamespaceBuilder) -> None:
+    def test_fields(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_enum() with an enum with multiple fields."""
         obj: CEnum = CEnum(
             name="Enum",
@@ -1266,13 +1260,13 @@ class TestBuildEnum:
         actual: Sequence[str] = builder.build_enum(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.ENUM}
+        assert builder.import_set == {Builder.ENUM}
 
 
 class TestBuildDelegate:
     """Tests for NamespaceBuilder.build_delegate()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_delegate() with a basic delegate."""
         obj: CDelegate = CDelegate(name="Name", namespace="Namespace")
 
@@ -1283,9 +1277,9 @@ class TestBuildDelegate:
         actual: Sequence[str] = builder.build_delegate(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.CALLABLE}
+        assert builder.import_set == {Builder.CALLABLE}
 
-    def test_parameters(self, builder: NamespaceBuilder) -> None:
+    def test_parameters(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_delegate() with a delegate with parameters."""
         obj: CDelegate = CDelegate(
             name="Name",
@@ -1303,9 +1297,9 @@ class TestBuildDelegate:
         actual: Sequence[str] = builder.build_delegate(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.CALLABLE, "Namespace.Type"}
+        assert builder.import_set == {Builder.CALLABLE, "Namespace.Type"}
 
-    def test_return(self, builder: NamespaceBuilder) -> None:
+    def test_return(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_delegate() with a delegate with parameters."""
         obj: CDelegate = CDelegate(
             name="Name",
@@ -1320,13 +1314,13 @@ class TestBuildDelegate:
         actual: Sequence[str] = builder.build_delegate(obj)
 
         assert actual == expected
-        assert builder.import_set == {NamespaceBuilder.CALLABLE, "Namespace.Type"}
+        assert builder.import_set == {Builder.CALLABLE, "Namespace.Type"}
 
 
 class TestBuildImportSet:
     """Tests for NamespaceBuilder.build_import_set()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for ImportList.build_import_set() with basic types."""
         builder.import_type(CType(name="TypeA", namespace="Namespace"))
         builder.import_type(CType(name="TypeB", namespace="Namespace"))
@@ -1343,7 +1337,7 @@ class TestBuildImportSet:
 
         assert actual == expected
 
-    def test_namespace(self, builder: NamespaceBuilder) -> None:
+    def test_namespace(self, builder: Builder) -> None:
         """Test for ImportList.build_import_set()."""
         builder.import_type(CType(name="TypeA", namespace="Namespace"))
         builder.import_type(CType(name="TypeB", namespace="Namespace"))
@@ -1358,13 +1352,13 @@ class TestBuildImportSet:
 
         assert actual == expected
 
-    def test_event_type(self, builder: NamespaceBuilder) -> None:
+    def test_event_type(self, builder: Builder) -> None:
         """Test for ImportList.build_import_set()."""
         builder.import_type(CType(name="TypeA", namespace="Namespace"))
         builder.import_type(CType(name="TypeB", namespace="Namespace"))
         builder.import_type(CType(name="TypeC", namespace="Namespace"))
         builder.import_type(CType(name="TypeD", namespace="Namespace"))
-        builder.import_set.add(NamespaceBuilder.EVENT_TYPE)
+        builder.import_set.add(Builder.EVENT_TYPE)
 
         expected: Sequence[str] = [
             "from Namespace import TypeA",
@@ -1383,7 +1377,7 @@ class TestBuildImportSet:
 class TestBuildNamespace:
     """Tests for NamespaceBuilder.build_namespace()."""
 
-    def test_basic(self, builder: NamespaceBuilder) -> None:
+    def test_basic(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_namespace() with a basic namespace."""
         obj: CNamespace = CNamespace(
             name="Name",
@@ -1398,7 +1392,7 @@ class TestBuildNamespace:
 
         assert actual == expected
 
-    def test_types(self, builder: NamespaceBuilder) -> None:
+    def test_types(self, builder: Builder) -> None:
         """Test for NamespaceBuilder.build_namespace() with a basic namespace."""
         obj: CNamespace = CNamespace(
             name="Name",
@@ -1453,7 +1447,7 @@ class TestBuildStubs:
     @pytest.mark.parametrize(("namespaces", "files"), **make_params(namespaces_list))
     def test_basic(
         self,
-        builder: NamespaceBuilder,
+        builder: Builder,
         namespaces: Sequence[CNamespace],
         tmp_path: Path,
         files: Sequence[str],
@@ -1469,7 +1463,7 @@ class TestBuildStubs:
     @pytest.mark.parametrize(("namespaces", "files"), **make_params(namespaces_list))
     def test_multi_threaded(
         self,
-        builder: NamespaceBuilder,
+        builder: Builder,
         namespaces: Sequence[CNamespace],
         tmp_path: Path,
         files: Sequence[str],
@@ -1482,7 +1476,7 @@ class TestBuildStubs:
 
             assert stub_file.exists()
 
-    def test_test_lib(self, builder: NamespaceBuilder, output_dir: Path) -> None:
+    def test_test_lib(self, builder: Builder, output_dir: Path) -> None:
         """Test for build_stubs() with TestLib."""
         skeleton_file: Path = output_dir / TL_SKELETON
         skeleton: CAssembly = CAssembly.from_json(json.loads(skeleton_file.read_text()))
