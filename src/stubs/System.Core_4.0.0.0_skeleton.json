@@ -1013,13 +1013,16 @@
           "nested_types": {}
         },
         "ICngSymmetricAlgorithm": {
-          "type": "interface",
+          "type": "class",
           "name": "ICngSymmetricAlgorithm",
           "namespace": "Internal.Cryptography",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "BaseKey": {
               "name": "BaseKey",
@@ -21647,13 +21650,16 @@
           "nested_types": {}
         },
         "IDynamicMetaObjectProvider": {
-          "type": "interface",
+          "type": "class",
           "name": "IDynamicMetaObjectProvider",
           "namespace": "System.Dynamic",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetMetaObject(System.Linq.Expressions:Expression)": {
@@ -21677,13 +21683,16 @@
           "nested_types": {}
         },
         "IInvokeOnGetBinder": {
-          "type": "interface",
+          "type": "class",
           "name": "IInvokeOnGetBinder",
           "namespace": "System.Dynamic",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "InvokeOnGet": {
               "name": "InvokeOnGet",
@@ -39280,19 +39289,22 @@
           "nested_types": {}
         },
         "IGrouping[$TKey, $TElement]": {
-          "type": "interface",
+          "type": "class",
           "name": "IGrouping",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$TKey",
             "$TElement"
           ],
+          "super_class": null,
           "interfaces": [
             "System.Collections.Generic:IEnumerable[$TElement]",
             "System.Collections:IEnumerable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Key": {
               "name": "Key",
@@ -39326,18 +39338,21 @@
           "nested_types": {}
         },
         "IIListProvider[$TElement]": {
-          "type": "interface",
+          "type": "class",
           "name": "IIListProvider",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$TElement"
           ],
+          "super_class": null,
           "interfaces": [
             "System.Collections.Generic:IEnumerable[$TElement]",
             "System.Collections:IEnumerable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetCount(System:Boolean)": {
@@ -39397,19 +39412,22 @@
           "nested_types": {}
         },
         "ILookup[$TKey, $TElement]": {
-          "type": "interface",
+          "type": "class",
           "name": "ILookup",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$TKey",
             "$TElement"
           ],
+          "super_class": null,
           "interfaces": [
             "System.Collections.Generic:IEnumerable[System.Linq:IGrouping[$TKey, $TElement]]",
             "System.Collections:IEnumerable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Count": {
               "name": "Count",
@@ -39507,18 +39525,21 @@
           "nested_types": {}
         },
         "IOrderedEnumerable[$TElement]": {
-          "type": "interface",
+          "type": "class",
           "name": "IOrderedEnumerable",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$TElement"
           ],
+          "super_class": null,
           "interfaces": [
             "System.Collections.Generic:IEnumerable[$TElement]",
             "System.Collections:IEnumerable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CreateOrderedEnumerable(System:Func[$TElement, $TKey], System.Collections.Generic:IComparer[$TKey], System:Boolean)": {
@@ -39572,16 +39593,19 @@
           "nested_types": {}
         },
         "IOrderedQueryable": {
-          "type": "interface",
+          "type": "class",
           "name": "IOrderedQueryable",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Collections:IEnumerable",
             "System.Linq:IQueryable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ElementType": {
               "name": "ElementType",
@@ -39629,13 +39653,15 @@
           "nested_types": {}
         },
         "IOrderedQueryable[$T]": {
-          "type": "interface",
+          "type": "class",
           "name": "IOrderedQueryable",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$T"
           ],
+          "super_class": null,
           "interfaces": [
             "System.Collections.Generic:IEnumerable[$T]",
             "System.Collections:IEnumerable",
@@ -39644,6 +39670,7 @@
             "System.Linq:IQueryable[$T]"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ElementType": {
               "name": "ElementType",
@@ -39691,13 +39718,16 @@
           "nested_types": {}
         },
         "IQueryProvider": {
-          "type": "interface",
+          "type": "class",
           "name": "IQueryProvider",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CreateQuery(System.Linq.Expressions:Expression)": {
@@ -39737,15 +39767,18 @@
           "nested_types": {}
         },
         "IQueryable": {
-          "type": "interface",
+          "type": "class",
           "name": "IQueryable",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Collections:IEnumerable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ElementType": {
               "name": "ElementType",
@@ -39793,19 +39826,22 @@
           "nested_types": {}
         },
         "IQueryable[$T]": {
-          "type": "interface",
+          "type": "class",
           "name": "IQueryable",
           "namespace": "System.Linq",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$T"
           ],
+          "super_class": null,
           "interfaces": [
             "System.Collections.Generic:IEnumerable[$T]",
             "System.Collections:IEnumerable",
             "System.Linq:IQueryable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ElementType": {
               "name": "ElementType",
@@ -63311,13 +63347,16 @@
           ]
         },
         "IArgumentProvider": {
-          "type": "interface",
+          "type": "class",
           "name": "IArgumentProvider",
           "namespace": "System.Linq.Expressions",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ArgumentCount": {
               "name": "ArgumentCount",
@@ -63349,15 +63388,18 @@
           "nested_types": {}
         },
         "IDynamicExpression": {
-          "type": "interface",
+          "type": "class",
           "name": "IDynamicExpression",
           "namespace": "System.Linq.Expressions",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Linq.Expressions:IArgumentProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ArgumentCount": {
               "name": "ArgumentCount",
@@ -79315,15 +79357,18 @@
           "nested_types": {}
         },
         "IMergeHelper[$TInputOutput]": {
-          "type": "interface",
+          "type": "class",
           "name": "IMergeHelper",
           "namespace": "System.Linq.Parallel",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$TInputOutput"
           ],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Execute()": {
@@ -79367,15 +79412,18 @@
           "nested_types": {}
         },
         "IParallelPartitionable[$T]": {
-          "type": "interface",
+          "type": "class",
           "name": "IParallelPartitionable",
           "namespace": "System.Linq.Parallel",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$T"
           ],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetPartitions(System:Int32)": {
@@ -79399,15 +79447,18 @@
           "nested_types": {}
         },
         "IPartitionedStreamRecipient[$TElement]": {
-          "type": "interface",
+          "type": "class",
           "name": "IPartitionedStreamRecipient",
           "namespace": "System.Linq.Parallel",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$TElement"
           ],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Receive(System.Linq.Parallel:PartitionedStream[$TElement, $TKey])": {
@@ -105245,13 +105296,16 @@
           "nested_types": {}
         },
         "IRuntimeVariables": {
-          "type": "interface",
+          "type": "class",
           "name": "IRuntimeVariables",
           "namespace": "System.Runtime.CompilerServices",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Count": {
               "name": "Count",
@@ -105321,13 +105375,16 @@
           "nested_types": {}
         },
         "IStrongBox": {
-          "type": "interface",
+          "type": "class",
           "name": "IStrongBox",
           "namespace": "System.Runtime.CompilerServices",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Value": {
               "name": "Value",

@@ -349,6 +349,10 @@ class CType(CWrapper):
     generic: bool = False
     nullable: bool = False
 
+    @override
+    def __hash__(self) -> int:
+        return hash(self.full_name)
+
     @property
     def import_name(self) -> str:
         """Get the name to use when importing this CType."""

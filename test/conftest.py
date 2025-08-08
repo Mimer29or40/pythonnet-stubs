@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import functools
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pytest
+
+from stubgen.model import CType
 
 if TYPE_CHECKING:  # pragma: no cover
     from collections.abc import Mapping
@@ -33,3 +36,9 @@ def output_dir() -> Path:
     output_dir: Path = Path("output")
     output_dir.mkdir(parents=True, exist_ok=True)
     return output_dir
+
+
+@functools.cache
+def generic(name: str) -> CType:
+    """Create a generic type."""
+    return CType(name=name, generic=True)

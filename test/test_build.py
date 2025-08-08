@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 from conftest import TL_SKELETON
+from conftest import generic
 from conftest import make_params
 
 from stubgen.build_stubs import BuildArguments
@@ -62,7 +63,7 @@ class TestImportType:
 
     def test_generic(self, builder: Builder) -> None:
         """Test for ImportList.add_type() with a generic type."""
-        obj: CType = CType(name="Type", generic=True)
+        obj: CType = generic("Type")
 
         builder.import_type(obj)
 
@@ -286,6 +287,22 @@ class TestBuildConstructor:
 
         assert actual == expected
         assert builder.import_set == {Builder.OVERLOAD}
+
+    def test_generic_class(self, builder: Builder) -> None:
+        """Test for NamespaceBuilder.build_constructor() with a generic class param."""
+        obj: CConstructor = CConstructor(
+            declaring_type=CType(name="Type", inner=[generic("T")]),
+            parameters=[CParameter(name="param", type=generic("T"))],
+        )
+
+        expected: Sequence[str] = [
+            "def __init__(self, param: T) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = builder.build_constructor(obj, overload=False)
+
+        assert actual == expected
+        assert builder.import_set == set()
 
 
 class TestBuildProperty:
@@ -538,6 +555,67 @@ class TestBuildMethod:
         assert actual == expected
         assert builder.import_set == {Builder.OVERLOAD}
 
+    def test_generic_class(self, builder: Builder) -> None:
+        """Test for NamespaceBuilder.build_method() with a method with a generic class param."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", inner=[generic("T")]),
+            parameters=[CParameter(name="param", type=generic("T"))],
+            return_types=[CType.VOID],
+        )
+
+        expected: Sequence[str] = [
+            "def Name(self, param: T) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = builder.build_method(obj, overload=False)
+
+        assert actual == expected
+        assert builder.import_set == set()
+
+    def test_generic_method(self, builder: Builder) -> None:
+        """Test for NamespaceBuilder.build_method() with a method with a generic method param."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", inner=[generic("T")]),
+            parameters=[
+                CParameter(name="param0", type=generic("T0")),
+                CParameter(name="param1", type=generic("T1")),
+            ],
+            return_types=[CType.VOID],
+        )
+
+        expected: Sequence[str] = [
+            "def Name[T0, T1](self, param0: T0, param1: T1) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = builder.build_method(obj, overload=False)
+
+        assert actual == expected
+        assert builder.import_set == set()
+
+    def test_generic_both(self, builder: Builder) -> None:
+        """Test for NamespaceBuilder.build_method() with a method with a both generic params."""
+        obj: CMethod = CMethod(
+            name="Name",
+            declaring_type=CType(name="Type", inner=[generic("T")]),
+            parameters=[
+                CParameter(name="param", type=generic("T")),
+                CParameter(name="param0", type=generic("T0")),
+                CParameter(name="param1", type=generic("T1")),
+            ],
+            return_types=[CType.VOID],
+        )
+
+        expected: Sequence[str] = [
+            "def Name[T0, T1](self, param: T, param0: T0, param1: T1) -> None:",
+            '    """"""',
+        ]
+        actual: Sequence[str] = builder.build_method(obj, overload=False)
+
+        assert actual == expected
+        assert builder.import_set == set()
+
 
 class TestBuildEvent:
     """Tests for NamespaceBuilder.build_event()."""
@@ -597,7 +675,7 @@ class TestBuildClass:
         obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
-            generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
+            generic_args=[generic("A"), generic("B")],
         )
 
         expected: Sequence[str] = [
@@ -924,7 +1002,7 @@ class TestBuildClass:
             '        """"""',
             "    class NestedEnum(Enum):",
             '        """"""',
-            "    NestedDelegate: Callable[[], Type] = ...",
+            "    type NestedDelegate = Callable[[], Type]",
             '    """"""',
         ]
         actual: Sequence[str] = builder.build_class(obj)
@@ -957,7 +1035,7 @@ class TestBuildInterface:
         obj: CClass = CClass(
             name="Name",
             namespace="Namespace",
-            generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
+            generic_args=[generic("A"), generic("B")],
         )
 
         expected: Sequence[str] = [
@@ -1218,7 +1296,7 @@ class TestBuildInterface:
             '        """"""',
             "    class NestedEnum(Enum):",
             '        """"""',
-            "    NestedDelegate: Callable[[], Type] = ...",
+            "    type NestedDelegate = Callable[[], Type]",
             '    """"""',
         ]
         actual: Sequence[str] = builder.build_class(obj)
@@ -1281,7 +1359,7 @@ class TestBuildDelegate:
         obj: CDelegate = CDelegate(name="Name", namespace="Namespace")
 
         expected: Sequence[str] = [
-            "Name: Callable[[], None] = ...",
+            "type Name = Callable[[], None]",
             '""""""',
         ]
         actual: Sequence[str] = builder.build_delegate(obj)
@@ -1301,7 +1379,7 @@ class TestBuildDelegate:
         )
 
         expected: Sequence[str] = [
-            "Name: Callable[[Type, Type], None] = ...",
+            "type Name = Callable[[Type, Type], None]",
             '""""""',
         ]
         actual: Sequence[str] = builder.build_delegate(obj)
@@ -1318,13 +1396,34 @@ class TestBuildDelegate:
         )
 
         expected: Sequence[str] = [
-            "Name: Callable[[], Type] = ...",
+            "type Name = Callable[[], Type]",
             '""""""',
         ]
         actual: Sequence[str] = builder.build_delegate(obj)
 
         assert actual == expected
         assert builder.import_set == {Builder.CALLABLE, "Namespace.Type"}
+
+    def test_generic(self, builder: Builder) -> None:
+        """Test for NamespaceBuilder.build_delegate() with a delegate with generic parameters."""
+        obj: CDelegate = CDelegate(
+            name="Name",
+            namespace="Namespace",
+            parameters=[
+                CParameter(name="param0", type=generic("T0")),
+                CParameter(name="param1", type=generic("T1")),
+            ],
+            return_type=generic("T"),
+        )
+
+        expected: Sequence[str] = [
+            "type Name[T0, T1, T] = Callable[[T0, T1], T]",
+            '""""""',
+        ]
+        actual: Sequence[str] = builder.build_delegate(obj)
+
+        assert actual == expected
+        assert builder.import_set == {Builder.CALLABLE}
 
 
 class TestBuildImportSet:
@@ -1421,7 +1520,7 @@ class TestBuildNamespace:
             "from collections.abc import Callable",
             "class Class:",
             '    """"""',
-            "Delegate: Callable[[], None] = ...",
+            "type Delegate = Callable[[], None]",
             '""""""',
             "class Enum(Enum):",
             '    """"""',

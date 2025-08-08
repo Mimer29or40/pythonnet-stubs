@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 from typing import ClassVar
 
 import pytest
+from conftest import generic
 from conftest import make_params
 
 from stubgen.model import CAssembly
@@ -726,7 +727,7 @@ class TestCType:
                         CType(
                             name="RecordGeneric",
                             namespace="TestLib",
-                            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+                            inner=[generic("TA"), generic("TB")],
                         )
                     ],
                 ),
@@ -1552,7 +1553,7 @@ class TestCClass:
             (
                 CClass(
                     name="Name",
-                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
+                    generic_args=[generic("A"), generic("B")],
                 ),
                 "Name[$A, $B]",
             ),
@@ -1616,7 +1617,7 @@ class TestCClass:
             (
                 CClass(
                     name="Name",
-                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
+                    generic_args=[generic("A"), generic("B")],
                 ),
                 {
                     "type": "class",
@@ -2010,7 +2011,7 @@ class TestCClass:
             (
                 CClass(
                     name="Name",
-                    generic_args=[CType(name="A", generic=True), CType(name="B", generic=True)],
+                    generic_args=[generic("A"), generic("B")],
                 ),
                 DocNode(name="Name[$A, $B]"),
             ),

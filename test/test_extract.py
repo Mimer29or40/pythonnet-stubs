@@ -6,12 +6,14 @@ import functools
 from dataclasses import replace
 from pprint import pprint
 from typing import TYPE_CHECKING
+from typing import override
 
 import clr
 import pytest
 from conftest import TEST_LIB
 from conftest import TL_DOC
 from conftest import TL_SKELETON
+from conftest import generic
 from System import Int32
 from System import Type
 from System.Reflection import ReflectionTypeLoadException
@@ -56,7 +58,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from System.Reflection import PropertyInfo
     from System.Reflection import TypeInfo
 
-T: CType = CType(name="T", generic=True)
 OBJECT: CType = CType(name="Object", namespace="System")
 STRUCT: CType = CType(name="ValueType", namespace="System")
 INT32: CType = CType(name="Int32", namespace="System")
@@ -67,11 +68,11 @@ EVENT_HANDLER_ARGS: CType = replace(
     inner=[CType(name="EventArgs", namespace="System")],
 )
 
-COMPARABLE: CType = CType(name="IComparable", namespace="System", inner=[T])
-EQUATABLE: CType = CType(name="IEquatable", namespace="System", inner=[T])
-COLLECTION = CType(name="ICollection", namespace="System.Collections.Generic", inner=[T])
-ENUMERABLE = CType(name="IEnumerable", namespace="System.Collections.Generic", inner=[T])
-LIST = CType(name="IList", namespace="System.Collections.Generic", inner=[T])
+COMPARABLE: CType = CType(name="IComparable", namespace="System", inner=[generic("T")])
+EQUATABLE: CType = CType(name="IEquatable", namespace="System", inner=[generic("T")])
+COLLECTION = CType(name="ICollection", namespace="System.Collections.Generic", inner=[generic("T")])
+ENUMERABLE = CType(name="IEnumerable", namespace="System.Collections.Generic", inner=[generic("T")])
+LIST = CType(name="IList", namespace="System.Collections.Generic", inner=[generic("T")])
 
 
 @pytest.fixture(scope="session")
@@ -719,7 +720,7 @@ class TestExtractType(_MemberBase):
         method: MethodInfo = type_info.GetMethod("Generic")
         parameter: ParameterInfo = method.GetParameters()[0]
 
-        expected: CType | None = T
+        expected: CType | None = generic("T")
         actual: CType | None = extract_type(parameter.ParameterType)
 
         assert actual == expected
@@ -858,6 +859,12 @@ class TestExtractConstructor(_MemberBase):
 
     type_name: str = "ExtractConstructor"
 
+    @classmethod
+    @functools.cache
+    @override
+    def parent(cls) -> CType:
+        return replace(super().parent(), inner=[generic("T")])
+
     def test_basic(self, type_info: TypeInfo) -> None:
         """Tests for extract_constructor() with a basic constructor."""
         constructor: ConstructorInfo = type_info.GetConstructor(to_c_array(Type, []))
@@ -954,6 +961,12 @@ class TestExtractMethod(_MemberBase):
 
     type_name: str = "ExtractMethod"
 
+    @classmethod
+    @functools.cache
+    @override
+    def parent(cls) -> CType:
+        return replace(super().parent(), inner=[generic("T")])
+
     def test_basic(self, type_info: TypeInfo) -> None:
         """Tests for extract_method() with a basic method."""
         name: str = "Basic"
@@ -1030,6 +1043,58 @@ class TestExtractMethod(_MemberBase):
             declaring_type=self.parent(),
             return_types=[CType.VOID],
             static=True,
+        )
+        actual: CMethod | None = extract_method(method)
+
+        assert actual == expected
+
+    def test_generic_class(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a method with a generic class param."""
+        name: str = "GenericClass"
+        method: MethodInfo = type_info.GetMethod(name)
+
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            parameters=[CParameter(name="param", type=generic("T"))],
+            return_types=[CType.VOID],
+        )
+        actual: CMethod | None = extract_method(method)
+
+        assert actual == expected
+
+    def test_generic_method(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a method with a generic method param."""
+        name: str = "GenericMethod"
+        method: MethodInfo = type_info.GetMethod(name)
+
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            parameters=[
+                CParameter(name="param0", type=generic("T0")),
+                CParameter(name="param1", type=generic("T1")),
+            ],
+            return_types=[CType.VOID],
+        )
+        actual: CMethod | None = extract_method(method)
+
+        assert actual == expected
+
+    def test_generic_both(self, type_info: TypeInfo) -> None:
+        """Tests for extract_method() with a method with a generic class and method params."""
+        name: str = "GenericBoth"
+        method: MethodInfo = type_info.GetMethod(name)
+
+        expected: CMethod | None = CMethod(
+            name=name,
+            declaring_type=self.parent(),
+            parameters=[
+                CParameter(name="param", type=generic("T")),
+                CParameter(name="param0", type=generic("T0")),
+                CParameter(name="param1", type=generic("T1")),
+            ],
+            return_types=[CType.VOID],
         )
         actual: CMethod | None = extract_method(method)
 
@@ -1164,7 +1229,7 @@ class TestExtractClass(_Base):
         declaring_type: CType = CType(
             name=name,
             namespace=TEST_LIB,
-            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+            inner=[generic("TA"), generic("TB")],
         )
 
         expected: CClass | None = self.basic_class(declaring_type)
@@ -1371,7 +1436,7 @@ class TestExtractStruct(_Base):
         declaring_type: CType = CType(
             name=name,
             namespace=TEST_LIB,
-            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+            inner=[generic("TA"), generic("TB")],
         )
 
         expected: CClass | None = self.basic_struct(declaring_type)
@@ -1576,7 +1641,7 @@ class TestExtractRecord(_Base):
         declaring_type: CType = CType(
             name=name,
             namespace=TEST_LIB,
-            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+            inner=[generic("TA"), generic("TB")],
         )
 
         expected: CClass | None = self.basic_record(declaring_type)
@@ -1779,7 +1844,7 @@ class TestExtractInterface(_Base):
         declaring_type: CType = CType(
             name=name,
             namespace=TEST_LIB,
-            inner=[CType(name="TA", generic=True), CType(name="TB", generic=True)],
+            inner=[generic("TA"), generic("TB")],
         )
 
         expected: CClass | None = self.basic_interface(declaring_type)
@@ -2022,6 +2087,24 @@ class TestExtractDelegate(_Base):
         expected: CDelegate | None = replace(
             self.basic_delegate(declaring_type),
             return_type=INT32,
+        )
+        actual: CDelegate | None = extract_delegate(delegate)
+
+        assert actual == expected
+
+    def test_generic(self, assembly: Assembly) -> None:
+        """Tests for extract_delegate() with a delegate with generic parameters."""
+        name: str = "DelegateGeneric"
+        delegate: TypeInfo = self.get_type(assembly, name)
+        declaring_type: CType = CType(name=name, namespace=TEST_LIB)
+
+        expected: CDelegate | None = replace(
+            self.basic_delegate(declaring_type),
+            parameters=[
+                CParameter(name="param0", type=generic("T0")),
+                CParameter(name="param1", type=generic("T1")),
+            ],
+            return_type=generic("T"),
         )
         actual: CDelegate | None = extract_delegate(delegate)
 

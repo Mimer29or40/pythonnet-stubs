@@ -7392,13 +7392,16 @@
       "name": "Microsoft.Win32",
       "types": {
         "IInternetSecurityManager": {
-          "type": "interface",
+          "type": "class",
           "name": "IInternetSecurityManager",
           "namespace": "Microsoft.Win32",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetSecurityId(System:String, System:Byte, System:Int32, System:Int32)": {
@@ -45414,13 +45417,16 @@
           "nested_types": {}
         },
         "ICodeCompiler": {
-          "type": "interface",
+          "type": "class",
           "name": "ICodeCompiler",
           "namespace": "System.CodeDom.Compiler",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CompileAssemblyFromDom(System.CodeDom.Compiler:CompilerParameters, System.CodeDom:CodeCompileUnit)": {
@@ -45560,13 +45566,16 @@
           "nested_types": {}
         },
         "ICodeGenerator": {
-          "type": "interface",
+          "type": "class",
           "name": "ICodeGenerator",
           "namespace": "System.CodeDom.Compiler",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CreateEscapedIdentifier(System:String)": {
@@ -45810,13 +45819,16 @@
           "nested_types": {}
         },
         "ICodeParser": {
-          "type": "interface",
+          "type": "class",
           "name": "ICodeParser",
           "namespace": "System.CodeDom.Compiler",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Parse(System.IO:TextReader)": {
@@ -48667,19 +48679,22 @@
           "nested_types": {}
         },
         "ISet[$T]": {
-          "type": "interface",
+          "type": "class",
           "name": "ISet",
           "namespace": "System.Collections.Generic",
           "parent": null,
+          "abstract": true,
           "generic_args": [
             "$T"
           ],
+          "super_class": null,
           "interfaces": [
             "System.Collections.Generic:ICollection[$T]",
             "System.Collections.Generic:IEnumerable[$T]",
             "System.Collections:IEnumerable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Count": {
               "name": "Count",
@@ -57450,13 +57465,16 @@
           "nested_types": {}
         },
         "INotifyCollectionChanged": {
-          "type": "interface",
+          "type": "class",
           "name": "INotifyCollectionChanged",
           "namespace": "System.Collections.Specialized",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {},
           "events": {
@@ -57469,17 +57487,20 @@
           "nested_types": {}
         },
         "IOrderedDictionary": {
-          "type": "interface",
+          "type": "class",
           "name": "IOrderedDictionary",
           "namespace": "System.Collections.Specialized",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Collections:ICollection",
             "System.Collections:IDictionary",
             "System.Collections:IEnumerable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Count": {
               "name": "Count",
@@ -86770,17 +86791,20 @@
           "return_type": "System:Void"
         },
         "IBindingList": {
-          "type": "interface",
+          "type": "class",
           "name": "IBindingList",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Collections:ICollection",
             "System.Collections:IEnumerable",
             "System.Collections:IList"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "AllowEdit": {
               "name": "AllowEdit",
@@ -87224,11 +87248,13 @@
           "nested_types": {}
         },
         "IBindingListView": {
-          "type": "interface",
+          "type": "class",
           "name": "IBindingListView",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Collections:ICollection",
             "System.Collections:IEnumerable",
@@ -87236,6 +87262,7 @@
             "System.ComponentModel:IBindingList"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "AllowEdit": {
               "name": "AllowEdit",
@@ -87732,13 +87759,16 @@
           "nested_types": {}
         },
         "ICancelAddNew": {
-          "type": "interface",
+          "type": "class",
           "name": "ICancelAddNew",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CancelNew(System:Int32)": {
@@ -87778,13 +87808,16 @@
           "nested_types": {}
         },
         "IChangeTracking": {
-          "type": "interface",
+          "type": "class",
           "name": "IChangeTracking",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "IsChanged": {
               "name": "IsChanged",
@@ -87809,13 +87842,16 @@
           "nested_types": {}
         },
         "IComNativeDescriptorHandler": {
-          "type": "interface",
+          "type": "class",
           "name": "IComNativeDescriptorHandler",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetAttributes(System:Object)": {
@@ -88057,15 +88093,18 @@
           "nested_types": {}
         },
         "IComponent": {
-          "type": "interface",
+          "type": "class",
           "name": "IComponent",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Site": {
               "name": "Site",
@@ -88096,15 +88135,18 @@
           "nested_types": {}
         },
         "IContainer": {
-          "type": "interface",
+          "type": "class",
           "name": "IContainer",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Components": {
               "name": "Components",
@@ -88199,13 +88241,16 @@
           "nested_types": {}
         },
         "ICustomTypeDescriptor": {
-          "type": "interface",
+          "type": "class",
           "name": "ICustomTypeDescriptor",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetAttributes()": {
@@ -88349,13 +88394,16 @@
           "nested_types": {}
         },
         "IDataErrorInfo": {
-          "type": "interface",
+          "type": "class",
           "name": "IDataErrorInfo",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Error": {
               "name": "Error",
@@ -88394,13 +88442,16 @@
           "nested_types": {}
         },
         "IEditableObject": {
-          "type": "interface",
+          "type": "class",
           "name": "IEditableObject",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "BeginEdit()": {
@@ -88435,13 +88486,16 @@
           "nested_types": {}
         },
         "IExtenderProvider": {
-          "type": "interface",
+          "type": "class",
           "name": "IExtenderProvider",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CanExtend(System:Object)": {
@@ -88465,13 +88519,16 @@
           "nested_types": {}
         },
         "IIntellisenseBuilder": {
-          "type": "interface",
+          "type": "class",
           "name": "IIntellisenseBuilder",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Name": {
               "name": "Name",
@@ -88515,13 +88572,16 @@
           "nested_types": {}
         },
         "IListSource": {
-          "type": "interface",
+          "type": "class",
           "name": "IListSource",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ContainsListCollection": {
               "name": "ContainsListCollection",
@@ -88546,16 +88606,19 @@
           "nested_types": {}
         },
         "INestedContainer": {
-          "type": "interface",
+          "type": "class",
           "name": "INestedContainer",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel:IContainer",
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Components": {
               "name": "Components",
@@ -88657,16 +88720,19 @@
           "nested_types": {}
         },
         "INestedSite": {
-          "type": "interface",
+          "type": "class",
           "name": "INestedSite",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel:ISite",
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Component": {
               "name": "Component",
@@ -88726,13 +88792,16 @@
           "nested_types": {}
         },
         "INotifyDataErrorInfo": {
-          "type": "interface",
+          "type": "class",
           "name": "INotifyDataErrorInfo",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "HasErrors": {
               "name": "HasErrors",
@@ -88770,13 +88839,16 @@
           "nested_types": {}
         },
         "INotifyPropertyChanged": {
-          "type": "interface",
+          "type": "class",
           "name": "INotifyPropertyChanged",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {},
           "events": {
@@ -88789,13 +88861,16 @@
           "nested_types": {}
         },
         "INotifyPropertyChanging": {
-          "type": "interface",
+          "type": "class",
           "name": "INotifyPropertyChanging",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {},
           "events": {
@@ -88808,13 +88883,16 @@
           "nested_types": {}
         },
         "IRaiseItemChangedEvents": {
-          "type": "interface",
+          "type": "class",
           "name": "IRaiseItemChangedEvents",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "RaisesItemChangedEvents": {
               "name": "RaisesItemChangedEvents",
@@ -88829,15 +88907,18 @@
           "nested_types": {}
         },
         "IRevertibleChangeTracking": {
-          "type": "interface",
+          "type": "class",
           "name": "IRevertibleChangeTracking",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel:IChangeTracking"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "IsChanged": {
               "name": "IsChanged",
@@ -88871,15 +88952,18 @@
           "nested_types": {}
         },
         "ISite": {
-          "type": "interface",
+          "type": "class",
           "name": "ISite",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Component": {
               "name": "Component",
@@ -88932,13 +89016,16 @@
           "nested_types": {}
         },
         "ISupportInitialize": {
-          "type": "interface",
+          "type": "class",
           "name": "ISupportInitialize",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "BeginInit()": {
@@ -88964,15 +89051,18 @@
           "nested_types": {}
         },
         "ISupportInitializeNotification": {
-          "type": "interface",
+          "type": "class",
           "name": "ISupportInitializeNotification",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel:ISupportInitialize"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "IsInitialized": {
               "name": "IsInitialized",
@@ -89012,13 +89102,16 @@
           "nested_types": {}
         },
         "ISynchronizeInvoke": {
-          "type": "interface",
+          "type": "class",
           "name": "ISynchronizeInvoke",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "InvokeRequired": {
               "name": "InvokeRequired",
@@ -89094,15 +89187,18 @@
           "nested_types": {}
         },
         "ITypeDescriptorContext": {
-          "type": "interface",
+          "type": "class",
           "name": "ITypeDescriptorContext",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Container": {
               "name": "Container",
@@ -89166,13 +89262,16 @@
           "nested_types": {}
         },
         "ITypedList": {
-          "type": "interface",
+          "type": "class",
           "name": "ITypedList",
           "namespace": "System.ComponentModel",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetItemProperties(System:Array[System.ComponentModel:PropertyDescriptor])": {
@@ -121739,13 +121838,16 @@
           ]
         },
         "IComponentChangeService": {
-          "type": "interface",
+          "type": "class",
           "name": "IComponentChangeService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "OnComponentChanged(System:Object, System.ComponentModel:MemberDescriptor, System:Object, System:Object)": {
@@ -121845,13 +121947,16 @@
           "nested_types": {}
         },
         "IComponentDiscoveryService": {
-          "type": "interface",
+          "type": "class",
           "name": "IComponentDiscoveryService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetComponentTypes(System.ComponentModel.Design:IDesignerHost, System:Type)": {
@@ -121881,13 +121986,16 @@
           "nested_types": {}
         },
         "IComponentInitializer": {
-          "type": "interface",
+          "type": "class",
           "name": "IComponentInitializer",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "InitializeExistingComponent(System.Collections:IDictionary)": {
@@ -121927,15 +122035,18 @@
           "nested_types": {}
         },
         "IDesigner": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesigner",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Component": {
               "name": "Component",
@@ -121992,13 +122103,16 @@
           "nested_types": {}
         },
         "IDesignerEventService": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerEventService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "ActiveDesigner": {
               "name": "ActiveDesigner",
@@ -122041,13 +122155,16 @@
           "nested_types": {}
         },
         "IDesignerFilter": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerFilter",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "PostFilterAttributes(System.Collections:IDictionary)": {
@@ -122151,16 +122268,19 @@
           "nested_types": {}
         },
         "IDesignerHost": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerHost",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel.Design:IServiceContainer",
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Container": {
               "name": "Container",
@@ -122521,13 +122641,16 @@
           "nested_types": {}
         },
         "IDesignerHostTransactionState": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerHostTransactionState",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "IsClosingTransaction": {
               "name": "IsClosingTransaction",
@@ -122542,13 +122665,16 @@
           "nested_types": {}
         },
         "IDesignerOptionService": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerOptionService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetOptionValue(System:String, System:String)": {
@@ -122606,13 +122732,16 @@
           "nested_types": {}
         },
         "IDictionaryService": {
-          "type": "interface",
+          "type": "class",
           "name": "IDictionaryService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetKey(System:Object)": {
@@ -122674,13 +122803,16 @@
           "nested_types": {}
         },
         "IEventBindingService": {
-          "type": "interface",
+          "type": "class",
           "name": "IEventBindingService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CreateUniqueMethodName(System.ComponentModel:IComponent, System.ComponentModel:EventDescriptor)": {
@@ -122821,13 +122953,16 @@
           "nested_types": {}
         },
         "IExtenderListService": {
-          "type": "interface",
+          "type": "class",
           "name": "IExtenderListService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetExtenderProviders()": {
@@ -122844,13 +122979,16 @@
           "nested_types": {}
         },
         "IExtenderProviderService": {
-          "type": "interface",
+          "type": "class",
           "name": "IExtenderProviderService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "AddExtenderProvider(System.ComponentModel:IExtenderProvider)": {
@@ -122890,13 +123028,16 @@
           "nested_types": {}
         },
         "IHelpService": {
-          "type": "interface",
+          "type": "class",
           "name": "IHelpService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "AddContextAttribute(System:String, System:String, System.ComponentModel.Design:HelpKeywordType)": {
@@ -123027,13 +123168,16 @@
           "nested_types": {}
         },
         "IInheritanceService": {
-          "type": "interface",
+          "type": "class",
           "name": "IInheritanceService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "AddInheritedComponents(System.ComponentModel:IComponent, System.ComponentModel:IContainer)": {
@@ -123079,13 +123223,16 @@
           "nested_types": {}
         },
         "IMenuCommandService": {
-          "type": "interface",
+          "type": "class",
           "name": "IMenuCommandService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Verbs": {
               "name": "Verbs",
@@ -123225,13 +123372,16 @@
           "nested_types": {}
         },
         "IReferenceService": {
-          "type": "interface",
+          "type": "class",
           "name": "IReferenceService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetComponent(System:Object)": {
@@ -123312,13 +123462,16 @@
           "nested_types": {}
         },
         "IResourceService": {
-          "type": "interface",
+          "type": "class",
           "name": "IResourceService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetResourceReader(System.Globalization:CultureInfo)": {
@@ -123358,16 +123511,19 @@
           "nested_types": {}
         },
         "IRootDesigner": {
-          "type": "interface",
+          "type": "class",
           "name": "IRootDesigner",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel.Design:IDesigner",
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Component": {
               "name": "Component",
@@ -123447,13 +123603,16 @@
           "nested_types": {}
         },
         "ISelectionService": {
-          "type": "interface",
+          "type": "class",
           "name": "ISelectionService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "PrimarySelection": {
               "name": "PrimarySelection",
@@ -123550,15 +123709,18 @@
           "nested_types": {}
         },
         "IServiceContainer": {
-          "type": "interface",
+          "type": "class",
           "name": "IServiceContainer",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "AddService(System:Type, System.ComponentModel.Design:ServiceCreatorCallback)": {
@@ -123720,16 +123882,19 @@
           "nested_types": {}
         },
         "ITreeDesigner": {
-          "type": "interface",
+          "type": "class",
           "name": "ITreeDesigner",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel.Design:IDesigner",
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Children": {
               "name": "Children",
@@ -123800,13 +123965,16 @@
           "nested_types": {}
         },
         "ITypeDescriptorFilterService": {
-          "type": "interface",
+          "type": "class",
           "name": "ITypeDescriptorFilterService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "FilterAttributes(System.ComponentModel:IComponent, System.Collections:IDictionary)": {
@@ -123880,13 +124048,16 @@
           "nested_types": {}
         },
         "ITypeDiscoveryService": {
-          "type": "interface",
+          "type": "class",
           "name": "ITypeDiscoveryService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetTypes(System:Type, System:Boolean)": {
@@ -123916,13 +124087,16 @@
           "nested_types": {}
         },
         "ITypeResolutionService": {
-          "type": "interface",
+          "type": "class",
           "name": "ITypeResolutionService",
           "namespace": "System.ComponentModel.Design",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetAssembly(System.Reflection:AssemblyName)": {
@@ -126395,17 +126569,20 @@
           "nested_types": {}
         },
         "IDesignerLoaderHost": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerLoaderHost",
           "namespace": "System.ComponentModel.Design.Serialization",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel.Design:IDesignerHost",
             "System.ComponentModel.Design:IServiceContainer",
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Container": {
               "name": "Container",
@@ -126803,11 +126980,13 @@
           "nested_types": {}
         },
         "IDesignerLoaderHost2": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerLoaderHost2",
           "namespace": "System.ComponentModel.Design.Serialization",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.ComponentModel.Design.Serialization:IDesignerLoaderHost",
             "System.ComponentModel.Design:IDesignerHost",
@@ -126815,6 +126994,7 @@
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "CanReloadWithErrors": {
               "name": "CanReloadWithErrors",
@@ -127226,13 +127406,16 @@
           "nested_types": {}
         },
         "IDesignerLoaderService": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerLoaderService",
           "namespace": "System.ComponentModel.Design.Serialization",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "AddLoadDependency()": {
@@ -127280,15 +127463,18 @@
           "nested_types": {}
         },
         "IDesignerSerializationManager": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerSerializationManager",
           "namespace": "System.ComponentModel.Design.Serialization",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IServiceProvider"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Context": {
               "name": "Context",
@@ -127512,13 +127698,16 @@
           "nested_types": {}
         },
         "IDesignerSerializationProvider": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerSerializationProvider",
           "namespace": "System.ComponentModel.Design.Serialization",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetSerializer(System.ComponentModel.Design.Serialization:IDesignerSerializationManager, System:Object, System:Type, System:Type)": {
@@ -127560,13 +127749,16 @@
           "nested_types": {}
         },
         "IDesignerSerializationService": {
-          "type": "interface",
+          "type": "class",
           "name": "IDesignerSerializationService",
           "namespace": "System.ComponentModel.Design.Serialization",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Deserialize(System:Object)": {
@@ -127606,13 +127798,16 @@
           "nested_types": {}
         },
         "INameCreationService": {
-          "type": "interface",
+          "type": "class",
           "name": "INameCreationService",
           "namespace": "System.ComponentModel.Design.Serialization",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CreateName(System.ComponentModel:IContainer, System:Type)": {
@@ -137613,13 +137808,16 @@
           "nested_types": {}
         },
         "IApplicationSettingsProvider": {
-          "type": "interface",
+          "type": "class",
           "name": "IApplicationSettingsProvider",
           "namespace": "System.Configuration",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetPreviousVersion(System.Configuration:SettingsContext, System.Configuration:SettingsProperty)": {
@@ -137687,13 +137885,16 @@
           "nested_types": {}
         },
         "IConfigurationSectionHandler": {
-          "type": "interface",
+          "type": "class",
           "name": "IConfigurationSectionHandler",
           "namespace": "System.Configuration",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Create(System:Object, System:Object, System.Xml:XmlNode)": {
@@ -137729,13 +137930,16 @@
           "nested_types": {}
         },
         "IConfigurationSystem": {
-          "type": "interface",
+          "type": "class",
           "name": "IConfigurationSystem",
           "namespace": "System.Configuration",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetConfig(System:String)": {
@@ -137768,13 +137972,16 @@
           "nested_types": {}
         },
         "IPersistComponentSettings": {
-          "type": "interface",
+          "type": "class",
           "name": "IPersistComponentSettings",
           "namespace": "System.Configuration",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "SaveSettings": {
               "name": "SaveSettings",
@@ -137824,13 +138031,16 @@
           "nested_types": {}
         },
         "ISettingsProviderService": {
-          "type": "interface",
+          "type": "class",
           "name": "ISettingsProviderService",
           "namespace": "System.Configuration",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetSettingsProvider(System.Configuration:SettingsProperty)": {
@@ -157248,13 +157458,16 @@
           "nested_types": {}
         },
         "ICollectData": {
-          "type": "interface",
+          "type": "class",
           "name": "ICollectData",
           "namespace": "System.Diagnostics",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CloseData()": {
@@ -178378,15 +178591,18 @@
           "nested_types": {}
         },
         "IDeflater": {
-          "type": "interface",
+          "type": "class",
           "name": "IDeflater",
           "namespace": "System.IO.Compression",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Dispose()": {
@@ -178479,13 +178695,16 @@
           "nested_types": {}
         },
         "IFileFormatReader": {
-          "type": "interface",
+          "type": "class",
           "name": "IFileFormatReader",
           "namespace": "System.IO.Compression",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "ReadFooter(System.IO.Compression:InputBuffer)": {
@@ -178562,13 +178781,16 @@
           "nested_types": {}
         },
         "IFileFormatWriter": {
-          "type": "interface",
+          "type": "class",
           "name": "IFileFormatWriter",
           "namespace": "System.IO.Compression",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetFooter()": {
@@ -178622,15 +178844,18 @@
           "nested_types": {}
         },
         "IInflater": {
-          "type": "interface",
+          "type": "class",
           "name": "IInflater",
           "namespace": "System.IO.Compression",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "AvailableOutput": {
               "name": "AvailableOutput",
@@ -208332,13 +208557,16 @@
           "nested_types": {}
         },
         "IAuthenticationManager": {
-          "type": "interface",
+          "type": "class",
           "name": "IAuthenticationManager",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "CredentialPolicy": {
               "name": "CredentialPolicy",
@@ -208524,13 +208752,16 @@
           "nested_types": {}
         },
         "IAuthenticationModule": {
-          "type": "interface",
+          "type": "class",
           "name": "IAuthenticationModule",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "AuthenticationType": {
               "name": "AuthenticationType",
@@ -208603,15 +208834,18 @@
           "nested_types": {}
         },
         "IAutoWebProxy": {
-          "type": "interface",
+          "type": "class",
           "name": "IAutoWebProxy",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Net:IWebProxy"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Credentials": {
               "name": "Credentials",
@@ -208675,13 +208909,16 @@
           "nested_types": {}
         },
         "ICertificatePolicy": {
-          "type": "interface",
+          "type": "class",
           "name": "ICertificatePolicy",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CheckValidationResult(System.Net:ServicePoint, System.Security.Cryptography.X509Certificates:X509Certificate, System.Net:WebRequest, System:Int32)": {
@@ -208723,13 +208960,16 @@
           "nested_types": {}
         },
         "ICloseEx": {
-          "type": "interface",
+          "type": "class",
           "name": "ICloseEx",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CloseEx(System.Net:CloseExState)": {
@@ -208753,13 +208993,16 @@
           "nested_types": {}
         },
         "ICredentialPolicy": {
-          "type": "interface",
+          "type": "class",
           "name": "ICredentialPolicy",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "ShouldSendCredential(System:Uri, System.Net:WebRequest, System.Net:NetworkCredential, System.Net:IAuthenticationModule)": {
@@ -208801,13 +209044,16 @@
           "nested_types": {}
         },
         "ICredentials": {
-          "type": "interface",
+          "type": "class",
           "name": "ICredentials",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetCredential(System:Uri, System:String)": {
@@ -208837,13 +209083,16 @@
           "nested_types": {}
         },
         "ICredentialsByHost": {
-          "type": "interface",
+          "type": "class",
           "name": "ICredentialsByHost",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetCredential(System:String, System:Int32, System:String)": {
@@ -209619,13 +209868,16 @@
           "nested_types": {}
         },
         "IRequestLifetimeTracker": {
-          "type": "interface",
+          "type": "class",
           "name": "IRequestLifetimeTracker",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "TrackRequestLifetime(System:Int64)": {
@@ -209649,15 +209901,18 @@
           "nested_types": {}
         },
         "ISessionAuthenticationModule": {
-          "type": "interface",
+          "type": "class",
           "name": "ISessionAuthenticationModule",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System.Net:IAuthenticationModule"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "AuthenticationType": {
               "name": "AuthenticationType",
@@ -209775,13 +210030,16 @@
           "nested_types": {}
         },
         "IWebProxy": {
-          "type": "interface",
+          "type": "class",
           "name": "IWebProxy",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Credentials": {
               "name": "Credentials",
@@ -209829,15 +210087,18 @@
           "nested_types": {}
         },
         "IWebProxyFinder": {
-          "type": "interface",
+          "type": "class",
           "name": "IWebProxyFinder",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [
             "System:IDisposable"
           ],
           "fields": {},
+          "constructors": {},
           "properties": {
             "IsValid": {
               "name": "IsValid",
@@ -209903,13 +210164,16 @@
           "nested_types": {}
         },
         "IWebProxyScript": {
-          "type": "interface",
+          "type": "class",
           "name": "IWebProxyScript",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Close()": {
@@ -209976,13 +210240,16 @@
           "nested_types": {}
         },
         "IWebRequestCreate": {
-          "type": "interface",
+          "type": "class",
           "name": "IWebRequestCreate",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Create(System:Uri)": {
@@ -215955,13 +216222,16 @@
           "nested_types": {}
         },
         "SSPIInterface": {
-          "type": "interface",
+          "type": "class",
           "name": "SSPIInterface",
           "namespace": "System.Net",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "SecurityPackages": {
               "name": "SecurityPackages",
@@ -251455,13 +251725,16 @@
           "nested_types": {}
         },
         "IMSAdminBase": {
-          "type": "interface",
+          "type": "class",
           "name": "IMSAdminBase",
           "namespace": "System.Net.Mail",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "AddKey(System:IntPtr, System:String)": {
@@ -252392,13 +252665,16 @@
           "nested_types": {}
         },
         "ISmtpAuthenticationModule": {
-          "type": "interface",
+          "type": "class",
           "name": "ISmtpAuthenticationModule",
           "namespace": "System.Net.Mail",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "AuthenticationType": {
               "name": "AuthenticationType",
@@ -260560,13 +260836,16 @@
           }
         },
         "IEncodableStream": {
-          "type": "interface",
+          "type": "class",
           "name": "IEncodableStream",
           "namespace": "System.Net.Mime",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "DecodeBytes(System:Array[System:Byte], System:Int32, System:Int32)": {
@@ -292453,13 +292732,16 @@
       "name": "System.Reflection",
       "types": {
         "ICustomTypeProvider": {
-          "type": "interface",
+          "type": "class",
           "name": "ICustomTypeProvider",
           "namespace": "System.Reflection",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "GetCustomType()": {
@@ -293334,13 +293616,16 @@
           "nested_types": {}
         },
         "IAdviseSink": {
-          "type": "interface",
+          "type": "class",
           "name": "IAdviseSink",
           "namespace": "System.Runtime.InteropServices.ComTypes",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "OnClose()": {
@@ -293426,13 +293711,16 @@
           "nested_types": {}
         },
         "IDataObject": {
-          "type": "interface",
+          "type": "class",
           "name": "IDataObject",
           "namespace": "System.Runtime.InteropServices.ComTypes",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "DAdvise(System.Runtime.InteropServices.ComTypes:*FORMATETC, System.Runtime.InteropServices.ComTypes:ADVF, System.Runtime.InteropServices.ComTypes:IAdviseSink, System:*Int32)": {
@@ -293636,13 +293924,16 @@
           "nested_types": {}
         },
         "IEnumFORMATETC": {
-          "type": "interface",
+          "type": "class",
           "name": "IEnumFORMATETC",
           "namespace": "System.Runtime.InteropServices.ComTypes",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Clone(System.Runtime.InteropServices.ComTypes:*IEnumFORMATETC)": {
@@ -293722,13 +294013,16 @@
           "nested_types": {}
         },
         "IEnumSTATDATA": {
-          "type": "interface",
+          "type": "class",
           "name": "IEnumSTATDATA",
           "namespace": "System.Runtime.InteropServices.ComTypes",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "Clone(System.Runtime.InteropServices.ComTypes:*IEnumSTATDATA)": {
@@ -294173,13 +294467,16 @@
           "nested_types": {}
         },
         "ICommand_WinRT": {
-          "type": "interface",
+          "type": "class",
           "name": "ICommand_WinRT",
           "namespace": "System.Runtime.InteropServices.WindowsRuntime",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CanExecute(System:Object)": {
@@ -294219,13 +294516,16 @@
           "nested_types": {}
         },
         "INotifyCollectionChangedEventArgs": {
-          "type": "interface",
+          "type": "class",
           "name": "INotifyCollectionChangedEventArgs",
           "namespace": "System.Runtime.InteropServices.WindowsRuntime",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "Action": {
               "name": "Action",
@@ -294268,39 +294568,48 @@
           "nested_types": {}
         },
         "INotifyCollectionChanged_WinRT": {
-          "type": "interface",
+          "type": "class",
           "name": "INotifyCollectionChanged_WinRT",
           "namespace": "System.Runtime.InteropServices.WindowsRuntime",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {},
           "events": {},
           "nested_types": {}
         },
         "INotifyPropertyChanged_WinRT": {
-          "type": "interface",
+          "type": "class",
           "name": "INotifyPropertyChanged_WinRT",
           "namespace": "System.Runtime.InteropServices.WindowsRuntime",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {},
           "events": {},
           "nested_types": {}
         },
         "IPropertyChangedEventArgs": {
-          "type": "interface",
+          "type": "class",
           "name": "IPropertyChangedEventArgs",
           "namespace": "System.Runtime.InteropServices.WindowsRuntime",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {
             "PropertyName": {
               "name": "PropertyName",
@@ -314930,13 +315239,16 @@
           "nested_types": {}
         },
         "ICommand": {
-          "type": "interface",
+          "type": "class",
           "name": "ICommand",
           "namespace": "System.Windows.Input",
           "parent": null,
+          "abstract": true,
           "generic_args": [],
+          "super_class": null,
           "interfaces": [],
           "fields": {},
+          "constructors": {},
           "properties": {},
           "methods": {
             "CanExecute(System:Object)": {

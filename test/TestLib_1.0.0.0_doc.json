@@ -554,6 +554,15 @@
       "doc": "",
       "doc_formatted": {}
     },
+    "DelegateGeneric($T0, $T1)": {
+      "doc": "",
+      "doc_formatted": {},
+      "parameters": {
+        "param0": "",
+        "param1": ""
+      },
+      "return": ""
+    },
     "DelegateParameters(System:Int32, System:Int32)": {
       "doc": "",
       "doc_formatted": {},
@@ -591,7 +600,7 @@
         "doc_formatted": {}
       }
     },
-    "ExtractConstructor": {
+    "ExtractConstructor[$T]": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
@@ -604,6 +613,13 @@
         "parameters": {
           "param0": "",
           "param1": ""
+        }
+      },
+      "__init__($T)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param": ""
         }
       }
     },
@@ -646,7 +662,7 @@
         "doc_formatted": {}
       }
     },
-    "ExtractMethod": {
+    "ExtractMethod[$T]": {
       "doc": "",
       "doc_formatted": {},
       "__init__()": {
@@ -656,6 +672,33 @@
       "Basic()": {
         "doc": "",
         "doc_formatted": {},
+        "exceptions": {}
+      },
+      "GenericBoth($T, $T0, $T1)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param": "",
+          "param0": "",
+          "param1": ""
+        },
+        "exceptions": {}
+      },
+      "GenericClass($T)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param": ""
+        },
+        "exceptions": {}
+      },
+      "GenericMethod($T0, $T1)": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": "",
+          "param1": ""
+        },
         "exceptions": {}
       },
       "Out(System:*Int32)": {

@@ -2213,6 +2213,27 @@
           "parameters": [],
           "return_type": "System:Void"
         },
+        "DelegateGeneric($T0, $T1)": {
+          "type": "delegate",
+          "name": "DelegateGeneric",
+          "namespace": "TestLib",
+          "parent": null,
+          "parameters": [
+            {
+              "name": "param0",
+              "type": "$T0",
+              "default": false,
+              "out": false
+            },
+            {
+              "name": "param1",
+              "type": "$T1",
+              "default": false,
+              "out": false
+            }
+          ],
+          "return_type": "$T"
+        },
         "DelegateParameters(System:Int32, System:Int32)": {
           "type": "delegate",
           "name": "DelegateParameters",
@@ -2261,23 +2282,25 @@
             "Field3"
           ]
         },
-        "ExtractConstructor": {
+        "ExtractConstructor[$T]": {
           "type": "class",
           "name": "ExtractConstructor",
           "namespace": "TestLib",
           "parent": null,
           "abstract": false,
-          "generic_args": [],
+          "generic_args": [
+            "$T"
+          ],
           "super_class": "System:Object",
           "interfaces": [],
           "fields": {},
           "constructors": {
             "__init__()": {
-              "declaring_type": "TestLib:ExtractConstructor",
+              "declaring_type": "TestLib:ExtractConstructor[$T]",
               "parameters": []
             },
             "__init__(System:Int32, System:Int32)": {
-              "declaring_type": "TestLib:ExtractConstructor",
+              "declaring_type": "TestLib:ExtractConstructor[$T]",
               "parameters": [
                 {
                   "name": "param0",
@@ -2288,6 +2311,17 @@
                 {
                   "name": "param1",
                   "type": "System:Int32",
+                  "default": false,
+                  "out": false
+                }
+              ]
+            },
+            "__init__($T)": {
+              "declaring_type": "TestLib:ExtractConstructor[$T]",
+              "parameters": [
+                {
+                  "name": "param",
+                  "type": "$T",
                   "default": false,
                   "out": false
                 }
@@ -2503,19 +2537,21 @@
           "events": {},
           "nested_types": {}
         },
-        "ExtractMethod": {
+        "ExtractMethod[$T]": {
           "type": "class",
           "name": "ExtractMethod",
           "namespace": "TestLib",
           "parent": null,
           "abstract": false,
-          "generic_args": [],
+          "generic_args": [
+            "$T"
+          ],
           "super_class": "System:Object",
           "interfaces": [],
           "fields": {},
           "constructors": {
             "__init__()": {
-              "declaring_type": "TestLib:ExtractMethod",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
               "parameters": []
             }
           },
@@ -2523,7 +2559,7 @@
           "methods": {
             "Basic()": {
               "name": "Basic",
-              "declaring_type": "TestLib:ExtractMethod",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
               "parameters": [],
               "return_types": [
                 "System:Void"
@@ -2543,6 +2579,72 @@
               ],
               "return_types": [
                 "System:Boolean"
+              ],
+              "static": false
+            },
+            "GenericBoth($T, $T0, $T1)": {
+              "name": "GenericBoth",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
+              "parameters": [
+                {
+                  "name": "param",
+                  "type": "$T",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "param0",
+                  "type": "$T0",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "param1",
+                  "type": "$T1",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "GenericClass($T)": {
+              "name": "GenericClass",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
+              "parameters": [
+                {
+                  "name": "param",
+                  "type": "$T",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "GenericMethod($T0, $T1)": {
+              "name": "GenericMethod",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
+              "parameters": [
+                {
+                  "name": "param0",
+                  "type": "$T0",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "param1",
+                  "type": "$T1",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
               ],
               "static": false
             },
@@ -2566,7 +2668,7 @@
             },
             "Out(System:*Int32)": {
               "name": "Out",
-              "declaring_type": "TestLib:ExtractMethod",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
               "parameters": [
                 {
                   "name": "param",
@@ -2583,7 +2685,7 @@
             },
             "Parameters(System:Int32, System:Int32)": {
               "name": "Parameters",
-              "declaring_type": "TestLib:ExtractMethod",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
               "parameters": [
                 {
                   "name": "param0",
@@ -2605,7 +2707,7 @@
             },
             "Static()": {
               "name": "Static",
-              "declaring_type": "TestLib:ExtractMethod",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
               "parameters": [],
               "return_types": [
                 "System:Void"
@@ -2623,7 +2725,7 @@
             },
             "VoidOut(System:*Int32)": {
               "name": "VoidOut",
-              "declaring_type": "TestLib:ExtractMethod",
+              "declaring_type": "TestLib:ExtractMethod[$T]",
               "parameters": [
                 {
                   "name": "param",

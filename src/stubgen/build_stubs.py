@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import json
 import subprocess
 from concurrent.futures import Executor
@@ -44,9 +45,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from stubgen.command import CommandResult
 
 logger: Logger = get_logger(__name__)
-
-# TODO(Ryan): Need to handle method that override methods in parent classes better
-# Example Object.Equals(Object) -> AFObject.Equals(AFObject)
 
 
 @dataclass(frozen=True)
@@ -135,17 +133,27 @@ class Builder:
             param_str = param_str + " = ..."
         return param_str
 
-    def build_generic_args_str(self, obj: CClass) -> str:
-        """Build the generic args string for a CClass."""
-        generic_arg_str: str = ""
-        if len(obj.generic_args) > 0:
-            args: list[str] = [self.build_type(_obj) for _obj in obj.generic_args]
-            generic_arg_str = f"[{', '.join(args)}]"
-        return generic_arg_str
+    def build_generic_params(self, *types: CType, declaring_type: CType | None = None) -> str:
+        """Build a generic param declaration."""
 
-    def build_parents_str(self, parents: list[str]) -> str:
-        """Build the parents string for a CClass."""
-        return f"({', '.join(parents)})" if len(parents) > 0 else ""
+        def extract_generic(type: CType) -> list[CType]:  # noqa: A002
+            types: list[CType] = []
+            if type.generic:
+                types.append(type)
+            types.extend(t for inner in type.inner for t in extract_generic(inner))
+            return types
+
+        generic_types: list[CType] = list(
+            dict.fromkeys(extracted for t in types for extracted in extract_generic(t))
+        )
+        if declaring_type is not None:
+            for t in extract_generic(declaring_type):
+                with contextlib.suppress(ValueError):
+                    generic_types.remove(t)
+        generic_params: str = ""
+        if len(generic_types) > 0:
+            generic_params = f"[{', '.join(self.build_type(gt) for gt in generic_types)}]"
+        return generic_params
 
     def build_field(self, obj: CField, indent: int = 0) -> Sequence[str]:
         """Build a list of strings to represent a CField."""
@@ -187,11 +195,18 @@ class Builder:
             self.import_set.add(self.OVERLOAD)
             lines.append(f"{'    ' * indent}@overload")
 
+        generic_params: str = self.build_generic_params(
+            *(param.type for param in obj.parameters),
+            declaring_type=obj.declaring_type,
+        )
+
         parameters: Sequence[str] = [
             "self",
             *(self.build_parameter(p) for p in obj.parameters),
         ]
-        lines.append(f"{'    ' * indent}def __init__({', '.join(parameters)}) -> None:")
+        lines.append(
+            f"{'    ' * indent}def __init__{generic_params}({', '.join(parameters)}) -> None:"
+        )
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
@@ -260,30 +275,27 @@ class Builder:
             self.import_set.add(self.OVERLOAD)
             lines.append(f"{'    ' * indent}@overload")
 
-        parameters: Sequence[str] = [
+        generic_params: str = self.build_generic_params(
+            *(param.type for param in obj.parameters),
+            *obj.return_types,
+            declaring_type=obj.declaring_type,
+        )
+
+        param_strs: Sequence[str] = [
             self_cls,
             *(self.build_parameter(p) for p in obj.parameters),
         ]
 
         return_str: str
         if len(obj.return_types) > 1:
-            return_types: list[str] = [self.build_type(t, convert=True) for t in obj.return_types]
-            return_str = f"tuple[{', '.join(return_types)}]"
+            return_strs: list[str] = [self.build_type(t, convert=True) for t in obj.return_types]
+            return_str = f"tuple[{', '.join(return_strs)}]"
         else:
             return_str = self.build_type(obj.return_types[0], convert=True)
 
-        # TODO(Ryan): Need to extract all generic types, including those from inner.
-        generic_types: Sequence[CType] = [
-            *(param.type for param in obj.parameters if param.type.generic),
-            *(ret for ret in obj.return_types if ret.generic),
-        ]
-        generic_params: str = ""
-        if len(generic_types) > 0:
-            generic_params = f"[{', '.join(gt.name for gt in generic_types)}]"
-
         lines.append(
             f"{'    ' * indent}def {obj.name}{generic_params}"
-            f"({', '.join(parameters)}) -> {return_str}:"
+            f"({', '.join(param_strs)}) -> {return_str}:"
         )
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
@@ -355,10 +367,13 @@ class Builder:
             parents.append(self.build_type(obj.super_class))
         parents.extend(self.build_type(_obj) for _obj in obj.interfaces)
 
-        lines: list[str] = [
-            f"{'    ' * indent}class {obj.name}"
-            f"{self.build_generic_args_str(obj)}{self.build_parents_str(parents)}:"
-        ]
+        generic_arg_str: str = ""
+        if len(obj.generic_args) > 0:
+            generic_arg_str = f"[{', '.join(self.build_type(_obj) for _obj in obj.generic_args)}]"
+
+        parent_str: str = f"({', '.join(parents)})" if len(parents) > 0 else ""
+
+        lines: list[str] = [f"{'    ' * indent}class {obj.name}{generic_arg_str}{parent_str}:"]
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
@@ -397,12 +412,18 @@ class Builder:
 
         self.import_set.add(self.CALLABLE)
 
+        generic_params: str = self.build_generic_params(
+            *(param.type for param in obj.parameters),
+            obj.return_type,
+        )
+
         parameters: Sequence[str] = [self.build_type(p.type, convert=True) for p in obj.parameters]
 
         return_str: str = self.build_type(obj.return_type, convert=True)
 
         lines: list[str] = [
-            f"{'    ' * indent}{obj.name}: Callable[[{', '.join(parameters)}], {return_str}] = ...",
+            f"{'    ' * indent}type {obj.name}{generic_params} = "
+            f"Callable[[{', '.join(parameters)}], {return_str}]",
         ]
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]

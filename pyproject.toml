@@ -146,12 +146,14 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "*.pyi" = [
+    "F811",  # Pyflakes: Redefinition of unused from line
     "N802",  # pep8-naming: Function name should be lowercase
     "N803",  # pep8-naming: Argument name should be lowercase
     "N818",  # pep8-naming: Exception name should be named with an Error suffix
     "D205",  # pydocstyle: 1 blank line required between summary line and description
     "D418",  # pydocstyle: Function decorated with `@overload` shouldn't contain a docstring
     "D419",  # pydocstyle: Docstring is empty
+    "A002",  # flake8-builtins: Function argument is shadowing a Python builtin
     "PYI021",  # flake8-pyi: Docstrings should not be included in stubs
 ]
 "test/*" = [
