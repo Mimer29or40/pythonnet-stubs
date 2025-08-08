@@ -17,4 +17,8 @@ public class ExtractMethod<T>
     public void GenericMethod<T0, T1>(T0 param0, T1 param1) { }
     
     public void GenericBoth<T0, T1>(T param, T0 param0, T1 param1) { }
+
+    public void GenericOut<TOut>(out TOut param) { param = default(TOut) ?? throw new InvalidOperationException(); }
+
+    public void GenericConstraint<TP>(TP param) where TP: IConvertible {  }
 }

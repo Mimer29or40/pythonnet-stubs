@@ -178,41 +178,55 @@ class AccessViolationException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
-Action: Callable[[T], None] = ...
+type Action[T] = Callable[[T], None]
 """"""
-Action: Callable[[T1, T2], None] = ...
+type Action[T1, T2] = Callable[[T1, T2], None]
 """"""
-Action: Callable[[T1, T2, T3], None] = ...
+type Action[T1, T2, T3] = Callable[[T1, T2, T3], None]
 """"""
-Action: Callable[[T1, T2, T3, T4], None] = ...
+type Action[T1, T2, T3, T4] = Callable[[T1, T2, T3, T4], None]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5], None] = ...
+type Action[T1, T2, T3, T4, T5] = Callable[[T1, T2, T3, T4, T5], None]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6], None] = ...
+type Action[T1, T2, T3, T4, T5, T6] = Callable[[T1, T2, T3, T4, T5, T6], None]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7] = Callable[[T1, T2, T3, T4, T5, T6, T7], None]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8] = Callable[[T1, T2, T3, T4, T5, T6, T7, T8], None]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9], None
+]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10], None
+]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11], None
+]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12], None
+]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13], None
+]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14], None
+]
 """"""
-Action: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15], None] = ...
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15], None
+]
 """"""
-Action: Callable[
+type Action[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16] = Callable[
     [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16], None
-] = ...
+]
 """"""
-Action: Callable[[], None] = ...
+type Action = Callable[[], None]
 """"""
 
 class ActivationContext(Object, ISerializable, IDisposable):
@@ -254,9 +268,9 @@ class ActivationContext(Object, ISerializable, IDisposable):
     class ContextForm(Enum):
         """"""
 
-        Loose: ContextForm = ...
+        Loose: ActivationContext.ContextForm = ...
         """"""
-        StoreBounded: ContextForm = ...
+        StoreBounded: ActivationContext.ContextForm = ...
         """"""
 
 class Activator(Object, _Activator):
@@ -1292,7 +1306,7 @@ class AppDomainHandle(ValueType):
     def ToString(self) -> str:
         """"""
 
-AppDomainInitializer: Callable[[Array[str]], None] = ...
+type AppDomainInitializer = Callable[[Array[str]], None]
 """"""
 
 class AppDomainInitializerInfo(Object):
@@ -1998,7 +2012,7 @@ class Array(
     def Add(self, value: object) -> int:
         """"""
     @classmethod
-    def AsReadOnly(cls, array: Array[T]) -> ReadOnlyCollection[T]:
+    def AsReadOnly[T](cls, array: Array[T]) -> ReadOnlyCollection[T]:
         """"""
     @classmethod
     @overload
@@ -2127,7 +2141,7 @@ class Array(
     def CreateInstance(cls, elementType: Type, length1: int, length2: int, length3: int) -> Array:
         """"""
     @classmethod
-    def Empty(cls) -> Array[T]:
+    def Empty[T](cls) -> Array[T]:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -2136,45 +2150,45 @@ class Array(
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @classmethod
-    def Exists(cls, array: Array[T], match: Predicate[T]) -> bool:
+    def Exists[T](cls, array: Array[T], match: Predicate[T]) -> bool:
         """"""
     @classmethod
     def Find[T](cls, array: Array[T], match: Predicate[T]) -> T:
         """"""
     @classmethod
-    def FindAll(cls, array: Array[T], match: Predicate[T]) -> Array[T]:
+    def FindAll[T](cls, array: Array[T], match: Predicate[T]) -> Array[T]:
         """"""
     @classmethod
     @overload
-    def FindIndex(cls, array: Array[T], startIndex: int, count: int, match: Predicate[T]) -> int:
+    def FindIndex[T](cls, array: Array[T], startIndex: int, count: int, match: Predicate[T]) -> int:
         """"""
     @classmethod
     @overload
-    def FindIndex(cls, array: Array[T], startIndex: int, match: Predicate[T]) -> int:
+    def FindIndex[T](cls, array: Array[T], startIndex: int, match: Predicate[T]) -> int:
         """"""
     @classmethod
     @overload
-    def FindIndex(cls, array: Array[T], match: Predicate[T]) -> int:
+    def FindIndex[T](cls, array: Array[T], match: Predicate[T]) -> int:
         """"""
     @classmethod
     def FindLast[T](cls, array: Array[T], match: Predicate[T]) -> T:
         """"""
     @classmethod
     @overload
-    def FindLastIndex(
+    def FindLastIndex[T](
         cls, array: Array[T], startIndex: int, count: int, match: Predicate[T]
     ) -> int:
         """"""
     @classmethod
     @overload
-    def FindLastIndex(cls, array: Array[T], startIndex: int, match: Predicate[T]) -> int:
+    def FindLastIndex[T](cls, array: Array[T], startIndex: int, match: Predicate[T]) -> int:
         """"""
     @classmethod
     @overload
-    def FindLastIndex(cls, array: Array[T], match: Predicate[T]) -> int:
+    def FindLastIndex[T](cls, array: Array[T], match: Predicate[T]) -> int:
         """"""
     @classmethod
-    def ForEach(cls, array: Array[T], action: Action[T]) -> None:
+    def ForEach[T](cls, array: Array[T], action: Action[T]) -> None:
         """"""
     def GetEnumerator(self) -> IEnumerator:
         """"""
@@ -2350,15 +2364,19 @@ class Array(
         """"""
     @classmethod
     @overload
-    def Sort(cls, keys: Array[TKey], items: Array[TValue], comparer: IComparer[TKey]) -> None:
+    def Sort[TKey, TValue](
+        cls, keys: Array[TKey], items: Array[TValue], comparer: IComparer[TKey]
+    ) -> None:
         """"""
     @classmethod
     @overload
-    def Sort(cls, keys: Array[TKey], items: Array[TValue], index: int, length: int) -> None:
+    def Sort[TKey, TValue](
+        cls, keys: Array[TKey], items: Array[TValue], index: int, length: int
+    ) -> None:
         """"""
     @classmethod
     @overload
-    def Sort(
+    def Sort[TKey, TValue](
         cls,
         keys: Array[TKey],
         items: Array[TValue],
@@ -2369,28 +2387,28 @@ class Array(
         """"""
     @classmethod
     @overload
-    def Sort(cls, array: Array[T]) -> None:
+    def Sort[T](cls, array: Array[T]) -> None:
         """"""
     @classmethod
     @overload
-    def Sort(cls, array: Array[T], comparer: IComparer[T]) -> None:
+    def Sort[T](cls, array: Array[T], comparer: IComparer[T]) -> None:
         """"""
     @classmethod
     @overload
-    def Sort(cls, array: Array[T], comparison: Comparison[T]) -> None:
+    def Sort[T](cls, array: Array[T], comparison: Comparison[T]) -> None:
         """"""
     @classmethod
     @overload
-    def Sort(cls, array: Array[T], index: int, length: int) -> None:
+    def Sort[T](cls, array: Array[T], index: int, length: int) -> None:
         """"""
     @classmethod
     @overload
-    def Sort(cls, array: Array[T], index: int, length: int, comparer: IComparer[T]) -> None:
+    def Sort[T](cls, array: Array[T], index: int, length: int, comparer: IComparer[T]) -> None:
         """"""
     def ToString(self) -> str:
         """"""
     @classmethod
-    def TrueForAll(cls, array: Array[T], match: Predicate[T]) -> bool:
+    def TrueForAll[T](cls, array: Array[T], match: Predicate[T]) -> bool:
         """"""
     def __contains__(self, value: object) -> bool:
         """"""
@@ -2438,11 +2456,11 @@ class ArraySegment[T](
     @property
     def Offset(self) -> int:
         """"""
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
@@ -2452,17 +2470,17 @@ class ArraySegment[T](
     @overload
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def IndexOf[T](self, item: T) -> int:
+    def IndexOf(self, item: T) -> int:
         """"""
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def RemoveAt(self, index: int) -> None:
         """"""
@@ -2474,21 +2492,21 @@ class ArraySegment[T](
     @classmethod
     def op_Inequality(cls, a: ArraySegment[T], b: ArraySegment[T]) -> bool:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
     def __eq__(self, other: ArraySegment[T]) -> bool:
         """"""
     def __ne__(self, other: ArraySegment[T]) -> bool:
         """"""
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
 
 class ArrayTypeMismatchException(SystemException, _Exception, ISerializable):
@@ -2559,9 +2577,9 @@ class AssemblyLoadEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-AssemblyLoadEventHandler: Callable[[object, AssemblyLoadEventArgs], None] = ...
+type AssemblyLoadEventHandler = Callable[[object, AssemblyLoadEventArgs], None]
 """"""
-AsyncCallback: Callable[[IAsyncResult], None] = ...
+type AsyncCallback = Callable[[IAsyncResult], None]
 """"""
 
 class Attribute(ABC, Object, _Attribute):
@@ -3718,7 +3736,7 @@ class ClientUtils(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-Comparison: Callable[[T, T], int] = ...
+type Comparison[T] = Callable[[T, T], int]
 """"""
 
 class CompatibilityFlag(Enum):
@@ -4448,7 +4466,7 @@ class ConsoleCancelEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ConsoleCancelEventHandler: Callable[[object, ConsoleCancelEventArgs], None] = ...
+type ConsoleCancelEventHandler = Callable[[object, ConsoleCancelEventArgs], None]
 """"""
 
 class ConsoleColor(Enum):
@@ -6207,11 +6225,11 @@ class Convert(ABC, Object):
     def ToUInt64(cls, value: int) -> int:
         """"""
 
-Converter: Callable[[TInput], TOutput] = ...
+type Converter[TInput, TOutput] = Callable[[TInput], TOutput]
 """"""
-CrossAppDomainDelegate: Callable[[], None] = ...
+type CrossAppDomainDelegate = Callable[[], None]
 """"""
-CtorDelegate: Callable[[object], None] = ...
+type CtorDelegate = Callable[[object], None]
 """"""
 
 class CultureAwareComparer(
@@ -8523,109 +8541,109 @@ class Environment(ABC, Object):
     class SpecialFolder(Enum):
         """"""
 
-        Desktop: SpecialFolder = ...
+        Desktop: Environment.SpecialFolder = ...
         """"""
-        Programs: SpecialFolder = ...
+        Programs: Environment.SpecialFolder = ...
         """"""
-        MyDocuments: SpecialFolder = ...
+        MyDocuments: Environment.SpecialFolder = ...
         """"""
-        Personal: SpecialFolder = ...
+        Personal: Environment.SpecialFolder = ...
         """"""
-        Favorites: SpecialFolder = ...
+        Favorites: Environment.SpecialFolder = ...
         """"""
-        Startup: SpecialFolder = ...
+        Startup: Environment.SpecialFolder = ...
         """"""
-        Recent: SpecialFolder = ...
+        Recent: Environment.SpecialFolder = ...
         """"""
-        SendTo: SpecialFolder = ...
+        SendTo: Environment.SpecialFolder = ...
         """"""
-        StartMenu: SpecialFolder = ...
+        StartMenu: Environment.SpecialFolder = ...
         """"""
-        MyMusic: SpecialFolder = ...
+        MyMusic: Environment.SpecialFolder = ...
         """"""
-        MyVideos: SpecialFolder = ...
+        MyVideos: Environment.SpecialFolder = ...
         """"""
-        DesktopDirectory: SpecialFolder = ...
+        DesktopDirectory: Environment.SpecialFolder = ...
         """"""
-        MyComputer: SpecialFolder = ...
+        MyComputer: Environment.SpecialFolder = ...
         """"""
-        NetworkShortcuts: SpecialFolder = ...
+        NetworkShortcuts: Environment.SpecialFolder = ...
         """"""
-        Fonts: SpecialFolder = ...
+        Fonts: Environment.SpecialFolder = ...
         """"""
-        Templates: SpecialFolder = ...
+        Templates: Environment.SpecialFolder = ...
         """"""
-        CommonStartMenu: SpecialFolder = ...
+        CommonStartMenu: Environment.SpecialFolder = ...
         """"""
-        CommonPrograms: SpecialFolder = ...
+        CommonPrograms: Environment.SpecialFolder = ...
         """"""
-        CommonStartup: SpecialFolder = ...
+        CommonStartup: Environment.SpecialFolder = ...
         """"""
-        CommonDesktopDirectory: SpecialFolder = ...
+        CommonDesktopDirectory: Environment.SpecialFolder = ...
         """"""
-        ApplicationData: SpecialFolder = ...
+        ApplicationData: Environment.SpecialFolder = ...
         """"""
-        PrinterShortcuts: SpecialFolder = ...
+        PrinterShortcuts: Environment.SpecialFolder = ...
         """"""
-        LocalApplicationData: SpecialFolder = ...
+        LocalApplicationData: Environment.SpecialFolder = ...
         """"""
-        InternetCache: SpecialFolder = ...
+        InternetCache: Environment.SpecialFolder = ...
         """"""
-        Cookies: SpecialFolder = ...
+        Cookies: Environment.SpecialFolder = ...
         """"""
-        History: SpecialFolder = ...
+        History: Environment.SpecialFolder = ...
         """"""
-        CommonApplicationData: SpecialFolder = ...
+        CommonApplicationData: Environment.SpecialFolder = ...
         """"""
-        Windows: SpecialFolder = ...
+        Windows: Environment.SpecialFolder = ...
         """"""
-        System: SpecialFolder = ...
+        System: Environment.SpecialFolder = ...
         """"""
-        ProgramFiles: SpecialFolder = ...
+        ProgramFiles: Environment.SpecialFolder = ...
         """"""
-        MyPictures: SpecialFolder = ...
+        MyPictures: Environment.SpecialFolder = ...
         """"""
-        UserProfile: SpecialFolder = ...
+        UserProfile: Environment.SpecialFolder = ...
         """"""
-        SystemX86: SpecialFolder = ...
+        SystemX86: Environment.SpecialFolder = ...
         """"""
-        ProgramFilesX86: SpecialFolder = ...
+        ProgramFilesX86: Environment.SpecialFolder = ...
         """"""
-        CommonProgramFiles: SpecialFolder = ...
+        CommonProgramFiles: Environment.SpecialFolder = ...
         """"""
-        CommonProgramFilesX86: SpecialFolder = ...
+        CommonProgramFilesX86: Environment.SpecialFolder = ...
         """"""
-        CommonTemplates: SpecialFolder = ...
+        CommonTemplates: Environment.SpecialFolder = ...
         """"""
-        CommonDocuments: SpecialFolder = ...
+        CommonDocuments: Environment.SpecialFolder = ...
         """"""
-        CommonAdminTools: SpecialFolder = ...
+        CommonAdminTools: Environment.SpecialFolder = ...
         """"""
-        AdminTools: SpecialFolder = ...
+        AdminTools: Environment.SpecialFolder = ...
         """"""
-        CommonMusic: SpecialFolder = ...
+        CommonMusic: Environment.SpecialFolder = ...
         """"""
-        CommonPictures: SpecialFolder = ...
+        CommonPictures: Environment.SpecialFolder = ...
         """"""
-        CommonVideos: SpecialFolder = ...
+        CommonVideos: Environment.SpecialFolder = ...
         """"""
-        Resources: SpecialFolder = ...
+        Resources: Environment.SpecialFolder = ...
         """"""
-        LocalizedResources: SpecialFolder = ...
+        LocalizedResources: Environment.SpecialFolder = ...
         """"""
-        CommonOemLinks: SpecialFolder = ...
+        CommonOemLinks: Environment.SpecialFolder = ...
         """"""
-        CDBurning: SpecialFolder = ...
+        CDBurning: Environment.SpecialFolder = ...
         """"""
 
     class SpecialFolderOption(Enum):
         """"""
 
-        _None: SpecialFolderOption = ...
+        _None: Environment.SpecialFolderOption = ...
         """"""
-        DoNotVerify: SpecialFolderOption = ...
+        DoNotVerify: Environment.SpecialFolderOption = ...
         """"""
-        Create: SpecialFolderOption = ...
+        Create: Environment.SpecialFolderOption = ...
         """"""
 
 class EnvironmentHelpers(ABC, Object):
@@ -8669,9 +8687,9 @@ class EventArgs(Object):
     def ToString(self) -> str:
         """"""
 
-EventHandler: Callable[[object, TEventArgs], None] = ...
+type EventHandler[TEventArgs] = Callable[[object, TEventArgs], None]
 """"""
-EventHandler: Callable[[object, EventArgs], None] = ...
+type EventHandler = Callable[[object, EventArgs], None]
 """"""
 
 class Exception(Object, _Exception, ISerializable):
@@ -9209,41 +9227,57 @@ class FtpStyleUriParser(UriParser):
     def ToString(self) -> str:
         """"""
 
-Func: Callable[[T], TResult] = ...
+type Func[T, TResult] = Callable[[T], TResult]
 """"""
-Func: Callable[[T1, T2], TResult] = ...
+type Func[T1, T2, TResult] = Callable[[T1, T2], TResult]
 """"""
-Func: Callable[[T1, T2, T3], TResult] = ...
+type Func[T1, T2, T3, TResult] = Callable[[T1, T2, T3], TResult]
 """"""
-Func: Callable[[T1, T2, T3, T4], TResult] = ...
+type Func[T1, T2, T3, T4, TResult] = Callable[[T1, T2, T3, T4], TResult]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5], TResult] = ...
+type Func[T1, T2, T3, T4, T5, TResult] = Callable[[T1, T2, T3, T4, T5], TResult]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, TResult] = Callable[[T1, T2, T3, T4, T5, T6], TResult]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, TResult] = Callable[[T1, T2, T3, T4, T5, T6, T7], TResult]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8], TResult
+]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9], TResult
+]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10], TResult
+]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11], TResult
+]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12], TResult
+]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13], TResult
+]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14], TResult
+]
 """"""
-Func: Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15], TResult] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult] = Callable[
+    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15], TResult
+]
 """"""
-Func: Callable[
-    [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16], TResult
-] = ...
+type Func[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult] = (
+    Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16], TResult]
+)
 """"""
-Func: Callable[[], TResult] = ...
+type Func[TResult] = Callable[[], TResult]
 """"""
 
 class GC(ABC, Object):
@@ -9556,7 +9590,7 @@ class HttpStyleUriParser(UriParser):
     def ToString(self) -> str:
         """"""
 
-class IAppDomainSetup:
+class IAppDomainSetup(ABC):
     """"""
     @property
     def ApplicationBase(self) -> str:
@@ -9609,7 +9643,7 @@ class IAppDomainSetup:
     @ShadowCopyFiles.setter
     def ShadowCopyFiles(self, value: str) -> None: ...
 
-class IAsyncResult:
+class IAsyncResult(ABC):
     """"""
     @property
     def AsyncState(self) -> object:
@@ -9624,22 +9658,22 @@ class IAsyncResult:
     def IsCompleted(self) -> bool:
         """"""
 
-class ICloneable:
+class ICloneable(ABC):
     """"""
     def Clone(self) -> object:
         """"""
 
-class IComparable:
+class IComparable(ABC):
     """"""
     def CompareTo(self, obj: object) -> int:
         """"""
 
-class IComparable[T]:
+class IComparable[T](ABC):
     """"""
-    def CompareTo[T](self, other: T) -> int:
+    def CompareTo(self, other: T) -> int:
         """"""
 
-class IConvertible:
+class IConvertible(ABC):
     """"""
     def GetTypeCode(self) -> TypeCode:
         """"""
@@ -9676,48 +9710,48 @@ class IConvertible:
     def ToUInt64(self, provider: IFormatProvider) -> int:
         """"""
 
-class ICustomFormatter:
+class ICustomFormatter(ABC):
     """"""
     def Format(self, format: str, arg: object, formatProvider: IFormatProvider) -> str:
         """"""
 
-class IDisposable:
+class IDisposable(ABC):
     """"""
     def Dispose(self) -> None:
         """"""
 
-class IEquatable[T]:
+class IEquatable[T](ABC):
     """"""
-    def Equals[T](self, other: T) -> bool:
+    def Equals(self, other: T) -> bool:
         """"""
 
-class IFormatProvider:
+class IFormatProvider(ABC):
     """"""
     def GetFormat(self, formatType: Type) -> object:
         """"""
 
-class IFormattable:
+class IFormattable(ABC):
     """"""
     def ToString(self, format: str, formatProvider: IFormatProvider) -> str:
         """"""
 
-class IObservable[T]:
+class IObservable[T](ABC):
     """"""
     def Subscribe(self, observer: IObserver[T]) -> IDisposable:
         """"""
 
-class IObserver[T]:
+class IObserver[T](ABC):
     """"""
     def OnCompleted(self) -> None:
         """"""
     def OnError(self, error: Exception) -> None:
         """"""
-    def OnNext[T](self, value: T) -> None:
+    def OnNext(self, value: T) -> None:
         """"""
 
-class IProgress[T]:
+class IProgress[T](ABC):
     """"""
-    def Report[T](self, value: T) -> None:
+    def Report(self, value: T) -> None:
         """"""
 
 class IPv4AddressHelper(ABC, Object):
@@ -9742,24 +9776,24 @@ class IPv6AddressHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class IRuntimeFieldInfo:
+class IRuntimeFieldInfo(ABC):
     """"""
     @property
     def Value(self) -> RuntimeFieldHandleInternal:
         """"""
 
-class IRuntimeMethodInfo:
+class IRuntimeMethodInfo(ABC):
     """"""
     @property
     def Value(self) -> RuntimeMethodHandleInternal:
         """"""
 
-class IServiceProvider:
+class IServiceProvider(ABC):
     """"""
     def GetService(self, serviceType: Type) -> object:
         """"""
 
-class ITupleInternal(ITuple):
+class ITupleInternal(ABC, ITuple):
     """"""
     @property
     def Item(self) -> object:
@@ -9774,7 +9808,7 @@ class ITupleInternal(ITuple):
     def __getitem__(self, index: int) -> object:
         """"""
 
-class IValueTupleInternal(ITuple):
+class IValueTupleInternal(ABC, ITuple):
     """"""
     @property
     def Item(self) -> object:
@@ -9789,7 +9823,7 @@ class IValueTupleInternal(ITuple):
     def __getitem__(self, index: int) -> object:
         """"""
 
-class IWellKnownStringEqualityComparer:
+class IWellKnownStringEqualityComparer(ABC):
     """"""
     def GetEqualityComparerForSerialization(self) -> IEqualityComparer:
         """"""
@@ -12012,11 +12046,11 @@ class NullReferenceException(SystemException, _Exception, ISerializable):
 class Nullable(ABC, Object):
     """"""
     @classmethod
-    def Compare[T, T](cls, n1: T | None, n2: T | None) -> int:
+    def Compare[T](cls, n1: T | None, n2: T | None) -> int:
         """"""
     @classmethod
     @overload
-    def Equals[T, T](cls, n1: T | None, n2: T | None) -> bool:
+    def Equals[T](cls, n1: T | None, n2: T | None) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -12048,18 +12082,18 @@ class Nullable[T](ValueType):
     def GetType(self) -> Type:
         """"""
     @overload
-    def GetValueOrDefault[T, T](self, defaultValue: T) -> T:
+    def GetValueOrDefault(self, defaultValue: T) -> T:
         """"""
     @overload
-    def GetValueOrDefault[T](self) -> T:
+    def GetValueOrDefault(self) -> T:
         """"""
     def ToString(self) -> str:
         """"""
     @classmethod
-    def op_Explicit[T](cls, value: Nullable[T]) -> T:
+    def op_Explicit(cls, value: Nullable[T]) -> T:
         """"""
     @classmethod
-    def op_Implicit[T](cls, value: T) -> Nullable[T]:
+    def op_Implicit(cls, value: T) -> Nullable[T]:
         """"""
 
 class Number(Object):
@@ -12974,7 +13008,7 @@ class PlatformNotSupportedException(NotSupportedException, _Exception, ISerializ
     def ToString(self) -> str:
         """"""
 
-Predicate: Callable[[T], bool] = ...
+type Predicate[T] = Callable[[T], bool]
 """"""
 
 class ProgressStatics(ABC, Object):
@@ -13002,7 +13036,7 @@ class Progress[T](Object, IProgress[T]):
         """"""
     def GetType(self) -> Type:
         """"""
-    def Report[T](self, value: T) -> None:
+    def Report(self, value: T) -> None:
         """"""
     def ToString(self) -> str:
         """"""
@@ -13676,7 +13710,7 @@ class ResolveEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ResolveEventHandler: Callable[[object, ResolveEventArgs], Assembly] = ...
+type ResolveEventHandler = Callable[[object, ResolveEventArgs], Assembly]
 """"""
 
 class Resolver(ABC, Object):
@@ -15179,7 +15213,7 @@ class String(
         """"""
     @classmethod
     @overload
-    def Concat(cls, values: IEnumerable[T]) -> str:
+    def Concat[T](cls, values: IEnumerable[T]) -> str:
         """"""
     @classmethod
     @overload
@@ -15358,7 +15392,7 @@ class String(
         """"""
     @classmethod
     @overload
-    def Join(cls, separator: str, values: IEnumerable[T]) -> str:
+    def Join[T](cls, separator: str, values: IEnumerable[T]) -> str:
         """"""
     @classmethod
     @overload
@@ -16196,7 +16230,7 @@ class TimeZoneInfo(Object, IDeserializationCallback, ISerializable, IEquatable[T
         displayName: str,
         standardDisplayName: str,
         daylightDisplayName: str,
-        adjustmentRules: Array[AdjustmentRule],
+        adjustmentRules: Array[TimeZoneInfo.AdjustmentRule],
     ) -> TimeZoneInfo:
         """"""
     @classmethod
@@ -16208,7 +16242,7 @@ class TimeZoneInfo(Object, IDeserializationCallback, ISerializable, IEquatable[T
         displayName: str,
         standardDisplayName: str,
         daylightDisplayName: str,
-        adjustmentRules: Array[AdjustmentRule],
+        adjustmentRules: Array[TimeZoneInfo.AdjustmentRule],
         disableDaylightSavingTime: bool,
     ) -> TimeZoneInfo:
         """"""
@@ -16224,7 +16258,7 @@ class TimeZoneInfo(Object, IDeserializationCallback, ISerializable, IEquatable[T
     @classmethod
     def FromSerializedString(cls, source: str) -> TimeZoneInfo:
         """"""
-    def GetAdjustmentRules(self) -> Array[AdjustmentRule]:
+    def GetAdjustmentRules(self) -> Array[TimeZoneInfo.AdjustmentRule]:
         """"""
     @overload
     def GetAmbiguousTimeOffsets(self, dateTime: DateTime) -> Array[TimeSpan]:
@@ -16615,7 +16649,7 @@ class TupleExtensions(ABC, Object):
     """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
         item1: T1,
@@ -16666,7 +16700,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
         item1: T1,
@@ -16715,7 +16749,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
         item1: T1,
@@ -16743,7 +16777,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
         item1: T1,
@@ -16770,7 +16804,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
         item1: T1,
@@ -16794,7 +16828,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
         item1: T1,
@@ -16817,7 +16851,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
         item1: T1,
@@ -16839,7 +16873,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12, T13, T14]],
         item1: T1,
@@ -16860,7 +16894,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12, T13]],
         item1: T1,
@@ -16880,7 +16914,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12]],
         item1: T1,
@@ -16899,7 +16933,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11]],
         item1: T1,
@@ -16917,7 +16951,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10]],
         item1: T1,
@@ -16934,7 +16968,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T8, T9](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9]],
         item1: T1,
@@ -16950,7 +16984,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7, T8](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8]],
         item1: T1,
@@ -16965,7 +16999,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6, T7](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7],
         item1: T1,
@@ -16979,7 +17013,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5, T6](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6],
         item1: T1,
@@ -16992,29 +17026,29 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4, T5](
         cls, value: Tuple[T1, T2, T3, T4, T5], item1: T1, item2: T2, item3: T3, item4: T4, item5: T5
     ) -> tuple[None, T1, T2, T3, T4, T5]:
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3, T4](
         cls, value: Tuple[T1, T2, T3, T4], item1: T1, item2: T2, item3: T3, item4: T4
     ) -> tuple[None, T1, T2, T3, T4]:
         """"""
     @classmethod
     @overload
-    def Deconstruct(
+    def Deconstruct[T1, T2, T3](
         cls, value: Tuple[T1, T2, T3], item1: T1, item2: T2, item3: T3
     ) -> tuple[None, T1, T2, T3]:
         """"""
     @classmethod
     @overload
-    def Deconstruct(cls, value: Tuple[T1, T2], item1: T1, item2: T2) -> tuple[None, T1, T2]:
+    def Deconstruct[T1, T2](cls, value: Tuple[T1, T2], item1: T1, item2: T2) -> tuple[None, T1, T2]:
         """"""
     @classmethod
     @overload
-    def Deconstruct(cls, value: Tuple[T1], item1: T1) -> tuple[None, T1]:
+    def Deconstruct[T1](cls, value: Tuple[T1], item1: T1) -> tuple[None, T1]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -17026,7 +17060,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: ValueTuple[
             T1, T2, T3, T4, T5, T6, T7, ValueTuple, T9, T10, T11, T12, T13, T14, ValueTuple[T15]
@@ -17035,7 +17069,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: ValueTuple[
             T1, T2, T3, T4, T5, T6, T7, ValueTuple, T9, T10, T11, T12, T13, T14, ValueTuple[T15]
@@ -17044,7 +17078,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: ValueTuple[
             T1, T2, T3, T4, T5, T6, T7, ValueTuple, T9, T10, T11, T12, T13, T14, ValueTuple[T15]
@@ -17053,7 +17087,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: ValueTuple[
             T1, T2, T3, T4, T5, T6, T7, ValueTuple, T9, T10, T11, T12, T13, T14, ValueTuple[T15]
@@ -17062,7 +17096,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: ValueTuple[
             T1, T2, T3, T4, T5, T6, T7, ValueTuple, T9, T10, T11, T12, T13, T14, ValueTuple[T15]
@@ -17071,7 +17105,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: ValueTuple[
             T1, T2, T3, T4, T5, T6, T7, ValueTuple, T9, T10, T11, T12, T13, T14, ValueTuple[T15]
@@ -17080,7 +17114,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: ValueTuple[
             T1, T2, T3, T4, T5, T6, T7, ValueTuple, T9, T10, T11, T12, T13, T14, ValueTuple[T15]
@@ -17089,80 +17123,84 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14](
         cls,
         value: ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11, T12, T13, T14]],
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12, T13, T14]]:
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13](
         cls, value: ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11, T12, T13]]
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12, T13]]:
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12](
         cls, value: ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11, T12]]
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12]]:
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11](
         cls, value: ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11]]
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11]]:
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10](
         cls, value: ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10]]
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10]]:
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9](
         cls, value: ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9]]
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9]]:
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7, T8](
         cls, value: ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8]]
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8]]:
         """"""
     @classmethod
     @overload
-    def ToTuple(
+    def ToTuple[T1, T2, T3, T4, T5, T6, T7](
         cls, value: ValueTuple[T1, T2, T3, T4, T5, T6, T7]
     ) -> Tuple[T1, T2, T3, T4, T5, T6, T7]:
         """"""
     @classmethod
     @overload
-    def ToTuple(cls, value: ValueTuple[T1, T2, T3, T4, T5, T6]) -> Tuple[T1, T2, T3, T4, T5, T6]:
+    def ToTuple[T1, T2, T3, T4, T5, T6](
+        cls, value: ValueTuple[T1, T2, T3, T4, T5, T6]
+    ) -> Tuple[T1, T2, T3, T4, T5, T6]:
         """"""
     @classmethod
     @overload
-    def ToTuple(cls, value: ValueTuple[T1, T2, T3, T4, T5]) -> Tuple[T1, T2, T3, T4, T5]:
+    def ToTuple[T1, T2, T3, T4, T5](
+        cls, value: ValueTuple[T1, T2, T3, T4, T5]
+    ) -> Tuple[T1, T2, T3, T4, T5]:
         """"""
     @classmethod
     @overload
-    def ToTuple(cls, value: ValueTuple[T1, T2, T3, T4]) -> Tuple[T1, T2, T3, T4]:
+    def ToTuple[T1, T2, T3, T4](cls, value: ValueTuple[T1, T2, T3, T4]) -> Tuple[T1, T2, T3, T4]:
         """"""
     @classmethod
     @overload
-    def ToTuple(cls, value: ValueTuple[T1, T2, T3]) -> Tuple[T1, T2, T3]:
+    def ToTuple[T1, T2, T3](cls, value: ValueTuple[T1, T2, T3]) -> Tuple[T1, T2, T3]:
         """"""
     @classmethod
     @overload
-    def ToTuple(cls, value: ValueTuple[T1, T2]) -> Tuple[T1, T2]:
+    def ToTuple[T1, T2](cls, value: ValueTuple[T1, T2]) -> Tuple[T1, T2]:
         """"""
     @classmethod
     @overload
-    def ToTuple(cls, value: ValueTuple[T1]) -> Tuple[T1]:
+    def ToTuple[T1](cls, value: ValueTuple[T1]) -> Tuple[T1]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
     ) -> ValueTuple[
@@ -17171,7 +17209,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
     ) -> ValueTuple[
@@ -17180,7 +17218,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
     ) -> ValueTuple[
@@ -17189,7 +17227,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
     ) -> ValueTuple[
@@ -17198,7 +17236,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
     ) -> ValueTuple[
@@ -17207,7 +17245,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
     ) -> ValueTuple[
@@ -17216,7 +17254,7 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15](
         cls,
         value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple, T9, T10, T11, T12, T13, T14, Tuple[T15]],
     ) -> ValueTuple[
@@ -17225,77 +17263,81 @@ class TupleExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12, T13, T14]]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11, T12, T13, T14]]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12, T13]]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11, T12, T13]]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11, T12]]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11, T12]]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10, T11]]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10, T11]]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9, T10]]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9, T10]]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T8, T9](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8, T9]]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8, T9]]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7, T8](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7, Tuple[T8]]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7, ValueTuple[T8]]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6, T7](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6, T7]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6, T7]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(
+    def ToValueTuple[T1, T2, T3, T4, T5, T6](
         cls, value: Tuple[T1, T2, T3, T4, T5, T6]
     ) -> ValueTuple[T1, T2, T3, T4, T5, T6]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(cls, value: Tuple[T1, T2, T3, T4, T5]) -> ValueTuple[T1, T2, T3, T4, T5]:
+    def ToValueTuple[T1, T2, T3, T4, T5](
+        cls, value: Tuple[T1, T2, T3, T4, T5]
+    ) -> ValueTuple[T1, T2, T3, T4, T5]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(cls, value: Tuple[T1, T2, T3, T4]) -> ValueTuple[T1, T2, T3, T4]:
+    def ToValueTuple[T1, T2, T3, T4](
+        cls, value: Tuple[T1, T2, T3, T4]
+    ) -> ValueTuple[T1, T2, T3, T4]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(cls, value: Tuple[T1, T2, T3]) -> ValueTuple[T1, T2, T3]:
+    def ToValueTuple[T1, T2, T3](cls, value: Tuple[T1, T2, T3]) -> ValueTuple[T1, T2, T3]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(cls, value: Tuple[T1, T2]) -> ValueTuple[T1, T2]:
+    def ToValueTuple[T1, T2](cls, value: Tuple[T1, T2]) -> ValueTuple[T1, T2]:
         """"""
     @classmethod
     @overload
-    def ToValueTuple(cls, value: Tuple[T1]) -> ValueTuple[T1]:
+    def ToValueTuple[T1](cls, value: Tuple[T1]) -> ValueTuple[T1]:
         """"""
 
 class Tuple[T1, T2, T3, T4, T5, T6, T7, TRest](
@@ -19160,7 +19202,7 @@ class UnhandledExceptionEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-UnhandledExceptionEventHandler: Callable[[object, UnhandledExceptionEventArgs], None] = ...
+type UnhandledExceptionEventHandler = Callable[[object, UnhandledExceptionEventArgs], None]
 """"""
 
 class UnitySerializationHolder(Object, IObjectReference, ISerializable):
@@ -20018,7 +20060,9 @@ class ValueTuple[T1, T2, T3, T4, T5, T6, T7, TRest](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7, TRest]) -> int:
+    def CompareTo[T1, T2, T3, T4, T5, T6, T7, TRest](
+        self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7, TRest]
+    ) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20027,7 +20071,9 @@ class ValueTuple[T1, T2, T3, T4, T5, T6, T7, TRest](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7, TRest]) -> bool:
+    def Equals[T1, T2, T3, T4, T5, T6, T7, TRest](
+        self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7, TRest]
+    ) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20087,7 +20133,9 @@ class ValueTuple[T1, T2, T3, T4, T5, T6, T7](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7]) -> int:
+    def CompareTo[T1, T2, T3, T4, T5, T6, T7](
+        self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7]
+    ) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20096,7 +20144,9 @@ class ValueTuple[T1, T2, T3, T4, T5, T6, T7](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7]) -> bool:
+    def Equals[T1, T2, T3, T4, T5, T6, T7](
+        self, other: ValueTuple[T1, T2, T3, T4, T5, T6, T7]
+    ) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20152,7 +20202,7 @@ class ValueTuple[T1, T2, T3, T4, T5, T6](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1, T2, T3, T4, T5, T6]) -> int:
+    def CompareTo[T1, T2, T3, T4, T5, T6](self, other: ValueTuple[T1, T2, T3, T4, T5, T6]) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20161,7 +20211,7 @@ class ValueTuple[T1, T2, T3, T4, T5, T6](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1, T2, T3, T4, T5, T6]) -> bool:
+    def Equals[T1, T2, T3, T4, T5, T6](self, other: ValueTuple[T1, T2, T3, T4, T5, T6]) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20215,7 +20265,7 @@ class ValueTuple[T1, T2, T3, T4, T5](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1, T2, T3, T4, T5]) -> int:
+    def CompareTo[T1, T2, T3, T4, T5](self, other: ValueTuple[T1, T2, T3, T4, T5]) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20224,7 +20274,7 @@ class ValueTuple[T1, T2, T3, T4, T5](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1, T2, T3, T4, T5]) -> bool:
+    def Equals[T1, T2, T3, T4, T5](self, other: ValueTuple[T1, T2, T3, T4, T5]) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20276,7 +20326,7 @@ class ValueTuple[T1, T2, T3, T4](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1, T2, T3, T4]) -> int:
+    def CompareTo[T1, T2, T3, T4](self, other: ValueTuple[T1, T2, T3, T4]) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20285,7 +20335,7 @@ class ValueTuple[T1, T2, T3, T4](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1, T2, T3, T4]) -> bool:
+    def Equals[T1, T2, T3, T4](self, other: ValueTuple[T1, T2, T3, T4]) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20335,7 +20385,7 @@ class ValueTuple[T1, T2, T3](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1, T2, T3]) -> int:
+    def CompareTo[T1, T2, T3](self, other: ValueTuple[T1, T2, T3]) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20344,7 +20394,7 @@ class ValueTuple[T1, T2, T3](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1, T2, T3]) -> bool:
+    def Equals[T1, T2, T3](self, other: ValueTuple[T1, T2, T3]) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20392,7 +20442,7 @@ class ValueTuple[T1, T2](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1, T2]) -> int:
+    def CompareTo[T1, T2](self, other: ValueTuple[T1, T2]) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20401,7 +20451,7 @@ class ValueTuple[T1, T2](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1, T2]) -> bool:
+    def Equals[T1, T2](self, other: ValueTuple[T1, T2]) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20447,7 +20497,7 @@ class ValueTuple[T1](
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
     @overload
-    def CompareTo(self, other: ValueTuple[T1]) -> int:
+    def CompareTo[T1](self, other: ValueTuple[T1]) -> int:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -20456,7 +20506,7 @@ class ValueTuple[T1](
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""
     @overload
-    def Equals(self, other: ValueTuple[T1]) -> bool:
+    def Equals[T1](self, other: ValueTuple[T1]) -> bool:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -20698,7 +20748,7 @@ class WeakReference[T](Object, ISerializable):
         """"""
     def GetType(self) -> Type:
         """"""
-    def SetTarget[T](self, target: T) -> None:
+    def SetTarget(self, target: T) -> None:
         """"""
     def ToString(self) -> str:
         """"""
@@ -20745,7 +20795,7 @@ class XmlIgnoreMemberAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
-class _AppDomain:
+class _AppDomain(ABC):
     """"""
     @property
     def BaseDirectory(self) -> str:

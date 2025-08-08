@@ -2842,17 +2842,17 @@ class ECCurve(ValueType):
     class ECCurveType(Enum):
         """"""
 
-        Implicit: ECCurveType = ...
+        Implicit: ECCurve.ECCurveType = ...
         """"""
-        PrimeShortWeierstrass: ECCurveType = ...
+        PrimeShortWeierstrass: ECCurve.ECCurveType = ...
         """"""
-        PrimeTwistedEdwards: ECCurveType = ...
+        PrimeTwistedEdwards: ECCurve.ECCurveType = ...
         """"""
-        PrimeMontgomery: ECCurveType = ...
+        PrimeMontgomery: ECCurve.ECCurveType = ...
         """"""
-        Characteristic2: ECCurveType = ...
+        Characteristic2: ECCurve.ECCurveType = ...
         """"""
-        Named: ECCurveType = ...
+        Named: ECCurve.ECCurveType = ...
         """"""
 
     class NamedCurves(ABC, Object):
@@ -4227,7 +4227,7 @@ class HashAlgorithmName(ValueType, IEquatable[HashAlgorithmName]):
     def __ne__(self, other: HashAlgorithmName) -> bool:
         """"""
 
-class ICryptoTransform(IDisposable):
+class ICryptoTransform(ABC, IDisposable):
     """"""
     @property
     def CanReuseTransform(self) -> bool:
@@ -4257,7 +4257,7 @@ class ICryptoTransform(IDisposable):
     ) -> Array[int]:
         """"""
 
-class ICspAsymmetricAlgorithm:
+class ICspAsymmetricAlgorithm(ABC):
     """"""
     @property
     def CspKeyContainerInfo(self) -> CspKeyContainerInfo:

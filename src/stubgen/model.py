@@ -685,6 +685,13 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
     parent: CType | None = None
 
     @property
+    def qualified_name(self) -> str:
+        """Get the full qualified name."""
+        if self.parent is None:
+            return self.name
+        return f"{self.parent.name}.{self.name}"
+
+    @property
     @override
     def unique_name(self) -> str:
         name: str = super().unique_name
@@ -718,7 +725,7 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
                 return CDelegate.merge(obj1, obj2)
         # noinspection PyUnreachableCode
         raise TypeError(
-            f"Type definitions are not the same: {type(obj1)} != {type(obj2)}"
+            f"Type definitions are not the same: {type(obj1)} != {type(obj2)}",
         )  # pragma: no cover
 
 
@@ -1000,7 +1007,7 @@ class CNamespace(CWrapper, DocNodeMixin, MergeMixin):
                         obj2.types,
                         CTypeDefinition.merge,
                     ).items(),
-                )
+                ),
             ),
         )
 

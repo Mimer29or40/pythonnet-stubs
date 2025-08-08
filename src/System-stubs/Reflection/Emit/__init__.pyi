@@ -3878,8 +3878,8 @@ class MethodBuilder(
         returnTypeRequiredCustomModifiers: Array[Type],
         returnTypeOptionalCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        parameterTypeRequiredCustomModifiers: Array[Type],
-        parameterTypeOptionalCustomModifiers: Array[Type],
+        parameterTypeRequiredCustomModifiers: Array[Array[Type]],
+        parameterTypeOptionalCustomModifiers: Array[Array[Type]],
     ) -> None:
         """"""
     def SetSymCustomAttribute(self, name: str, data: Array[int]) -> None:
@@ -4370,8 +4370,8 @@ class ModuleBuilder(Module, ICustomAttributeProvider, _Module, _ModuleBuilder, I
         requiredReturnTypeCustomModifiers: Array[Type],
         optionalReturnTypeCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        requiredParameterTypeCustomModifiers: Array[Type],
-        optionalParameterTypeCustomModifiers: Array[Type],
+        requiredParameterTypeCustomModifiers: Array[Array[Type]],
+        optionalParameterTypeCustomModifiers: Array[Array[Type]],
     ) -> MethodBuilder:
         """"""
     @overload
@@ -6099,8 +6099,8 @@ class SignatureHelper(Object, _SignatureHelper):
     def AddArguments(
         self,
         arguments: Array[Type],
-        requiredCustomModifiers: Array[Type],
-        optionalCustomModifiers: Array[Type],
+        requiredCustomModifiers: Array[Array[Type]],
+        optionalCustomModifiers: Array[Array[Type]],
     ) -> None:
         """"""
     def AddSentinel(self) -> None:
@@ -6164,8 +6164,8 @@ class SignatureHelper(Object, _SignatureHelper):
         requiredReturnTypeCustomModifiers: Array[Type],
         optionalReturnTypeCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        requiredParameterTypeCustomModifiers: Array[Type],
-        optionalParameterTypeCustomModifiers: Array[Type],
+        requiredParameterTypeCustomModifiers: Array[Array[Type]],
+        optionalParameterTypeCustomModifiers: Array[Array[Type]],
     ) -> SignatureHelper:
         """"""
     @classmethod
@@ -6183,8 +6183,8 @@ class SignatureHelper(Object, _SignatureHelper):
         requiredReturnTypeCustomModifiers: Array[Type],
         optionalReturnTypeCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        requiredParameterTypeCustomModifiers: Array[Type],
-        optionalParameterTypeCustomModifiers: Array[Type],
+        requiredParameterTypeCustomModifiers: Array[Array[Type]],
+        optionalParameterTypeCustomModifiers: Array[Array[Type]],
     ) -> SignatureHelper:
         """"""
     def GetSignature(self) -> Array[int]:
@@ -7305,8 +7305,8 @@ class TypeBuilder(
         attributes: MethodAttributes,
         callingConvention: CallingConventions,
         parameterTypes: Array[Type],
-        requiredCustomModifiers: Array[Type],
-        optionalCustomModifiers: Array[Type],
+        requiredCustomModifiers: Array[Array[Type]],
+        optionalCustomModifiers: Array[Array[Type]],
     ) -> ConstructorBuilder:
         """"""
     def DefineDefaultConstructor(self, attributes: MethodAttributes) -> ConstructorBuilder:
@@ -7360,8 +7360,8 @@ class TypeBuilder(
         returnTypeRequiredCustomModifiers: Array[Type],
         returnTypeOptionalCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        parameterTypeRequiredCustomModifiers: Array[Type],
-        parameterTypeOptionalCustomModifiers: Array[Type],
+        parameterTypeRequiredCustomModifiers: Array[Array[Type]],
+        parameterTypeOptionalCustomModifiers: Array[Array[Type]],
     ) -> MethodBuilder:
         """"""
     @overload
@@ -7441,8 +7441,8 @@ class TypeBuilder(
         returnTypeRequiredCustomModifiers: Array[Type],
         returnTypeOptionalCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        parameterTypeRequiredCustomModifiers: Array[Type],
-        parameterTypeOptionalCustomModifiers: Array[Type],
+        parameterTypeRequiredCustomModifiers: Array[Array[Type]],
+        parameterTypeOptionalCustomModifiers: Array[Array[Type]],
         nativeCallConv: CallingConvention,
         nativeCharSet: CharSet,
     ) -> MethodBuilder:
@@ -7467,8 +7467,8 @@ class TypeBuilder(
         returnTypeRequiredCustomModifiers: Array[Type],
         returnTypeOptionalCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        parameterTypeRequiredCustomModifiers: Array[Type],
-        parameterTypeOptionalCustomModifiers: Array[Type],
+        parameterTypeRequiredCustomModifiers: Array[Array[Type]],
+        parameterTypeOptionalCustomModifiers: Array[Array[Type]],
     ) -> PropertyBuilder:
         """"""
     @overload
@@ -7489,8 +7489,8 @@ class TypeBuilder(
         returnTypeRequiredCustomModifiers: Array[Type],
         returnTypeOptionalCustomModifiers: Array[Type],
         parameterTypes: Array[Type],
-        parameterTypeRequiredCustomModifiers: Array[Type],
-        parameterTypeOptionalCustomModifiers: Array[Type],
+        parameterTypeRequiredCustomModifiers: Array[Array[Type]],
+        parameterTypeOptionalCustomModifiers: Array[Array[Type]],
     ) -> PropertyBuilder:
         """"""
     def DefineTypeInitializer(self) -> ConstructorBuilder:

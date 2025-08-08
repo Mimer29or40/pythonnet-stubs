@@ -154,7 +154,7 @@ class ContextLevelActivator(Object, IActivator):
     def ToString(self) -> str:
         """"""
 
-class IActivator:
+class IActivator(ABC):
     """"""
     @property
     def Level(self) -> ActivatorLevel:
@@ -167,7 +167,7 @@ class IActivator:
     def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
         """"""
 
-class IConstructionCallMessage(IMessage, IMethodCallMessage, IMethodMessage):
+class IConstructionCallMessage(ABC, IMessage, IMethodCallMessage, IMethodMessage):
     """"""
     @property
     def ActivationType(self) -> Type:
@@ -231,7 +231,7 @@ class IConstructionCallMessage(IMessage, IMethodCallMessage, IMethodMessage):
     def GetInArgName(self, index: int) -> str:
         """"""
 
-class IConstructionReturnMessage(IMessage, IMethodMessage, IMethodReturnMessage):
+class IConstructionReturnMessage(ABC, IMessage, IMethodMessage, IMethodReturnMessage):
     """"""
     @property
     def ArgCount(self) -> int:

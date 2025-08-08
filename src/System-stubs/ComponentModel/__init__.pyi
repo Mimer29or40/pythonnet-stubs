@@ -97,7 +97,7 @@ class AddingNewEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-AddingNewEventHandler: Callable[[object, AddingNewEventArgs], None] = ...
+type AddingNewEventHandler = Callable[[object, AddingNewEventArgs], None]
 """"""
 
 class AmbientValueAttribute(Attribute, _Attribute):
@@ -392,7 +392,7 @@ class AsyncCompletedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-AsyncCompletedEventHandler: Callable[[object, AsyncCompletedEventArgs], None] = ...
+type AsyncCompletedEventHandler = Callable[[object, AsyncCompletedEventArgs], None]
 """"""
 
 class AsyncOperation(Object):
@@ -958,7 +958,7 @@ class BindingList[T](
     def SyncRoot(self) -> object:
         """"""
     @overload
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     @overload
     def Add(self, value: object) -> int:
@@ -974,7 +974,7 @@ class BindingList[T](
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def Contains(self, value: object) -> bool:
@@ -991,26 +991,26 @@ class BindingList[T](
         """"""
     def Find(self, property: PropertyDescriptor, key: object) -> int:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
     @overload
-    def IndexOf[T](self, item: T) -> int:
+    def IndexOf(self, item: T) -> int:
         """"""
     @overload
     def IndexOf(self, value: object) -> int:
         """"""
     @overload
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
     @overload
     def Insert(self, index: int, value: object) -> None:
         """"""
     @overload
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     @overload
     def Remove(self, value: object) -> None:
@@ -1028,15 +1028,15 @@ class BindingList[T](
     def ToString(self) -> str:
         """"""
     @overload
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
     @overload
     def __contains__(self, value: object) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     @overload
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     @overload
     def __delitem__(self, value: object) -> None:
@@ -1046,7 +1046,7 @@ class BindingList[T](
     def __getitem__[T](self, index: int) -> T:
         """"""
     @overload
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
     @overload
     def __setitem__(self, index: int, value: object) -> None:
@@ -1472,7 +1472,7 @@ class CancelEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-CancelEventHandler: Callable[[object, CancelEventArgs], None] = ...
+type CancelEventHandler = Callable[[object, CancelEventArgs], None]
 """"""
 
 class CategoryAttribute(Attribute, _Attribute):
@@ -1779,7 +1779,7 @@ class CollectionChangeEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-CollectionChangeEventHandler: Callable[[object, CollectionChangeEventArgs], None] = ...
+type CollectionChangeEventHandler = Callable[[object, CollectionChangeEventArgs], None]
 """"""
 
 class CollectionConverter(TypeConverter):
@@ -3984,7 +3984,7 @@ class DoWorkEventArgs(CancelEventArgs):
     def ToString(self) -> str:
         """"""
 
-DoWorkEventHandler: Callable[[object, DoWorkEventArgs], None] = ...
+type DoWorkEventHandler = Callable[[object, DoWorkEventArgs], None]
 """"""
 
 class DoubleConverter(BaseNumberConverter):
@@ -5143,10 +5143,10 @@ class HandledEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-HandledEventHandler: Callable[[object, HandledEventArgs], None] = ...
+type HandledEventHandler = Callable[[object, HandledEventArgs], None]
 """"""
 
-class IBindingList(ICollection, IEnumerable, IList):
+class IBindingList(ABC, ICollection, IEnumerable, IList):
     """"""
     @property
     def AllowEdit(self) -> bool:
@@ -5240,7 +5240,7 @@ class IBindingList(ICollection, IEnumerable, IList):
     ListChanged: EventType[ListChangedEventHandler] = ...
     """"""
 
-class IBindingListView(ICollection, IEnumerable, IList, IBindingList):
+class IBindingListView(ABC, ICollection, IEnumerable, IList, IBindingList):
     """"""
     @property
     def AllowEdit(self) -> bool:
@@ -5354,14 +5354,14 @@ class IBindingListView(ICollection, IEnumerable, IList, IBindingList):
     ListChanged: EventType[ListChangedEventHandler] = ...
     """"""
 
-class ICancelAddNew:
+class ICancelAddNew(ABC):
     """"""
     def CancelNew(self, itemIndex: int) -> None:
         """"""
     def EndNew(self, itemIndex: int) -> None:
         """"""
 
-class IChangeTracking:
+class IChangeTracking(ABC):
     """"""
     @property
     def IsChanged(self) -> bool:
@@ -5369,7 +5369,7 @@ class IChangeTracking:
     def AcceptChanges(self) -> None:
         """"""
 
-class IComNativeDescriptorHandler:
+class IComNativeDescriptorHandler(ABC):
     """"""
     def GetAttributes(self, component: object) -> AttributeCollection:
         """"""
@@ -5404,7 +5404,7 @@ class IComNativeDescriptorHandler:
     def GetPropertyValue(self, component: object, propertyName: str, success: Boolean) -> object:
         """"""
 
-class IComponent(IDisposable):
+class IComponent(ABC, IDisposable):
     """"""
     @property
     def Site(self) -> ISite:
@@ -5416,7 +5416,7 @@ class IComponent(IDisposable):
     Disposed: EventType[EventHandler] = ...
     """"""
 
-class IContainer(IDisposable):
+class IContainer(ABC, IDisposable):
     """"""
     @property
     def Components(self) -> ComponentCollection:
@@ -5434,7 +5434,7 @@ class IContainer(IDisposable):
     def __delitem__(self, component: IComponent) -> None:
         """"""
 
-class ICustomTypeDescriptor:
+class ICustomTypeDescriptor(ABC):
     """"""
     def GetAttributes(self) -> AttributeCollection:
         """"""
@@ -5465,7 +5465,7 @@ class ICustomTypeDescriptor:
     def GetPropertyOwner(self, pd: PropertyDescriptor) -> object:
         """"""
 
-class IDataErrorInfo:
+class IDataErrorInfo(ABC):
     """"""
     @property
     def Error(self) -> str:
@@ -5476,7 +5476,7 @@ class IDataErrorInfo:
     def __getitem__(self, columnName: str) -> str:
         """"""
 
-class IEditableObject:
+class IEditableObject(ABC):
     """"""
     def BeginEdit(self) -> None:
         """"""
@@ -5485,12 +5485,12 @@ class IEditableObject:
     def EndEdit(self) -> None:
         """"""
 
-class IExtenderProvider:
+class IExtenderProvider(ABC):
     """"""
     def CanExtend(self, extendee: object) -> bool:
         """"""
 
-class IIntellisenseBuilder:
+class IIntellisenseBuilder(ABC):
     """"""
     @property
     def Name(self) -> str:
@@ -5498,7 +5498,7 @@ class IIntellisenseBuilder:
     def Show(self, language: str, value: str, newValue: String) -> bool:
         """"""
 
-class IListSource:
+class IListSource(ABC):
     """"""
     @property
     def ContainsListCollection(self) -> bool:
@@ -5506,7 +5506,7 @@ class IListSource:
     def GetList(self) -> IList:
         """"""
 
-class INestedContainer(IContainer, IDisposable):
+class INestedContainer(ABC, IContainer, IDisposable):
     """"""
     @property
     def Components(self) -> ComponentCollection:
@@ -5527,7 +5527,7 @@ class INestedContainer(IContainer, IDisposable):
     def __delitem__(self, component: IComponent) -> None:
         """"""
 
-class INestedSite(ISite, IServiceProvider):
+class INestedSite(ABC, ISite, IServiceProvider):
     """"""
     @property
     def Component(self) -> IComponent:
@@ -5549,7 +5549,7 @@ class INestedSite(ISite, IServiceProvider):
     def GetService(self, serviceType: Type) -> object:
         """"""
 
-class INotifyDataErrorInfo:
+class INotifyDataErrorInfo(ABC):
     """"""
     @property
     def HasErrors(self) -> bool:
@@ -5559,25 +5559,25 @@ class INotifyDataErrorInfo:
     ErrorsChanged: EventType[EventHandler[DataErrorsChangedEventArgs]] = ...
     """"""
 
-class INotifyPropertyChanged:
+class INotifyPropertyChanged(ABC):
     """"""
 
     PropertyChanged: EventType[PropertyChangedEventHandler] = ...
     """"""
 
-class INotifyPropertyChanging:
+class INotifyPropertyChanging(ABC):
     """"""
 
     PropertyChanging: EventType[PropertyChangingEventHandler] = ...
     """"""
 
-class IRaiseItemChangedEvents:
+class IRaiseItemChangedEvents(ABC):
     """"""
     @property
     def RaisesItemChangedEvents(self) -> bool:
         """"""
 
-class IRevertibleChangeTracking(IChangeTracking):
+class IRevertibleChangeTracking(ABC, IChangeTracking):
     """"""
     @property
     def IsChanged(self) -> bool:
@@ -5587,7 +5587,7 @@ class IRevertibleChangeTracking(IChangeTracking):
     def RejectChanges(self) -> None:
         """"""
 
-class ISite(IServiceProvider):
+class ISite(ABC, IServiceProvider):
     """"""
     @property
     def Component(self) -> IComponent:
@@ -5606,14 +5606,14 @@ class ISite(IServiceProvider):
     def GetService(self, serviceType: Type) -> object:
         """"""
 
-class ISupportInitialize:
+class ISupportInitialize(ABC):
     """"""
     def BeginInit(self) -> None:
         """"""
     def EndInit(self) -> None:
         """"""
 
-class ISupportInitializeNotification(ISupportInitialize):
+class ISupportInitializeNotification(ABC, ISupportInitialize):
     """"""
     @property
     def IsInitialized(self) -> bool:
@@ -5625,7 +5625,7 @@ class ISupportInitializeNotification(ISupportInitialize):
     Initialized: EventType[EventHandler] = ...
     """"""
 
-class ISynchronizeInvoke:
+class ISynchronizeInvoke(ABC):
     """"""
     @property
     def InvokeRequired(self) -> bool:
@@ -5637,7 +5637,7 @@ class ISynchronizeInvoke:
     def Invoke(self, method: Delegate, args: Array[object]) -> object:
         """"""
 
-class ITypeDescriptorContext(IServiceProvider):
+class ITypeDescriptorContext(ABC, IServiceProvider):
     """"""
     @property
     def Container(self) -> IContainer:
@@ -5655,7 +5655,7 @@ class ITypeDescriptorContext(IServiceProvider):
     def OnComponentChanging(self) -> bool:
         """"""
 
-class ITypedList:
+class ITypedList(ABC):
     """"""
     def GetItemProperties(
         self, listAccessors: Array[PropertyDescriptor]
@@ -6873,7 +6873,7 @@ class ListChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ListChangedEventHandler: Callable[[object, ListChangedEventArgs], None] = ...
+type ListChangedEventHandler = Callable[[object, ListChangedEventArgs], None]
 """"""
 
 class ListChangedType(Enum):
@@ -8140,7 +8140,7 @@ class ProgressChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ProgressChangedEventHandler: Callable[[object, ProgressChangedEventArgs], None] = ...
+type ProgressChangedEventHandler = Callable[[object, ProgressChangedEventArgs], None]
 """"""
 
 class PropertyChangedEventArgs(EventArgs):
@@ -8159,7 +8159,7 @@ class PropertyChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-PropertyChangedEventHandler: Callable[[object, PropertyChangedEventArgs], None] = ...
+type PropertyChangedEventHandler = Callable[[object, PropertyChangedEventArgs], None]
 """"""
 
 class PropertyChangingEventArgs(EventArgs):
@@ -8178,7 +8178,7 @@ class PropertyChangingEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-PropertyChangingEventHandler: Callable[[object, PropertyChangingEventArgs], None] = ...
+type PropertyChangingEventHandler = Callable[[object, PropertyChangingEventArgs], None]
 """"""
 
 class PropertyDescriptor(ABC, MemberDescriptor):
@@ -9042,7 +9042,7 @@ class RefreshEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-RefreshEventHandler: Callable[[RefreshEventArgs], None] = ...
+type RefreshEventHandler = Callable[[RefreshEventArgs], None]
 """"""
 
 class RefreshProperties(Enum):
@@ -9180,7 +9180,7 @@ class RunWorkerCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-RunWorkerCompletedEventHandler: Callable[[object, RunWorkerCompletedEventArgs], None] = ...
+type RunWorkerCompletedEventHandler = Callable[[object, RunWorkerCompletedEventArgs], None]
 """"""
 
 class SByteConverter(BaseNumberConverter):

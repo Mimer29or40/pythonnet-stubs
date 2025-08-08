@@ -1546,6 +1546,18 @@ class TestCEvent:
 class TestCClass:
     """Tests for CClass."""
 
+    qualified_name_objects: ClassVar[ParamSequence[tuple[CClass, str]]] = [
+        ("parent", (CClass(name="Name", parent=CType(name="Parent")), "Parent.Name")),
+        ("no_parent", (CClass(name="Name"), "Name")),
+    ]
+
+    @pytest.mark.parametrize(("obj", "expected"), **make_params(qualified_name_objects))
+    def test_qualified_name(self, obj: CClass, expected: str) -> None:
+        """Test for CClass.qualified_name."""
+        actual: str = obj.qualified_name
+
+        assert actual == expected
+
     unique_name_objects: ClassVar[ParamSequence[tuple[CClass, str]]] = [
         ("basic", (CClass(name="Name"), "Name")),
         (
@@ -2419,6 +2431,18 @@ class TestCClass:
 class TestCEnum:
     """Tests for CEnum."""
 
+    qualified_name_objects: ClassVar[ParamSequence[tuple[CEnum, str]]] = [
+        ("parent", (CEnum(name="Name", parent=CType(name="Parent")), "Parent.Name")),
+        ("no_parent", (CEnum(name="Name"), "Name")),
+    ]
+
+    @pytest.mark.parametrize(("obj", "expected"), **make_params(qualified_name_objects))
+    def test_qualified_name(self, obj: CEnum, expected: str) -> None:
+        """Test for CEnum.qualified_name."""
+        actual: str = obj.qualified_name
+
+        assert actual == expected
+
     unique_name_objects: ClassVar[ParamSequence[tuple[CEnum, str]]] = [
         ("basic", (CEnum(name="Name"), "Name")),
     ]
@@ -2523,6 +2547,18 @@ class TestCEnum:
 
 class TestCDelegate:
     """Tests for CDelegate."""
+
+    qualified_name_objects: ClassVar[ParamSequence[tuple[CDelegate, str]]] = [
+        ("parent", (CDelegate(name="Name", parent=CType(name="Parent")), "Parent.Name")),
+        ("no_parent", (CDelegate(name="Name"), "Name")),
+    ]
+
+    @pytest.mark.parametrize(("obj", "expected"), **make_params(qualified_name_objects))
+    def test_qualified_name(self, obj: CDelegate, expected: str) -> None:
+        """Test for CDelegate.qualified_name."""
+        actual: str = obj.qualified_name
+
+        assert actual == expected
 
     unique_name_objects: ClassVar[ParamSequence[tuple[CDelegate, str]]] = [
         ("basic", (CDelegate(name="Name"), "Name()")),

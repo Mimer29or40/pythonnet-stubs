@@ -830,7 +830,7 @@ class HashElementEntryFieldId(Enum):
     HashElement_Xml: HashElementEntryFieldId = ...
     """"""
 
-class IAssemblyReferenceDependentAssemblyEntry:
+class IAssemblyReferenceDependentAssemblyEntry(ABC):
     """"""
     @property
     def AllData(self) -> AssemblyReferenceDependentAssemblyEntry:
@@ -866,7 +866,7 @@ class IAssemblyReferenceDependentAssemblyEntry:
     def SupportUrl(self) -> str:
         """"""
 
-class IAssemblyReferenceEntry:
+class IAssemblyReferenceEntry(ABC):
     """"""
     @property
     def AllData(self) -> AssemblyReferenceEntry:
@@ -881,7 +881,7 @@ class IAssemblyReferenceEntry:
     def ReferenceIdentity(self) -> IReferenceIdentity:
         """"""
 
-class IAssemblyRequestEntry:
+class IAssemblyRequestEntry(ABC):
     """"""
     @property
     def AllData(self) -> AssemblyRequestEntry:
@@ -893,7 +893,7 @@ class IAssemblyRequestEntry:
     def permissionSetID(self) -> str:
         """"""
 
-class ICLRSurrogateEntry:
+class ICLRSurrogateEntry(ABC):
     """"""
     @property
     def AllData(self) -> CLRSurrogateEntry:
@@ -908,7 +908,7 @@ class ICLRSurrogateEntry:
     def RuntimeVersion(self) -> str:
         """"""
 
-class ICMS:
+class ICMS(ABC):
     """"""
     @property
     def AssemblyReferenceSection(self) -> ISection:
@@ -977,7 +977,7 @@ class ICMS:
     def WindowClassSection(self) -> ISection:
         """"""
 
-class ICOMServerEntry:
+class ICOMServerEntry(ABC):
     """"""
     @property
     def AllData(self) -> COMServerEntry:
@@ -1007,7 +1007,7 @@ class ICOMServerEntry:
     def TypeLibrary(self) -> Guid:
         """"""
 
-class ICategoryMembershipDataEntry:
+class ICategoryMembershipDataEntry(ABC):
     """"""
     @property
     def AllData(self) -> CategoryMembershipDataEntry:
@@ -1022,7 +1022,7 @@ class ICategoryMembershipDataEntry:
     def index(self) -> int:
         """"""
 
-class ICategoryMembershipEntry:
+class ICategoryMembershipEntry(ABC):
     """"""
     @property
     def AllData(self) -> CategoryMembershipEntry:
@@ -1034,7 +1034,7 @@ class ICategoryMembershipEntry:
     def SubcategoryMembership(self) -> ISection:
         """"""
 
-class ICompatibleFrameworksMetadataEntry:
+class ICompatibleFrameworksMetadataEntry(ABC):
     """"""
     @property
     def AllData(self) -> CompatibleFrameworksMetadataEntry:
@@ -1043,7 +1043,7 @@ class ICompatibleFrameworksMetadataEntry:
     def SupportUrl(self) -> str:
         """"""
 
-class IDependentOSMetadataEntry:
+class IDependentOSMetadataEntry(ABC):
     """"""
     @property
     def AllData(self) -> DependentOSMetadataEntry:
@@ -1070,7 +1070,7 @@ class IDependentOSMetadataEntry:
     def SupportUrl(self) -> str:
         """"""
 
-class IDeploymentMetadataEntry:
+class IDeploymentMetadataEntry(ABC):
     """"""
     @property
     def AllData(self) -> DeploymentMetadataEntry:
@@ -1091,7 +1091,7 @@ class IDeploymentMetadataEntry:
     def MinimumRequiredVersion(self) -> str:
         """"""
 
-class IDescriptionMetadataEntry:
+class IDescriptionMetadataEntry(ABC):
     """"""
     @property
     def AllData(self) -> DescriptionMetadataEntry:
@@ -1115,7 +1115,7 @@ class IDescriptionMetadataEntry:
     def SupportUrl(self) -> str:
         """"""
 
-class IEntryPointEntry:
+class IEntryPointEntry(ABC):
     """"""
     @property
     def AllData(self) -> EntryPointEntry:
@@ -1136,7 +1136,7 @@ class IEntryPointEntry:
     def Name(self) -> str:
         """"""
 
-class IFileAssociationEntry:
+class IFileAssociationEntry(ABC):
     """"""
     @property
     def AllData(self) -> FileAssociationEntry:
@@ -1157,7 +1157,7 @@ class IFileAssociationEntry:
     def ProgID(self) -> str:
         """"""
 
-class IFileEntry:
+class IFileEntry(ABC):
     """"""
     @property
     def AllData(self) -> FileEntry:
@@ -1205,7 +1205,7 @@ class IFileEntry:
     def WritableType(self) -> int:
         """"""
 
-class IHashElementEntry:
+class IHashElementEntry(ABC):
     """"""
     @property
     def AllData(self) -> HashElementEntry:
@@ -1229,7 +1229,7 @@ class IHashElementEntry:
     def index(self) -> int:
         """"""
 
-class IMetadataSectionEntry:
+class IMetadataSectionEntry(ABC):
     """"""
     @property
     def AllData(self) -> MetadataSectionEntry:
@@ -1295,7 +1295,7 @@ class IMetadataSectionEntry:
     def defaultPermissionSetID(self) -> str:
         """"""
 
-class IMuiResourceIdLookupMapEntry:
+class IMuiResourceIdLookupMapEntry(ABC):
     """"""
     @property
     def AllData(self) -> MuiResourceIdLookupMapEntry:
@@ -1306,7 +1306,7 @@ class IMuiResourceIdLookupMapEntry:
     def __len__(self) -> int:
         """"""
 
-class IMuiResourceMapEntry:
+class IMuiResourceMapEntry(ABC):
     """"""
     @property
     def AllData(self) -> MuiResourceMapEntry:
@@ -1318,7 +1318,7 @@ class IMuiResourceMapEntry:
     def ResourceTypeIdString(self) -> object:
         """"""
 
-class IMuiResourceTypeIdIntEntry:
+class IMuiResourceTypeIdIntEntry(ABC):
     """"""
     @property
     def AllData(self) -> MuiResourceTypeIdIntEntry:
@@ -1330,7 +1330,7 @@ class IMuiResourceTypeIdIntEntry:
     def StringIds(self) -> object:
         """"""
 
-class IMuiResourceTypeIdStringEntry:
+class IMuiResourceTypeIdStringEntry(ABC):
     """"""
     @property
     def AllData(self) -> MuiResourceTypeIdStringEntry:
@@ -1342,7 +1342,7 @@ class IMuiResourceTypeIdStringEntry:
     def StringIds(self) -> object:
         """"""
 
-class IPermissionSetEntry:
+class IPermissionSetEntry(ABC):
     """"""
     @property
     def AllData(self) -> PermissionSetEntry:
@@ -1354,7 +1354,7 @@ class IPermissionSetEntry:
     def XmlSegment(self) -> str:
         """"""
 
-class IProgIdRedirectionEntry:
+class IProgIdRedirectionEntry(ABC):
     """"""
     @property
     def AllData(self) -> ProgIdRedirectionEntry:
@@ -1366,7 +1366,7 @@ class IProgIdRedirectionEntry:
     def RedirectedGuid(self) -> Guid:
         """"""
 
-class IResourceTableMappingEntry:
+class IResourceTableMappingEntry(ABC):
     """"""
     @property
     def AllData(self) -> ResourceTableMappingEntry:
@@ -1378,7 +1378,7 @@ class IResourceTableMappingEntry:
     def id(self) -> str:
         """"""
 
-class ISubcategoryMembershipEntry:
+class ISubcategoryMembershipEntry(ABC):
     """"""
     @property
     def AllData(self) -> SubcategoryMembershipEntry:
@@ -1390,7 +1390,7 @@ class ISubcategoryMembershipEntry:
     def Subcategory(self) -> str:
         """"""
 
-class IWindowClassEntry:
+class IWindowClassEntry(ABC):
     """"""
     @property
     def AllData(self) -> WindowClassEntry:

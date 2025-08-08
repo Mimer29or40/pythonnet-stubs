@@ -154,7 +154,7 @@ class Fusion(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class IApplicationContext:
+class IApplicationContext(ABC):
     """"""
     def Get(
         self, szName: str, pvValue: Int32, pcbValue: UInt32, dwFlags: int
@@ -169,7 +169,7 @@ class IApplicationContext:
     def SetContextNameObject(self, pName: IAssemblyName) -> None:
         """"""
 
-class IAssemblyEnum:
+class IAssemblyEnum(ABC):
     """"""
     def Clone(self, ppEnum: IAssemblyEnum) -> tuple[int, IAssemblyEnum]:
         """"""
@@ -180,7 +180,7 @@ class IAssemblyEnum:
     def Reset(self) -> int:
         """"""
 
-class IAssemblyName:
+class IAssemblyName(ABC):
     """"""
     def BindToObject(
         self,
@@ -213,7 +213,7 @@ class IAssemblyName:
     def SetProperty(self, PropertyId: int, pvProperty: IntPtr, cbProperty: int) -> int:
         """"""
 
-class IInternetSecurityManager:
+class IInternetSecurityManager(ABC):
     """"""
     def GetSecurityId(
         self, pwszUrl: str, pbSecurityId: int, pcbSecurityId: int, dwReserved: int
@@ -1753,7 +1753,7 @@ class NativeMethods(ABC, Object):
     @classmethod
     def WaitForInputIdle(cls, handle: SafeProcessHandle, milliseconds: int) -> int:
         """"""
-    ConHndlr: Callable[[int], int] = ...
+    type ConHndlr = Callable[[int], int]
     """"""
     class MSG(ValueType):
         """"""
@@ -1837,24 +1837,24 @@ class NativeMethods(ABC, Object):
     class StructFormat(Enum):
         """"""
 
-        Ansi: StructFormat = ...
+        Ansi: NativeMethods.StructFormat = ...
         """"""
-        Unicode: StructFormat = ...
+        Unicode: NativeMethods.StructFormat = ...
         """"""
-        Auto: StructFormat = ...
+        Auto: NativeMethods.StructFormat = ...
         """"""
 
     class StructFormatEnum(Enum):
         """"""
 
-        Ansi: StructFormatEnum = ...
+        Ansi: NativeMethods.StructFormatEnum = ...
         """"""
-        Unicode: StructFormatEnum = ...
+        Unicode: NativeMethods.StructFormatEnum = ...
         """"""
-        Auto: StructFormatEnum = ...
+        Auto: NativeMethods.StructFormatEnum = ...
         """"""
 
-    WndProc: Callable[[IntPtr, int, IntPtr, IntPtr], IntPtr] = ...
+    type WndProc = Callable[[IntPtr, int, IntPtr, IntPtr], IntPtr]
     """"""
 
 class OAVariantLib(ABC, Object):
@@ -1895,7 +1895,7 @@ class PowerModeChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-PowerModeChangedEventHandler: Callable[[object, PowerModeChangedEventArgs], None] = ...
+type PowerModeChangedEventHandler = Callable[[object, PowerModeChangedEventArgs], None]
 """"""
 
 class PowerModes(Enum):
@@ -2341,7 +2341,7 @@ class SessionEndedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-SessionEndedEventHandler: Callable[[object, SessionEndedEventArgs], None] = ...
+type SessionEndedEventHandler = Callable[[object, SessionEndedEventArgs], None]
 """"""
 
 class SessionEndingEventArgs(EventArgs):
@@ -2365,7 +2365,7 @@ class SessionEndingEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-SessionEndingEventHandler: Callable[[object, SessionEndingEventArgs], None] = ...
+type SessionEndingEventHandler = Callable[[object, SessionEndingEventArgs], None]
 """"""
 
 class SessionSwitchEventArgs(EventArgs):
@@ -2384,7 +2384,7 @@ class SessionSwitchEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-SessionSwitchEventHandler: Callable[[object, SessionSwitchEventArgs], None] = ...
+type SessionSwitchEventHandler = Callable[[object, SessionSwitchEventArgs], None]
 """"""
 
 class SessionSwitchReason(Enum):
@@ -2473,7 +2473,7 @@ class TimerElapsedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-TimerElapsedEventHandler: Callable[[object, TimerElapsedEventArgs], None] = ...
+type TimerElapsedEventHandler = Callable[[object, TimerElapsedEventArgs], None]
 """"""
 
 class UnsafeNativeMethods(ABC, Object):
@@ -2897,7 +2897,7 @@ class UserPreferenceChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-UserPreferenceChangedEventHandler: Callable[[object, UserPreferenceChangedEventArgs], None] = ...
+type UserPreferenceChangedEventHandler = Callable[[object, UserPreferenceChangedEventArgs], None]
 """"""
 
 class UserPreferenceChangingEventArgs(EventArgs):
@@ -2916,7 +2916,7 @@ class UserPreferenceChangingEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-UserPreferenceChangingEventHandler: Callable[[object, UserPreferenceChangingEventArgs], None] = ...
+type UserPreferenceChangingEventHandler = Callable[[object, UserPreferenceChangingEventArgs], None]
 """"""
 
 class Win32Native(ABC, Object):

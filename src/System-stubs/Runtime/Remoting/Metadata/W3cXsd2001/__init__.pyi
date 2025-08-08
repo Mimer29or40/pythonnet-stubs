@@ -10,7 +10,7 @@ from System import Object
 from System import TimeSpan
 from System import Type
 
-class ISoapXsd:
+class ISoapXsd(ABC):
     """"""
     def GetXsdType(self) -> str:
         """"""

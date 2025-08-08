@@ -238,10 +238,10 @@ class VariableBinder(ExpressionVisitor):
     def Visit(self, node: Expression) -> Expression:
         """"""
     @overload
-    def VisitAndConvert[T, T](self, node: T, callerName: str) -> T:
+    def VisitAndConvert[T](self, node: T, callerName: str) -> T:
         """"""
     @overload
-    def VisitAndConvert(
+    def VisitAndConvert[T](
         self, nodes: ReadOnlyCollection[T], callerName: str
     ) -> ReadOnlyCollection[T]:
         """"""

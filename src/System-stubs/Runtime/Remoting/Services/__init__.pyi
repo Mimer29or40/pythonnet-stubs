@@ -1,5 +1,7 @@
 """Automatically generated stubs for C# namespace: System.Runtime.Remoting.Services."""
 
+from abc import ABC
+
 from System import Array
 from System import IntPtr
 from System import MarshalByRefObject
@@ -34,7 +36,7 @@ class EnterpriseServicesHelper(Object):
     def WrapIUnknownWithComObject(cls, punk: IntPtr) -> object:
         """"""
 
-class ITrackingHandler:
+class ITrackingHandler(ABC):
     """"""
     def DisconnectedObject(self, obj: object) -> None:
         """"""

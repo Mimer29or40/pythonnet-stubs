@@ -184,13 +184,13 @@ class EncryptionPolicy(Enum):
     NoEncryption: EncryptionPolicy = ...
     """"""
 
-LocalCertSelectionCallback: Callable[
+type LocalCertSelectionCallback = Callable[
     [str, X509CertificateCollection, X509Certificate, Array[str]], X509Certificate
-] = ...
+]
 """"""
-LocalCertificateSelectionCallback: Callable[
+type LocalCertificateSelectionCallback = Callable[
     [object, str, X509CertificateCollection, X509Certificate, Array[str]], X509Certificate
-] = ...
+]
 """"""
 
 class NegoState(Object):
@@ -569,13 +569,13 @@ class ProtocolToken(Object):
     def ToString(self) -> str:
         """"""
 
-RemoteCertValidationCallback: Callable[
+type RemoteCertValidationCallback = Callable[
     [str, X509Certificate, X509Chain, SslPolicyErrors], bool
-] = ...
+]
 """"""
-RemoteCertificateValidationCallback: Callable[
+type RemoteCertificateValidationCallback = Callable[
     [object, X509Certificate, X509Chain, SslPolicyErrors], bool
-] = ...
+]
 """"""
 
 class SSPIHandleCache(ABC, Object):

@@ -90,7 +90,7 @@ class SerialDataReceivedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-SerialDataReceivedEventHandler: Callable[[object, SerialDataReceivedEventArgs], None] = ...
+type SerialDataReceivedEventHandler = Callable[[object, SerialDataReceivedEventArgs], None]
 """"""
 
 class SerialError(Enum):
@@ -121,7 +121,7 @@ class SerialErrorReceivedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-SerialErrorReceivedEventHandler: Callable[[object, SerialErrorReceivedEventArgs], None] = ...
+type SerialErrorReceivedEventHandler = Callable[[object, SerialErrorReceivedEventArgs], None]
 """"""
 
 class SerialPinChange(Enum):
@@ -152,7 +152,7 @@ class SerialPinChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-SerialPinChangedEventHandler: Callable[[object, SerialPinChangedEventArgs], None] = ...
+type SerialPinChangedEventHandler = Callable[[object, SerialPinChangedEventArgs], None]
 """"""
 
 class SerialPort(Component, IComponent, IDisposable):

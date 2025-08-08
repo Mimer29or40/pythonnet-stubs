@@ -80,18 +80,18 @@ class BlockingCollection[T](
     def SyncRoot(self) -> object:
         """"""
     @overload
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     @overload
-    def Add[T](self, item: T, cancellationToken: CancellationToken) -> None:
-        """"""
-    @classmethod
-    @overload
-    def AddToAny[T](cls, collections: Array[BlockingCollection[T]], item: T) -> int:
+    def Add(self, item: T, cancellationToken: CancellationToken) -> None:
         """"""
     @classmethod
     @overload
-    def AddToAny[T](
+    def AddToAny(cls, collections: Array[BlockingCollection[T]], item: T) -> int:
+        """"""
+    @classmethod
+    @overload
+    def AddToAny(
         cls,
         collections: Array[BlockingCollection[T]],
         item: T,
@@ -116,17 +116,17 @@ class BlockingCollection[T](
     @overload
     def GetConsumingEnumerable(self, cancellationToken: CancellationToken) -> IEnumerable[T]:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
     @overload
-    def Take[T](self) -> T:
+    def Take(self) -> T:
         """"""
     @overload
-    def Take[T](self, cancellationToken: CancellationToken) -> T:
+    def Take(self, cancellationToken: CancellationToken) -> T:
         """"""
     @classmethod
     @overload
@@ -146,32 +146,32 @@ class BlockingCollection[T](
     def ToString(self) -> str:
         """"""
     @overload
-    def TryAdd[T](self, item: T) -> bool:
+    def TryAdd(self, item: T) -> bool:
         """"""
     @overload
-    def TryAdd[T](self, item: T, millisecondsTimeout: int) -> bool:
+    def TryAdd(self, item: T, millisecondsTimeout: int) -> bool:
         """"""
     @overload
-    def TryAdd[T](
+    def TryAdd(
         self, item: T, millisecondsTimeout: int, cancellationToken: CancellationToken
     ) -> bool:
         """"""
     @overload
-    def TryAdd[T](self, item: T, timeout: TimeSpan) -> bool:
+    def TryAdd(self, item: T, timeout: TimeSpan) -> bool:
         """"""
     @classmethod
     @overload
-    def TryAddToAny[T](cls, collections: Array[BlockingCollection[T]], item: T) -> int:
+    def TryAddToAny(cls, collections: Array[BlockingCollection[T]], item: T) -> int:
         """"""
     @classmethod
     @overload
-    def TryAddToAny[T](
+    def TryAddToAny(
         cls, collections: Array[BlockingCollection[T]], item: T, millisecondsTimeout: int
     ) -> int:
         """"""
     @classmethod
     @overload
-    def TryAddToAny[T](
+    def TryAddToAny(
         cls,
         collections: Array[BlockingCollection[T]],
         item: T,
@@ -181,7 +181,7 @@ class BlockingCollection[T](
         """"""
     @classmethod
     @overload
-    def TryAddToAny[T](
+    def TryAddToAny(
         cls, collections: Array[BlockingCollection[T]], item: T, timeout: TimeSpan
     ) -> int:
         """"""
@@ -225,7 +225,7 @@ class BlockingCollection[T](
         cls, collections: Array[BlockingCollection[T]], item: T, timeout: TimeSpan
     ) -> tuple[int, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -333,7 +333,7 @@ class ConcurrentBag[T](
     @property
     def SyncRoot(self) -> object:
         """"""
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
@@ -343,7 +343,7 @@ class ConcurrentBag[T](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -353,13 +353,13 @@ class ConcurrentBag[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def TryAdd[T](self, item: T) -> bool:
+    def TryAdd(self, item: T) -> bool:
         """"""
     def TryPeek(self, result: T) -> tuple[bool, T]:
         """"""
     def TryTake(self, result: T) -> tuple[bool, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -436,21 +436,21 @@ class ConcurrentDictionary[TKey, TValue](
     def Values(self) -> ICollection[TValue]:
         """"""
     @overload
-    def Add[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def Add(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
-    def Add(self, item: KeyValuePair[TKey, TValue]) -> None:
+    def Add[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> None:
         """"""
     @overload
     def Add(self, key: object, value: object) -> None:
         """"""
     @overload
-    def AddOrUpdate[TKey, TValue, TValue](
+    def AddOrUpdate(
         self, key: TKey, addValue: TValue, updateValueFactory: Func[TKey, TValue, TValue]
     ) -> TValue:
         """"""
     @overload
-    def AddOrUpdate[TKey, TArg, TValue](
+    def AddOrUpdate[TArg](
         self,
         key: TKey,
         addValueFactory: Func[TKey, TArg, TValue],
@@ -459,7 +459,7 @@ class ConcurrentDictionary[TKey, TValue](
     ) -> TValue:
         """"""
     @overload
-    def AddOrUpdate[TKey, TValue](
+    def AddOrUpdate(
         self,
         key: TKey,
         addValueFactory: Func[TKey, TValue],
@@ -469,43 +469,45 @@ class ConcurrentDictionary[TKey, TValue](
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Contains[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Contains(self, key: object) -> bool:
         """"""
-    def ContainsKey[TKey](self, key: TKey) -> bool:
+    def ContainsKey(self, key: TKey) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
         """"""
     @overload
-    def CopyTo(self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int) -> None:
+    def CopyTo[TKey, TValue](
+        self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int
+    ) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
+    def GetEnumerator[TKey, TValue](self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     @overload
-    def GetOrAdd[TKey, TValue, TValue](self, key: TKey, value: TValue) -> TValue:
+    def GetOrAdd(self, key: TKey, value: TValue) -> TValue:
         """"""
     @overload
-    def GetOrAdd[TKey, TArg, TValue](
+    def GetOrAdd[TArg](
         self, key: TKey, valueFactory: Func[TKey, TArg, TValue], factoryArgument: TArg
     ) -> TValue:
         """"""
     @overload
-    def GetOrAdd[TKey, TValue](self, key: TKey, valueFactory: Func[TKey, TValue]) -> TValue:
+    def GetOrAdd(self, key: TKey, valueFactory: Func[TKey, TValue]) -> TValue:
         """"""
     def GetType(self) -> Type:
         """"""
     @overload
-    def Remove[TKey](self, key: TKey) -> bool:
+    def Remove(self, key: TKey) -> bool:
         """"""
     @overload
-    def Remove(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Remove[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Remove(self, key: object) -> None:
@@ -514,32 +516,30 @@ class ConcurrentDictionary[TKey, TValue](
         """"""
     def ToString(self) -> str:
         """"""
-    def TryAdd[TKey, TValue](self, key: TKey, value: TValue) -> bool:
+    def TryAdd(self, key: TKey, value: TValue) -> bool:
         """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
-    def TryRemove[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryRemove(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
-    def TryUpdate[TKey, TValue, TValue](
-        self, key: TKey, newValue: TValue, comparisonValue: TValue
-    ) -> bool:
+    def TryUpdate(self, key: TKey, newValue: TValue, comparisonValue: TValue) -> bool:
         """"""
     @overload
-    def __contains__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __contains__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __contains__(self, key: object) -> bool:
         """"""
     @overload
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[KeyValuePair[TKey, TValue]]:
-        """"""
-    @overload
-    def __delitem__[TKey](self, key: TKey) -> bool:
+    def __iter__[TKey, TValue](self) -> Iterator[KeyValuePair[TKey, TValue]]:
         """"""
     @overload
-    def __delitem__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __delitem__(self, key: TKey) -> bool:
+        """"""
+    @overload
+    def __delitem__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __delitem__(self, key: object) -> None:
@@ -547,13 +547,13 @@ class ConcurrentDictionary[TKey, TValue](
     def __len__(self) -> int:
         """"""
     @overload
-    def __getitem__[TKey, TValue](self, key: TKey) -> TValue:
+    def __getitem__(self, key: TKey) -> TValue:
         """"""
     @overload
     def __getitem__(self, key: object) -> object:
         """"""
     @overload
-    def __setitem__[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def __setitem__(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
     def __setitem__(self, key: object, value: object) -> None:
@@ -592,11 +592,11 @@ class ConcurrentQueue[T](
     @overload
     def CopyTo(self, array: Array[T], index: int) -> None:
         """"""
-    def Enqueue[T](self, item: T) -> None:
+    def Enqueue(self, item: T) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -606,7 +606,7 @@ class ConcurrentQueue[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def TryAdd[T](self, item: T) -> bool:
+    def TryAdd(self, item: T) -> bool:
         """"""
     def TryDequeue(self, result: T) -> tuple[bool, T]:
         """"""
@@ -614,7 +614,7 @@ class ConcurrentQueue[T](
         """"""
     def TryTake(self, item: T) -> tuple[bool, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -656,13 +656,13 @@ class ConcurrentStack[T](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def Push[T](self, item: T) -> None:
+    def Push(self, item: T) -> None:
         """"""
     @overload
     def PushRange(self, items: Array[T]) -> None:
@@ -674,7 +674,7 @@ class ConcurrentStack[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def TryAdd[T](self, item: T) -> bool:
+    def TryAdd(self, item: T) -> bool:
         """"""
     def TryPeek(self, result: T) -> tuple[bool, T]:
         """"""
@@ -688,7 +688,7 @@ class ConcurrentStack[T](
         """"""
     def TryTake(self, item: T) -> tuple[bool, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -701,7 +701,7 @@ class EnumerablePartitionerOptions(Enum):
     NoBuffering: EnumerablePartitionerOptions = ...
     """"""
 
-class IProducerConsumerCollection[T](IEnumerable[T], ICollection, IEnumerable):
+class IProducerConsumerCollection[T](ABC, IEnumerable[T], ICollection, IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -718,15 +718,15 @@ class IProducerConsumerCollection[T](IEnumerable[T], ICollection, IEnumerable):
     @overload
     def CopyTo(self, array: Array[T], index: int) -> None:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def ToArray(self) -> Array[T]:
         """"""
-    def TryAdd[T](self, item: T) -> bool:
+    def TryAdd(self, item: T) -> bool:
         """"""
     def TryTake(self, item: T) -> tuple[bool, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -768,21 +768,25 @@ class Partitioner(ABC, Object):
     """"""
     @classmethod
     @overload
-    def Create(cls, source: IEnumerable[TSource]) -> OrderablePartitioner[TSource]:
+    def Create[TSource](cls, source: IEnumerable[TSource]) -> OrderablePartitioner[TSource]:
         """"""
     @classmethod
     @overload
-    def Create(
+    def Create[TSource](
         cls, source: IEnumerable[TSource], partitionerOptions: EnumerablePartitionerOptions
     ) -> OrderablePartitioner[TSource]:
         """"""
     @classmethod
     @overload
-    def Create(cls, list: IList[TSource], loadBalance: bool) -> OrderablePartitioner[TSource]:
+    def Create[TSource](
+        cls, list: IList[TSource], loadBalance: bool
+    ) -> OrderablePartitioner[TSource]:
         """"""
     @classmethod
     @overload
-    def Create(cls, array: Array[TSource], loadBalance: bool) -> OrderablePartitioner[TSource]:
+    def Create[TSource](
+        cls, array: Array[TSource], loadBalance: bool
+    ) -> OrderablePartitioner[TSource]:
         """"""
     @classmethod
     @overload

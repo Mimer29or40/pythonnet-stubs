@@ -932,7 +932,7 @@ class HandlerBase(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class ICodeCompiler:
+class ICodeCompiler(ABC):
     """"""
     def CompileAssemblyFromDom(
         self, options: CompilerParameters, compilationUnit: CodeCompileUnit
@@ -959,7 +959,7 @@ class ICodeCompiler:
     ) -> CompilerResults:
         """"""
 
-class ICodeGenerator:
+class ICodeGenerator(ABC):
     """"""
     def CreateEscapedIdentifier(self, value: str) -> str:
         """"""
@@ -994,7 +994,7 @@ class ICodeGenerator:
     def ValidateIdentifier(self, value: str) -> None:
         """"""
 
-class ICodeParser:
+class ICodeParser(ABC):
     """"""
     def Parse(self, codeStream: TextReader) -> CodeCompileUnit:
         """"""

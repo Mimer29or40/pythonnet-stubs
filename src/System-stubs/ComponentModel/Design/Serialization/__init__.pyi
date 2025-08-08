@@ -237,7 +237,7 @@ class DesignerSerializerAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
-class IDesignerLoaderHost(IDesignerHost, IServiceContainer, IServiceProvider):
+class IDesignerLoaderHost(ABC, IDesignerHost, IServiceContainer, IServiceProvider):
     """"""
     @property
     def Container(self) -> IContainer:
@@ -318,7 +318,9 @@ class IDesignerLoaderHost(IDesignerHost, IServiceContainer, IServiceProvider):
     TransactionOpening: EventType[EventHandler] = ...
     """"""
 
-class IDesignerLoaderHost2(IDesignerLoaderHost, IDesignerHost, IServiceContainer, IServiceProvider):
+class IDesignerLoaderHost2(
+    ABC, IDesignerLoaderHost, IDesignerHost, IServiceContainer, IServiceProvider
+):
     """"""
     @property
     def CanReloadWithErrors(self) -> bool:
@@ -409,7 +411,7 @@ class IDesignerLoaderHost2(IDesignerLoaderHost, IDesignerHost, IServiceContainer
     TransactionOpening: EventType[EventHandler] = ...
     """"""
 
-class IDesignerLoaderService:
+class IDesignerLoaderService(ABC):
     """"""
     def AddLoadDependency(self) -> None:
         """"""
@@ -418,7 +420,7 @@ class IDesignerLoaderService:
     def Reload(self) -> bool:
         """"""
 
-class IDesignerSerializationManager(IServiceProvider):
+class IDesignerSerializationManager(ABC, IServiceProvider):
     """"""
     @property
     def Context(self) -> ContextStack:
@@ -453,7 +455,7 @@ class IDesignerSerializationManager(IServiceProvider):
     SerializationComplete: EventType[EventHandler] = ...
     """"""
 
-class IDesignerSerializationProvider:
+class IDesignerSerializationProvider(ABC):
     """"""
     def GetSerializer(
         self,
@@ -464,14 +466,14 @@ class IDesignerSerializationProvider:
     ) -> object:
         """"""
 
-class IDesignerSerializationService:
+class IDesignerSerializationService(ABC):
     """"""
     def Deserialize(self, serializationData: object) -> ICollection:
         """"""
     def Serialize(self, objects: ICollection) -> object:
         """"""
 
-class INameCreationService:
+class INameCreationService(ABC):
     """"""
     def CreateName(self, container: IContainer, dataType: Type) -> str:
         """"""
@@ -600,7 +602,7 @@ class ResolveNameEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ResolveNameEventHandler: Callable[[object, ResolveNameEventArgs], None] = ...
+type ResolveNameEventHandler = Callable[[object, ResolveNameEventArgs], None]
 """"""
 
 class RootDesignerSerializerAttribute(Attribute, _Attribute):

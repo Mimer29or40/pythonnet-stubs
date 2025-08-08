@@ -1,5 +1,6 @@
 """Automatically generated stubs for C# namespace: System.Runtime.InteropServices.Expando."""
 
+from abc import ABC
 from typing import overload
 
 from System import Array
@@ -15,7 +16,7 @@ from System.Reflection import MethodInfo
 from System.Reflection import ParameterModifier
 from System.Reflection import PropertyInfo
 
-class IExpando(IReflect):
+class IExpando(ABC, IReflect):
     """"""
     @property
     def UnderlyingSystemType(self) -> Type:

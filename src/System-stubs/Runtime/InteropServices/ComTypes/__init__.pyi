@@ -1,5 +1,6 @@
 """Automatically generated stubs for C# namespace: System.Runtime.InteropServices.ComTypes."""
 
+from abc import ABC
 from collections.abc import Iterator
 from typing import ClassVar
 from typing import Final
@@ -358,7 +359,7 @@ class FUNCKIND(Enum):
     FUNC_DISPATCH: FUNCKIND = ...
     """"""
 
-class IAdviseSink:
+class IAdviseSink(ABC):
     """"""
     def OnClose(self) -> None:
         """"""
@@ -371,7 +372,7 @@ class IAdviseSink:
     def OnViewChange(self, aspect: int, index: int) -> None:
         """"""
 
-class IBindCtx:
+class IBindCtx(ABC):
     """"""
     def EnumObjectParam(self, ppenum: IEnumString) -> tuple[None, IEnumString]:
         """"""
@@ -394,7 +395,7 @@ class IBindCtx:
     def SetBindOptions(self, pbindopts: BIND_OPTS) -> None:
         """"""
 
-class IConnectionPoint:
+class IConnectionPoint(ABC):
     """"""
     def Advise(self, pUnkSink: object, pdwCookie: Int32) -> tuple[None, Int32]:
         """"""
@@ -409,7 +410,7 @@ class IConnectionPoint:
     def Unadvise(self, dwCookie: int) -> None:
         """"""
 
-class IConnectionPointContainer:
+class IConnectionPointContainer(ABC):
     """"""
     def EnumConnectionPoints(
         self, ppEnum: IEnumConnectionPoints
@@ -450,7 +451,7 @@ class IDLFLAG(Enum):
     IDLFLAG_FRETVAL: IDLFLAG = ...
     """"""
 
-class IDataObject:
+class IDataObject(ABC):
     """"""
     def DAdvise(
         self, pFormatetc: FORMATETC, advf: ADVF, adviseSink: IAdviseSink, connection: Int32
@@ -475,7 +476,7 @@ class IDataObject:
     def SetData(self, formatIn: FORMATETC, medium: STGMEDIUM, release: bool) -> None:
         """"""
 
-class IEnumConnectionPoints:
+class IEnumConnectionPoints(ABC):
     """"""
     def Clone(self, ppenum: IEnumConnectionPoints) -> tuple[None, IEnumConnectionPoints]:
         """"""
@@ -488,7 +489,7 @@ class IEnumConnectionPoints:
     def Skip(self, celt: int) -> int:
         """"""
 
-class IEnumConnections:
+class IEnumConnections(ABC):
     """"""
     def Clone(self, ppenum: IEnumConnections) -> tuple[None, IEnumConnections]:
         """"""
@@ -501,7 +502,7 @@ class IEnumConnections:
     def Skip(self, celt: int) -> int:
         """"""
 
-class IEnumFORMATETC:
+class IEnumFORMATETC(ABC):
     """"""
     def Clone(self, newEnum: IEnumFORMATETC) -> tuple[None, IEnumFORMATETC]:
         """"""
@@ -514,7 +515,7 @@ class IEnumFORMATETC:
     def Skip(self, celt: int) -> int:
         """"""
 
-class IEnumMoniker:
+class IEnumMoniker(ABC):
     """"""
     def Clone(self, ppenum: IEnumMoniker) -> tuple[None, IEnumMoniker]:
         """"""
@@ -527,7 +528,7 @@ class IEnumMoniker:
     def Skip(self, celt: int) -> int:
         """"""
 
-class IEnumSTATDATA:
+class IEnumSTATDATA(ABC):
     """"""
     def Clone(self, newEnum: IEnumSTATDATA) -> tuple[None, IEnumSTATDATA]:
         """"""
@@ -540,7 +541,7 @@ class IEnumSTATDATA:
     def Skip(self, celt: int) -> int:
         """"""
 
-class IEnumString:
+class IEnumString(ABC):
     """"""
     def Clone(self, ppenum: IEnumString) -> tuple[None, IEnumString]:
         """"""
@@ -551,7 +552,7 @@ class IEnumString:
     def Skip(self, celt: int) -> int:
         """"""
 
-class IEnumVARIANT:
+class IEnumVARIANT(ABC):
     """"""
     def Clone(self) -> IEnumVARIANT:
         """"""
@@ -564,14 +565,14 @@ class IEnumVARIANT:
     def Skip(self, celt: int) -> int:
         """"""
 
-class IEnumerable:
+class IEnumerable(ABC):
     """"""
     def GetEnumerator(self) -> IEnumerator:
         """"""
     def __iter__(self) -> Iterator:
         """"""
 
-class IEnumerator:
+class IEnumerator(ABC):
     """"""
     @property
     def Current(self) -> object:
@@ -581,7 +582,7 @@ class IEnumerator:
     def Reset(self) -> None:
         """"""
 
-class IExpando(IReflect):
+class IExpando(ABC, IReflect):
     """"""
     @property
     def UnderlyingSystemType(self) -> Type:
@@ -658,7 +659,7 @@ class IMPLTYPEFLAGS(Enum):
     IMPLTYPEFLAG_FDEFAULTVTABLE: IMPLTYPEFLAGS = ...
     """"""
 
-class IMoniker:
+class IMoniker(ABC):
     """"""
     def BindToObject(
         self, pbc: IBindCtx, pmkToLeft: IMoniker, riidResult: Guid, ppvResult: Object
@@ -732,7 +733,7 @@ class INVOKEKIND(Enum):
     INVOKE_PROPERTYPUTREF: INVOKEKIND = ...
     """"""
 
-class IPersistFile:
+class IPersistFile(ABC):
     """"""
     def GetClassID(self, pClassID: Guid) -> tuple[None, Guid]:
         """"""
@@ -747,7 +748,7 @@ class IPersistFile:
     def SaveCompleted(self, pszFileName: str) -> None:
         """"""
 
-class IReflect:
+class IReflect(ABC):
     """"""
     @property
     def UnderlyingSystemType(self) -> Type:
@@ -804,7 +805,7 @@ class IReflect:
     ) -> object:
         """"""
 
-class IRunningObjectTable:
+class IRunningObjectTable(ABC):
     """"""
     def EnumRunning(self, ppenumMoniker: IEnumMoniker) -> tuple[None, IEnumMoniker]:
         """"""
@@ -823,7 +824,7 @@ class IRunningObjectTable:
     def Revoke(self, dwRegister: int) -> None:
         """"""
 
-class IStream:
+class IStream(ABC):
     """"""
     def Clone(self, ppstm: IStream) -> tuple[None, IStream]:
         """"""
@@ -848,7 +849,7 @@ class IStream:
     def Write(self, pv: Array[int], cb: int, pcbWritten: IntPtr) -> None:
         """"""
 
-class ITypeComp:
+class ITypeComp(ABC):
     """"""
     def Bind(
         self,
@@ -865,7 +866,7 @@ class ITypeComp:
     ) -> tuple[None, ITypeInfo, ITypeComp]:
         """"""
 
-class ITypeInfo:
+class ITypeInfo(ABC):
     """"""
     def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> tuple[None, IntPtr]:
         """"""
@@ -935,7 +936,7 @@ class ITypeInfo:
     def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
         """"""
 
-class ITypeInfo2(ITypeInfo):
+class ITypeInfo2(ABC, ITypeInfo):
     """"""
     def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> tuple[None, IntPtr]:
         """"""
@@ -1045,7 +1046,7 @@ class ITypeInfo2(ITypeInfo):
     def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
         """"""
 
-class ITypeLib:
+class ITypeLib(ABC):
     """"""
     def FindName(
         self,
@@ -1082,7 +1083,7 @@ class ITypeLib:
     def ReleaseTLibAttr(self, pTLibAttr: IntPtr) -> None:
         """"""
 
-class ITypeLib2(ITypeLib):
+class ITypeLib2(ABC, ITypeLib):
     """"""
     def FindName(
         self,

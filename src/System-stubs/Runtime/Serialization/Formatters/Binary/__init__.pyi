@@ -484,7 +484,7 @@ class IOUtil(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class IStreamable:
+class IStreamable(ABC):
     """"""
     def Read(self, input: __BinaryParser) -> None:
         """"""

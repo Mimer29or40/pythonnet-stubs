@@ -67,6 +67,9 @@ if TYPE_CHECKING:  # pragma: no cover
 
 logger: Logger = get_logger(__name__)
 
+# TODO(Ryan): Extract generic parameter constraints GetGenericParameterConstraints()
+# TODO(Ryan): Out generic parameter type is not recognized as generic
+
 
 def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | None:
     """Extract a TypeInfo object into a CType."""
@@ -77,10 +80,13 @@ def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | No
         # Converts IEquatable[Class] -> IEquatable[$T]
         info = info.GetGenericTypeDefinition()
 
+    name: str = make_python_name(info.Name)
+    if info.IsArray and name != "Array":
+        return CType(name="Array", namespace="System", inner=[extract_type(info.GetElementType())])
+
     reference: bool = info.IsByRef
     nullable: bool = False
 
-    name: str = make_python_name(info.Name)
     underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
     if underlying_type is not None:
         info = underlying_type
@@ -191,7 +197,9 @@ def extract_event(info: EventInfo) -> CEvent:
 
 
 def _extract_members[T: CWrapper](
-    type_info: TypeInfo, member_func: MemberFunc, skip_parents: bool = False
+    type_info: TypeInfo,
+    member_func: MemberFunc,
+    skip_parents: bool = False,
 ) -> dict[str, T]:
     binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
     found: dict[str, T] = {obj.unique_name: obj for obj in member_func(type_info, binding_flags)}
@@ -292,7 +300,7 @@ def _get_methods(type_info: TypeInfo) -> dict[str, CMethod]:
                         else method.parameters
                     ),
                     static=False,
-                )
+                ),
             )
         elif method.name == "GetEnumerator":
             dunder_methods.append(
@@ -304,9 +312,9 @@ def _get_methods(type_info: TypeInfo) -> dict[str, CMethod]:
                             method.return_types[0],
                             name="Iterator",
                             namespace="collections.abc",
-                        )
+                        ),
                     ],
-                )
+                ),
             )
     methods.update({m.unique_name: m for m in dunder_methods})
 

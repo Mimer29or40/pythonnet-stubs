@@ -1419,9 +1419,9 @@ class NetBiosNodeType(Enum):
     Hybrid: NetBiosNodeType = ...
     """"""
 
-NetworkAddressChangedEventHandler: Callable[[object, EventArgs], None] = ...
+type NetworkAddressChangedEventHandler = Callable[[object, EventArgs], None]
 """"""
-NetworkAvailabilityChangedEventHandler: Callable[[object, NetworkAvailabilityEventArgs], None] = ...
+type NetworkAvailabilityChangedEventHandler = Callable[[object, NetworkAvailabilityEventArgs], None]
 """"""
 
 class NetworkAvailabilityEventArgs(EventArgs):
@@ -1968,7 +1968,7 @@ class PingCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-PingCompletedEventHandler: Callable[[object, PingCompletedEventArgs], None] = ...
+type PingCompletedEventHandler = Callable[[object, PingCompletedEventArgs], None]
 """"""
 
 class PingException(InvalidOperationException, _Exception, ISerializable):
@@ -2169,7 +2169,7 @@ class ScopeLevel(Enum):
     Global: ScopeLevel = ...
     """"""
 
-StableUnicastIpAddressTableDelegate: Callable[[IntPtr, IntPtr], None] = ...
+type StableUnicastIpAddressTableDelegate = Callable[[IntPtr, IntPtr], None]
 """"""
 
 class StartIPOptions(Enum):

@@ -135,7 +135,7 @@ class CompiledRegexRunnerFactory(RegexRunnerFactory):
     def ToString(self) -> str:
         """"""
 
-CreateInstanceDelegate: Callable[[], RegexRunner] = ...
+type CreateInstanceDelegate = Callable[[], RegexRunner]
 """"""
 
 class ExclusiveReference(Object):
@@ -151,7 +151,7 @@ class ExclusiveReference(Object):
     def ToString(self) -> str:
         """"""
 
-FindFirstCharDelegate: Callable[[RegexRunner], bool] = ...
+type FindFirstCharDelegate = Callable[[RegexRunner], bool]
 """"""
 
 class Group(Capture):
@@ -344,7 +344,7 @@ class MatchEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
-MatchEvaluator: Callable[[Match], str] = ...
+type MatchEvaluator = Callable[[Match], str]
 """"""
 
 class MatchSparse(Match):
@@ -383,7 +383,7 @@ class MatchSparse(Match):
     def ToString(self) -> str:
         """"""
 
-NoParamDelegate: Callable[[RegexRunner], None] = ...
+type NoParamDelegate = Callable[[RegexRunner], None]
 """"""
 
 class Regex(Object, ISerializable):

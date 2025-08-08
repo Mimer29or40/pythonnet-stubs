@@ -69,7 +69,7 @@ class Contract(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Exists(cls, collection: IEnumerable[T], predicate: Predicate[T]) -> bool:
+    def Exists[T](cls, collection: IEnumerable[T], predicate: Predicate[T]) -> bool:
         """"""
     @classmethod
     @overload
@@ -77,7 +77,7 @@ class Contract(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForAll(cls, collection: IEnumerable[T], predicate: Predicate[T]) -> bool:
+    def ForAll[T](cls, collection: IEnumerable[T], predicate: Predicate[T]) -> bool:
         """"""
     @classmethod
     @overload
@@ -96,7 +96,7 @@ class Contract(ABC, Object):
     def Invariant(cls, condition: bool, userMessage: str) -> None:
         """"""
     @classmethod
-    def OldValue[T, T](cls, value: T) -> T:
+    def OldValue[T](cls, value: T) -> T:
         """"""
     @classmethod
     @overload

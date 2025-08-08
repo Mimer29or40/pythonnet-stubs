@@ -33,7 +33,7 @@ logger: Logger = get_logger(__name__)
 
 
 def _is_valid_python_name(name: str) -> bool:  # pragma: no cover
-    return name.isidentifier() and not keyword.iskeyword(name)
+    return name.isidentifier() and not keyword.iskeyword(name) and name != "cls"
 
 
 illegal_chars: Pattern[str] = re.compile(r"`\d+|&|\[|]|\*|<|>|\$")
@@ -186,7 +186,9 @@ def from_c_list[T](c_list: IList[T]) -> Sequence[T]:
 
 
 def to_c_dict[K, V](
-    key_type: type[K], value_type: type[V], mapping: Mapping[K, V]
+    key_type: type[K],
+    value_type: type[V],
+    mapping: Mapping[K, V],
 ) -> Dictionary[K, V]:
     """Convert a python mapping to a C# Dictionary.
 

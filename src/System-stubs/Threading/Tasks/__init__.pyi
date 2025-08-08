@@ -391,27 +391,27 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -420,12 +420,12 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -433,7 +433,7 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -441,7 +441,7 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -449,7 +449,7 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -459,31 +459,31 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult]
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult], scheduler: TaskScheduler
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
@@ -492,12 +492,12 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], object, TNewResult], state: object
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -505,7 +505,7 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -513,7 +513,7 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -521,7 +521,7 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -751,27 +751,27 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -780,12 +780,12 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -793,7 +793,7 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -801,7 +801,7 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -809,7 +809,7 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -819,31 +819,31 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult]
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult], scheduler: TaskScheduler
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
@@ -852,12 +852,12 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], object, TNewResult], state: object
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -865,7 +865,7 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -873,7 +873,7 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -881,7 +881,7 @@ class ContinuationResultTaskFromTask[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -1040,27 +1040,27 @@ class ContinuationTaskFromResultTask[TAntecedentResult](
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -1069,12 +1069,12 @@ class ContinuationTaskFromResultTask[TAntecedentResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1082,7 +1082,7 @@ class ContinuationTaskFromResultTask[TAntecedentResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1090,7 +1090,7 @@ class ContinuationTaskFromResultTask[TAntecedentResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1098,7 +1098,7 @@ class ContinuationTaskFromResultTask[TAntecedentResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1255,27 +1255,27 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -1284,12 +1284,12 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1297,7 +1297,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1305,7 +1305,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1313,7 +1313,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1377,7 +1377,7 @@ class GenericDelegateCache[TAntecedentResult, TResult](ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class IProducerConsumerQueue[T](IEnumerable[T], IEnumerable):
+class IProducerConsumerQueue[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -1385,20 +1385,20 @@ class IProducerConsumerQueue[T](IEnumerable[T], IEnumerable):
     @property
     def IsEmpty(self) -> bool:
         """"""
-    def Enqueue[T](self, item: T) -> None:
+    def Enqueue(self, item: T) -> None:
         """"""
     def GetCountSafe(self, syncObj: object) -> int:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def TryDequeue(self, result: T) -> tuple[bool, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
 
-class ITaskCompletionAction:
+class ITaskCompletionAction(ABC):
     """"""
     def Invoke(self, completingTask: Task) -> None:
         """"""
@@ -1466,13 +1466,13 @@ class MultiProducerMultiConsumerQueue[T](
     @overload
     def CopyTo(self, array: Array[T], index: int) -> None:
         """"""
-    def Enqueue[T](self, item: T) -> None:
+    def Enqueue(self, item: T) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
     def GetCountSafe(self, syncObj: object) -> int:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1482,7 +1482,7 @@ class MultiProducerMultiConsumerQueue[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def TryAdd[T](self, item: T) -> bool:
+    def TryAdd(self, item: T) -> bool:
         """"""
     def TryDequeue(self, result: T) -> tuple[bool, T]:
         """"""
@@ -1490,7 +1490,7 @@ class MultiProducerMultiConsumerQueue[T](
         """"""
     def TryTake(self, item: T) -> tuple[bool, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -1543,7 +1543,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def For(
+    def For[TLocal](
         cls,
         fromInclusive: int,
         toExclusive: int,
@@ -1565,7 +1565,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def For(
+    def For[TLocal](
         cls,
         fromInclusive: int,
         toExclusive: int,
@@ -1596,7 +1596,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def For(
+    def For[TLocal](
         cls,
         fromInclusive: int,
         toExclusive: int,
@@ -1618,7 +1618,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def For(
+    def For[TLocal](
         cls,
         fromInclusive: int,
         toExclusive: int,
@@ -1629,7 +1629,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls,
         source: OrderablePartitioner[TSource],
         parallelOptions: ParallelOptions,
@@ -1638,7 +1638,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: OrderablePartitioner[TSource],
         parallelOptions: ParallelOptions,
@@ -1649,13 +1649,13 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls, source: OrderablePartitioner[TSource], body: Action[TSource, ParallelLoopState, int]
     ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: OrderablePartitioner[TSource],
         localInit: Func[TLocal],
@@ -1665,7 +1665,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls,
         source: Partitioner[TSource],
         parallelOptions: ParallelOptions,
@@ -1674,13 +1674,13 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls, source: Partitioner[TSource], parallelOptions: ParallelOptions, body: Action[TSource]
     ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: Partitioner[TSource],
         parallelOptions: ParallelOptions,
@@ -1691,17 +1691,19 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls, source: Partitioner[TSource], body: Action[TSource, ParallelLoopState]
     ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(cls, source: Partitioner[TSource], body: Action[TSource]) -> ParallelLoopResult:
+    def ForEach[TSource](
+        cls, source: Partitioner[TSource], body: Action[TSource]
+    ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: Partitioner[TSource],
         localInit: Func[TLocal],
@@ -1711,7 +1713,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls,
         source: IEnumerable[TSource],
         parallelOptions: ParallelOptions,
@@ -1720,7 +1722,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls,
         source: IEnumerable[TSource],
         parallelOptions: ParallelOptions,
@@ -1729,13 +1731,13 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls, source: IEnumerable[TSource], parallelOptions: ParallelOptions, body: Action[TSource]
     ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: IEnumerable[TSource],
         parallelOptions: ParallelOptions,
@@ -1746,7 +1748,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: IEnumerable[TSource],
         parallelOptions: ParallelOptions,
@@ -1757,23 +1759,25 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls, source: IEnumerable[TSource], body: Action[TSource, ParallelLoopState, int]
     ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource](
         cls, source: IEnumerable[TSource], body: Action[TSource, ParallelLoopState]
     ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(cls, source: IEnumerable[TSource], body: Action[TSource]) -> ParallelLoopResult:
+    def ForEach[TSource](
+        cls, source: IEnumerable[TSource], body: Action[TSource]
+    ) -> ParallelLoopResult:
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: IEnumerable[TSource],
         localInit: Func[TLocal],
@@ -1783,7 +1787,7 @@ class Parallel(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ForEach(
+    def ForEach[TSource, TLocal](
         cls,
         source: IEnumerable[TSource],
         localInit: Func[TLocal],
@@ -1900,27 +1904,27 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -1929,12 +1933,12 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1942,7 +1946,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1950,7 +1954,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -1958,7 +1962,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2105,27 +2109,27 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -2134,12 +2138,12 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2147,7 +2151,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2155,7 +2159,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2163,7 +2167,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2426,13 +2430,13 @@ class SingleProducerSingleConsumerQueue[T](
         """"""
     def Clear(self) -> None:
         """"""
-    def Enqueue[T](self, item: T) -> None:
+    def Enqueue(self, item: T) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
     def GetCountSafe(self, syncObj: object) -> int:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2446,7 +2450,7 @@ class SingleProducerSingleConsumerQueue[T](
         """"""
     def TryPeek(self, result: T) -> tuple[bool, T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -2717,27 +2721,27 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -2746,12 +2750,12 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2759,7 +2763,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2767,7 +2771,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2775,7 +2779,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -2807,10 +2811,10 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     def ExecuteWorkItem(self) -> None:
         """"""
     @classmethod
-    def FromCanceled(cls, cancellationToken: CancellationToken) -> Task[TResult]:
+    def FromCanceled[TResult](cls, cancellationToken: CancellationToken) -> Task[TResult]:
         """"""
     @classmethod
-    def FromException(cls, exception: Exception) -> Task[TResult]:
+    def FromException[TResult](cls, exception: Exception) -> Task[TResult]:
         """"""
     @classmethod
     def FromResult[TResult](cls, result: TResult) -> Task[TResult]:
@@ -2833,19 +2837,21 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         """"""
     @classmethod
     @overload
-    def Run(cls, function: Func[TResult]) -> Task[TResult]:
+    def Run[TResult](cls, function: Func[TResult]) -> Task[TResult]:
         """"""
     @classmethod
     @overload
-    def Run(cls, function: Func[TResult], cancellationToken: CancellationToken) -> Task[TResult]:
+    def Run[TResult](
+        cls, function: Func[TResult], cancellationToken: CancellationToken
+    ) -> Task[TResult]:
         """"""
     @classmethod
     @overload
-    def Run(cls, function: Func[Task[TResult]]) -> Task[TResult]:
+    def Run[TResult](cls, function: Func[Task[TResult]]) -> Task[TResult]:
         """"""
     @classmethod
     @overload
-    def Run(
+    def Run[TResult](
         cls, function: Func[Task[TResult]], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
@@ -2932,7 +2938,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         """"""
     @classmethod
     @overload
-    def WhenAll(cls, tasks: IEnumerable[Task[TResult]]) -> Task[Array[TResult]]:
+    def WhenAll[TResult](cls, tasks: IEnumerable[Task[TResult]]) -> Task[Array[TResult]]:
         """"""
     @classmethod
     @overload
@@ -2940,7 +2946,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         """"""
     @classmethod
     @overload
-    def WhenAll(cls, tasks: Array[Task[TResult]]) -> Task[Array[TResult]]:
+    def WhenAll[TResult](cls, tasks: Array[Task[TResult]]) -> Task[Array[TResult]]:
         """"""
     @classmethod
     @overload
@@ -2948,7 +2954,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         """"""
     @classmethod
     @overload
-    def WhenAny(cls, tasks: IEnumerable[Task[TResult]]) -> Task[Task[TResult]]:
+    def WhenAny[TResult](cls, tasks: IEnumerable[Task[TResult]]) -> Task[Task[TResult]]:
         """"""
     @classmethod
     @overload
@@ -2956,7 +2962,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
         """"""
     @classmethod
     @overload
-    def WhenAny(cls, tasks: Array[Task[TResult]]) -> Task[Task[TResult]]:
+    def WhenAny[TResult](cls, tasks: Array[Task[TResult]]) -> Task[Task[TResult]]:
         """"""
     @classmethod
     @overload
@@ -3058,7 +3064,7 @@ class TaskCompletionSource[TResult](Object):
     @overload
     def SetException(self, exception: Exception) -> None:
         """"""
-    def SetResult[TResult](self, result: TResult) -> None:
+    def SetResult(self, result: TResult) -> None:
         """"""
     def ToString(self) -> str:
         """"""
@@ -3074,7 +3080,7 @@ class TaskCompletionSource[TResult](Object):
     @overload
     def TrySetException(self, exception: Exception) -> bool:
         """"""
-    def TrySetResult[TResult](self, result: TResult) -> bool:
+    def TrySetResult(self, result: TResult) -> bool:
         """"""
 
 class TaskContinuation(ABC, Object):
@@ -3163,7 +3169,7 @@ class TaskExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Unwrap(cls, task: Task[Task[TResult]]) -> Task[TResult]:
+    def Unwrap[TResult](cls, task: Task[Task[TResult]]) -> Task[TResult]:
         """"""
     @classmethod
     @overload
@@ -3208,14 +3214,14 @@ class TaskFactory(Object):
     def Scheduler(self) -> TaskScheduler:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Array[Task[TAntecedentResult]]],
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Array[Task[TAntecedentResult]]],
@@ -3223,7 +3229,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Array[Task[TAntecedentResult]]],
@@ -3231,7 +3237,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Array[Task[TAntecedentResult]]],
@@ -3241,14 +3247,14 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
@@ -3256,7 +3262,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
@@ -3264,7 +3270,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
@@ -3303,12 +3309,12 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TResult](
         self, tasks: Array[Task], continuationFunction: Func[Array[Task], TResult]
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TResult](
         self,
         tasks: Array[Task],
         continuationFunction: Func[Array[Task], TResult],
@@ -3316,7 +3322,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TResult](
         self,
         tasks: Array[Task],
         continuationFunction: Func[Array[Task], TResult],
@@ -3324,7 +3330,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TResult](
         self,
         tasks: Array[Task],
         continuationFunction: Func[Array[Task], TResult],
@@ -3334,14 +3340,14 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Task[TAntecedentResult]],
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Task[TAntecedentResult]],
@@ -3349,7 +3355,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Task[TAntecedentResult]],
@@ -3357,7 +3363,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationAction: Action[Task[TAntecedentResult]],
@@ -3367,14 +3373,14 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
@@ -3382,7 +3388,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
@@ -3390,7 +3396,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult, TResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
@@ -3429,12 +3435,12 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TResult](
         self, tasks: Array[Task], continuationFunction: Func[Task, TResult]
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TResult](
         self,
         tasks: Array[Task],
         continuationFunction: Func[Task, TResult],
@@ -3442,7 +3448,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TResult](
         self,
         tasks: Array[Task],
         continuationFunction: Func[Task, TResult],
@@ -3450,7 +3456,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TResult](
         self,
         tasks: Array[Task],
         continuationFunction: Func[Task, TResult],
@@ -3485,7 +3491,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def FromAsync[TArg1, TArg2, TArg3](
+    def FromAsync[TArg1, TArg2, TArg3, TResult](
         self,
         beginMethod: Func[TArg1, TArg2, TArg3, AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3496,7 +3502,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def FromAsync[TArg1, TArg2, TArg3](
+    def FromAsync[TArg1, TArg2, TArg3, TResult](
         self,
         beginMethod: Func[TArg1, TArg2, TArg3, AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3529,7 +3535,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def FromAsync[TArg1, TArg2](
+    def FromAsync[TArg1, TArg2, TResult](
         self,
         beginMethod: Func[TArg1, TArg2, AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3539,7 +3545,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def FromAsync[TArg1, TArg2](
+    def FromAsync[TArg1, TArg2, TResult](
         self,
         beginMethod: Func[TArg1, TArg2, AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3569,7 +3575,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def FromAsync[TArg1](
+    def FromAsync[TArg1, TResult](
         self,
         beginMethod: Func[TArg1, AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3578,7 +3584,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def FromAsync[TArg1](
+    def FromAsync[TArg1, TResult](
         self,
         beginMethod: Func[TArg1, AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3605,7 +3611,7 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def FromAsync(
+    def FromAsync[TResult](
         self,
         beginMethod: Func[AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3613,7 +3619,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def FromAsync(
+    def FromAsync[TResult](
         self,
         beginMethod: Func[AsyncCallback, object, IAsyncResult],
         endMethod: Func[IAsyncResult, TResult],
@@ -3642,12 +3648,12 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def FromAsync(
+    def FromAsync[TResult](
         self, asyncResult: IAsyncResult, endMethod: Func[IAsyncResult, TResult]
     ) -> Task[TResult]:
         """"""
     @overload
-    def FromAsync(
+    def FromAsync[TResult](
         self,
         asyncResult: IAsyncResult,
         endMethod: Func[IAsyncResult, TResult],
@@ -3655,7 +3661,7 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def FromAsync(
+    def FromAsync[TResult](
         self,
         asyncResult: IAsyncResult,
         endMethod: Func[IAsyncResult, TResult],
@@ -3709,20 +3715,20 @@ class TaskFactory(Object):
     ) -> Task:
         """"""
     @overload
-    def StartNew(self, function: Func[TResult]) -> Task[TResult]:
+    def StartNew[TResult](self, function: Func[TResult]) -> Task[TResult]:
         """"""
     @overload
-    def StartNew(
+    def StartNew[TResult](
         self, function: Func[TResult], creationOptions: TaskCreationOptions
     ) -> Task[TResult]:
         """"""
     @overload
-    def StartNew(
+    def StartNew[TResult](
         self, function: Func[TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def StartNew(
+    def StartNew[TResult](
         self,
         function: Func[TResult],
         cancellationToken: CancellationToken,
@@ -3731,20 +3737,20 @@ class TaskFactory(Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def StartNew(self, function: Func[object, TResult], state: object) -> Task[TResult]:
+    def StartNew[TResult](self, function: Func[object, TResult], state: object) -> Task[TResult]:
         """"""
     @overload
-    def StartNew(
+    def StartNew[TResult](
         self, function: Func[object, TResult], state: object, creationOptions: TaskCreationOptions
     ) -> Task[TResult]:
         """"""
     @overload
-    def StartNew(
+    def StartNew[TResult](
         self, function: Func[object, TResult], state: object, cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def StartNew(
+    def StartNew[TResult](
         self,
         function: Func[object, TResult],
         state: object,
@@ -3794,14 +3800,14 @@ class TaskFactory[TResult](Object):
     def Scheduler(self) -> TaskScheduler:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
@@ -3809,7 +3815,7 @@ class TaskFactory[TResult](Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
@@ -3817,7 +3823,7 @@ class TaskFactory[TResult](Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAll(
+    def ContinueWhenAll[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Array[Task[TAntecedentResult]], TResult],
@@ -3858,14 +3864,14 @@ class TaskFactory[TResult](Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
@@ -3873,7 +3879,7 @@ class TaskFactory[TResult](Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
@@ -3881,7 +3887,7 @@ class TaskFactory[TResult](Object):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWhenAny(
+    def ContinueWhenAny[TAntecedentResult](
         self,
         tasks: Array[Task[TAntecedentResult]],
         continuationFunction: Func[Task[TAntecedentResult], TResult],
@@ -4422,27 +4428,27 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -4451,12 +4457,12 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -4464,7 +4470,7 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -4472,7 +4478,7 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -4480,7 +4486,7 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -4490,31 +4496,31 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult]
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult], scheduler: TaskScheduler
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
@@ -4523,12 +4529,12 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], object, TNewResult], state: object
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -4536,7 +4542,7 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -4544,7 +4550,7 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -4552,7 +4558,7 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -4801,11 +4807,11 @@ class TplEtwProvider(EventSource, IDisposable):
     class ForkJoinOperationType(Enum):
         """"""
 
-        ParallelInvoke: ForkJoinOperationType = ...
+        ParallelInvoke: TplEtwProvider.ForkJoinOperationType = ...
         """"""
-        ParallelFor: ForkJoinOperationType = ...
+        ParallelFor: TplEtwProvider.ForkJoinOperationType = ...
         """"""
-        ParallelForEach: ForkJoinOperationType = ...
+        ParallelForEach: TplEtwProvider.ForkJoinOperationType = ...
         """"""
 
     class Keywords(Object):
@@ -4847,9 +4853,9 @@ class TplEtwProvider(EventSource, IDisposable):
     class TaskWaitBehavior(Enum):
         """"""
 
-        Synchronous: TaskWaitBehavior = ...
+        Synchronous: TplEtwProvider.TaskWaitBehavior = ...
         """"""
-        Asynchronous: TaskWaitBehavior = ...
+        Asynchronous: TplEtwProvider.TaskWaitBehavior = ...
         """"""
 
     class Tasks(Object):
@@ -5074,27 +5080,27 @@ class UnwrapPromise[TResult](
     ) -> Task:
         """"""
     @overload
-    def ContinueWith(self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
+    def ContinueWith[TResult](self, continuationFunction: Func[Task, TResult]) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], scheduler: TaskScheduler
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, TResult], cancellationToken: CancellationToken
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, TResult],
         cancellationToken: CancellationToken,
@@ -5103,12 +5109,12 @@ class UnwrapPromise[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self, continuationFunction: Func[Task, object, TResult], state: object
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -5116,7 +5122,7 @@ class UnwrapPromise[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -5124,7 +5130,7 @@ class UnwrapPromise[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -5132,7 +5138,7 @@ class UnwrapPromise[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TResult](
         self,
         continuationFunction: Func[Task, object, TResult],
         state: object,
@@ -5142,31 +5148,31 @@ class UnwrapPromise[TResult](
     ) -> Task[TResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult]
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         continuationOptions: TaskContinuationOptions,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], TNewResult], scheduler: TaskScheduler
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], TNewResult],
         cancellationToken: CancellationToken,
@@ -5175,12 +5181,12 @@ class UnwrapPromise[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self, continuationFunction: Func[Task[TResult], object, TNewResult], state: object
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -5188,7 +5194,7 @@ class UnwrapPromise[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -5196,7 +5202,7 @@ class UnwrapPromise[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,
@@ -5204,7 +5210,7 @@ class UnwrapPromise[TResult](
     ) -> Task[TNewResult]:
         """"""
     @overload
-    def ContinueWith(
+    def ContinueWith[TNewResult](
         self,
         continuationFunction: Func[Task[TResult], object, TNewResult],
         state: object,

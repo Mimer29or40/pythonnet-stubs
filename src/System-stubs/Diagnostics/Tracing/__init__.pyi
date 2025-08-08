@@ -425,7 +425,7 @@ class ClassPropertyWriter[ContainerType, ValueType](PropertyAccessor[ContainerTy
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetData[ContainerType](self, container: ContainerType) -> object:
+    def GetData(self, container: ContainerType) -> object:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -439,10 +439,10 @@ class ClassPropertyWriter[ContainerType, ValueType](PropertyAccessor[ContainerTy
 class ConcurrentSetItem[KeyType, ItemType](ABC, Object):
     """"""
     @overload
-    def Compare[ItemType](self, other: ItemType) -> int:
+    def Compare(self, other: ItemType) -> int:
         """"""
     @overload
-    def Compare[KeyType](self, key: KeyType) -> int:
+    def Compare(self, key: KeyType) -> int:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -459,13 +459,13 @@ class ConcurrentSet[KeyType, ItemType](ValueType):
         """"""
     def GetHashCode(self) -> int:
         """"""
-    def GetOrAdd[ItemType, ItemType](self, newItem: ItemType) -> ItemType:
+    def GetOrAdd(self, newItem: ItemType) -> ItemType:
         """"""
     def GetType(self) -> Type:
         """"""
     def ToString(self) -> str:
         """"""
-    def TryGet[KeyType, ItemType](self, key: KeyType) -> ItemType:
+    def TryGet(self, key: KeyType) -> ItemType:
         """"""
 
 class ControllerCommand(Enum):
@@ -733,7 +733,7 @@ class EnumByteTypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
 class EnumHelper[UnderlyingType](ABC, Object):
     """"""
     @classmethod
-    def Cast[ValueType, UnderlyingType](cls, value: ValueType) -> UnderlyingType:
+    def Cast[ValueType](cls, value: ValueType) -> UnderlyingType:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -1750,17 +1750,17 @@ class EventProvider(Object, IDisposable):
     class WriteEventErrorCode(Enum):
         """"""
 
-        NoError: WriteEventErrorCode = ...
+        NoError: EventProvider.WriteEventErrorCode = ...
         """"""
-        NoFreeBuffers: WriteEventErrorCode = ...
+        NoFreeBuffers: EventProvider.WriteEventErrorCode = ...
         """"""
-        EventTooBig: WriteEventErrorCode = ...
+        EventTooBig: EventProvider.WriteEventErrorCode = ...
         """"""
-        NullInput: WriteEventErrorCode = ...
+        NullInput: EventProvider.WriteEventErrorCode = ...
         """"""
-        TooManyArgs: WriteEventErrorCode = ...
+        TooManyArgs: EventProvider.WriteEventErrorCode = ...
         """"""
-        Other: WriteEventErrorCode = ...
+        Other: EventProvider.WriteEventErrorCode = ...
         """"""
 
 class EventSource(Object, IDisposable):
@@ -3042,7 +3042,9 @@ class KeyValuePairTypeInfo[K, V](TraceLoggingTypeInfo[KeyValuePair[K, V]]):
         """"""
     def ToString(self) -> str:
         """"""
-    def WriteData(self, collector: TraceLoggingDataCollector, value: KeyValuePair[K, V]) -> None:
+    def WriteData[K, V](
+        self, collector: TraceLoggingDataCollector, value: KeyValuePair[K, V]
+    ) -> None:
         """"""
     def WriteMetadata(
         self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
@@ -3124,7 +3126,7 @@ class ManifestEnvelope(ValueType):
     class ManifestFormats(Enum):
         """"""
 
-        SimpleXmlFormat: ManifestFormats = ...
+        SimpleXmlFormat: ManifestEnvelope.ManifestFormats = ...
         """"""
 
 class NameInfo(ConcurrentSetItem[KeyValuePair[String, EventTags], NameInfo]):
@@ -3192,7 +3194,7 @@ class NonGenericProperytWriter[ContainerType](PropertyAccessor[ContainerType]):
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetData[ContainerType](self, container: ContainerType) -> object:
+    def GetData(self, container: ContainerType) -> object:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -3270,7 +3272,7 @@ class NullableTypeInfo[T](TraceLoggingTypeInfo[T | None]):
         """"""
     def ToString(self) -> str:
         """"""
-    def WriteData(self, collector: TraceLoggingDataCollector, value: Nullable[T]) -> None:
+    def WriteData[T](self, collector: TraceLoggingDataCollector, value: Nullable[T]) -> None:
         """"""
     def WriteMetadata(
         self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
@@ -3286,7 +3288,7 @@ class PropertyAccessor[ContainerType](ABC, Object):
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetData[ContainerType](self, value: ContainerType) -> object:
+    def GetData(self, value: ContainerType) -> object:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -3593,7 +3595,9 @@ class Statics(ABC, Object):
     def Combine(cls, settingValue1: int, settingValue2: int, defaultValue: int) -> int:
         """"""
     @classmethod
-    def CreateDefaultTypeInfo(cls, recursionCheck: List[Type]) -> TraceLoggingTypeInfo[DataType]:
+    def CreateDefaultTypeInfo[DataType](
+        cls, recursionCheck: List[Type]
+    ) -> TraceLoggingTypeInfo[DataType]:
         """"""
     @classmethod
     def CreateDelegate(cls, delegateType: Type, methodInfo: MethodInfo) -> Delegate:
@@ -3735,7 +3739,7 @@ class StructPropertyWriter[ContainerType, ValueType](PropertyAccessor[ContainerT
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetData[ContainerType](self, container: ContainerType) -> object:
+    def GetData(self, container: ContainerType) -> object:
         """"""
     def GetHashCode(self) -> int:
         """"""

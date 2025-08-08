@@ -1,5 +1,6 @@
 """Automatically generated stubs for C# namespace: System.Runtime.Remoting.Contexts."""
 
+from abc import ABC
 from collections.abc import Callable
 from typing import ClassVar
 from typing import overload
@@ -169,7 +170,7 @@ class ContextProperty(Object):
     def ToString(self) -> str:
         """"""
 
-CrossContextDelegate: Callable[[], None] = ...
+type CrossContextDelegate = Callable[[], None]
 """"""
 
 class DynamicPropertyHolder(Object):
@@ -185,14 +186,14 @@ class DynamicPropertyHolder(Object):
     def ToString(self) -> str:
         """"""
 
-class IContextAttribute:
+class IContextAttribute(ABC):
     """"""
     def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> None:
         """"""
     def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> bool:
         """"""
 
-class IContextProperty:
+class IContextProperty(ABC):
     """"""
     @property
     def Name(self) -> str:
@@ -202,7 +203,7 @@ class IContextProperty:
     def IsNewContextOK(self, newCtx: Context) -> bool:
         """"""
 
-class IContextPropertyActivator:
+class IContextPropertyActivator(ABC):
     """"""
     def CollectFromClientContext(self, msg: IConstructionCallMessage) -> None:
         """"""
@@ -215,39 +216,39 @@ class IContextPropertyActivator:
     def IsOKToActivate(self, msg: IConstructionCallMessage) -> bool:
         """"""
 
-class IContributeClientContextSink:
+class IContributeClientContextSink(ABC):
     """"""
     def GetClientContextSink(self, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
-class IContributeDynamicSink:
+class IContributeDynamicSink(ABC):
     """"""
     def GetDynamicSink(self) -> IDynamicMessageSink:
         """"""
 
-class IContributeEnvoySink:
+class IContributeEnvoySink(ABC):
     """"""
     def GetEnvoySink(self, obj: MarshalByRefObject, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
-class IContributeObjectSink:
+class IContributeObjectSink(ABC):
     """"""
     def GetObjectSink(self, obj: MarshalByRefObject, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
-class IContributeServerContextSink:
+class IContributeServerContextSink(ABC):
     """"""
     def GetServerContextSink(self, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
-class IDynamicMessageSink:
+class IDynamicMessageSink(ABC):
     """"""
     def ProcessMessageFinish(self, replyMsg: IMessage, bCliSide: bool, bAsync: bool) -> None:
         """"""
     def ProcessMessageStart(self, reqMsg: IMessage, bCliSide: bool, bAsync: bool) -> None:
         """"""
 
-class IDynamicProperty:
+class IDynamicProperty(ABC):
     """"""
     @property
     def Name(self) -> str:

@@ -1,5 +1,6 @@
 """Automatically generated stubs for C# namespace: System.Diagnostics.SymbolStore."""
 
+from abc import ABC
 from typing import ClassVar
 from typing import overload
 
@@ -13,17 +14,17 @@ from System import ValueType
 from System.Reflection import FieldAttributes
 from System.Reflection import ParameterAttributes
 
-class ISymbolBinder:
+class ISymbolBinder(ABC):
     """"""
     def GetReader(self, importer: int, filename: str, searchPath: str) -> ISymbolReader:
         """"""
 
-class ISymbolBinder1:
+class ISymbolBinder1(ABC):
     """"""
     def GetReader(self, importer: IntPtr, filename: str, searchPath: str) -> ISymbolReader:
         """"""
 
-class ISymbolDocument:
+class ISymbolDocument(ABC):
     """"""
     @property
     def CheckSumAlgorithmId(self) -> Guid:
@@ -55,14 +56,14 @@ class ISymbolDocument:
     ) -> Array[int]:
         """"""
 
-class ISymbolDocumentWriter:
+class ISymbolDocumentWriter(ABC):
     """"""
     def SetCheckSum(self, algorithmId: Guid, checkSum: Array[int]) -> None:
         """"""
     def SetSource(self, source: Array[int]) -> None:
         """"""
 
-class ISymbolMethod:
+class ISymbolMethod(ABC):
     """"""
     @property
     def RootScope(self) -> ISymbolScope:
@@ -98,7 +99,7 @@ class ISymbolMethod:
     ) -> bool:
         """"""
 
-class ISymbolNamespace:
+class ISymbolNamespace(ABC):
     """"""
     @property
     def Name(self) -> str:
@@ -108,7 +109,7 @@ class ISymbolNamespace:
     def GetVariables(self) -> Array[ISymbolVariable]:
         """"""
 
-class ISymbolReader:
+class ISymbolReader(ABC):
     """"""
     @property
     def UserEntryPoint(self) -> SymbolToken:
@@ -138,7 +139,7 @@ class ISymbolReader:
     def GetVariables(self, parent: SymbolToken) -> Array[ISymbolVariable]:
         """"""
 
-class ISymbolScope:
+class ISymbolScope(ABC):
     """"""
     @property
     def EndOffset(self) -> int:
@@ -159,7 +160,7 @@ class ISymbolScope:
     def GetNamespaces(self) -> Array[ISymbolNamespace]:
         """"""
 
-class ISymbolVariable:
+class ISymbolVariable(ABC):
     """"""
     @property
     def AddressField1(self) -> int:
@@ -188,7 +189,7 @@ class ISymbolVariable:
     def GetSignature(self) -> Array[int]:
         """"""
 
-class ISymbolWriter:
+class ISymbolWriter(ABC):
     """"""
     def Close(self) -> None:
         """"""

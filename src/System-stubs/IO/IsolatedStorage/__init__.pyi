@@ -40,7 +40,7 @@ from System.Security.Policy import Evidence
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
-class INormalizeForIsolatedStorage:
+class INormalizeForIsolatedStorage(ABC):
     """"""
     def Normalize(self) -> object:
         """"""

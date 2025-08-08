@@ -53,29 +53,29 @@ class ArrayBuilder[T](ValueType):
         """"""
     @Item.setter
     def Item(self, value: T) -> None: ...
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def First[T](self) -> T:
+    def First(self) -> T:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def Last[T](self) -> T:
+    def Last(self) -> T:
         """"""
     def ToArray(self) -> Array[T]:
         """"""
     def ToString(self) -> str:
         """"""
-    def UncheckedAdd[T](self, item: T) -> None:
+    def UncheckedAdd(self, item: T) -> None:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
 
 class ArraySortHelper[TKey, TValue](Object, IArraySortHelper[TKey, TValue]):
@@ -122,7 +122,7 @@ class ArraySortHelper[T](Object, IArraySortHelper[T]):
         """"""
     def GetType(self) -> Type:
         """"""
-    def Sort(self, keys: Array[T], index: int, length: int, comparer: IComparer[T]) -> None:
+    def Sort[T](self, keys: Array[T], index: int, length: int, comparer: IComparer[T]) -> None:
         """"""
     def ToString(self) -> str:
         """"""
@@ -172,7 +172,7 @@ class Comparer[T](ABC, Object, IComparer[T], IComparer):
     def Default(cls) -> Comparer[T]:
         """"""
     @overload
-    def Compare[T, T](self, x: T, y: T) -> int:
+    def Compare(self, x: T, y: T) -> int:
         """"""
     @overload
     def Compare(self, x: object, y: object) -> int:
@@ -194,7 +194,7 @@ class ComparisonComparer[T](Comparer[T], IComparer[T], IComparer):
     def __init__(self, comparison: Comparison[T]) -> None:
         """"""
     @overload
-    def Compare[T, T](self, x: T, y: T) -> int:
+    def Compare(self, x: T, y: T) -> int:
         """"""
     @overload
     def Compare(self, x: object, y: object) -> int:
@@ -287,10 +287,10 @@ class Dictionary[TKey, TValue](
     def Values(self) -> Dictionary.ValueCollection[TKey, TValue]:
         """"""
     @overload
-    def Add[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def Add(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
-    def Add(self, item: KeyValuePair[TKey, TValue]) -> None:
+    def Add[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> None:
         """"""
     @overload
     def Add(self, key: object, value: object) -> None:
@@ -298,24 +298,26 @@ class Dictionary[TKey, TValue](
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Contains[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Contains(self, key: object) -> bool:
         """"""
-    def ContainsKey[TKey](self, key: TKey) -> bool:
+    def ContainsKey(self, key: TKey) -> bool:
         """"""
-    def ContainsValue[TValue](self, value: TValue) -> bool:
+    def ContainsValue(self, value: TValue) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
         """"""
     @overload
-    def CopyTo(self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int) -> None:
+    def CopyTo[TKey, TValue](
+        self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int
+    ) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> Dictionary.Enumerator[TKey, TValue]:
+    def GetEnumerator[TKey, TValue](self) -> Dictionary.Enumerator[TKey, TValue]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -326,34 +328,34 @@ class Dictionary[TKey, TValue](
     def OnDeserialization(self, sender: object) -> None:
         """"""
     @overload
-    def Remove[TKey](self, key: TKey) -> bool:
+    def Remove(self, key: TKey) -> bool:
         """"""
     @overload
-    def Remove(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Remove[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Remove(self, key: object) -> None:
         """"""
     def ToString(self) -> str:
         """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
     @overload
-    def __contains__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __contains__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __contains__(self, key: object) -> bool:
         """"""
     @overload
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[TKey, TValue]:
-        """"""
-    @overload
-    def __delitem__[TKey](self, key: TKey) -> bool:
+    def __iter__[TKey, TValue](self) -> Iterator[TKey, TValue]:
         """"""
     @overload
-    def __delitem__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __delitem__(self, key: TKey) -> bool:
+        """"""
+    @overload
+    def __delitem__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __delitem__(self, key: object) -> None:
@@ -361,13 +363,13 @@ class Dictionary[TKey, TValue](
     def __len__(self) -> int:
         """"""
     @overload
-    def __getitem__[TKey, TValue](self, key: TKey) -> TValue:
+    def __getitem__(self, key: TKey) -> TValue:
         """"""
     @overload
     def __getitem__(self, key: object) -> object:
         """"""
     @overload
-    def __setitem__[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def __setitem__(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
     def __setitem__(self, key: object, value: object) -> None:
@@ -440,11 +442,11 @@ class Dictionary[TKey, TValue](
         def CopyTo(self, array: Array, index: int) -> None:
             """"""
         @overload
-        def CopyTo(self, array: Array[TKey], index: int) -> None:
+        def CopyTo[TKey](self, array: Array[TKey], index: int) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
             """"""
-        def GetEnumerator(self) -> Dictionary.KeyCollection.Enumerator[TKey, TValue]:
+        def GetEnumerator[TKey, TValue](self) -> Dictionary.KeyCollection.Enumerator[TKey, TValue]:
             """"""
         def GetHashCode(self) -> int:
             """"""
@@ -456,7 +458,7 @@ class Dictionary[TKey, TValue](
             """"""
         def __contains__[TKey](self, item: TKey) -> bool:
             """"""
-        def __iter__(self) -> Iterator[TKey, TValue]:
+        def __iter__[TKey, TValue](self) -> Iterator[TKey, TValue]:
             """"""
         def __delitem__[TKey](self, item: TKey) -> bool:
             """"""
@@ -515,11 +517,13 @@ class Dictionary[TKey, TValue](
         def CopyTo(self, array: Array, index: int) -> None:
             """"""
         @overload
-        def CopyTo(self, array: Array[TValue], index: int) -> None:
+        def CopyTo[TValue](self, array: Array[TValue], index: int) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
             """"""
-        def GetEnumerator(self) -> Dictionary.ValueCollection.Enumerator[TKey, TValue]:
+        def GetEnumerator[TKey, TValue](
+            self,
+        ) -> Dictionary.ValueCollection.Enumerator[TKey, TValue]:
             """"""
         def GetHashCode(self) -> int:
             """"""
@@ -531,7 +535,7 @@ class Dictionary[TKey, TValue](
             """"""
         def __contains__[TValue](self, item: TValue) -> bool:
             """"""
-        def __iter__(self) -> Iterator[TKey, TValue]:
+        def __iter__[TKey, TValue](self) -> Iterator[TKey, TValue]:
             """"""
         def __delitem__[TValue](self, item: TValue) -> bool:
             """"""
@@ -564,7 +568,7 @@ class EnumEqualityComparer[T](
     def __init__(self) -> None:
         """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -573,7 +577,7 @@ class EnumEqualityComparer[T](
     def Equals(self, x: object, y: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -606,7 +610,7 @@ class EqualityComparer[T](ABC, Object, IEqualityComparer[T], IEqualityComparer):
     def Default(cls) -> EqualityComparer[T]:
         """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -615,7 +619,7 @@ class EqualityComparer[T](ABC, Object, IEqualityComparer[T], IEqualityComparer):
     def Equals(self, x: object, y: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -664,7 +668,7 @@ class GenericArraySortHelper[T](Object, IArraySortHelper[T]):
         """"""
     def GetType(self) -> Type:
         """"""
-    def Sort(self, keys: Array[T], index: int, length: int, comparer: IComparer[T]) -> None:
+    def Sort[T](self, keys: Array[T], index: int, length: int, comparer: IComparer[T]) -> None:
         """"""
     def ToString(self) -> str:
         """"""
@@ -674,7 +678,7 @@ class GenericComparer[T](Comparer[T], IComparer[T], IComparer):
     def __init__(self) -> None:
         """"""
     @overload
-    def Compare[T, T](self, x: T, y: T) -> int:
+    def Compare(self, x: T, y: T) -> int:
         """"""
     @overload
     def Compare(self, x: object, y: object) -> int:
@@ -693,7 +697,7 @@ class GenericEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqu
     def __init__(self) -> None:
         """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -702,7 +706,7 @@ class GenericEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqu
     def Equals(self, x: object, y: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -794,11 +798,11 @@ class HashSet[T](
     @property
     def IsReadOnly(self) -> bool:
         """"""
-    def Add[T](self, item: T) -> bool:
+    def Add(self, item: T) -> bool:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array[T]) -> None:
@@ -816,7 +820,7 @@ class HashSet[T](
         """"""
     def ExceptWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def GetEnumerator(self) -> HashSet.Enumerator[T]:
+    def GetEnumerator[T](self) -> HashSet.Enumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -838,7 +842,7 @@ class HashSet[T](
         """"""
     def Overlaps(self, other: IEnumerable[T]) -> bool:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def RemoveWhere(self, match: Predicate[T]) -> int:
         """"""
@@ -850,15 +854,15 @@ class HashSet[T](
         """"""
     def TrimExcess(self) -> None:
         """"""
-    def TryGetValue[T](self, equalValue: T, actualValue: T) -> tuple[bool, T]:
+    def TryGetValue(self, equalValue: T, actualValue: T) -> tuple[bool, T]:
         """"""
     def UnionWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
@@ -882,7 +886,7 @@ class HashSet[T](
         def ToString(self) -> str:
             """"""
 
-class IArraySortHelper[TKey, TValue]:
+class IArraySortHelper[TKey, TValue](ABC):
     """"""
     def Sort(
         self,
@@ -894,16 +898,16 @@ class IArraySortHelper[TKey, TValue]:
     ) -> None:
         """"""
 
-class IArraySortHelper[TKey]:
+class IArraySortHelper[TKey](ABC):
     """"""
-    def BinarySearch[TKey](
+    def BinarySearch(
         self, keys: Array[TKey], index: int, length: int, value: TKey, comparer: IComparer[TKey]
     ) -> int:
         """"""
     def Sort(self, keys: Array[TKey], index: int, length: int, comparer: IComparer[TKey]) -> None:
         """"""
 
-class ICollection[T](IEnumerable[T], IEnumerable):
+class ICollection[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -911,34 +915,37 @@ class ICollection[T](IEnumerable[T], IEnumerable):
     @property
     def IsReadOnly(self) -> bool:
         """"""
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
 
-class IComparer[T]:
+class IComparer[T](ABC):
     """"""
-    def Compare[T, T](self, x: T, y: T) -> int:
+    def Compare(self, x: T, y: T) -> int:
         """"""
 
 class IDictionary[TKey, TValue](
-    ICollection[KeyValuePair[TKey, TValue]], IEnumerable[KeyValuePair[TKey, TValue]], IEnumerable
+    ABC,
+    ICollection[KeyValuePair[TKey, TValue]],
+    IEnumerable[KeyValuePair[TKey, TValue]],
+    IEnumerable,
 ):
     """"""
     @property
@@ -959,58 +966,60 @@ class IDictionary[TKey, TValue](
     def Values(self) -> ICollection[TValue]:
         """"""
     @overload
-    def Add[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def Add(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
-    def Add(self, item: KeyValuePair[TKey, TValue]) -> None:
+    def Add[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Contains[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
-    def ContainsKey[TKey](self, key: TKey) -> bool:
+    def ContainsKey(self, key: TKey) -> bool:
         """"""
-    def CopyTo(self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int) -> None:
+    def CopyTo[TKey, TValue](
+        self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int
+    ) -> None:
         """"""
-    def GetEnumerator(self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
-        """"""
-    @overload
-    def Remove[TKey](self, key: TKey) -> bool:
-        """"""
-    @overload
-    def Remove(self, item: KeyValuePair[TKey, TValue]) -> bool:
-        """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def GetEnumerator[TKey, TValue](self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
         """"""
     @overload
-    def __contains__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Remove(self, key: TKey) -> bool:
         """"""
     @overload
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def Remove[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
-    def __iter__(self) -> Iterator[KeyValuePair[TKey, TValue]]:
-        """"""
-    @overload
-    def __delitem__[TKey](self, key: TKey) -> bool:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
     @overload
-    def __delitem__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __contains__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
+        """"""
+    @overload
+    def __contains__(self, key: TKey) -> bool:
+        """"""
+    def __iter__[TKey, TValue](self) -> Iterator[KeyValuePair[TKey, TValue]]:
+        """"""
+    @overload
+    def __delitem__(self, key: TKey) -> bool:
+        """"""
+    @overload
+    def __delitem__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[TKey, TValue](self, key: TKey) -> TValue:
+    def __getitem__(self, key: TKey) -> TValue:
         """"""
-    def __setitem__[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def __setitem__(self, key: TKey, value: TValue) -> None:
         """"""
 
-class IEnumerable[T](IEnumerable):
+class IEnumerable[T](ABC, IEnumerable):
     """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
-class IEnumerator[T](IEnumerator, IDisposable):
+class IEnumerator[T](ABC, IEnumerator, IDisposable):
     """"""
     @property
     def Current(self) -> T:
@@ -1022,14 +1031,14 @@ class IEnumerator[T](IEnumerator, IDisposable):
     def Reset(self) -> None:
         """"""
 
-class IEqualityComparer[T]:
+class IEqualityComparer[T](ABC):
     """"""
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
 
-class IList[T](ICollection[T], IEnumerable[T], IEnumerable):
+class IList[T](ABC, ICollection[T], IEnumerable[T], IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -1042,50 +1051,51 @@ class IList[T](ICollection[T], IEnumerable[T], IEnumerable):
         """"""
     @Item.setter
     def Item(self, value: T) -> None: ...
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def IndexOf[T](self, item: T) -> int:
+    def IndexOf(self, item: T) -> int:
         """"""
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def RemoveAt(self, index: int) -> None:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
 
-class IReadOnlyCollection[T](IEnumerable[T], IEnumerable):
+class IReadOnlyCollection[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     @property
     def Count(self) -> int:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
 
 class IReadOnlyDictionary[TKey, TValue](
+    ABC,
     IEnumerable[KeyValuePair[TKey, TValue]],
     IReadOnlyCollection[KeyValuePair[TKey, TValue]],
     IEnumerable,
@@ -1103,22 +1113,22 @@ class IReadOnlyDictionary[TKey, TValue](
     @property
     def Values(self) -> IEnumerable[TValue]:
         """"""
-    def ContainsKey[TKey](self, key: TKey) -> bool:
+    def ContainsKey(self, key: TKey) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
+    def GetEnumerator[TKey, TValue](self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
         """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[KeyValuePair[TKey, TValue]]:
+    def __iter__[TKey, TValue](self) -> Iterator[KeyValuePair[TKey, TValue]]:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[TKey, TValue](self, key: TKey) -> TValue:
+    def __getitem__(self, key: TKey) -> TValue:
         """"""
 
-class IReadOnlyList[T](IEnumerable[T], IReadOnlyCollection[T], IEnumerable):
+class IReadOnlyList[T](ABC, IEnumerable[T], IReadOnlyCollection[T], IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -1126,16 +1136,16 @@ class IReadOnlyList[T](IEnumerable[T], IReadOnlyCollection[T], IEnumerable):
     @property
     def Item(self) -> T:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
 
-class ISet[T](ICollection[T], IEnumerable[T], IEnumerable):
+class ISet[T](ABC, ICollection[T], IEnumerable[T], IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -1143,17 +1153,17 @@ class ISet[T](ICollection[T], IEnumerable[T], IEnumerable):
     @property
     def IsReadOnly(self) -> bool:
         """"""
-    def Add[T](self, item: T) -> bool:
+    def Add(self, item: T) -> bool:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
     def ExceptWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def IntersectWith(self, other: IEnumerable[T]) -> None:
         """"""
@@ -1167,7 +1177,7 @@ class ISet[T](ICollection[T], IEnumerable[T], IEnumerable):
         """"""
     def Overlaps(self, other: IEnumerable[T]) -> bool:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def SetEquals(self, other: IEnumerable[T]) -> bool:
         """"""
@@ -1175,11 +1185,11 @@ class ISet[T](ICollection[T], IEnumerable[T], IEnumerable):
         """"""
     def UnionWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
@@ -1277,7 +1287,7 @@ class LargeArrayBuilder[T](ValueType):
     @property
     def Count(self) -> int:
         """"""
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def AddRange(self, items: IEnumerable[T]) -> None:
         """"""
@@ -1297,7 +1307,7 @@ class LargeArrayBuilder[T](ValueType):
         """"""
     def GetType(self) -> Type:
         """"""
-    def SlowAdd[T](self, item: T) -> None:
+    def SlowAdd(self, item: T) -> None:
         """"""
     def ToArray(self) -> Array[T]:
         """"""
@@ -1370,35 +1380,35 @@ class LinkedList[T](
     @property
     def SyncRoot(self) -> object:
         """"""
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     @overload
-    def AddAfter[T](self, node: LinkedListNode[T], value: T) -> LinkedListNode[T]:
+    def AddAfter(self, node: LinkedListNode[T], value: T) -> LinkedListNode[T]:
         """"""
     @overload
     def AddAfter(self, node: LinkedListNode[T], newNode: LinkedListNode[T]) -> None:
         """"""
     @overload
-    def AddBefore[T](self, node: LinkedListNode[T], value: T) -> LinkedListNode[T]:
+    def AddBefore(self, node: LinkedListNode[T], value: T) -> LinkedListNode[T]:
         """"""
     @overload
     def AddBefore(self, node: LinkedListNode[T], newNode: LinkedListNode[T]) -> None:
         """"""
     @overload
-    def AddFirst[T](self, value: T) -> LinkedListNode[T]:
+    def AddFirst(self, value: T) -> LinkedListNode[T]:
         """"""
     @overload
     def AddFirst(self, node: LinkedListNode[T]) -> None:
         """"""
     @overload
-    def AddLast[T](self, value: T) -> LinkedListNode[T]:
+    def AddLast(self, value: T) -> LinkedListNode[T]:
         """"""
     @overload
     def AddLast(self, node: LinkedListNode[T]) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, value: T) -> bool:
+    def Contains(self, value: T) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
@@ -1408,11 +1418,11 @@ class LinkedList[T](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def Find[T](self, value: T) -> LinkedListNode[T]:
+    def Find(self, value: T) -> LinkedListNode[T]:
         """"""
-    def FindLast[T](self, value: T) -> LinkedListNode[T]:
+    def FindLast(self, value: T) -> LinkedListNode[T]:
         """"""
-    def GetEnumerator(self) -> LinkedList.Enumerator[T]:
+    def GetEnumerator[T](self) -> LinkedList.Enumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1423,7 +1433,7 @@ class LinkedList[T](
     def OnDeserialization(self, sender: object) -> None:
         """"""
     @overload
-    def Remove[T](self, value: T) -> bool:
+    def Remove(self, value: T) -> bool:
         """"""
     @overload
     def Remove(self, node: LinkedListNode[T]) -> None:
@@ -1434,12 +1444,12 @@ class LinkedList[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def __contains__[T](self, value: T) -> bool:
+    def __contains__(self, value: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     @overload
-    def __delitem__[T](self, value: T) -> bool:
+    def __delitem__(self, value: T) -> bool:
         """"""
     @overload
     def __delitem__(self, node: LinkedListNode[T]) -> None:
@@ -1519,7 +1529,7 @@ class List[T](
     def SyncRoot(self) -> object:
         """"""
     @overload
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     @overload
     def Add(self, value: object) -> int:
@@ -1529,23 +1539,23 @@ class List[T](
     def AsReadOnly(self) -> ReadOnlyCollection[T]:
         """"""
     @overload
-    def BinarySearch[T](self, item: T) -> int:
+    def BinarySearch(self, item: T) -> int:
         """"""
     @overload
-    def BinarySearch[T](self, item: T, comparer: IComparer[T]) -> int:
+    def BinarySearch(self, item: T, comparer: IComparer[T]) -> int:
         """"""
     @overload
-    def BinarySearch[T](self, index: int, count: int, item: T, comparer: IComparer[T]) -> int:
+    def BinarySearch(self, index: int, count: int, item: T, comparer: IComparer[T]) -> int:
         """"""
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def Contains(self, value: object) -> bool:
         """"""
-    def ConvertAll(self, converter: Converter[T, TOutput]) -> List[TOutput]:
+    def ConvertAll[TOutput](self, converter: Converter[T, TOutput]) -> List[TOutput]:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
@@ -1563,7 +1573,7 @@ class List[T](
         """"""
     def Exists(self, match: Predicate[T]) -> bool:
         """"""
-    def Find[T](self, match: Predicate[T]) -> T:
+    def Find(self, match: Predicate[T]) -> T:
         """"""
     def FindAll(self, match: Predicate[T]) -> List[T]:
         """"""
@@ -1576,7 +1586,7 @@ class List[T](
     @overload
     def FindIndex(self, match: Predicate[T]) -> int:
         """"""
-    def FindLast[T](self, match: Predicate[T]) -> T:
+    def FindLast(self, match: Predicate[T]) -> T:
         """"""
     @overload
     def FindLastIndex(self, startIndex: int, count: int, match: Predicate[T]) -> int:
@@ -1589,7 +1599,7 @@ class List[T](
         """"""
     def ForEach(self, action: Action[T]) -> None:
         """"""
-    def GetEnumerator(self) -> List.Enumerator[T]:
+    def GetEnumerator[T](self) -> List.Enumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1598,19 +1608,19 @@ class List[T](
     def GetType(self) -> Type:
         """"""
     @overload
-    def IndexOf[T](self, item: T) -> int:
+    def IndexOf(self, item: T) -> int:
         """"""
     @overload
-    def IndexOf[T](self, item: T, index: int) -> int:
+    def IndexOf(self, item: T, index: int) -> int:
         """"""
     @overload
-    def IndexOf[T](self, item: T, index: int, count: int) -> int:
+    def IndexOf(self, item: T, index: int, count: int) -> int:
         """"""
     @overload
     def IndexOf(self, value: object) -> int:
         """"""
     @overload
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
     @overload
     def Insert(self, index: int, value: object) -> None:
@@ -1618,16 +1628,16 @@ class List[T](
     def InsertRange(self, index: int, collection: IEnumerable[T]) -> None:
         """"""
     @overload
-    def LastIndexOf[T](self, item: T) -> int:
+    def LastIndexOf(self, item: T) -> int:
         """"""
     @overload
-    def LastIndexOf[T](self, item: T, index: int) -> int:
+    def LastIndexOf(self, item: T, index: int) -> int:
         """"""
     @overload
-    def LastIndexOf[T](self, item: T, index: int, count: int) -> int:
+    def LastIndexOf(self, item: T, index: int, count: int) -> int:
         """"""
     @overload
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     @overload
     def Remove(self, value: object) -> None:
@@ -1665,25 +1675,25 @@ class List[T](
     def TrueForAll(self, match: Predicate[T]) -> bool:
         """"""
     @overload
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
     @overload
     def __contains__(self, value: object) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     @overload
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     @overload
     def __delitem__(self, value: object) -> None:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
     @overload
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
     @overload
     def __setitem__(self, index: int, value: object) -> None:
@@ -1719,7 +1729,7 @@ class LongEnumEqualityComparer[T](
     def __init__(self, information: SerializationInfo, context: StreamingContext) -> None:
         """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -1728,7 +1738,7 @@ class LongEnumEqualityComparer[T](
     def Equals(self, x: object, y: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -1849,7 +1859,7 @@ class NullableComparer[T](Comparer[T | None], IComparer[T | None], IComparer):
     def __init__(self) -> None:
         """"""
     @overload
-    def Compare[T, T](self, x: T | None, y: T | None) -> int:
+    def Compare[T](self, x: T | None, y: T | None) -> int:
         """"""
     @overload
     def Compare(self, x: object, y: object) -> int:
@@ -1870,7 +1880,7 @@ class NullableEqualityComparer[T](
     def __init__(self) -> None:
         """"""
     @overload
-    def Equals[T, T](self, x: T | None, y: T | None) -> bool:
+    def Equals[T](self, x: T | None, y: T | None) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -1897,7 +1907,7 @@ class ObjectComparer[T](Comparer[T], IComparer[T], IComparer):
     def __init__(self) -> None:
         """"""
     @overload
-    def Compare[T, T](self, x: T, y: T) -> int:
+    def Compare(self, x: T, y: T) -> int:
         """"""
     @overload
     def Compare(self, x: object, y: object) -> int:
@@ -1916,7 +1926,7 @@ class ObjectEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqua
     def __init__(self) -> None:
         """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -1925,7 +1935,7 @@ class ObjectEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqua
     def Equals(self, x: object, y: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -1960,7 +1970,7 @@ class Queue[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
@@ -1968,19 +1978,19 @@ class Queue[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
     @overload
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
-    def Dequeue[T](self) -> T:
+    def Dequeue(self) -> T:
         """"""
-    def Enqueue[T](self, item: T) -> None:
+    def Enqueue(self, item: T) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> Queue.Enumerator[T]:
+    def GetEnumerator[T](self) -> Queue.Enumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def Peek[T](self) -> T:
+    def Peek(self) -> T:
         """"""
     def ToArray(self) -> Array[T]:
         """"""
@@ -1988,9 +1998,9 @@ class Queue[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         """"""
     def TrimExcess(self) -> None:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -2083,7 +2093,7 @@ class SByteEnumEqualityComparer[T](
     def __init__(self, information: SerializationInfo, context: StreamingContext) -> None:
         """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -2092,7 +2102,7 @@ class SByteEnumEqualityComparer[T](
     def Equals(self, x: object, y: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -2118,7 +2128,7 @@ class ShortEnumEqualityComparer[T](
     def __init__(self, information: SerializationInfo, context: StreamingContext) -> None:
         """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
@@ -2127,7 +2137,7 @@ class ShortEnumEqualityComparer[T](
     def Equals(self, x: object, y: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:
@@ -2196,10 +2206,10 @@ class SortedDictionary[TKey, TValue](
     def Values(self) -> SortedDictionary.ValueCollection[TKey, TValue]:
         """"""
     @overload
-    def Add[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def Add(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
-    def Add(self, item: KeyValuePair[TKey, TValue]) -> None:
+    def Add[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> None:
         """"""
     @overload
     def Add(self, key: object, value: object) -> None:
@@ -2207,58 +2217,58 @@ class SortedDictionary[TKey, TValue](
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Contains[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Contains(self, key: object) -> bool:
         """"""
-    def ContainsKey[TKey](self, key: TKey) -> bool:
+    def ContainsKey(self, key: TKey) -> bool:
         """"""
-    def ContainsValue[TValue](self, value: TValue) -> bool:
+    def ContainsValue(self, value: TValue) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
         """"""
     @overload
-    def CopyTo(self, array: Array[KeyValuePair[TKey, TValue]], index: int) -> None:
+    def CopyTo[TKey, TValue](self, array: Array[KeyValuePair[TKey, TValue]], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> SortedDictionary.Enumerator[TKey, TValue]:
+    def GetEnumerator[TKey, TValue](self) -> SortedDictionary.Enumerator[TKey, TValue]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
     @overload
-    def Remove[TKey](self, key: TKey) -> bool:
+    def Remove(self, key: TKey) -> bool:
         """"""
     @overload
-    def Remove(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Remove[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Remove(self, key: object) -> None:
         """"""
     def ToString(self) -> str:
         """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
     @overload
-    def __contains__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __contains__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __contains__(self, key: object) -> bool:
         """"""
     @overload
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[TKey, TValue]:
-        """"""
-    @overload
-    def __delitem__[TKey](self, key: TKey) -> bool:
+    def __iter__[TKey, TValue](self) -> Iterator[TKey, TValue]:
         """"""
     @overload
-    def __delitem__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __delitem__(self, key: TKey) -> bool:
+        """"""
+    @overload
+    def __delitem__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __delitem__(self, key: object) -> None:
@@ -2266,13 +2276,13 @@ class SortedDictionary[TKey, TValue](
     def __len__(self) -> int:
         """"""
     @overload
-    def __getitem__[TKey, TValue](self, key: TKey) -> TValue:
+    def __getitem__(self, key: TKey) -> TValue:
         """"""
     @overload
     def __getitem__(self, key: object) -> object:
         """"""
     @overload
-    def __setitem__[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def __setitem__(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
     def __setitem__(self, key: object, value: object) -> None:
@@ -2345,11 +2355,13 @@ class SortedDictionary[TKey, TValue](
         def CopyTo(self, array: Array, index: int) -> None:
             """"""
         @overload
-        def CopyTo(self, array: Array[TKey], index: int) -> None:
+        def CopyTo[TKey](self, array: Array[TKey], index: int) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
             """"""
-        def GetEnumerator(self) -> SortedDictionary.KeyCollection.Enumerator[TKey, TValue]:
+        def GetEnumerator[TKey, TValue](
+            self,
+        ) -> SortedDictionary.KeyCollection.Enumerator[TKey, TValue]:
             """"""
         def GetHashCode(self) -> int:
             """"""
@@ -2361,7 +2373,7 @@ class SortedDictionary[TKey, TValue](
             """"""
         def __contains__[TKey](self, item: TKey) -> bool:
             """"""
-        def __iter__(self) -> Iterator[TKey, TValue]:
+        def __iter__[TKey, TValue](self) -> Iterator[TKey, TValue]:
             """"""
         def __delitem__[TKey](self, item: TKey) -> bool:
             """"""
@@ -2420,11 +2432,13 @@ class SortedDictionary[TKey, TValue](
         def CopyTo(self, array: Array, index: int) -> None:
             """"""
         @overload
-        def CopyTo(self, array: Array[TValue], index: int) -> None:
+        def CopyTo[TValue](self, array: Array[TValue], index: int) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
             """"""
-        def GetEnumerator(self) -> SortedDictionary.ValueCollection.Enumerator[TKey, TValue]:
+        def GetEnumerator[TKey, TValue](
+            self,
+        ) -> SortedDictionary.ValueCollection.Enumerator[TKey, TValue]:
             """"""
         def GetHashCode(self) -> int:
             """"""
@@ -2436,7 +2450,7 @@ class SortedDictionary[TKey, TValue](
             """"""
         def __contains__[TValue](self, item: TValue) -> bool:
             """"""
-        def __iter__(self) -> Iterator[TKey, TValue]:
+        def __iter__[TKey, TValue](self) -> Iterator[TKey, TValue]:
             """"""
         def __delitem__[TValue](self, item: TValue) -> bool:
             """"""
@@ -2527,10 +2541,10 @@ class SortedList[TKey, TValue](
     def Values(self) -> IList[TValue]:
         """"""
     @overload
-    def Add[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def Add(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
-    def Add(self, item: KeyValuePair[TKey, TValue]) -> None:
+    def Add[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> None:
         """"""
     @overload
     def Add(self, key: object, value: object) -> None:
@@ -2538,38 +2552,40 @@ class SortedList[TKey, TValue](
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Contains[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Contains(self, key: object) -> bool:
         """"""
-    def ContainsKey[TKey](self, key: TKey) -> bool:
+    def ContainsKey(self, key: TKey) -> bool:
         """"""
-    def ContainsValue[TValue](self, value: TValue) -> bool:
+    def ContainsValue(self, value: TValue) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
         """"""
     @overload
-    def CopyTo(self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int) -> None:
+    def CopyTo[TKey, TValue](
+        self, array: Array[KeyValuePair[TKey, TValue]], arrayIndex: int
+    ) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
+    def GetEnumerator[TKey, TValue](self) -> IEnumerator[KeyValuePair[TKey, TValue]]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def IndexOfKey[TKey](self, key: TKey) -> int:
+    def IndexOfKey(self, key: TKey) -> int:
         """"""
-    def IndexOfValue[TValue](self, value: TValue) -> int:
-        """"""
-    @overload
-    def Remove[TKey](self, key: TKey) -> bool:
+    def IndexOfValue(self, value: TValue) -> int:
         """"""
     @overload
-    def Remove(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def Remove(self, key: TKey) -> bool:
+        """"""
+    @overload
+    def Remove[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def Remove(self, key: object) -> None:
@@ -2580,24 +2596,24 @@ class SortedList[TKey, TValue](
         """"""
     def TrimExcess(self) -> None:
         """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
     @overload
-    def __contains__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __contains__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __contains__(self, key: object) -> bool:
         """"""
     @overload
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[KeyValuePair[TKey, TValue]]:
-        """"""
-    @overload
-    def __delitem__[TKey](self, key: TKey) -> bool:
+    def __iter__[TKey, TValue](self) -> Iterator[KeyValuePair[TKey, TValue]]:
         """"""
     @overload
-    def __delitem__(self, item: KeyValuePair[TKey, TValue]) -> bool:
+    def __delitem__(self, key: TKey) -> bool:
+        """"""
+    @overload
+    def __delitem__[TKey, TValue](self, item: KeyValuePair[TKey, TValue]) -> bool:
         """"""
     @overload
     def __delitem__(self, key: object) -> None:
@@ -2605,13 +2621,13 @@ class SortedList[TKey, TValue](
     def __len__(self) -> int:
         """"""
     @overload
-    def __getitem__[TKey, TValue](self, key: TKey) -> TValue:
+    def __getitem__(self, key: TKey) -> TValue:
         """"""
     @overload
     def __getitem__(self, key: object) -> object:
         """"""
     @overload
-    def __setitem__[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def __setitem__(self, key: TKey, value: TValue) -> None:
         """"""
     @overload
     def __setitem__(self, key: object, value: object) -> None:
@@ -2711,11 +2727,11 @@ class SortedSet[T](
     @property
     def SyncRoot(self) -> object:
         """"""
-    def Add[T](self, item: T) -> bool:
+    def Add(self, item: T) -> bool:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
@@ -2743,7 +2759,7 @@ class SortedSet[T](
         """"""
     def ExceptWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def GetEnumerator(self) -> SortedSet.Enumerator[T]:
+    def GetEnumerator[T](self) -> SortedSet.Enumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2751,7 +2767,7 @@ class SortedSet[T](
         """"""
     def GetType(self) -> Type:
         """"""
-    def GetViewBetween[T, T](self, lowerValue: T, upperValue: T) -> SortedSet[T]:
+    def GetViewBetween(self, lowerValue: T, upperValue: T) -> SortedSet[T]:
         """"""
     def IntersectWith(self, other: IEnumerable[T]) -> None:
         """"""
@@ -2767,7 +2783,7 @@ class SortedSet[T](
         """"""
     def Overlaps(self, other: IEnumerable[T]) -> bool:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def RemoveWhere(self, match: Predicate[T]) -> int:
         """"""
@@ -2779,15 +2795,15 @@ class SortedSet[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def TryGetValue[T](self, equalValue: T, actualValue: T) -> tuple[bool, T]:
+    def TryGetValue(self, equalValue: T, actualValue: T) -> tuple[bool, T]:
         """"""
     def UnionWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
@@ -2827,7 +2843,7 @@ class SparseArrayBuilder[T](ValueType):
     @property
     def Markers(self) -> ArrayBuilder[Marker]:
         """"""
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def AddRange(self, items: IEnumerable[T]) -> None:
         """"""
@@ -2872,7 +2888,7 @@ class Stack[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
@@ -2882,17 +2898,17 @@ class Stack[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> Stack.Enumerator[T]:
+    def GetEnumerator[T](self) -> Stack.Enumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def Peek[T](self) -> T:
+    def Peek(self) -> T:
         """"""
-    def Pop[T](self) -> T:
+    def Pop(self) -> T:
         """"""
-    def Push[T](self, item: T) -> None:
+    def Push(self, item: T) -> None:
         """"""
     def ToArray(self) -> Array[T]:
         """"""
@@ -2900,9 +2916,9 @@ class Stack[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         """"""
     def TrimExcess(self) -> None:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     def __len__(self) -> int:
         """"""
@@ -3082,11 +3098,11 @@ class TreeSet[T](
     @property
     def SyncRoot(self) -> object:
         """"""
-    def Add[T](self, item: T) -> bool:
+    def Add(self, item: T) -> bool:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def CopyTo(self, array: Array, index: int) -> None:
@@ -3104,7 +3120,7 @@ class TreeSet[T](
         """"""
     def ExceptWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def GetEnumerator(self) -> SortedSet.Enumerator[T]:
+    def GetEnumerator[T](self) -> SortedSet.Enumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -3112,7 +3128,7 @@ class TreeSet[T](
         """"""
     def GetType(self) -> Type:
         """"""
-    def GetViewBetween[T, T](self, lowerValue: T, upperValue: T) -> SortedSet[T]:
+    def GetViewBetween(self, lowerValue: T, upperValue: T) -> SortedSet[T]:
         """"""
     def IntersectWith(self, other: IEnumerable[T]) -> None:
         """"""
@@ -3128,7 +3144,7 @@ class TreeSet[T](
         """"""
     def Overlaps(self, other: IEnumerable[T]) -> bool:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def RemoveWhere(self, match: Predicate[T]) -> int:
         """"""
@@ -3140,15 +3156,15 @@ class TreeSet[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def TryGetValue[T](self, equalValue: T, actualValue: T) -> tuple[bool, T]:
+    def TryGetValue(self, equalValue: T, actualValue: T) -> tuple[bool, T]:
         """"""
     def UnionWith(self, other: IEnumerable[T]) -> None:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
@@ -3178,5 +3194,5 @@ class TreeSet[T](
         def ToString(self) -> str:
             """"""
 
-TreeWalkPredicate: Callable[[SortedSet.Node[T]], bool] = ...
+type TreeWalkPredicate[T] = Callable[[SortedSet.Node[T]], bool]
 """"""

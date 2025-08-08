@@ -32,7 +32,7 @@ class FormatterTypeStyle(Enum):
     XsdString: FormatterTypeStyle = ...
     """"""
 
-class IFieldInfo:
+class IFieldInfo(ABC):
     """"""
     @property
     def FieldNames(self) -> Array[str]:
@@ -45,7 +45,7 @@ class IFieldInfo:
     @FieldTypes.setter
     def FieldTypes(self, value: Array[Type]) -> None: ...
 
-class ISoapMessage:
+class ISoapMessage(ABC):
     """"""
     @property
     def Headers(self) -> Array[Header]:

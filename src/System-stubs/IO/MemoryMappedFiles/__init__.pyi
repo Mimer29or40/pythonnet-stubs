@@ -440,7 +440,7 @@ class MemoryMappedViewAccessor(UnmanagedMemoryAccessor, IDisposable):
         """"""
     def Read(self, position: int, structure: T) -> tuple[None, T]:
         """"""
-    def ReadArray(self, position: int, array: Array[T], offset: int, count: int) -> int:
+    def ReadArray[T](self, position: int, array: Array[T], offset: int, count: int) -> int:
         """"""
     def ReadBoolean(self, position: int) -> bool:
         """"""
@@ -512,7 +512,7 @@ class MemoryMappedViewAccessor(UnmanagedMemoryAccessor, IDisposable):
     @overload
     def Write(self, position: int, value: int) -> None:
         """"""
-    def WriteArray(self, position: int, array: Array[T], offset: int, count: int) -> None:
+    def WriteArray[T](self, position: int, array: Array[T], offset: int, count: int) -> None:
         """"""
 
 class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):

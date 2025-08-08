@@ -53,7 +53,7 @@ from System.Runtime.InteropServices import _FieldInfo
 from System.Runtime.InteropServices import _MemberInfo
 from System.Runtime.Serialization.Formatters import TypeFilterLevel
 
-DeserializationEventHandler: Callable[[object], None] = ...
+type DeserializationEventHandler = Callable[[object], None]
 """"""
 
 class FixupHolder(Object):
@@ -203,12 +203,12 @@ class FormatterServices(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class IDeserializationCallback:
+class IDeserializationCallback(ABC):
     """"""
     def OnDeserialization(self, sender: object) -> None:
         """"""
 
-class IFormatter:
+class IFormatter(ABC):
     """"""
     @property
     def Binder(self) -> SerializationBinder:
@@ -230,7 +230,7 @@ class IFormatter:
     def Serialize(self, serializationStream: Stream, graph: object) -> None:
         """"""
 
-class IFormatterConverter:
+class IFormatterConverter(ABC):
     """"""
     @overload
     def Convert(self, value: object, type: Type) -> object:
@@ -269,22 +269,22 @@ class IFormatterConverter:
     def ToUInt64(self, value: object) -> int:
         """"""
 
-class IObjectReference:
+class IObjectReference(ABC):
     """"""
     def GetRealObject(self, context: StreamingContext) -> object:
         """"""
 
-class ISafeSerializationData:
+class ISafeSerializationData(ABC):
     """"""
     def CompleteDeserialization(self, deserialized: object) -> None:
         """"""
 
-class ISerializable:
+class ISerializable(ABC):
     """"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
         """"""
 
-class ISerializationSurrogate:
+class ISerializationSurrogate(ABC):
     """"""
     def GetObjectData(
         self, obj: object, info: SerializationInfo, context: StreamingContext
@@ -299,7 +299,7 @@ class ISerializationSurrogate:
     ) -> object:
         """"""
 
-class ISurrogateSelector:
+class ISurrogateSelector(ABC):
     """"""
     def ChainSelector(self, selector: ISurrogateSelector) -> None:
         """"""
@@ -728,7 +728,7 @@ class SerializationEntry(ValueType):
     def ToString(self) -> str:
         """"""
 
-SerializationEventHandler: Callable[[StreamingContext], None] = ...
+type SerializationEventHandler = Callable[[StreamingContext], None]
 """"""
 
 class SerializationEvents(Object):

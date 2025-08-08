@@ -10,7 +10,7 @@ from System import IntPtr
 from System import Object
 from System import Type
 
-class IClrStrongName:
+class IClrStrongName(ABC):
     """"""
     def GetHashFromAssemblyFile(
         self, pszFilePath: str, piHashAlg: Int32, pbHash: Array[int], cchHash: int, pchHash: Int32
@@ -145,7 +145,7 @@ class IClrStrongName:
     ) -> tuple[int, IntPtr, Int32]:
         """"""
 
-class IClrStrongNameUsingIntPtr:
+class IClrStrongNameUsingIntPtr(ABC):
     """"""
     def GetHashFromAssemblyFile(
         self, pszFilePath: str, piHashAlg: Int32, pbHash: Array[int], cchHash: int, pchHash: Int32

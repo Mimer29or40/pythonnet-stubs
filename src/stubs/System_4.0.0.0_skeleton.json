@@ -47566,13 +47566,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Concurrent:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Concurrent:BlockingCollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Concurrent:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -47747,7 +47747,7 @@
               "declaring_type": "System.Collections.Concurrent:BlockingCollection[$T]",
               "parameters": [],
               "return_types": [
-                "System:Array[System.Collections.Concurrent:T]"
+                "System:Array[$T]"
               ],
               "static": false
             },
@@ -48294,13 +48294,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Concurrent:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Concurrent:IProducerConsumerCollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Concurrent:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -48364,7 +48364,7 @@
               "declaring_type": "System.Collections.Concurrent:IProducerConsumerCollection[$T]",
               "parameters": [],
               "return_types": [
-                "System:Array[System.Collections.Concurrent:T]"
+                "System:Array[$T]"
               ],
               "static": false
             },
@@ -48478,7 +48478,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Concurrent:SystemThreadingCollection_IProducerConsumerCollectionDebugView[$T]",
-              "type": "System:Array[System.Collections.Concurrent:T]",
+              "type": "System:Array[$T]",
               "setter": false,
               "static": false
             }
@@ -48560,7 +48560,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Concurrent:SystemThreadingCollections_BlockingCollectionDebugView[$T]",
-              "type": "System:Array[System.Collections.Concurrent:T]",
+              "type": "System:Array[$T]",
               "setter": false,
               "static": false
             }
@@ -48753,13 +48753,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -49311,13 +49311,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -49936,13 +49936,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:Queue[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -50040,7 +50040,7 @@
               "declaring_type": "System.Collections.Generic:Queue[$T]",
               "parameters": [],
               "return_types": [
-                "System:Array[System.Collections.Generic:T]"
+                "System:Array[$T]"
               ],
               "static": false
             },
@@ -51078,13 +51078,13 @@
                   ],
                   "static": false
                 },
-                "CopyTo(System:Array[System.Collections.Generic:TKey], System:Int32)": {
+                "CopyTo(System:Array[$TKey], System:Int32)": {
                   "name": "CopyTo",
                   "declaring_type": "System.Collections.Generic:ICollection[$T]",
                   "parameters": [
                     {
                       "name": "array",
-                      "type": "System:Array[System.Collections.Generic:TKey]",
+                      "type": "System:Array[$TKey]",
                       "default": false,
                       "out": false
                     },
@@ -51451,13 +51451,13 @@
                   ],
                   "static": false
                 },
-                "CopyTo(System:Array[System.Collections.Generic:TValue], System:Int32)": {
+                "CopyTo(System:Array[$TValue], System:Int32)": {
                   "name": "CopyTo",
                   "declaring_type": "System.Collections.Generic:ICollection[$T]",
                   "parameters": [
                     {
                       "name": "array",
-                      "type": "System:Array[System.Collections.Generic:TValue]",
+                      "type": "System:Array[$TValue]",
                       "default": false,
                       "out": false
                     },
@@ -52600,13 +52600,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T])": {
+            "CopyTo(System:Array[$T])": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:SortedSet[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 }
@@ -52616,13 +52616,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -52638,13 +52638,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32, System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32, System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:SortedSet[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -53252,7 +53252,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Generic:SortedSetDebugView[$T]",
-              "type": "System:Array[System.Collections.Generic:T]",
+              "type": "System:Array[$T]",
               "setter": false,
               "static": false
             }
@@ -53567,13 +53567,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:Stack[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -53671,7 +53671,7 @@
               "declaring_type": "System.Collections.Generic:Stack[$T]",
               "parameters": [],
               "return_types": [
-                "System:Array[System.Collections.Generic:T]"
+                "System:Array[$T]"
               ],
               "static": false
             },
@@ -53862,7 +53862,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Generic:System_CollectionDebugView[$T]",
-              "type": "System:Array[System.Collections.Generic:T]",
+              "type": "System:Array[$T]",
               "setter": false,
               "static": false
             }
@@ -54028,7 +54028,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Generic:System_DictionaryKeyCollectionDebugView[$TKey, $TValue]",
-              "type": "System:Array[System.Collections.Generic:TKey]",
+              "type": "System:Array[$TKey]",
               "setter": false,
               "static": false
             }
@@ -54111,7 +54111,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Generic:System_DictionaryValueCollectionDebugView[$TKey, $TValue]",
-              "type": "System:Array[System.Collections.Generic:TValue]",
+              "type": "System:Array[$TValue]",
               "setter": false,
               "static": false
             }
@@ -54193,7 +54193,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Generic:System_QueueDebugView[$T]",
-              "type": "System:Array[System.Collections.Generic:T]",
+              "type": "System:Array[$T]",
               "setter": false,
               "static": false
             }
@@ -54275,7 +54275,7 @@
             "Items": {
               "name": "Items",
               "declaring_type": "System.Collections.Generic:System_StackDebugView[$T]",
-              "type": "System:Array[System.Collections.Generic:T]",
+              "type": "System:Array[$T]",
               "setter": false,
               "static": false
             }
@@ -54538,13 +54538,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T])": {
+            "CopyTo(System:Array[$T])": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:SortedSet[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 }
@@ -54554,13 +54554,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -54576,13 +54576,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.Generic:T], System:Int32, System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32, System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:SortedSet[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.Generic:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -55347,13 +55347,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.ObjectModel:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.ObjectModel:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -55900,13 +55900,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.Collections.ObjectModel:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.Collections.ObjectModel:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },
@@ -65541,13 +65541,13 @@
               ],
               "static": false
             },
-            "CopyTo(System:Array[System.ComponentModel:T], System:Int32)": {
+            "CopyTo(System:Array[$T], System:Int32)": {
               "name": "CopyTo",
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
                   "name": "array",
-                  "type": "System:Array[System.ComponentModel:T]",
+                  "type": "System:Array[$T]",
                   "default": false,
                   "out": false
                 },

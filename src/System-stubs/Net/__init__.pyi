@@ -214,7 +214,7 @@ class Alg(Enum):
     ClassKeyXch: Alg = ...
     """"""
 
-AsyncProtocolCallback: Callable[[AsyncProtocolRequest], None] = ...
+type AsyncProtocolCallback = Callable[[AsyncProtocolRequest], None]
 """"""
 
 class AsyncProtocolRequest(Object):
@@ -476,7 +476,7 @@ class AuthenticationManagerDefault(AuthenticationManagerBase, IAuthenticationMan
     def Unregister(self, authenticationScheme: str) -> None:
         """"""
 
-AuthenticationSchemeSelector: Callable[[HttpListenerRequest], AuthenticationSchemes] = ...
+type AuthenticationSchemeSelector = Callable[[HttpListenerRequest], AuthenticationSchemes]
 """"""
 
 class AuthenticationSchemes(Enum):
@@ -756,7 +756,7 @@ class BasicClient(Object, IAuthenticationModule):
     def ToString(self) -> str:
         """"""
 
-BindIPEndPoint: Callable[[ServicePoint, IPEndPoint, int], IPEndPoint] = ...
+type BindIPEndPoint = Callable[[ServicePoint, IPEndPoint, int], IPEndPoint]
 """"""
 
 class Bindings(ValueType):
@@ -1603,7 +1603,7 @@ class Comparer(Object, IComparer):
     def ToString(self) -> str:
         """"""
 
-CompletionDelegate: Callable[[Array[int], Exception, object], None] = ...
+type CompletionDelegate = Callable[[Array[int], Exception, object], None]
 """"""
 
 class ConnectStream(Stream, ICloseEx, IRequestLifetimeTracker, IDisposable):
@@ -2427,7 +2427,7 @@ class CoreResponseData(Object):
     def ToString(self) -> str:
         """"""
 
-CreateConnectionDelegate: Callable[[ConnectionPool], PooledStream] = ...
+type CreateConnectionDelegate = Callable[[ConnectionPool], PooledStream]
 """"""
 
 class CredentialCache(Object, IEnumerable, ICredentials, ICredentialsByHost):
@@ -3109,7 +3109,7 @@ class DownloadDataCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-DownloadDataCompletedEventHandler: Callable[[object, DownloadDataCompletedEventArgs], None] = ...
+type DownloadDataCompletedEventHandler = Callable[[object, DownloadDataCompletedEventArgs], None]
 """"""
 
 class DownloadProgressChangedEventArgs(ProgressChangedEventArgs):
@@ -3135,9 +3135,9 @@ class DownloadProgressChangedEventArgs(ProgressChangedEventArgs):
     def ToString(self) -> str:
         """"""
 
-DownloadProgressChangedEventHandler: Callable[
+type DownloadProgressChangedEventHandler = Callable[
     [object, DownloadProgressChangedEventArgs], None
-] = ...
+]
 """"""
 
 class DownloadStringCompletedEventArgs(AsyncCompletedEventArgs):
@@ -3163,9 +3163,9 @@ class DownloadStringCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-DownloadStringCompletedEventHandler: Callable[
+type DownloadStringCompletedEventHandler = Callable[
     [object, DownloadStringCompletedEventArgs], None
-] = ...
+]
 """"""
 
 class EmptyWebProxy(Object, IAutoWebProxy, IWebProxy):
@@ -4433,7 +4433,7 @@ class GZipWrapperStream(GZipStream, ICloseEx, IRequestLifetimeTracker, IDisposab
     def WriteByte(self, value: int) -> None:
         """"""
 
-GeneralAsyncDelegate: Callable[[object, object], None] = ...
+type GeneralAsyncDelegate = Callable[[object, object], None]
 """"""
 
 class GlobalLog(ABC, Object):
@@ -4575,7 +4575,7 @@ class HeaderInfoTable(Object):
     def ToString(self) -> str:
         """"""
 
-HeaderParser: Callable[[str], Array[str]] = ...
+type HeaderParser = Callable[[str], Array[str]]
 """"""
 
 class HeaderVariantInfo(ValueType):
@@ -4600,7 +4600,7 @@ class HostHeaderString(Object):
     def ToString(self) -> str:
         """"""
 
-HttpAbortDelegate: Callable[[HttpWebRequest, WebException], bool] = ...
+type HttpAbortDelegate = Callable[[HttpWebRequest, WebException], bool]
 """"""
 
 class HttpBehaviour(Enum):
@@ -4615,7 +4615,7 @@ class HttpBehaviour(Enum):
     HTTP11: HttpBehaviour = ...
     """"""
 
-HttpContinueDelegate: Callable[[int, WebHeaderCollection], None] = ...
+type HttpContinueDelegate = Callable[[int, WebHeaderCollection], None]
 """"""
 
 class HttpDateParse(ABC, Object):
@@ -4879,7 +4879,7 @@ class HttpListener(Object, IDisposable):
         """"""
     def ToString(self) -> str:
         """"""
-    ExtendedProtectionSelector: Callable[[HttpListenerRequest], ExtendedProtectionPolicy] = ...
+    type ExtendedProtectionSelector = Callable[[HttpListenerRequest], ExtendedProtectionPolicy]
     """"""
 
 class HttpListenerBasicIdentity(GenericIdentity, IIdentity):
@@ -6445,7 +6445,7 @@ class HybridWebProxyFinder(Object, IWebProxyFinder, IDisposable):
     def ToString(self) -> str:
         """"""
 
-class IAuthenticationManager:
+class IAuthenticationManager(ABC):
     """"""
     @property
     def CredentialPolicy(self) -> ICredentialPolicy:
@@ -6486,7 +6486,7 @@ class IAuthenticationManager:
     def Unregister(self, authenticationScheme: str) -> None:
         """"""
 
-class IAuthenticationModule:
+class IAuthenticationModule(ABC):
     """"""
     @property
     def AuthenticationType(self) -> str:
@@ -6501,7 +6501,7 @@ class IAuthenticationModule:
     def PreAuthenticate(self, request: WebRequest, credentials: ICredentials) -> Authorization:
         """"""
 
-class IAutoWebProxy(IWebProxy):
+class IAutoWebProxy(ABC, IWebProxy):
     """"""
     @property
     def Credentials(self) -> ICredentials:
@@ -6515,7 +6515,7 @@ class IAutoWebProxy(IWebProxy):
     def IsBypassed(self, host: Uri) -> bool:
         """"""
 
-class ICertificatePolicy:
+class ICertificatePolicy(ABC):
     """"""
     def CheckValidationResult(
         self,
@@ -6526,12 +6526,12 @@ class ICertificatePolicy:
     ) -> bool:
         """"""
 
-class ICloseEx:
+class ICloseEx(ABC):
     """"""
     def CloseEx(self, closeState: CloseExState) -> None:
         """"""
 
-class ICredentialPolicy:
+class ICredentialPolicy(ABC):
     """"""
     def ShouldSendCredential(
         self,
@@ -6542,12 +6542,12 @@ class ICredentialPolicy:
     ) -> bool:
         """"""
 
-class ICredentials:
+class ICredentials(ABC):
     """"""
     def GetCredential(self, uri: Uri, authType: str) -> NetworkCredential:
         """"""
 
-class ICredentialsByHost:
+class ICredentialsByHost(ABC):
     """"""
     def GetCredential(self, host: str, port: int, authenticationType: str) -> NetworkCredential:
         """"""
@@ -6743,12 +6743,12 @@ class IPv6MulticastRequest(ValueType):
     def ToString(self) -> str:
         """"""
 
-class IRequestLifetimeTracker:
+class IRequestLifetimeTracker(ABC):
     """"""
     def TrackRequestLifetime(self, requestStartTimestamp: int) -> None:
         """"""
 
-class ISessionAuthenticationModule(IAuthenticationModule):
+class ISessionAuthenticationModule(ABC, IAuthenticationModule):
     """"""
     @property
     def AuthenticationType(self) -> str:
@@ -6770,7 +6770,7 @@ class ISessionAuthenticationModule(IAuthenticationModule):
     def Update(self, challenge: str, webRequest: WebRequest) -> bool:
         """"""
 
-class IWebProxy:
+class IWebProxy(ABC):
     """"""
     @property
     def Credentials(self) -> ICredentials:
@@ -6782,7 +6782,7 @@ class IWebProxy:
     def IsBypassed(self, host: Uri) -> bool:
         """"""
 
-class IWebProxyFinder(IDisposable):
+class IWebProxyFinder(ABC, IDisposable):
     """"""
     @property
     def IsValid(self) -> bool:
@@ -6796,7 +6796,7 @@ class IWebProxyFinder(IDisposable):
     def Reset(self) -> None:
         """"""
 
-class IWebProxyScript:
+class IWebProxyScript(ABC):
     """"""
     def Close(self) -> None:
         """"""
@@ -6805,7 +6805,7 @@ class IWebProxyScript:
     def Run(self, url: str, host: str) -> str:
         """"""
 
-class IWebRequestCreate:
+class IWebRequestCreate(ABC):
     """"""
     def Create(self, uri: Uri) -> WebRequest:
         """"""
@@ -7503,7 +7503,7 @@ class OpenReadCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-OpenReadCompletedEventHandler: Callable[[object, OpenReadCompletedEventArgs], None] = ...
+type OpenReadCompletedEventHandler = Callable[[object, OpenReadCompletedEventArgs], None]
 """"""
 
 class OpenWriteCompletedEventArgs(AsyncCompletedEventArgs):
@@ -7529,7 +7529,7 @@ class OpenWriteCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-OpenWriteCompletedEventHandler: Callable[[object, OpenWriteCompletedEventArgs], None] = ...
+type OpenWriteCompletedEventHandler = Callable[[object, OpenWriteCompletedEventArgs], None]
 """"""
 
 class PathList(Object):
@@ -8108,7 +8108,7 @@ class SSPIHandle(ValueType):
     def ToString(self) -> str:
         """"""
 
-class SSPIInterface:
+class SSPIInterface(ABC):
     """"""
     @property
     def SecurityPackages(self) -> Array[SecurityPackageInfoClass]:
@@ -9683,21 +9683,21 @@ class SecureCredential(ValueType):
     class Flags(Enum):
         """"""
 
-        Zero: Flags = ...
+        Zero: SecureCredential.Flags = ...
         """"""
-        NoSystemMapper: Flags = ...
+        NoSystemMapper: SecureCredential.Flags = ...
         """"""
-        NoNameCheck: Flags = ...
+        NoNameCheck: SecureCredential.Flags = ...
         """"""
-        ValidateManual: Flags = ...
+        ValidateManual: SecureCredential.Flags = ...
         """"""
-        NoDefaultCred: Flags = ...
+        NoDefaultCred: SecureCredential.Flags = ...
         """"""
-        ValidateAuto: Flags = ...
+        ValidateAuto: SecureCredential.Flags = ...
         """"""
-        SendAuxRecord: Flags = ...
+        SendAuxRecord: SecureCredential.Flags = ...
         """"""
-        UseStrongCrypto: Flags = ...
+        UseStrongCrypto: SecureCredential.Flags = ...
         """"""
 
 class SecureCredential2(ValueType):
@@ -9738,25 +9738,25 @@ class SecureCredential2(ValueType):
     class Flags(Enum):
         """"""
 
-        Zero: Flags = ...
+        Zero: SecureCredential2.Flags = ...
         """"""
-        NoSystemMapper: Flags = ...
+        NoSystemMapper: SecureCredential2.Flags = ...
         """"""
-        NoNameCheck: Flags = ...
+        NoNameCheck: SecureCredential2.Flags = ...
         """"""
-        ValidateManual: Flags = ...
+        ValidateManual: SecureCredential2.Flags = ...
         """"""
-        NoDefaultCred: Flags = ...
+        NoDefaultCred: SecureCredential2.Flags = ...
         """"""
-        ValidateAuto: Flags = ...
+        ValidateAuto: SecureCredential2.Flags = ...
         """"""
-        SendAuxRecord: Flags = ...
+        SendAuxRecord: SecureCredential2.Flags = ...
         """"""
-        UseStrongCrypto: Flags = ...
+        UseStrongCrypto: SecureCredential2.Flags = ...
         """"""
-        UsePresharedKeyOnly: Flags = ...
+        UsePresharedKeyOnly: SecureCredential2.Flags = ...
         """"""
-        AllowNullEencryption: Flags = ...
+        AllowNullEencryption: SecureCredential2.Flags = ...
         """"""
 
 class SecurityBuffer(Object):
@@ -10886,9 +10886,9 @@ class TlsParamaters(ValueType):
     class Flags(Enum):
         """"""
 
-        Zero: Flags = ...
+        Zero: TlsParamaters.Flags = ...
         """"""
-        TLS_PARAMS_OPTIONAL: Flags = ...
+        TLS_PARAMS_OPTIONAL: TlsParamaters.Flags = ...
         """"""
 
 class TlsStream(NetworkStream, IDisposable):
@@ -11216,7 +11216,7 @@ class TunnelStateObject(ValueType):
     def ToString(self) -> str:
         """"""
 
-UnlockConnectionDelegate: Callable[[], None] = ...
+type UnlockConnectionDelegate = Callable[[], None]
 """"""
 
 class UnsafeNclNativeMethods(ABC, Object):
@@ -11258,7 +11258,7 @@ class UploadDataCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-UploadDataCompletedEventHandler: Callable[[object, UploadDataCompletedEventArgs], None] = ...
+type UploadDataCompletedEventHandler = Callable[[object, UploadDataCompletedEventArgs], None]
 """"""
 
 class UploadFileCompletedEventArgs(AsyncCompletedEventArgs):
@@ -11284,7 +11284,7 @@ class UploadFileCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-UploadFileCompletedEventHandler: Callable[[object, UploadFileCompletedEventArgs], None] = ...
+type UploadFileCompletedEventHandler = Callable[[object, UploadFileCompletedEventArgs], None]
 """"""
 
 class UploadProgressChangedEventArgs(ProgressChangedEventArgs):
@@ -11316,7 +11316,7 @@ class UploadProgressChangedEventArgs(ProgressChangedEventArgs):
     def ToString(self) -> str:
         """"""
 
-UploadProgressChangedEventHandler: Callable[[object, UploadProgressChangedEventArgs], None] = ...
+type UploadProgressChangedEventHandler = Callable[[object, UploadProgressChangedEventArgs], None]
 """"""
 
 class UploadStringCompletedEventArgs(AsyncCompletedEventArgs):
@@ -11342,7 +11342,7 @@ class UploadStringCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-UploadStringCompletedEventHandler: Callable[[object, UploadStringCompletedEventArgs], None] = ...
+type UploadStringCompletedEventHandler = Callable[[object, UploadStringCompletedEventArgs], None]
 """"""
 
 class UploadValuesCompletedEventArgs(AsyncCompletedEventArgs):
@@ -11368,7 +11368,7 @@ class UploadValuesCompletedEventArgs(AsyncCompletedEventArgs):
     def ToString(self) -> str:
         """"""
 
-UploadValuesCompletedEventHandler: Callable[[object, UploadValuesCompletedEventArgs], None] = ...
+type UploadValuesCompletedEventHandler = Callable[[object, UploadValuesCompletedEventArgs], None]
 """"""
 
 class ValidationHelper(ABC, Object):
@@ -13040,7 +13040,7 @@ class WriteStreamClosedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-WriteStreamClosedEventHandler: Callable[[object, WriteStreamClosedEventArgs], None] = ...
+type WriteStreamClosedEventHandler = Callable[[object, WriteStreamClosedEventArgs], None]
 """"""
 
 class _CERT_CHAIN_ELEMENT(ValueType):

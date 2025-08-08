@@ -709,7 +709,7 @@ class CompressedStackSwitcher(ValueType, IDisposable):
     def __ne__(self, other: CompressedStackSwitcher) -> bool:
         """"""
 
-ContextCallback: Callable[[object], None] = ...
+type ContextCallback = Callable[[object], None]
 """"""
 
 class CountdownEvent(Object, IDisposable):
@@ -783,9 +783,9 @@ class CountdownEvent(Object, IDisposable):
 
 class DeferredDisposableLifetime[T](ValueType):
     """"""
-    def AddRef[T](self, obj: T) -> bool:
+    def AddRef(self, obj: T) -> bool:
         """"""
-    def Dispose[T](self, obj: T) -> None:
+    def Dispose(self, obj: T) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -793,7 +793,7 @@ class DeferredDisposableLifetime[T](ValueType):
         """"""
     def GetType(self) -> Type:
         """"""
-    def Release[T](self, obj: T) -> None:
+    def Release(self, obj: T) -> None:
         """"""
     def ToString(self) -> str:
         """"""
@@ -1033,14 +1033,14 @@ class HostExecutionContextSwitcher(Object):
     def Undo(cls, switcherObject: object) -> None:
         """"""
 
-class IAsyncLocal:
+class IAsyncLocal(ABC):
     """"""
     def OnValueChanged(
         self, previousValue: object, currentValue: object, contextChanged: bool
     ) -> None:
         """"""
 
-class IAsyncLocalValueMap:
+class IAsyncLocalValueMap(ABC):
     """"""
     def Set(
         self, key: IAsyncLocal, value: object, treatNullValueAsNonexistent: bool
@@ -1049,15 +1049,15 @@ class IAsyncLocalValueMap:
     def TryGetValue(self, key: IAsyncLocal, value: Object) -> tuple[bool, Object]:
         """"""
 
-class IDeferredDisposable:
+class IDeferredDisposable(ABC):
     """"""
     def OnFinalRelease(self, disposed: bool) -> None:
         """"""
 
-IOCompletionCallback: Callable[[int, int, NativeOverlapped], None] = ...
+type IOCompletionCallback = Callable[[int, int, NativeOverlapped], None]
 """"""
 
-class IThreadPoolWorkItem:
+class IThreadPoolWorkItem(ABC):
     """"""
     def ExecuteWorkItem(self) -> None:
         """"""
@@ -1107,7 +1107,7 @@ class Interlocked(ABC, Object):
         """"""
     @classmethod
     @overload
-    def CompareExchange[T, T, T](cls, location1: T, value: T, comparand: T) -> T:
+    def CompareExchange[T](cls, location1: T, value: T, comparand: T) -> T:
         """"""
     @classmethod
     @overload
@@ -1145,7 +1145,7 @@ class Interlocked(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Exchange[T, T](cls, location1: T, value: T) -> T:
+    def Exchange[T](cls, location1: T, value: T) -> T:
         """"""
     @classmethod
     @overload
@@ -1195,7 +1195,7 @@ class Interlocked(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-InternalCrossContextDelegate: Callable[[Array[object]], object] = ...
+type InternalCrossContextDelegate = Callable[[Array[object]], object]
 """"""
 
 class LazyHelpers[T](ABC, Object):
@@ -1700,7 +1700,7 @@ class OverlappedData(Object):
     def ToString(self) -> str:
         """"""
 
-ParameterizedThreadStart: Callable[[object], None] = ...
+type ParameterizedThreadStart = Callable[[object], None]
 """"""
 
 class PinnableBufferCache(Object):
@@ -2322,7 +2322,7 @@ class SemaphoreSlim(Object, IDisposable):
     def WaitAsync(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> Task[bool]:
         """"""
 
-SendOrPostCallback: Callable[[object], None] = ...
+type SendOrPostCallback = Callable[[object], None]
 """"""
 
 class SparselyPopulatedArrayAddInfo[T](ValueType):
@@ -2924,7 +2924,7 @@ class ThreadExceptionEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ThreadExceptionEventHandler: Callable[[object, ThreadExceptionEventArgs], None] = ...
+type ThreadExceptionEventHandler = Callable[[object, ThreadExceptionEventArgs], None]
 """"""
 
 class ThreadHandle(ValueType):
@@ -3351,7 +3351,7 @@ class ThreadPriority(Enum):
     Highest: ThreadPriority = ...
     """"""
 
-ThreadStart: Callable[[], None] = ...
+type ThreadStart = Callable[[], None]
 """"""
 
 class ThreadStartException(SystemException, _Exception, ISerializable):
@@ -3558,7 +3558,7 @@ class Timer(MarshalByRefObject, IDisposable):
     def ToString(self) -> str:
         """"""
 
-TimerCallback: Callable[[object], None] = ...
+type TimerCallback = Callable[[object], None]
 """"""
 
 class TimerHolder(Object):
@@ -3741,7 +3741,7 @@ class Volatile(ABC, Object):
     def Write(cls, location: UIntPtr, value: UIntPtr) -> None:
         """"""
 
-WaitCallback: Callable[[object], None] = ...
+type WaitCallback = Callable[[object], None]
 """"""
 
 class WaitHandle(ABC, MarshalByRefObject, IDisposable):
@@ -3922,7 +3922,7 @@ class WaitHandleExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-WaitOrTimerCallback: Callable[[object, bool], None] = ...
+type WaitOrTimerCallback = Callable[[object, bool], None]
 """"""
 
 class WinRTSynchronizationContextFactoryBase(Object):

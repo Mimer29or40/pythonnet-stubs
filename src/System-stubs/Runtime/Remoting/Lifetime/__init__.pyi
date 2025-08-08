@@ -1,5 +1,6 @@
 """Automatically generated stubs for C# namespace: System.Runtime.Remoting.Lifetime."""
 
+from abc import ABC
 from typing import overload
 
 from System import Enum
@@ -51,7 +52,7 @@ class ClientSponsor(MarshalByRefObject, ISponsor):
     def Unregister(self, obj: MarshalByRefObject) -> None:
         """"""
 
-class ILease:
+class ILease(ABC):
     """"""
     @property
     def CurrentLeaseTime(self) -> TimeSpan:
@@ -85,7 +86,7 @@ class ILease:
     def Unregister(self, obj: ISponsor) -> None:
         """"""
 
-class ISponsor:
+class ISponsor(ABC):
     """"""
     def Renewal(self, lease: ILease) -> TimeSpan:
         """"""

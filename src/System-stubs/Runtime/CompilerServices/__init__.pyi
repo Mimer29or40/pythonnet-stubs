@@ -254,7 +254,7 @@ class AsyncTaskMethodBuilder[TResult](ValueType):
         """"""
     def SetException(self, exception: Exception) -> None:
         """"""
-    def SetResult[TResult](self, result: TResult) -> None:
+    def SetResult(self, result: TResult) -> None:
         """"""
     def SetStateMachine(self, stateMachine: IAsyncStateMachine) -> None:
         """"""
@@ -408,12 +408,12 @@ class CallSiteOps(ABC, Object):
     def ClearMatch(cls, site: CallSite) -> None:
         """"""
     @classmethod
-    def CreateMatchmaker(cls, site: CallSite[T]) -> CallSite[T]:
+    def CreateMatchmaker[T](cls, site: CallSite[T]) -> CallSite[T]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
     @classmethod
-    def GetCachedRules(cls, cache: RuleCache[T]) -> Array[T]:
+    def GetCachedRules[T](cls, cache: RuleCache[T]) -> Array[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -421,10 +421,10 @@ class CallSiteOps(ABC, Object):
     def GetMatch(cls, site: CallSite) -> bool:
         """"""
     @classmethod
-    def GetRuleCache(cls, site: CallSite[T]) -> RuleCache[T]:
+    def GetRuleCache[T](cls, site: CallSite[T]) -> RuleCache[T]:
         """"""
     @classmethod
-    def GetRules(cls, site: CallSite[T]) -> Array[T]:
+    def GetRules[T](cls, site: CallSite[T]) -> Array[T]:
         """"""
     def GetType(self) -> Type:
         """"""
@@ -437,7 +437,7 @@ class CallSiteOps(ABC, Object):
     def ToString(self) -> str:
         """"""
     @classmethod
-    def UpdateRules(cls, this: CallSite[T], matched: int) -> None:
+    def UpdateRules[T](cls, this: CallSite[T], matched: int) -> None:
         """"""
 
 class CallSite[T](CallSite):
@@ -749,29 +749,29 @@ class ConditionalWeakTable[TKey, TValue](Object):
     """"""
     def __init__(self) -> None:
         """"""
-    def Add[TKey, TValue](self, key: TKey, value: TValue) -> None:
+    def Add(self, key: TKey, value: TValue) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
     def GetHashCode(self) -> int:
         """"""
-    def GetOrCreateValue[TKey, TValue](self, key: TKey) -> TValue:
+    def GetOrCreateValue(self, key: TKey) -> TValue:
         """"""
     def GetType(self) -> Type:
         """"""
-    def GetValue[TKey, TValue](
+    def GetValue(
         self, key: TKey, createValueCallback: ConditionalWeakTable.CreateValueCallback[TKey, TValue]
     ) -> TValue:
         """"""
-    def Remove[TKey](self, key: TKey) -> bool:
+    def Remove(self, key: TKey) -> bool:
         """"""
     def ToString(self) -> str:
         """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
-    def __delitem__[TKey](self, key: TKey) -> bool:
+    def __delitem__(self, key: TKey) -> bool:
         """"""
-    CreateValueCallback: Callable[[TKey], TValue] = ...
+    type CreateValueCallback[TKey, TValue] = Callable[[TKey], TValue]
     """"""
 
 class ConfiguredTaskAwaitable(ValueType):
@@ -827,7 +827,7 @@ class ConfiguredTaskAwaitable[TResult](ValueType):
             """"""
         def GetHashCode(self) -> int:
             """"""
-        def GetResult[TResult](self) -> TResult:
+        def GetResult(self) -> TResult:
             """"""
         def GetType(self) -> Type:
             """"""
@@ -1541,14 +1541,14 @@ class HasCopySemanticsAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
-class IAsyncStateMachine:
+class IAsyncStateMachine(ABC):
     """"""
     def MoveNext(self) -> None:
         """"""
     def SetStateMachine(self, stateMachine: IAsyncStateMachine) -> None:
         """"""
 
-class ICriticalNotifyCompletion(INotifyCompletion):
+class ICriticalNotifyCompletion(ABC, INotifyCompletion):
     """"""
     def OnCompleted(self, continuation: Action) -> None:
         """"""
@@ -1598,12 +1598,12 @@ class IDispatchConstantAttribute(CustomConstantAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
-class INotifyCompletion:
+class INotifyCompletion(ABC):
     """"""
     def OnCompleted(self, continuation: Action) -> None:
         """"""
 
-class IRuntimeVariables:
+class IRuntimeVariables(ABC):
     """"""
     @property
     def Count(self) -> int:
@@ -1620,7 +1620,7 @@ class IRuntimeVariables:
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
-class IStrongBox:
+class IStrongBox(ABC):
     """"""
     @property
     def Value(self) -> object:
@@ -1628,7 +1628,7 @@ class IStrongBox:
     @Value.setter
     def Value(self, value: object) -> None: ...
 
-class ITuple:
+class ITuple(ABC):
     """"""
     @property
     def Item(self) -> object:
@@ -2239,7 +2239,7 @@ class ReadOnlyCollectionBuilder[T](
     def SyncRoot(self) -> object:
         """"""
     @overload
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     @overload
     def Add(self, value: object) -> int:
@@ -2247,7 +2247,7 @@ class ReadOnlyCollectionBuilder[T](
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     @overload
     def Contains(self, value: object) -> bool:
@@ -2260,26 +2260,26 @@ class ReadOnlyCollectionBuilder[T](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
     @overload
-    def IndexOf[T](self, item: T) -> int:
+    def IndexOf(self, item: T) -> int:
         """"""
     @overload
     def IndexOf(self, value: object) -> int:
         """"""
     @overload
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
     @overload
     def Insert(self, index: int, value: object) -> None:
         """"""
     @overload
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     @overload
     def Remove(self, value: object) -> None:
@@ -2299,15 +2299,15 @@ class ReadOnlyCollectionBuilder[T](
     def ToString(self) -> str:
         """"""
     @overload
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
     @overload
     def __contains__(self, value: object) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     @overload
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     @overload
     def __delitem__(self, value: object) -> None:
@@ -2317,7 +2317,7 @@ class ReadOnlyCollectionBuilder[T](
     def __getitem__[T](self, index: int) -> T:
         """"""
     @overload
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
     @overload
     def __setitem__(self, index: int, value: object) -> None:
@@ -2555,9 +2555,9 @@ class RuntimeHelpers(ABC, Object):
         """"""
     def ToString(self) -> str:
         """"""
-    CleanupCode: Callable[[object, bool], None] = ...
+    type CleanupCode = Callable[[object, bool], None]
     """"""
-    TryCode: Callable[[object], None] = ...
+    type TryCode = Callable[[object], None]
     """"""
 
 class RuntimeOps(ABC, Object):
@@ -3006,7 +3006,7 @@ class TaskAwaiter[TResult](ValueType, ICriticalNotifyCompletion, INotifyCompleti
         """"""
     def GetHashCode(self) -> int:
         """"""
-    def GetResult[TResult](self) -> TResult:
+    def GetResult(self) -> TResult:
         """"""
     def GetType(self) -> Type:
         """"""
@@ -3048,7 +3048,7 @@ class TrueReadOnlyCollection[T](
     def SyncRoot(self) -> object:
         """"""
     @overload
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     @overload
     def Add(self, value: object) -> int:
@@ -3056,7 +3056,7 @@ class TrueReadOnlyCollection[T](
     def Clear(self) -> None:
         """"""
     @overload
-    def Contains[T](self, value: T) -> bool:
+    def Contains(self, value: T) -> bool:
         """"""
     @overload
     def Contains(self, value: object) -> bool:
@@ -3069,26 +3069,26 @@ class TrueReadOnlyCollection[T](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
     @overload
-    def IndexOf[T](self, value: T) -> int:
+    def IndexOf(self, value: T) -> int:
         """"""
     @overload
     def IndexOf(self, value: object) -> int:
         """"""
     @overload
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
     @overload
     def Insert(self, index: int, value: object) -> None:
         """"""
     @overload
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     @overload
     def Remove(self, value: object) -> None:
@@ -3098,25 +3098,25 @@ class TrueReadOnlyCollection[T](
     def ToString(self) -> str:
         """"""
     @overload
-    def __contains__[T](self, value: T) -> bool:
+    def __contains__(self, value: T) -> bool:
         """"""
     @overload
     def __contains__(self, value: object) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
     @overload
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     @overload
     def __delitem__(self, value: object) -> None:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
     @overload
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
     @overload
     def __setitem__(self, index: int, value: object) -> None:

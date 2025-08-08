@@ -219,7 +219,7 @@ class EnvoyInfo(Object, IEnvoyInfo):
     def ToString(self) -> str:
         """"""
 
-class IChannelInfo:
+class IChannelInfo(ABC):
     """"""
     @property
     def ChannelData(self) -> Array[object]:
@@ -227,7 +227,7 @@ class IChannelInfo:
     @ChannelData.setter
     def ChannelData(self, value: Array[object]) -> None: ...
 
-class IEnvoyInfo:
+class IEnvoyInfo(ABC):
     """"""
     @property
     def EnvoySinks(self) -> IMessageSink:
@@ -235,12 +235,12 @@ class IEnvoyInfo:
     @EnvoySinks.setter
     def EnvoySinks(self, value: IMessageSink) -> None: ...
 
-class IObjectHandle:
+class IObjectHandle(ABC):
     """"""
     def Unwrap(self) -> object:
         """"""
 
-class IRemotingTypeInfo:
+class IRemotingTypeInfo(ABC):
     """"""
     @property
     def TypeName(self) -> str:

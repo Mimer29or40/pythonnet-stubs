@@ -65,13 +65,13 @@ class Helpers(ABC, Object):
 class ReferenceEqualityComparer[T](Object, IEqualityComparer[T]):
     """"""
     @overload
-    def Equals[T, T](self, x: T, y: T) -> bool:
+    def Equals(self, x: T, y: T) -> bool:
         """"""
     @overload
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetHashCode[T](self, obj: T) -> int:
+    def GetHashCode(self, obj: T) -> int:
         """"""
     @overload
     def GetHashCode(self) -> int:

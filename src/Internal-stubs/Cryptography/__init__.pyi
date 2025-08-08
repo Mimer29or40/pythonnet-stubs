@@ -197,7 +197,7 @@ class Helpers(ABC, Object):
     def UsesIv(cls, cipherMode: CipherMode) -> bool:
         """"""
 
-class ICngSymmetricAlgorithm:
+class ICngSymmetricAlgorithm(ABC):
     """"""
     @property
     def BaseKey(self) -> Array[int]:

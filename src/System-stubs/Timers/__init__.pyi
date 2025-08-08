@@ -40,7 +40,7 @@ class ElapsedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ElapsedEventHandler: Callable[[object, ElapsedEventArgs], None] = ...
+type ElapsedEventHandler = Callable[[object, ElapsedEventArgs], None]
 """"""
 
 class Timer(Component, IComponent, ISupportInitialize, IDisposable):

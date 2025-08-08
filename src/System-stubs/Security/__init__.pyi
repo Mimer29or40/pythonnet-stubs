@@ -33,7 +33,6 @@ from System.Reflection import MethodBase
 from System.Reflection import MethodInfo
 from System.Reflection.Emit import DynamicResolver
 from System.Runtime.InteropServices import SafeBuffer
-from System.Runtime.InteropServices import T
 from System.Runtime.InteropServices import _Attribute
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import IDeserializationCallback
@@ -354,13 +353,13 @@ class HostSecurityManagerOptions(Enum):
     AllFlags: HostSecurityManagerOptions = ...
     """"""
 
-class IEvidenceFactory:
+class IEvidenceFactory(ABC):
     """"""
     @property
     def Evidence(self) -> Evidence:
         """"""
 
-class IPermission(ISecurityEncodable):
+class IPermission(ABC, ISecurityEncodable):
     """"""
     def Copy(self) -> IPermission:
         """"""
@@ -377,7 +376,7 @@ class IPermission(ISecurityEncodable):
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
-class ISecurityElementFactory:
+class ISecurityElementFactory(ABC):
     """"""
     def Attribute(self, attributeName: str) -> str:
         """"""
@@ -388,21 +387,21 @@ class ISecurityElementFactory:
     def GetTag(self) -> str:
         """"""
 
-class ISecurityEncodable:
+class ISecurityEncodable(ABC):
     """"""
     def FromXml(self, e: SecurityElement) -> None:
         """"""
     def ToXml(self) -> SecurityElement:
         """"""
 
-class ISecurityPolicyEncodable:
+class ISecurityPolicyEncodable(ABC):
     """"""
     def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
         """"""
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
-class IStackWalk:
+class IStackWalk(ABC):
     """"""
     def Assert(self) -> None:
         """"""
@@ -955,7 +954,7 @@ class SafeBSTRHandle(SafeBuffer, IDisposable):
         """"""
     def Read[T](self, byteOffset: int) -> T:
         """"""
-    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def ReadArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
     def ReleasePointer(self) -> None:
         """"""
@@ -965,7 +964,7 @@ class SafeBSTRHandle(SafeBuffer, IDisposable):
         """"""
     def Write[T](self, byteOffset: int, value: T) -> None:
         """"""
-    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
 class SecureString(Object, IDisposable):

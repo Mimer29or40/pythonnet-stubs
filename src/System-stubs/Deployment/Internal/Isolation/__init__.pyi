@@ -97,7 +97,7 @@ class IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS(Enum):
     IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS = ...
     """"""
 
-class IActContext:
+class IActContext(ABC):
     """"""
     def ApplicationBasePath(self, Flags: int, ApplicationPath: String) -> tuple[None, String]:
         """"""
@@ -195,7 +195,7 @@ class IActContext:
     ) -> tuple[None, UInt32]:
         """"""
 
-class IAppIdAuthority:
+class IAppIdAuthority(ABC):
     """"""
     def AreDefinitionsEqual(
         self, Flags: int, Definition1: IDefinitionAppId, Definition2: IDefinitionAppId
@@ -238,7 +238,7 @@ class IAppIdAuthority:
     def TextToReference(self, Flags: int, Identity: str) -> IReferenceAppId:
         """"""
 
-class ICDF:
+class ICDF(ABC):
     """"""
     @property
     def Count(self) -> int:
@@ -273,7 +273,7 @@ class IDENTITY_ATTRIBUTE(ValueType):
     def ToString(self) -> str:
         """"""
 
-class IDefinitionAppId:
+class IDefinitionAppId(ABC):
     """"""
     def EnumAppPath(self) -> IEnumDefinitionIdentity:
         """"""
@@ -286,7 +286,7 @@ class IDefinitionAppId:
     def put_SubscriptionId(self, Subscription: str) -> None:
         """"""
 
-class IDefinitionIdentity:
+class IDefinitionIdentity(ABC):
     """"""
     def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IDefinitionIdentity:
         """"""
@@ -297,7 +297,7 @@ class IDefinitionIdentity:
     def SetAttribute(self, Namespace: str, Name: str, Value: str) -> None:
         """"""
 
-class IEnumDefinitionIdentity:
+class IEnumDefinitionIdentity(ABC):
     """"""
     def Clone(self) -> IEnumDefinitionIdentity:
         """"""
@@ -310,7 +310,7 @@ class IEnumDefinitionIdentity:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumIDENTITY_ATTRIBUTE:
+class IEnumIDENTITY_ATTRIBUTE(ABC):
     """"""
     def Clone(self) -> IEnumIDENTITY_ATTRIBUTE:
         """"""
@@ -325,7 +325,7 @@ class IEnumIDENTITY_ATTRIBUTE:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumReferenceIdentity:
+class IEnumReferenceIdentity(ABC):
     """"""
     def Clone(self) -> IEnumReferenceIdentity:
         """"""
@@ -338,7 +338,7 @@ class IEnumReferenceIdentity:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumSTORE_ASSEMBLY:
+class IEnumSTORE_ASSEMBLY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_ASSEMBLY:
         """"""
@@ -349,7 +349,7 @@ class IEnumSTORE_ASSEMBLY:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumSTORE_ASSEMBLY_FILE:
+class IEnumSTORE_ASSEMBLY_FILE(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_ASSEMBLY_FILE:
         """"""
@@ -362,7 +362,7 @@ class IEnumSTORE_ASSEMBLY_FILE:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
+class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
         """"""
@@ -375,7 +375,7 @@ class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumSTORE_CATEGORY:
+class IEnumSTORE_CATEGORY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_CATEGORY:
         """"""
@@ -388,7 +388,7 @@ class IEnumSTORE_CATEGORY:
     def Skip(self, ulElements: int) -> None:
         """"""
 
-class IEnumSTORE_CATEGORY_INSTANCE:
+class IEnumSTORE_CATEGORY_INSTANCE(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_CATEGORY_INSTANCE:
         """"""
@@ -401,7 +401,7 @@ class IEnumSTORE_CATEGORY_INSTANCE:
     def Skip(self, ulElements: int) -> None:
         """"""
 
-class IEnumSTORE_CATEGORY_SUBCATEGORY:
+class IEnumSTORE_CATEGORY_SUBCATEGORY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_CATEGORY_SUBCATEGORY:
         """"""
@@ -414,7 +414,7 @@ class IEnumSTORE_CATEGORY_SUBCATEGORY:
     def Skip(self, ulElements: int) -> None:
         """"""
 
-class IEnumSTORE_DEPLOYMENT_METADATA:
+class IEnumSTORE_DEPLOYMENT_METADATA(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA:
         """"""
@@ -427,7 +427,7 @@ class IEnumSTORE_DEPLOYMENT_METADATA:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
+class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
         """"""
@@ -440,7 +440,7 @@ class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
     def Skip(self, celt: int) -> None:
         """"""
 
-class IEnumUnknown:
+class IEnumUnknown(ABC):
     """"""
     def Clone(self, enumUnknown: IEnumUnknown) -> tuple[int, IEnumUnknown]:
         """"""
@@ -471,7 +471,7 @@ class IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS(Enum):
     IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS = ...
     """"""
 
-class IIdentityAuthority:
+class IIdentityAuthority(ABC):
     """"""
     def AreDefinitionsEqual(
         self, Flags: int, Definition1: IDefinitionIdentity, Definition2: IDefinitionIdentity
@@ -533,10 +533,10 @@ class IIdentityAuthority:
     def TextToReference(self, Flags: int, Identity: str) -> IReferenceIdentity:
         """"""
 
-class IManifestInformation:
+class IManifestInformation(ABC):
     """"""
 
-class IManifestParseErrorCallback:
+class IManifestParseErrorCallback(ABC):
     """"""
     def OnError(
         self,
@@ -550,7 +550,7 @@ class IManifestParseErrorCallback:
     ) -> None:
         """"""
 
-class IReferenceAppId:
+class IReferenceAppId(ABC):
     """"""
     def EnumAppPath(self) -> IEnumReferenceIdentity:
         """"""
@@ -559,7 +559,7 @@ class IReferenceAppId:
     def put_SubscriptionId(self, Subscription: str) -> None:
         """"""
 
-class IReferenceIdentity:
+class IReferenceIdentity(ABC):
     """"""
     def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IReferenceIdentity:
         """"""
@@ -594,7 +594,7 @@ class ISTORE_ENUM_FILES_FLAGS(Enum):
     ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES: ISTORE_ENUM_FILES_FLAGS = ...
     """"""
 
-class ISection:
+class ISection(ABC):
     """"""
     @property
     def Count(self) -> int:
@@ -611,21 +611,21 @@ class ISection:
     def __len__(self) -> int:
         """"""
 
-class ISectionEntry:
+class ISectionEntry(ABC):
     """"""
     def GetField(self, fieldId: int) -> object:
         """"""
     def GetFieldName(self, fieldId: int) -> str:
         """"""
 
-class ISectionWithReferenceIdentityKey:
+class ISectionWithReferenceIdentityKey(ABC):
     """"""
     def Lookup(
         self, ReferenceIdentityKey: IReferenceIdentity, ppUnknown: Object
     ) -> tuple[None, Object]:
         """"""
 
-class ISectionWithStringKey:
+class ISectionWithStringKey(ABC):
     """"""
     @property
     def IsCaseInsensitive(self) -> bool:
@@ -633,7 +633,7 @@ class ISectionWithStringKey:
     def Lookup(self, wzStringKey: str, ppUnknown: Object) -> tuple[None, Object]:
         """"""
 
-class IStateManager:
+class IStateManager(ABC):
     """"""
     def GetApplicationStateFilesystemLocation(
         self,
@@ -653,7 +653,7 @@ class IStateManager:
     ) -> tuple[None, UInt32]:
         """"""
 
-class IStore:
+class IStore(ABC):
     """"""
     def BindDefinitions(
         self,
@@ -1089,66 +1089,66 @@ class Store(Object):
     class EnumApplicationPrivateFiles(Enum):
         """"""
 
-        Nothing: EnumApplicationPrivateFiles = ...
+        Nothing: Store.EnumApplicationPrivateFiles = ...
         """"""
-        IncludeInstalled: EnumApplicationPrivateFiles = ...
+        IncludeInstalled: Store.EnumApplicationPrivateFiles = ...
         """"""
-        IncludeMissing: EnumApplicationPrivateFiles = ...
+        IncludeMissing: Store.EnumApplicationPrivateFiles = ...
         """"""
 
     class EnumAssembliesFlags(Enum):
         """"""
 
-        Nothing: EnumAssembliesFlags = ...
+        Nothing: Store.EnumAssembliesFlags = ...
         """"""
-        VisibleOnly: EnumAssembliesFlags = ...
+        VisibleOnly: Store.EnumAssembliesFlags = ...
         """"""
-        MatchServicing: EnumAssembliesFlags = ...
+        MatchServicing: Store.EnumAssembliesFlags = ...
         """"""
-        ForceLibrarySemantics: EnumAssembliesFlags = ...
+        ForceLibrarySemantics: Store.EnumAssembliesFlags = ...
         """"""
 
     class EnumAssemblyFilesFlags(Enum):
         """"""
 
-        Nothing: EnumAssemblyFilesFlags = ...
+        Nothing: Store.EnumAssemblyFilesFlags = ...
         """"""
-        IncludeInstalled: EnumAssemblyFilesFlags = ...
+        IncludeInstalled: Store.EnumAssemblyFilesFlags = ...
         """"""
-        IncludeMissing: EnumAssemblyFilesFlags = ...
+        IncludeMissing: Store.EnumAssemblyFilesFlags = ...
         """"""
 
     class EnumAssemblyInstallReferenceFlags(Enum):
         """"""
 
-        Nothing: EnumAssemblyInstallReferenceFlags = ...
+        Nothing: Store.EnumAssemblyInstallReferenceFlags = ...
         """"""
 
     class EnumCategoriesFlags(Enum):
         """"""
 
-        Nothing: EnumCategoriesFlags = ...
+        Nothing: Store.EnumCategoriesFlags = ...
         """"""
 
     class EnumCategoryInstancesFlags(Enum):
         """"""
 
-        Nothing: EnumCategoryInstancesFlags = ...
+        Nothing: Store.EnumCategoryInstancesFlags = ...
         """"""
 
     class EnumSubcategoriesFlags(Enum):
         """"""
 
-        Nothing: EnumSubcategoriesFlags = ...
+        Nothing: Store.EnumSubcategoriesFlags = ...
         """"""
 
     class GetPackagePropertyFlags(Enum):
         """"""
 
-        Nothing: GetPackagePropertyFlags = ...
+        Nothing: Store.GetPackagePropertyFlags = ...
         """"""
 
-    class IPathLock(IDisposable):
+    class IPathLock(ABC, IDisposable):
         """"""
         @property
         def Path(self) -> str:
@@ -1187,7 +1187,7 @@ class StoreApplicationReference(ValueType):
     class RefFlags(Enum):
         """"""
 
-        Nothing: RefFlags = ...
+        Nothing: StoreApplicationReference.RefFlags = ...
         """"""
 
 class StoreAssemblyEnumeration(Object, IEnumerator):
@@ -1366,19 +1366,19 @@ class StoreOperationInstallDeployment(ValueType):
     class Disposition(Enum):
         """"""
 
-        Failed: Disposition = ...
+        Failed: StoreOperationInstallDeployment.Disposition = ...
         """"""
-        AlreadyInstalled: Disposition = ...
+        AlreadyInstalled: StoreOperationInstallDeployment.Disposition = ...
         """"""
-        Installed: Disposition = ...
+        Installed: StoreOperationInstallDeployment.Disposition = ...
         """"""
 
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationInstallDeployment.OpFlags = ...
         """"""
-        UninstallOthers: OpFlags = ...
+        UninstallOthers: StoreOperationInstallDeployment.OpFlags = ...
         """"""
 
 class StoreOperationMetadataProperty(ValueType):
@@ -1441,17 +1441,17 @@ class StoreOperationPinDeployment(ValueType):
     class Disposition(Enum):
         """"""
 
-        Failed: Disposition = ...
+        Failed: StoreOperationPinDeployment.Disposition = ...
         """"""
-        Pinned: Disposition = ...
+        Pinned: StoreOperationPinDeployment.Disposition = ...
         """"""
 
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationPinDeployment.OpFlags = ...
         """"""
-        NeverExpires: OpFlags = ...
+        NeverExpires: StoreOperationPinDeployment.OpFlags = ...
         """"""
 
 class StoreOperationScavenge(ValueType):
@@ -1486,15 +1486,15 @@ class StoreOperationScavenge(ValueType):
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationScavenge.OpFlags = ...
         """"""
-        Light: OpFlags = ...
+        Light: StoreOperationScavenge.OpFlags = ...
         """"""
-        LimitSize: OpFlags = ...
+        LimitSize: StoreOperationScavenge.OpFlags = ...
         """"""
-        LimitTime: OpFlags = ...
+        LimitTime: StoreOperationScavenge.OpFlags = ...
         """"""
-        LimitCount: OpFlags = ...
+        LimitCount: StoreOperationScavenge.OpFlags = ...
         """"""
 
 class StoreOperationSetCanonicalizationContext(ValueType):
@@ -1523,7 +1523,7 @@ class StoreOperationSetCanonicalizationContext(ValueType):
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationSetCanonicalizationContext.OpFlags = ...
         """"""
 
 class StoreOperationSetDeploymentMetadata(ValueType):
@@ -1575,15 +1575,15 @@ class StoreOperationSetDeploymentMetadata(ValueType):
     class Disposition(Enum):
         """"""
 
-        Failed: Disposition = ...
+        Failed: StoreOperationSetDeploymentMetadata.Disposition = ...
         """"""
-        Set: Disposition = ...
+        Set: StoreOperationSetDeploymentMetadata.Disposition = ...
         """"""
 
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationSetDeploymentMetadata.OpFlags = ...
         """"""
 
 class StoreOperationStageComponent(ValueType):
@@ -1618,19 +1618,19 @@ class StoreOperationStageComponent(ValueType):
     class Disposition(Enum):
         """"""
 
-        Failed: Disposition = ...
+        Failed: StoreOperationStageComponent.Disposition = ...
         """"""
-        Installed: Disposition = ...
+        Installed: StoreOperationStageComponent.Disposition = ...
         """"""
-        Refreshed: Disposition = ...
+        Refreshed: StoreOperationStageComponent.Disposition = ...
         """"""
-        AlreadyInstalled: Disposition = ...
+        AlreadyInstalled: StoreOperationStageComponent.Disposition = ...
         """"""
 
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationStageComponent.OpFlags = ...
         """"""
 
 class StoreOperationStageComponentFile(ValueType):
@@ -1669,19 +1669,19 @@ class StoreOperationStageComponentFile(ValueType):
     class Disposition(Enum):
         """"""
 
-        Failed: Disposition = ...
+        Failed: StoreOperationStageComponentFile.Disposition = ...
         """"""
-        Installed: Disposition = ...
+        Installed: StoreOperationStageComponentFile.Disposition = ...
         """"""
-        Refreshed: Disposition = ...
+        Refreshed: StoreOperationStageComponentFile.Disposition = ...
         """"""
-        AlreadyInstalled: Disposition = ...
+        AlreadyInstalled: StoreOperationStageComponentFile.Disposition = ...
         """"""
 
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationStageComponentFile.OpFlags = ...
         """"""
 
 class StoreOperationUninstallDeployment(ValueType):
@@ -1710,17 +1710,17 @@ class StoreOperationUninstallDeployment(ValueType):
     class Disposition(Enum):
         """"""
 
-        Failed: Disposition = ...
+        Failed: StoreOperationUninstallDeployment.Disposition = ...
         """"""
-        DidNotExist: Disposition = ...
+        DidNotExist: StoreOperationUninstallDeployment.Disposition = ...
         """"""
-        Uninstalled: Disposition = ...
+        Uninstalled: StoreOperationUninstallDeployment.Disposition = ...
         """"""
 
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationUninstallDeployment.OpFlags = ...
         """"""
 
 class StoreOperationUnpinDeployment(ValueType):
@@ -1749,15 +1749,15 @@ class StoreOperationUnpinDeployment(ValueType):
     class Disposition(Enum):
         """"""
 
-        Failed: Disposition = ...
+        Failed: StoreOperationUnpinDeployment.Disposition = ...
         """"""
-        Unpinned: Disposition = ...
+        Unpinned: StoreOperationUnpinDeployment.Disposition = ...
         """"""
 
     class OpFlags(Enum):
         """"""
 
-        Nothing: OpFlags = ...
+        Nothing: StoreOperationUnpinDeployment.OpFlags = ...
         """"""
 
 class StoreSubcategoryEnumeration(Object, IEnumerator):

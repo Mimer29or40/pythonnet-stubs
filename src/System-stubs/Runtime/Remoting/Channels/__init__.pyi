@@ -634,7 +634,7 @@ class DispatchChannelSinkProvider(Object, IServerChannelSinkProvider):
     def ToString(self) -> str:
         """"""
 
-class IChannel:
+class IChannel(ABC):
     """"""
     @property
     def ChannelName(self) -> str:
@@ -645,7 +645,7 @@ class IChannel:
     def Parse(self, url: str, objectURI: String) -> tuple[str, String]:
         """"""
 
-class IChannelDataStore:
+class IChannelDataStore(ABC):
     """"""
     @property
     def ChannelUris(self) -> Array[str]:
@@ -660,7 +660,7 @@ class IChannelDataStore:
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
-class IChannelReceiver(IChannel):
+class IChannelReceiver(ABC, IChannel):
     """"""
     @property
     def ChannelData(self) -> object:
@@ -680,7 +680,7 @@ class IChannelReceiver(IChannel):
     def StopListening(self, data: object) -> None:
         """"""
 
-class IChannelReceiverHook:
+class IChannelReceiverHook(ABC):
     """"""
     @property
     def ChannelScheme(self) -> str:
@@ -694,7 +694,7 @@ class IChannelReceiverHook:
     def AddHookChannelUri(self, channelUri: str) -> None:
         """"""
 
-class IChannelSender(IChannel):
+class IChannelSender(ABC, IChannel):
     """"""
     @property
     def ChannelName(self) -> str:
@@ -709,13 +709,13 @@ class IChannelSender(IChannel):
     def Parse(self, url: str, objectURI: String) -> tuple[str, String]:
         """"""
 
-class IChannelSinkBase:
+class IChannelSinkBase(ABC):
     """"""
     @property
     def Properties(self) -> IDictionary:
         """"""
 
-class IClientChannelSink(IChannelSinkBase):
+class IClientChannelSink(ABC, IChannelSinkBase):
     """"""
     @property
     def NextChannelSink(self) -> IClientChannelSink:
@@ -751,7 +751,7 @@ class IClientChannelSink(IChannelSinkBase):
     ) -> tuple[None, ITransportHeaders, Stream]:
         """"""
 
-class IClientChannelSinkProvider:
+class IClientChannelSinkProvider(ABC):
     """"""
     @property
     def Next(self) -> IClientChannelSinkProvider:
@@ -763,7 +763,7 @@ class IClientChannelSinkProvider:
     ) -> IClientChannelSink:
         """"""
 
-class IClientChannelSinkStack(IClientResponseChannelSinkStack):
+class IClientChannelSinkStack(ABC, IClientResponseChannelSinkStack):
     """"""
     def AsyncProcessResponse(self, headers: ITransportHeaders, stream: Stream) -> None:
         """"""
@@ -776,7 +776,7 @@ class IClientChannelSinkStack(IClientResponseChannelSinkStack):
     def Push(self, sink: IClientChannelSink, state: object) -> None:
         """"""
 
-class IClientFormatterSink(IChannelSinkBase, IClientChannelSink, IMessageSink):
+class IClientFormatterSink(ABC, IChannelSinkBase, IClientChannelSink, IMessageSink):
     """"""
     @property
     def NextChannelSink(self) -> IClientChannelSink:
@@ -819,7 +819,7 @@ class IClientFormatterSink(IChannelSinkBase, IClientChannelSink, IMessageSink):
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
         """"""
 
-class IClientFormatterSinkProvider(IClientChannelSinkProvider):
+class IClientFormatterSinkProvider(ABC, IClientChannelSinkProvider):
     """"""
     @property
     def Next(self) -> IClientChannelSinkProvider:
@@ -831,7 +831,7 @@ class IClientFormatterSinkProvider(IClientChannelSinkProvider):
     ) -> IClientChannelSink:
         """"""
 
-class IClientResponseChannelSinkStack:
+class IClientResponseChannelSinkStack(ABC):
     """"""
     def AsyncProcessResponse(self, headers: ITransportHeaders, stream: Stream) -> None:
         """"""
@@ -840,7 +840,7 @@ class IClientResponseChannelSinkStack:
     def DispatchReplyMessage(self, msg: IMessage) -> None:
         """"""
 
-class ISecurableChannel:
+class ISecurableChannel(ABC):
     """"""
     @property
     def IsSecured(self) -> bool:
@@ -848,7 +848,7 @@ class ISecurableChannel:
     @IsSecured.setter
     def IsSecured(self, value: bool) -> None: ...
 
-class IServerChannelSink(IChannelSinkBase):
+class IServerChannelSink(ABC, IChannelSinkBase):
     """"""
     @property
     def NextChannelSink(self) -> IServerChannelSink:
@@ -885,7 +885,7 @@ class IServerChannelSink(IChannelSinkBase):
     ) -> tuple[ServerProcessing, IMessage, ITransportHeaders, Stream]:
         """"""
 
-class IServerChannelSinkProvider:
+class IServerChannelSinkProvider(ABC):
     """"""
     @property
     def Next(self) -> IServerChannelSinkProvider:
@@ -897,7 +897,7 @@ class IServerChannelSinkProvider:
     def GetChannelData(self, channelData: IChannelDataStore) -> None:
         """"""
 
-class IServerChannelSinkStack(IServerResponseChannelSinkStack):
+class IServerChannelSinkStack(ABC, IServerResponseChannelSinkStack):
     """"""
     def AsyncProcessResponse(
         self, msg: IMessage, headers: ITransportHeaders, stream: Stream
@@ -916,7 +916,7 @@ class IServerChannelSinkStack(IServerResponseChannelSinkStack):
     def StoreAndDispatch(self, sink: IServerChannelSink, state: object) -> None:
         """"""
 
-class IServerFormatterSinkProvider(IServerChannelSinkProvider):
+class IServerFormatterSinkProvider(ABC, IServerChannelSinkProvider):
     """"""
     @property
     def Next(self) -> IServerChannelSinkProvider:
@@ -928,7 +928,7 @@ class IServerFormatterSinkProvider(IServerChannelSinkProvider):
     def GetChannelData(self, channelData: IChannelDataStore) -> None:
         """"""
 
-class IServerResponseChannelSinkStack:
+class IServerResponseChannelSinkStack(ABC):
     """"""
     def AsyncProcessResponse(
         self, msg: IMessage, headers: ITransportHeaders, stream: Stream
@@ -937,7 +937,7 @@ class IServerResponseChannelSinkStack:
     def GetResponseStream(self, msg: IMessage, headers: ITransportHeaders) -> Stream:
         """"""
 
-class ITransportHeaders:
+class ITransportHeaders(ABC):
     """"""
     @property
     def Item(self) -> object:

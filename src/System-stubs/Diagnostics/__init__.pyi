@@ -945,7 +945,7 @@ class DataReceivedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-DataReceivedEventHandler: Callable[[object, DataReceivedEventArgs], None] = ...
+type DataReceivedEventHandler = Callable[[object, DataReceivedEventArgs], None]
 """"""
 
 class Debug(ABC, Object):
@@ -1153,15 +1153,15 @@ class DebuggableAttribute(Attribute, _Attribute):
     class DebuggingModes(Enum):
         """"""
 
-        _None: DebuggingModes = ...
+        _None: DebuggableAttribute.DebuggingModes = ...
         """"""
-        Default: DebuggingModes = ...
+        Default: DebuggableAttribute.DebuggingModes = ...
         """"""
-        IgnoreSymbolStoreSequencePoints: DebuggingModes = ...
+        IgnoreSymbolStoreSequencePoints: DebuggableAttribute.DebuggingModes = ...
         """"""
-        EnableEditAndContinue: DebuggingModes = ...
+        EnableEditAndContinue: DebuggableAttribute.DebuggingModes = ...
         """"""
-        DisableOptimizations: DebuggingModes = ...
+        DisableOptimizations: DebuggableAttribute.DebuggingModes = ...
         """"""
 
 class Debugger(Object):
@@ -2006,7 +2006,7 @@ class EntryWrittenEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-EntryWrittenEventHandler: Callable[[object, EntryWrittenEventArgs], None] = ...
+type EntryWrittenEventHandler = Callable[[object, EntryWrittenEventArgs], None]
 """"""
 
 class EnvironmentBlock(ABC, Object):
@@ -3335,7 +3335,7 @@ class FilterElement(TypedElement):
     def ToString(self) -> str:
         """"""
 
-class ICollectData:
+class ICollectData(ABC):
     """"""
     def CloseData(self) -> None:
         """"""
@@ -3344,7 +3344,7 @@ class ICollectData:
     ) -> tuple[None, IntPtr]:
         """"""
 
-class ICustomDebuggerNotification:
+class ICustomDebuggerNotification(ABC):
     """"""
 
 class InitState(Enum):
@@ -3768,7 +3768,7 @@ class Log(ABC, Object):
     def Warning(cls, switchname: str, message: str) -> None:
         """"""
 
-LogMessageEventHandler: Callable[[LoggingLevels, LogSwitch, str, StackTrace], None] = ...
+type LogMessageEventHandler = Callable[[LoggingLevels, LogSwitch, str, StackTrace], None]
 """"""
 
 class LogSwitch(Object):
@@ -3803,7 +3803,7 @@ class LogSwitch(Object):
     def ToString(self) -> str:
         """"""
 
-LogSwitchLevelHandler: Callable[[LogSwitch, LoggingLevels], None] = ...
+type LogSwitchLevelHandler = Callable[[LogSwitch, LoggingLevels], None]
 """"""
 
 class LoggingLevels(Enum):
@@ -7621,7 +7621,7 @@ class UnescapedXmlDiagnosticData(Object):
     def ToString(self) -> str:
         """"""
 
-UserCallBack: Callable[[str], None] = ...
+type UserCallBack = Callable[[str], None]
 """"""
 
 class WinProcessManager(ABC, Object):

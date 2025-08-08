@@ -75,9 +75,9 @@ class AcceptAsyncResult(ContextAwareResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
-AcceptExDelegate: Callable[
+type AcceptExDelegate = Callable[
     [SafeCloseSocket, SafeCloseSocket, IntPtr, int, int, int, Int32, SafeHandle], bool
-] = ...
+]
 """"""
 
 class AcceptOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
@@ -269,9 +269,9 @@ class ConnectAsyncResult(ContextAwareResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
-ConnectExDelegate: Callable[
+type ConnectExDelegate = Callable[
     [SafeCloseSocket, IntPtr, int, IntPtr, int, Int32, SafeHandle], bool
-] = ...
+]
 """"""
 
 class ConnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
@@ -297,9 +297,9 @@ class ConnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
-DisconnectExDelegate: Callable[[SafeCloseSocket, SafeHandle, int, int], bool] = ...
+type DisconnectExDelegate = Callable[[SafeCloseSocket, SafeHandle, int, int], bool]
 """"""
-DisconnectExDelegate_Blocking: Callable[[IntPtr, IntPtr, int, int], bool] = ...
+type DisconnectExDelegate_Blocking = Callable[[IntPtr, IntPtr, int, int], bool]
 """"""
 
 class DisconnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
@@ -343,9 +343,9 @@ class DynamicWinsockMethods(Object):
     def ToString(self) -> str:
         """"""
 
-GetAcceptExSockaddrsDelegate: Callable[
+type GetAcceptExSockaddrsDelegate = Callable[
     [IntPtr, int, int, int, IntPtr, Int32, IntPtr, Int32], None
-] = ...
+]
 """"""
 
 class IOControlCode(Enum):
@@ -2445,9 +2445,9 @@ class TransmitFileOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult)
     def ToString(self) -> str:
         """"""
 
-TransmitPacketsDelegate: Callable[
+type TransmitPacketsDelegate = Callable[
     [SafeCloseSocket, IntPtr, int, int, SafeNativeOverlapped, TransmitFileOptions], bool
-] = ...
+]
 """"""
 
 class UdpClient(Object, IDisposable):
@@ -2632,9 +2632,9 @@ class UdpReceiveResult(ValueType, IEquatable[UdpReceiveResult]):
     def __ne__(self, other: UdpReceiveResult) -> bool:
         """"""
 
-WSARecvMsgDelegate: Callable[
+type WSARecvMsgDelegate = Callable[
     [SafeCloseSocket, IntPtr, Int32, SafeHandle, IntPtr], SocketError
-] = ...
+]
 """"""
-WSARecvMsgDelegate_Blocking: Callable[[IntPtr, IntPtr, Int32, IntPtr, IntPtr], SocketError] = ...
+type WSARecvMsgDelegate_Blocking = Callable[[IntPtr, IntPtr, Int32, IntPtr, IntPtr], SocketError]
 """"""

@@ -2070,17 +2070,17 @@ class HandleRef(ValueType):
     def op_Explicit(cls, value: HandleRef) -> IntPtr:
         """"""
 
-class ICustomAdapter:
+class ICustomAdapter(ABC):
     """"""
     def GetUnderlyingObject(self) -> object:
         """"""
 
-class ICustomFactory:
+class ICustomFactory(ABC):
     """"""
     def CreateInstance(self, serverType: Type) -> MarshalByRefObject:
         """"""
 
-class ICustomMarshaler:
+class ICustomMarshaler(ABC):
     """"""
     def CleanUpManagedData(self, ManagedObj: object) -> None:
         """"""
@@ -2093,7 +2093,7 @@ class ICustomMarshaler:
     def MarshalNativeToManaged(self, pNativeData: IntPtr) -> object:
         """"""
 
-class ICustomQueryInterface:
+class ICustomQueryInterface(ABC):
     """"""
     def GetInterface(self, iid: Guid, ppv: IntPtr) -> tuple[CustomQueryInterfaceResult, IntPtr]:
         """"""
@@ -2209,7 +2209,7 @@ class INVOKEKIND(Enum):
     INVOKE_PROPERTYPUTREF: INVOKEKIND = ...
     """"""
 
-class IRegistrationServices:
+class IRegistrationServices(ABC):
     """"""
     def GetManagedCategoryGuid(self) -> Guid:
         """"""
@@ -2228,7 +2228,7 @@ class IRegistrationServices:
     def UnregisterAssembly(self, assembly: Assembly) -> bool:
         """"""
 
-class ITypeLibConverter:
+class ITypeLibConverter(ABC):
     """"""
     def ConvertAssemblyToTypeLib(
         self,
@@ -2268,19 +2268,19 @@ class ITypeLibConverter:
     ) -> tuple[bool, String, String]:
         """"""
 
-class ITypeLibExporterNameProvider:
+class ITypeLibExporterNameProvider(ABC):
     """"""
     def GetNames(self) -> Array[str]:
         """"""
 
-class ITypeLibExporterNotifySink:
+class ITypeLibExporterNotifySink(ABC):
     """"""
     def ReportEvent(self, eventKind: ExporterEventKind, eventCode: int, eventMsg: str) -> None:
         """"""
     def ResolveRef(self, assembly: Assembly) -> object:
         """"""
 
-class ITypeLibImporterNotifySink:
+class ITypeLibImporterNotifySink(ABC):
     """"""
     def ReportEvent(self, eventKind: ImporterEventKind, eventCode: int, eventMsg: str) -> None:
         """"""
@@ -2909,7 +2909,7 @@ class Marshal(ABC, Object):
     def GetObjectForNativeVariant[T](cls, pSrcNativeVariant: IntPtr) -> T:
         """"""
     @classmethod
-    def GetObjectsForNativeVariants(cls, aSrcNativeVariant: IntPtr, cVars: int) -> Array[T]:
+    def GetObjectsForNativeVariants[T](cls, aSrcNativeVariant: IntPtr, cVars: int) -> Array[T]:
         """"""
     @classmethod
     def GetStartComSlot(cls, t: Type) -> int:
@@ -3199,7 +3199,7 @@ class Marshal(ABC, Object):
         """"""
     @classmethod
     @overload
-    def UnsafeAddrOfPinnedArrayElement(cls, arr: Array[T], index: int) -> IntPtr:
+    def UnsafeAddrOfPinnedArrayElement[T](cls, arr: Array[T], index: int) -> IntPtr:
         """"""
     @classmethod
     @overload
@@ -3491,7 +3491,7 @@ class OSPlatform(ValueType, IEquatable[OSPlatform]):
     def __ne__(self, other: OSPlatform) -> bool:
         """"""
 
-ObjectCreationDelegate: Callable[[IntPtr], IntPtr] = ...
+type ObjectCreationDelegate = Callable[[IntPtr], IntPtr]
 """"""
 
 class OptionalAttribute(Attribute, _Attribute):
@@ -4185,7 +4185,7 @@ class SafeBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
         """"""
     def Read[T](self, byteOffset: int) -> T:
         """"""
-    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def ReadArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
     def ReleasePointer(self) -> None:
         """"""
@@ -4195,7 +4195,7 @@ class SafeBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
         """"""
     def Write[T](self, byteOffset: int, value: T) -> None:
         """"""
-    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
 class SafeHandle(ABC, CriticalFinalizerObject, IDisposable):
@@ -4269,7 +4269,7 @@ class SafeHeapHandle(SafeBuffer, IDisposable):
         """"""
     def Read[T](self, byteOffset: int) -> T:
         """"""
-    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def ReadArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
     def ReleasePointer(self) -> None:
         """"""
@@ -4281,7 +4281,7 @@ class SafeHeapHandle(SafeBuffer, IDisposable):
         """"""
     def Write[T](self, byteOffset: int, value: T) -> None:
         """"""
-    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
 class SafeHeapHandleCache(Object, IDisposable):
@@ -5155,7 +5155,7 @@ class TypeLibVersionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
-class UCOMIBindCtx:
+class UCOMIBindCtx(ABC):
     """"""
     def EnumObjectParam(self, ppenum: UCOMIEnumString) -> tuple[None, UCOMIEnumString]:
         """"""
@@ -5180,7 +5180,7 @@ class UCOMIBindCtx:
     def SetBindOptions(self, pbindopts: BIND_OPTS) -> None:
         """"""
 
-class UCOMIConnectionPoint:
+class UCOMIConnectionPoint(ABC):
     """"""
     def Advise(self, pUnkSink: object, pdwCookie: Int32) -> tuple[None, Int32]:
         """"""
@@ -5195,7 +5195,7 @@ class UCOMIConnectionPoint:
     def Unadvise(self, dwCookie: int) -> None:
         """"""
 
-class UCOMIConnectionPointContainer:
+class UCOMIConnectionPointContainer(ABC):
     """"""
     def EnumConnectionPoints(
         self, ppEnum: UCOMIEnumConnectionPoints
@@ -5206,7 +5206,7 @@ class UCOMIConnectionPointContainer:
     ) -> tuple[None, UCOMIConnectionPoint]:
         """"""
 
-class UCOMIEnumConnectionPoints:
+class UCOMIEnumConnectionPoints(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumConnectionPoints) -> tuple[None, UCOMIEnumConnectionPoints]:
         """"""
@@ -5219,7 +5219,7 @@ class UCOMIEnumConnectionPoints:
     def Skip(self, celt: int) -> int:
         """"""
 
-class UCOMIEnumConnections:
+class UCOMIEnumConnections(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumConnections) -> tuple[None, UCOMIEnumConnections]:
         """"""
@@ -5232,7 +5232,7 @@ class UCOMIEnumConnections:
     def Skip(self, celt: int) -> int:
         """"""
 
-class UCOMIEnumMoniker:
+class UCOMIEnumMoniker(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumMoniker) -> tuple[None, UCOMIEnumMoniker]:
         """"""
@@ -5245,7 +5245,7 @@ class UCOMIEnumMoniker:
     def Skip(self, celt: int) -> int:
         """"""
 
-class UCOMIEnumString:
+class UCOMIEnumString(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumString) -> tuple[None, UCOMIEnumString]:
         """"""
@@ -5258,7 +5258,7 @@ class UCOMIEnumString:
     def Skip(self, celt: int) -> int:
         """"""
 
-class UCOMIEnumVARIANT:
+class UCOMIEnumVARIANT(ABC):
     """"""
     def Clone(self, ppenum: int) -> None:
         """"""
@@ -5269,14 +5269,14 @@ class UCOMIEnumVARIANT:
     def Skip(self, celt: int) -> int:
         """"""
 
-class UCOMIEnumerable:
+class UCOMIEnumerable(ABC):
     """"""
     def GetEnumerator(self) -> IEnumerator:
         """"""
     def __iter__(self) -> Iterator:
         """"""
 
-class UCOMIEnumerator:
+class UCOMIEnumerator(ABC):
     """"""
     @property
     def Current(self) -> object:
@@ -5286,7 +5286,7 @@ class UCOMIEnumerator:
     def Reset(self) -> None:
         """"""
 
-class UCOMIExpando(UCOMIReflect):
+class UCOMIExpando(ABC, UCOMIReflect):
     """"""
     @property
     def UnderlyingSystemType(self) -> Type:
@@ -5351,7 +5351,7 @@ class UCOMIExpando(UCOMIReflect):
     def RemoveMember(self, m: MemberInfo) -> None:
         """"""
 
-class UCOMIMoniker:
+class UCOMIMoniker(ABC):
     """"""
     def BindToObject(
         self, pbc: UCOMIBindCtx, pmkToLeft: UCOMIMoniker, riidResult: Guid, ppvResult: Object
@@ -5425,7 +5425,7 @@ class UCOMIMoniker:
     def Save(self, pStm: UCOMIStream, fClearDirty: bool) -> None:
         """"""
 
-class UCOMIPersistFile:
+class UCOMIPersistFile(ABC):
     """"""
     def GetClassID(self, pClassID: Guid) -> tuple[None, Guid]:
         """"""
@@ -5440,7 +5440,7 @@ class UCOMIPersistFile:
     def SaveCompleted(self, pszFileName: str) -> None:
         """"""
 
-class UCOMIReflect:
+class UCOMIReflect(ABC):
     """"""
     @property
     def UnderlyingSystemType(self) -> Type:
@@ -5497,7 +5497,7 @@ class UCOMIReflect:
     ) -> object:
         """"""
 
-class UCOMIRunningObjectTable:
+class UCOMIRunningObjectTable(ABC):
     """"""
     def EnumRunning(self, ppenumMoniker: UCOMIEnumMoniker) -> tuple[None, UCOMIEnumMoniker]:
         """"""
@@ -5518,7 +5518,7 @@ class UCOMIRunningObjectTable:
     def Revoke(self, dwRegister: int) -> None:
         """"""
 
-class UCOMIStream:
+class UCOMIStream(ABC):
     """"""
     def Clone(self, ppstm: UCOMIStream) -> tuple[None, UCOMIStream]:
         """"""
@@ -5543,7 +5543,7 @@ class UCOMIStream:
     def Write(self, pv: Array[int], cb: int, pcbWritten: IntPtr) -> None:
         """"""
 
-class UCOMITypeComp:
+class UCOMITypeComp(ABC):
     """"""
     def Bind(
         self,
@@ -5560,7 +5560,7 @@ class UCOMITypeComp:
     ) -> tuple[None, UCOMITypeInfo, UCOMITypeComp]:
         """"""
 
-class UCOMITypeInfo:
+class UCOMITypeInfo(ABC):
     """"""
     def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> tuple[None, IntPtr]:
         """"""
@@ -5630,7 +5630,7 @@ class UCOMITypeInfo:
     def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
         """"""
 
-class UCOMITypeLib:
+class UCOMITypeLib(ABC):
     """"""
     def FindName(
         self,
@@ -6114,7 +6114,7 @@ class VariantWrapper(Object):
     def ToString(self) -> str:
         """"""
 
-class _Activator:
+class _Activator(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6137,7 +6137,7 @@ class _Activator:
     ) -> None:
         """"""
 
-class _Assembly:
+class _Assembly(ABC):
     """"""
     @property
     def CodeBase(self) -> str:
@@ -6267,7 +6267,7 @@ class _Assembly:
     ModuleResolve: EventType[ModuleResolveEventHandler] = ...
     """"""
 
-class _AssemblyBuilder:
+class _AssemblyBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6290,7 +6290,7 @@ class _AssemblyBuilder:
     ) -> None:
         """"""
 
-class _AssemblyName:
+class _AssemblyName(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6313,7 +6313,7 @@ class _AssemblyName:
     ) -> None:
         """"""
 
-class _Attribute:
+class _Attribute(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6336,7 +6336,7 @@ class _Attribute:
     ) -> None:
         """"""
 
-class _ConstructorBuilder:
+class _ConstructorBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6359,7 +6359,7 @@ class _ConstructorBuilder:
     ) -> None:
         """"""
 
-class _ConstructorInfo:
+class _ConstructorInfo(ABC):
     """"""
     @property
     def Attributes(self) -> MethodAttributes:
@@ -6483,7 +6483,7 @@ class _ConstructorInfo:
     def ToString(self) -> str:
         """"""
 
-class _CustomAttributeBuilder:
+class _CustomAttributeBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6506,7 +6506,7 @@ class _CustomAttributeBuilder:
     ) -> None:
         """"""
 
-class _EnumBuilder:
+class _EnumBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6529,7 +6529,7 @@ class _EnumBuilder:
     ) -> None:
         """"""
 
-class _EventBuilder:
+class _EventBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6552,7 +6552,7 @@ class _EventBuilder:
     ) -> None:
         """"""
 
-class _EventInfo:
+class _EventInfo(ABC):
     """"""
     @property
     def Attributes(self) -> EventAttributes:
@@ -6637,7 +6637,7 @@ class _EventInfo:
     def ToString(self) -> str:
         """"""
 
-class _Exception:
+class _Exception(ABC):
     """"""
     @property
     def HelpLink(self) -> str:
@@ -6674,7 +6674,7 @@ class _Exception:
     def ToString(self) -> str:
         """"""
 
-class _FieldBuilder:
+class _FieldBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6697,7 +6697,7 @@ class _FieldBuilder:
     ) -> None:
         """"""
 
-class _FieldInfo:
+class _FieldInfo(ABC):
     """"""
     @property
     def Attributes(self) -> FieldAttributes:
@@ -6812,7 +6812,7 @@ class _FieldInfo:
     def ToString(self) -> str:
         """"""
 
-class _ILGenerator:
+class _ILGenerator(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6835,7 +6835,7 @@ class _ILGenerator:
     ) -> None:
         """"""
 
-class _LocalBuilder:
+class _LocalBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -6858,7 +6858,7 @@ class _LocalBuilder:
     ) -> None:
         """"""
 
-class _MemberInfo:
+class _MemberInfo(ABC):
     """"""
     @property
     def DeclaringType(self) -> Type:
@@ -6909,7 +6909,7 @@ class _MemberInfo:
     def ToString(self) -> str:
         """"""
 
-class _MethodBase:
+class _MethodBase(ABC):
     """"""
     @property
     def Attributes(self) -> MethodAttributes:
@@ -7026,7 +7026,7 @@ class _MethodBase:
     def ToString(self) -> str:
         """"""
 
-class _MethodBuilder:
+class _MethodBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7049,7 +7049,7 @@ class _MethodBuilder:
     ) -> None:
         """"""
 
-class _MethodInfo:
+class _MethodInfo(ABC):
     """"""
     @property
     def Attributes(self) -> MethodAttributes:
@@ -7174,7 +7174,7 @@ class _MethodInfo:
     def ToString(self) -> str:
         """"""
 
-class _MethodRental:
+class _MethodRental(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7197,7 +7197,7 @@ class _MethodRental:
     ) -> None:
         """"""
 
-class _Module:
+class _Module(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7220,7 +7220,7 @@ class _Module:
     ) -> None:
         """"""
 
-class _ModuleBuilder:
+class _ModuleBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7243,7 +7243,7 @@ class _ModuleBuilder:
     ) -> None:
         """"""
 
-class _ParameterBuilder:
+class _ParameterBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7266,7 +7266,7 @@ class _ParameterBuilder:
     ) -> None:
         """"""
 
-class _ParameterInfo:
+class _ParameterInfo(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7289,7 +7289,7 @@ class _ParameterInfo:
     ) -> None:
         """"""
 
-class _PropertyBuilder:
+class _PropertyBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7312,7 +7312,7 @@ class _PropertyBuilder:
     ) -> None:
         """"""
 
-class _PropertyInfo:
+class _PropertyInfo(ABC):
     """"""
     @property
     def Attributes(self) -> PropertyAttributes:
@@ -7425,7 +7425,7 @@ class _PropertyInfo:
     def ToString(self) -> str:
         """"""
 
-class _SignatureHelper:
+class _SignatureHelper(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7448,7 +7448,7 @@ class _SignatureHelper:
     ) -> None:
         """"""
 
-class _Thread:
+class _Thread(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
@@ -7471,7 +7471,7 @@ class _Thread:
     ) -> None:
         """"""
 
-class _Type:
+class _Type(ABC):
     """"""
     @property
     def Assembly(self) -> Assembly:
@@ -7877,7 +7877,7 @@ class _Type:
     def ToString(self) -> str:
         """"""
 
-class _TypeBuilder:
+class _TypeBuilder(ABC):
     """"""
     def GetIDsOfNames(
         self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr

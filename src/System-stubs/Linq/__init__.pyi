@@ -84,7 +84,7 @@ class Enumerable(ABC, Object):
     """"""
     @classmethod
     @overload
-    def Aggregate[TAccumulate, TAccumulate](
+    def Aggregate[TSource, TAccumulate](
         cls,
         source: IEnumerable[TSource],
         seed: TAccumulate,
@@ -93,7 +93,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Aggregate[TAccumulate, TResult](
+    def Aggregate[TSource, TAccumulate, TResult](
         cls,
         source: IEnumerable[TSource],
         seed: TAccumulate,
@@ -108,15 +108,15 @@ class Enumerable(ABC, Object):
     ) -> TSource:
         """"""
     @classmethod
-    def All(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> bool:
+    def All[TSource](cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> bool:
         """"""
     @classmethod
     @overload
-    def Any(cls, source: IEnumerable[TSource]) -> bool:
+    def Any[TSource](cls, source: IEnumerable[TSource]) -> bool:
         """"""
     @classmethod
     @overload
-    def Any(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> bool:
+    def Any[TSource](cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> bool:
         """"""
     @classmethod
     def Append[TSource](
@@ -124,57 +124,63 @@ class Enumerable(ABC, Object):
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
-    def AsEnumerable(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
+    def AsEnumerable[TSource](cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Average[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Average[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, float]
+    ) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> float:
+    def Average[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> float:
+    def Average[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Average[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, float]
+    ) -> float:
         """"""
     @classmethod
     @overload
@@ -217,10 +223,10 @@ class Enumerable(ABC, Object):
     def Average(cls, source: IEnumerable[float]) -> float:
         """"""
     @classmethod
-    def Cast(cls, source: IEnumerable) -> IEnumerable[TResult]:
+    def Cast[TResult](cls, source: IEnumerable) -> IEnumerable[TResult]:
         """"""
     @classmethod
-    def Concat(
+    def Concat[TSource](
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
         """"""
@@ -236,15 +242,15 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Count(cls, source: IEnumerable[TSource]) -> int:
+    def Count[TSource](cls, source: IEnumerable[TSource]) -> int:
         """"""
     @classmethod
     @overload
-    def Count(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> int:
+    def Count[TSource](cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> int:
         """"""
     @classmethod
     @overload
-    def DefaultIfEmpty(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
+    def DefaultIfEmpty[TSource](cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
@@ -254,11 +260,11 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Distinct(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
+    def Distinct[TSource](cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Distinct(
+    def Distinct[TSource](
         cls, source: IEnumerable[TSource], comparer: IEqualityComparer[TSource]
     ) -> IEnumerable[TSource]:
         """"""
@@ -269,19 +275,19 @@ class Enumerable(ABC, Object):
     def ElementAtOrDefault[TSource](cls, source: IEnumerable[TSource], index: int) -> TSource:
         """"""
     @classmethod
-    def Empty(cls) -> IEnumerable[TResult]:
+    def Empty[TResult](cls) -> IEnumerable[TResult]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls,
         first: IEnumerable[TSource],
         second: IEnumerable[TSource],
@@ -314,13 +320,13 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey](
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IEnumerable[IGrouping[TKey, TSource]]:
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -329,7 +335,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TResult](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -338,7 +344,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TResult](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -348,7 +354,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -357,7 +363,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -367,7 +373,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement, TResult](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -377,7 +383,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement, TResult](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -388,7 +394,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: IEnumerable[TOuter],
         inner: IEnumerable[TInner],
@@ -399,7 +405,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: IEnumerable[TOuter],
         inner: IEnumerable[TInner],
@@ -411,13 +417,13 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls,
         first: IEnumerable[TSource],
         second: IEnumerable[TSource],
@@ -426,7 +432,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: IEnumerable[TOuter],
         inner: IEnumerable[TInner],
@@ -437,7 +443,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: IEnumerable[TOuter],
         inner: IEnumerable[TInner],
@@ -467,11 +473,13 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def LongCount(cls, source: IEnumerable[TSource]) -> int:
+    def LongCount[TSource](cls, source: IEnumerable[TSource]) -> int:
         """"""
     @classmethod
     @overload
-    def LongCount(cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]) -> int:
+    def LongCount[TSource](
+        cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
+    ) -> int:
         """"""
     @classmethod
     @overload
@@ -479,55 +487,61 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Max[TResult](
+    def Max[TSource, TResult](
         cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]
     ) -> TResult:
         """"""
     @classmethod
     @overload
-    def Max(
+    def Max[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Max[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Max(
+    def Max[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Max[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Max[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
+    def Max[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Max[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
+    def Max[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Max(
+    def Max[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Max[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
@@ -575,55 +589,61 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Min[TResult](
+    def Min[TSource, TResult](
         cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]
     ) -> TResult:
         """"""
     @classmethod
     @overload
-    def Min(
+    def Min[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Min[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Min(
+    def Min[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Min[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Min[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
+    def Min[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Min[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
+    def Min[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Min(
+    def Min[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Min[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
@@ -666,17 +686,17 @@ class Enumerable(ABC, Object):
     def Min(cls, source: IEnumerable[float]) -> float:
         """"""
     @classmethod
-    def OfType(cls, source: IEnumerable) -> IEnumerable[TResult]:
+    def OfType[TResult](cls, source: IEnumerable) -> IEnumerable[TResult]:
         """"""
     @classmethod
     @overload
-    def OrderBy(
+    def OrderBy[TSource, TKey](
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def OrderBy(
+    def OrderBy[TSource, TKey](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -685,13 +705,13 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def OrderByDescending(
+    def OrderByDescending[TSource, TKey](
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def OrderByDescending(
+    def OrderByDescending[TSource, TKey](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -710,23 +730,23 @@ class Enumerable(ABC, Object):
     def Repeat[TResult](cls, element: TResult, count: int) -> IEnumerable[TResult]:
         """"""
     @classmethod
-    def Reverse(cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
+    def Reverse[TSource](cls, source: IEnumerable[TSource]) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Select(
+    def Select[TSource, TResult](
         cls, source: IEnumerable[TSource], selector: Func[TSource, TResult]
     ) -> IEnumerable[TResult]:
         """"""
     @classmethod
     @overload
-    def Select(
+    def Select[TSource, TResult](
         cls, source: IEnumerable[TSource], selector: Func[TSource, int, TResult]
     ) -> IEnumerable[TResult]:
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TCollection, TResult](
         cls,
         source: IEnumerable[TSource],
         collectionSelector: Func[TSource, IEnumerable[TCollection]],
@@ -735,13 +755,13 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TResult](
         cls, source: IEnumerable[TSource], selector: Func[TSource, IEnumerable[TResult]]
     ) -> IEnumerable[TResult]:
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TCollection, TResult](
         cls,
         source: IEnumerable[TSource],
         collectionSelector: Func[TSource, int, IEnumerable[TCollection]],
@@ -750,17 +770,19 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TResult](
         cls, source: IEnumerable[TSource], selector: Func[TSource, int, IEnumerable[TResult]]
     ) -> IEnumerable[TResult]:
         """"""
     @classmethod
     @overload
-    def SequenceEqual(cls, first: IEnumerable[TSource], second: IEnumerable[TSource]) -> bool:
+    def SequenceEqual[TSource](
+        cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
+    ) -> bool:
         """"""
     @classmethod
     @overload
-    def SequenceEqual(
+    def SequenceEqual[TSource](
         cls,
         first: IEnumerable[TSource],
         second: IEnumerable[TSource],
@@ -788,65 +810,71 @@ class Enumerable(ABC, Object):
     ) -> TSource:
         """"""
     @classmethod
-    def Skip(cls, source: IEnumerable[TSource], count: int) -> IEnumerable[TSource]:
+    def Skip[TSource](cls, source: IEnumerable[TSource], count: int) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def SkipWhile(
+    def SkipWhile[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def SkipWhile(
+    def SkipWhile[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, int, bool]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Sum[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Sum[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Sum[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
+    def Sum[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Sum[TSource](
+        cls, source: IEnumerable[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
+    def Sum[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IEnumerable[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
+    def Sum[TSource](cls, source: IEnumerable[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
@@ -889,29 +917,29 @@ class Enumerable(ABC, Object):
     def Sum(cls, source: IEnumerable[float]) -> float:
         """"""
     @classmethod
-    def Take(cls, source: IEnumerable[TSource], count: int) -> IEnumerable[TSource]:
+    def Take[TSource](cls, source: IEnumerable[TSource], count: int) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def TakeWhile(
+    def TakeWhile[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def TakeWhile(
+    def TakeWhile[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, int, bool]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenBy(
+    def ThenBy[TSource, TKey](
         cls, source: IOrderedEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenBy(
+    def ThenBy[TSource, TKey](
         cls,
         source: IOrderedEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -920,13 +948,13 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ThenByDescending(
+    def ThenByDescending[TSource, TKey](
         cls, source: IOrderedEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> IOrderedEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenByDescending(
+    def ThenByDescending[TSource, TKey](
         cls,
         source: IOrderedEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -934,17 +962,17 @@ class Enumerable(ABC, Object):
     ) -> IOrderedEnumerable[TSource]:
         """"""
     @classmethod
-    def ToArray(cls, source: IEnumerable[TSource]) -> Array[TSource]:
+    def ToArray[TSource](cls, source: IEnumerable[TSource]) -> Array[TSource]:
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey](
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> Dictionary[TKey, TSource]:
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -953,7 +981,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey, TElement](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -962,7 +990,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey, TElement](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -972,26 +1000,26 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToHashSet(cls, source: IEnumerable[TSource]) -> HashSet[TSource]:
+    def ToHashSet[TSource](cls, source: IEnumerable[TSource]) -> HashSet[TSource]:
         """"""
     @classmethod
     @overload
-    def ToHashSet(
+    def ToHashSet[TSource](
         cls, source: IEnumerable[TSource], comparer: IEqualityComparer[TSource]
     ) -> HashSet[TSource]:
         """"""
     @classmethod
-    def ToList(cls, source: IEnumerable[TSource]) -> List[TSource]:
+    def ToList[TSource](cls, source: IEnumerable[TSource]) -> List[TSource]:
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey](
         cls, source: IEnumerable[TSource], keySelector: Func[TSource, TKey]
     ) -> ILookup[TKey, TSource]:
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -1000,7 +1028,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey, TElement](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -1009,7 +1037,7 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey, TElement](
         cls,
         source: IEnumerable[TSource],
         keySelector: Func[TSource, TKey],
@@ -1021,13 +1049,13 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls, first: IEnumerable[TSource], second: IEnumerable[TSource]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls,
         first: IEnumerable[TSource],
         second: IEnumerable[TSource],
@@ -1036,18 +1064,18 @@ class Enumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Where(
+    def Where[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, bool]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
-    def Where(
+    def Where[TSource](
         cls, source: IEnumerable[TSource], predicate: Func[TSource, int, bool]
     ) -> IEnumerable[TSource]:
         """"""
     @classmethod
-    def Zip(
+    def Zip[TFirst, TSecond, TResult](
         cls,
         first: IEnumerable[TFirst],
         second: IEnumerable[TSecond],
@@ -1130,7 +1158,7 @@ class EnumerableQuery[T](
         """"""
     def Execute(self, expression: Expression) -> object:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1138,7 +1166,7 @@ class EnumerableQuery[T](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
 class EnumerableRewriter(OldExpressionVisitor):
@@ -1200,7 +1228,7 @@ class GroupedEnumerable[TSource, TKey, TElement, TResult](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TResult]:
+    def GetEnumerator[TResult](self) -> IEnumerator[TResult]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1208,7 +1236,7 @@ class GroupedEnumerable[TSource, TKey, TElement, TResult](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TResult]:
+    def __iter__[TResult](self) -> Iterator[TResult]:
         """"""
 
 class GroupedEnumerable[TSource, TKey, TElement](
@@ -1225,7 +1253,7 @@ class GroupedEnumerable[TSource, TKey, TElement](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]:
+    def GetEnumerator[TKey, TElement](self) -> IEnumerator[IGrouping[TKey, TElement]]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1233,33 +1261,33 @@ class GroupedEnumerable[TSource, TKey, TElement](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[IGrouping[TKey, TElement]]:
+    def __iter__[TKey, TElement](self) -> Iterator[IGrouping[TKey, TElement]]:
         """"""
 
-class IGrouping[TElement, TKey](IEnumerable[TElement], IEnumerable):
+class IGrouping[TKey, TElement](ABC, IEnumerable[TElement], IEnumerable):
     """"""
     @property
     def Key(self) -> TKey:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
-class IIListProvider[TElement](IEnumerable[TElement], IEnumerable):
+class IIListProvider[TElement](ABC, IEnumerable[TElement], IEnumerable):
     """"""
     def GetCount(self, onlyIfCheap: bool) -> int:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
     def ToArray(self) -> Array[TElement]:
         """"""
     def ToList(self) -> List[TElement]:
         """"""
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
-class ILookup[TElement, TKey](IEnumerable[IGrouping[TKey, TElement]], IEnumerable):
+class ILookup[TKey, TElement](ABC, IEnumerable[IGrouping[TKey, TElement]], IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -1267,31 +1295,31 @@ class ILookup[TElement, TKey](IEnumerable[IGrouping[TKey, TElement]], IEnumerabl
     @property
     def Item(self) -> IEnumerable[TElement]:
         """"""
-    def Contains[TKey](self, key: TKey) -> bool:
+    def Contains(self, key: TKey) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]:
+    def GetEnumerator[TKey, TElement](self) -> IEnumerator[IGrouping[TKey, TElement]]:
         """"""
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[IGrouping[TKey, TElement]]:
+    def __iter__[TKey, TElement](self) -> Iterator[IGrouping[TKey, TElement]]:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[TKey](self, key: TKey) -> IEnumerable[TElement]:
+    def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
         """"""
 
-class IOrderedEnumerable[TElement](IEnumerable[TElement], IEnumerable):
+class IOrderedEnumerable[TElement](ABC, IEnumerable[TElement], IEnumerable):
     """"""
-    def CreateOrderedEnumerable(
+    def CreateOrderedEnumerable[TKey](
         self, keySelector: Func[TElement, TKey], comparer: IComparer[TKey], descending: bool
     ) -> IOrderedEnumerable[TElement]:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
-class IOrderedQueryable(IEnumerable, IQueryable):
+class IOrderedQueryable(ABC, IEnumerable, IQueryable):
     """"""
     @property
     def ElementType(self) -> Type:
@@ -1308,7 +1336,7 @@ class IOrderedQueryable(IEnumerable, IQueryable):
         """"""
 
 class IOrderedQueryable[T](
-    IEnumerable[T], IEnumerable, IOrderedQueryable, IQueryable, IQueryable[T]
+    ABC, IEnumerable[T], IEnumerable, IOrderedQueryable, IQueryable, IQueryable[T]
 ):
     """"""
     @property
@@ -1320,19 +1348,19 @@ class IOrderedQueryable[T](
     @property
     def Provider(self) -> IQueryProvider:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
-class IQueryProvider:
+class IQueryProvider(ABC):
     """"""
-    def CreateQuery(self, expression: Expression) -> IQueryable[TElement]:
+    def CreateQuery[TElement](self, expression: Expression) -> IQueryable[TElement]:
         """"""
     def Execute[TResult](self, expression: Expression) -> TResult:
         """"""
 
-class IQueryable(IEnumerable):
+class IQueryable(ABC, IEnumerable):
     """"""
     @property
     def ElementType(self) -> Type:
@@ -1348,7 +1376,7 @@ class IQueryable(IEnumerable):
     def __iter__(self) -> Iterator:
         """"""
 
-class IQueryable[T](IEnumerable[T], IEnumerable, IQueryable):
+class IQueryable[T](ABC, IEnumerable[T], IEnumerable, IQueryable):
     """"""
     @property
     def ElementType(self) -> Type:
@@ -1359,9 +1387,9 @@ class IQueryable[T](IEnumerable[T], IEnumerable, IQueryable):
     @property
     def Provider(self) -> IQueryProvider:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
 class IdentityFunction[TElement](Object):
@@ -1391,15 +1419,15 @@ class Lookup[TKey, TElement](
     @property
     def Item(self) -> IEnumerable[TElement]:
         """"""
-    def ApplyResultSelector(
+    def ApplyResultSelector[TResult](
         self, resultSelector: Func[TKey, IEnumerable[TElement], TResult]
     ) -> IEnumerable[TResult]:
         """"""
-    def Contains[TKey](self, key: TKey) -> bool:
+    def Contains(self, key: TKey) -> bool:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]:
+    def GetEnumerator[TKey, TElement](self) -> IEnumerator[IGrouping[TKey, TElement]]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1407,26 +1435,26 @@ class Lookup[TKey, TElement](
         """"""
     def ToString(self) -> str:
         """"""
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[IGrouping[TKey, TElement]]:
+    def __iter__[TKey, TElement](self) -> Iterator[IGrouping[TKey, TElement]]:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[TKey](self, key: TKey) -> IEnumerable[TElement]:
+    def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
         """"""
 
 class OrderedEnumerable[TElement, TKey](
     OrderedEnumerable[TElement], IEnumerable[TElement], IEnumerable, IOrderedEnumerable[TElement]
 ):
     """"""
-    def CreateOrderedEnumerable(
+    def CreateOrderedEnumerable[TKey](
         self, keySelector: Func[TElement, TKey], comparer: IComparer[TKey], descending: bool
     ) -> IOrderedEnumerable[TElement]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1434,20 +1462,20 @@ class OrderedEnumerable[TElement, TKey](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
 class OrderedEnumerable[TElement](
     ABC, Object, IEnumerable[TElement], IEnumerable, IOrderedEnumerable[TElement]
 ):
     """"""
-    def CreateOrderedEnumerable(
+    def CreateOrderedEnumerable[TKey](
         self, keySelector: Func[TElement, TKey], comparer: IComparer[TKey], descending: bool
     ) -> IOrderedEnumerable[TElement]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1455,14 +1483,14 @@ class OrderedEnumerable[TElement](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
 class OrderedParallelQuery[TSource](ParallelQuery[TSource], IEnumerable[TSource], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1470,14 +1498,14 @@ class OrderedParallelQuery[TSource](ParallelQuery[TSource], IEnumerable[TSource]
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
 
 class ParallelEnumerable(ABC, Object):
     """"""
     @classmethod
     @overload
-    def Aggregate[TAccumulate, TAccumulate](
+    def Aggregate[TSource, TAccumulate](
         cls,
         source: ParallelQuery[TSource],
         seed: TAccumulate,
@@ -1486,7 +1514,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Aggregate[TAccumulate, TResult](
+    def Aggregate[TSource, TAccumulate, TResult](
         cls,
         source: ParallelQuery[TSource],
         seed: TAccumulate,
@@ -1497,7 +1525,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Aggregate[TAccumulate, TResult](
+    def Aggregate[TSource, TAccumulate, TResult](
         cls,
         source: ParallelQuery[TSource],
         seed: TAccumulate,
@@ -1507,7 +1535,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Aggregate[TResult](
+    def Aggregate[TSource, TAccumulate, TResult](
         cls,
         source: ParallelQuery[TSource],
         seedFactory: Func[TAccumulate],
@@ -1523,18 +1551,18 @@ class ParallelEnumerable(ABC, Object):
     ) -> TSource:
         """"""
     @classmethod
-    def All(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> bool:
+    def All[TSource](cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> bool:
         """"""
     @classmethod
     @overload
-    def Any(cls, source: ParallelQuery[TSource]) -> bool:
+    def Any[TSource](cls, source: ParallelQuery[TSource]) -> bool:
         """"""
     @classmethod
     @overload
-    def Any(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> bool:
+    def Any[TSource](cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> bool:
         """"""
     @classmethod
-    def AsEnumerable(cls, source: ParallelQuery[TSource]) -> IEnumerable[TSource]:
+    def AsEnumerable[TSource](cls, source: ParallelQuery[TSource]) -> IEnumerable[TSource]:
         """"""
     @classmethod
     @overload
@@ -1542,75 +1570,85 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def AsOrdered(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
+    def AsOrdered[TSource](cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def AsParallel(cls, source: Partitioner[TSource]) -> ParallelQuery[TSource]:
+    def AsParallel[TSource](cls, source: Partitioner[TSource]) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def AsParallel(cls, source: IEnumerable[TSource]) -> ParallelQuery[TSource]:
+    def AsParallel[TSource](cls, source: IEnumerable[TSource]) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
     def AsParallel(cls, source: IEnumerable) -> ParallelQuery:
         """"""
     @classmethod
-    def AsSequential(cls, source: ParallelQuery[TSource]) -> IEnumerable[TSource]:
+    def AsSequential[TSource](cls, source: ParallelQuery[TSource]) -> IEnumerable[TSource]:
         """"""
     @classmethod
-    def AsUnordered(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
+    def AsUnordered[TSource](cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Average[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Average[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, float]
+    ) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> float:
+    def Average[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int]
+    ) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> float:
+    def Average[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int]
+    ) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Average[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, float]
+    ) -> float:
         """"""
     @classmethod
     @overload
@@ -1653,17 +1691,17 @@ class ParallelEnumerable(ABC, Object):
     def Average(cls, source: ParallelQuery[float]) -> float:
         """"""
     @classmethod
-    def Cast(cls, source: ParallelQuery) -> ParallelQuery[TResult]:
+    def Cast[TResult](cls, source: ParallelQuery) -> ParallelQuery[TResult]:
         """"""
     @classmethod
     @overload
-    def Concat(
+    def Concat[TSource](
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Concat(
+    def Concat[TSource](
         cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
@@ -1679,15 +1717,15 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Count(cls, source: ParallelQuery[TSource]) -> int:
+    def Count[TSource](cls, source: ParallelQuery[TSource]) -> int:
         """"""
     @classmethod
     @overload
-    def Count(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> int:
+    def Count[TSource](cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> int:
         """"""
     @classmethod
     @overload
-    def DefaultIfEmpty(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
+    def DefaultIfEmpty[TSource](cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
@@ -1697,11 +1735,11 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Distinct(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
+    def Distinct[TSource](cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Distinct(
+    def Distinct[TSource](
         cls, source: ParallelQuery[TSource], comparer: IEqualityComparer[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
@@ -1712,19 +1750,19 @@ class ParallelEnumerable(ABC, Object):
     def ElementAtOrDefault[TSource](cls, source: ParallelQuery[TSource], index: int) -> TSource:
         """"""
     @classmethod
-    def Empty(cls) -> ParallelQuery[TResult]:
+    def Empty[TResult](cls) -> ParallelQuery[TResult]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: IEnumerable[TSource],
@@ -1733,13 +1771,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: ParallelQuery[TSource],
@@ -1767,7 +1805,7 @@ class ParallelEnumerable(ABC, Object):
     ) -> TSource:
         """"""
     @classmethod
-    def ForAll(cls, source: ParallelQuery[TSource], action: Action[TSource]) -> None:
+    def ForAll[TSource](cls, source: ParallelQuery[TSource], action: Action[TSource]) -> None:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1775,13 +1813,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey](
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> ParallelQuery[IGrouping[TKey, TSource]]:
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -1790,7 +1828,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TResult](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -1799,7 +1837,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TResult](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -1809,7 +1847,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -1818,7 +1856,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -1828,7 +1866,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement, TResult](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -1838,7 +1876,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement, TResult](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -1849,7 +1887,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: IEnumerable[TInner],
@@ -1860,7 +1898,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: IEnumerable[TInner],
@@ -1872,7 +1910,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: ParallelQuery[TInner],
@@ -1883,7 +1921,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: ParallelQuery[TInner],
@@ -1895,13 +1933,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: IEnumerable[TSource],
@@ -1910,13 +1948,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: ParallelQuery[TSource],
@@ -1925,7 +1963,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: IEnumerable[TInner],
@@ -1936,7 +1974,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: IEnumerable[TInner],
@@ -1948,7 +1986,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: ParallelQuery[TInner],
@@ -1959,7 +1997,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: ParallelQuery[TOuter],
         inner: ParallelQuery[TInner],
@@ -1991,11 +2029,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def LongCount(cls, source: ParallelQuery[TSource]) -> int:
+    def LongCount[TSource](cls, source: ParallelQuery[TSource]) -> int:
         """"""
     @classmethod
     @overload
-    def LongCount(cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]) -> int:
+    def LongCount[TSource](
+        cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
+    ) -> int:
         """"""
     @classmethod
     @overload
@@ -2003,55 +2043,61 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Max[TResult](
+    def Max[TSource, TResult](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]
     ) -> TResult:
         """"""
     @classmethod
     @overload
-    def Max(
+    def Max[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Max[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Max(
+    def Max[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Max[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Max[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
+    def Max[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Max[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
+    def Max[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Max(
+    def Max[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Max(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Max[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
@@ -2099,55 +2145,61 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Min[TResult](
+    def Min[TSource, TResult](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]
     ) -> TResult:
         """"""
     @classmethod
     @overload
-    def Min(
+    def Min[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Min[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Min(
+    def Min[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Min[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Min[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
+    def Min[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Min[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
+    def Min[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Min(
+    def Min[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Min(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Min[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
@@ -2190,17 +2242,17 @@ class ParallelEnumerable(ABC, Object):
     def Min(cls, source: ParallelQuery[float]) -> float:
         """"""
     @classmethod
-    def OfType(cls, source: ParallelQuery) -> ParallelQuery[TResult]:
+    def OfType[TResult](cls, source: ParallelQuery) -> ParallelQuery[TResult]:
         """"""
     @classmethod
     @overload
-    def OrderBy(
+    def OrderBy[TSource, TKey](
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def OrderBy(
+    def OrderBy[TSource, TKey](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2209,13 +2261,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def OrderByDescending(
+    def OrderByDescending[TSource, TKey](
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def OrderByDescending(
+    def OrderByDescending[TSource, TKey](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2229,23 +2281,23 @@ class ParallelEnumerable(ABC, Object):
     def Repeat[TResult](cls, element: TResult, count: int) -> ParallelQuery[TResult]:
         """"""
     @classmethod
-    def Reverse(cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
+    def Reverse[TSource](cls, source: ParallelQuery[TSource]) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Select(
+    def Select[TSource, TResult](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, TResult]
     ) -> ParallelQuery[TResult]:
         """"""
     @classmethod
     @overload
-    def Select(
+    def Select[TSource, TResult](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, int, TResult]
     ) -> ParallelQuery[TResult]:
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TCollection, TResult](
         cls,
         source: ParallelQuery[TSource],
         collectionSelector: Func[TSource, IEnumerable[TCollection]],
@@ -2254,13 +2306,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TResult](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, IEnumerable[TResult]]
     ) -> ParallelQuery[TResult]:
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TCollection, TResult](
         cls,
         source: ParallelQuery[TSource],
         collectionSelector: Func[TSource, int, IEnumerable[TCollection]],
@@ -2269,17 +2321,19 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TResult](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, int, IEnumerable[TResult]]
     ) -> ParallelQuery[TResult]:
         """"""
     @classmethod
     @overload
-    def SequenceEqual(cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]) -> bool:
+    def SequenceEqual[TSource](
+        cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
+    ) -> bool:
         """"""
     @classmethod
     @overload
-    def SequenceEqual(
+    def SequenceEqual[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: IEnumerable[TSource],
@@ -2288,11 +2342,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def SequenceEqual(cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]) -> bool:
+    def SequenceEqual[TSource](
+        cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
+    ) -> bool:
         """"""
     @classmethod
     @overload
-    def SequenceEqual(
+    def SequenceEqual[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: ParallelQuery[TSource],
@@ -2320,65 +2376,71 @@ class ParallelEnumerable(ABC, Object):
     ) -> TSource:
         """"""
     @classmethod
-    def Skip(cls, source: ParallelQuery[TSource], count: int) -> ParallelQuery[TSource]:
+    def Skip[TSource](cls, source: ParallelQuery[TSource], count: int) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def SkipWhile(
+    def SkipWhile[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def SkipWhile(
+    def SkipWhile[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, int, bool]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal | None]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]) -> Decimal:
+    def Sum[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, Decimal]
+    ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Sum[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Sum[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
+    def Sum[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]) -> int | None:
+    def Sum[TSource](
+        cls, source: ParallelQuery[TSource], selector: Func[TSource, int | None]
+    ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
+    def Sum[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, int]) -> int:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: ParallelQuery[TSource], selector: Func[TSource, float | None]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
+    def Sum[TSource](cls, source: ParallelQuery[TSource], selector: Func[TSource, float]) -> float:
         """"""
     @classmethod
     @overload
@@ -2421,29 +2483,29 @@ class ParallelEnumerable(ABC, Object):
     def Sum(cls, source: ParallelQuery[float]) -> float:
         """"""
     @classmethod
-    def Take(cls, source: ParallelQuery[TSource], count: int) -> ParallelQuery[TSource]:
+    def Take[TSource](cls, source: ParallelQuery[TSource], count: int) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def TakeWhile(
+    def TakeWhile[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def TakeWhile(
+    def TakeWhile[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, int, bool]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenBy(
+    def ThenBy[TSource, TKey](
         cls, source: OrderedParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenBy(
+    def ThenBy[TSource, TKey](
         cls,
         source: OrderedParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2452,13 +2514,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ThenByDescending(
+    def ThenByDescending[TSource, TKey](
         cls, source: OrderedParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> OrderedParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenByDescending(
+    def ThenByDescending[TSource, TKey](
         cls,
         source: OrderedParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2466,17 +2528,17 @@ class ParallelEnumerable(ABC, Object):
     ) -> OrderedParallelQuery[TSource]:
         """"""
     @classmethod
-    def ToArray(cls, source: ParallelQuery[TSource]) -> Array[TSource]:
+    def ToArray[TSource](cls, source: ParallelQuery[TSource]) -> Array[TSource]:
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey](
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> Dictionary[TKey, TSource]:
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2485,7 +2547,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey, TElement](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2494,7 +2556,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToDictionary(
+    def ToDictionary[TSource, TKey, TElement](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2503,17 +2565,17 @@ class ParallelEnumerable(ABC, Object):
     ) -> Dictionary[TKey, TElement]:
         """"""
     @classmethod
-    def ToList(cls, source: ParallelQuery[TSource]) -> List[TSource]:
+    def ToList[TSource](cls, source: ParallelQuery[TSource]) -> List[TSource]:
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey](
         cls, source: ParallelQuery[TSource], keySelector: Func[TSource, TKey]
     ) -> ILookup[TKey, TSource]:
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2522,7 +2584,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey, TElement](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2531,7 +2593,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ToLookup(
+    def ToLookup[TSource, TKey, TElement](
         cls,
         source: ParallelQuery[TSource],
         keySelector: Func[TSource, TKey],
@@ -2543,13 +2605,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls, first: ParallelQuery[TSource], second: IEnumerable[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: IEnumerable[TSource],
@@ -2558,13 +2620,13 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls, first: ParallelQuery[TSource], second: ParallelQuery[TSource]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls,
         first: ParallelQuery[TSource],
         second: ParallelQuery[TSource],
@@ -2573,39 +2635,39 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Where(
+    def Where[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, bool]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Where(
+    def Where[TSource](
         cls, source: ParallelQuery[TSource], predicate: Func[TSource, int, bool]
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
-    def WithCancellation(
+    def WithCancellation[TSource](
         cls, source: ParallelQuery[TSource], cancellationToken: CancellationToken
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
-    def WithDegreeOfParallelism(
+    def WithDegreeOfParallelism[TSource](
         cls, source: ParallelQuery[TSource], degreeOfParallelism: int
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
-    def WithExecutionMode(
+    def WithExecutionMode[TSource](
         cls, source: ParallelQuery[TSource], executionMode: ParallelExecutionMode
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
-    def WithMergeOptions(
+    def WithMergeOptions[TSource](
         cls, source: ParallelQuery[TSource], mergeOptions: ParallelMergeOptions
     ) -> ParallelQuery[TSource]:
         """"""
     @classmethod
     @overload
-    def Zip(
+    def Zip[TFirst, TSecond, TResult](
         cls,
         first: ParallelQuery[TFirst],
         second: IEnumerable[TSecond],
@@ -2614,7 +2676,7 @@ class ParallelEnumerable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Zip(
+    def Zip[TFirst, TSecond, TResult](
         cls,
         first: ParallelQuery[TFirst],
         second: ParallelQuery[TSecond],
@@ -2669,7 +2731,7 @@ class ParallelQuery[TSource](ParallelQuery, IEnumerable[TSource], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2677,14 +2739,14 @@ class ParallelQuery[TSource](ParallelQuery, IEnumerable[TSource], IEnumerable):
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
 
 class Queryable(ABC, Object):
     """"""
     @classmethod
     @overload
-    def Aggregate[TAccumulate, TAccumulate](
+    def Aggregate[TSource, TAccumulate](
         cls,
         source: IQueryable[TSource],
         seed: TAccumulate,
@@ -2693,7 +2755,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Aggregate[TAccumulate, TResult](
+    def Aggregate[TSource, TAccumulate, TResult](
         cls,
         source: IQueryable[TSource],
         seed: TAccumulate,
@@ -2708,19 +2770,23 @@ class Queryable(ABC, Object):
     ) -> TSource:
         """"""
     @classmethod
-    def All(cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]) -> bool:
+    def All[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
+    ) -> bool:
         """"""
     @classmethod
     @overload
-    def Any(cls, source: IQueryable[TSource]) -> bool:
+    def Any[TSource](cls, source: IQueryable[TSource]) -> bool:
         """"""
     @classmethod
     @overload
-    def Any(cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]) -> bool:
+    def Any[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
+    ) -> bool:
         """"""
     @classmethod
     @overload
-    def AsQueryable(cls, source: IEnumerable[TElement]) -> IQueryable[TElement]:
+    def AsQueryable[TElement](cls, source: IEnumerable[TElement]) -> IQueryable[TElement]:
         """"""
     @classmethod
     @overload
@@ -2728,61 +2794,61 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal | None]]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal]]
     ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]
     ) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]
     ) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]
     ) -> float:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Average(
+    def Average[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]
     ) -> float:
         """"""
@@ -2827,10 +2893,10 @@ class Queryable(ABC, Object):
     def Average(cls, source: IQueryable[float]) -> float:
         """"""
     @classmethod
-    def Cast(cls, source: IQueryable) -> IQueryable[TResult]:
+    def Cast[TResult](cls, source: IQueryable) -> IQueryable[TResult]:
         """"""
     @classmethod
-    def Concat(
+    def Concat[TSource](
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
         """"""
@@ -2846,15 +2912,17 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Count(cls, source: IQueryable[TSource]) -> int:
+    def Count[TSource](cls, source: IQueryable[TSource]) -> int:
         """"""
     @classmethod
     @overload
-    def Count(cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]) -> int:
+    def Count[TSource](
+        cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
+    ) -> int:
         """"""
     @classmethod
     @overload
-    def DefaultIfEmpty(cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
+    def DefaultIfEmpty[TSource](cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
@@ -2864,11 +2932,11 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Distinct(cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
+    def Distinct[TSource](cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def Distinct(
+    def Distinct[TSource](
         cls, source: IQueryable[TSource], comparer: IEqualityComparer[TSource]
     ) -> IQueryable[TSource]:
         """"""
@@ -2882,13 +2950,13 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def Except(
+    def Except[TSource](
         cls,
         source1: IQueryable[TSource],
         source2: IEnumerable[TSource],
@@ -2921,13 +2989,13 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey](
         cls, source: IQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IQueryable[IGrouping[TKey, TSource]]:
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -2936,7 +3004,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TResult](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -2945,7 +3013,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TResult](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -2955,7 +3023,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -2964,7 +3032,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -2974,7 +3042,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement, TResult](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -2984,7 +3052,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupBy(
+    def GroupBy[TSource, TKey, TElement, TResult](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -2995,7 +3063,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
@@ -3006,7 +3074,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GroupJoin(
+    def GroupJoin[TOuter, TInner, TKey, TResult](
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
@@ -3018,13 +3086,13 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def Intersect(
+    def Intersect[TSource](
         cls,
         source1: IQueryable[TSource],
         source2: IEnumerable[TSource],
@@ -3033,7 +3101,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
@@ -3044,7 +3112,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Join(
+    def Join[TOuter, TInner, TKey, TResult](
         cls,
         outer: IQueryable[TOuter],
         inner: IEnumerable[TInner],
@@ -3076,11 +3144,11 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def LongCount(cls, source: IQueryable[TSource]) -> int:
+    def LongCount[TSource](cls, source: IQueryable[TSource]) -> int:
         """"""
     @classmethod
     @overload
-    def LongCount(
+    def LongCount[TSource](
         cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> int:
         """"""
@@ -3090,7 +3158,7 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Max[TResult](
+    def Max[TSource, TResult](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, TResult]]
     ) -> TResult:
         """"""
@@ -3100,22 +3168,22 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Min[TResult](
+    def Min[TSource, TResult](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, TResult]]
     ) -> TResult:
         """"""
     @classmethod
-    def OfType(cls, source: IQueryable) -> IQueryable[TResult]:
+    def OfType[TResult](cls, source: IQueryable) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
-    def OrderBy(
+    def OrderBy[TSource, TKey](
         cls, source: IQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def OrderBy(
+    def OrderBy[TSource, TKey](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -3124,13 +3192,13 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def OrderByDescending(
+    def OrderByDescending[TSource, TKey](
         cls, source: IQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def OrderByDescending(
+    def OrderByDescending[TSource, TKey](
         cls,
         source: IQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -3138,23 +3206,23 @@ class Queryable(ABC, Object):
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
-    def Reverse(cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
+    def Reverse[TSource](cls, source: IQueryable[TSource]) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def Select(
+    def Select[TSource, TResult](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
-    def Select(
+    def Select[TSource, TResult](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int, TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TCollection, TResult](
         cls,
         source: IQueryable[TSource],
         collectionSelector: Expression[Func, IEnumerable[TCollection]],
@@ -3163,13 +3231,13 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TResult](
         cls, source: IQueryable[TSource], selector: Expression[Func, IEnumerable[TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TCollection, TResult](
         cls,
         source: IQueryable[TSource],
         collectionSelector: Expression[Func, int, IEnumerable[TCollection]],
@@ -3178,17 +3246,19 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def SelectMany(
+    def SelectMany[TSource, TResult](
         cls, source: IQueryable[TSource], selector: Expression[Func, int, IEnumerable[TResult]]
     ) -> IQueryable[TResult]:
         """"""
     @classmethod
     @overload
-    def SequenceEqual(cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]) -> bool:
+    def SequenceEqual[TSource](
+        cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
+    ) -> bool:
         """"""
     @classmethod
     @overload
-    def SequenceEqual(
+    def SequenceEqual[TSource](
         cls,
         source1: IQueryable[TSource],
         source2: IEnumerable[TSource],
@@ -3216,71 +3286,79 @@ class Queryable(ABC, Object):
     ) -> TSource:
         """"""
     @classmethod
-    def Skip(cls, source: IQueryable[TSource], count: int) -> IQueryable[TSource]:
+    def Skip[TSource](cls, source: IQueryable[TSource], count: int) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def SkipWhile(
+    def SkipWhile[TSource](
         cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def SkipWhile(
+    def SkipWhile[TSource](
         cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, int, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal | None]]
     ) -> Decimal | None:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, Decimal]]
     ) -> Decimal:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]) -> float:
+    def Sum[TSource](
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]
+    ) -> float:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
     ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]) -> int:
+    def Sum[TSource](
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]
+    ) -> int:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int | None]]
     ) -> int | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]) -> int:
+    def Sum[TSource](
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, int]]
+    ) -> int:
         """"""
     @classmethod
     @overload
-    def Sum(
+    def Sum[TSource](
         cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float | None]]
     ) -> float | None:
         """"""
     @classmethod
     @overload
-    def Sum(cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]) -> float:
+    def Sum[TSource](
+        cls, source: IQueryable[TSource], selector: Expression[Func[TSource, float]]
+    ) -> float:
         """"""
     @classmethod
     @overload
@@ -3323,29 +3401,29 @@ class Queryable(ABC, Object):
     def Sum(cls, source: IQueryable[float]) -> float:
         """"""
     @classmethod
-    def Take(cls, source: IQueryable[TSource], count: int) -> IQueryable[TSource]:
+    def Take[TSource](cls, source: IQueryable[TSource], count: int) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def TakeWhile(
+    def TakeWhile[TSource](
         cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def TakeWhile(
+    def TakeWhile[TSource](
         cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, int, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenBy(
+    def ThenBy[TSource, TKey](
         cls, source: IOrderedQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenBy(
+    def ThenBy[TSource, TKey](
         cls,
         source: IOrderedQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -3354,13 +3432,13 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def ThenByDescending(
+    def ThenByDescending[TSource, TKey](
         cls, source: IOrderedQueryable[TSource], keySelector: Expression[Func[TSource, TKey]]
     ) -> IOrderedQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def ThenByDescending(
+    def ThenByDescending[TSource, TKey](
         cls,
         source: IOrderedQueryable[TSource],
         keySelector: Expression[Func[TSource, TKey]],
@@ -3371,13 +3449,13 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls, source1: IQueryable[TSource], source2: IEnumerable[TSource]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def Union(
+    def Union[TSource](
         cls,
         source1: IQueryable[TSource],
         source2: IEnumerable[TSource],
@@ -3386,18 +3464,18 @@ class Queryable(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Where(
+    def Where[TSource](
         cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
     @overload
-    def Where(
+    def Where[TSource](
         cls, source: IQueryable[TSource], predicate: Expression[Func[TSource, int, bool]]
     ) -> IQueryable[TSource]:
         """"""
     @classmethod
-    def Zip(
+    def Zip[TFirst, TSecond, TResult](
         cls,
         source1: IQueryable[TFirst],
         source2: IEnumerable[TSecond],
@@ -3537,9 +3615,9 @@ class Set[TElement](Object):
     @overload
     def __init__(self, comparer: IEqualityComparer[TElement]) -> None:
         """"""
-    def Add[TElement](self, value: TElement) -> bool:
+    def Add(self, value: TElement) -> bool:
         """"""
-    def Contains[TElement](self, value: TElement) -> bool:
+    def Contains(self, value: TElement) -> bool:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -3547,13 +3625,13 @@ class Set[TElement](Object):
         """"""
     def GetType(self) -> Type:
         """"""
-    def Remove[TElement](self, value: TElement) -> bool:
+    def Remove(self, value: TElement) -> bool:
         """"""
     def ToString(self) -> str:
         """"""
-    def __contains__[TElement](self, value: TElement) -> bool:
+    def __contains__(self, value: TElement) -> bool:
         """"""
-    def __delitem__[TElement](self, value: TElement) -> bool:
+    def __delitem__(self, value: TElement) -> bool:
         """"""
 
 class SingleLinkedNode[TSource](Object):
@@ -3566,7 +3644,7 @@ class SingleLinkedNode[TSource](Object):
     @property
     def Linked(self) -> SingleLinkedNode[TSource]:
         """"""
-    def Add[TSource](self, item: TSource) -> SingleLinkedNode[TSource]:
+    def Add(self, item: TSource) -> SingleLinkedNode[TSource]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -3586,7 +3664,7 @@ class SingleLinkedNode[TSource](Object):
         """"""
     def __iter__(self, count: int) -> Iterator[TSource]:
         """"""
-    def __getitem__[TSource](self) -> TSource:
+    def __getitem__(self) -> TSource:
         """"""
 
 class Strings(ABC, Object):

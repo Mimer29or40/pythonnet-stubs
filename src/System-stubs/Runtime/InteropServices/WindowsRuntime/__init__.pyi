@@ -489,13 +489,13 @@ class ConstantSplittableMap[TKey, TValue](
     @property
     def Values(self) -> IEnumerable[TValue]:
         """"""
-    def ContainsKey[TKey](self, key: TKey) -> bool:
+    def ContainsKey(self, key: TKey) -> bool:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def First(self) -> IIterator[IKeyValuePair[TKey, TValue]]:
+    def First[TKey, TValue](self) -> IIterator[IKeyValuePair[TKey, TValue]]:
         """"""
-    def GetEnumerator(self) -> IEnumerator[IKeyValuePair[TKey, TValue]]:
+    def GetEnumerator[TKey, TValue](self) -> IEnumerator[IKeyValuePair[TKey, TValue]]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -505,21 +505,21 @@ class ConstantSplittableMap[TKey, TValue](
         """"""
     def Lookup[TKey, TValue](self, key: TKey) -> TValue:
         """"""
-    def Split(
+    def Split[TKey, TValue](
         self, firstPartition: IMapView[TKey, TValue], secondPartition: IMapView[TKey, TValue]
     ) -> tuple[None, IMapView[TKey, TValue], IMapView[TKey, TValue]]:
         """"""
     def ToString(self) -> str:
         """"""
-    def TryGetValue[TKey](self, key: TKey, value: TValue) -> tuple[bool, TValue]:
+    def TryGetValue(self, key: TKey, value: TValue) -> tuple[bool, TValue]:
         """"""
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[IKeyValuePair[TKey, TValue]]:
+    def __iter__[TKey, TValue](self) -> Iterator[IKeyValuePair[TKey, TValue]]:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[TKey, TValue](self, key: TKey) -> TValue:
+    def __getitem__(self, key: TKey) -> TValue:
         """"""
 
 class CustomPropertyImpl(Object, ICustomProperty):
@@ -639,11 +639,11 @@ class DictionaryKeyCollection[TKey, TValue](
         """"""
     def Contains[TKey](self, item: TKey) -> bool:
         """"""
-    def CopyTo(self, array: Array[TKey], index: int) -> None:
+    def CopyTo[TKey](self, array: Array[TKey], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TKey]:
+    def GetEnumerator[TKey](self) -> IEnumerator[TKey]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -655,7 +655,7 @@ class DictionaryKeyCollection[TKey, TValue](
         """"""
     def __contains__[TKey](self, item: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[TKey]:
+    def __iter__[TKey](self) -> Iterator[TKey]:
         """"""
     def __delitem__[TKey](self, item: TKey) -> bool:
         """"""
@@ -713,11 +713,11 @@ class DictionaryValueCollection[TKey, TValue](
         """"""
     def Contains[TValue](self, item: TValue) -> bool:
         """"""
-    def CopyTo(self, array: Array[TValue], index: int) -> None:
+    def CopyTo[TValue](self, array: Array[TValue], index: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TValue]:
+    def GetEnumerator[TValue](self) -> IEnumerator[TValue]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -729,7 +729,7 @@ class DictionaryValueCollection[TKey, TValue](
         """"""
     def __contains__[TValue](self, item: TValue) -> bool:
         """"""
-    def __iter__(self) -> Iterator[TValue]:
+    def __iter__[TValue](self) -> Iterator[TValue]:
         """"""
     def __delitem__[TValue](self, item: TValue) -> bool:
         """"""
@@ -833,7 +833,7 @@ class EventRegistrationTokenTable[T](Object):
         """"""
     @InvocationList.setter
     def InvocationList(self, value: T) -> None: ...
-    def AddEventHandler[T](self, handler: T) -> EventRegistrationToken:
+    def AddEventHandler(self, handler: T) -> EventRegistrationToken:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -847,7 +847,7 @@ class EventRegistrationTokenTable[T](Object):
     def GetType(self) -> Type:
         """"""
     @overload
-    def RemoveEventHandler[T](self, handler: T) -> None:
+    def RemoveEventHandler(self, handler: T) -> None:
         """"""
     @overload
     def RemoveEventHandler(self, token: EventRegistrationToken) -> None:
@@ -855,7 +855,7 @@ class EventRegistrationTokenTable[T](Object):
     def ToString(self) -> str:
         """"""
 
-GetEnumerator_Delegate: Callable[[], IEnumerator[T]] = ...
+type GetEnumerator_Delegate[T] = Callable[[], IEnumerator[T]]
 """"""
 
 class HSTRING_HEADER(ValueType):
@@ -869,17 +869,17 @@ class HSTRING_HEADER(ValueType):
     def ToString(self) -> str:
         """"""
 
-class IActivationFactory:
+class IActivationFactory(ABC):
     """"""
     def ActivateInstance(self) -> object:
         """"""
 
-class IBindableIterable:
+class IBindableIterable(ABC):
     """"""
     def First(self) -> IBindableIterator:
         """"""
 
-class IBindableIterator:
+class IBindableIterator(ABC):
     """"""
     @property
     def Current(self) -> object:
@@ -890,7 +890,7 @@ class IBindableIterator:
     def MoveNext(self) -> bool:
         """"""
 
-class IBindableVector(IBindableIterable):
+class IBindableVector(ABC, IBindableIterable):
     """"""
     @property
     def Size(self) -> int:
@@ -916,7 +916,7 @@ class IBindableVector(IBindableIterable):
     def SetAt(self, index: int, value: object) -> None:
         """"""
 
-class IBindableVectorView(IBindableIterable):
+class IBindableVectorView(ABC, IBindableIterable):
     """"""
     @property
     def Size(self) -> int:
@@ -928,7 +928,7 @@ class IBindableVectorView(IBindableIterable):
     def IndexOf(self, value: object, index: UInt32) -> tuple[bool, UInt32]:
         """"""
 
-class IClosable:
+class IClosable(ABC):
     """"""
     def Close(self) -> None:
         """"""
@@ -977,14 +977,14 @@ class ICommandToWinRTAdapter(Object):
     def ToString(self) -> str:
         """"""
 
-class ICommand_WinRT:
+class ICommand_WinRT(ABC):
     """"""
     def CanExecute(self, parameter: object) -> bool:
         """"""
     def Execute(self, parameter: object) -> None:
         """"""
 
-class ICustomProperty:
+class ICustomProperty(ABC):
     """"""
     @property
     def CanRead(self) -> bool:
@@ -1011,7 +1011,7 @@ class ICustomProperty:
     def SetValue(self, target: object, value: object, indexValue: object) -> None:
         """"""
 
-class ICustomPropertyProvider:
+class ICustomPropertyProvider(ABC):
     """"""
     @property
     def Type(self) -> Type:
@@ -1107,21 +1107,21 @@ class IDisposableToIClosableAdapter(Object):
     def ToString(self) -> str:
         """"""
 
-class IGetProxyTarget:
+class IGetProxyTarget(ABC):
     """"""
     def GetTarget(self) -> object:
         """"""
 
-class IIterable[T](IEnumerable[T], IEnumerable):
+class IIterable[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     def First(self) -> IIterator[T]:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
-class IIterator[T]:
+class IIterator[T](ABC):
     """"""
     @property
     def Current(self) -> T:
@@ -1134,7 +1134,7 @@ class IIterator[T]:
     def MoveNext(self) -> bool:
         """"""
 
-class IKeyValuePair[K, V]:
+class IKeyValuePair[K, V](ABC):
     """"""
     @property
     def Key(self) -> K:
@@ -1143,7 +1143,7 @@ class IKeyValuePair[K, V]:
     def Value(self) -> V:
         """"""
 
-class IManagedActivationFactory:
+class IManagedActivationFactory(ABC):
     """"""
     def RunClassConstructor(self) -> None:
         """"""
@@ -1159,53 +1159,57 @@ class IMapViewToIReadOnlyDictionaryAdapter(Object):
     def ToString(self) -> str:
         """"""
 
-class IMapView[K, V](IEnumerable[IKeyValuePair[K, V]], IEnumerable, IIterable[IKeyValuePair[K, V]]):
+class IMapView[K, V](
+    ABC, IEnumerable[IKeyValuePair[K, V]], IEnumerable, IIterable[IKeyValuePair[K, V]]
+):
     """"""
     @property
     def Size(self) -> int:
         """"""
-    def First(self) -> IIterator[IKeyValuePair[K, V]]:
+    def First[K, V](self) -> IIterator[IKeyValuePair[K, V]]:
         """"""
-    def GetEnumerator(self) -> IEnumerator[IKeyValuePair[K, V]]:
+    def GetEnumerator[K, V](self) -> IEnumerator[IKeyValuePair[K, V]]:
         """"""
-    def HasKey[K](self, key: K) -> bool:
+    def HasKey(self, key: K) -> bool:
         """"""
-    def Lookup[K, V](self, key: K) -> V:
+    def Lookup(self, key: K) -> V:
         """"""
     def Split(
         self, first: IMapView[K, V], second: IMapView[K, V]
     ) -> tuple[None, IMapView[K, V], IMapView[K, V]]:
         """"""
-    def __iter__(self) -> Iterator[IKeyValuePair[K, V]]:
+    def __iter__[K, V](self) -> Iterator[IKeyValuePair[K, V]]:
         """"""
 
-class IMap[K, V](IEnumerable[IKeyValuePair[K, V]], IEnumerable, IIterable[IKeyValuePair[K, V]]):
+class IMap[K, V](
+    ABC, IEnumerable[IKeyValuePair[K, V]], IEnumerable, IIterable[IKeyValuePair[K, V]]
+):
     """"""
     @property
     def Size(self) -> int:
         """"""
     def Clear(self) -> None:
         """"""
-    def First(self) -> IIterator[IKeyValuePair[K, V]]:
+    def First[K, V](self) -> IIterator[IKeyValuePair[K, V]]:
         """"""
-    def GetEnumerator(self) -> IEnumerator[IKeyValuePair[K, V]]:
+    def GetEnumerator[K, V](self) -> IEnumerator[IKeyValuePair[K, V]]:
         """"""
     def GetView(self) -> IReadOnlyDictionary[K, V]:
         """"""
-    def HasKey[K](self, key: K) -> bool:
+    def HasKey(self, key: K) -> bool:
         """"""
-    def Insert[K, V](self, key: K, value: V) -> bool:
+    def Insert(self, key: K, value: V) -> bool:
         """"""
-    def Lookup[K, V](self, key: K) -> V:
+    def Lookup(self, key: K) -> V:
         """"""
-    def Remove[K](self, key: K) -> None:
+    def Remove(self, key: K) -> None:
         """"""
-    def __iter__(self) -> Iterator[IKeyValuePair[K, V]]:
+    def __iter__[K, V](self) -> Iterator[IKeyValuePair[K, V]]:
         """"""
-    def __delitem__[K](self, key: K) -> None:
+    def __delitem__(self, key: K) -> None:
         """"""
 
-class INotifyCollectionChangedEventArgs:
+class INotifyCollectionChangedEventArgs(ABC):
     """"""
     @property
     def Action(self) -> NotifyCollectionChangedAction:
@@ -1223,19 +1227,19 @@ class INotifyCollectionChangedEventArgs:
     def OldStartingIndex(self) -> int:
         """"""
 
-class INotifyCollectionChanged_WinRT:
+class INotifyCollectionChanged_WinRT(ABC):
     """"""
 
-class INotifyPropertyChanged_WinRT:
+class INotifyPropertyChanged_WinRT(ABC):
     """"""
 
-class IPropertyChangedEventArgs:
+class IPropertyChangedEventArgs(ABC):
     """"""
     @property
     def PropertyName(self) -> str:
         """"""
 
-class IPropertyValue:
+class IPropertyValue(ABC):
     """"""
     @property
     def IsNumericScalar(self) -> bool:
@@ -1340,7 +1344,7 @@ class IReadOnlyListToIVectorViewAdapter(Object):
     def ToString(self) -> str:
         """"""
 
-class IReferenceArray[T](IPropertyValue):
+class IReferenceArray[T](ABC, IPropertyValue):
     """"""
     @property
     def IsNumericScalar(self) -> bool:
@@ -1437,7 +1441,7 @@ class IReferenceFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class IReference[T](IPropertyValue):
+class IReference[T](ABC, IPropertyValue):
     """"""
     @property
     def IsNumericScalar(self) -> bool:
@@ -1523,7 +1527,7 @@ class IReference[T](IPropertyValue):
     def GetUInt8Array(self) -> Array[int]:
         """"""
 
-class IRestrictedErrorInfo:
+class IRestrictedErrorInfo(ABC):
     """"""
     def GetErrorDetails(
         self,
@@ -1536,7 +1540,7 @@ class IRestrictedErrorInfo:
     def GetReference(self, reference: String) -> tuple[None, String]:
         """"""
 
-class IStringable:
+class IStringable(ABC):
     """"""
     def ToString(self) -> str:
         """"""
@@ -1565,46 +1569,46 @@ class IVectorViewToIReadOnlyListAdapter(Object):
     def ToString(self) -> str:
         """"""
 
-class IVectorView[T](IEnumerable[T], IEnumerable, IIterable[T]):
+class IVectorView[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     """"""
     @property
     def Size(self) -> int:
         """"""
     def First(self) -> IIterator[T]:
         """"""
-    def GetAt[T](self, index: int) -> T:
+    def GetAt(self, index: int) -> T:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetMany(self, startIndex: int, items: Array[T]) -> tuple[int, Array[T]]:
         """"""
-    def IndexOf[T](self, value: T, index: UInt32) -> tuple[bool, UInt32]:
+    def IndexOf(self, value: T, index: UInt32) -> tuple[bool, UInt32]:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
-class IVector[T](IEnumerable[T], IEnumerable, IIterable[T]):
+class IVector[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     """"""
     @property
     def Size(self) -> int:
         """"""
-    def Append[T](self, value: T) -> None:
+    def Append(self, value: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
     def First(self) -> IIterator[T]:
         """"""
-    def GetAt[T](self, index: int) -> T:
+    def GetAt(self, index: int) -> T:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetMany(self, startIndex: int, items: Array[T]) -> tuple[int, Array[T]]:
         """"""
     def GetView(self) -> IReadOnlyList[T]:
         """"""
-    def IndexOf[T](self, value: T, index: UInt32) -> tuple[bool, UInt32]:
+    def IndexOf(self, value: T, index: UInt32) -> tuple[bool, UInt32]:
         """"""
-    def InsertAt[T](self, index: int, value: T) -> None:
+    def InsertAt(self, index: int, value: T) -> None:
         """"""
     def RemoveAt(self, index: int) -> None:
         """"""
@@ -1612,33 +1616,33 @@ class IVector[T](IEnumerable[T], IEnumerable, IIterable[T]):
         """"""
     def ReplaceAll(self, items: Array[T]) -> None:
         """"""
-    def SetAt[T](self, index: int, value: T) -> None:
+    def SetAt(self, index: int, value: T) -> None:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
-class IVector_Raw[T](IEnumerable[T], IEnumerable, IIterable[T]):
+class IVector_Raw[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     """"""
     @property
     def Size(self) -> int:
         """"""
-    def Append[T](self, value: T) -> None:
+    def Append(self, value: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
     def First(self) -> IIterator[T]:
         """"""
-    def GetAt[T](self, index: int) -> T:
+    def GetAt(self, index: int) -> T:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetMany(self, startIndex: int, items: Array[T]) -> tuple[int, Array[T]]:
         """"""
     def GetView(self) -> IVectorView[T]:
         """"""
-    def IndexOf[T](self, value: T, index: UInt32) -> tuple[bool, UInt32]:
+    def IndexOf(self, value: T, index: UInt32) -> tuple[bool, UInt32]:
         """"""
-    def InsertAt[T](self, index: int, value: T) -> None:
+    def InsertAt(self, index: int, value: T) -> None:
         """"""
     def RemoveAt(self, index: int) -> None:
         """"""
@@ -1646,19 +1650,19 @@ class IVector_Raw[T](IEnumerable[T], IEnumerable, IIterable[T]):
         """"""
     def ReplaceAll(self, items: Array[T]) -> None:
         """"""
-    def SetAt[T](self, index: int, value: T) -> None:
+    def SetAt(self, index: int, value: T) -> None:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
-class IWinRTClassActivator:
+class IWinRTClassActivator(ABC):
     """"""
     def ActivateInstance(self, activatableClassId: str) -> object:
         """"""
     def GetActivationFactory(self, activatableClassId: str, iid: Guid) -> IntPtr:
         """"""
 
-Indexer_Get_Delegate: Callable[[int], T] = ...
+type Indexer_Get_Delegate[T] = Callable[[int], T]
 """"""
 
 class InterfaceForwardingSupport(Enum):
@@ -1893,9 +1897,9 @@ class NotifyCollectionChangedEventArgsMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-NotifyCollectionChangedEventHandler_WinRT: Callable[
+type NotifyCollectionChangedEventHandler_WinRT = Callable[
     [object, NotifyCollectionChangedEventArgs], None
-] = ...
+]
 """"""
 
 class NotifyCollectionChangedToManagedAdapter(Object):
@@ -1964,7 +1968,7 @@ class PropertyChangedEventArgsMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-PropertyChangedEventHandler_WinRT: Callable[[object, PropertyChangedEventArgs], None] = ...
+type PropertyChangedEventHandler_WinRT = Callable[[object, PropertyChangedEventArgs], None]
 """"""
 
 class PropertyType(Enum):
@@ -2099,7 +2103,7 @@ class ReadOnlyDictionaryKeyCollection[TKey, TValue](Object, IEnumerable[TKey], I
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TKey]:
+    def GetEnumerator[TKey](self) -> IEnumerator[TKey]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2107,7 +2111,7 @@ class ReadOnlyDictionaryKeyCollection[TKey, TValue](Object, IEnumerable[TKey], I
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TKey]:
+    def __iter__[TKey](self) -> Iterator[TKey]:
         """"""
 
 class ReadOnlyDictionaryKeyEnumerator[TKey, TValue](
@@ -2140,7 +2144,7 @@ class ReadOnlyDictionaryValueCollection[TKey, TValue](Object, IEnumerable[TValue
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TValue]:
+    def GetEnumerator[TValue](self) -> IEnumerator[TValue]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2148,7 +2152,7 @@ class ReadOnlyDictionaryValueCollection[TKey, TValue](Object, IEnumerable[TValue
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TValue]:
+    def __iter__[TValue](self) -> Iterator[TValue]:
         """"""
 
 class ReadOnlyDictionaryValueEnumerator[TKey, TValue](
@@ -2324,7 +2328,7 @@ class WinRTClassActivator(MarshalByRefObject, IWinRTClassActivator):
     def ToString(self) -> str:
         """"""
 
-WindowsFoundationEventHandler: Callable[[object, T], None] = ...
+type WindowsFoundationEventHandler[T] = Callable[[object, T], None]
 """"""
 
 class WindowsRuntimeBufferHelper(ABC, Object):

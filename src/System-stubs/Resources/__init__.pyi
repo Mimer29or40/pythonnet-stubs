@@ -110,7 +110,7 @@ class FileBasedResourceGroveler(Object, IResourceGroveler):
     def ToString(self) -> str:
         """"""
 
-class IResourceGroveler:
+class IResourceGroveler(ABC):
     """"""
     def GrovelForResourceSet(
         self,
@@ -124,7 +124,7 @@ class IResourceGroveler:
     def HasNeutralResources(self, culture: CultureInfo, defaultResName: str) -> bool:
         """"""
 
-class IResourceReader(IEnumerable, IDisposable):
+class IResourceReader(ABC, IEnumerable, IDisposable):
     """"""
     def Close(self) -> None:
         """"""
@@ -135,7 +135,7 @@ class IResourceReader(IEnumerable, IDisposable):
     def __iter__(self) -> Iterator:
         """"""
 
-class IResourceWriter(IDisposable):
+class IResourceWriter(ABC, IDisposable):
     """"""
     @overload
     def AddResource(self, name: str, value: Array[int]) -> None:

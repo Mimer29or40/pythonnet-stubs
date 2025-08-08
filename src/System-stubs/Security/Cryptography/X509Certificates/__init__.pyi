@@ -1400,7 +1400,7 @@ class ReadOnlySpan[T](ValueType):
     @classmethod
     def op_Implicit(cls, array: Array[T]) -> ReadOnlySpan[T]:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
 
 class SR(ABC, Object):
@@ -1564,7 +1564,7 @@ class Span[T](ValueType):
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def Fill[T](self, value: T) -> None:
+    def Fill(self, value: T) -> None:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1590,9 +1590,9 @@ class Span[T](ValueType):
     @overload
     def op_Implicit(cls, array: Array[T]) -> Span[T]:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
 
 class StoreLocation(Enum):
@@ -1889,11 +1889,11 @@ class Utility(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GetSpanForArray(cls, array: Array[T], offset: int) -> Span[T]:
+    def GetSpanForArray[T](cls, array: Array[T], offset: int) -> Span[T]:
         """"""
     @classmethod
     @overload
-    def GetSpanForArray(cls, array: Array[T], offset: int, count: int) -> Span[T]:
+    def GetSpanForArray[T](cls, array: Array[T], offset: int, count: int) -> Span[T]:
         """"""
     def GetType(self) -> Type:
         """"""
@@ -3407,19 +3407,19 @@ class X509Native(ABC, Object):
     class AxlVerificationFlags(Enum):
         """"""
 
-        _None: AxlVerificationFlags = ...
+        _None: X509Native.AxlVerificationFlags = ...
         """"""
-        NoRevocationCheck: AxlVerificationFlags = ...
+        NoRevocationCheck: X509Native.AxlVerificationFlags = ...
         """"""
-        RevocationCheckEndCertOnly: AxlVerificationFlags = ...
+        RevocationCheckEndCertOnly: X509Native.AxlVerificationFlags = ...
         """"""
-        RevocationCheckEntireChain: AxlVerificationFlags = ...
+        RevocationCheckEntireChain: X509Native.AxlVerificationFlags = ...
         """"""
-        UrlOnlyCacheRetrieval: AxlVerificationFlags = ...
+        UrlOnlyCacheRetrieval: X509Native.AxlVerificationFlags = ...
         """"""
-        LifetimeSigning: AxlVerificationFlags = ...
+        LifetimeSigning: X509Native.AxlVerificationFlags = ...
         """"""
-        TrustMicrosoftRootOnly: AxlVerificationFlags = ...
+        TrustMicrosoftRootOnly: X509Native.AxlVerificationFlags = ...
         """"""
 
     class UnsafeNativeMethods(ABC, Object):

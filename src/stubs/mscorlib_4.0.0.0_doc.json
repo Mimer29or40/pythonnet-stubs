@@ -3788,7 +3788,7 @@
         "doc_formatted": {},
         "return": ""
       },
-      "AsReadOnly(System:Array[System:T])": {
+      "AsReadOnly(System:Array[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -3843,7 +3843,7 @@
         "return": "",
         "exceptions": {}
       },
-      "BinarySearch(System:Array[System:T], $T)": {
+      "BinarySearch(System:Array[$T], $T)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -3853,7 +3853,7 @@
         "return": "",
         "exceptions": {}
       },
-      "BinarySearch(System:Array[System:T], $T, System.Collections.Generic:IComparer[$T])": {
+      "BinarySearch(System:Array[$T], $T, System.Collections.Generic:IComparer[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -3864,7 +3864,7 @@
         "return": "",
         "exceptions": {}
       },
-      "BinarySearch(System:Array[System:T], System:Int32, System:Int32, $T)": {
+      "BinarySearch(System:Array[$T], System:Int32, System:Int32, $T)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -3876,7 +3876,7 @@
         "return": "",
         "exceptions": {}
       },
-      "BinarySearch(System:Array[System:T], System:Int32, System:Int32, $T, System.Collections.Generic:IComparer[$T])": {
+      "BinarySearch(System:Array[$T], System:Int32, System:Int32, $T, System.Collections.Generic:IComparer[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -3911,7 +3911,7 @@
         },
         "exceptions": {}
       },
-      "ConvertAll(System:Array[System:TInput], System:Converter[$TInput, $TOutput])": {
+      "ConvertAll(System:Array[$TInput], System:Converter[$TInput, $TOutput])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4044,7 +4044,7 @@
         "return": "",
         "exceptions": {}
       },
-      "Exists(System:Array[System:T], System:Predicate[$T])": {
+      "Exists(System:Array[$T], System:Predicate[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4054,7 +4054,7 @@
         "return": "",
         "exceptions": {}
       },
-      "Find(System:Array[System:T], System:Predicate[$T])": {
+      "Find(System:Array[$T], System:Predicate[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4064,7 +4064,7 @@
         "return": "",
         "exceptions": {}
       },
-      "FindAll(System:Array[System:T], System:Predicate[$T])": {
+      "FindAll(System:Array[$T], System:Predicate[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4074,50 +4074,7 @@
         "return": "",
         "exceptions": {}
       },
-      "FindIndex(System:Array[System:T], System:Int32, System:Int32, System:Predicate[$T])": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "array": "",
-          "startIndex": "",
-          "count": "",
-          "match": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "FindIndex(System:Array[System:T], System:Int32, System:Predicate[$T])": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "array": "",
-          "startIndex": "",
-          "match": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "FindIndex(System:Array[System:T], System:Predicate[$T])": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "array": "",
-          "match": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "FindLast(System:Array[System:T], System:Predicate[$T])": {
-        "doc": "",
-        "doc_formatted": {},
-        "parameters": {
-          "array": "",
-          "match": ""
-        },
-        "return": "",
-        "exceptions": {}
-      },
-      "FindLastIndex(System:Array[System:T], System:Int32, System:Int32, System:Predicate[$T])": {
+      "FindIndex(System:Array[$T], System:Int32, System:Int32, System:Predicate[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4129,7 +4086,7 @@
         "return": "",
         "exceptions": {}
       },
-      "FindLastIndex(System:Array[System:T], System:Int32, System:Predicate[$T])": {
+      "FindIndex(System:Array[$T], System:Int32, System:Predicate[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4140,7 +4097,7 @@
         "return": "",
         "exceptions": {}
       },
-      "FindLastIndex(System:Array[System:T], System:Predicate[$T])": {
+      "FindIndex(System:Array[$T], System:Predicate[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4150,7 +4107,50 @@
         "return": "",
         "exceptions": {}
       },
-      "ForEach(System:Array[System:T], System:Action[$T])": {
+      "FindLast(System:Array[$T], System:Predicate[$T])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "array": "",
+          "match": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "FindLastIndex(System:Array[$T], System:Int32, System:Int32, System:Predicate[$T])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "array": "",
+          "startIndex": "",
+          "count": "",
+          "match": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "FindLastIndex(System:Array[$T], System:Int32, System:Predicate[$T])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "array": "",
+          "startIndex": "",
+          "match": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "FindLastIndex(System:Array[$T], System:Predicate[$T])": {
+        "doc": "",
+        "doc_formatted": {},
+        "parameters": {
+          "array": "",
+          "match": ""
+        },
+        "return": "",
+        "exceptions": {}
+      },
+      "ForEach(System:Array[$T], System:Action[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4306,7 +4306,7 @@
         "return": "",
         "exceptions": {}
       },
-      "IndexOf(System:Array[System:T], $T)": {
+      "IndexOf(System:Array[$T], $T)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4316,7 +4316,7 @@
         "return": "",
         "exceptions": {}
       },
-      "IndexOf(System:Array[System:T], $T, System:Int32)": {
+      "IndexOf(System:Array[$T], $T, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4327,7 +4327,7 @@
         "return": "",
         "exceptions": {}
       },
-      "IndexOf(System:Array[System:T], $T, System:Int32, System:Int32)": {
+      "IndexOf(System:Array[$T], $T, System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4377,7 +4377,7 @@
         "return": "",
         "exceptions": {}
       },
-      "LastIndexOf(System:Array[System:T], $T)": {
+      "LastIndexOf(System:Array[$T], $T)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4387,7 +4387,7 @@
         "return": "",
         "exceptions": {}
       },
-      "LastIndexOf(System:Array[System:T], $T, System:Int32)": {
+      "LastIndexOf(System:Array[$T], $T, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4398,7 +4398,7 @@
         "return": "",
         "exceptions": {}
       },
-      "LastIndexOf(System:Array[System:T], $T, System:Int32, System:Int32)": {
+      "LastIndexOf(System:Array[$T], $T, System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4595,7 +4595,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:TKey], System:Array[System:TValue])": {
+      "Sort(System:Array[$TKey], System:Array[$TValue])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4604,7 +4604,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:TKey], System:Array[System:TValue], System.Collections.Generic:IComparer[$TKey])": {
+      "Sort(System:Array[$TKey], System:Array[$TValue], System.Collections.Generic:IComparer[$TKey])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4614,7 +4614,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:TKey], System:Array[System:TValue], System:Int32, System:Int32)": {
+      "Sort(System:Array[$TKey], System:Array[$TValue], System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4625,7 +4625,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:TKey], System:Array[System:TValue], System:Int32, System:Int32, System.Collections.Generic:IComparer[$TKey])": {
+      "Sort(System:Array[$TKey], System:Array[$TValue], System:Int32, System:Int32, System.Collections.Generic:IComparer[$TKey])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4637,7 +4637,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:T])": {
+      "Sort(System:Array[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4645,7 +4645,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:T], System.Collections.Generic:IComparer[$T])": {
+      "Sort(System:Array[$T], System.Collections.Generic:IComparer[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4654,7 +4654,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:T], System:Comparison[$T])": {
+      "Sort(System:Array[$T], System:Comparison[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4663,7 +4663,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:T], System:Int32, System:Int32)": {
+      "Sort(System:Array[$T], System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4673,7 +4673,7 @@
         },
         "exceptions": {}
       },
-      "Sort(System:Array[System:T], System:Int32, System:Int32, System.Collections.Generic:IComparer[$T])": {
+      "Sort(System:Array[$T], System:Int32, System:Int32, System.Collections.Generic:IComparer[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4684,7 +4684,7 @@
         },
         "exceptions": {}
       },
-      "TrueForAll(System:Array[System:T], System:Predicate[$T])": {
+      "TrueForAll(System:Array[$T], System:Predicate[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -4698,14 +4698,14 @@
     "ArraySegment[$T]": {
       "doc": "",
       "doc_formatted": {},
-      "__init__(System:Array[System:T])": {
+      "__init__(System:Array[$T])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
           "array": ""
         }
       },
-      "__init__(System:Array[System:T], System:Int32, System:Int32)": {
+      "__init__(System:Array[$T], System:Int32, System:Int32)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -7268,7 +7268,7 @@
             },
             "exceptions": {}
           },
-          "PushRange(System:Array[System.Collections.Concurrent:T])": {
+          "PushRange(System:Array[$T])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7276,7 +7276,7 @@
             },
             "exceptions": {}
           },
-          "PushRange(System:Array[System.Collections.Concurrent:T], System:Int32, System:Int32)": {
+          "PushRange(System:Array[$T], System:Int32, System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7304,7 +7304,7 @@
             "return": "",
             "exceptions": {}
           },
-          "TryPopRange(System:Array[System.Collections.Concurrent:T])": {
+          "TryPopRange(System:Array[$T])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7313,7 +7313,7 @@
             "return": "",
             "exceptions": {}
           },
-          "TryPopRange(System:Array[System.Collections.Concurrent:T], System:Int32, System:Int32)": {
+          "TryPopRange(System:Array[$T], System:Int32, System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7340,7 +7340,7 @@
         "IProducerConsumerCollection[$T]": {
           "doc": "",
           "doc_formatted": {},
-          "CopyTo(System:Array[System.Collections.Concurrent:T], System:Int32)": {
+          "CopyTo(System:Array[$T], System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7464,7 +7464,7 @@
             "return": "",
             "exceptions": {}
           },
-          "Create(System:Array[System.Collections.Concurrent:TSource], System:Boolean)": {
+          "Create(System:Array[$TSource], System:Boolean)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7781,7 +7781,7 @@
         "IArraySortHelper[$TKey]": {
           "doc": "",
           "doc_formatted": {},
-          "BinarySearch(System:Array[System.Collections.Generic:TKey], System:Int32, System:Int32, $TKey, System.Collections.Generic:IComparer[$TKey])": {
+          "BinarySearch(System:Array[$TKey], System:Int32, System:Int32, $TKey, System.Collections.Generic:IComparer[$TKey])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7794,7 +7794,7 @@
             "return": "",
             "exceptions": {}
           },
-          "Sort(System:Array[System.Collections.Generic:TKey], System:Int32, System:Int32, System.Collections.Generic:IComparer[$TKey])": {
+          "Sort(System:Array[$TKey], System:Int32, System:Int32, System.Collections.Generic:IComparer[$TKey])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7809,7 +7809,7 @@
         "IArraySortHelper[$TKey, $TValue]": {
           "doc": "",
           "doc_formatted": {},
-          "Sort(System:Array[System.Collections.Generic:TKey], System:Array[System.Collections.Generic:TValue], System:Int32, System:Int32, System.Collections.Generic:IComparer[$TKey])": {
+          "Sort(System:Array[$TKey], System:Array[$TValue], System:Int32, System:Int32, System.Collections.Generic:IComparer[$TKey])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -7857,7 +7857,7 @@
             "return": "",
             "exceptions": {}
           },
-          "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+          "CopyTo(System:Array[$T], System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -8336,7 +8336,7 @@
             "return": "",
             "exceptions": {}
           },
-          "CopyTo(System:Array[System.Collections.Generic:T])": {
+          "CopyTo(System:Array[$T])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -8344,7 +8344,7 @@
             },
             "exceptions": {}
           },
-          "CopyTo(System:Int32, System:Array[System.Collections.Generic:T], System:Int32, System:Int32)": {
+          "CopyTo(System:Int32, System:Array[$T], System:Int32, System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -40594,7 +40594,7 @@
           },
           "exceptions": {}
         },
-        "ReadArray(System:Int64, System:Array[System.IO:T], System:Int32, System:Int32)": {
+        "ReadArray(System:Int64, System:Array[$T], System:Int32, System:Int32)": {
           "doc": "",
           "doc_formatted": {},
           "parameters": {
@@ -40849,7 +40849,7 @@
           },
           "exceptions": {}
         },
-        "WriteArray(System:Int64, System:Array[System.IO:T], System:Int32, System:Int32)": {
+        "WriteArray(System:Int64, System:Array[$T], System:Int32, System:Int32)": {
           "doc": "",
           "doc_formatted": {},
           "parameters": {
@@ -47953,7 +47953,7 @@
             },
             "exceptions": {}
           },
-          "SetSignature(System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "SetSignature(System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -48115,7 +48115,7 @@
             "return": "",
             "exceptions": {}
           },
-          "DefineGlobalMethod(System:String, System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "DefineGlobalMethod(System:String, System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51108,7 +51108,7 @@
             },
             "exceptions": {}
           },
-          "AddArguments(System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "AddArguments(System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51200,7 +51200,7 @@
             "return": "",
             "exceptions": {}
           },
-          "GetPropertySigHelper(System.Reflection:Module, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "GetPropertySigHelper(System.Reflection:Module, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51227,7 +51227,7 @@
             "return": "",
             "exceptions": {}
           },
-          "GetPropertySigHelper(System.Reflection:Module, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "GetPropertySigHelper(System.Reflection:Module, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51569,7 +51569,7 @@
             "return": "",
             "exceptions": {}
           },
-          "DefineConstructor(System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "DefineConstructor(System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51680,7 +51680,7 @@
             "return": "",
             "exceptions": {}
           },
-          "DefineMethod(System:String, System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "DefineMethod(System:String, System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51830,7 +51830,7 @@
             "return": "",
             "exceptions": {}
           },
-          "DefinePInvokeMethod(System:String, System:String, System:String, System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System.Runtime.InteropServices:CallingConvention, System.Runtime.InteropServices:CharSet)": {
+          "DefinePInvokeMethod(System:String, System:String, System:String, System.Reflection:MethodAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]], System.Runtime.InteropServices:CallingConvention, System.Runtime.InteropServices:CharSet)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51864,7 +51864,7 @@
             "return": "",
             "exceptions": {}
           },
-          "DefineProperty(System:String, System.Reflection:PropertyAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "DefineProperty(System:String, System.Reflection:PropertyAttributes, System.Reflection:CallingConventions, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -51893,7 +51893,7 @@
             "return": "",
             "exceptions": {}
           },
-          "DefineProperty(System:String, System.Reflection:PropertyAttributes, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Type])": {
+          "DefineProperty(System:String, System.Reflection:PropertyAttributes, System:Type, System:Array[System:Type], System:Array[System:Type], System:Array[System:Type], System:Array[System:Array[System:Type]], System:Array[System:Array[System:Type]])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -64107,7 +64107,7 @@
             "return": "",
             "exceptions": {}
           },
-          "UnsafeAddrOfPinnedArrayElement(System:Array[System.Runtime.InteropServices:T], System:Int32)": {
+          "UnsafeAddrOfPinnedArrayElement(System:Array[$T], System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -65177,7 +65177,7 @@
             "return": "",
             "exceptions": {}
           },
-          "ReadArray(System:UInt64, System:Array[System.Runtime.InteropServices:T], System:Int32, System:Int32)": {
+          "ReadArray(System:UInt64, System:Array[$T], System:Int32, System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -65202,7 +65202,7 @@
             },
             "exceptions": {}
           },
-          "WriteArray(System:UInt64, System:Array[System.Runtime.InteropServices:T], System:Int32, System:Int32)": {
+          "WriteArray(System:UInt64, System:Array[$T], System:Int32, System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -68213,7 +68213,7 @@
           "CLRIReferenceArrayImpl[$T]": {
             "doc": "",
             "doc_formatted": {},
-            "__init__(System.Runtime.InteropServices.WindowsRuntime:PropertyType, System:Array[System.Runtime.InteropServices.WindowsRuntime:T])": {
+            "__init__(System.Runtime.InteropServices.WindowsRuntime:PropertyType, System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -68812,7 +68812,7 @@
               "doc_formatted": {},
               "return": ""
             },
-            "GetMany(System:Array[System.Runtime.InteropServices.WindowsRuntime:T])": {
+            "GetMany(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -69292,7 +69292,7 @@
               "return": "",
               "exceptions": {}
             },
-            "GetMany(System:UInt32, System:Array[System.Runtime.InteropServices.WindowsRuntime:T])": {
+            "GetMany(System:UInt32, System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -69340,7 +69340,7 @@
               "doc_formatted": {},
               "exceptions": {}
             },
-            "ReplaceAll(System:Array[System.Runtime.InteropServices.WindowsRuntime:T])": {
+            "ReplaceAll(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -69375,7 +69375,7 @@
               "return": "",
               "exceptions": {}
             },
-            "GetMany(System:UInt32, System:Array[System.Runtime.InteropServices.WindowsRuntime:T])": {
+            "GetMany(System:UInt32, System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -69430,7 +69430,7 @@
               "return": "",
               "exceptions": {}
             },
-            "GetMany(System:UInt32, System:Array[System.Runtime.InteropServices.WindowsRuntime:T])": {
+            "GetMany(System:UInt32, System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -69478,7 +69478,7 @@
               "doc_formatted": {},
               "exceptions": {}
             },
-            "ReplaceAll(System:Array[System.Runtime.InteropServices.WindowsRuntime:T])": {
+            "ReplaceAll(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91435,7 +91435,7 @@
                 "segment": ""
               }
             },
-            "__init__(System:Array[System.Security.Cryptography.X509Certificates:T], System:Int32, System:Int32)": {
+            "__init__(System:Array[$T], System:Int32, System:Int32)": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91444,7 +91444,7 @@
                 "count": ""
               }
             },
-            "__init__(System:Array[System.Security.Cryptography.X509Certificates:T])": {
+            "__init__(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91511,7 +91511,7 @@
               "return": "",
               "exceptions": {}
             },
-            "op_Implicit(System:Array[System.Security.Cryptography.X509Certificates:T])": {
+            "op_Implicit(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91536,7 +91536,7 @@
                 "segment": ""
               }
             },
-            "__init__(System:Array[System.Security.Cryptography.X509Certificates:T], System:Int32, System:Int32)": {
+            "__init__(System:Array[$T], System:Int32, System:Int32)": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91545,7 +91545,7 @@
                 "count": ""
               }
             },
-            "__init__(System:Array[System.Security.Cryptography.X509Certificates:T])": {
+            "__init__(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91630,7 +91630,7 @@
               "return": "",
               "exceptions": {}
             },
-            "op_Implicit(System:Array[System.Security.Cryptography.X509Certificates:T])": {
+            "op_Implicit(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91696,7 +91696,7 @@
                 "segment": ""
               }
             },
-            "__init__(System:Array[System.Security.Cryptography.X509Certificates:T], System:Int32, System:Int32)": {
+            "__init__(System:Array[$T], System:Int32, System:Int32)": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91705,7 +91705,7 @@
                 "count": ""
               }
             },
-            "__init__(System:Array[System.Security.Cryptography.X509Certificates:T])": {
+            "__init__(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -91804,7 +91804,7 @@
               "return": "",
               "exceptions": {}
             },
-            "op_Implicit(System:Array[System.Security.Cryptography.X509Certificates:T])": {
+            "op_Implicit(System:Array[$T])": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -92074,7 +92074,7 @@
               "return": "",
               "exceptions": {}
             },
-            "GetSpanForArray(System:Array[System.Security.Cryptography.X509Certificates:T], System:Int32)": {
+            "GetSpanForArray(System:Array[$T], System:Int32)": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -92084,7 +92084,7 @@
               "return": "",
               "exceptions": {}
             },
-            "GetSpanForArray(System:Array[System.Security.Cryptography.X509Certificates:T], System:Int32, System:Int32)": {
+            "GetSpanForArray(System:Array[$T], System:Int32, System:Int32)": {
               "doc": "",
               "doc_formatted": {},
               "parameters": {
@@ -114146,7 +114146,7 @@
         "return": "",
         "exceptions": {}
       },
-      "CreateCustomTimeZone(System:String, System:TimeSpan, System:String, System:String, System:String, System:Array[System:AdjustmentRule])": {
+      "CreateCustomTimeZone(System:String, System:TimeSpan, System:String, System:String, System:String, System:Array[System:TimeZoneInfo.AdjustmentRule])": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {
@@ -114160,7 +114160,7 @@
         "return": "",
         "exceptions": {}
       },
-      "CreateCustomTimeZone(System:String, System:TimeSpan, System:String, System:String, System:String, System:Array[System:AdjustmentRule], System:Boolean)": {
+      "CreateCustomTimeZone(System:String, System:TimeSpan, System:String, System:String, System:String, System:Array[System:TimeZoneInfo.AdjustmentRule], System:Boolean)": {
         "doc": "",
         "doc_formatted": {},
         "parameters": {

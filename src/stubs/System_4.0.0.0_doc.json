@@ -10756,7 +10756,7 @@
             "doc_formatted": {},
             "exceptions": {}
           },
-          "CopyTo(System:Array[System.Collections.Concurrent:T], System:Int32)": {
+          "CopyTo(System:Array[$T], System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -11369,7 +11369,7 @@
             "return": "",
             "exceptions": {}
           },
-          "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+          "CopyTo(System:Array[$T], System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -11626,7 +11626,7 @@
             "doc_formatted": {},
             "return": ""
           },
-          "CopyTo(System:Array[System.Collections.Generic:T])": {
+          "CopyTo(System:Array[$T])": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -11634,7 +11634,7 @@
             },
             "exceptions": {}
           },
-          "CopyTo(System:Array[System.Collections.Generic:T], System:Int32, System:Int32)": {
+          "CopyTo(System:Array[$T], System:Int32, System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {
@@ -11780,7 +11780,7 @@
             "return": "",
             "exceptions": {}
           },
-          "CopyTo(System:Array[System.Collections.Generic:T], System:Int32)": {
+          "CopyTo(System:Array[$T], System:Int32)": {
             "doc": "",
             "doc_formatted": {},
             "parameters": {

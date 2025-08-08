@@ -144,7 +144,7 @@ class Builder:
             return types
 
         generic_types: list[CType] = list(
-            dict.fromkeys(extracted for t in types for extracted in extract_generic(t))
+            dict.fromkeys(extracted for t in types for extracted in extract_generic(t)),
         )
         if declaring_type is not None:
             for t in extract_generic(declaring_type):
@@ -152,7 +152,8 @@ class Builder:
                     generic_types.remove(t)
         generic_params: str = ""
         if len(generic_types) > 0:
-            generic_params = f"[{', '.join(self.build_type(gt) for gt in generic_types)}]"
+            # Don't use build_type here because we don't want "T | None"
+            generic_params = f"[{', '.join(gt.name for gt in generic_types)}]"
         return generic_params
 
     def build_field(self, obj: CField, indent: int = 0) -> Sequence[str]:
@@ -184,7 +185,10 @@ class Builder:
         return lines
 
     def build_constructor(
-        self, obj: CConstructor, overload: bool, indent: int = 0
+        self,
+        obj: CConstructor,
+        overload: bool,
+        indent: int = 0,
     ) -> Sequence[str]:
         """Build a list of strings to represent a CConstructor."""
         logger.debug("Building constructor: %s", obj.unique_name)
@@ -205,7 +209,7 @@ class Builder:
             *(self.build_parameter(p) for p in obj.parameters),
         ]
         lines.append(
-            f"{'    ' * indent}def __init__{generic_params}({', '.join(parameters)}) -> None:"
+            f"{'    ' * indent}def __init__{generic_params}({', '.join(parameters)}) -> None:",
         )
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
@@ -248,7 +252,7 @@ class Builder:
                 (
                     f"{indent_str}@{obj.name}.setter",
                     f"{indent_str}def {obj.name}({self_cls}, value: {property_type}) -> None: ...",
-                )
+                ),
             )
 
         return lines
@@ -295,7 +299,7 @@ class Builder:
 
         lines.append(
             f"{'    ' * indent}def {obj.name}{generic_params}"
-            f"({', '.join(param_strs)}) -> {return_str}:"
+            f"({', '.join(param_strs)}) -> {return_str}:",
         )
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
@@ -322,7 +326,7 @@ class Builder:
         self.import_set.add(self.SELF)
 
         lines: list[str] = [
-            f"{indent_str}{obj.name}: EventType[{self.build_type(obj.type, convert=True)}] = ..."
+            f"{indent_str}{obj.name}: EventType[{self.build_type(obj.type, convert=True)}] = ...",
         ]
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
@@ -399,7 +403,7 @@ class Builder:
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         for field_obj in obj.fields:
-            lines.append(f"{'    ' * (indent + 1)}{field_obj}: {obj.name} = ...")
+            lines.append(f"{'    ' * (indent + 1)}{field_obj}: {obj.qualified_name} = ...")
 
             doc_node: DocNode = self.doc_tree[f"{obj.namespace}.{obj.name}.{field_obj}"]
             lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
@@ -519,17 +523,50 @@ def format_stubs(args: BuildArguments) -> None:
 
     from ruff.__main__ import find_ruff_bin
 
+    ignores: Sequence[str] = [
+        "F811",  # Pyflakes: Redefinition of unused from line
+        "F821",  # Pyflakes: Undefined name
+        "E501",  # pycodestyle: Line too long
+        "N801",  # pep8-naming: Class name should use CapWords convention
+        "N802",  # pep8-naming: Function name should be lowercase
+        "N803",  # pep8-naming: Argument name should be lowercase
+        "N815",  # pep8-naming: Variable in class scope should not be mixedCase
+        "N818",  # pep8-naming: Exception name should be named with an Error suffix
+        "D205",  # pydocstyle: 1 blank line required between summary line and description
+        "D418",  # pydocstyle: Function decorated with `@overload` shouldn't contain a docstring
+        "D419",  # pydocstyle: Docstring is empty
+        "A001",  # flake8-builtins: Variable is shadowing a Python builtin
+        "A002",  # flake8-builtins: Function argument is shadowing a Python builtin
+        "A004",  # flake8-builtins: Import is shadowing a Python builtin
+        "PYI021",  # flake8-pyi: Docstrings should not be included in stubs
+        "PLE0302",  # : The special method expects 2 parameters, 3 were given
+    ]
+
+    configs: Sequence[str] = [
+        "lint.isort.force-single-line=true",
+        'lint.isort.known-third-party=["System","Microsoft","Internal","Accessibility","MS"]',
+    ]
+
+    files: Sequence[str] = [str(f.resolve()) for f in args.output_dir.rglob("*.pyi")]
+
     process = subprocess.run(
         [
             find_ruff_bin(),
             "check",
-            "--verbose",
+            # "--verbose",
+            "--isolated",
+            "--select",
+            "ALL",
+            *(v for ignore in ignores for v in ("--ignore", ignore)),
+            *(v for config in configs for v in ("--config", config)),
             "--fix",
             "--target-version",
             "py313",
             "--line-length",
             str(args.line_length),
+            *files,
         ],
+        check=False,
         capture_output=True,
         cwd=args.output_dir,
         text=True,
@@ -543,12 +580,14 @@ def format_stubs(args: BuildArguments) -> None:
         [
             find_ruff_bin(),
             "format",
-            "--verbose",
+            # "--verbose",
+            "--isolated",
             "--target-version",
             "py313",
             "--line-length",
             str(args.line_length),
         ],
+        check=False,
         capture_output=True,
         cwd=args.output_dir,
         text=True,

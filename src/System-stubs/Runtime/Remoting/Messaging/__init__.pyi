@@ -851,10 +851,10 @@ class Header(Object):
     def ToString(self) -> str:
         """"""
 
-HeaderHandler: Callable[[Array[Header]], object] = ...
+type HeaderHandler = Callable[[Array[Header]], object]
 """"""
 
-class IInternalMessage:
+class IInternalMessage(ABC):
     """"""
     @property
     def IdentityObject(self) -> Identity:
@@ -873,21 +873,21 @@ class IInternalMessage:
     def SetURI(self, uri: str) -> None:
         """"""
 
-class ILogicalThreadAffinative:
+class ILogicalThreadAffinative(ABC):
     """"""
 
-class IMessage:
+class IMessage(ABC):
     """"""
     @property
     def Properties(self) -> IDictionary:
         """"""
 
-class IMessageCtrl:
+class IMessageCtrl(ABC):
     """"""
     def Cancel(self, msToCancel: int) -> None:
         """"""
 
-class IMessageSink:
+class IMessageSink(ABC):
     """"""
     @property
     def NextSink(self) -> IMessageSink:
@@ -897,7 +897,7 @@ class IMessageSink:
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
         """"""
 
-class IMethodCallMessage(IMessage, IMethodMessage):
+class IMethodCallMessage(ABC, IMessage, IMethodMessage):
     """"""
     @property
     def ArgCount(self) -> int:
@@ -944,7 +944,7 @@ class IMethodCallMessage(IMessage, IMethodMessage):
     def GetInArgName(self, index: int) -> str:
         """"""
 
-class IMethodMessage(IMessage):
+class IMethodMessage(ABC, IMessage):
     """"""
     @property
     def ArgCount(self) -> int:
@@ -981,7 +981,7 @@ class IMethodMessage(IMessage):
     def GetArgName(self, index: int) -> str:
         """"""
 
-class IMethodReturnMessage(IMessage, IMethodMessage):
+class IMethodReturnMessage(ABC, IMessage, IMethodMessage):
     """"""
     @property
     def ArgCount(self) -> int:
@@ -1034,7 +1034,7 @@ class IMethodReturnMessage(IMessage, IMethodMessage):
     def GetOutArgName(self, index: int) -> str:
         """"""
 
-class IRemotingFormatter(IFormatter):
+class IRemotingFormatter(ABC, IFormatter):
     """"""
     @property
     def Binder(self) -> SerializationBinder:
@@ -1064,7 +1064,7 @@ class IRemotingFormatter(IFormatter):
     def Serialize(self, serializationStream: Stream, graph: object, headers: Array[Header]) -> None:
         """"""
 
-class ISerializationRootObject:
+class ISerializationRootObject(ABC):
     """"""
     def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> None:
         """"""
@@ -1502,7 +1502,7 @@ class MessageSurrogate(Object, ISerializationSurrogate):
     def ToString(self) -> str:
         """"""
 
-MessageSurrogateFilter: Callable[[str, object], bool] = ...
+type MessageSurrogateFilter = Callable[[str, object], bool]
 """"""
 
 class MethodCall(

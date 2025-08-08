@@ -698,12 +698,12 @@ class GetMemberBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
-class IDynamicMetaObjectProvider:
+class IDynamicMetaObjectProvider(ABC):
     """"""
     def GetMetaObject(self, parameter: Expression) -> DynamicMetaObject:
         """"""
 
-class IInvokeOnGetBinder:
+class IInvokeOnGetBinder(ABC):
     """"""
     @property
     def InvokeOnGet(self) -> bool:

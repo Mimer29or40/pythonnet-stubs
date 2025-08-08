@@ -1,5 +1,6 @@
 """Automatically generated stubs for C# namespace: System.Windows.Input."""
 
+from abc import ABC
 from typing import ClassVar
 from typing import Self
 
@@ -29,7 +30,7 @@ class BuildInfo(Object):
     def ToString(self) -> str:
         """"""
 
-class ICommand:
+class ICommand(ABC):
     """"""
     def CanExecute(self, parameter: object) -> bool:
         """"""

@@ -1096,7 +1096,7 @@ class ErrorEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ErrorEventHandler: Callable[[object, ErrorEventArgs], None] = ...
+type ErrorEventHandler = Callable[[object, ErrorEventArgs], None]
 """"""
 
 class File(ABC, Object):
@@ -1991,7 +1991,7 @@ class FileSystemEnumerableIterator[TSource](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2003,7 +2003,7 @@ class FileSystemEnumerableIterator[TSource](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
 
 class FileSystemEventArgs(EventArgs):
@@ -2028,7 +2028,7 @@ class FileSystemEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-FileSystemEventHandler: Callable[[object, FileSystemEventArgs], None] = ...
+type FileSystemEventHandler = Callable[[object, FileSystemEventArgs], None]
 """"""
 
 class FileSystemInfo(ABC, MarshalByRefObject, ISerializable):
@@ -2430,7 +2430,7 @@ class Iterator[TSource](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2442,7 +2442,7 @@ class Iterator[TSource](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
 
 class LogRetentionOption(Enum):
@@ -3146,7 +3146,7 @@ class RenamedEventArgs(FileSystemEventArgs):
     def ToString(self) -> str:
         """"""
 
-RenamedEventHandler: Callable[[object, RenamedEventArgs], None] = ...
+type RenamedEventHandler = Callable[[object, RenamedEventArgs], None]
 """"""
 
 class SearchOption(Enum):
@@ -4102,7 +4102,7 @@ class UnmanagedMemoryAccessor(Object, IDisposable):
         """"""
     def Read(self, position: int, structure: T) -> tuple[None, T]:
         """"""
-    def ReadArray(self, position: int, array: Array[T], offset: int, count: int) -> int:
+    def ReadArray[T](self, position: int, array: Array[T], offset: int, count: int) -> int:
         """"""
     def ReadBoolean(self, position: int) -> bool:
         """"""
@@ -4174,7 +4174,7 @@ class UnmanagedMemoryAccessor(Object, IDisposable):
     @overload
     def Write(self, position: int, value: int) -> None:
         """"""
-    def WriteArray(self, position: int, array: Array[T], offset: int, count: int) -> None:
+    def WriteArray[T](self, position: int, array: Array[T], offset: int, count: int) -> None:
         """"""
 
 class UnmanagedMemoryStream(Stream, IDisposable):

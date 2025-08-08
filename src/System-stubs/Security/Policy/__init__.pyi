@@ -994,7 +994,7 @@ class HashMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
-class IApplicationTrustManager(ISecurityEncodable):
+class IApplicationTrustManager(ABC, ISecurityEncodable):
     """"""
     def DetermineApplicationTrust(
         self, activationContext: ActivationContext, context: TrustManagerContext
@@ -1005,10 +1005,10 @@ class IApplicationTrustManager(ISecurityEncodable):
     def ToXml(self) -> SecurityElement:
         """"""
 
-class IConstantMembershipCondition:
+class IConstantMembershipCondition(ABC):
     """"""
 
-class IDelayEvaluatedEvidence:
+class IDelayEvaluatedEvidence(ABC):
     """"""
     @property
     def IsVerified(self) -> bool:
@@ -1019,12 +1019,12 @@ class IDelayEvaluatedEvidence:
     def MarkUsed(self) -> None:
         """"""
 
-class IIdentityPermissionFactory:
+class IIdentityPermissionFactory(ABC):
     """"""
     def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
         """"""
 
-class ILegacyEvidenceAdapter:
+class ILegacyEvidenceAdapter(ABC):
     """"""
     @property
     def EvidenceObject(self) -> object:
@@ -1033,7 +1033,7 @@ class ILegacyEvidenceAdapter:
     def EvidenceType(self) -> Type:
         """"""
 
-class IMembershipCondition(ISecurityEncodable, ISecurityPolicyEncodable):
+class IMembershipCondition(ABC, ISecurityEncodable, ISecurityPolicyEncodable):
     """"""
     def Check(self, evidence: Evidence) -> bool:
         """"""
@@ -1057,7 +1057,7 @@ class IMembershipCondition(ISecurityEncodable, ISecurityPolicyEncodable):
         """"""
 
 class IReportMatchMembershipCondition(
-    IMembershipCondition, ISecurityEncodable, ISecurityPolicyEncodable
+    ABC, IMembershipCondition, ISecurityEncodable, ISecurityPolicyEncodable
 ):
     """"""
     @overload
@@ -1085,7 +1085,7 @@ class IReportMatchMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
-class IRuntimeEvidenceFactory:
+class IRuntimeEvidenceFactory(ABC):
     """"""
     @property
     def Target(self) -> IEvidenceFactory:
@@ -1095,7 +1095,7 @@ class IRuntimeEvidenceFactory:
     def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]:
         """"""
 
-class IUnionSemanticCodeGroup:
+class IUnionSemanticCodeGroup(ABC):
     """"""
     def InternalResolve(self, evidence: Evidence) -> PolicyStatement:
         """"""

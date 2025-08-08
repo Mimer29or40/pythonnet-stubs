@@ -12,7 +12,6 @@ from System import Type
 from System.Runtime.InteropServices import CriticalHandle
 from System.Runtime.InteropServices import SafeBuffer
 from System.Runtime.InteropServices import SafeHandle
-from System.Runtime.InteropServices import T
 
 class CriticalHandleMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
     """"""
@@ -636,7 +635,7 @@ class SafeLocalAllocHandle(SafeBuffer, IDisposable):
         """"""
     def Read[T](self, byteOffset: int) -> T:
         """"""
-    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def ReadArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
     def ReleasePointer(self) -> None:
         """"""
@@ -646,7 +645,7 @@ class SafeLocalAllocHandle(SafeBuffer, IDisposable):
         """"""
     def Write[T](self, byteOffset: int, value: T) -> None:
         """"""
-    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
 class SafeLocalMemHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
@@ -747,7 +746,7 @@ class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
         """"""
     def Read[T](self, byteOffset: int) -> T:
         """"""
-    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def ReadArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
     def ReleasePointer(self) -> None:
         """"""
@@ -757,7 +756,7 @@ class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
         """"""
     def Write[T](self, byteOffset: int, value: T) -> None:
         """"""
-    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
 class SafeLsaPolicyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
@@ -829,7 +828,7 @@ class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
         """"""
     def Read[T](self, byteOffset: int) -> T:
         """"""
-    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def ReadArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
     def ReleasePointer(self) -> None:
         """"""
@@ -839,7 +838,7 @@ class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
         """"""
     def Write[T](self, byteOffset: int, value: T) -> None:
         """"""
-    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
 class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
@@ -911,7 +910,7 @@ class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
         """"""
     def Read[T](self, byteOffset: int) -> T:
         """"""
-    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def ReadArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
     def ReleasePointer(self) -> None:
         """"""
@@ -921,7 +920,7 @@ class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
         """"""
     def Write[T](self, byteOffset: int, value: T) -> None:
         """"""
-    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+    def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
 class SafeNCryptHandle(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):

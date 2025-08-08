@@ -763,7 +763,7 @@ class Hashtable(
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
-class ICollection(IEnumerable):
+class ICollection(ABC, IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -783,12 +783,12 @@ class ICollection(IEnumerable):
     def __len__(self) -> int:
         """"""
 
-class IComparer:
+class IComparer(ABC):
     """"""
     def Compare(self, x: object, y: object) -> int:
         """"""
 
-class IDictionary(ICollection, IEnumerable):
+class IDictionary(ABC, ICollection, IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -841,7 +841,7 @@ class IDictionary(ICollection, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
-class IDictionaryEnumerator(IEnumerator):
+class IDictionaryEnumerator(ABC, IEnumerator):
     """"""
     @property
     def Current(self) -> object:
@@ -860,14 +860,14 @@ class IDictionaryEnumerator(IEnumerator):
     def Reset(self) -> None:
         """"""
 
-class IEnumerable:
+class IEnumerable(ABC):
     """"""
     def GetEnumerator(self) -> IEnumerator:
         """"""
     def __iter__(self) -> Iterator:
         """"""
 
-class IEnumerator:
+class IEnumerator(ABC):
     """"""
     @property
     def Current(self) -> object:
@@ -877,19 +877,19 @@ class IEnumerator:
     def Reset(self) -> None:
         """"""
 
-class IEqualityComparer:
+class IEqualityComparer(ABC):
     """"""
     def Equals(self, x: object, y: object) -> bool:
         """"""
     def GetHashCode(self, obj: object) -> int:
         """"""
 
-class IHashCodeProvider:
+class IHashCodeProvider(ABC):
     """"""
     def GetHashCode(self, obj: object) -> int:
         """"""
 
-class IList(ICollection, IEnumerable):
+class IList(ABC, ICollection, IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -942,12 +942,12 @@ class IList(ICollection, IEnumerable):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
-class IStructuralComparable:
+class IStructuralComparable(ABC):
     """"""
     def CompareTo(self, other: object, comparer: IComparer) -> int:
         """"""
 
-class IStructuralEquatable:
+class IStructuralEquatable(ABC):
     """"""
     def Equals(self, other: object, comparer: IEqualityComparer) -> bool:
         """"""

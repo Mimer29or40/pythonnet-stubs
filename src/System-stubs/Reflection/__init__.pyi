@@ -2062,7 +2062,7 @@ class CustomAttributeExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GetCustomAttributes(cls, element: Assembly) -> IEnumerable[T]:
+    def GetCustomAttributes[T](cls, element: Assembly) -> IEnumerable[T]:
         """"""
     @classmethod
     @overload
@@ -2070,11 +2070,11 @@ class CustomAttributeExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GetCustomAttributes(cls, element: MemberInfo) -> IEnumerable[T]:
+    def GetCustomAttributes[T](cls, element: MemberInfo) -> IEnumerable[T]:
         """"""
     @classmethod
     @overload
-    def GetCustomAttributes(cls, element: MemberInfo, inherit: bool) -> IEnumerable[T]:
+    def GetCustomAttributes[T](cls, element: MemberInfo, inherit: bool) -> IEnumerable[T]:
         """"""
     @classmethod
     @overload
@@ -2090,7 +2090,7 @@ class CustomAttributeExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GetCustomAttributes(cls, element: Module) -> IEnumerable[T]:
+    def GetCustomAttributes[T](cls, element: Module) -> IEnumerable[T]:
         """"""
     @classmethod
     @overload
@@ -2098,11 +2098,11 @@ class CustomAttributeExtensions(ABC, Object):
         """"""
     @classmethod
     @overload
-    def GetCustomAttributes(cls, element: ParameterInfo) -> IEnumerable[T]:
+    def GetCustomAttributes[T](cls, element: ParameterInfo) -> IEnumerable[T]:
         """"""
     @classmethod
     @overload
-    def GetCustomAttributes(cls, element: ParameterInfo, inherit: bool) -> IEnumerable[T]:
+    def GetCustomAttributes[T](cls, element: ParameterInfo, inherit: bool) -> IEnumerable[T]:
         """"""
     @classmethod
     @overload
@@ -2782,7 +2782,7 @@ class GenericParameterAttributes(Enum):
     SpecialConstraintMask: GenericParameterAttributes = ...
     """"""
 
-class ICustomAttributeProvider:
+class ICustomAttributeProvider(ABC):
     """"""
     @overload
     def GetCustomAttributes(self, inherit: bool) -> Array[object]:
@@ -2793,7 +2793,7 @@ class ICustomAttributeProvider:
     def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
         """"""
 
-class ICustomTypeProvider:
+class ICustomTypeProvider(ABC):
     """"""
     def GetCustomType(self) -> Type:
         """"""
@@ -2828,7 +2828,7 @@ class INVOCATION_FLAGS(Enum):
     INVOCATION_FLAGS_CONSTRUCTOR_INVOKE: INVOCATION_FLAGS = ...
     """"""
 
-class IReflect:
+class IReflect(ABC):
     """"""
     @property
     def UnderlyingSystemType(self) -> Type:
@@ -2885,7 +2885,7 @@ class IReflect:
     ) -> object:
         """"""
 
-class IReflectableType:
+class IReflectableType(ABC):
     """"""
     def GetTypeInfo(self) -> TypeInfo:
         """"""
@@ -3266,7 +3266,7 @@ class MdSigCallingConvention(Enum):
     ExplicitThis: MdSigCallingConvention = ...
     """"""
 
-MemberFilter: Callable[[MemberInfo, object], bool] = ...
+type MemberFilter = Callable[[MemberInfo, object], bool]
 """"""
 
 class MemberInfo(ABC, Object, ICustomAttributeProvider, _MemberInfo):
@@ -4421,7 +4421,7 @@ class Module(ABC, Object, ICustomAttributeProvider, _Module, ISerializable):
     def __ne__(self, other: Module) -> bool:
         """"""
 
-ModuleResolveEventHandler: Callable[[object, ResolveEventArgs], Module] = ...
+type ModuleResolveEventHandler = Callable[[object, ResolveEventArgs], Module]
 """"""
 
 class ObfuscateAssemblyAttribute(Attribute, _Attribute):
@@ -7299,7 +7299,7 @@ class TypeDelegator(
     def ToString(self) -> str:
         """"""
 
-TypeFilter: Callable[[Type, object], bool] = ...
+type TypeFilter = Callable[[Type, object], bool]
 """"""
 
 class TypeInfo(ABC, Type, ICustomAttributeProvider, IReflect, IReflectableType, _MemberInfo, _Type):

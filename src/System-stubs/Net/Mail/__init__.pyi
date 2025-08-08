@@ -588,7 +588,7 @@ class HelloCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
-class IMSAdminBase:
+class IMSAdminBase(ABC):
     """"""
     def AddKey(self, handle: IntPtr, Path: str) -> int:
         """"""
@@ -718,7 +718,7 @@ class IMSAdminBase:
     def UnmarshalInterface(self, interf: IMSAdminBase) -> tuple[int, IMSAdminBase]:
         """"""
 
-class ISmtpAuthenticationModule:
+class ISmtpAuthenticationModule(ABC):
     """"""
     @property
     def AuthenticationType(self) -> str:
@@ -1493,7 +1493,7 @@ class RecipientLocationType(Enum):
     Ambiguous: RecipientLocationType = ...
     """"""
 
-SendCompletedEventHandler: Callable[[object, AsyncCompletedEventArgs], None] = ...
+type SendCompletedEventHandler = Callable[[object, AsyncCompletedEventArgs], None]
 """"""
 
 class SendMailAsyncResult(LazyAsyncResult, IAsyncResult):

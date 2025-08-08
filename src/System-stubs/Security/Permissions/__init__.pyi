@@ -969,7 +969,7 @@ class HostProtectionResource(Enum):
     All: HostProtectionResource = ...
     """"""
 
-class IBuiltInPermission:
+class IBuiltInPermission(ABC):
     """"""
     def GetTokenIndex(self) -> int:
         """"""
@@ -987,7 +987,7 @@ class IDRole(Object):
     def ToString(self) -> str:
         """"""
 
-class IUnrestrictedPermission:
+class IUnrestrictedPermission(ABC):
     """"""
     def IsUnrestricted(self) -> bool:
         """"""

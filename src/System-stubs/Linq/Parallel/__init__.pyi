@@ -108,10 +108,10 @@ class AssociativeAggregationOperator[TInput, TIntermediate, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TIntermediate]:
+    def GetEnumerator[TIntermediate](self) -> IEnumerator[TIntermediate]:
         """"""
     @overload
-    def GetEnumerator(
+    def GetEnumerator[TIntermediate](
         self, mergeOptions: ParallelMergeOptions | None
     ) -> IEnumerator[TIntermediate]:
         """"""
@@ -122,10 +122,12 @@ class AssociativeAggregationOperator[TInput, TIntermediate, TOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TIntermediate]:
+    def __iter__[TIntermediate](self) -> Iterator[TIntermediate]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TIntermediate]:
+    def __iter__[TIntermediate](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TIntermediate]:
         """"""
 
 class AsynchronousChannelMergeEnumerator[T](
@@ -170,7 +172,7 @@ class BinaryQueryOperator[TLeftInput, TRightInput, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -181,7 +183,7 @@ class BinaryQueryOperator[TLeftInput, TRightInput, TOutput](
         """"""
     def ToString(self) -> str:
         """"""
-    def WrapPartitionedStream(
+    def WrapPartitionedStream[TLeftKey, TRightKey](
         self,
         leftPartitionedStream: PartitionedStream[TLeftInput, TLeftKey],
         rightPartitionedStream: PartitionedStream[TRightInput, TRightKey],
@@ -191,7 +193,7 @@ class BinaryQueryOperator[TLeftInput, TRightInput, TOutput](
     ) -> None:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -237,10 +239,12 @@ class ConcatQueryOperator[TSource](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -248,7 +252,7 @@ class ConcatQueryOperator[TSource](
         """"""
     def ToString(self) -> str:
         """"""
-    def WrapPartitionedStream(
+    def WrapPartitionedStream[TSource, TLeftKey, TRightKey](
         self,
         leftStream: PartitionedStream[TSource, TLeftKey],
         rightStream: PartitionedStream[TSource, TRightKey],
@@ -258,10 +262,10 @@ class ConcatQueryOperator[TSource](
     ) -> None:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class ContainsSearchOperator[TInput](
@@ -400,10 +404,12 @@ class DefaultIfEmptyQueryOperator[TSource](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -412,10 +418,10 @@ class DefaultIfEmptyQueryOperator[TSource](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class DefaultMergeHelper[TInputOutput, TIgnoreKey](Object, IMergeHelper[TInputOutput]):
@@ -444,10 +450,12 @@ class DistinctQueryOperator[TInputOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -456,10 +464,12 @@ class DistinctQueryOperator[TInputOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TInputOutput]:
         """"""
 
 class DoubleAverageAggregationOperator(
@@ -548,10 +558,12 @@ class ElementAtQueryOperator[TSource](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -560,17 +572,17 @@ class ElementAtQueryOperator[TSource](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class EmptyEnumerable[T](ParallelQuery[T], IEnumerable[T], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -578,7 +590,7 @@ class EmptyEnumerable[T](ParallelQuery[T], IEnumerable[T], IEnumerable):
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
 class EmptyEnumerator[T](
@@ -629,10 +641,12 @@ class ExceptQueryOperator[TInputOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -640,7 +654,7 @@ class ExceptQueryOperator[TInputOutput](
         """"""
     def ToString(self) -> str:
         """"""
-    def WrapPartitionedStream(
+    def WrapPartitionedStream[TInputOutput, TLeftKey, TRightKey](
         self,
         leftStream: PartitionedStream[TInputOutput, TLeftKey],
         rightStream: PartitionedStream[TInputOutput, TRightKey],
@@ -650,10 +664,12 @@ class ExceptQueryOperator[TInputOutput](
     ) -> None:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TInputOutput]:
         """"""
 
 class ExceptionAggregator(ABC, Object):
@@ -685,10 +701,12 @@ class FirstQueryOperator[TSource](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -697,10 +715,10 @@ class FirstQueryOperator[TSource](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class FixedMaxHeap[TElement](Object):
@@ -798,10 +816,12 @@ class ForAllOperator[TInput](UnaryQueryOperator[TInput, TInput], IEnumerable[TIn
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInput]:
+    def GetEnumerator[TInput](self) -> IEnumerator[TInput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInput]:
+    def GetEnumerator[TInput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -810,10 +830,10 @@ class ForAllOperator[TInput](UnaryQueryOperator[TInput, TInput], IEnumerable[TIn
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInput]:
+    def __iter__[TInput](self) -> Iterator[TInput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInput]:
+    def __iter__[TInput](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInput]:
         """"""
 
 class ForAllSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
@@ -851,7 +871,7 @@ class GroupByGrouping[TGroupKey, TElement](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -859,7 +879,7 @@ class GroupByGrouping[TGroupKey, TElement](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
 class GroupByIdentityQueryOperatorEnumerator[TSource, TGroupKey, TOrderKey](
@@ -901,10 +921,10 @@ class GroupByQueryOperator[TSource, TGroupKey, TElement](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[IGrouping[TGroupKey, TElement]]:
+    def GetEnumerator[TGroupKey, TElement](self) -> IEnumerator[IGrouping[TGroupKey, TElement]]:
         """"""
     @overload
-    def GetEnumerator(
+    def GetEnumerator[TGroupKey, TElement](
         self, mergeOptions: ParallelMergeOptions | None
     ) -> IEnumerator[IGrouping[TGroupKey, TElement]]:
         """"""
@@ -915,10 +935,10 @@ class GroupByQueryOperator[TSource, TGroupKey, TElement](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[IGrouping[TGroupKey, TElement]]:
+    def __iter__[TGroupKey, TElement](self) -> Iterator[IGrouping[TGroupKey, TElement]]:
         """"""
     @overload
-    def __iter__(
+    def __iter__[TGroupKey, TElement](
         self, mergeOptions: ParallelMergeOptions | None
     ) -> Iterator[IGrouping[TGroupKey, TElement]]:
         """"""
@@ -930,7 +950,7 @@ class GroupJoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -941,7 +961,7 @@ class GroupJoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
         """"""
     def ToString(self) -> str:
         """"""
-    def WrapPartitionedStream(
+    def WrapPartitionedStream[TLeftKey, TRightKey](
         self,
         leftStream: PartitionedStream[TLeftInput, TLeftKey],
         rightStream: PartitionedStream[TRightInput, TRightKey],
@@ -951,7 +971,7 @@ class GroupJoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     ) -> None:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -1025,7 +1045,7 @@ class HashRepartitionStream[TInputOutput, THashKey, TOrderKey](
     def ToString(self) -> str:
         """"""
 
-class IMergeHelper[TInputOutput]:
+class IMergeHelper[TInputOutput](ABC):
     """"""
     def Execute(self) -> None:
         """"""
@@ -1036,14 +1056,14 @@ class IMergeHelper[TInputOutput]:
     def __iter__(self) -> Iterator[TInputOutput]:
         """"""
 
-class IParallelPartitionable[T]:
+class IParallelPartitionable[T](ABC):
     """"""
     def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator[T, int]]:
         """"""
 
-class IPartitionedStreamRecipient[TElement]:
+class IPartitionedStreamRecipient[TElement](ABC):
     """"""
-    def Receive(self, partitionedStream: PartitionedStream[TElement, TKey]) -> None:
+    def Receive[TKey](self, partitionedStream: PartitionedStream[TElement, TKey]) -> None:
         """"""
 
 class IndexedSelectQueryOperator[TInput, TOutput](
@@ -1053,7 +1073,7 @@ class IndexedSelectQueryOperator[TInput, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -1065,7 +1085,7 @@ class IndexedSelectQueryOperator[TInput, TOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -1078,10 +1098,12 @@ class IndexedWhereQueryOperator[TInputOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1090,10 +1112,12 @@ class IndexedWhereQueryOperator[TInputOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TInputOutput]:
         """"""
 
 class InlinedAggregationOperatorEnumerator[TIntermediate](
@@ -1118,10 +1142,10 @@ class InlinedAggregationOperator[TSource, TIntermediate, TResult](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TIntermediate]:
+    def GetEnumerator[TIntermediate](self) -> IEnumerator[TIntermediate]:
         """"""
     @overload
-    def GetEnumerator(
+    def GetEnumerator[TIntermediate](
         self, mergeOptions: ParallelMergeOptions | None
     ) -> IEnumerator[TIntermediate]:
         """"""
@@ -1132,10 +1156,12 @@ class InlinedAggregationOperator[TSource, TIntermediate, TResult](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TIntermediate]:
+    def __iter__[TIntermediate](self) -> Iterator[TIntermediate]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TIntermediate]:
+    def __iter__[TIntermediate](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TIntermediate]:
         """"""
 
 class IntAverageAggregationOperator(
@@ -1270,10 +1296,12 @@ class IntersectQueryOperator[TInputOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1281,7 +1309,7 @@ class IntersectQueryOperator[TInputOutput](
         """"""
     def ToString(self) -> str:
         """"""
-    def WrapPartitionedStream(
+    def WrapPartitionedStream[TInputOutput, TLeftKey, TRightKey](
         self,
         leftPartitionedStream: PartitionedStream[TInputOutput, TLeftKey],
         rightPartitionedStream: PartitionedStream[TInputOutput, TRightKey],
@@ -1291,10 +1319,12 @@ class IntersectQueryOperator[TInputOutput](
     ) -> None:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TInputOutput]:
         """"""
 
 class JoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
@@ -1304,7 +1334,7 @@ class JoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -1315,7 +1345,7 @@ class JoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
         """"""
     def ToString(self) -> str:
         """"""
-    def WrapPartitionedStream(
+    def WrapPartitionedStream[TLeftKey, TRightKey](
         self,
         leftStream: PartitionedStream[TLeftInput, TLeftKey],
         rightStream: PartitionedStream[TRightInput, TRightKey],
@@ -1325,7 +1355,7 @@ class JoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     ) -> None:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -1338,10 +1368,12 @@ class LastQueryOperator[TSource](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1350,17 +1382,17 @@ class LastQueryOperator[TSource](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class ListChunk[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1368,7 +1400,7 @@ class ListChunk[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable):
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
 
 class ListQueryResults[T](QueryResults[T], ICollection[T], IEnumerable[T], IList[T], IEnumerable):
@@ -1384,43 +1416,43 @@ class ListQueryResults[T](QueryResults[T], ICollection[T], IEnumerable[T], IList
         """"""
     @Item.setter
     def Item(self, value: T) -> None: ...
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def IndexOf[T](self, item: T) -> int:
+    def IndexOf(self, item: T) -> int:
         """"""
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def RemoveAt(self, index: int) -> None:
         """"""
     def ToString(self) -> str:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
 
 class LongAverageAggregationOperator(
@@ -1537,11 +1569,11 @@ class Lookup[TKey, TElement](
     @property
     def Item(self) -> IEnumerable[TElement]:
         """"""
-    def Contains[TKey](self, key: TKey) -> bool:
+    def Contains(self, key: TKey) -> bool:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]:
+    def GetEnumerator[TKey, TElement](self) -> IEnumerator[IGrouping[TKey, TElement]]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1549,13 +1581,13 @@ class Lookup[TKey, TElement](
         """"""
     def ToString(self) -> str:
         """"""
-    def __contains__[TKey](self, key: TKey) -> bool:
+    def __contains__(self, key: TKey) -> bool:
         """"""
-    def __iter__(self) -> Iterator[IGrouping[TKey, TElement]]:
+    def __iter__[TKey, TElement](self) -> Iterator[IGrouping[TKey, TElement]]:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[TKey](self, key: TKey) -> IEnumerable[TElement]:
+    def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
         """"""
 
 class MergeEnumerator[TInputOutput](
@@ -1584,7 +1616,7 @@ class MergeExecutor[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable
     """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -1592,7 +1624,7 @@ class MergeExecutor[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
 
 class NoKeyMemoizationRequired(ValueType):
@@ -2050,17 +2082,17 @@ class OrderPreservingPipeliningMergeHelper[TOutput, TKey](Object, IMergeHelper[T
         """"""
     def Execute(self) -> None:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
-    def GetResultsAsArray(self) -> Array[TOutput]:
+    def GetResultsAsArray[TOutput](self) -> Array[TOutput]:
         """"""
     def GetType(self) -> Type:
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
 
 class OrderPreservingPipeliningSpoolingTask[TOutput, TKey](SpoolingTaskBase):
@@ -2123,7 +2155,7 @@ class OrderedGroupByGrouping[TGroupKey, TOrderKey, TElement](
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2131,7 +2163,7 @@ class OrderedGroupByGrouping[TGroupKey, TOrderKey, TElement](
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
 class OrderedGroupByIdentityQueryOperatorEnumerator[TSource, TGroupKey, TOrderKey](
@@ -2202,10 +2234,12 @@ class OrderingQueryOperator[TSource](QueryOperator[TSource], IEnumerable[TSource
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2214,10 +2248,10 @@ class OrderingQueryOperator[TSource](QueryOperator[TSource], IEnumerable[TSource
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class OrdinalIndexState(Enum):
@@ -2236,7 +2270,7 @@ class PairComparer[T, U](Object, IComparer[Pair[T, U]]):
     """"""
     def __init__(self, comparer1: IComparer[T], comparer2: IComparer[U]) -> None:
         """"""
-    def Compare(self, x: Pair[T, U], y: Pair[T, U]) -> int:
+    def Compare[U](self, x: Pair[T, U], y: Pair[T, U]) -> int:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -2289,7 +2323,7 @@ class ParallelEnumerableWrapper[T](ParallelQuery[T], IEnumerable[T], IEnumerable
     """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2297,7 +2331,7 @@ class ParallelEnumerableWrapper[T](ParallelQuery[T], IEnumerable[T], IEnumerable
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
 
 class PartitionedDataSource[T](PartitionedStream[T, Int32]):
@@ -2322,7 +2356,7 @@ class PartitionedStreamMerger[TOutput](Object, IPartitionedStreamRecipient[TOutp
         """"""
     def GetType(self) -> Type:
         """"""
-    def Receive(self, partitionedStream: PartitionedStream[TOutput, TKey]) -> None:
+    def Receive[TOutput, TKey](self, partitionedStream: PartitionedStream[TOutput, TKey]) -> None:
         """"""
     def ToString(self) -> str:
         """"""
@@ -2348,10 +2382,12 @@ class PartitionerQueryOperator[TElement](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TElement]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2360,10 +2396,10 @@ class PartitionerQueryOperator[TElement](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TElement]:
+    def __iter__[TElement](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TElement]:
         """"""
 
 class PipelineSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
@@ -2500,10 +2536,12 @@ class QueryExecutionOption[TSource](QueryOperator[TSource], IEnumerable[TSource]
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2512,10 +2550,10 @@ class QueryExecutionOption[TSource](QueryOperator[TSource], IEnumerable[TSource]
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class QueryLifecycle(ABC, Object):
@@ -2567,7 +2605,7 @@ class QueryOperator[TOutput](ABC, ParallelQuery[TOutput], IEnumerable[TOutput], 
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -2579,7 +2617,7 @@ class QueryOperator[TOutput](ABC, ParallelQuery[TOutput], IEnumerable[TOutput], 
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -2598,43 +2636,43 @@ class QueryResults[T](ABC, Object, ICollection[T], IEnumerable[T], IList[T], IEn
         """"""
     @Item.setter
     def Item(self, value: T) -> None: ...
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def IndexOf[T](self, item: T) -> int:
+    def IndexOf(self, item: T) -> int:
         """"""
-    def Insert[T](self, index: int, item: T) -> None:
+    def Insert(self, index: int, item: T) -> None:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def RemoveAt(self, index: int) -> None:
         """"""
     def ToString(self) -> str:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
-    def __setitem__[T](self, index: int, value: T) -> None:
+    def __setitem__(self, index: int, value: T) -> None:
         """"""
 
 class QuerySettings(ValueType):
@@ -2697,22 +2735,24 @@ class RepeatEnumerable[TResult](
     """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TResult]:
+    def GetEnumerator[TResult](self) -> IEnumerator[TResult]:
         """"""
     def GetHashCode(self) -> int:
         """"""
-    def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator[TResult, int]]:
+    def GetPartitions[TResult](
+        self, partitionCount: int
+    ) -> Array[QueryOperatorEnumerator[TResult, int]]:
         """"""
     def GetType(self) -> Type:
         """"""
     def ToString(self) -> str:
         """"""
-    def __iter__(self) -> Iterator[TResult]:
+    def __iter__[TResult](self) -> Iterator[TResult]:
         """"""
 
 class ReverseComparer[T](Object, IComparer[T]):
     """"""
-    def Compare[T, T](self, x: T, y: T) -> int:
+    def Compare(self, x: T, y: T) -> int:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -2730,10 +2770,12 @@ class ReverseQueryOperator[TSource](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2742,10 +2784,10 @@ class ReverseQueryOperator[TSource](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class ScanQueryOperator[TElement](QueryOperator[TElement], IEnumerable[TElement], IEnumerable):
@@ -2756,10 +2798,12 @@ class ScanQueryOperator[TElement](QueryOperator[TElement], IEnumerable[TElement]
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](self) -> IEnumerator[TElement]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TElement]:
+    def GetEnumerator[TElement](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TElement]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2768,10 +2812,10 @@ class ScanQueryOperator[TElement](QueryOperator[TElement], IEnumerable[TElement]
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TElement]:
+    def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TElement]:
+    def __iter__[TElement](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TElement]:
         """"""
 
 class Scheduling(ABC, Object):
@@ -2792,7 +2836,7 @@ class SelectManyQueryOperator[TLeftInput, TRightInput, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -2804,7 +2848,7 @@ class SelectManyQueryOperator[TLeftInput, TRightInput, TOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -2817,7 +2861,7 @@ class SelectQueryOperator[TInput, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -2829,7 +2873,7 @@ class SelectQueryOperator[TInput, TOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -2853,10 +2897,12 @@ class SingleQueryOperator[TSource](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](self) -> IEnumerator[TSource]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TSource]:
+    def GetEnumerator[TSource](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TSource]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2865,10 +2911,10 @@ class SingleQueryOperator[TSource](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TSource]:
+    def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
+    def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
 class SortHelper[TInputOutput, TKey](SortHelper[TInputOutput], IDisposable):
@@ -2938,11 +2984,11 @@ class SortQueryOperatorResults[TInputOutput, TSortKey](
         """"""
     def Contains[TInputOutput](self, item: TInputOutput) -> bool:
         """"""
-    def CopyTo(self, array: Array[TInputOutput], arrayIndex: int) -> None:
+    def CopyTo[TInputOutput](self, array: Array[TInputOutput], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2960,7 +3006,7 @@ class SortQueryOperatorResults[TInputOutput, TSortKey](
         """"""
     def __contains__[TInputOutput](self, item: TInputOutput) -> bool:
         """"""
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     def __delitem__[TInputOutput](self, item: TInputOutput) -> bool:
         """"""
@@ -2978,17 +3024,19 @@ class SortQueryOperator[TInputOutput, TSortKey](
     IOrderedEnumerable[TInputOutput],
 ):
     """"""
-    def CreateOrderedEnumerable(
+    def CreateOrderedEnumerable[TInputOutput, TKey](
         self, keySelector: Func[TInputOutput, TKey], comparer: IComparer[TKey], descending: bool
     ) -> IOrderedEnumerable[TInputOutput]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -2997,10 +3045,12 @@ class SortQueryOperator[TInputOutput, TSortKey](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TInputOutput]:
         """"""
 
 class SpoolingTask(ABC, Object):
@@ -3076,10 +3126,12 @@ class TakeOrSkipQueryOperator[TResult](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TResult]:
+    def GetEnumerator[TResult](self) -> IEnumerator[TResult]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TResult]:
+    def GetEnumerator[TResult](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TResult]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -3088,10 +3140,10 @@ class TakeOrSkipQueryOperator[TResult](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TResult]:
+    def __iter__[TResult](self) -> Iterator[TResult]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TResult]:
+    def __iter__[TResult](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TResult]:
         """"""
 
 class TakeOrSkipWhileQueryOperator[TResult](
@@ -3101,10 +3153,12 @@ class TakeOrSkipWhileQueryOperator[TResult](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TResult]:
+    def GetEnumerator[TResult](self) -> IEnumerator[TResult]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TResult]:
+    def GetEnumerator[TResult](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TResult]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -3113,10 +3167,10 @@ class TakeOrSkipWhileQueryOperator[TResult](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TResult]:
+    def __iter__[TResult](self) -> Iterator[TResult]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TResult]:
+    def __iter__[TResult](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TResult]:
         """"""
 
 class TraceHelpers(ABC, Object):
@@ -3137,7 +3191,7 @@ class UnaryQueryOperator[TInput, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -3149,7 +3203,7 @@ class UnaryQueryOperator[TInput, TOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
@@ -3164,10 +3218,12 @@ class UnionQueryOperator[TInputOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -3175,7 +3231,7 @@ class UnionQueryOperator[TInputOutput](
         """"""
     def ToString(self) -> str:
         """"""
-    def WrapPartitionedStream(
+    def WrapPartitionedStream[TInputOutput, TLeftKey, TRightKey](
         self,
         leftStream: PartitionedStream[TInputOutput, TLeftKey],
         rightStream: PartitionedStream[TInputOutput, TRightKey],
@@ -3185,10 +3241,12 @@ class UnionQueryOperator[TInputOutput](
     ) -> None:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TInputOutput]:
         """"""
 
 class UnorderedHashRepartitionStream[TInputOutput, THashKey, TIgnoreKey](
@@ -3225,10 +3283,12 @@ class WhereQueryOperator[TInputOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](self) -> IEnumerator[TInputOutput]:
         """"""
     @overload
-    def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TInputOutput]:
+    def GetEnumerator[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> IEnumerator[TInputOutput]:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -3237,10 +3297,12 @@ class WhereQueryOperator[TInputOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
     @overload
-    def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInputOutput]:
+    def __iter__[TInputOutput](
+        self, mergeOptions: ParallelMergeOptions | None
+    ) -> Iterator[TInputOutput]:
         """"""
 
 class WrapperEqualityComparer[T](ValueType, IEqualityComparer[Wrapper[T]]):
@@ -3280,7 +3342,7 @@ class ZipQueryOperator[TLeftInput, TRightInput, TOutput](
     def Equals(self, obj: object) -> bool:
         """"""
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]:
+    def GetEnumerator[TOutput](self) -> IEnumerator[TOutput]:
         """"""
     @overload
     def GetEnumerator(self, mergeOptions: ParallelMergeOptions | None) -> IEnumerator[TOutput]:
@@ -3292,7 +3354,7 @@ class ZipQueryOperator[TLeftInput, TRightInput, TOutput](
     def ToString(self) -> str:
         """"""
     @overload
-    def __iter__(self) -> Iterator[TOutput]:
+    def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
     @overload
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:

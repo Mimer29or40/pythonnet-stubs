@@ -1354,7 +1354,7 @@ class PipeStreamAsyncResult(Object, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
-PipeStreamImpersonationWorker: Callable[[], None] = ...
+type PipeStreamImpersonationWorker = Callable[[], None]
 """"""
 
 class PipeTransmissionMode(Enum):

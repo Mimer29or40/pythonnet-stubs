@@ -436,7 +436,7 @@ class HeaderCollection(
         def __getitem__(self, index: int) -> str:
             """"""
 
-class IEncodableStream:
+class IEncodableStream(ABC):
     """"""
     def DecodeBytes(self, buffer: Array[int], offset: int, count: int) -> int:
         """"""

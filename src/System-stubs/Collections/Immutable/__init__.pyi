@@ -12,7 +12,7 @@ from System import ValueType
 class ImmutableArray(ABC, Object):
     """"""
     @classmethod
-    def CreateBuilder(cls, capacity: int) -> ImmutableArray.Builder[T]:
+    def CreateBuilder[T](cls, capacity: int) -> ImmutableArray.Builder[T]:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
@@ -48,7 +48,7 @@ class ImmutableArray[T](ValueType):
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def FirstOrDefault[T](self, predicate: Func[T, bool]) -> T:
+    def FirstOrDefault(self, predicate: Func[T, bool]) -> T:
         """"""
     def GetHashCode(self) -> int:
         """"""
@@ -56,7 +56,7 @@ class ImmutableArray[T](ValueType):
         """"""
     def ToString(self) -> str:
         """"""
-    def __getitem__[T](self, index: int) -> T:
+    def __getitem__(self, index: int) -> T:
         """"""
     class Builder[T](Object):
         """"""
@@ -71,7 +71,7 @@ class ImmutableArray[T](ValueType):
             """"""
         @Item.setter
         def Item(self, value: T) -> None: ...
-        def Add[T](self, item: T) -> None:
+        def Add(self, item: T) -> None:
             """"""
         def Equals(self, obj: object) -> bool:
             """"""
@@ -85,7 +85,7 @@ class ImmutableArray[T](ValueType):
             """"""
         def __len__(self) -> int:
             """"""
-        def __getitem__[T](self, index: int) -> T:
+        def __getitem__(self, index: int) -> T:
             """"""
-        def __setitem__[T](self, index: int, value: T) -> None:
+        def __setitem__(self, index: int, value: T) -> None:
             """"""

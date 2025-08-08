@@ -1,5 +1,7 @@
 """Automatically generated stubs for C# namespace: Windows.Foundation.Diagnostics."""
 
+from abc import ABC
+
 from System import Enum
 from System import Guid
 from System import Type
@@ -62,7 +64,7 @@ class CausalityTraceLevel(Enum):
     Verbose: CausalityTraceLevel = ...
     """"""
 
-class IAsyncCausalityTracerStatics:
+class IAsyncCausalityTracerStatics(ABC):
     """"""
     def TraceOperationCompletion(
         self,
@@ -109,7 +111,7 @@ class IAsyncCausalityTracerStatics:
     ) -> None:
         """"""
 
-class ITracingStatusChangedEventArgs:
+class ITracingStatusChangedEventArgs(ABC):
     """"""
     @property
     def Enabled(self) -> bool:

@@ -75,7 +75,7 @@ class ActiveDesignerEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ActiveDesignerEventHandler: Callable[[object, ActiveDesignerEventArgs], None] = ...
+type ActiveDesignerEventHandler = Callable[[object, ActiveDesignerEventArgs], None]
 """"""
 
 class CheckoutException(ExternalException, _Exception, ISerializable):
@@ -185,7 +185,7 @@ class ComponentChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ComponentChangedEventHandler: Callable[[object, ComponentChangedEventArgs], None] = ...
+type ComponentChangedEventHandler = Callable[[object, ComponentChangedEventArgs], None]
 """"""
 
 class ComponentChangingEventArgs(EventArgs):
@@ -207,7 +207,7 @@ class ComponentChangingEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ComponentChangingEventHandler: Callable[[object, ComponentChangingEventArgs], None] = ...
+type ComponentChangingEventHandler = Callable[[object, ComponentChangingEventArgs], None]
 """"""
 
 class ComponentEventArgs(EventArgs):
@@ -226,7 +226,7 @@ class ComponentEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ComponentEventHandler: Callable[[object, ComponentEventArgs], None] = ...
+type ComponentEventHandler = Callable[[object, ComponentEventArgs], None]
 """"""
 
 class ComponentRenameEventArgs(EventArgs):
@@ -251,7 +251,7 @@ class ComponentRenameEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-ComponentRenameEventHandler: Callable[[object, ComponentRenameEventArgs], None] = ...
+type ComponentRenameEventHandler = Callable[[object, ComponentRenameEventArgs], None]
 """"""
 
 class DesignerCollection(Object, ICollection, IEnumerable):
@@ -309,7 +309,7 @@ class DesignerEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-DesignerEventHandler: Callable[[object, DesignerEventArgs], None] = ...
+type DesignerEventHandler = Callable[[object, DesignerEventArgs], None]
 """"""
 
 class DesignerOptionService(ABC, Object, IDesignerOptionService):
@@ -456,9 +456,9 @@ class DesignerTransactionCloseEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-DesignerTransactionCloseEventHandler: Callable[
+type DesignerTransactionCloseEventHandler = Callable[
     [object, DesignerTransactionCloseEventArgs], None
-] = ...
+]
 """"""
 
 class DesignerVerb(MenuCommand):
@@ -748,7 +748,7 @@ class HelpKeywordType(Enum):
     FilterKeyword: HelpKeywordType = ...
     """"""
 
-class IComponentChangeService:
+class IComponentChangeService(ABC):
     """"""
     def OnComponentChanged(
         self, component: object, member: MemberDescriptor, oldValue: object, newValue: object
@@ -771,19 +771,19 @@ class IComponentChangeService:
     ComponentRename: EventType[ComponentRenameEventHandler] = ...
     """"""
 
-class IComponentDiscoveryService:
+class IComponentDiscoveryService(ABC):
     """"""
     def GetComponentTypes(self, designerHost: IDesignerHost, baseType: Type) -> ICollection:
         """"""
 
-class IComponentInitializer:
+class IComponentInitializer(ABC):
     """"""
     def InitializeExistingComponent(self, defaultValues: IDictionary) -> None:
         """"""
     def InitializeNewComponent(self, defaultValues: IDictionary) -> None:
         """"""
 
-class IDesigner(IDisposable):
+class IDesigner(ABC, IDisposable):
     """"""
     @property
     def Component(self) -> IComponent:
@@ -798,7 +798,7 @@ class IDesigner(IDisposable):
     def Initialize(self, component: IComponent) -> None:
         """"""
 
-class IDesignerEventService:
+class IDesignerEventService(ABC):
     """"""
     @property
     def ActiveDesigner(self) -> IDesignerHost:
@@ -815,7 +815,7 @@ class IDesignerEventService:
     SelectionChanged: EventType[EventHandler] = ...
     """"""
 
-class IDesignerFilter:
+class IDesignerFilter(ABC):
     """"""
     def PostFilterAttributes(self, attributes: IDictionary) -> None:
         """"""
@@ -830,7 +830,7 @@ class IDesignerFilter:
     def PreFilterProperties(self, properties: IDictionary) -> None:
         """"""
 
-class IDesignerHost(IServiceContainer, IServiceProvider):
+class IDesignerHost(ABC, IServiceContainer, IServiceProvider):
     """"""
     @property
     def Container(self) -> IContainer:
@@ -907,20 +907,20 @@ class IDesignerHost(IServiceContainer, IServiceProvider):
     TransactionOpening: EventType[EventHandler] = ...
     """"""
 
-class IDesignerHostTransactionState:
+class IDesignerHostTransactionState(ABC):
     """"""
     @property
     def IsClosingTransaction(self) -> bool:
         """"""
 
-class IDesignerOptionService:
+class IDesignerOptionService(ABC):
     """"""
     def GetOptionValue(self, pageName: str, valueName: str) -> object:
         """"""
     def SetOptionValue(self, pageName: str, valueName: str, value: object) -> None:
         """"""
 
-class IDictionaryService:
+class IDictionaryService(ABC):
     """"""
     def GetKey(self, value: object) -> object:
         """"""
@@ -929,7 +929,7 @@ class IDictionaryService:
     def SetValue(self, key: object, value: object) -> None:
         """"""
 
-class IEventBindingService:
+class IEventBindingService(ABC):
     """"""
     def CreateUniqueMethodName(self, component: IComponent, e: EventDescriptor) -> str:
         """"""
@@ -951,19 +951,19 @@ class IEventBindingService:
     def ShowCode(self, lineNumber: int) -> bool:
         """"""
 
-class IExtenderListService:
+class IExtenderListService(ABC):
     """"""
     def GetExtenderProviders(self) -> Array[IExtenderProvider]:
         """"""
 
-class IExtenderProviderService:
+class IExtenderProviderService(ABC):
     """"""
     def AddExtenderProvider(self, provider: IExtenderProvider) -> None:
         """"""
     def RemoveExtenderProvider(self, provider: IExtenderProvider) -> None:
         """"""
 
-class IHelpService:
+class IHelpService(ABC):
     """"""
     def AddContextAttribute(self, name: str, value: str, keywordType: HelpKeywordType) -> None:
         """"""
@@ -980,14 +980,14 @@ class IHelpService:
     def ShowHelpFromUrl(self, helpUrl: str) -> None:
         """"""
 
-class IInheritanceService:
+class IInheritanceService(ABC):
     """"""
     def AddInheritedComponents(self, component: IComponent, container: IContainer) -> None:
         """"""
     def GetInheritanceAttribute(self, component: IComponent) -> InheritanceAttribute:
         """"""
 
-class IMenuCommandService:
+class IMenuCommandService(ABC):
     """"""
     @property
     def Verbs(self) -> DesignerVerbCollection:
@@ -1007,7 +1007,7 @@ class IMenuCommandService:
     def ShowContextMenu(self, menuID: CommandID, x: int, y: int) -> None:
         """"""
 
-class IReferenceService:
+class IReferenceService(ABC):
     """"""
     def GetComponent(self, reference: object) -> IComponent:
         """"""
@@ -1022,14 +1022,14 @@ class IReferenceService:
     def GetReferences(self, baseType: Type) -> Array[object]:
         """"""
 
-class IResourceService:
+class IResourceService(ABC):
     """"""
     def GetResourceReader(self, info: CultureInfo) -> IResourceReader:
         """"""
     def GetResourceWriter(self, info: CultureInfo) -> IResourceWriter:
         """"""
 
-class IRootDesigner(IDesigner, IDisposable):
+class IRootDesigner(ABC, IDesigner, IDisposable):
     """"""
     @property
     def Component(self) -> IComponent:
@@ -1049,7 +1049,7 @@ class IRootDesigner(IDesigner, IDisposable):
     def Initialize(self, component: IComponent) -> None:
         """"""
 
-class ISelectionService:
+class ISelectionService(ABC):
     """"""
     @property
     def PrimarySelection(self) -> object:
@@ -1072,7 +1072,7 @@ class ISelectionService:
     SelectionChanging: EventType[EventHandler] = ...
     """"""
 
-class IServiceContainer(IServiceProvider):
+class IServiceContainer(ABC, IServiceProvider):
     """"""
     @overload
     def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
@@ -1097,7 +1097,7 @@ class IServiceContainer(IServiceProvider):
     def RemoveService(self, serviceType: Type, promote: bool) -> None:
         """"""
 
-class ITreeDesigner(IDesigner, IDisposable):
+class ITreeDesigner(ABC, IDesigner, IDisposable):
     """"""
     @property
     def Children(self) -> ICollection:
@@ -1118,7 +1118,7 @@ class ITreeDesigner(IDesigner, IDisposable):
     def Initialize(self, component: IComponent) -> None:
         """"""
 
-class ITypeDescriptorFilterService:
+class ITypeDescriptorFilterService(ABC):
     """"""
     def FilterAttributes(self, component: IComponent, attributes: IDictionary) -> bool:
         """"""
@@ -1127,12 +1127,12 @@ class ITypeDescriptorFilterService:
     def FilterProperties(self, component: IComponent, properties: IDictionary) -> bool:
         """"""
 
-class ITypeDiscoveryService:
+class ITypeDiscoveryService(ABC):
     """"""
     def GetTypes(self, baseType: Type, excludeGlobalTypes: bool) -> ICollection:
         """"""
 
-class ITypeResolutionService:
+class ITypeResolutionService(ABC):
     """"""
     @overload
     def GetAssembly(self, name: AssemblyName) -> Assembly:
@@ -1293,7 +1293,7 @@ class ServiceContainer(Object, IServiceContainer, IDisposable, IServiceProvider)
     def ToString(self) -> str:
         """"""
 
-ServiceCreatorCallback: Callable[[IServiceContainer, Type], object] = ...
+type ServiceCreatorCallback = Callable[[IServiceContainer, Type], object]
 """"""
 
 class StandardCommands(Object):

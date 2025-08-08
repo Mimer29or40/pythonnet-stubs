@@ -732,10 +732,10 @@ class DebugViewWriter(ExpressionVisitor):
     def Visit(self, node: Expression) -> Expression:
         """"""
     @overload
-    def VisitAndConvert[T, T](self, node: T, callerName: str) -> T:
+    def VisitAndConvert[T](self, node: T, callerName: str) -> T:
         """"""
     @overload
-    def VisitAndConvert(
+    def VisitAndConvert[T](
         self, nodes: ReadOnlyCollection[T], callerName: str
     ) -> ReadOnlyCollection[T]:
         """"""
@@ -1153,10 +1153,10 @@ class DynamicExpressionVisitor(ABC, ExpressionVisitor):
     def Visit(self, node: Expression) -> Expression:
         """"""
     @overload
-    def VisitAndConvert[T, T](self, node: T, callerName: str) -> T:
+    def VisitAndConvert[T](self, node: T, callerName: str) -> T:
         """"""
     @overload
-    def VisitAndConvert(
+    def VisitAndConvert[T](
         self, nodes: ReadOnlyCollection[T], callerName: str
     ) -> ReadOnlyCollection[T]:
         """"""
@@ -1846,31 +1846,31 @@ class Expression(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Lambda(
+    def Lambda[TDelegate](
         cls, body: Expression, parameters: IEnumerable[ParameterExpression]
     ) -> Expression[TDelegate]:
         """"""
     @classmethod
     @overload
-    def Lambda(
+    def Lambda[TDelegate](
         cls, body: Expression, parameters: Array[ParameterExpression]
     ) -> Expression[TDelegate]:
         """"""
     @classmethod
     @overload
-    def Lambda(
+    def Lambda[TDelegate](
         cls, body: Expression, tailCall: bool, parameters: IEnumerable[ParameterExpression]
     ) -> Expression[TDelegate]:
         """"""
     @classmethod
     @overload
-    def Lambda(
+    def Lambda[TDelegate](
         cls, body: Expression, tailCall: bool, parameters: Array[ParameterExpression]
     ) -> Expression[TDelegate]:
         """"""
     @classmethod
     @overload
-    def Lambda(
+    def Lambda[TDelegate](
         cls, body: Expression, name: str, parameters: IEnumerable[ParameterExpression]
     ) -> Expression[TDelegate]:
         """"""
@@ -2782,10 +2782,10 @@ class ExpressionStringBuilder(ExpressionVisitor):
     def Visit(self, node: Expression) -> Expression:
         """"""
     @overload
-    def VisitAndConvert[T, T](self, node: T, callerName: str) -> T:
+    def VisitAndConvert[T](self, node: T, callerName: str) -> T:
         """"""
     @overload
-    def VisitAndConvert(
+    def VisitAndConvert[T](
         self, nodes: ReadOnlyCollection[T], callerName: str
     ) -> ReadOnlyCollection[T]:
         """"""
@@ -2976,7 +2976,7 @@ class ExpressionVisitor(ABC, Object):
         """"""
     @classmethod
     @overload
-    def Visit(
+    def Visit[T](
         cls, nodes: ReadOnlyCollection[T], elementVisitor: Func[T, T]
     ) -> ReadOnlyCollection[T]:
         """"""
@@ -2987,10 +2987,10 @@ class ExpressionVisitor(ABC, Object):
     def Visit(self, node: Expression) -> Expression:
         """"""
     @overload
-    def VisitAndConvert[T, T](self, node: T, callerName: str) -> T:
+    def VisitAndConvert[T](self, node: T, callerName: str) -> T:
         """"""
     @overload
-    def VisitAndConvert(
+    def VisitAndConvert[T](
         self, nodes: ReadOnlyCollection[T], callerName: str
     ) -> ReadOnlyCollection[T]:
         """"""
@@ -3220,7 +3220,7 @@ class GotoExpressionKind(Enum):
     Continue: GotoExpressionKind = ...
     """"""
 
-class IArgumentProvider:
+class IArgumentProvider(ABC):
     """"""
     @property
     def ArgumentCount(self) -> int:
@@ -3228,7 +3228,7 @@ class IArgumentProvider:
     def GetArgument(self, index: int) -> Expression:
         """"""
 
-class IDynamicExpression(IArgumentProvider):
+class IDynamicExpression(ABC, IArgumentProvider):
     """"""
     @property
     def ArgumentCount(self) -> int:
@@ -4965,31 +4965,31 @@ class Set[T](Object, ICollection[T], IEnumerable[T], IEnumerable):
     @property
     def IsReadOnly(self) -> bool:
         """"""
-    def Add[T](self, item: T) -> None:
+    def Add(self, item: T) -> None:
         """"""
     def Clear(self) -> None:
         """"""
-    def Contains[T](self, item: T) -> bool:
+    def Contains(self, item: T) -> bool:
         """"""
     def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
         """"""
     def Equals(self, obj: object) -> bool:
         """"""
-    def GetEnumerator(self) -> IEnumerator[T]:
+    def GetEnumerator[T](self) -> IEnumerator[T]:
         """"""
     def GetHashCode(self) -> int:
         """"""
     def GetType(self) -> Type:
         """"""
-    def Remove[T](self, item: T) -> bool:
+    def Remove(self, item: T) -> bool:
         """"""
     def ToString(self) -> str:
         """"""
-    def __contains__[T](self, item: T) -> bool:
+    def __contains__(self, item: T) -> bool:
         """"""
-    def __iter__(self) -> Iterator[T]:
+    def __iter__[T](self) -> Iterator[T]:
         """"""
-    def __delitem__[T](self, item: T) -> bool:
+    def __delitem__(self, item: T) -> bool:
         """"""
     def __len__(self) -> int:
         """"""

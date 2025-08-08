@@ -293,13 +293,13 @@ class HybridDictionary(Object, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
-class INotifyCollectionChanged:
+class INotifyCollectionChanged(ABC):
     """"""
 
     CollectionChanged: EventType[NotifyCollectionChangedEventHandler] = ...
     """"""
 
-class IOrderedDictionary(ICollection, IDictionary, IEnumerable):
+class IOrderedDictionary(ABC, ICollection, IDictionary, IEnumerable):
     """"""
     @property
     def Count(self) -> int:
@@ -734,9 +734,9 @@ class NotifyCollectionChangedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-NotifyCollectionChangedEventHandler: Callable[
+type NotifyCollectionChangedEventHandler = Callable[
     [object, NotifyCollectionChangedEventArgs], None
-] = ...
+]
 """"""
 
 class OrderedDictionary(

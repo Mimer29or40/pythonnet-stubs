@@ -62,7 +62,8 @@ def _setup_parser() -> ArgumentParser:
     )
 
     command_parser: _SubParsersAction[ArgumentParser] = parser.add_subparsers(
-        dest="command", metavar="command"
+        dest="command",
+        metavar="command",
     )
 
     command_args: type[CommandArguments]

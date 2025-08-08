@@ -165,7 +165,7 @@ class GenericPrincipal(ClaimsPrincipal, IPrincipal):
     def WriteTo(self, writer: BinaryWriter) -> None:
         """"""
 
-class IIdentity:
+class IIdentity(ABC):
     """"""
     @property
     def AuthenticationType(self) -> str:
@@ -177,7 +177,7 @@ class IIdentity:
     def Name(self) -> str:
         """"""
 
-class IPrincipal:
+class IPrincipal(ABC):
     """"""
     @property
     def Identity(self) -> IIdentity:

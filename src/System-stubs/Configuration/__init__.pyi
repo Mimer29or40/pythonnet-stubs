@@ -2003,7 +2003,7 @@ class HandlerBase(Object):
     def ToString(self) -> str:
         """"""
 
-class IApplicationSettingsProvider:
+class IApplicationSettingsProvider(ABC):
     """"""
     def GetPreviousVersion(
         self, context: SettingsContext, property: SettingsProperty
@@ -2014,19 +2014,19 @@ class IApplicationSettingsProvider:
     def Upgrade(self, context: SettingsContext, properties: SettingsPropertyCollection) -> None:
         """"""
 
-class IConfigurationSectionHandler:
+class IConfigurationSectionHandler(ABC):
     """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
         """"""
 
-class IConfigurationSystem:
+class IConfigurationSystem(ABC):
     """"""
     def GetConfig(self, configKey: str) -> object:
         """"""
     def Init(self) -> None:
         """"""
 
-class IPersistComponentSettings:
+class IPersistComponentSettings(ABC):
     """"""
     @property
     def SaveSettings(self) -> bool:
@@ -2045,7 +2045,7 @@ class IPersistComponentSettings:
     def SaveComponentSettings(self) -> None:
         """"""
 
-class ISettingsProviderService:
+class ISettingsProviderService(ABC):
     """"""
     def GetSettingsProvider(self, property: SettingsProperty) -> SettingsProvider:
         """"""
@@ -2602,7 +2602,7 @@ class SettingChangingEventArgs(CancelEventArgs):
     def ToString(self) -> str:
         """"""
 
-SettingChangingEventHandler: Callable[[object, SettingChangingEventArgs], None] = ...
+type SettingChangingEventHandler = Callable[[object, SettingChangingEventArgs], None]
 """"""
 
 class SettingElement(ConfigurationElement):
@@ -3140,7 +3140,7 @@ class SettingsLoadedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
-SettingsLoadedEventHandler: Callable[[object, SettingsLoadedEventArgs], None] = ...
+type SettingsLoadedEventHandler = Callable[[object, SettingsLoadedEventArgs], None]
 """"""
 
 class SettingsManageability(Enum):
@@ -3686,7 +3686,7 @@ class SettingsProviderCollection(ProviderCollection, ICollection, IEnumerable):
     def __getitem__(self, name: str) -> ProviderBase:
         """"""
 
-SettingsSavingEventHandler: Callable[[object, CancelEventArgs], None] = ...
+type SettingsSavingEventHandler = Callable[[object, CancelEventArgs], None]
 """"""
 
 class SettingsSerializeAs(Enum):
