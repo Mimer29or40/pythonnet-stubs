@@ -21,6 +21,7 @@ from System.Text import StringBuilder
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AbstractMemoryBlock(ABC, Object, IDisposable):
     """"""
     @property
@@ -42,6 +43,7 @@ class AbstractMemoryBlock(ABC, Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ByteArrayMemoryBlock(AbstractMemoryBlock, IDisposable):
     """"""
     @property
@@ -63,6 +65,7 @@ class ByteArrayMemoryBlock(AbstractMemoryBlock, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ByteArrayMemoryProvider(MemoryBlockProvider, IDisposable):
     """"""
     def __init__(self, array: ImmutableArray[int]) -> None:
@@ -92,6 +95,7 @@ class ByteArrayMemoryProvider(MemoryBlockProvider, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CriticalDisposableObject(ABC, CriticalFinalizerObject, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -105,6 +109,7 @@ class CriticalDisposableObject(ABC, CriticalFinalizerObject, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExternalMemoryBlock(AbstractMemoryBlock, IDisposable):
     """"""
     def __init__(self, memoryOwner: object, buffer: int, size: int) -> None:
@@ -128,6 +133,7 @@ class ExternalMemoryBlock(AbstractMemoryBlock, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExternalMemoryBlockProvider(MemoryBlockProvider, IDisposable):
     """"""
     def __init__(self, memory: int, size: int) -> None:
@@ -157,6 +163,7 @@ class ExternalMemoryBlockProvider(MemoryBlockProvider, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Hash(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -168,6 +175,7 @@ class Hash(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ImmutableMemoryStream(Stream, IDisposable):
     """"""
     @property
@@ -286,6 +294,7 @@ class ImmutableMemoryStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LightUpHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -297,6 +306,7 @@ class LightUpHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryBlock(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -308,6 +318,7 @@ class MemoryBlock(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryBlockProvider(ABC, Object, IDisposable):
     """"""
     @property
@@ -332,6 +343,7 @@ class MemoryBlockProvider(ABC, Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryMapLightUp(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -343,6 +355,7 @@ class MemoryMapLightUp(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedFileBlock(AbstractMemoryBlock, IDisposable):
     """"""
     @property
@@ -364,6 +377,7 @@ class MemoryMappedFileBlock(AbstractMemoryBlock, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NativeHeapMemoryBlock(AbstractMemoryBlock, IDisposable):
     """"""
     @property
@@ -385,6 +399,7 @@ class NativeHeapMemoryBlock(AbstractMemoryBlock, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectPool[T](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -396,6 +411,7 @@ class ObjectPool[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PinnedObject(CriticalDisposableObject, IDisposable):
     """"""
     def __init__(self, obj: object) -> None:
@@ -414,6 +430,7 @@ class PinnedObject(CriticalDisposableObject, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PooledStringBuilder(Object):
     """"""
 
@@ -441,6 +458,7 @@ class PooledStringBuilder(Object):
     def ToStringAndFree(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyUnmanagedMemoryStream(Stream, IDisposable):
     """"""
     def __init__(self, data: int, length: int) -> None:
@@ -559,6 +577,7 @@ class ReadOnlyUnmanagedMemoryStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StreamConstraints(ValueType):
     """"""
 
@@ -579,6 +598,7 @@ class StreamConstraints(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StreamExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -590,6 +610,7 @@ class StreamExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StreamMemoryBlockProvider(MemoryBlockProvider, IDisposable):
     """"""
     def __init__(

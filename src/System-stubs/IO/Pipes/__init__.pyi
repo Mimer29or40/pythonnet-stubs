@@ -36,6 +36,7 @@ from System.Threading import NativeOverlapped
 from System.Threading import WaitHandle
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AnonymousPipeClientStream(PipeStream, IDisposable):
     """"""
     @overload
@@ -193,6 +194,7 @@ class AnonymousPipeClientStream(PipeStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AnonymousPipeServerStream(PipeStream, IDisposable):
     """"""
     @overload
@@ -379,6 +381,7 @@ class AnonymousPipeServerStream(PipeStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IOCancellationHelper(Object):
     """"""
     def __init__(self, cancellationToken: CancellationToken) -> None:
@@ -398,6 +401,7 @@ class IOCancellationHelper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NamedPipeClientStream(PipeStream, IDisposable):
     """"""
     @overload
@@ -622,6 +626,7 @@ class NamedPipeClientStream(PipeStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NamedPipeServerStream(PipeStream, IDisposable):
     """"""
 
@@ -884,6 +889,7 @@ class NamedPipeServerStream(PipeStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PipeAccessRights(Enum):
     """"""
 
@@ -922,6 +928,7 @@ class PipeAccessRights(Enum):
     AccessSystemSecurity: PipeAccessRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PipeAccessRule(AccessRule):
     """"""
     @overload
@@ -959,6 +966,7 @@ class PipeAccessRule(AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PipeAsyncResult(Object, IAsyncResult):
     """"""
     def __init__(self) -> None:
@@ -984,6 +992,7 @@ class PipeAsyncResult(Object, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PipeAuditRule(AuditRule):
     """"""
     @overload
@@ -1021,6 +1030,7 @@ class PipeAuditRule(AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PipeDirection(Enum):
     """"""
 
@@ -1031,6 +1041,7 @@ class PipeDirection(Enum):
     InOut: PipeDirection = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PipeOptions(Enum):
     """"""
 
@@ -1041,6 +1052,7 @@ class PipeOptions(Enum):
     WriteThrough: PipeOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PipeSecurity(NativeObjectSecurity):
     """"""
     def __init__(self) -> None:
@@ -1167,6 +1179,7 @@ class PipeSecurity(NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PipeState(Enum):
     """"""
 
@@ -1181,6 +1194,7 @@ class PipeState(Enum):
     Closed: PipeState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PipeStream(ABC, Stream, IDisposable):
     """"""
     @property
@@ -1329,6 +1343,7 @@ class PipeStream(ABC, Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PipeStreamAsyncResult(Object, IAsyncResult):
     """"""
     def __init__(self) -> None:
@@ -1357,6 +1372,7 @@ class PipeStreamAsyncResult(Object, IAsyncResult):
 type PipeStreamImpersonationWorker = Callable[[], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PipeTransmissionMode(Enum):
     """"""
 

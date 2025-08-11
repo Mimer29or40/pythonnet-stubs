@@ -23,10 +23,7 @@ from System import UInt32
 from System import Uri
 from System import ValueType
 from System import __ComObject
-from System.Collections import ICollection
 from System.Collections import IDictionary
-from System.Collections import IEnumerable
-from System.Collections import IList
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IEnumerable
 from System.Collections.Generic import IEnumerator
@@ -77,6 +74,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AlternateView(AttachmentBase, IDisposable):
     """"""
     @overload
@@ -148,6 +146,7 @@ class AlternateView(AttachmentBase, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AlternateViewCollection(
     Collection[AlternateView],
     ICollection[AlternateView],
@@ -258,6 +257,7 @@ class AlternateViewCollection(
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Attachment(AttachmentBase, IDisposable):
     """"""
     @overload
@@ -334,6 +334,7 @@ class Attachment(AttachmentBase, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AttachmentBase(ABC, Object, IDisposable):
     """"""
     @property
@@ -365,6 +366,7 @@ class AttachmentBase(ABC, Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AttachmentCollection(
     Collection[Attachment],
     ICollection[Attachment],
@@ -475,6 +477,7 @@ class AttachmentCollection(
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -486,6 +489,7 @@ class AuthCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BufferBuilder(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -497,6 +501,7 @@ class BufferBuilder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CheckCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -508,6 +513,7 @@ class CheckCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DataCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -519,6 +525,7 @@ class DataCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DataStopCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -530,6 +537,7 @@ class DataStopCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DeliveryNotificationOptions(Enum):
     """"""
 
@@ -544,6 +552,7 @@ class DeliveryNotificationOptions(Enum):
     Never: DeliveryNotificationOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DomainLiteralReader(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -555,6 +564,7 @@ class DomainLiteralReader(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DotAtomReader(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -566,6 +576,7 @@ class DotAtomReader(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EHelloCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -577,6 +588,7 @@ class EHelloCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HelloCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -588,6 +600,7 @@ class HelloCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMSAdminBase(ABC):
     """"""
     def AddKey(self, handle: IntPtr, Path: str) -> int:
@@ -718,6 +731,7 @@ class IMSAdminBase(ABC):
     def UnmarshalInterface(self, interf: IMSAdminBase) -> tuple[int, IMSAdminBase]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISmtpAuthenticationModule(ABC):
     """"""
     @property
@@ -735,6 +749,7 @@ class ISmtpAuthenticationModule(ABC):
     def CloseContext(self, sessionCookie: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IisPickupDirectory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -746,6 +761,7 @@ class IisPickupDirectory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LineInfo(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -757,6 +773,7 @@ class LineInfo(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LinkedResource(AttachmentBase, IDisposable):
     """"""
     @overload
@@ -827,6 +844,7 @@ class LinkedResource(AttachmentBase, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LinkedResourceCollection(
     Collection[LinkedResource],
     ICollection[LinkedResource],
@@ -937,6 +955,7 @@ class LinkedResourceCollection(
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MBDataType(Enum):
     """"""
 
@@ -953,6 +972,7 @@ class MBDataType(Enum):
     MultiString: MBDataType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MBErrors(Enum):
     """"""
 
@@ -979,6 +999,7 @@ class MBErrors(Enum):
     InvalidVersion: MBErrors = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MBKeyAccess(Enum):
     """"""
 
@@ -987,6 +1008,7 @@ class MBKeyAccess(Enum):
     Write: MBKeyAccess = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MBUserType(Enum):
     """"""
 
@@ -1001,6 +1023,7 @@ class MBUserType(Enum):
     Asp: MBUserType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MSAdminBase(__ComObject):
     """"""
     def __init__(self) -> None:
@@ -1020,6 +1043,7 @@ class MSAdminBase(__ComObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailAddress(Object):
     """"""
     @overload
@@ -1052,6 +1076,7 @@ class MailAddress(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailAddressCollection(
     Collection[MailAddress],
     ICollection[MailAddress],
@@ -1164,6 +1189,7 @@ class MailAddressCollection(
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailAddressParser(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1175,6 +1201,7 @@ class MailAddressParser(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1186,6 +1213,7 @@ class MailCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MailHeaderID(Enum):
     """"""
 
@@ -1260,6 +1288,7 @@ class MailHeaderID(Enum):
     Unknown: MailHeaderID = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailHeaderInfo(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1271,6 +1300,7 @@ class MailHeaderInfo(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailMessage(Object, IDisposable):
     """"""
     @overload
@@ -1377,6 +1407,7 @@ class MailMessage(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MailPriority(Enum):
     """"""
 
@@ -1387,6 +1418,7 @@ class MailPriority(Enum):
     High: MailPriority = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailWriter(BaseWriter):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1398,6 +1430,7 @@ class MailWriter(BaseWriter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Message(Object):
     """"""
     @property
@@ -1414,6 +1447,7 @@ class Message(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataRecord(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1425,6 +1459,7 @@ class MetadataRecord(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PropertyName(Enum):
     """"""
 
@@ -1435,6 +1470,7 @@ class PropertyName(Enum):
     PickupDirectory: PropertyName = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QuotedPairReader(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1446,6 +1482,7 @@ class QuotedPairReader(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QuotedStringFormatReader(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1457,6 +1494,7 @@ class QuotedStringFormatReader(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadLinesCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1468,6 +1506,7 @@ class ReadLinesCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RecipientCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1479,6 +1518,7 @@ class RecipientCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RecipientLocationType(Enum):
     """"""
 
@@ -1496,6 +1536,7 @@ class RecipientLocationType(Enum):
 type SendCompletedEventHandler = Callable[[object, AsyncCompletedEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SendMailAsyncResult(LazyAsyncResult, IAsyncResult):
     """"""
     @property
@@ -1519,6 +1560,7 @@ class SendMailAsyncResult(LazyAsyncResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ServerState(Enum):
     """"""
 
@@ -1537,6 +1579,7 @@ class ServerState(Enum):
     Continuing: ServerState = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SmtpAccess(Enum):
     """"""
 
@@ -1547,6 +1590,7 @@ class SmtpAccess(Enum):
     ConnectToUnrestrictedPort: SmtpAccess = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpAuthenticationManager(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1558,6 +1602,7 @@ class SmtpAuthenticationManager(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpClient(Object, IDisposable):
     """"""
     @overload
@@ -1660,6 +1705,7 @@ class SmtpClient(Object, IDisposable):
     SendCompleted: EventType[SendCompletedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpCommands(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1671,6 +1717,7 @@ class SmtpCommands(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpConnection(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1682,6 +1729,7 @@ class SmtpConnection(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SmtpDeliveryFormat(Enum):
     """"""
 
@@ -1690,6 +1738,7 @@ class SmtpDeliveryFormat(Enum):
     International: SmtpDeliveryFormat = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SmtpDeliveryMethod(Enum):
     """"""
 
@@ -1700,6 +1749,7 @@ class SmtpDeliveryMethod(Enum):
     PickupDirectoryFromIis: SmtpDeliveryMethod = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpDigestAuthenticationModule(Object, ISmtpAuthenticationModule):
     """"""
     @property
@@ -1725,6 +1775,7 @@ class SmtpDigestAuthenticationModule(Object, ISmtpAuthenticationModule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -1790,6 +1841,7 @@ class SmtpException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpFailedRecipientException(SmtpException, _Exception, ISerializable):
     """"""
     @overload
@@ -1863,6 +1915,7 @@ class SmtpFailedRecipientException(SmtpException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpFailedRecipientsException(SmtpFailedRecipientException, _Exception, ISerializable):
     """"""
     @overload
@@ -1931,6 +1984,7 @@ class SmtpFailedRecipientsException(SmtpFailedRecipientException, _Exception, IS
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpLoginAuthenticationModule(Object, ISmtpAuthenticationModule):
     """"""
     @property
@@ -1956,6 +2010,7 @@ class SmtpLoginAuthenticationModule(Object, ISmtpAuthenticationModule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpNegotiateAuthenticationModule(Object, ISmtpAuthenticationModule):
     """"""
     @property
@@ -1981,6 +2036,7 @@ class SmtpNegotiateAuthenticationModule(Object, ISmtpAuthenticationModule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpNtlmAuthenticationModule(Object, ISmtpAuthenticationModule):
     """"""
     @property
@@ -2006,6 +2062,7 @@ class SmtpNtlmAuthenticationModule(Object, ISmtpAuthenticationModule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpPermission(
     CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -2055,6 +2112,7 @@ class SmtpPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -2112,6 +2170,7 @@ class SmtpPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpPooledStream(PooledStream, IDisposable):
     """"""
     @property
@@ -2232,6 +2291,7 @@ class SmtpPooledStream(PooledStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpReplyReader(Object):
     """"""
     def Close(self) -> None:
@@ -2245,6 +2305,7 @@ class SmtpReplyReader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpReplyReaderFactory(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2256,6 +2317,7 @@ class SmtpReplyReaderFactory(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SmtpStatusCode(Enum):
     """"""
 
@@ -2310,6 +2372,7 @@ class SmtpStatusCode(Enum):
     GeneralFailure: SmtpStatusCode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpTransport(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2321,6 +2384,7 @@ class SmtpTransport(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StartTlsCommand(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2332,6 +2396,7 @@ class StartTlsCommand(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SupportedAuth(Enum):
     """"""
 
@@ -2346,6 +2411,7 @@ class SupportedAuth(Enum):
     WDigest: SupportedAuth = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WhitespaceReader(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2357,6 +2423,7 @@ class WhitespaceReader(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _METADATA_HANDLE_INFO(Object):
     """"""
     def Equals(self, obj: object) -> bool:

@@ -30,6 +30,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AppDomainSortingSetupInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -41,6 +42,7 @@ class AppDomainSortingSetupInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class BidiCategory(Enum):
     """"""
 
@@ -91,6 +93,7 @@ class BidiCategory(Enum):
     PopDirectionIsolate: BidiCategory = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Calendar(ABC, Object, ICloneable):
     """"""
 
@@ -232,6 +235,7 @@ class Calendar(ABC, Object, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CalendarAlgorithmType(Enum):
     """"""
 
@@ -244,6 +248,7 @@ class CalendarAlgorithmType(Enum):
     LunisolarCalendar: CalendarAlgorithmType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CalendarData(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -255,6 +260,7 @@ class CalendarData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CalendarId(Enum):
     """"""
 
@@ -307,6 +313,7 @@ class CalendarId(Enum):
     LAST_CALENDAR: CalendarId = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CalendarWeekRule(Enum):
     """"""
 
@@ -317,6 +324,7 @@ class CalendarWeekRule(Enum):
     FirstFourDayWeek: CalendarWeekRule = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CalendricalCalculationsHelper(Object):
     """"""
     def __init__(self) -> None:
@@ -351,6 +359,7 @@ class CalendricalCalculationsHelper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CharUnicodeInfo(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -394,6 +403,7 @@ class CharUnicodeInfo(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ChineseLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     """"""
 
@@ -540,6 +550,7 @@ class ChineseLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodePageDataItem(Object):
     """"""
     @property
@@ -566,6 +577,7 @@ class CodePageDataItem(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompareInfo(Object, IDeserializationCallback):
     """"""
     @property
@@ -747,6 +759,7 @@ class CompareInfo(Object, IDeserializationCallback):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CompareOptions(Enum):
     """"""
 
@@ -769,6 +782,7 @@ class CompareOptions(Enum):
     Ordinal: CompareOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CultureData(Object):
     """"""
     def __init__(self) -> None:
@@ -782,6 +796,7 @@ class CultureData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CultureInfo(Object, ICloneable, IFormatProvider):
     """"""
     @overload
@@ -940,6 +955,7 @@ class CultureInfo(Object, ICloneable, IFormatProvider):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CultureNotFoundException(ArgumentException, _Exception, ISerializable):
     """"""
     @overload
@@ -1016,6 +1032,7 @@ class CultureNotFoundException(ArgumentException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CultureTypes(Enum):
     """"""
 
@@ -1036,6 +1053,7 @@ class CultureTypes(Enum):
     FrameworkCultures: CultureTypes = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DateTimeFormatFlags(Enum):
     """"""
 
@@ -1056,6 +1074,7 @@ class DateTimeFormatFlags(Enum):
     NotInitialized: DateTimeFormatFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DateTimeFormatInfo(Object, ICloneable, IFormatProvider):
     """"""
     def __init__(self) -> None:
@@ -1231,6 +1250,7 @@ class DateTimeFormatInfo(Object, ICloneable, IFormatProvider):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DateTimeFormatInfoScanner(Object):
     """"""
     def __init__(self) -> None:
@@ -1244,6 +1264,7 @@ class DateTimeFormatInfoScanner(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DateTimeStyles(Enum):
     """"""
 
@@ -1268,6 +1289,7 @@ class DateTimeStyles(Enum):
     RoundtripKind: DateTimeStyles = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DaylightTime(Object):
     """"""
     def __init__(self, start: DateTime, end: DateTime, delta: TimeSpan) -> None:
@@ -1290,6 +1312,7 @@ class DaylightTime(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DaylightTimeStruct(ValueType):
     """"""
     def __init__(self, start: DateTime, end: DateTime, delta: TimeSpan) -> None:
@@ -1312,6 +1335,7 @@ class DaylightTimeStruct(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DigitShapes(Enum):
     """"""
 
@@ -1322,6 +1346,7 @@ class DigitShapes(Enum):
     NativeNational: DigitShapes = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EastAsianLunisolarCalendar(ABC, Calendar, ICloneable):
     """"""
     @property
@@ -1463,6 +1488,7 @@ class EastAsianLunisolarCalendar(ABC, Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncodingTable(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1474,6 +1500,7 @@ class EncodingTable(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EraInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1485,6 +1512,7 @@ class EraInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FORMATFLAGS(Enum):
     """"""
 
@@ -1503,6 +1531,7 @@ class FORMATFLAGS(Enum):
     UseDigitPrefixInTokens: FORMATFLAGS = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GlobalizationAssembly(Object):
     """"""
     def __init__(self) -> None:
@@ -1516,6 +1545,7 @@ class GlobalizationAssembly(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GlobalizationExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1530,6 +1560,7 @@ class GlobalizationExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GregorianCalendar(Calendar, ICloneable):
     """"""
 
@@ -1679,6 +1710,7 @@ class GregorianCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GregorianCalendarHelper(Object):
     """"""
     @property
@@ -1745,6 +1777,7 @@ class GregorianCalendarHelper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class GregorianCalendarTypes(Enum):
     """"""
 
@@ -1761,6 +1794,7 @@ class GregorianCalendarTypes(Enum):
     TransliteratedFrench: GregorianCalendarTypes = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HebrewCalendar(Calendar, ICloneable):
     """"""
 
@@ -1901,6 +1935,7 @@ class HebrewCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HebrewNumber(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1912,6 +1947,7 @@ class HebrewNumber(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HebrewNumberParsingContext(ValueType):
     """"""
     def __init__(self, result: int) -> None:
@@ -1925,6 +1961,7 @@ class HebrewNumberParsingContext(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HebrewNumberParsingState(Enum):
     """"""
 
@@ -1937,6 +1974,7 @@ class HebrewNumberParsingState(Enum):
     ContinueParsing: HebrewNumberParsingState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HijriCalendar(Calendar, ICloneable):
     """"""
 
@@ -2082,6 +2120,7 @@ class HijriCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IdnMapping(Object):
     """"""
     def __init__(self) -> None:
@@ -2123,6 +2162,7 @@ class IdnMapping(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalCodePageDataItem(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2134,6 +2174,7 @@ class InternalCodePageDataItem(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalEncodingDataItem(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2145,6 +2186,7 @@ class InternalEncodingDataItem(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class JapaneseCalendar(Calendar, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -2282,6 +2324,7 @@ class JapaneseCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class JapaneseLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     """"""
 
@@ -2428,6 +2471,7 @@ class JapaneseLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class JulianCalendar(Calendar, ICloneable):
     """"""
 
@@ -2568,6 +2612,7 @@ class JulianCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KoreanCalendar(Calendar, ICloneable):
     """"""
 
@@ -2708,6 +2753,7 @@ class KoreanCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KoreanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     """"""
 
@@ -2854,6 +2900,7 @@ class KoreanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MonthNameStyles(Enum):
     """"""
 
@@ -2864,6 +2911,7 @@ class MonthNameStyles(Enum):
     LeapYear: MonthNameStyles = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NumberFormatInfo(Object, ICloneable, IFormatProvider):
     """"""
     def __init__(self) -> None:
@@ -3033,6 +3081,7 @@ class NumberFormatInfo(Object, ICloneable, IFormatProvider):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NumberStyles(Enum):
     """"""
 
@@ -3071,6 +3120,7 @@ class NumberStyles(Enum):
     HexNumber: NumberStyles = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PersianCalendar(Calendar, ICloneable):
     """"""
 
@@ -3211,6 +3261,7 @@ class PersianCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegionInfo(Object):
     """"""
     @overload
@@ -3271,6 +3322,7 @@ class RegionInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortKey(Object):
     """"""
     @property
@@ -3291,6 +3343,7 @@ class SortKey(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortVersion(Object, IEquatable[SortVersion]):
     """"""
     def __init__(self, fullVersion: int, sortId: Guid) -> None:
@@ -3324,6 +3377,7 @@ class SortVersion(Object, IEquatable[SortVersion]):
     def __ne__(self, other: SortVersion) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringInfo(Object):
     """"""
     @overload
@@ -3374,6 +3428,7 @@ class StringInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaiwanCalendar(Calendar, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -3511,6 +3566,7 @@ class TaiwanCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaiwanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -3654,6 +3710,7 @@ class TaiwanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TextElementEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -3677,6 +3734,7 @@ class TextElementEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TextInfo(Object, IDeserializationCallback, ICloneable):
     """"""
     @property
@@ -3738,6 +3796,7 @@ class TextInfo(Object, IDeserializationCallback, ICloneable):
     def ToUpper(self, str: str) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ThaiBuddhistCalendar(Calendar, ICloneable):
     """"""
 
@@ -3878,6 +3937,7 @@ class ThaiBuddhistCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TimeSpanFormat(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3889,6 +3949,7 @@ class TimeSpanFormat(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TimeSpanParse(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3900,6 +3961,7 @@ class TimeSpanParse(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TimeSpanStyles(Enum):
     """"""
 
@@ -3908,6 +3970,7 @@ class TimeSpanStyles(Enum):
     AssumeNegative: TimeSpanStyles = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenHashValue(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3919,6 +3982,7 @@ class TokenHashValue(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UmAlQuraCalendar(Calendar, ICloneable):
     """"""
 
@@ -4059,6 +4123,7 @@ class UmAlQuraCalendar(Calendar, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UnicodeCategory(Enum):
     """"""
 

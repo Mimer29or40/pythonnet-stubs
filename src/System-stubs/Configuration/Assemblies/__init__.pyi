@@ -9,6 +9,7 @@ from System import ICloneable
 from System import Type
 from System import ValueType
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssemblyHash(ValueType, ICloneable):
     """"""
 
@@ -40,6 +41,7 @@ class AssemblyHash(ValueType, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AssemblyHashAlgorithm(Enum):
     """"""
 
@@ -56,6 +58,7 @@ class AssemblyHashAlgorithm(Enum):
     SHA512: AssemblyHashAlgorithm = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AssemblyVersionCompatibility(Enum):
     """"""
 

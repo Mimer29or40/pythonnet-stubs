@@ -9,6 +9,7 @@ from System import IDisposable
 from System import Object
 from System import Type
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CounterData(Object):
     """"""
     @property
@@ -36,6 +37,7 @@ class CounterData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CounterSet(Object, IDisposable):
     """"""
     def __init__(
@@ -61,6 +63,7 @@ class CounterSet(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CounterSetInstance(Object, IDisposable):
     """"""
     @property
@@ -77,6 +80,7 @@ class CounterSetInstance(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CounterSetInstanceCounterDataSet(Object, IDisposable):
     """"""
     @property
@@ -99,6 +103,7 @@ class CounterSetInstanceCounterDataSet(Object, IDisposable):
     def __getitem__(self, counterName: str) -> CounterData:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CounterSetInstanceType(Enum):
     """"""
 
@@ -115,6 +120,7 @@ class CounterSetInstanceType(Enum):
     InstanceAggregate: CounterSetInstanceType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CounterType(Enum):
     """"""
 
@@ -191,6 +197,7 @@ class CounterType(Enum):
     MultiTimerBase: CounterType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PerfProvider(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -202,6 +209,7 @@ class PerfProvider(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PerfProviderCollection(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

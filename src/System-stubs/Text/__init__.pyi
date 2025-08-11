@@ -24,6 +24,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ASCIIEncoding(Encoding, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -167,6 +168,7 @@ class ASCIIEncoding(Encoding, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BaseCodePageEncoding(ABC, EncodingNLS, ISerializable, ICloneable):
     """"""
     @property
@@ -310,6 +312,7 @@ class BaseCodePageEncoding(ABC, EncodingNLS, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodePageEncoding(Object, IObjectReference, ISerializable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -325,6 +328,7 @@ class CodePageEncoding(Object, IObjectReference, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DBCSCodePageEncoding(BaseCodePageEncoding, ISerializable, ICloneable):
     """"""
     def __init__(self, codePage: int) -> None:
@@ -470,6 +474,7 @@ class DBCSCodePageEncoding(BaseCodePageEncoding, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Decoder(ABC, Object):
     """"""
     @property
@@ -547,6 +552,7 @@ class Decoder(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderExceptionFallback(DecoderFallback):
     """"""
     def __init__(self) -> None:
@@ -565,6 +571,7 @@ class DecoderExceptionFallback(DecoderFallback):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderExceptionFallbackBuffer(DecoderFallbackBuffer):
     """"""
     def __init__(self) -> None:
@@ -589,6 +596,7 @@ class DecoderExceptionFallbackBuffer(DecoderFallbackBuffer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderFallback(ABC, Object):
     """"""
     @classmethod
@@ -613,6 +621,7 @@ class DecoderFallback(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderFallbackBuffer(ABC, Object):
     """"""
     @property
@@ -635,6 +644,7 @@ class DecoderFallbackBuffer(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderFallbackException(ArgumentException, _Exception, ISerializable):
     """"""
     @overload
@@ -699,6 +709,7 @@ class DecoderFallbackException(ArgumentException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderNLS(Decoder, ISerializable):
     """"""
     @property
@@ -781,6 +792,7 @@ class DecoderNLS(Decoder, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderReplacementFallback(DecoderFallback):
     """"""
     @overload
@@ -806,6 +818,7 @@ class DecoderReplacementFallback(DecoderFallback):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecoderReplacementFallbackBuffer(DecoderFallbackBuffer):
     """"""
     def __init__(self, fallback: DecoderReplacementFallback) -> None:
@@ -830,6 +843,7 @@ class DecoderReplacementFallbackBuffer(DecoderFallbackBuffer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EUCJPEncoding(DBCSCodePageEncoding, ISerializable, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -975,6 +989,7 @@ class EUCJPEncoding(DBCSCodePageEncoding, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Encoder(ABC, Object):
     """"""
     @property
@@ -1044,6 +1059,7 @@ class Encoder(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderExceptionFallback(EncoderFallback):
     """"""
     def __init__(self) -> None:
@@ -1062,6 +1078,7 @@ class EncoderExceptionFallback(EncoderFallback):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderExceptionFallbackBuffer(EncoderFallbackBuffer):
     """"""
     def __init__(self) -> None:
@@ -1090,6 +1107,7 @@ class EncoderExceptionFallbackBuffer(EncoderFallbackBuffer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderFallback(ABC, Object):
     """"""
     @classmethod
@@ -1114,6 +1132,7 @@ class EncoderFallback(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderFallbackBuffer(ABC, Object):
     """"""
     @property
@@ -1140,6 +1159,7 @@ class EncoderFallbackBuffer(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderFallbackException(ArgumentException, _Exception, ISerializable):
     """"""
     @overload
@@ -1209,6 +1229,7 @@ class EncoderFallbackException(ArgumentException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderNLS(Encoder, ISerializable):
     """"""
     @property
@@ -1286,6 +1307,7 @@ class EncoderNLS(Encoder, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderReplacementFallback(EncoderFallback):
     """"""
     @overload
@@ -1311,6 +1333,7 @@ class EncoderReplacementFallback(EncoderFallback):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncoderReplacementFallbackBuffer(EncoderFallbackBuffer):
     """"""
     def __init__(self, fallback: EncoderReplacementFallback) -> None:
@@ -1339,6 +1362,7 @@ class EncoderReplacementFallbackBuffer(EncoderFallbackBuffer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Encoding(ABC, Object, ICloneable):
     """"""
     @classmethod
@@ -1544,6 +1568,7 @@ class Encoding(ABC, Object, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncodingInfo(Object):
     """"""
     @property
@@ -1566,6 +1591,7 @@ class EncodingInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncodingNLS(ABC, Encoding, ICloneable):
     """"""
     @property
@@ -1707,6 +1733,7 @@ class EncodingNLS(ABC, Encoding, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncodingProvider(ABC, Object):
     """"""
     def __init__(self) -> None:
@@ -1736,6 +1763,7 @@ class EncodingProvider(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ExtendedNormalizationForms(Enum):
     """"""
 
@@ -1760,6 +1788,7 @@ class ExtendedNormalizationForms(Enum):
     FormIdnaDisallowUnassigned: ExtendedNormalizationForms = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GB18030Encoding(DBCSCodePageEncoding, ISerializable, ICloneable):
     """"""
     @property
@@ -1903,6 +1932,7 @@ class GB18030Encoding(DBCSCodePageEncoding, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISCIIEncoding(EncodingNLS, ISerializable, ICloneable):
     """"""
     def __init__(self, codePage: int) -> None:
@@ -2048,6 +2078,7 @@ class ISCIIEncoding(EncodingNLS, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISO2022Encoding(DBCSCodePageEncoding, ISerializable, ICloneable):
     """"""
     @property
@@ -2191,6 +2222,7 @@ class ISO2022Encoding(DBCSCodePageEncoding, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalDecoderBestFitFallback(DecoderFallback):
     """"""
     @property
@@ -2207,6 +2239,7 @@ class InternalDecoderBestFitFallback(DecoderFallback):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalDecoderBestFitFallbackBuffer(DecoderFallbackBuffer):
     """"""
     def __init__(self, fallback: InternalDecoderBestFitFallback) -> None:
@@ -2231,6 +2264,7 @@ class InternalDecoderBestFitFallbackBuffer(DecoderFallbackBuffer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalEncoderBestFitFallback(EncoderFallback):
     """"""
     @property
@@ -2247,6 +2281,7 @@ class InternalEncoderBestFitFallback(EncoderFallback):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalEncoderBestFitFallbackBuffer(EncoderFallbackBuffer):
     """"""
     def __init__(self, fallback: InternalEncoderBestFitFallback) -> None:
@@ -2275,6 +2310,7 @@ class InternalEncoderBestFitFallbackBuffer(EncoderFallbackBuffer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Latin1Encoding(EncodingNLS, ISerializable, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -2420,6 +2456,7 @@ class Latin1Encoding(EncodingNLS, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MLangCodePageEncoding(Object, IObjectReference, ISerializable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2435,6 +2472,7 @@ class MLangCodePageEncoding(Object, IObjectReference, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Normalization(Object):
     """"""
     def __init__(self) -> None:
@@ -2448,6 +2486,7 @@ class Normalization(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NormalizationForm(Enum):
     """"""
 
@@ -2460,6 +2499,7 @@ class NormalizationForm(Enum):
     FormKD: NormalizationForm = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SBCSCodePageEncoding(BaseCodePageEncoding, ISerializable, ICloneable):
     """"""
     def __init__(self, codePage: int) -> None:
@@ -2605,6 +2645,7 @@ class SBCSCodePageEncoding(BaseCodePageEncoding, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringBuilder(Object, ISerializable):
     """"""
     @overload
@@ -2835,6 +2876,7 @@ class StringBuilder(Object, ISerializable):
     def __delitem__(self, startIndex: int, length: int) -> StringBuilder:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringBuilderCache(ABC, Object):
     """"""
     @classmethod
@@ -2855,6 +2897,7 @@ class StringBuilderCache(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SurrogateEncoder(Object, IObjectReference, ISerializable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2870,6 +2913,7 @@ class SurrogateEncoder(Object, IObjectReference, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UTF32Encoding(Encoding, ICloneable):
     """"""
     @overload
@@ -3022,6 +3066,7 @@ class UTF32Encoding(Encoding, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UTF7Encoding(Encoding, ICloneable):
     """"""
     @overload
@@ -3169,6 +3214,7 @@ class UTF7Encoding(Encoding, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UTF8Encoding(Encoding, ICloneable):
     """"""
     @overload
@@ -3319,6 +3365,7 @@ class UTF8Encoding(Encoding, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnicodeEncoding(Encoding, ICloneable):
     """"""
 

@@ -22,6 +22,7 @@ from System.Runtime.Remoting import ObjRef
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BaseWrapperStream(ABC, Stream, IRequestLifetimeTracker, IDisposable):
     """"""
     def __init__(self, wrappedStream: Stream) -> None:
@@ -142,6 +143,7 @@ class BaseWrapperStream(ABC, Stream, IRequestLifetimeTracker, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CacheFreshnessStatus(Enum):
     """"""
 
@@ -152,6 +154,7 @@ class CacheFreshnessStatus(Enum):
     Stale: CacheFreshnessStatus = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CacheValidationStatus(Enum):
     """"""
 
@@ -180,6 +183,7 @@ class CacheValidationStatus(Enum):
     Continue: CacheValidationStatus = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CombinedReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
     @property
@@ -300,6 +304,7 @@ class CombinedReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, I
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ForwardingReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
     @property
@@ -420,6 +425,7 @@ class ForwardingReadStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FtpRequestCacheValidator(HttpRequestCacheValidator):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -431,6 +437,7 @@ class FtpRequestCacheValidator(HttpRequestCacheValidator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HttpCacheAgeControl(Enum):
     """"""
 
@@ -447,6 +454,7 @@ class HttpCacheAgeControl(Enum):
     MaxAgeAndMaxStale: HttpCacheAgeControl = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HttpMethod(Enum):
     """"""
 
@@ -469,6 +477,7 @@ class HttpMethod(Enum):
     Other: HttpMethod = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HttpRequestCacheLevel(Enum):
     """"""
 
@@ -491,6 +500,7 @@ class HttpRequestCacheLevel(Enum):
     Refresh: HttpRequestCacheLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HttpRequestCachePolicy(RequestCachePolicy):
     """"""
     @overload
@@ -543,6 +553,7 @@ class HttpRequestCachePolicy(RequestCachePolicy):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HttpRequestCacheValidator(RequestCacheValidator):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -554,6 +565,7 @@ class HttpRequestCacheValidator(RequestCacheValidator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataUpdateStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
     @property
@@ -674,6 +686,7 @@ class MetadataUpdateStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker,
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RangeStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposable):
     """"""
     @property
@@ -794,6 +807,7 @@ class RangeStream(BaseWrapperStream, ICloseEx, IRequestLifetimeTracker, IDisposa
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCache(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -805,6 +819,7 @@ class RequestCache(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCacheBinding(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -816,6 +831,7 @@ class RequestCacheBinding(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCacheEntry(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -827,6 +843,7 @@ class RequestCacheEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RequestCacheLevel(Enum):
     """"""
 
@@ -845,6 +862,7 @@ class RequestCacheLevel(Enum):
     NoCacheNoStore: RequestCacheLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCacheManager(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -856,6 +874,7 @@ class RequestCacheManager(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCachePolicy(Object):
     """"""
     @overload
@@ -876,6 +895,7 @@ class RequestCachePolicy(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCacheProtocol(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -887,6 +907,7 @@ class RequestCacheProtocol(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCacheValidator(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -898,6 +919,7 @@ class RequestCacheValidator(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResponseCacheControl(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -909,6 +931,7 @@ class ResponseCacheControl(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Rfc2616(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -935,6 +958,7 @@ class Rfc2616(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SingleItemRequestCache(WinInetCache):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -946,6 +970,7 @@ class SingleItemRequestCache(WinInetCache):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _WinInetCache(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

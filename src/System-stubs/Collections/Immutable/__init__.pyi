@@ -9,6 +9,7 @@ from System import Object
 from System import Type
 from System import ValueType
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ImmutableArray(ABC, Object):
     """"""
     @classmethod
@@ -23,6 +24,7 @@ class ImmutableArray(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ImmutableArray[T](ValueType):
     """"""
 
@@ -58,6 +60,7 @@ class ImmutableArray[T](ValueType):
         """"""
     def __getitem__(self, index: int) -> T:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Builder[T](Object):
         """"""
         @property

@@ -15,6 +15,7 @@ from System.Linq.Expressions import ExpressionType
 from System.Linq.Expressions import ExpressionVisitor
 from System.Linq.Expressions import ParameterExpression
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AnalyzedTree(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -26,6 +27,7 @@ class AnalyzedTree(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssemblyGen(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -37,6 +39,7 @@ class AssemblyGen(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BoundConstants(Object):
     """"""
     def __init__(self) -> None:
@@ -50,6 +53,7 @@ class BoundConstants(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompilerScope(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -61,6 +65,7 @@ class CompilerScope(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DelegateHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -72,6 +77,7 @@ class DelegateHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HoistedLocals(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -83,6 +89,7 @@ class HoistedLocals(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ILGen(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -94,6 +101,7 @@ class ILGen(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyedQueue[K, V](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -105,6 +113,7 @@ class KeyedQueue[K, V](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LabelInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -116,6 +125,7 @@ class LabelInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LabelScopeInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -127,6 +137,7 @@ class LabelScopeInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class LabelScopeKind(Enum):
     """"""
 
@@ -149,6 +160,7 @@ class LabelScopeKind(Enum):
     Expression: LabelScopeKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LambdaCompiler(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -160,6 +172,7 @@ class LambdaCompiler(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SpilledExpressionBlock(BlockN):
     """"""
     @property
@@ -199,6 +212,7 @@ class SpilledExpressionBlock(BlockN):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StackSpiller(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -210,6 +224,7 @@ class StackSpiller(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymbolGuids(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -221,6 +236,7 @@ class SymbolGuids(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VariableBinder(ExpressionVisitor):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -246,6 +262,7 @@ class VariableBinder(ExpressionVisitor):
     ) -> ReadOnlyCollection[T]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class VariableStorageKind(Enum):
     """"""
 

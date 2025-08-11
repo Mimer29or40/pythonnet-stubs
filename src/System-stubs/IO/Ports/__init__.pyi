@@ -31,6 +31,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Handshake(Enum):
     """"""
 
@@ -43,6 +44,7 @@ class Handshake(Enum):
     RequestToSendXOnXOff: Handshake = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalResources(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -54,6 +56,7 @@ class InternalResources(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Parity(Enum):
     """"""
 
@@ -68,6 +71,7 @@ class Parity(Enum):
     Space: Parity = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SerialData(Enum):
     """"""
 
@@ -76,6 +80,7 @@ class SerialData(Enum):
     Eof: SerialData = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerialDataReceivedEventArgs(EventArgs):
     """"""
     @property
@@ -93,6 +98,7 @@ class SerialDataReceivedEventArgs(EventArgs):
 type SerialDataReceivedEventHandler = Callable[[object, SerialDataReceivedEventArgs], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SerialError(Enum):
     """"""
 
@@ -107,6 +113,7 @@ class SerialError(Enum):
     TXFull: SerialError = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerialErrorReceivedEventArgs(EventArgs):
     """"""
     @property
@@ -124,6 +131,7 @@ class SerialErrorReceivedEventArgs(EventArgs):
 type SerialErrorReceivedEventHandler = Callable[[object, SerialErrorReceivedEventArgs], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SerialPinChange(Enum):
     """"""
 
@@ -138,6 +146,7 @@ class SerialPinChange(Enum):
     Ring: SerialPinChange = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerialPinChangedEventArgs(EventArgs):
     """"""
     @property
@@ -155,6 +164,7 @@ class SerialPinChangedEventArgs(EventArgs):
 type SerialPinChangedEventHandler = Callable[[object, SerialPinChangedEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerialPort(Component, IComponent, IDisposable):
     """"""
 
@@ -365,6 +375,7 @@ class SerialPort(Component, IComponent, IDisposable):
     PinChanged: EventType[SerialPinChangedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerialStream(Stream, IDisposable):
     """"""
     @property
@@ -496,6 +507,7 @@ class SerialStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StopBits(Enum):
     """"""
 

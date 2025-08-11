@@ -32,6 +32,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Collection[T](
     Object,
     ICollection[T],
@@ -145,6 +146,7 @@ class Collection[T](
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyedCollection[TKey, TItem](
     ABC,
     Collection[TItem],
@@ -272,6 +274,7 @@ class KeyedCollection[TKey, TItem](
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObservableCollection[T](
     Collection[T],
     ICollection[T],
@@ -396,6 +399,7 @@ class ObservableCollection[T](
     PropertyChanged: EventType[PropertyChangedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyCollection[T](
     Object,
     ICollection[T],
@@ -503,6 +507,7 @@ class ReadOnlyCollection[T](
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyDictionaryHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -514,6 +519,7 @@ class ReadOnlyDictionaryHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyDictionary[TKey, TValue](
     Object,
     ICollection[KeyValuePair[TKey, TValue]],
@@ -634,6 +640,7 @@ class ReadOnlyDictionary[TKey, TValue](
     @overload
     def __setitem__(self, key: object, value: object) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class KeyCollection[TKey, TValue](
         Object,
         ICollection[TKey],
@@ -688,6 +695,7 @@ class ReadOnlyDictionary[TKey, TValue](
         def __len__(self) -> int:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class ValueCollection[TKey, TValue](
         Object,
         ICollection[TValue],
@@ -742,6 +750,7 @@ class ReadOnlyDictionary[TKey, TValue](
         def __len__(self) -> int:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyObservableCollection[T](
     ReadOnlyCollection[T],
     ICollection[T],

@@ -56,6 +56,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ActiveDesignerEventArgs(EventArgs):
     """"""
     def __init__(self, oldDesigner: IDesignerHost, newDesigner: IDesignerHost) -> None:
@@ -78,6 +79,7 @@ class ActiveDesignerEventArgs(EventArgs):
 type ActiveDesignerEventHandler = Callable[[object, ActiveDesignerEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CheckoutException(ExternalException, _Exception, ISerializable):
     """"""
 
@@ -139,6 +141,7 @@ class CheckoutException(ExternalException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CommandID(Object):
     """"""
     def __init__(self, menuGroup: Guid, commandID: int) -> None:
@@ -158,6 +161,7 @@ class CommandID(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComponentChangedEventArgs(EventArgs):
     """"""
     def __init__(
@@ -188,6 +192,7 @@ class ComponentChangedEventArgs(EventArgs):
 type ComponentChangedEventHandler = Callable[[object, ComponentChangedEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComponentChangingEventArgs(EventArgs):
     """"""
     def __init__(self, component: object, member: MemberDescriptor) -> None:
@@ -210,6 +215,7 @@ class ComponentChangingEventArgs(EventArgs):
 type ComponentChangingEventHandler = Callable[[object, ComponentChangingEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComponentEventArgs(EventArgs):
     """"""
     def __init__(self, component: IComponent) -> None:
@@ -229,6 +235,7 @@ class ComponentEventArgs(EventArgs):
 type ComponentEventHandler = Callable[[object, ComponentEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComponentRenameEventArgs(EventArgs):
     """"""
     def __init__(self, component: object, oldName: str, newName: str) -> None:
@@ -254,6 +261,7 @@ class ComponentRenameEventArgs(EventArgs):
 type ComponentRenameEventHandler = Callable[[object, ComponentRenameEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerCollection(Object, ICollection, IEnumerable):
     """"""
     @overload
@@ -293,6 +301,7 @@ class DesignerCollection(Object, ICollection, IEnumerable):
     def __getitem__(self, index: int) -> IDesignerHost:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerEventArgs(EventArgs):
     """"""
     def __init__(self, host: IDesignerHost) -> None:
@@ -312,6 +321,7 @@ class DesignerEventArgs(EventArgs):
 type DesignerEventHandler = Callable[[object, DesignerEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerOptionService(ABC, Object, IDesignerOptionService):
     """"""
     @property
@@ -329,6 +339,7 @@ class DesignerOptionService(ABC, Object, IDesignerOptionService):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class DesignerOptionCollection(Object, ICollection, IEnumerable, IList):
         """"""
         @property
@@ -407,6 +418,7 @@ class DesignerOptionService(ABC, Object, IDesignerOptionService):
         def __setitem__(self, index: int, value: object) -> None:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerTransaction(ABC, Object, IDisposable):
     """"""
     @property
@@ -433,6 +445,7 @@ class DesignerTransaction(ABC, Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerTransactionCloseEventArgs(EventArgs):
     """"""
     @overload
@@ -461,6 +474,7 @@ type DesignerTransactionCloseEventHandler = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerVerb(MenuCommand):
     """"""
     @overload
@@ -523,6 +537,7 @@ class DesignerVerb(MenuCommand):
     CommandChanged: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerVerbCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -637,6 +652,7 @@ class DesignerVerbCollection(CollectionBase, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesigntimeLicenseContext(LicenseContext, IServiceProvider):
     """"""
     def __init__(self) -> None:
@@ -659,6 +675,7 @@ class DesigntimeLicenseContext(LicenseContext, IServiceProvider):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesigntimeLicenseContextSerializer(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -673,6 +690,7 @@ class DesigntimeLicenseContextSerializer(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HelpContextType(Enum):
     """"""
 
@@ -685,6 +703,7 @@ class HelpContextType(Enum):
     ToolWindowSelection: HelpContextType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HelpKeywordAttribute(Attribute, _Attribute):
     """"""
 
@@ -738,6 +757,7 @@ class HelpKeywordAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HelpKeywordType(Enum):
     """"""
 
@@ -748,6 +768,7 @@ class HelpKeywordType(Enum):
     FilterKeyword: HelpKeywordType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IComponentChangeService(ABC):
     """"""
     def OnComponentChanged(
@@ -771,11 +792,13 @@ class IComponentChangeService(ABC):
     ComponentRename: EventType[ComponentRenameEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IComponentDiscoveryService(ABC):
     """"""
     def GetComponentTypes(self, designerHost: IDesignerHost, baseType: Type) -> ICollection:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IComponentInitializer(ABC):
     """"""
     def InitializeExistingComponent(self, defaultValues: IDictionary) -> None:
@@ -783,6 +806,7 @@ class IComponentInitializer(ABC):
     def InitializeNewComponent(self, defaultValues: IDictionary) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesigner(ABC, IDisposable):
     """"""
     @property
@@ -798,6 +822,7 @@ class IDesigner(ABC, IDisposable):
     def Initialize(self, component: IComponent) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerEventService(ABC):
     """"""
     @property
@@ -815,6 +840,7 @@ class IDesignerEventService(ABC):
     SelectionChanged: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerFilter(ABC):
     """"""
     def PostFilterAttributes(self, attributes: IDictionary) -> None:
@@ -830,6 +856,7 @@ class IDesignerFilter(ABC):
     def PreFilterProperties(self, properties: IDictionary) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerHost(ABC, IServiceContainer, IServiceProvider):
     """"""
     @property
@@ -907,12 +934,14 @@ class IDesignerHost(ABC, IServiceContainer, IServiceProvider):
     TransactionOpening: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerHostTransactionState(ABC):
     """"""
     @property
     def IsClosingTransaction(self) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerOptionService(ABC):
     """"""
     def GetOptionValue(self, pageName: str, valueName: str) -> object:
@@ -920,6 +949,7 @@ class IDesignerOptionService(ABC):
     def SetOptionValue(self, pageName: str, valueName: str, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDictionaryService(ABC):
     """"""
     def GetKey(self, value: object) -> object:
@@ -929,6 +959,7 @@ class IDictionaryService(ABC):
     def SetValue(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEventBindingService(ABC):
     """"""
     def CreateUniqueMethodName(self, component: IComponent, e: EventDescriptor) -> str:
@@ -951,11 +982,13 @@ class IEventBindingService(ABC):
     def ShowCode(self, lineNumber: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IExtenderListService(ABC):
     """"""
     def GetExtenderProviders(self) -> Array[IExtenderProvider]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IExtenderProviderService(ABC):
     """"""
     def AddExtenderProvider(self, provider: IExtenderProvider) -> None:
@@ -963,6 +996,7 @@ class IExtenderProviderService(ABC):
     def RemoveExtenderProvider(self, provider: IExtenderProvider) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IHelpService(ABC):
     """"""
     def AddContextAttribute(self, name: str, value: str, keywordType: HelpKeywordType) -> None:
@@ -980,6 +1014,7 @@ class IHelpService(ABC):
     def ShowHelpFromUrl(self, helpUrl: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IInheritanceService(ABC):
     """"""
     def AddInheritedComponents(self, component: IComponent, container: IContainer) -> None:
@@ -987,6 +1022,7 @@ class IInheritanceService(ABC):
     def GetInheritanceAttribute(self, component: IComponent) -> InheritanceAttribute:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMenuCommandService(ABC):
     """"""
     @property
@@ -1007,6 +1043,7 @@ class IMenuCommandService(ABC):
     def ShowContextMenu(self, menuID: CommandID, x: int, y: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReferenceService(ABC):
     """"""
     def GetComponent(self, reference: object) -> IComponent:
@@ -1022,6 +1059,7 @@ class IReferenceService(ABC):
     def GetReferences(self, baseType: Type) -> Array[object]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IResourceService(ABC):
     """"""
     def GetResourceReader(self, info: CultureInfo) -> IResourceReader:
@@ -1029,6 +1067,7 @@ class IResourceService(ABC):
     def GetResourceWriter(self, info: CultureInfo) -> IResourceWriter:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IRootDesigner(ABC, IDesigner, IDisposable):
     """"""
     @property
@@ -1049,6 +1088,7 @@ class IRootDesigner(ABC, IDesigner, IDisposable):
     def Initialize(self, component: IComponent) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISelectionService(ABC):
     """"""
     @property
@@ -1072,6 +1112,7 @@ class ISelectionService(ABC):
     SelectionChanging: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IServiceContainer(ABC, IServiceProvider):
     """"""
     @overload
@@ -1097,6 +1138,7 @@ class IServiceContainer(ABC, IServiceProvider):
     def RemoveService(self, serviceType: Type, promote: bool) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITreeDesigner(ABC, IDesigner, IDisposable):
     """"""
     @property
@@ -1118,6 +1160,7 @@ class ITreeDesigner(ABC, IDesigner, IDisposable):
     def Initialize(self, component: IComponent) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeDescriptorFilterService(ABC):
     """"""
     def FilterAttributes(self, component: IComponent, attributes: IDictionary) -> bool:
@@ -1127,11 +1170,13 @@ class ITypeDescriptorFilterService(ABC):
     def FilterProperties(self, component: IComponent, properties: IDictionary) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeDiscoveryService(ABC):
     """"""
     def GetTypes(self, baseType: Type, excludeGlobalTypes: bool) -> ICollection:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeResolutionService(ABC):
     """"""
     @overload
@@ -1154,6 +1199,7 @@ class ITypeResolutionService(ABC):
     def ReferenceAssembly(self, name: AssemblyName) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MenuCommand(Object):
     """"""
     def __init__(self, handler: EventHandler, command: CommandID) -> None:
@@ -1204,6 +1250,7 @@ class MenuCommand(Object):
     CommandChanged: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RuntimeLicenseContext(LicenseContext, IServiceProvider):
     """"""
     def __init__(self) -> None:
@@ -1226,6 +1273,7 @@ class RuntimeLicenseContext(LicenseContext, IServiceProvider):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SelectionTypes(Enum):
     """"""
 
@@ -1252,6 +1300,7 @@ class SelectionTypes(Enum):
     Remove: SelectionTypes = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServiceContainer(Object, IServiceContainer, IDisposable, IServiceProvider):
     """"""
     @overload
@@ -1296,6 +1345,7 @@ class ServiceContainer(Object, IServiceContainer, IDisposable, IServiceProvider)
 type ServiceCreatorCallback = Callable[[IServiceContainer, Type], object]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StandardCommands(Object):
     """"""
 
@@ -1420,6 +1470,7 @@ class StandardCommands(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StandardToolWindows(Object):
     """"""
 
@@ -1450,6 +1501,7 @@ class StandardToolWindows(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeDescriptionProviderService(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1467,6 +1519,7 @@ class TypeDescriptionProviderService(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ViewTechnology(Enum):
     """"""
 

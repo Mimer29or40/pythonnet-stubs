@@ -7,6 +7,7 @@ from System import Type
 from System import UInt32
 from System.Runtime.InteropServices import _Attribute
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BitmapSuffixInSatelliteAssemblyAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:

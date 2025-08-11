@@ -47,6 +47,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CSharpCodeGenerator(Object, ICodeCompiler, ICodeGenerator):
     """"""
     def CompileAssemblyFromDom(
@@ -118,6 +119,7 @@ class CSharpCodeGenerator(Object, ICodeCompiler, ICodeGenerator):
     def ValidateIdentifier(self, value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CSharpCodeProvider(CodeDomProvider, IComponent, IDisposable):
     """"""
     @overload
@@ -222,6 +224,7 @@ class CSharpCodeProvider(CodeDomProvider, IComponent, IDisposable):
     Disposed: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CSharpMemberAttributeConverter(CSharpModifierAttributeConverter):
     """"""
     @classmethod
@@ -361,6 +364,7 @@ class CSharpMemberAttributeConverter(CSharpModifierAttributeConverter):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
         def __init__(self, values: ICollection) -> None:
@@ -396,6 +400,7 @@ class CSharpMemberAttributeConverter(CSharpModifierAttributeConverter):
         def __getitem__(self, index: int) -> object:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CSharpModifierAttributeConverter(ABC, TypeConverter):
     """"""
     @overload
@@ -531,6 +536,7 @@ class CSharpModifierAttributeConverter(ABC, TypeConverter):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
         def __init__(self, values: ICollection) -> None:
@@ -566,6 +572,7 @@ class CSharpModifierAttributeConverter(ABC, TypeConverter):
         def __getitem__(self, index: int) -> object:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CSharpTypeAttributeConverter(CSharpModifierAttributeConverter):
     """"""
     @classmethod
@@ -705,6 +712,7 @@ class CSharpTypeAttributeConverter(CSharpModifierAttributeConverter):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
         def __init__(self, values: ICollection) -> None:

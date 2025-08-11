@@ -691,6 +691,7 @@ class TestExtractType(_MemberBase):
     def test_none(self) -> None:
         """Tests for extract_type() with None."""
         expected: CType | None = None
+        # noinspection PyTypeChecker
         actual: CType | None = extract_type(None)
 
         assert actual == expected

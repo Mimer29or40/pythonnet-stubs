@@ -53,6 +53,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BindableIterableToEnumerableAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -64,6 +65,7 @@ class BindableIterableToEnumerableAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BindableVectorToCollectionAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -75,6 +77,7 @@ class BindableVectorToCollectionAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BindableVectorToListAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -86,6 +89,7 @@ class BindableVectorToListAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CLRIKeyValuePairImpl[K, V](Object, IKeyValuePair[K, V]):
     """"""
     def __init__(self, pair: KeyValuePair[K, V]) -> None:
@@ -105,6 +109,7 @@ class CLRIKeyValuePairImpl[K, V](Object, IKeyValuePair[K, V]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CLRIPropertyValueImpl(Object, IPropertyValue):
     """"""
     @property
@@ -198,6 +203,7 @@ class CLRIPropertyValueImpl(Object, IPropertyValue):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CLRIReferenceArrayImpl[T](
     CLRIPropertyValueImpl,
     ICollection,
@@ -360,6 +366,7 @@ class CLRIReferenceArrayImpl[T](
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CLRIReferenceImpl[T](
     CLRIPropertyValueImpl, ICustomPropertyProvider, IPropertyValue, IReference[T]
 ):
@@ -466,6 +473,7 @@ class CLRIReferenceImpl[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstantSplittableMap[TKey, TValue](
     Object,
     IEnumerable[IKeyValuePair[TKey, TValue]],
@@ -522,6 +530,7 @@ class ConstantSplittableMap[TKey, TValue](
     def __getitem__(self, key: TKey) -> TValue:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CustomPropertyImpl(Object, ICustomProperty):
     """"""
     def __init__(self, propertyInfo: PropertyInfo) -> None:
@@ -559,6 +568,7 @@ class CustomPropertyImpl(Object, ICustomProperty):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultInterfaceAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, defaultInterface: Type) -> None:
@@ -602,6 +612,7 @@ class DefaultInterfaceAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerNamespaceResolveEventArgs(EventArgs):
     """"""
     def __init__(self, namespaceName: str) -> None:
@@ -621,6 +632,7 @@ class DesignerNamespaceResolveEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DictionaryKeyCollection[TKey, TValue](
     Object, ICollection[TKey], IEnumerable[TKey], IEnumerable
 ):
@@ -662,6 +674,7 @@ class DictionaryKeyCollection[TKey, TValue](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DictionaryKeyEnumerator[TKey, TValue](Object, IEnumerator[TKey], IEnumerator, IDisposable):
     """"""
     def __init__(self, dictionary: IDictionary[TKey, TValue]) -> None:
@@ -684,6 +697,7 @@ class DictionaryKeyEnumerator[TKey, TValue](Object, IEnumerator[TKey], IEnumerat
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DictionaryToMapAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -695,6 +709,7 @@ class DictionaryToMapAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DictionaryValueCollection[TKey, TValue](
     Object, ICollection[TValue], IEnumerable[TValue], IEnumerable
 ):
@@ -736,6 +751,7 @@ class DictionaryValueCollection[TKey, TValue](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DictionaryValueEnumerator[TKey, TValue](
     Object, IEnumerator[TValue], IEnumerator, IDisposable
 ):
@@ -760,6 +776,7 @@ class DictionaryValueEnumerator[TKey, TValue](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumerableToBindableIterableAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -771,6 +788,7 @@ class EnumerableToBindableIterableAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumerableToIterableAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -782,6 +800,7 @@ class EnumerableToIterableAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumeratorToIteratorAdapter[T](Object, IBindableIterator, IIterator[T]):
     """"""
     @property
@@ -803,6 +822,7 @@ class EnumeratorToIteratorAdapter[T](Object, IBindableIterator, IIterator[T]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventRegistrationToken(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -824,6 +844,7 @@ class EventRegistrationToken(ValueType):
     def __ne__(self, other: EventRegistrationToken) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventRegistrationTokenTable[T](Object):
     """"""
     def __init__(self) -> None:
@@ -858,6 +879,7 @@ class EventRegistrationTokenTable[T](Object):
 type GetEnumerator_Delegate[T] = Callable[[], IEnumerator[T]]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HSTRING_HEADER(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -869,16 +891,19 @@ class HSTRING_HEADER(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IActivationFactory(ABC):
     """"""
     def ActivateInstance(self) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IBindableIterable(ABC):
     """"""
     def First(self) -> IBindableIterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IBindableIterator(ABC):
     """"""
     @property
@@ -890,6 +915,7 @@ class IBindableIterator(ABC):
     def MoveNext(self) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IBindableVector(ABC, IBindableIterable):
     """"""
     @property
@@ -916,6 +942,7 @@ class IBindableVector(ABC, IBindableIterable):
     def SetAt(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IBindableVectorView(ABC, IBindableIterable):
     """"""
     @property
@@ -928,11 +955,13 @@ class IBindableVectorView(ABC, IBindableIterable):
     def IndexOf(self, value: object, index: UInt32) -> tuple[bool, UInt32]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClosable(ABC):
     """"""
     def Close(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClosableToIDisposableAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -944,6 +973,7 @@ class IClosableToIDisposableAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICommandAdapterHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -955,6 +985,7 @@ class ICommandAdapterHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICommandToManagedAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -966,6 +997,7 @@ class ICommandToManagedAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICommandToWinRTAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -977,6 +1009,7 @@ class ICommandToWinRTAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICommand_WinRT(ABC):
     """"""
     def CanExecute(self, parameter: object) -> bool:
@@ -984,6 +1017,7 @@ class ICommand_WinRT(ABC):
     def Execute(self, parameter: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomProperty(ABC):
     """"""
     @property
@@ -1011,6 +1045,7 @@ class ICustomProperty(ABC):
     def SetValue(self, target: object, value: object, indexValue: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomPropertyProvider(ABC):
     """"""
     @property
@@ -1023,6 +1058,7 @@ class ICustomPropertyProvider(ABC):
     def GetStringRepresentation(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomPropertyProviderImpl(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1034,6 +1070,7 @@ class ICustomPropertyProviderImpl(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomPropertyProviderProxy[T1, T2](
     Object,
     IEnumerable,
@@ -1094,6 +1131,7 @@ class ICustomPropertyProviderProxy[T1, T2](
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDisposableToIClosableAdapter(Object):
     """"""
     def Close(self) -> None:
@@ -1107,11 +1145,13 @@ class IDisposableToIClosableAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IGetProxyTarget(ABC):
     """"""
     def GetTarget(self) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IIterable[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     def First(self) -> IIterator[T]:
@@ -1121,6 +1161,7 @@ class IIterable[T](ABC, IEnumerable[T], IEnumerable):
     def __iter__[T](self) -> Iterator[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IIterator[T](ABC):
     """"""
     @property
@@ -1134,6 +1175,7 @@ class IIterator[T](ABC):
     def MoveNext(self) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IKeyValuePair[K, V](ABC):
     """"""
     @property
@@ -1143,11 +1185,13 @@ class IKeyValuePair[K, V](ABC):
     def Value(self) -> V:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IManagedActivationFactory(ABC):
     """"""
     def RunClassConstructor(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMapViewToIReadOnlyDictionaryAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1159,6 +1203,7 @@ class IMapViewToIReadOnlyDictionaryAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMapView[K, V](
     ABC, IEnumerable[IKeyValuePair[K, V]], IEnumerable, IIterable[IKeyValuePair[K, V]]
 ):
@@ -1181,6 +1226,7 @@ class IMapView[K, V](
     def __iter__[K, V](self) -> Iterator[IKeyValuePair[K, V]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMap[K, V](
     ABC, IEnumerable[IKeyValuePair[K, V]], IEnumerable, IIterable[IKeyValuePair[K, V]]
 ):
@@ -1209,6 +1255,7 @@ class IMap[K, V](
     def __delitem__(self, key: K) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class INotifyCollectionChangedEventArgs(ABC):
     """"""
     @property
@@ -1227,18 +1274,22 @@ class INotifyCollectionChangedEventArgs(ABC):
     def OldStartingIndex(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class INotifyCollectionChanged_WinRT(ABC):
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class INotifyPropertyChanged_WinRT(ABC):
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPropertyChangedEventArgs(ABC):
     """"""
     @property
     def PropertyName(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPropertyValue(ABC):
     """"""
     @property
@@ -1322,6 +1373,7 @@ class IPropertyValue(ABC):
     def GetUInt8Array(self) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReadOnlyDictionaryToIMapViewAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1333,6 +1385,7 @@ class IReadOnlyDictionaryToIMapViewAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReadOnlyListToIVectorViewAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1344,6 +1397,7 @@ class IReadOnlyListToIVectorViewAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReferenceArray[T](ABC, IPropertyValue):
     """"""
     @property
@@ -1430,6 +1484,7 @@ class IReferenceArray[T](ABC, IPropertyValue):
     def GetUInt8Array(self) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReferenceFactory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1441,6 +1496,7 @@ class IReferenceFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReference[T](ABC, IPropertyValue):
     """"""
     @property
@@ -1527,6 +1583,7 @@ class IReference[T](ABC, IPropertyValue):
     def GetUInt8Array(self) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IRestrictedErrorInfo(ABC):
     """"""
     def GetErrorDetails(
@@ -1540,11 +1597,13 @@ class IRestrictedErrorInfo(ABC):
     def GetReference(self, reference: String) -> tuple[None, String]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStringable(ABC):
     """"""
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStringableHelper(Object):
     """"""
     def __init__(self) -> None:
@@ -1558,6 +1617,7 @@ class IStringableHelper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IVectorViewToIReadOnlyListAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1569,6 +1629,7 @@ class IVectorViewToIReadOnlyListAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IVectorView[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     """"""
     @property
@@ -1587,6 +1648,7 @@ class IVectorView[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     def __iter__[T](self) -> Iterator[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IVector[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     """"""
     @property
@@ -1621,6 +1683,7 @@ class IVector[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     def __iter__[T](self) -> Iterator[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IVector_Raw[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     """"""
     @property
@@ -1655,6 +1718,7 @@ class IVector_Raw[T](ABC, IEnumerable[T], IEnumerable, IIterable[T]):
     def __iter__[T](self) -> Iterator[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IWinRTClassActivator(ABC):
     """"""
     def ActivateInstance(self, activatableClassId: str) -> object:
@@ -1665,6 +1729,7 @@ class IWinRTClassActivator(ABC):
 type Indexer_Get_Delegate[T] = Callable[[int], T]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InterfaceForwardingSupport(Enum):
     """"""
 
@@ -1681,6 +1746,7 @@ class InterfaceForwardingSupport(Enum):
     IBindableIterableOrIIterable: InterfaceForwardingSupport = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InterfaceImplementedInVersionAttribute(Attribute, _Attribute):
     """"""
     def __init__(
@@ -1743,6 +1809,7 @@ class InterfaceImplementedInVersionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IterableToEnumerableAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1754,6 +1821,7 @@ class IterableToEnumerableAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IteratorToEnumeratorAdapter[T](Object, IEnumerator[T], IEnumerator, IDisposable):
     """"""
     @property
@@ -1774,6 +1842,7 @@ class IteratorToEnumeratorAdapter[T](Object, IEnumerator[T], IEnumerator, IDispo
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListToBindableVectorAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1785,6 +1854,7 @@ class ListToBindableVectorAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListToBindableVectorViewAdapter(Object, IBindableIterable, IBindableVectorView):
     """"""
     @property
@@ -1805,6 +1875,7 @@ class ListToBindableVectorViewAdapter(Object, IBindableIterable, IBindableVector
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListToVectorAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1816,6 +1887,7 @@ class ListToVectorAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagedActivationFactory(Object, IActivationFactory, IManagedActivationFactory):
     """"""
     def ActivateInstance(self) -> object:
@@ -1831,6 +1903,7 @@ class ManagedActivationFactory(Object, IActivationFactory, IManagedActivationFac
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MapToCollectionAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1842,6 +1915,7 @@ class MapToCollectionAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MapToDictionaryAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1853,6 +1927,7 @@ class MapToDictionaryAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MapViewToReadOnlyCollectionAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1864,6 +1939,7 @@ class MapViewToReadOnlyCollectionAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NamespaceResolveEventArgs(EventArgs):
     """"""
     def __init__(self, namespaceName: str, requestingAssembly: Assembly) -> None:
@@ -1886,6 +1962,7 @@ class NamespaceResolveEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NotifyCollectionChangedEventArgsMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1902,6 +1979,7 @@ type NotifyCollectionChangedEventHandler_WinRT = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NotifyCollectionChangedToManagedAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1913,6 +1991,7 @@ class NotifyCollectionChangedToManagedAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NotifyCollectionChangedToWinRTAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1924,6 +2003,7 @@ class NotifyCollectionChangedToWinRTAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NotifyPropertyChangedToManagedAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1935,6 +2015,7 @@ class NotifyPropertyChangedToManagedAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NotifyPropertyChangedToWinRTAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1946,6 +2027,7 @@ class NotifyPropertyChangedToWinRTAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Point(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1957,6 +2039,7 @@ class Point(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PropertyChangedEventArgsMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1971,6 +2054,7 @@ class PropertyChangedEventArgsMarshaler(ABC, Object):
 type PropertyChangedEventHandler_WinRT = Callable[[object, PropertyChangedEventArgs], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PropertyType(Enum):
     """"""
 
@@ -2057,6 +2141,7 @@ class PropertyType(Enum):
     OtherArray: PropertyType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyArrayAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -2097,6 +2182,7 @@ class ReadOnlyArrayAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyDictionaryKeyCollection[TKey, TValue](Object, IEnumerable[TKey], IEnumerable):
     """"""
     def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]) -> None:
@@ -2114,6 +2200,7 @@ class ReadOnlyDictionaryKeyCollection[TKey, TValue](Object, IEnumerable[TKey], I
     def __iter__[TKey](self) -> Iterator[TKey]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyDictionaryKeyEnumerator[TKey, TValue](
     Object, IEnumerator[TKey], IEnumerator, IDisposable
 ):
@@ -2138,6 +2225,7 @@ class ReadOnlyDictionaryKeyEnumerator[TKey, TValue](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyDictionaryValueCollection[TKey, TValue](Object, IEnumerable[TValue], IEnumerable):
     """"""
     def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]) -> None:
@@ -2155,6 +2243,7 @@ class ReadOnlyDictionaryValueCollection[TKey, TValue](Object, IEnumerable[TValue
     def __iter__[TValue](self) -> Iterator[TValue]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyDictionaryValueEnumerator[TKey, TValue](
     Object, IEnumerator[TValue], IEnumerator, IDisposable
 ):
@@ -2179,6 +2268,7 @@ class ReadOnlyDictionaryValueEnumerator[TKey, TValue](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Rect(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2190,6 +2280,7 @@ class Rect(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReturnValueNameAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, name: str) -> None:
@@ -2233,6 +2324,7 @@ class ReturnValueNameAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RuntimeClass(ABC, __ComObject):
     """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
@@ -2250,6 +2342,7 @@ class RuntimeClass(ABC, __ComObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Size(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2261,6 +2354,7 @@ class Size(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnsafeNativeMethods(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2272,6 +2366,7 @@ class UnsafeNativeMethods(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VectorToCollectionAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2283,6 +2378,7 @@ class VectorToCollectionAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VectorToListAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2294,6 +2390,7 @@ class VectorToListAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VectorViewToReadOnlyCollectionAdapter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2305,6 +2402,7 @@ class VectorViewToReadOnlyCollectionAdapter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WinRTClassActivator(MarshalByRefObject, IWinRTClassActivator):
     """"""
     def __init__(self) -> None:
@@ -2331,6 +2429,7 @@ class WinRTClassActivator(MarshalByRefObject, IWinRTClassActivator):
 type WindowsFoundationEventHandler[T] = Callable[[object, T], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsRuntimeBufferHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2342,6 +2441,7 @@ class WindowsRuntimeBufferHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsRuntimeImportAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -2382,6 +2482,7 @@ class WindowsRuntimeImportAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsRuntimeMarshal(ABC, Object):
     """"""
     @classmethod
@@ -2421,6 +2522,7 @@ class WindowsRuntimeMarshal(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsRuntimeMetadata(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2448,6 +2550,7 @@ class WindowsRuntimeMetadata(ABC, Object):
     ReflectionOnlyNamespaceResolve: EventType[EventHandler[NamespaceResolveEventArgs]] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WriteOnlyArrayAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:

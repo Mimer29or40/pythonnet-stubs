@@ -17,6 +17,7 @@ from System.Diagnostics import TraceListener
 from System.Diagnostics import TraceOptions
 from System.Runtime.Remoting import ObjRef
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventDescriptor(ValueType):
     """"""
     def __init__(
@@ -53,6 +54,7 @@ class EventDescriptor(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventProvider(Object, IDisposable):
     """"""
     def __init__(self, providerGuid: Guid) -> None:
@@ -100,6 +102,7 @@ class EventProvider(Object, IDisposable):
         self, eventDescriptor: EventDescriptor, relatedActivityId: Guid, eventPayload: Array[object]
     ) -> bool:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class WriteEventErrorCode(Enum):
         """"""
 
@@ -110,6 +113,7 @@ class EventProvider(Object, IDisposable):
         EventTooBig: EventProvider.WriteEventErrorCode = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventProviderTraceListener(TraceListener, IDisposable):
     """"""
     @overload

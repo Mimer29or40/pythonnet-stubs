@@ -23,6 +23,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeArgumentReferenceExpression(CodeExpression):
     """"""
     @overload
@@ -48,6 +49,7 @@ class CodeArgumentReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeArrayCreateExpression(CodeExpression):
     """"""
     @overload
@@ -110,6 +112,7 @@ class CodeArrayCreateExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeArrayIndexerExpression(CodeExpression):
     """"""
     @overload
@@ -138,6 +141,7 @@ class CodeArrayIndexerExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeAssignStatement(CodeStatement):
     """"""
     @overload
@@ -179,6 +183,7 @@ class CodeAssignStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeAttachEventStatement(CodeStatement):
     """"""
     @overload
@@ -225,6 +230,7 @@ class CodeAttachEventStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeAttributeArgument(Object):
     """"""
     @overload
@@ -255,6 +261,7 @@ class CodeAttributeArgument(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeAttributeArgumentCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -372,6 +379,7 @@ class CodeAttributeArgumentCollection(CollectionBase, ICollection, IEnumerable, 
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeAttributeDeclaration(Object):
     """"""
     @overload
@@ -411,6 +419,7 @@ class CodeAttributeDeclaration(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeAttributeDeclarationCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -528,6 +537,7 @@ class CodeAttributeDeclarationCollection(CollectionBase, ICollection, IEnumerabl
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeBaseReferenceExpression(CodeExpression):
     """"""
     def __init__(self) -> None:
@@ -544,6 +554,7 @@ class CodeBaseReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeBinaryOperatorExpression(CodeExpression):
     """"""
     @overload
@@ -581,6 +592,7 @@ class CodeBinaryOperatorExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CodeBinaryOperatorType(Enum):
     """"""
 
@@ -619,6 +631,7 @@ class CodeBinaryOperatorType(Enum):
     GreaterThanOrEqual: CodeBinaryOperatorType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeCastExpression(CodeExpression):
     """"""
     @overload
@@ -655,6 +668,7 @@ class CodeCastExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeCatchClause(Object):
     """"""
     @overload
@@ -696,6 +710,7 @@ class CodeCatchClause(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeCatchClauseCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -813,6 +828,7 @@ class CodeCatchClauseCollection(CollectionBase, ICollection, IEnumerable, IList)
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeChecksumPragma(CodeDirective):
     """"""
     @overload
@@ -848,6 +864,7 @@ class CodeChecksumPragma(CodeDirective):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeComment(CodeObject):
     """"""
     @overload
@@ -881,6 +898,7 @@ class CodeComment(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeCommentStatement(CodeStatement):
     """"""
     @overload
@@ -923,6 +941,7 @@ class CodeCommentStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeCommentStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -1040,6 +1059,7 @@ class CodeCommentStatementCollection(CollectionBase, ICollection, IEnumerable, I
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeCompileUnit(CodeObject):
     """"""
     def __init__(self) -> None:
@@ -1071,6 +1091,7 @@ class CodeCompileUnit(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeConditionStatement(CodeStatement):
     """"""
     @overload
@@ -1121,6 +1142,7 @@ class CodeConditionStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeConstructor(CodeMemberMethod):
     """"""
     def __init__(self) -> None:
@@ -1203,6 +1225,7 @@ class CodeConstructor(CodeMemberMethod):
     PopulateStatements: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDefaultValueExpression(CodeExpression):
     """"""
     @overload
@@ -1228,6 +1251,7 @@ class CodeDefaultValueExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDelegateCreateExpression(CodeExpression):
     """"""
     @overload
@@ -1265,6 +1289,7 @@ class CodeDelegateCreateExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDelegateInvokeExpression(CodeExpression):
     """"""
     @overload
@@ -1296,6 +1321,7 @@ class CodeDelegateInvokeExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDirectionExpression(CodeExpression):
     """"""
     @overload
@@ -1326,6 +1352,7 @@ class CodeDirectionExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDirective(CodeObject):
     """"""
     def __init__(self) -> None:
@@ -1342,6 +1369,7 @@ class CodeDirective(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDirectiveCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -1459,6 +1487,7 @@ class CodeDirectiveCollection(CollectionBase, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeEntryPointMethod(CodeMemberMethod):
     """"""
     def __init__(self) -> None:
@@ -1535,6 +1564,7 @@ class CodeEntryPointMethod(CodeMemberMethod):
     PopulateStatements: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeEventReferenceExpression(CodeExpression):
     """"""
     @overload
@@ -1565,6 +1595,7 @@ class CodeEventReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeExpression(CodeObject):
     """"""
     def __init__(self) -> None:
@@ -1581,6 +1612,7 @@ class CodeExpression(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -1698,6 +1730,7 @@ class CodeExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeExpressionStatement(CodeStatement):
     """"""
     @overload
@@ -1734,6 +1767,7 @@ class CodeExpressionStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeFieldReferenceExpression(CodeExpression):
     """"""
     @overload
@@ -1764,6 +1798,7 @@ class CodeFieldReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeGotoStatement(CodeStatement):
     """"""
     @overload
@@ -1800,6 +1835,7 @@ class CodeGotoStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeIndexerExpression(CodeExpression):
     """"""
     @overload
@@ -1828,6 +1864,7 @@ class CodeIndexerExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeIterationStatement(CodeStatement):
     """"""
     @overload
@@ -1883,6 +1920,7 @@ class CodeIterationStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeLabeledStatement(CodeStatement):
     """"""
     @overload
@@ -1927,6 +1965,7 @@ class CodeLabeledStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeLinePragma(Object):
     """"""
     @overload
@@ -1954,6 +1993,7 @@ class CodeLinePragma(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeMemberEvent(CodeTypeMember):
     """"""
     def __init__(self) -> None:
@@ -2012,6 +2052,7 @@ class CodeMemberEvent(CodeTypeMember):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeMemberField(CodeTypeMember):
     """"""
     @overload
@@ -2077,6 +2118,7 @@ class CodeMemberField(CodeTypeMember):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeMemberMethod(CodeTypeMember):
     """"""
     def __init__(self) -> None:
@@ -2153,6 +2195,7 @@ class CodeMemberMethod(CodeTypeMember):
     PopulateStatements: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeMemberProperty(CodeTypeMember):
     """"""
     def __init__(self) -> None:
@@ -2230,6 +2273,7 @@ class CodeMemberProperty(CodeTypeMember):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeMethodInvokeExpression(CodeExpression):
     """"""
     @overload
@@ -2265,6 +2309,7 @@ class CodeMethodInvokeExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeMethodReferenceExpression(CodeExpression):
     """"""
     @overload
@@ -2306,6 +2351,7 @@ class CodeMethodReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeMethodReturnStatement(CodeStatement):
     """"""
     @overload
@@ -2342,6 +2388,7 @@ class CodeMethodReturnStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeNamespace(CodeObject):
     """"""
     @overload
@@ -2382,6 +2429,7 @@ class CodeNamespace(CodeObject):
     PopulateTypes: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeNamespaceCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -2499,6 +2547,7 @@ class CodeNamespaceCollection(CollectionBase, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeNamespaceImport(CodeObject):
     """"""
     @overload
@@ -2529,6 +2578,7 @@ class CodeNamespaceImport(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeNamespaceImportCollection(Object, ICollection, IEnumerable, IList):
     """"""
     def __init__(self) -> None:
@@ -2602,6 +2652,7 @@ class CodeNamespaceImportCollection(Object, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeObject(Object):
     """"""
     def __init__(self) -> None:
@@ -2618,6 +2669,7 @@ class CodeObject(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeObjectCreateExpression(CodeExpression):
     """"""
     @overload
@@ -2652,6 +2704,7 @@ class CodeObjectCreateExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeParameterDeclarationExpression(CodeExpression):
     """"""
     @overload
@@ -2698,6 +2751,7 @@ class CodeParameterDeclarationExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeParameterDeclarationExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -2815,6 +2869,7 @@ class CodeParameterDeclarationExpressionCollection(CollectionBase, ICollection, 
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodePrimitiveExpression(CodeExpression):
     """"""
     @overload
@@ -2840,6 +2895,7 @@ class CodePrimitiveExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodePropertyReferenceExpression(CodeExpression):
     """"""
     @overload
@@ -2870,6 +2926,7 @@ class CodePropertyReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodePropertySetValueReferenceExpression(CodeExpression):
     """"""
     def __init__(self) -> None:
@@ -2886,6 +2943,7 @@ class CodePropertySetValueReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeRegionDirective(CodeDirective):
     """"""
     @overload
@@ -2916,6 +2974,7 @@ class CodeRegionDirective(CodeDirective):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CodeRegionMode(Enum):
     """"""
 
@@ -2926,6 +2985,7 @@ class CodeRegionMode(Enum):
     End: CodeRegionMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeRemoveEventStatement(CodeStatement):
     """"""
     @overload
@@ -2972,6 +3032,7 @@ class CodeRemoveEventStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeSnippetCompileUnit(CodeCompileUnit):
     """"""
     @overload
@@ -3017,6 +3078,7 @@ class CodeSnippetCompileUnit(CodeCompileUnit):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeSnippetExpression(CodeExpression):
     """"""
     @overload
@@ -3042,6 +3104,7 @@ class CodeSnippetExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeSnippetStatement(CodeStatement):
     """"""
     @overload
@@ -3078,6 +3141,7 @@ class CodeSnippetStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeSnippetTypeMember(CodeTypeMember):
     """"""
     @overload
@@ -3132,6 +3196,7 @@ class CodeSnippetTypeMember(CodeTypeMember):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeStatement(CodeObject):
     """"""
     def __init__(self) -> None:
@@ -3159,6 +3224,7 @@ class CodeStatement(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -3279,6 +3345,7 @@ class CodeStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeThisReferenceExpression(CodeExpression):
     """"""
     def __init__(self) -> None:
@@ -3295,6 +3362,7 @@ class CodeThisReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeThrowExceptionStatement(CodeStatement):
     """"""
     @overload
@@ -3331,6 +3399,7 @@ class CodeThrowExceptionStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTryCatchFinallyStatement(CodeStatement):
     """"""
     @overload
@@ -3381,6 +3450,7 @@ class CodeTryCatchFinallyStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeConstructor(CodeMemberMethod):
     """"""
     def __init__(self) -> None:
@@ -3457,6 +3527,7 @@ class CodeTypeConstructor(CodeMemberMethod):
     PopulateStatements: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeDeclaration(CodeTypeMember):
     """"""
     @overload
@@ -3549,6 +3620,7 @@ class CodeTypeDeclaration(CodeTypeMember):
     PopulateMembers: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeDeclarationCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -3666,6 +3738,7 @@ class CodeTypeDeclarationCollection(CollectionBase, ICollection, IEnumerable, IL
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeDelegate(CodeTypeDeclaration):
     """"""
     @overload
@@ -3766,6 +3839,7 @@ class CodeTypeDelegate(CodeTypeDeclaration):
     PopulateMembers: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeMember(CodeObject):
     """"""
     def __init__(self) -> None:
@@ -3811,6 +3885,7 @@ class CodeTypeMember(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeMemberCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -3928,6 +4003,7 @@ class CodeTypeMemberCollection(CollectionBase, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeOfExpression(CodeExpression):
     """"""
     @overload
@@ -3959,6 +4035,7 @@ class CodeTypeOfExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeParameter(CodeObject):
     """"""
     @overload
@@ -3995,6 +4072,7 @@ class CodeTypeParameter(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeParameterCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -4115,6 +4193,7 @@ class CodeTypeParameterCollection(CollectionBase, ICollection, IEnumerable, ILis
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeReference(CodeObject):
     """"""
     @overload
@@ -4179,6 +4258,7 @@ class CodeTypeReference(CodeObject):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeReferenceCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -4302,6 +4382,7 @@ class CodeTypeReferenceCollection(CollectionBase, ICollection, IEnumerable, ILis
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeTypeReferenceExpression(CodeExpression):
     """"""
     @overload
@@ -4333,6 +4414,7 @@ class CodeTypeReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CodeTypeReferenceOptions(Enum):
     """"""
 
@@ -4341,6 +4423,7 @@ class CodeTypeReferenceOptions(Enum):
     GenericTypeParameter: CodeTypeReferenceOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeVariableDeclarationStatement(CodeStatement):
     """"""
     @overload
@@ -4402,6 +4485,7 @@ class CodeVariableDeclarationStatement(CodeStatement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeVariableReferenceExpression(CodeExpression):
     """"""
     @overload
@@ -4427,6 +4511,7 @@ class CodeVariableReferenceExpression(CodeExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FieldDirection(Enum):
     """"""
 
@@ -4437,6 +4522,7 @@ class FieldDirection(Enum):
     Ref: FieldDirection = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MemberAttributes(Enum):
     """"""
 

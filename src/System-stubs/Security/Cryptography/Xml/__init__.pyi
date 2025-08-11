@@ -17,6 +17,7 @@ from System.Xml import XmlDocument
 from System.Xml import XmlElement
 from System.Xml import XmlResolver
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManifestSignedXml(SignedXml):
     """"""
     def __init__(self, manifestXml: XmlDocument, manifest: ManifestKinds) -> None:

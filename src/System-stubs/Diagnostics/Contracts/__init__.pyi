@@ -28,6 +28,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Contract(ABC, Object):
     """"""
     @classmethod
@@ -117,6 +118,7 @@ class Contract(ABC, Object):
     ContractFailed: EventType[EventHandler[ContractFailedEventArgs]] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractAbbreviatorAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -157,6 +159,7 @@ class ContractAbbreviatorAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractArgumentValidatorAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -197,6 +200,7 @@ class ContractArgumentValidatorAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractClassAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, typeContainingContracts: Type) -> None:
@@ -240,6 +244,7 @@ class ContractClassAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractClassForAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, typeContractsAreFor: Type) -> None:
@@ -283,6 +288,7 @@ class ContractClassForAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractException(Exception, _Exception, ISerializable):
     """"""
     def __init__(
@@ -347,6 +353,7 @@ class ContractException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractFailedEventArgs(EventArgs):
     """"""
     def __init__(
@@ -388,6 +395,7 @@ class ContractFailedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ContractFailureKind(Enum):
     """"""
 
@@ -404,6 +412,7 @@ class ContractFailureKind(Enum):
     Assume: ContractFailureKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractInvariantMethodAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -444,6 +453,7 @@ class ContractInvariantMethodAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractOptionAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -500,6 +510,7 @@ class ContractOptionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractPublicPropertyNameAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, name: str) -> None:
@@ -543,6 +554,7 @@ class ContractPublicPropertyNameAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractReferenceAssemblyAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -583,6 +595,7 @@ class ContractReferenceAssemblyAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractRuntimeIgnoredAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -623,6 +636,7 @@ class ContractRuntimeIgnoredAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractVerificationAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, value: bool) -> None:
@@ -666,6 +680,7 @@ class ContractVerificationAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PureAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:

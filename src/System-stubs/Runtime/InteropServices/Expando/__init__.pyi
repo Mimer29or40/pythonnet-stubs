@@ -16,6 +16,7 @@ from System.Reflection import MethodInfo
 from System.Reflection import ParameterModifier
 from System.Reflection import PropertyInfo
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IExpando(ABC, IReflect):
     """"""
     @property

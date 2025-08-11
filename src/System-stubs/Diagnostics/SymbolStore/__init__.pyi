@@ -14,16 +14,19 @@ from System import ValueType
 from System.Reflection import FieldAttributes
 from System.Reflection import ParameterAttributes
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolBinder(ABC):
     """"""
     def GetReader(self, importer: int, filename: str, searchPath: str) -> ISymbolReader:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolBinder1(ABC):
     """"""
     def GetReader(self, importer: IntPtr, filename: str, searchPath: str) -> ISymbolReader:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolDocument(ABC):
     """"""
     @property
@@ -56,6 +59,7 @@ class ISymbolDocument(ABC):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolDocumentWriter(ABC):
     """"""
     def SetCheckSum(self, algorithmId: Guid, checkSum: Array[int]) -> None:
@@ -63,6 +67,7 @@ class ISymbolDocumentWriter(ABC):
     def SetSource(self, source: Array[int]) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolMethod(ABC):
     """"""
     @property
@@ -99,6 +104,7 @@ class ISymbolMethod(ABC):
     ) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolNamespace(ABC):
     """"""
     @property
@@ -109,6 +115,7 @@ class ISymbolNamespace(ABC):
     def GetVariables(self) -> Array[ISymbolVariable]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolReader(ABC):
     """"""
     @property
@@ -139,6 +146,7 @@ class ISymbolReader(ABC):
     def GetVariables(self, parent: SymbolToken) -> Array[ISymbolVariable]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolScope(ABC):
     """"""
     @property
@@ -160,6 +168,7 @@ class ISymbolScope(ABC):
     def GetNamespaces(self) -> Array[ISymbolNamespace]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolVariable(ABC):
     """"""
     @property
@@ -189,6 +198,7 @@ class ISymbolVariable(ABC):
     def GetSignature(self) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISymbolWriter(ABC):
     """"""
     def Close(self) -> None:
@@ -289,6 +299,7 @@ class ISymbolWriter(ABC):
     def UsingNamespace(self, fullName: str) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SymAddressKind(Enum):
     """"""
 
@@ -313,6 +324,7 @@ class SymAddressKind(Enum):
     NativeSectionOffset: SymAddressKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymDocumentType(Object):
     """"""
 
@@ -329,6 +341,7 @@ class SymDocumentType(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymLanguageType(Object):
     """"""
 
@@ -365,6 +378,7 @@ class SymLanguageType(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymLanguageVendor(Object):
     """"""
 
@@ -381,6 +395,7 @@ class SymLanguageVendor(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymbolToken(ValueType):
     """"""
     def __init__(self, val: int) -> None:

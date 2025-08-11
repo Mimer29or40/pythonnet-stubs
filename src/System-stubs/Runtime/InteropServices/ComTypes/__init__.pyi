@@ -28,6 +28,7 @@ from System.Reflection import MethodInfo
 from System.Reflection import ParameterModifier
 from System.Reflection import PropertyInfo
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ADVF(Enum):
     """"""
 
@@ -46,6 +47,7 @@ class ADVF(Enum):
     ADVF_DATAONSTOP: ADVF = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BINDPTR(ValueType):
     """"""
 
@@ -64,6 +66,7 @@ class BINDPTR(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BIND_OPTS(ValueType):
     """"""
 
@@ -84,6 +87,7 @@ class BIND_OPTS(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CALLCONV(Enum):
     """"""
 
@@ -108,6 +112,7 @@ class CALLCONV(Enum):
     CC_MAX: CALLCONV = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CONNECTDATA(ValueType):
     """"""
 
@@ -124,6 +129,7 @@ class CONNECTDATA(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DATADIR(Enum):
     """"""
 
@@ -132,6 +138,7 @@ class DATADIR(Enum):
     DATADIR_SET: DATADIR = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DESCKIND(Enum):
     """"""
 
@@ -148,6 +155,7 @@ class DESCKIND(Enum):
     DESCKIND_MAX: DESCKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DISPPARAMS(ValueType):
     """"""
 
@@ -168,6 +176,7 @@ class DISPPARAMS(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DVASPECT(Enum):
     """"""
 
@@ -180,6 +189,7 @@ class DVASPECT(Enum):
     DVASPECT_DOCPRINT: DVASPECT = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ELEMDESC(ValueType):
     """"""
 
@@ -195,6 +205,7 @@ class ELEMDESC(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class DESCUNION(ValueType):
         """"""
 
@@ -211,6 +222,7 @@ class ELEMDESC(ValueType):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EXCEPINFO(ValueType):
     """"""
 
@@ -241,6 +253,7 @@ class EXCEPINFO(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FILETIME(ValueType):
     """"""
 
@@ -257,6 +270,7 @@ class FILETIME(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FORMATETC(ValueType):
     """"""
 
@@ -279,6 +293,7 @@ class FORMATETC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FUNCDESC(ValueType):
     """"""
 
@@ -315,6 +330,7 @@ class FUNCDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FUNCFLAGS(Enum):
     """"""
 
@@ -345,6 +361,7 @@ class FUNCFLAGS(Enum):
     FUNCFLAG_FIMMEDIATEBIND: FUNCFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FUNCKIND(Enum):
     """"""
 
@@ -359,6 +376,7 @@ class FUNCKIND(Enum):
     FUNC_DISPATCH: FUNCKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IAdviseSink(ABC):
     """"""
     def OnClose(self) -> None:
@@ -372,6 +390,7 @@ class IAdviseSink(ABC):
     def OnViewChange(self, aspect: int, index: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IBindCtx(ABC):
     """"""
     def EnumObjectParam(self, ppenum: IEnumString) -> tuple[None, IEnumString]:
@@ -395,6 +414,7 @@ class IBindCtx(ABC):
     def SetBindOptions(self, pbindopts: BIND_OPTS) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IConnectionPoint(ABC):
     """"""
     def Advise(self, pUnkSink: object, pdwCookie: Int32) -> tuple[None, Int32]:
@@ -410,6 +430,7 @@ class IConnectionPoint(ABC):
     def Unadvise(self, dwCookie: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IConnectionPointContainer(ABC):
     """"""
     def EnumConnectionPoints(
@@ -421,6 +442,7 @@ class IConnectionPointContainer(ABC):
     ) -> tuple[None, IConnectionPoint]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDLDESC(ValueType):
     """"""
 
@@ -437,6 +459,7 @@ class IDLDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IDLFLAG(Enum):
     """"""
 
@@ -451,6 +474,7 @@ class IDLFLAG(Enum):
     IDLFLAG_FRETVAL: IDLFLAG = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDataObject(ABC):
     """"""
     def DAdvise(
@@ -476,6 +500,7 @@ class IDataObject(ABC):
     def SetData(self, formatIn: FORMATETC, medium: STGMEDIUM, release: bool) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumConnectionPoints(ABC):
     """"""
     def Clone(self, ppenum: IEnumConnectionPoints) -> tuple[None, IEnumConnectionPoints]:
@@ -489,6 +514,7 @@ class IEnumConnectionPoints(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumConnections(ABC):
     """"""
     def Clone(self, ppenum: IEnumConnections) -> tuple[None, IEnumConnections]:
@@ -502,6 +528,7 @@ class IEnumConnections(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumFORMATETC(ABC):
     """"""
     def Clone(self, newEnum: IEnumFORMATETC) -> tuple[None, IEnumFORMATETC]:
@@ -515,6 +542,7 @@ class IEnumFORMATETC(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumMoniker(ABC):
     """"""
     def Clone(self, ppenum: IEnumMoniker) -> tuple[None, IEnumMoniker]:
@@ -528,6 +556,7 @@ class IEnumMoniker(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTATDATA(ABC):
     """"""
     def Clone(self, newEnum: IEnumSTATDATA) -> tuple[None, IEnumSTATDATA]:
@@ -541,6 +570,7 @@ class IEnumSTATDATA(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumString(ABC):
     """"""
     def Clone(self, ppenum: IEnumString) -> tuple[None, IEnumString]:
@@ -552,6 +582,7 @@ class IEnumString(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumVARIANT(ABC):
     """"""
     def Clone(self) -> IEnumVARIANT:
@@ -565,6 +596,7 @@ class IEnumVARIANT(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumerable(ABC):
     """"""
     def GetEnumerator(self) -> IEnumerator:
@@ -572,6 +604,7 @@ class IEnumerable(ABC):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumerator(ABC):
     """"""
     @property
@@ -582,6 +615,7 @@ class IEnumerator(ABC):
     def Reset(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IExpando(ABC, IReflect):
     """"""
     @property
@@ -647,6 +681,7 @@ class IExpando(ABC, IReflect):
     def RemoveMember(self, m: MemberInfo) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IMPLTYPEFLAGS(Enum):
     """"""
 
@@ -659,6 +694,7 @@ class IMPLTYPEFLAGS(Enum):
     IMPLTYPEFLAG_FDEFAULTVTABLE: IMPLTYPEFLAGS = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMoniker(ABC):
     """"""
     def BindToObject(
@@ -721,6 +757,7 @@ class IMoniker(ABC):
     def Save(self, pStm: IStream, fClearDirty: bool) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class INVOKEKIND(Enum):
     """"""
 
@@ -733,6 +770,7 @@ class INVOKEKIND(Enum):
     INVOKE_PROPERTYPUTREF: INVOKEKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPersistFile(ABC):
     """"""
     def GetClassID(self, pClassID: Guid) -> tuple[None, Guid]:
@@ -748,6 +786,7 @@ class IPersistFile(ABC):
     def SaveCompleted(self, pszFileName: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReflect(ABC):
     """"""
     @property
@@ -805,6 +844,7 @@ class IReflect(ABC):
     ) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IRunningObjectTable(ABC):
     """"""
     def EnumRunning(self, ppenumMoniker: IEnumMoniker) -> tuple[None, IEnumMoniker]:
@@ -824,6 +864,7 @@ class IRunningObjectTable(ABC):
     def Revoke(self, dwRegister: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStream(ABC):
     """"""
     def Clone(self, ppstm: IStream) -> tuple[None, IStream]:
@@ -849,6 +890,7 @@ class IStream(ABC):
     def Write(self, pv: Array[int], cb: int, pcbWritten: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeComp(ABC):
     """"""
     def Bind(
@@ -866,6 +908,7 @@ class ITypeComp(ABC):
     ) -> tuple[None, ITypeInfo, ITypeComp]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeInfo(ABC):
     """"""
     def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> tuple[None, IntPtr]:
@@ -936,6 +979,7 @@ class ITypeInfo(ABC):
     def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeInfo2(ABC, ITypeInfo):
     """"""
     def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> tuple[None, IntPtr]:
@@ -1046,6 +1090,7 @@ class ITypeInfo2(ABC, ITypeInfo):
     def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeLib(ABC):
     """"""
     def FindName(
@@ -1083,6 +1128,7 @@ class ITypeLib(ABC):
     def ReleaseTLibAttr(self, pTLibAttr: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeLib2(ABC, ITypeLib):
     """"""
     def FindName(
@@ -1134,6 +1180,7 @@ class ITypeLib2(ABC, ITypeLib):
     def ReleaseTLibAttr(self, pTLibAttr: IntPtr) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class LIBFLAGS(Enum):
     """"""
 
@@ -1146,6 +1193,7 @@ class LIBFLAGS(Enum):
     LIBFLAG_FHASDISKIMAGE: LIBFLAGS = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PARAMDESC(ValueType):
     """"""
 
@@ -1162,6 +1210,7 @@ class PARAMDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PARAMFLAG(Enum):
     """"""
 
@@ -1182,6 +1231,7 @@ class PARAMFLAG(Enum):
     PARAMFLAG_FHASCUSTDATA: PARAMFLAG = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STATDATA(ValueType):
     """"""
 
@@ -1202,6 +1252,7 @@ class STATDATA(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STATSTG(ValueType):
     """"""
 
@@ -1236,6 +1287,7 @@ class STATSTG(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STGMEDIUM(ValueType):
     """"""
 
@@ -1254,6 +1306,7 @@ class STGMEDIUM(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SYSKIND(Enum):
     """"""
 
@@ -1266,6 +1319,7 @@ class SYSKIND(Enum):
     SYS_WIN64: SYSKIND = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TYMED(Enum):
     """"""
 
@@ -1286,6 +1340,7 @@ class TYMED(Enum):
     TYMED_ENHMF: TYMED = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TYPEATTR(ValueType):
     """"""
 
@@ -1336,6 +1391,7 @@ class TYPEATTR(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TYPEDESC(ValueType):
     """"""
 
@@ -1352,6 +1408,7 @@ class TYPEDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TYPEFLAGS(Enum):
     """"""
 
@@ -1386,6 +1443,7 @@ class TYPEFLAGS(Enum):
     TYPEFLAG_FPROXY: TYPEFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TYPEKIND(Enum):
     """"""
 
@@ -1408,6 +1466,7 @@ class TYPEKIND(Enum):
     TKIND_MAX: TYPEKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TYPELIBATTR(ValueType):
     """"""
 
@@ -1432,6 +1491,7 @@ class TYPELIBATTR(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VARDESC(ValueType):
     """"""
 
@@ -1455,6 +1515,7 @@ class VARDESC(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class DESCUNION(ValueType):
         """"""
 
@@ -1471,6 +1532,7 @@ class VARDESC(ValueType):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class VARFLAGS(Enum):
     """"""
 
@@ -1501,6 +1563,7 @@ class VARFLAGS(Enum):
     VARFLAG_FIMMEDIATEBIND: VARFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class VARKIND(Enum):
     """"""
 

@@ -10,11 +10,13 @@ from System import Object
 from System import TimeSpan
 from System import Type
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISoapXsd(ABC):
     """"""
     def GetXsdType(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapAnyUri(Object, ISoapXsd):
     """"""
     @overload
@@ -46,6 +48,7 @@ class SoapAnyUri(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapBase64Binary(Object, ISoapXsd):
     """"""
     @overload
@@ -77,6 +80,7 @@ class SoapBase64Binary(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapDate(Object, ISoapXsd):
     """"""
     @overload
@@ -116,6 +120,7 @@ class SoapDate(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapDateTime(Object):
     """"""
     def __init__(self) -> None:
@@ -141,6 +146,7 @@ class SoapDateTime(Object):
     def ToString(cls, value: DateTime) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapDay(Object, ISoapXsd):
     """"""
     @overload
@@ -172,6 +178,7 @@ class SoapDay(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapDuration(Object):
     """"""
     def __init__(self) -> None:
@@ -197,6 +204,7 @@ class SoapDuration(Object):
     def ToString(cls, timeSpan: TimeSpan) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapEntities(Object, ISoapXsd):
     """"""
     @overload
@@ -228,6 +236,7 @@ class SoapEntities(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapEntity(Object, ISoapXsd):
     """"""
     @overload
@@ -259,6 +268,7 @@ class SoapEntity(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapHexBinary(Object, ISoapXsd):
     """"""
     @overload
@@ -290,6 +300,7 @@ class SoapHexBinary(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapId(Object, ISoapXsd):
     """"""
     @overload
@@ -321,6 +332,7 @@ class SoapId(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapIdref(Object, ISoapXsd):
     """"""
     @overload
@@ -352,6 +364,7 @@ class SoapIdref(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapIdrefs(Object, ISoapXsd):
     """"""
     @overload
@@ -383,6 +396,7 @@ class SoapIdrefs(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapInteger(Object, ISoapXsd):
     """"""
     @overload
@@ -414,6 +428,7 @@ class SoapInteger(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapLanguage(Object, ISoapXsd):
     """"""
     @overload
@@ -445,6 +460,7 @@ class SoapLanguage(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapMonth(Object, ISoapXsd):
     """"""
     @overload
@@ -476,6 +492,7 @@ class SoapMonth(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapMonthDay(Object, ISoapXsd):
     """"""
     @overload
@@ -507,6 +524,7 @@ class SoapMonthDay(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapName(Object, ISoapXsd):
     """"""
     @overload
@@ -538,6 +556,7 @@ class SoapName(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNcName(Object, ISoapXsd):
     """"""
     @overload
@@ -569,6 +588,7 @@ class SoapNcName(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNegativeInteger(Object, ISoapXsd):
     """"""
     @overload
@@ -600,6 +620,7 @@ class SoapNegativeInteger(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNmtoken(Object, ISoapXsd):
     """"""
     @overload
@@ -631,6 +652,7 @@ class SoapNmtoken(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNmtokens(Object, ISoapXsd):
     """"""
     @overload
@@ -662,6 +684,7 @@ class SoapNmtokens(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNonNegativeInteger(Object, ISoapXsd):
     """"""
     @overload
@@ -693,6 +716,7 @@ class SoapNonNegativeInteger(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNonPositiveInteger(Object, ISoapXsd):
     """"""
     @overload
@@ -724,6 +748,7 @@ class SoapNonPositiveInteger(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNormalizedString(Object, ISoapXsd):
     """"""
     @overload
@@ -755,6 +780,7 @@ class SoapNormalizedString(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapNotation(Object, ISoapXsd):
     """"""
     @overload
@@ -786,6 +812,7 @@ class SoapNotation(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapPositiveInteger(Object, ISoapXsd):
     """"""
     @overload
@@ -817,6 +844,7 @@ class SoapPositiveInteger(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapQName(Object, ISoapXsd):
     """"""
     @overload
@@ -864,6 +892,7 @@ class SoapQName(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapTime(Object, ISoapXsd):
     """"""
     @overload
@@ -895,6 +924,7 @@ class SoapTime(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapToken(Object, ISoapXsd):
     """"""
     @overload
@@ -926,6 +956,7 @@ class SoapToken(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapType(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -937,6 +968,7 @@ class SoapType(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapYear(Object, ISoapXsd):
     """"""
     @overload
@@ -976,6 +1008,7 @@ class SoapYear(Object, ISoapXsd):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapYearMonth(Object, ISoapXsd):
     """"""
     @overload

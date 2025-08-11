@@ -42,6 +42,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CoTaskMemSafeHandle(SafeHandle, IDisposable):
     """"""
     @property
@@ -75,6 +76,7 @@ class CoTaskMemSafeHandle(SafeHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CoTaskMemUnicodeSafeHandle(SafeHandle, IDisposable):
     """"""
     @property
@@ -108,6 +110,7 @@ class CoTaskMemUnicodeSafeHandle(SafeHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventBookmark(Object, ISerializable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -121,6 +124,7 @@ class EventBookmark(Object, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventKeyword(Object):
     """"""
     @property
@@ -141,6 +145,7 @@ class EventKeyword(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLevel(Object):
     """"""
     @property
@@ -161,6 +166,7 @@ class EventLevel(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogConfiguration(Object, IDisposable):
     """"""
     @overload
@@ -250,6 +256,7 @@ class EventLogConfiguration(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -302,6 +309,7 @@ class EventLogException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogHandle(SafeHandle, IDisposable):
     """"""
     @property
@@ -335,6 +343,7 @@ class EventLogHandle(SafeHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogInformation(Object):
     """"""
     @property
@@ -370,6 +379,7 @@ class EventLogInformation(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogInvalidDataException(EventLogException, _Exception, ISerializable):
     """"""
     @overload
@@ -422,6 +432,7 @@ class EventLogInvalidDataException(EventLogException, _Exception, ISerializable)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventLogIsolation(Enum):
     """"""
 
@@ -432,6 +443,7 @@ class EventLogIsolation(Enum):
     Custom: EventLogIsolation = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogLink(Object):
     """"""
     @property
@@ -452,6 +464,7 @@ class EventLogLink(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventLogMode(Enum):
     """"""
 
@@ -462,6 +475,7 @@ class EventLogMode(Enum):
     Retain: EventLogMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogNotFoundException(EventLogException, _Exception, ISerializable):
     """"""
     @overload
@@ -514,6 +528,7 @@ class EventLogNotFoundException(EventLogException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogPermissionHolder(Object):
     """"""
     def __init__(self) -> None:
@@ -530,6 +545,7 @@ class EventLogPermissionHolder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogPropertySelector(Object, IDisposable):
     """"""
     def __init__(self, propertyQueries: IEnumerable[str]) -> None:
@@ -545,6 +561,7 @@ class EventLogPropertySelector(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogProviderDisabledException(EventLogException, _Exception, ISerializable):
     """"""
     @overload
@@ -597,6 +614,7 @@ class EventLogProviderDisabledException(EventLogException, _Exception, ISerializ
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogQuery(Object):
     """"""
     @overload
@@ -629,6 +647,7 @@ class EventLogQuery(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogReader(Object, IDisposable):
     """"""
     @overload
@@ -679,6 +698,7 @@ class EventLogReader(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogReadingException(EventLogException, _Exception, ISerializable):
     """"""
     @overload
@@ -731,6 +751,7 @@ class EventLogReadingException(EventLogException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogRecord(EventRecord, IDisposable):
     """"""
     @property
@@ -832,6 +853,7 @@ class EventLogRecord(EventRecord, IDisposable):
     def ToXml(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogSession(Object, IDisposable):
     """"""
     @overload
@@ -908,6 +930,7 @@ class EventLogSession(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogStatus(Object):
     """"""
     @property
@@ -925,6 +948,7 @@ class EventLogStatus(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventLogType(Enum):
     """"""
 
@@ -937,6 +961,7 @@ class EventLogType(Enum):
     Debug: EventLogType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventLogWatcher(Object, IDisposable):
     """"""
     @overload
@@ -971,6 +996,7 @@ class EventLogWatcher(Object, IDisposable):
     EventRecordWritten: EventType[EventHandler[EventRecordWrittenEventArgs]] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventMetadata(Object):
     """"""
     @property
@@ -1009,6 +1035,7 @@ class EventMetadata(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventOpcode(Object):
     """"""
     @property
@@ -1029,6 +1056,7 @@ class EventOpcode(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventProperty(Object):
     """"""
     @property
@@ -1043,6 +1071,7 @@ class EventProperty(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventRecord(ABC, Object, IDisposable):
     """"""
     @property
@@ -1136,6 +1165,7 @@ class EventRecord(ABC, Object, IDisposable):
     def ToXml(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventRecordWrittenEventArgs(EventArgs):
     """"""
     @property
@@ -1153,6 +1183,7 @@ class EventRecordWrittenEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventTask(Object):
     """"""
     @property
@@ -1176,6 +1207,7 @@ class EventTask(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NativeWrapper(Object):
     """"""
     def __init__(self) -> None:
@@ -1433,6 +1465,7 @@ class NativeWrapper(Object):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class SystemProperties(Object):
         """"""
 
@@ -1485,6 +1518,7 @@ class NativeWrapper(Object):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PathType(Enum):
     """"""
 
@@ -1493,6 +1527,7 @@ class PathType(Enum):
     FilePath: PathType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProviderMetadata(Object, IDisposable):
     """"""
     @overload
@@ -1553,6 +1588,7 @@ class ProviderMetadata(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProviderMetadataCachedInformation(Object):
     """"""
     def __init__(self, session: EventLogSession, logfile: str, maximumCacheSize: int) -> None:
@@ -1584,6 +1620,7 @@ class ProviderMetadataCachedInformation(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SessionAuthentication(Enum):
     """"""
 
@@ -1596,6 +1633,7 @@ class SessionAuthentication(Enum):
     Ntlm: SessionAuthentication = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StandardEventKeywords(Enum):
     """"""
 
@@ -1620,6 +1658,7 @@ class StandardEventKeywords(Enum):
     EventLogClassic: StandardEventKeywords = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StandardEventLevel(Enum):
     """"""
 
@@ -1636,6 +1675,7 @@ class StandardEventLevel(Enum):
     Verbose: StandardEventLevel = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StandardEventOpcode(Enum):
     """"""
 
@@ -1662,6 +1702,7 @@ class StandardEventOpcode(Enum):
     Receive: StandardEventOpcode = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StandardEventTask(Enum):
     """"""
 

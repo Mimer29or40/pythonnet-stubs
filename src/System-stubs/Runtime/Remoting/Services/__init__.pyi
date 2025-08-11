@@ -12,6 +12,7 @@ from System.Runtime.Remoting.Activation import IConstructionCallMessage
 from System.Runtime.Remoting.Activation import IConstructionReturnMessage
 from System.Runtime.Remoting.Proxies import RealProxy
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnterpriseServicesHelper(Object):
     """"""
     def __init__(self) -> None:
@@ -36,6 +37,7 @@ class EnterpriseServicesHelper(Object):
     def WrapIUnknownWithComObject(cls, punk: IntPtr) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITrackingHandler(ABC):
     """"""
     def DisconnectedObject(self, obj: object) -> None:
@@ -45,6 +47,7 @@ class ITrackingHandler(ABC):
     def UnmarshaledObject(self, obj: object, _or: ObjRef) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TrackingServices(Object):
     """"""
     def __init__(self) -> None:

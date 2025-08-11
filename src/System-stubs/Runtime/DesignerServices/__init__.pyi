@@ -7,6 +7,7 @@ from System import Type
 from System.Collections.Generic import IEnumerable
 from System.Reflection import Assembly
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsRuntimeDesignerContext(Object):
     """"""
     def __init__(self, paths: IEnumerable[str], name: str) -> None:

@@ -14,6 +14,7 @@ from System import UInt32
 from System import Version
 from System.Runtime.InteropServices import _Attribute
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryCompatibility(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -25,6 +26,7 @@ class BinaryCompatibility(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompatibilitySwitch(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -42,6 +44,7 @@ class CompatibilitySwitch(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComponentGuaranteesAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, guarantees: ComponentGuaranteesOptions) -> None:
@@ -85,6 +88,7 @@ class ComponentGuaranteesAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ComponentGuaranteesOptions(Enum):
     """"""
 
@@ -97,6 +101,7 @@ class ComponentGuaranteesOptions(Enum):
     SideBySide: ComponentGuaranteesOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FrameworkName(Object, IEquatable[FrameworkName]):
     """"""
     @overload
@@ -143,6 +148,7 @@ class FrameworkName(Object, IEquatable[FrameworkName]):
     def __ne__(self, other: FrameworkName) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MultitargetingHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -154,6 +160,7 @@ class MultitargetingHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NonVersionableAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -194,6 +201,7 @@ class NonVersionableAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceConsumptionAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -244,6 +252,7 @@ class ResourceConsumptionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceExposureAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, exposureLevel: ResourceScope) -> None:
@@ -287,6 +296,7 @@ class ResourceExposureAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ResourceScope(Enum):
     """"""
 
@@ -305,6 +315,7 @@ class ResourceScope(Enum):
     Assembly: ResourceScope = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SxSRequirements(Enum):
     """"""
 
@@ -321,6 +332,7 @@ class SxSRequirements(Enum):
     TypeName: SxSRequirements = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TargetFrameworkAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, frameworkName: str) -> None:
@@ -369,6 +381,7 @@ class TargetFrameworkAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TargetFrameworkId(Enum):
     """"""
 
@@ -389,6 +402,7 @@ class TargetFrameworkId(Enum):
     Phone: TargetFrameworkId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VersioningHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

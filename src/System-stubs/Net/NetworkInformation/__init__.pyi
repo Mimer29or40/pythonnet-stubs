@@ -26,7 +26,6 @@ from System import Type
 from System import UInt32
 from System import ValueType
 from System.Collections import IDictionary
-from System.Collections import IEnumerable
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IEnumerable
 from System.Collections.Generic import IEnumerator
@@ -60,6 +59,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AdapterAddressFlags(Enum):
     """"""
 
@@ -68,6 +68,7 @@ class AdapterAddressFlags(Enum):
     Transient: AdapterAddressFlags = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AdapterFlags(Enum):
     """"""
 
@@ -92,6 +93,7 @@ class AdapterFlags(Enum):
     IPv6ManagedAddressConfigurationSupported: AdapterFlags = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DuplicateAddressDetectionState(Enum):
     """"""
 
@@ -106,6 +108,7 @@ class DuplicateAddressDetectionState(Enum):
     Preferred: DuplicateAddressDetectionState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FIXED_INFO(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -117,6 +120,7 @@ class FIXED_INFO(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FixedInfo(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -128,6 +132,7 @@ class FixedInfo(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GatewayIPAddressInformation(ABC, Object):
     """"""
     @property
@@ -142,6 +147,7 @@ class GatewayIPAddressInformation(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GatewayIPAddressInformationCollection(
     Object,
     ICollection[GatewayIPAddressInformation],
@@ -189,6 +195,7 @@ class GatewayIPAddressInformationCollection(
     def __getitem__(self, index: int) -> GatewayIPAddressInformation:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class GetAdaptersAddressesFlags(Enum):
     """"""
 
@@ -215,6 +222,7 @@ class GetAdaptersAddressesFlags(Enum):
     IncludeTunnelBindingOrder: GetAdaptersAddressesFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPAddressCollection(Object, ICollection[IPAddress], IEnumerable[IPAddress], IEnumerable):
     """"""
     @property
@@ -257,6 +265,7 @@ class IPAddressCollection(Object, ICollection[IPAddress], IEnumerable[IPAddress]
     def __getitem__(self, index: int) -> IPAddress:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPAddressInformation(ABC, Object):
     """"""
     @property
@@ -277,6 +286,7 @@ class IPAddressInformation(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPAddressInformationCollection(
     Object, ICollection[IPAddressInformation], IEnumerable[IPAddressInformation], IEnumerable
 ):
@@ -321,6 +331,7 @@ class IPAddressInformationCollection(
     def __getitem__(self, index: int) -> IPAddressInformation:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPGlobalProperties(ABC, Object):
     """"""
     @property
@@ -382,6 +393,7 @@ class IPGlobalProperties(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPGlobalStatistics(ABC, Object):
     """"""
     @property
@@ -459,6 +471,7 @@ class IPGlobalStatistics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPInterfaceProperties(ABC, Object):
     """"""
     @property
@@ -504,6 +517,7 @@ class IPInterfaceProperties(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPInterfaceStatistics(ABC, Object):
     """"""
     @property
@@ -551,6 +565,7 @@ class IPInterfaceStatistics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPOptions(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -562,6 +577,7 @@ class IPOptions(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IPStatus(Enum):
     """"""
 
@@ -614,6 +630,7 @@ class IPStatus(Enum):
     Unknown: IPStatus = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPv4InterfaceProperties(ABC, Object):
     """"""
     @property
@@ -646,6 +663,7 @@ class IPv4InterfaceProperties(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPv4InterfaceStatistics(ABC, Object):
     """"""
     @property
@@ -693,6 +711,7 @@ class IPv4InterfaceStatistics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPv6InterfaceProperties(ABC, Object):
     """"""
     @property
@@ -712,6 +731,7 @@ class IPv6InterfaceProperties(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Icmp6EchoReply(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -723,6 +743,7 @@ class Icmp6EchoReply(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IcmpEchoReply(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -734,6 +755,7 @@ class IcmpEchoReply(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IcmpV4Code(Enum):
     """"""
 
@@ -766,6 +788,7 @@ class IcmpV4Code(Enum):
     ICMP4_UNREACH_ADMIN: IcmpV4Code = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IcmpV4Statistics(ABC, Object):
     """"""
     @property
@@ -855,6 +878,7 @@ class IcmpV4Statistics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IcmpV4Type(Enum):
     """"""
 
@@ -885,6 +909,7 @@ class IcmpV4Type(Enum):
     ICMP4_MASK_REPLY: IcmpV4Type = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IcmpV6StatType(Enum):
     """"""
 
@@ -917,6 +942,7 @@ class IcmpV6StatType(Enum):
     Redirect: IcmpV6StatType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IcmpV6Statistics(ABC, Object):
     """"""
     @property
@@ -1024,6 +1050,7 @@ class IcmpV6Statistics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InterfaceConnectionType(Enum):
     """"""
 
@@ -1036,6 +1063,7 @@ class InterfaceConnectionType(Enum):
     Maximum: InterfaceConnectionType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InterfaceTunnelType(Enum):
     """"""
 
@@ -1054,6 +1082,7 @@ class InterfaceTunnelType(Enum):
     IpHttps: InterfaceTunnelType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IpAdapterAddress(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1065,6 +1094,7 @@ class IpAdapterAddress(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IpAdapterAddresses(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1076,6 +1106,7 @@ class IpAdapterAddresses(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IpAdapterUnicastAddress(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1087,6 +1118,7 @@ class IpAdapterUnicastAddress(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IpAddrString(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1098,6 +1130,7 @@ class IpAddrString(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IpHelperErrors(Object):
     """"""
     def __init__(self) -> None:
@@ -1111,6 +1144,7 @@ class IpHelperErrors(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IpPerAdapterInfo(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1122,6 +1156,7 @@ class IpPerAdapterInfo(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IpSocketAddress(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1133,6 +1168,7 @@ class IpSocketAddress(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Ipv6Address(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1144,6 +1180,7 @@ class Ipv6Address(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibIcmpInfo(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1155,6 +1192,7 @@ class MibIcmpInfo(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibIcmpInfoEx(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1166,6 +1204,7 @@ class MibIcmpInfoEx(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibIcmpStats(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1177,6 +1216,7 @@ class MibIcmpStats(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibIcmpStatsEx(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1188,6 +1228,7 @@ class MibIcmpStatsEx(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibIfRow2(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1199,6 +1240,7 @@ class MibIfRow2(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibIpStats(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1210,6 +1252,7 @@ class MibIpStats(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibTcp6RowOwnerPid(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1221,6 +1264,7 @@ class MibTcp6RowOwnerPid(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibTcp6TableOwnerPid(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1232,6 +1276,7 @@ class MibTcp6TableOwnerPid(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibTcpRow(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1243,6 +1288,7 @@ class MibTcpRow(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibTcpStats(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1254,6 +1300,7 @@ class MibTcpStats(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibTcpTable(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1265,6 +1312,7 @@ class MibTcpTable(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibUdp6RowOwnerPid(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1276,6 +1324,7 @@ class MibUdp6RowOwnerPid(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibUdp6TableOwnerPid(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1287,6 +1336,7 @@ class MibUdp6TableOwnerPid(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibUdpRow(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1298,6 +1348,7 @@ class MibUdpRow(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibUdpStats(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1309,6 +1360,7 @@ class MibUdpStats(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MibUdpTable(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1320,6 +1372,7 @@ class MibUdpTable(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MulticastIPAddressInformation(ABC, IPAddressInformation):
     """"""
     @property
@@ -1358,6 +1411,7 @@ class MulticastIPAddressInformation(ABC, IPAddressInformation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MulticastIPAddressInformationCollection(
     Object,
     ICollection[MulticastIPAddressInformation],
@@ -1405,6 +1459,7 @@ class MulticastIPAddressInformationCollection(
     def __getitem__(self, index: int) -> MulticastIPAddressInformation:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NetBiosNodeType(Enum):
     """"""
 
@@ -1424,6 +1479,7 @@ type NetworkAddressChangedEventHandler = Callable[[object, EventArgs], None]
 type NetworkAvailabilityChangedEventHandler = Callable[[object, NetworkAvailabilityEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkAvailabilityEventArgs(EventArgs):
     """"""
     @property
@@ -1438,6 +1494,7 @@ class NetworkAvailabilityEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkChange(Object):
     """"""
     def __init__(self) -> None:
@@ -1458,6 +1515,7 @@ class NetworkChange(Object):
     NetworkAvailabilityChanged: EventType[NetworkAvailabilityChangedEventHandler] = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NetworkInformationAccess(Enum):
     """"""
 
@@ -1468,6 +1526,7 @@ class NetworkInformationAccess(Enum):
     Ping: NetworkInformationAccess = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkInformationException(Win32Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -1523,6 +1582,7 @@ class NetworkInformationException(Win32Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkInformationPermission(
     CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -1569,6 +1629,7 @@ class NetworkInformationPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -1626,6 +1687,7 @@ class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkInterface(ABC, Object):
     """"""
     @property
@@ -1685,6 +1747,7 @@ class NetworkInterface(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NetworkInterfaceComponent(Enum):
     """"""
 
@@ -1693,6 +1756,7 @@ class NetworkInterfaceComponent(Enum):
     IPv6: NetworkInterfaceComponent = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NetworkInterfaceType(Enum):
     """"""
 
@@ -1753,6 +1817,7 @@ class NetworkInterfaceType(Enum):
     Wwanpp2: NetworkInterfaceType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class OldOperationalStatus(Enum):
     """"""
 
@@ -1769,6 +1834,7 @@ class OldOperationalStatus(Enum):
     Operational: OldOperationalStatus = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class OperationalStatus(Enum):
     """"""
 
@@ -1787,6 +1853,7 @@ class OperationalStatus(Enum):
     LowerLayerDown: OperationalStatus = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PhysicalAddress(Object):
     """"""
 
@@ -1808,6 +1875,7 @@ class PhysicalAddress(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Ping(Component, IComponent, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -1945,6 +2013,7 @@ class Ping(Component, IComponent, IDisposable):
     PingCompleted: EventType[PingCompletedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PingCompletedEventArgs(AsyncCompletedEventArgs):
     """"""
     @property
@@ -1971,6 +2040,7 @@ class PingCompletedEventArgs(AsyncCompletedEventArgs):
 type PingCompletedEventHandler = Callable[[object, PingCompletedEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PingException(InvalidOperationException, _Exception, ISerializable):
     """"""
     @overload
@@ -2020,6 +2090,7 @@ class PingException(InvalidOperationException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PingOptions(Object):
     """"""
     @overload
@@ -2047,6 +2118,7 @@ class PingOptions(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PingReply(Object):
     """"""
     @property
@@ -2073,6 +2145,7 @@ class PingReply(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PrefixOrigin(Enum):
     """"""
 
@@ -2087,6 +2160,7 @@ class PrefixOrigin(Enum):
     RouterAdvertisement: PrefixOrigin = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCancelMibChangeNotify(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -2118,6 +2192,7 @@ class SafeCancelMibChangeNotify(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeFreeMibTable(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -2149,6 +2224,7 @@ class SafeFreeMibTable(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ScopeLevel(Enum):
     """"""
 
@@ -2172,6 +2248,7 @@ class ScopeLevel(Enum):
 type StableUnicastIpAddressTableDelegate = Callable[[IntPtr, IntPtr], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StartIPOptions(Enum):
     """"""
 
@@ -2184,6 +2261,7 @@ class StartIPOptions(Enum):
     Both: StartIPOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SuffixOrigin(Enum):
     """"""
 
@@ -2200,6 +2278,7 @@ class SuffixOrigin(Enum):
     Random: SuffixOrigin = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemGatewayIPAddressInformation(GatewayIPAddressInformation):
     """"""
     @property
@@ -2214,6 +2293,7 @@ class SystemGatewayIPAddressInformation(GatewayIPAddressInformation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPAddressInformation(IPAddressInformation):
     """"""
     @property
@@ -2234,6 +2314,7 @@ class SystemIPAddressInformation(IPAddressInformation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPGlobalProperties(IPGlobalProperties):
     """"""
     @property
@@ -2292,6 +2373,7 @@ class SystemIPGlobalProperties(IPGlobalProperties):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPGlobalStatistics(IPGlobalStatistics):
     """"""
     @property
@@ -2369,6 +2451,7 @@ class SystemIPGlobalStatistics(IPGlobalStatistics):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPInterfaceProperties(IPInterfaceProperties):
     """"""
     @property
@@ -2414,6 +2497,7 @@ class SystemIPInterfaceProperties(IPInterfaceProperties):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPInterfaceStatistics(IPInterfaceStatistics):
     """"""
     @property
@@ -2461,6 +2545,7 @@ class SystemIPInterfaceStatistics(IPInterfaceStatistics):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPv4InterfaceProperties(IPv4InterfaceProperties):
     """"""
     @property
@@ -2493,6 +2578,7 @@ class SystemIPv4InterfaceProperties(IPv4InterfaceProperties):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPv4InterfaceStatistics(IPv4InterfaceStatistics):
     """"""
     @property
@@ -2540,6 +2626,7 @@ class SystemIPv4InterfaceStatistics(IPv4InterfaceStatistics):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIPv6InterfaceProperties(IPv6InterfaceProperties):
     """"""
     @property
@@ -2559,6 +2646,7 @@ class SystemIPv6InterfaceProperties(IPv6InterfaceProperties):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIcmpV4Statistics(IcmpV4Statistics):
     """"""
     @property
@@ -2648,6 +2736,7 @@ class SystemIcmpV4Statistics(IcmpV4Statistics):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemIcmpV6Statistics(IcmpV6Statistics):
     """"""
     @property
@@ -2755,6 +2844,7 @@ class SystemIcmpV6Statistics(IcmpV6Statistics):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemMulticastIPAddressInformation(MulticastIPAddressInformation):
     """"""
     def __init__(self, addressInfo: SystemIPAddressInformation) -> None:
@@ -2795,6 +2885,7 @@ class SystemMulticastIPAddressInformation(MulticastIPAddressInformation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemNetworkInterface(NetworkInterface):
     """"""
     @property
@@ -2840,6 +2931,7 @@ class SystemNetworkInterface(NetworkInterface):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemTcpConnectionInformation(TcpConnectionInformation):
     """"""
     @property
@@ -2860,6 +2952,7 @@ class SystemTcpConnectionInformation(TcpConnectionInformation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemTcpStatistics(TcpStatistics):
     """"""
     @property
@@ -2913,6 +3006,7 @@ class SystemTcpStatistics(TcpStatistics):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemUdpStatistics(UdpStatistics):
     """"""
     @property
@@ -2939,6 +3033,7 @@ class SystemUdpStatistics(UdpStatistics):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemUnicastIPAddressInformation(UnicastIPAddressInformation):
     """"""
     @property
@@ -2983,6 +3078,7 @@ class SystemUnicastIPAddressInformation(UnicastIPAddressInformation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TcpConnectionInformation(ABC, Object):
     """"""
     @property
@@ -3003,6 +3099,7 @@ class TcpConnectionInformation(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TcpState(Enum):
     """"""
 
@@ -3033,6 +3130,7 @@ class TcpState(Enum):
     DeleteTcb: TcpState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TcpStatistics(ABC, Object):
     """"""
     @property
@@ -3086,6 +3184,7 @@ class TcpStatistics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TcpTableClass(Enum):
     """"""
 
@@ -3108,6 +3207,7 @@ class TcpTableClass(Enum):
     TcpTableOwnerModuleAll: TcpTableClass = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TeredoHelper(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3124,6 +3224,7 @@ class TeredoHelper(Object):
     ) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UdpStatistics(ABC, Object):
     """"""
     @property
@@ -3150,6 +3251,7 @@ class UdpStatistics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UdpTableClass(Enum):
     """"""
 
@@ -3160,6 +3262,7 @@ class UdpTableClass(Enum):
     UdpTableOwnerModule: UdpTableClass = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnicastIPAddressInformation(ABC, IPAddressInformation):
     """"""
     @property
@@ -3204,6 +3307,7 @@ class UnicastIPAddressInformation(ABC, IPAddressInformation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnicastIPAddressInformationCollection(
     Object,
     ICollection[UnicastIPAddressInformation],
@@ -3251,6 +3355,7 @@ class UnicastIPAddressInformationCollection(
     def __getitem__(self, index: int) -> UnicastIPAddressInformation:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnsafeNetInfoNativeMethods(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

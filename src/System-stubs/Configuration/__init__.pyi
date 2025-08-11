@@ -32,9 +32,6 @@ from System.Collections.Specialized import NameValueCollection
 from System.ComponentModel import CancelEventArgs
 from System.ComponentModel import INotifyPropertyChanged
 from System.ComponentModel import PropertyChangedEventHandler
-from System.Configuration.Internal import IConfigErrorInfo
-from System.Configuration.Provider import ProviderBase
-from System.Configuration.Provider import ProviderCollection
 from System.IO import Stream
 from System.IO import TextReader
 from System.IO import TextWriter
@@ -76,10 +73,15 @@ from System.Xml.Schema import XmlSchemaSet
 from System.Xml.XPath import IXPathNavigable
 from System.Xml.XPath import XPathNavigator
 
+from .Internal import IConfigErrorInfo
+from .Provider import ProviderBase
+from .Provider import ProviderCollection
+
 class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AppSettingsReader(Object):
     """"""
     def __init__(self) -> None:
@@ -95,6 +97,7 @@ class AppSettingsReader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationScopedSettingAttribute(SettingAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -135,6 +138,7 @@ class ApplicationScopedSettingAttribute(SettingAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationSettingsBase(ABC, SettingsBase, INotifyPropertyChanged):
     """"""
     @property
@@ -200,6 +204,7 @@ class ApplicationSettingsBase(ABC, SettingsBase, INotifyPropertyChanged):
     SettingsSaving: EventType[SettingsSavingEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationSettingsGroup(ConfigurationSectionGroup):
     """"""
     def __init__(self) -> None:
@@ -242,6 +247,7 @@ class ApplicationSettingsGroup(ConfigurationSectionGroup):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientSettingsSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -286,6 +292,7 @@ class ClientSettingsSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientSettingsStore(Object):
     """"""
     def __init__(self) -> None:
@@ -299,6 +306,7 @@ class ClientSettingsStore(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CommonConfigurationStrings(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -310,6 +318,7 @@ class CommonConfigurationStrings(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlAttribute(XmlAttribute, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
     def __init__(
@@ -474,6 +483,7 @@ class ConfigXmlAttribute(XmlAttribute, IEnumerable, IConfigErrorInfo, IXPathNavi
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlCDataSection(
     XmlCDataSection, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable
 ):
@@ -644,6 +654,7 @@ class ConfigXmlCDataSection(
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlComment(XmlComment, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
     def __init__(self, filename: str, line: int, comment: str, doc: XmlDocument) -> None:
@@ -812,6 +823,7 @@ class ConfigXmlComment(XmlComment, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -1098,6 +1110,7 @@ class ConfigXmlDocument(XmlDocument, IEnumerable, IConfigErrorInfo, IXPathNaviga
     NodeRemoving: EventType[XmlNodeChangedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlElement(XmlElement, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
     def __init__(
@@ -1316,6 +1329,7 @@ class ConfigXmlElement(XmlElement, IEnumerable, IConfigErrorInfo, IXPathNavigabl
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlSignificantWhitespace(
     XmlSignificantWhitespace, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable
 ):
@@ -1486,6 +1500,7 @@ class ConfigXmlSignificantWhitespace(
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlText(XmlText, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable):
     """"""
     def __init__(self, filename: str, line: int, strData: str, doc: XmlDocument) -> None:
@@ -1656,6 +1671,7 @@ class ConfigXmlText(XmlText, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICl
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigXmlWhitespace(
     XmlWhitespace, IEnumerable, IConfigErrorInfo, IXPathNavigable, ICloneable
 ):
@@ -1826,6 +1842,7 @@ class ConfigXmlWhitespace(
     def __getitem__(self, localname: str, ns: str) -> XmlElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigurationException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -1905,6 +1922,7 @@ class ConfigurationException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigurationManagerInternalFactory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1916,6 +1934,7 @@ class ConfigurationManagerInternalFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigurationSettings(Object):
     """"""
     @classmethod
@@ -1934,6 +1953,7 @@ class ConfigurationSettings(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultSettingValueAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, value: str) -> None:
@@ -1977,6 +1997,7 @@ class DefaultSettingValueAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DictionarySectionHandler(Object, IConfigurationSectionHandler):
     """"""
     def __init__(self) -> None:
@@ -1992,6 +2013,7 @@ class DictionarySectionHandler(Object, IConfigurationSectionHandler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HandlerBase(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2003,6 +2025,7 @@ class HandlerBase(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IApplicationSettingsProvider(ABC):
     """"""
     def GetPreviousVersion(
@@ -2014,11 +2037,13 @@ class IApplicationSettingsProvider(ABC):
     def Upgrade(self, context: SettingsContext, properties: SettingsPropertyCollection) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IConfigurationSectionHandler(ABC):
     """"""
     def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IConfigurationSystem(ABC):
     """"""
     def GetConfig(self, configKey: str) -> object:
@@ -2026,6 +2051,7 @@ class IConfigurationSystem(ABC):
     def Init(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPersistComponentSettings(ABC):
     """"""
     @property
@@ -2045,11 +2071,13 @@ class IPersistComponentSettings(ABC):
     def SaveComponentSettings(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISettingsProviderService(ABC):
     """"""
     def GetSettingsProvider(self, property: SettingsProperty) -> SettingsProvider:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IdnElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -2093,6 +2121,7 @@ class IdnElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IgnoreSectionHandler(Object, IConfigurationSectionHandler):
     """"""
     def __init__(self) -> None:
@@ -2108,6 +2137,7 @@ class IgnoreSectionHandler(Object, IConfigurationSectionHandler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IriParsingElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -2151,6 +2181,7 @@ class IriParsingElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LocalFileSettingsProvider(SettingsProvider, IApplicationSettingsProvider):
     """"""
     def __init__(self) -> None:
@@ -2193,6 +2224,7 @@ class LocalFileSettingsProvider(SettingsProvider, IApplicationSettingsProvider):
     def Upgrade(self, context: SettingsContext, properties: SettingsPropertyCollection) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameValueFileSectionHandler(Object, IConfigurationSectionHandler):
     """"""
     def __init__(self) -> None:
@@ -2208,6 +2240,7 @@ class NameValueFileSectionHandler(Object, IConfigurationSectionHandler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameValueSectionHandler(Object, IConfigurationSectionHandler):
     """"""
     def __init__(self) -> None:
@@ -2223,6 +2256,7 @@ class NameValueSectionHandler(Object, IConfigurationSectionHandler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NoSettingsVersionUpgradeAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -2263,6 +2297,7 @@ class NoSettingsVersionUpgradeAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrivilegedConfigurationManager(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2274,6 +2309,7 @@ class PrivilegedConfigurationManager(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyNameValueCollection(
     NameValueCollection, ICollection, IEnumerable, IDeserializationCallback, ISerializable
 ):
@@ -2354,6 +2390,7 @@ class ReadOnlyNameValueCollection(
         """"""
     def __setitem__(self, name: str, value: str) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class KeysCollection(Object, ICollection, IEnumerable):
         """"""
         @property
@@ -2389,6 +2426,7 @@ class ReadOnlyNameValueCollection(
         def __getitem__(self, index: int) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SchemeSettingElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -2433,6 +2471,7 @@ class SchemeSettingElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SchemeSettingElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -2511,6 +2550,7 @@ class SchemeSettingElementCollection(ConfigurationElementCollection, ICollection
     def __getitem__(self, name: str) -> SchemeSettingElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SchemeSettingInternal(Object):
     """"""
     def __init__(self, name: str, options: GenericUriParserOptions) -> None:
@@ -2530,6 +2570,7 @@ class SchemeSettingInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -2570,6 +2611,7 @@ class SettingAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingChangingEventArgs(CancelEventArgs):
     """"""
     def __init__(
@@ -2605,6 +2647,7 @@ class SettingChangingEventArgs(CancelEventArgs):
 type SettingChangingEventHandler = Callable[[object, SettingChangingEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingElement(ConfigurationElement):
     """"""
     @overload
@@ -2662,6 +2705,7 @@ class SettingElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -2739,6 +2783,7 @@ class SettingElementCollection(ConfigurationElementCollection, ICollection, IEnu
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingValueElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -2782,6 +2827,7 @@ class SettingValueElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsAttributeDictionary(
     Hashtable,
     ICollection,
@@ -2867,6 +2913,7 @@ class SettingsAttributeDictionary(
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsBase(ABC, Object):
     """"""
     @property
@@ -2914,6 +2961,7 @@ class SettingsBase(ABC, Object):
     def __setitem__(self, propertyName: str, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsContext(
     Hashtable,
     ICollection,
@@ -2995,6 +3043,7 @@ class SettingsContext(
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsDescriptionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, description: str) -> None:
@@ -3038,6 +3087,7 @@ class SettingsDescriptionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsGroupDescriptionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, description: str) -> None:
@@ -3081,6 +3131,7 @@ class SettingsGroupDescriptionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsGroupNameAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, groupName: str) -> None:
@@ -3124,6 +3175,7 @@ class SettingsGroupNameAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsLoadedEventArgs(EventArgs):
     """"""
     def __init__(self, provider: SettingsProvider) -> None:
@@ -3143,12 +3195,14 @@ class SettingsLoadedEventArgs(EventArgs):
 type SettingsLoadedEventHandler = Callable[[object, SettingsLoadedEventArgs], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SettingsManageability(Enum):
     """"""
 
     Roaming: SettingsManageability = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsManageabilityAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, manageability: SettingsManageability) -> None:
@@ -3192,6 +3246,7 @@ class SettingsManageabilityAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsProperty(Object):
     """"""
     @overload
@@ -3266,6 +3321,7 @@ class SettingsProperty(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsPropertyCollection(Object, ICollection, IEnumerable, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -3313,6 +3369,7 @@ class SettingsPropertyCollection(Object, ICollection, IEnumerable, ICloneable):
     def __getitem__(self, name: str) -> SettingsProperty:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsPropertyIsReadOnlyException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -3365,6 +3422,7 @@ class SettingsPropertyIsReadOnlyException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsPropertyNotFoundException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -3417,6 +3475,7 @@ class SettingsPropertyNotFoundException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsPropertyValue(Object):
     """"""
     def __init__(self, property: SettingsProperty) -> None:
@@ -3459,6 +3518,7 @@ class SettingsPropertyValue(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsPropertyValueCollection(Object, ICollection, IEnumerable, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -3506,6 +3566,7 @@ class SettingsPropertyValueCollection(Object, ICollection, IEnumerable, ICloneab
     def __getitem__(self, name: str) -> SettingsPropertyValue:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsPropertyWrongTypeException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -3558,6 +3619,7 @@ class SettingsPropertyWrongTypeException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsProvider(ABC, ProviderBase):
     """"""
     @property
@@ -3590,6 +3652,7 @@ class SettingsProvider(ABC, ProviderBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsProviderAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -3637,6 +3700,7 @@ class SettingsProviderAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsProviderCollection(ProviderCollection, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -3689,6 +3753,7 @@ class SettingsProviderCollection(ProviderCollection, ICollection, IEnumerable):
 type SettingsSavingEventHandler = Callable[[object, CancelEventArgs], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SettingsSerializeAs(Enum):
     """"""
 
@@ -3701,6 +3766,7 @@ class SettingsSerializeAs(Enum):
     ProviderSpecific: SettingsSerializeAs = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsSerializeAsAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, serializeAs: SettingsSerializeAs) -> None:
@@ -3744,6 +3810,7 @@ class SettingsSerializeAsAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SingleTagSectionHandler(Object, IConfigurationSectionHandler):
     """"""
     def __init__(self) -> None:
@@ -3759,6 +3826,7 @@ class SingleTagSectionHandler(Object, IConfigurationSectionHandler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SpecialSetting(Enum):
     """"""
 
@@ -3767,6 +3835,7 @@ class SpecialSetting(Enum):
     WebServiceUrl: SpecialSetting = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SpecialSettingAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, specialSetting: SpecialSetting) -> None:
@@ -3810,6 +3879,7 @@ class SpecialSettingAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoredSetting(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3821,6 +3891,7 @@ class StoredSetting(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeUtil(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3832,6 +3903,7 @@ class TypeUtil(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UriSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -3882,6 +3954,7 @@ class UriSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UriSectionData(Object):
     """"""
     def __init__(self) -> None:
@@ -3908,6 +3981,7 @@ class UriSectionData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UriSectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3919,6 +3993,7 @@ class UriSectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UriSectionReader(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3938,6 +4013,7 @@ class UriSectionReader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UserScopedSettingAttribute(SettingAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -3978,6 +4054,7 @@ class UserScopedSettingAttribute(SettingAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UserSettingsGroup(ConfigurationSectionGroup):
     """"""
     def __init__(self) -> None:

@@ -56,6 +56,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeCompiler(ABC, CodeGenerator, ICodeCompiler, ICodeGenerator):
     """"""
     def CompileAssemblyFromDom(
@@ -127,6 +128,7 @@ class CodeCompiler(ABC, CodeGenerator, ICodeCompiler, ICodeGenerator):
     def ValidateIdentifier(self, value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDomCompilationConfiguration(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -138,6 +140,7 @@ class CodeDomCompilationConfiguration(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDomConfigurationHandler(Object, IConfigurationSectionHandler):
     """"""
     def Create(self, inheritedObject: object, configContextObj: object, node: XmlNode) -> object:
@@ -151,6 +154,7 @@ class CodeDomConfigurationHandler(Object, IConfigurationSectionHandler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeDomProvider(ABC, Component, IComponent, IDisposable):
     """"""
     @property
@@ -274,6 +278,7 @@ class CodeDomProvider(ABC, Component, IComponent, IDisposable):
     Disposed: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeGenerator(ABC, Object, ICodeGenerator):
     """"""
     def CreateEscapedIdentifier(self, value: str) -> str:
@@ -327,6 +332,7 @@ class CodeGenerator(ABC, Object, ICodeGenerator):
     def ValidateIdentifiers(cls, e: CodeObject) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeGeneratorOptions(Object):
     """"""
     def __init__(self) -> None:
@@ -374,6 +380,7 @@ class CodeGeneratorOptions(Object):
     def __setitem__(self, index: str, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeParser(ABC, Object, ICodeParser):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -387,6 +394,7 @@ class CodeParser(ABC, Object, ICodeParser):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeValidator(Object):
     """"""
     def __init__(self) -> None:
@@ -400,6 +408,7 @@ class CodeValidator(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompilerError(Object):
     """"""
     @overload
@@ -449,6 +458,7 @@ class CompilerError(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompilerErrorCollection(CollectionBase, ICollection, IEnumerable, IList):
     """"""
     @overload
@@ -572,6 +582,7 @@ class CompilerErrorCollection(CollectionBase, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompilerInfo(Object):
     """"""
     @property
@@ -601,6 +612,7 @@ class CompilerInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompilerParameters(Object):
     """"""
     @overload
@@ -700,6 +712,7 @@ class CompilerParameters(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompilerResults(Object):
     """"""
     def __init__(self, tempFiles: TempFileCollection) -> None:
@@ -744,6 +757,7 @@ class CompilerResults(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Executor(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -798,6 +812,7 @@ class Executor(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileIntegrity(ABC, Object):
     """"""
     @classmethod
@@ -819,6 +834,7 @@ class FileIntegrity(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GeneratedCodeAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, tool: str, version: str) -> None:
@@ -865,6 +881,7 @@ class GeneratedCodeAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class GeneratorSupport(Enum):
     """"""
 
@@ -921,6 +938,7 @@ class GeneratorSupport(Enum):
     DeclareIndexerProperties: GeneratorSupport = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HandlerBase(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -932,6 +950,7 @@ class HandlerBase(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICodeCompiler(ABC):
     """"""
     def CompileAssemblyFromDom(
@@ -959,6 +978,7 @@ class ICodeCompiler(ABC):
     ) -> CompilerResults:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICodeGenerator(ABC):
     """"""
     def CreateEscapedIdentifier(self, value: str) -> str:
@@ -994,11 +1014,13 @@ class ICodeGenerator(ABC):
     def ValidateIdentifier(self, value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICodeParser(ABC):
     """"""
     def Parse(self, codeStream: TextReader) -> CodeCompileUnit:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Indentation(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1010,6 +1032,7 @@ class Indentation(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IndentedTextWriter(TextWriter, IDisposable):
     """"""
 
@@ -1197,6 +1220,7 @@ class IndentedTextWriter(TextWriter, IDisposable):
     def WriteLineNoTabs(self, s: str) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class LanguageOptions(Enum):
     """"""
 
@@ -1205,6 +1229,7 @@ class LanguageOptions(Enum):
     CaseInsensitive: LanguageOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RedistVersionInfo(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1219,6 +1244,7 @@ class RedistVersionInfo(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TempFileCollection(Object, ICollection, IEnumerable, IDisposable):
     """"""
     @overload

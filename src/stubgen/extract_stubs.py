@@ -71,7 +71,8 @@ logger: Logger = get_logger(__name__)
 # TODO(Ryan): Out generic parameter type is not recognized as generic
 
 
-def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | None:
+# noinspection PyUnreachableCode
+def extract_type(info: TypeInfo, use_generic: bool = False) -> CType | None:
     """Extract a TypeInfo object into a CType."""
     if info is None:
         return None
@@ -155,6 +156,7 @@ def extract_property(info: PropertyInfo) -> CProperty:
     set_method: MethodInfo = info.GetSetMethod()
 
     declaring_type: TypeInfo = info.DeclaringType
+    # noinspection PyUnreachableCode
     if get_method is not None:
         declaring_type = get_method.GetBaseDefinition().DeclaringType
 

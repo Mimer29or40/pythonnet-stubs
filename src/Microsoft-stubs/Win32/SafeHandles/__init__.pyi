@@ -13,6 +13,7 @@ from System.Runtime.InteropServices import CriticalHandle
 from System.Runtime.InteropServices import SafeBuffer
 from System.Runtime.InteropServices import SafeHandle
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CriticalHandleMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
     """"""
     @property
@@ -36,6 +37,7 @@ class CriticalHandleMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CriticalHandleZeroOrMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
     """"""
     @property
@@ -59,6 +61,7 @@ class CriticalHandleZeroOrMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeAccessTokenHandle(SafeHandle, IDisposable):
     """"""
     def __init__(self, handle: IntPtr) -> None:
@@ -94,6 +97,7 @@ class SafeAccessTokenHandle(SafeHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeAxlBufferHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -123,6 +127,7 @@ class SafeAxlBufferHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeBCryptAlgorithmHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -152,6 +157,7 @@ class SafeBCryptAlgorithmHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeBCryptHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -181,6 +187,7 @@ class SafeBCryptHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeBCryptKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -210,6 +217,7 @@ class SafeBCryptKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCapiHandleBase(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -239,6 +247,7 @@ class SafeCapiHandleBase(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCapiHashHandle(SafeCapiHandleBase, IDisposable):
     """"""
     @classmethod
@@ -272,6 +281,7 @@ class SafeCapiHashHandle(SafeCapiHandleBase, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCapiKeyHandle(SafeCapiHandleBase, IDisposable):
     """"""
     @property
@@ -301,6 +311,7 @@ class SafeCapiKeyHandle(SafeCapiHandleBase, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -332,6 +343,7 @@ class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeEventLogReadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -361,6 +373,7 @@ class SafeEventLogReadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeEventLogWriteHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -390,6 +403,7 @@ class SafeEventLogWriteHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool) -> None:
@@ -421,6 +435,7 @@ class SafeFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeFileMapViewHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -450,6 +465,7 @@ class SafeFileMapViewHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeFileMappingHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -479,6 +495,7 @@ class SafeFileMappingHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeFindHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -508,6 +525,7 @@ class SafeFindHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeHandleMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
     """"""
     @property
@@ -537,6 +555,7 @@ class SafeHandleMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeHandleZeroOrMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
     """"""
     @property
@@ -566,6 +585,7 @@ class SafeHandleZeroOrMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -595,6 +615,7 @@ class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLocalAllocHandle(SafeBuffer, IDisposable):
     """"""
     @property
@@ -648,6 +669,7 @@ class SafeLocalAllocHandle(SafeBuffer, IDisposable):
     def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLocalMemHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -677,6 +699,7 @@ class SafeLocalMemHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLsaLogonProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -706,6 +729,7 @@ class SafeLsaLogonProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
     """"""
     @property
@@ -759,6 +783,7 @@ class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
     def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLsaPolicyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -788,6 +813,7 @@ class SafeLsaPolicyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
     """"""
     @property
@@ -841,6 +867,7 @@ class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
     def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -870,6 +897,7 @@ class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
     """"""
     @property
@@ -923,6 +951,7 @@ class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
     def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeNCryptHandle(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -952,6 +981,7 @@ class SafeNCryptHandle(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeNCryptKeyHandle(SafeNCryptHandle, IDisposable):
     """"""
     @overload
@@ -987,6 +1017,7 @@ class SafeNCryptKeyHandle(SafeNCryptHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeNCryptProviderHandle(SafeNCryptHandle, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -1018,6 +1049,7 @@ class SafeNCryptProviderHandle(SafeNCryptHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeNCryptSecretHandle(SafeNCryptHandle, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -1049,6 +1081,7 @@ class SafeNCryptSecretHandle(SafeNCryptHandle, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafePEFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -1078,6 +1111,7 @@ class SafePEFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafePerfProviderHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -1107,6 +1141,7 @@ class SafePerfProviderHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafePipeHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool) -> None:
@@ -1138,6 +1173,7 @@ class SafePipeHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     def __init__(self, existingHandle: IntPtr, ownsHandle: bool) -> None:
@@ -1169,6 +1205,7 @@ class SafeProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeRegistryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool) -> None:
@@ -1200,6 +1237,7 @@ class SafeRegistryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeThreadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -1229,6 +1267,7 @@ class SafeThreadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeTimerHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -1258,6 +1297,7 @@ class SafeTimerHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeUserTokenHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -1287,6 +1327,7 @@ class SafeUserTokenHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeViewOfFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -1316,6 +1357,7 @@ class SafeViewOfFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeWaitHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     def __init__(self, existingHandle: IntPtr, ownsHandle: bool) -> None:
@@ -1347,6 +1389,7 @@ class SafeWaitHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeX509ChainHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property

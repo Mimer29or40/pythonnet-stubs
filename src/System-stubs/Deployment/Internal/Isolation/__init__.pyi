@@ -21,8 +21,10 @@ from System import UInt64
 from System import UIntPtr
 from System import ValueType
 from System.Collections import IEnumerator
-from System.Deployment.Internal.Isolation.Manifest import ICMS
 
+from .Manifest import ICMS
+
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BLOB(ValueType, IDisposable):
     """"""
 
@@ -41,6 +43,7 @@ class BLOB(ValueType, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CATEGORY(ValueType):
     """"""
 
@@ -55,6 +58,7 @@ class CATEGORY(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CATEGORY_INSTANCE(ValueType):
     """"""
 
@@ -71,6 +75,7 @@ class CATEGORY_INSTANCE(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CATEGORY_SUBCATEGORY(ValueType):
     """"""
 
@@ -85,18 +90,21 @@ class CATEGORY_SUBCATEGORY(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS(Enum):
     """"""
 
     IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS(Enum):
     """"""
 
     IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IActContext(ABC):
     """"""
     def ApplicationBasePath(self, Flags: int, ApplicationPath: String) -> tuple[None, String]:
@@ -195,6 +203,7 @@ class IActContext(ABC):
     ) -> tuple[None, UInt32]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IAppIdAuthority(ABC):
     """"""
     def AreDefinitionsEqual(
@@ -238,6 +247,7 @@ class IAppIdAuthority(ABC):
     def TextToReference(self, Flags: int, Identity: str) -> IReferenceAppId:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICDF(ABC):
     """"""
     @property
@@ -255,6 +265,7 @@ class ICDF(ABC):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDENTITY_ATTRIBUTE(ValueType):
     """"""
 
@@ -273,6 +284,7 @@ class IDENTITY_ATTRIBUTE(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDefinitionAppId(ABC):
     """"""
     def EnumAppPath(self) -> IEnumDefinitionIdentity:
@@ -286,6 +298,7 @@ class IDefinitionAppId(ABC):
     def put_SubscriptionId(self, Subscription: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDefinitionIdentity(ABC):
     """"""
     def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IDefinitionIdentity:
@@ -297,6 +310,7 @@ class IDefinitionIdentity(ABC):
     def SetAttribute(self, Namespace: str, Name: str, Value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumDefinitionIdentity(ABC):
     """"""
     def Clone(self) -> IEnumDefinitionIdentity:
@@ -310,6 +324,7 @@ class IEnumDefinitionIdentity(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumIDENTITY_ATTRIBUTE(ABC):
     """"""
     def Clone(self) -> IEnumIDENTITY_ATTRIBUTE:
@@ -325,6 +340,7 @@ class IEnumIDENTITY_ATTRIBUTE(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumReferenceIdentity(ABC):
     """"""
     def Clone(self) -> IEnumReferenceIdentity:
@@ -338,6 +354,7 @@ class IEnumReferenceIdentity(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_ASSEMBLY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_ASSEMBLY:
@@ -349,6 +366,7 @@ class IEnumSTORE_ASSEMBLY(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_ASSEMBLY_FILE(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_ASSEMBLY_FILE:
@@ -362,6 +380,7 @@ class IEnumSTORE_ASSEMBLY_FILE(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
@@ -375,6 +394,7 @@ class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_CATEGORY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_CATEGORY:
@@ -388,6 +408,7 @@ class IEnumSTORE_CATEGORY(ABC):
     def Skip(self, ulElements: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_CATEGORY_INSTANCE(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_CATEGORY_INSTANCE:
@@ -401,6 +422,7 @@ class IEnumSTORE_CATEGORY_INSTANCE(ABC):
     def Skip(self, ulElements: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_CATEGORY_SUBCATEGORY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_CATEGORY_SUBCATEGORY:
@@ -414,6 +436,7 @@ class IEnumSTORE_CATEGORY_SUBCATEGORY(ABC):
     def Skip(self, ulElements: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_DEPLOYMENT_METADATA(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA:
@@ -427,6 +450,7 @@ class IEnumSTORE_DEPLOYMENT_METADATA(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY(ABC):
     """"""
     def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
@@ -440,6 +464,7 @@ class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY(ABC):
     def Skip(self, celt: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumUnknown(ABC):
     """"""
     def Clone(self, enumUnknown: IEnumUnknown) -> tuple[int, IEnumUnknown]:
@@ -453,24 +478,28 @@ class IEnumUnknown(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS(Enum):
     """"""
 
     IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS(Enum):
     """"""
 
     IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAG_EXACT_MATCH_REQUIRED: IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS(Enum):
     """"""
 
     IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IIdentityAuthority(ABC):
     """"""
     def AreDefinitionsEqual(
@@ -533,9 +562,11 @@ class IIdentityAuthority(ABC):
     def TextToReference(self, Flags: int, Identity: str) -> IReferenceIdentity:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IManifestInformation(ABC):
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IManifestParseErrorCallback(ABC):
     """"""
     def OnError(
@@ -550,6 +581,7 @@ class IManifestParseErrorCallback(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReferenceAppId(ABC):
     """"""
     def EnumAppPath(self) -> IEnumReferenceIdentity:
@@ -559,6 +591,7 @@ class IReferenceAppId(ABC):
     def put_SubscriptionId(self, Subscription: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReferenceIdentity(ABC):
     """"""
     def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IReferenceIdentity:
@@ -570,12 +603,14 @@ class IReferenceIdentity(ABC):
     def SetAttribute(self, Namespace: str, Name: str, Value: str) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS(Enum):
     """"""
 
     ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAG_FORCE_LIBRARY_SEMANTICS: ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ISTORE_ENUM_ASSEMBLIES_FLAGS(Enum):
     """"""
 
@@ -586,6 +621,7 @@ class ISTORE_ENUM_ASSEMBLIES_FLAGS(Enum):
     ISTORE_ENUM_ASSEMBLIES_FLAG_FORCE_LIBRARY_SEMANTICS: ISTORE_ENUM_ASSEMBLIES_FLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ISTORE_ENUM_FILES_FLAGS(Enum):
     """"""
 
@@ -594,6 +630,7 @@ class ISTORE_ENUM_FILES_FLAGS(Enum):
     ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES: ISTORE_ENUM_FILES_FLAGS = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISection(ABC):
     """"""
     @property
@@ -611,6 +648,7 @@ class ISection(ABC):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISectionEntry(ABC):
     """"""
     def GetField(self, fieldId: int) -> object:
@@ -618,6 +656,7 @@ class ISectionEntry(ABC):
     def GetFieldName(self, fieldId: int) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISectionWithReferenceIdentityKey(ABC):
     """"""
     def Lookup(
@@ -625,6 +664,7 @@ class ISectionWithReferenceIdentityKey(ABC):
     ) -> tuple[None, Object]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISectionWithStringKey(ABC):
     """"""
     @property
@@ -633,6 +673,7 @@ class ISectionWithStringKey(ABC):
     def Lookup(self, wzStringKey: str, ppUnknown: Object) -> tuple[None, Object]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStateManager(ABC):
     """"""
     def GetApplicationStateFilesystemLocation(
@@ -653,6 +694,7 @@ class IStateManager(ABC):
     ) -> tuple[None, UInt32]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStore(ABC):
     """"""
     def BindDefinitions(
@@ -760,6 +802,7 @@ class IStore(ABC):
     ) -> tuple[None, Array[int], Array[int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStore_BindingResult(ValueType):
     """"""
 
@@ -782,6 +825,7 @@ class IStore_BindingResult(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStore_BindingResult_BoundVersion(ValueType):
     """"""
 
@@ -802,6 +846,7 @@ class IStore_BindingResult_BoundVersion(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolationInterop(ABC, Object):
     """"""
 
@@ -851,6 +896,7 @@ class IsolationInterop(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STORE_ASSEMBLY(ValueType):
     """"""
 
@@ -873,6 +919,7 @@ class STORE_ASSEMBLY(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STORE_ASSEMBLY_FILE(ValueType):
     """"""
 
@@ -893,12 +940,14 @@ class STORE_ASSEMBLY_FILE(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class STORE_ASSEMBLY_FILE_STATUS_FLAGS(Enum):
     """"""
 
     STORE_ASSEMBLY_FILE_STATUS_FLAG_PRESENT: STORE_ASSEMBLY_FILE_STATUS_FLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class STORE_ASSEMBLY_STATUS_FLAGS(Enum):
     """"""
 
@@ -909,6 +958,7 @@ class STORE_ASSEMBLY_STATUS_FLAGS(Enum):
     STORE_ASSEMBLY_STATUS_PARTIAL_INSTALL: STORE_ASSEMBLY_STATUS_FLAGS = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STORE_CATEGORY(ValueType):
     """"""
 
@@ -923,6 +973,7 @@ class STORE_CATEGORY(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STORE_CATEGORY_INSTANCE(ValueType):
     """"""
 
@@ -939,6 +990,7 @@ class STORE_CATEGORY_INSTANCE(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STORE_CATEGORY_SUBCATEGORY(ValueType):
     """"""
 
@@ -953,6 +1005,7 @@ class STORE_CATEGORY_SUBCATEGORY(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StateManager_RunningState(Enum):
     """"""
 
@@ -963,6 +1016,7 @@ class StateManager_RunningState(Enum):
     Running: StateManager_RunningState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Store(Object):
     """"""
     def __init__(self, pStore: IStore) -> None:
@@ -1086,6 +1140,7 @@ class Store(Object):
         """"""
     def Transact(self, operations: Array[StoreTransactionOperation]) -> Array[int]:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class EnumApplicationPrivateFiles(Enum):
         """"""
 
@@ -1096,6 +1151,7 @@ class Store(Object):
         IncludeMissing: Store.EnumApplicationPrivateFiles = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class EnumAssembliesFlags(Enum):
         """"""
 
@@ -1108,6 +1164,7 @@ class Store(Object):
         ForceLibrarySemantics: Store.EnumAssembliesFlags = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class EnumAssemblyFilesFlags(Enum):
         """"""
 
@@ -1118,36 +1175,42 @@ class Store(Object):
         IncludeMissing: Store.EnumAssemblyFilesFlags = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class EnumAssemblyInstallReferenceFlags(Enum):
         """"""
 
         Nothing: Store.EnumAssemblyInstallReferenceFlags = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class EnumCategoriesFlags(Enum):
         """"""
 
         Nothing: Store.EnumCategoriesFlags = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class EnumCategoryInstancesFlags(Enum):
         """"""
 
         Nothing: Store.EnumCategoryInstancesFlags = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class EnumSubcategoriesFlags(Enum):
         """"""
 
         Nothing: Store.EnumSubcategoriesFlags = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class GetPackagePropertyFlags(Enum):
         """"""
 
         Nothing: Store.GetPackagePropertyFlags = ...
         """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class IPathLock(ABC, IDisposable):
         """"""
         @property
@@ -1156,6 +1219,7 @@ class Store(Object):
         def Dispose(self) -> None:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreApplicationReference(ValueType):
     """"""
 
@@ -1184,12 +1248,14 @@ class StoreApplicationReference(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class RefFlags(Enum):
         """"""
 
         Nothing: StoreApplicationReference.RefFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreAssemblyEnumeration(Object, IEnumerator):
     """"""
     def __init__(self, pI: IEnumSTORE_ASSEMBLY) -> None:
@@ -1214,6 +1280,7 @@ class StoreAssemblyEnumeration(Object, IEnumerator):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreAssemblyFileEnumeration(Object, IEnumerator):
     """"""
     def __init__(self, pI: IEnumSTORE_ASSEMBLY_FILE) -> None:
@@ -1238,6 +1305,7 @@ class StoreAssemblyFileEnumeration(Object, IEnumerator):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreCategoryEnumeration(Object, IEnumerator):
     """"""
     def __init__(self, pI: IEnumSTORE_CATEGORY) -> None:
@@ -1262,6 +1330,7 @@ class StoreCategoryEnumeration(Object, IEnumerator):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreCategoryInstanceEnumeration(Object, IEnumerator):
     """"""
     def __init__(self, pI: IEnumSTORE_CATEGORY_INSTANCE) -> None:
@@ -1286,6 +1355,7 @@ class StoreCategoryInstanceEnumeration(Object, IEnumerator):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreDeploymentMetadataEnumeration(Object, IEnumerator):
     """"""
     def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA) -> None:
@@ -1310,6 +1380,7 @@ class StoreDeploymentMetadataEnumeration(Object, IEnumerator):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreDeploymentMetadataPropertyEnumeration(Object, IEnumerator):
     """"""
     def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY) -> None:
@@ -1334,6 +1405,7 @@ class StoreDeploymentMetadataPropertyEnumeration(Object, IEnumerator):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationInstallDeployment(ValueType):
     """"""
 
@@ -1363,6 +1435,7 @@ class StoreOperationInstallDeployment(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class Disposition(Enum):
         """"""
 
@@ -1373,6 +1446,7 @@ class StoreOperationInstallDeployment(ValueType):
         Installed: StoreOperationInstallDeployment.Disposition = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
@@ -1381,6 +1455,7 @@ class StoreOperationInstallDeployment(ValueType):
         UninstallOthers: StoreOperationInstallDeployment.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationMetadataProperty(ValueType):
     """"""
 
@@ -1407,6 +1482,7 @@ class StoreOperationMetadataProperty(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationPinDeployment(ValueType):
     """"""
 
@@ -1438,6 +1514,7 @@ class StoreOperationPinDeployment(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class Disposition(Enum):
         """"""
 
@@ -1446,6 +1523,7 @@ class StoreOperationPinDeployment(ValueType):
         Pinned: StoreOperationPinDeployment.Disposition = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
@@ -1454,6 +1532,7 @@ class StoreOperationPinDeployment(ValueType):
         NeverExpires: StoreOperationPinDeployment.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationScavenge(ValueType):
     """"""
 
@@ -1483,6 +1562,7 @@ class StoreOperationScavenge(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
@@ -1497,6 +1577,7 @@ class StoreOperationScavenge(ValueType):
         LimitCount: StoreOperationScavenge.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationSetCanonicalizationContext(ValueType):
     """"""
 
@@ -1520,12 +1601,14 @@ class StoreOperationSetCanonicalizationContext(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
         Nothing: StoreOperationSetCanonicalizationContext.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationSetDeploymentMetadata(ValueType):
     """"""
 
@@ -1572,6 +1655,7 @@ class StoreOperationSetDeploymentMetadata(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class Disposition(Enum):
         """"""
 
@@ -1580,12 +1664,14 @@ class StoreOperationSetDeploymentMetadata(ValueType):
         Set: StoreOperationSetDeploymentMetadata.Disposition = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
         Nothing: StoreOperationSetDeploymentMetadata.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationStageComponent(ValueType):
     """"""
 
@@ -1615,6 +1701,7 @@ class StoreOperationStageComponent(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class Disposition(Enum):
         """"""
 
@@ -1627,12 +1714,14 @@ class StoreOperationStageComponent(ValueType):
         AlreadyInstalled: StoreOperationStageComponent.Disposition = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
         Nothing: StoreOperationStageComponent.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationStageComponentFile(ValueType):
     """"""
 
@@ -1666,6 +1755,7 @@ class StoreOperationStageComponentFile(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class Disposition(Enum):
         """"""
 
@@ -1678,12 +1768,14 @@ class StoreOperationStageComponentFile(ValueType):
         AlreadyInstalled: StoreOperationStageComponentFile.Disposition = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
         Nothing: StoreOperationStageComponentFile.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationUninstallDeployment(ValueType):
     """"""
 
@@ -1707,6 +1799,7 @@ class StoreOperationUninstallDeployment(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class Disposition(Enum):
         """"""
 
@@ -1717,12 +1810,14 @@ class StoreOperationUninstallDeployment(ValueType):
         Uninstalled: StoreOperationUninstallDeployment.Disposition = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
         Nothing: StoreOperationUninstallDeployment.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreOperationUnpinDeployment(ValueType):
     """"""
 
@@ -1746,6 +1841,7 @@ class StoreOperationUnpinDeployment(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class Disposition(Enum):
         """"""
 
@@ -1754,12 +1850,14 @@ class StoreOperationUnpinDeployment(ValueType):
         Unpinned: StoreOperationUnpinDeployment.Disposition = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class OpFlags(Enum):
         """"""
 
         Nothing: StoreOperationUnpinDeployment.OpFlags = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreSubcategoryEnumeration(Object, IEnumerator):
     """"""
     def __init__(self, pI: IEnumSTORE_CATEGORY_SUBCATEGORY) -> None:
@@ -1784,6 +1882,7 @@ class StoreSubcategoryEnumeration(Object, IEnumerator):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreTransaction(Object, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -1829,6 +1928,7 @@ class StoreTransaction(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreTransactionData(ValueType):
     """"""
 
@@ -1843,6 +1943,7 @@ class StoreTransactionData(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StoreTransactionOperation(ValueType):
     """"""
 
@@ -1859,6 +1960,7 @@ class StoreTransactionOperation(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StoreTransactionOperationType(Enum):
     """"""
 

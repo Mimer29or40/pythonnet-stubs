@@ -35,6 +35,7 @@ from System.Security.Claims import Claim
 from System.Security.Claims import ClaimsIdentity
 from System.Security.Claims import ClaimsPrincipal
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericIdentity(ClaimsIdentity, IIdentity):
     """"""
     @overload
@@ -115,6 +116,7 @@ class GenericIdentity(ClaimsIdentity, IIdentity):
     def WriteTo(self, writer: BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericPrincipal(ClaimsPrincipal, IPrincipal):
     """"""
     def __init__(self, identity: IIdentity, roles: Array[str]) -> None:
@@ -165,6 +167,7 @@ class GenericPrincipal(ClaimsPrincipal, IPrincipal):
     def WriteTo(self, writer: BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IIdentity(ABC):
     """"""
     @property
@@ -177,6 +180,7 @@ class IIdentity(ABC):
     def Name(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPrincipal(ABC):
     """"""
     @property
@@ -185,6 +189,7 @@ class IPrincipal(ABC):
     def IsInRole(self, role: str) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IdentifierAuthority(Enum):
     """"""
 
@@ -209,6 +214,7 @@ class IdentifierAuthority(Enum):
     ResourceManagerAuthority: IdentifierAuthority = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IdentityNotMappedException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -266,6 +272,7 @@ class IdentityNotMappedException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IdentityReference(ABC, Object):
     """"""
     @property
@@ -294,6 +301,7 @@ class IdentityReference(ABC, Object):
     def __ne__(self, other: IdentityReference) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IdentityReferenceCollection(
     Object, ICollection[IdentityReference], IEnumerable[IdentityReference], IEnumerable
 ):
@@ -354,6 +362,7 @@ class IdentityReferenceCollection(
     def __setitem__(self, index: int, value: IdentityReference) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IdentityReferenceEnumerator(Object, IEnumerator[IdentityReference], IEnumerator, IDisposable):
     """"""
     @property
@@ -374,6 +383,7 @@ class IdentityReferenceEnumerator(Object, IEnumerator[IdentityReference], IEnume
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ImpersonationQueryResult(Enum):
     """"""
 
@@ -384,6 +394,7 @@ class ImpersonationQueryResult(Enum):
     Failed: ImpersonationQueryResult = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class KerbLogonSubmitType(Enum):
     """"""
 
@@ -404,6 +415,7 @@ class KerbLogonSubmitType(Enum):
     KerbS4ULogon: KerbLogonSubmitType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NTAccount(IdentityReference):
     """"""
     @overload
@@ -438,6 +450,7 @@ class NTAccount(IdentityReference):
     def __ne__(self, other: NTAccount) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PolicyRights(Enum):
     """"""
 
@@ -468,6 +481,7 @@ class PolicyRights(Enum):
     POLICY_NOTIFICATION: PolicyRights = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PrincipalPolicy(Enum):
     """"""
 
@@ -478,6 +492,7 @@ class PrincipalPolicy(Enum):
     WindowsPrincipal: PrincipalPolicy = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SecurityIdentifier(IdentityReference, IComparable[SecurityIdentifier]):
     """"""
 
@@ -543,6 +558,7 @@ class SecurityIdentifier(IdentityReference, IComparable[SecurityIdentifier]):
     def __ne__(self, other: SecurityIdentifier) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SecurityLogonType(Enum):
     """"""
 
@@ -559,6 +575,7 @@ class SecurityLogonType(Enum):
     Unlock: SecurityLogonType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SidNameUse(Enum):
     """"""
 
@@ -581,6 +598,7 @@ class SidNameUse(Enum):
     Computer: SidNameUse = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TokenAccessLevels(Enum):
     """"""
 
@@ -611,6 +629,7 @@ class TokenAccessLevels(Enum):
     MaximumAllowed: TokenAccessLevels = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TokenImpersonationLevel(Enum):
     """"""
 
@@ -625,6 +644,7 @@ class TokenImpersonationLevel(Enum):
     Delegation: TokenImpersonationLevel = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TokenInformationClass(Enum):
     """"""
 
@@ -707,6 +727,7 @@ class TokenInformationClass(Enum):
     MaxTokenInfoClass: TokenInformationClass = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TokenType(Enum):
     """"""
 
@@ -715,6 +736,7 @@ class TokenType(Enum):
     TokenImpersonation: TokenType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WellKnownSidType(Enum):
     """"""
 
@@ -843,6 +865,7 @@ class WellKnownSidType(Enum):
     MaxDefined: WellKnownSidType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Win32(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -854,6 +877,7 @@ class Win32(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WinSecurityContext(Enum):
     """"""
 
@@ -864,6 +888,7 @@ class WinSecurityContext(Enum):
     Both: WinSecurityContext = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WindowsAccountType(Enum):
     """"""
 
@@ -876,6 +901,7 @@ class WindowsAccountType(Enum):
     Anonymous: WindowsAccountType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WindowsBuiltInRole(Enum):
     """"""
 
@@ -898,6 +924,7 @@ class WindowsBuiltInRole(Enum):
     Replicator: WindowsBuiltInRole = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsIdentity(
     ClaimsIdentity, IDeserializationCallback, ISerializable, IIdentity, IDisposable
 ):
@@ -1069,6 +1096,7 @@ class WindowsIdentity(
     def WriteTo(self, writer: BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsImpersonationContext(Object, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -1084,6 +1112,7 @@ class WindowsImpersonationContext(Object, IDisposable):
     def Undo(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsPrincipal(ClaimsPrincipal, IPrincipal):
     """"""
     def __init__(self, ntIdentity: WindowsIdentity) -> None:

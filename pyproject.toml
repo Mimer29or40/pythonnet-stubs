@@ -154,13 +154,16 @@ ignore = [
     "N803",  # pep8-naming: Argument name should be lowercase
     "N815",  # pep8-naming: Variable in class scope should not be mixedCase
     "N818",  # pep8-naming: Exception name should be named with an Error suffix
+    "D203",  # pydocstyle: 1 blank line required before class docstring
     "D205",  # pydocstyle: 1 blank line required between summary line and description
+    "D213",  # pydocstyle: Multi-line docstring summary should start at the second line
     "D418",  # pydocstyle: Function decorated with `@overload` shouldn't contain a docstring
     "D419",  # pydocstyle: Docstring is empty
     "A001",  # flake8-builtins: Variable is shadowing a Python builtin
     "A002",  # flake8-builtins: Function argument is shadowing a Python builtin
     "A004",  # flake8-builtins: Import is shadowing a Python builtin
     "PYI021",  # flake8-pyi: Docstrings should not be included in stubs
+    "PYI034",  # flake8-pyi: methods in classes like usually return at runtime
     "PLE0302",  # : The special method expects 2 parameters, 3 were given
 ]
 "test/*" = [

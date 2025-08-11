@@ -64,6 +64,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryReader(Object, IDisposable):
     """"""
     @overload
@@ -134,6 +135,7 @@ class BinaryReader(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryWriter(Object, IDisposable):
     """"""
 
@@ -222,6 +224,7 @@ class BinaryWriter(Object, IDisposable):
     def Write(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BufferedStream(Stream, IDisposable):
     """"""
     @overload
@@ -344,6 +347,7 @@ class BufferedStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BufferedStream2(ABC, Stream, IDisposable):
     """"""
     @property
@@ -460,6 +464,7 @@ class BufferedStream2(ABC, Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Direct(ABC, Object):
     """"""
 
@@ -500,6 +505,7 @@ class Direct(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Directory(ABC, Object):
     """"""
     @classmethod
@@ -679,6 +685,7 @@ class Directory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DirectoryInfo(FileSystemInfo, ISerializable):
     """"""
     def __init__(self, path: str) -> None:
@@ -847,6 +854,7 @@ class DirectoryInfo(FileSystemInfo, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DirectoryInfoResultHandler(SearchResultHandler[DirectoryInfo]):
     """"""
     def __init__(self) -> None:
@@ -860,6 +868,7 @@ class DirectoryInfoResultHandler(SearchResultHandler[DirectoryInfo]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DirectoryNotFoundException(IOException, _Exception, ISerializable):
     """"""
     @overload
@@ -912,6 +921,7 @@ class DirectoryNotFoundException(IOException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DriveInfo(Object, ISerializable):
     """"""
     def __init__(self, driveName: str) -> None:
@@ -959,6 +969,7 @@ class DriveInfo(Object, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DriveNotFoundException(IOException, _Exception, ISerializable):
     """"""
     @overload
@@ -1011,6 +1022,7 @@ class DriveNotFoundException(IOException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DriveType(Enum):
     """"""
 
@@ -1029,6 +1041,7 @@ class DriveType(Enum):
     Ram: DriveType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EndOfStreamException(IOException, _Exception, ISerializable):
     """"""
     @overload
@@ -1081,6 +1094,7 @@ class EndOfStreamException(IOException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ErrorEventArgs(EventArgs):
     """"""
     def __init__(self, exception: Exception) -> None:
@@ -1099,6 +1113,7 @@ class ErrorEventArgs(EventArgs):
 type ErrorEventHandler = Callable[[object, ErrorEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class File(ABC, Object):
     """"""
     @classmethod
@@ -1317,6 +1332,7 @@ class File(ABC, Object):
     def WriteAllText(cls, path: str, contents: str, encoding: Encoding) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileAccess(Enum):
     """"""
 
@@ -1327,6 +1343,7 @@ class FileAccess(Enum):
     ReadWrite: FileAccess = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileAttributes(Enum):
     """"""
 
@@ -1363,6 +1380,7 @@ class FileAttributes(Enum):
     NoScrubData: FileAttributes = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileInfo(FileSystemInfo, ISerializable):
     """"""
     def __init__(self, fileName: str) -> None:
@@ -1498,6 +1516,7 @@ class FileInfo(FileSystemInfo, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileInfoResultHandler(SearchResultHandler[FileInfo]):
     """"""
     def __init__(self) -> None:
@@ -1511,6 +1530,7 @@ class FileInfoResultHandler(SearchResultHandler[FileInfo]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileLoadException(IOException, _Exception, ISerializable):
     """"""
     @overload
@@ -1575,6 +1595,7 @@ class FileLoadException(IOException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileMode(Enum):
     """"""
 
@@ -1591,6 +1612,7 @@ class FileMode(Enum):
     Append: FileMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileNotFoundException(IOException, _Exception, ISerializable):
     """"""
     @overload
@@ -1655,6 +1677,7 @@ class FileNotFoundException(IOException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileOptions(Enum):
     """"""
 
@@ -1673,6 +1696,7 @@ class FileOptions(Enum):
     WriteThrough: FileOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileSecurityStateAccess(Enum):
     """"""
 
@@ -1689,6 +1713,7 @@ class FileSecurityStateAccess(Enum):
     AllAccess: FileSecurityStateAccess = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileShare(Enum):
     """"""
 
@@ -1705,6 +1730,7 @@ class FileShare(Enum):
     Inheritable: FileShare = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileStream(Stream, IDisposable):
     """"""
     @overload
@@ -1941,6 +1967,7 @@ class FileStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileStreamAsyncResult(Object, IAsyncResult):
     """"""
     @property
@@ -1964,6 +1991,7 @@ class FileStreamAsyncResult(Object, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemEnumerableFactory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1975,6 +2003,7 @@ class FileSystemEnumerableFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemEnumerableIterator[TSource](
     Iterator[TSource],
     IEnumerable[TSource],
@@ -2006,6 +2035,7 @@ class FileSystemEnumerableIterator[TSource](
     def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemEventArgs(EventArgs):
     """"""
     def __init__(self, changeType: WatcherChangeTypes, directory: str, name: str) -> None:
@@ -2031,6 +2061,7 @@ class FileSystemEventArgs(EventArgs):
 type FileSystemEventHandler = Callable[[object, FileSystemEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemInfo(ABC, MarshalByRefObject, ISerializable):
     """"""
     @property
@@ -2101,6 +2132,7 @@ class FileSystemInfo(ABC, MarshalByRefObject, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemInfoResultHandler(SearchResultHandler[FileSystemInfo]):
     """"""
     def __init__(self) -> None:
@@ -2114,6 +2146,7 @@ class FileSystemInfoResultHandler(SearchResultHandler[FileSystemInfo]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemWatcher(Component, IComponent, ISupportInitialize, IDisposable):
     """"""
     @overload
@@ -2207,6 +2240,7 @@ class FileSystemWatcher(Component, IComponent, ISupportInitialize, IDisposable):
     Renamed: EventType[RenamedEventHandler] = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HandleInheritability(Enum):
     """"""
 
@@ -2215,6 +2249,7 @@ class HandleInheritability(Enum):
     Inheritable: HandleInheritability = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IODescriptionAttribute(DescriptionAttribute, _Attribute):
     """"""
     def __init__(self, description: str) -> None:
@@ -2258,6 +2293,7 @@ class IODescriptionAttribute(DescriptionAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IOException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -2313,6 +2349,7 @@ class IOException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalBufferOverflowException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -2365,6 +2402,7 @@ class InternalBufferOverflowException(SystemException, _Exception, ISerializable
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvalidDataException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -2417,6 +2455,7 @@ class InvalidDataException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Iterator[TSource](
     ABC, Object, IEnumerable[TSource], IEnumerator[TSource], IEnumerable, IEnumerator, IDisposable
 ):
@@ -2445,6 +2484,7 @@ class Iterator[TSource](
     def __iter__[TSource](self) -> Iterator[TSource]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class LogRetentionOption(Enum):
     """"""
 
@@ -2459,6 +2499,7 @@ class LogRetentionOption(Enum):
     SingleFileBoundedSize: LogRetentionOption = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LogStream(BufferedStream2, IDisposable):
     """"""
     @property
@@ -2575,6 +2616,7 @@ class LogStream(BufferedStream2, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongPath(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2586,6 +2628,7 @@ class LongPath(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongPathDirectory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2597,6 +2640,7 @@ class LongPathDirectory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongPathFile(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2608,6 +2652,7 @@ class LongPathFile(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongPathHelper(Object):
     """"""
     def __init__(self) -> None:
@@ -2621,6 +2666,7 @@ class LongPathHelper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryStream(Stream, IDisposable):
     """"""
     @overload
@@ -2773,6 +2819,7 @@ class MemoryStream(Stream, IDisposable):
     def WriteTo(self, stream: Stream) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NotifyFilters(Enum):
     """"""
 
@@ -2793,6 +2840,7 @@ class NotifyFilters(Enum):
     Security: NotifyFilters = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Path(ABC, Object):
     """"""
 
@@ -2873,6 +2921,7 @@ class Path(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PathHelper(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2884,6 +2933,7 @@ class PathHelper(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PathInternal(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2895,6 +2945,7 @@ class PathInternal(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PathTooLongException(IOException, _Exception, ISerializable):
     """"""
     @overload
@@ -2947,6 +2998,7 @@ class PathTooLongException(IOException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PatternMatcher(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2961,6 +3013,7 @@ class PatternMatcher(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PinnedBufferMemoryStream(UnmanagedMemoryStream, IDisposable):
     """"""
     @property
@@ -3085,6 +3138,7 @@ class PinnedBufferMemoryStream(UnmanagedMemoryStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadLinesIterator(
     Iterator[String],
     IEnumerable[String],
@@ -3116,6 +3170,7 @@ class ReadLinesIterator(
     def __iter__(self) -> Iterator[str]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RenamedEventArgs(FileSystemEventArgs):
     """"""
     def __init__(
@@ -3149,6 +3204,7 @@ class RenamedEventArgs(FileSystemEventArgs):
 type RenamedEventHandler = Callable[[object, RenamedEventArgs], None]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SearchOption(Enum):
     """"""
 
@@ -3157,6 +3213,7 @@ class SearchOption(Enum):
     AllDirectories: SearchOption = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SearchResultHandler[TSource](ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3168,6 +3225,7 @@ class SearchResultHandler[TSource](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SeekOrigin(Enum):
     """"""
 
@@ -3178,6 +3236,7 @@ class SeekOrigin(Enum):
     End: SeekOrigin = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Stream(ABC, MarshalByRefObject, IDisposable):
     """"""
 
@@ -3300,6 +3359,7 @@ class Stream(ABC, MarshalByRefObject, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StreamReader(TextReader, IDisposable):
     """"""
 
@@ -3409,6 +3469,7 @@ class StreamReader(TextReader, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StreamWriter(TextWriter, IDisposable):
     """"""
 
@@ -3614,6 +3675,7 @@ class StreamWriter(TextWriter, IDisposable):
     def WriteLineAsync(self, value: str) -> Task:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringReader(TextReader, IDisposable):
     """"""
     def __init__(self, s: str) -> None:
@@ -3659,6 +3721,7 @@ class StringReader(TextReader, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringResultHandler(SearchResultHandler[String]):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3670,6 +3733,7 @@ class StringResultHandler(SearchResultHandler[String]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringWriter(TextWriter, IDisposable):
     """"""
     @overload
@@ -3852,6 +3916,7 @@ class StringWriter(TextWriter, IDisposable):
     def WriteLineAsync(self, value: str) -> Task:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TextReader(ABC, MarshalByRefObject, IDisposable):
     """"""
 
@@ -3901,6 +3966,7 @@ class TextReader(ABC, MarshalByRefObject, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TextWriter(ABC, MarshalByRefObject, IDisposable):
     """"""
 
@@ -4075,6 +4141,7 @@ class TextWriter(ABC, MarshalByRefObject, IDisposable):
     def WriteLineAsync(self, value: str) -> Task:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnmanagedMemoryAccessor(Object, IDisposable):
     """"""
     @overload
@@ -4177,6 +4244,7 @@ class UnmanagedMemoryAccessor(Object, IDisposable):
     def WriteArray[T](self, position: int, array: Array[T], offset: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnmanagedMemoryStream(Stream, IDisposable):
     """"""
     @overload
@@ -4313,6 +4381,7 @@ class UnmanagedMemoryStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnmanagedMemoryStreamWrapper(MemoryStream, IDisposable):
     """"""
     @property
@@ -4442,6 +4511,7 @@ class UnmanagedMemoryStreamWrapper(MemoryStream, IDisposable):
     def WriteTo(self, stream: Stream) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WaitForChangedResult(ValueType):
     """"""
     @property
@@ -4473,6 +4543,7 @@ class WaitForChangedResult(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WatcherChangeTypes(Enum):
     """"""
 
@@ -4487,6 +4558,7 @@ class WatcherChangeTypes(Enum):
     All: WatcherChangeTypes = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class __ConsoleStream(Stream, IDisposable):
     """"""
     @property
@@ -4603,6 +4675,7 @@ class __ConsoleStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class __Error(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -4614,6 +4687,7 @@ class __Error(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class __HResults(ABC, Object):
     """"""
 

@@ -9,6 +9,7 @@ from System.Threading import IThreadPoolWorkItem
 from System.Threading import ThreadAbortException
 from System.Threading import WaitHandle
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TimerQueue(Object):
     """"""
     @classmethod
@@ -30,6 +31,7 @@ class TimerQueue(Object):
     def UpdateTimer(self, timer: TimerQueueTimer, dueTime: int, period: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TimerQueueTimer(Object, IThreadPoolWorkItem):
     """"""
     @overload

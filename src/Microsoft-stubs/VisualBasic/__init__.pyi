@@ -48,6 +48,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VBCodeGenerator(CodeCompiler, ICodeCompiler, ICodeGenerator):
     """"""
     def CompileAssemblyFromDom(
@@ -122,6 +123,7 @@ class VBCodeGenerator(CodeCompiler, ICodeCompiler, ICodeGenerator):
     def ValidateIdentifier(self, value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VBCodeProvider(CodeDomProvider, IComponent, IDisposable):
     """"""
     @overload
@@ -226,6 +228,7 @@ class VBCodeProvider(CodeDomProvider, IComponent, IDisposable):
     Disposed: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VBMemberAttributeConverter(VBModifierAttributeConverter):
     """"""
     @classmethod
@@ -365,6 +368,7 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
         def __init__(self, values: ICollection) -> None:
@@ -400,6 +404,7 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
         def __getitem__(self, index: int) -> object:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VBModifierAttributeConverter(ABC, TypeConverter):
     """"""
     @overload
@@ -535,6 +540,7 @@ class VBModifierAttributeConverter(ABC, TypeConverter):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
         def __init__(self, values: ICollection) -> None:
@@ -570,6 +576,7 @@ class VBModifierAttributeConverter(ABC, TypeConverter):
         def __getitem__(self, index: int) -> object:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VBTypeAttributeConverter(VBModifierAttributeConverter):
     """"""
     @classmethod
@@ -709,6 +716,7 @@ class VBTypeAttributeConverter(VBModifierAttributeConverter):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
         def __init__(self, values: ICollection) -> None:

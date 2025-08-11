@@ -64,6 +64,7 @@ def compare_string(x: str | None, y: str | None) -> CompareResults:
         case (str(), str()):
             return 0 if x == y else (-1 if x < y else 1)
     # This should never be reached, as long as the parameter types are correct
+    # noinspection PyUnreachableCode
     raise NotImplementedError  # pragma: no cover
 
 
@@ -90,6 +91,7 @@ def merge_string(x: str | None, y: str | None) -> str | None:
         case (str(), str()):
             return f"{x}\n{y}"
     # This should never be reached, as long as the parameter types are correct
+    # noinspection PyUnreachableCode
     raise NotImplementedError  # pragma: no cover
 
 
@@ -119,6 +121,7 @@ def merge_sequence[T](
                     merged.append(obj2)
             return merged
     # This should never be reached, as long as the parameter types are correct
+    # noinspection PyUnreachableCode
     raise NotImplementedError  # pragma: no cover
 
 
@@ -147,6 +150,7 @@ def merge_mapping[T](
                 merged[name] = obj2
             return merged
     # This should never be reached, as long as the parameter types are correct
+    # noinspection PyUnreachableCode
     raise NotImplementedError  # pragma: no cover
 
 
@@ -172,6 +176,7 @@ def to_c_list[T](list_type: type[T], iterable: Iterable[T]) -> List[T]:
     :param iterable: The iterable.
     :return: The List
     """
+    # noinspection PyTypeHints
     list_obj = List[list_type]()
 
     for obj in iterable:
@@ -197,6 +202,7 @@ def to_c_dict[K, V](
     :param mapping: The mapping.
     :return: The Dictionary
     """
+    # noinspection PyTypeHints
     dict_obj = Dictionary[key_type, value_type]()
 
     for key, value in mapping.items():

@@ -24,6 +24,7 @@ from System.Runtime.Remoting.Messaging import IMethodCallMessage
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AgileAsyncWorkerItem(Object):
     """"""
     def __init__(self, message: IMethodCallMessage, ar: AsyncResult, target: object) -> None:
@@ -42,6 +43,7 @@ class AgileAsyncWorkerItem(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CallType(Enum):
     """"""
 
@@ -52,6 +54,7 @@ class CallType(Enum):
     ConstructorCall: CallType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MessageData(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -63,6 +66,7 @@ class MessageData(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
     """"""
     def __init__(self) -> None:
@@ -113,6 +117,7 @@ class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RealProxy(ABC, Object):
     """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
@@ -150,6 +155,7 @@ class RealProxy(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RealProxyFlags(Enum):
     """"""
 
@@ -160,6 +166,7 @@ class RealProxyFlags(Enum):
     Initialized: RealProxyFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingProxy(RealProxy, IRemotingTypeInfo):
     """"""
     def __init__(self, serverType: Type) -> None:

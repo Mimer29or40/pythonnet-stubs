@@ -65,6 +65,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ActivityFilter(Object, IDisposable):
     """"""
     @classmethod
@@ -122,6 +123,7 @@ class ActivityFilter(Object, IDisposable):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ActivityTracker(Object):
     """"""
     def __init__(self) -> None:
@@ -153,6 +155,7 @@ class ActivityTracker(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArrayTypeInfo[ElementType](TraceLoggingTypeInfo[Array[ElementType]]):
     """"""
     def __init__(self, elementInfo: TraceLoggingTypeInfo[ElementType]) -> None:
@@ -191,6 +194,7 @@ class ArrayTypeInfo[ElementType](TraceLoggingTypeInfo[Array[ElementType]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BooleanArrayTypeInfo(TraceLoggingTypeInfo[Array[Boolean]]):
     """"""
     def __init__(self) -> None:
@@ -229,6 +233,7 @@ class BooleanArrayTypeInfo(TraceLoggingTypeInfo[Array[Boolean]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BooleanTypeInfo(TraceLoggingTypeInfo[Boolean]):
     """"""
     def __init__(self) -> None:
@@ -267,6 +272,7 @@ class BooleanTypeInfo(TraceLoggingTypeInfo[Boolean]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ByteArrayTypeInfo(TraceLoggingTypeInfo[Array[Byte]]):
     """"""
     def __init__(self) -> None:
@@ -305,6 +311,7 @@ class ByteArrayTypeInfo(TraceLoggingTypeInfo[Array[Byte]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ByteTypeInfo(TraceLoggingTypeInfo[Byte]):
     """"""
     def __init__(self) -> None:
@@ -343,6 +350,7 @@ class ByteTypeInfo(TraceLoggingTypeInfo[Byte]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CharArrayTypeInfo(TraceLoggingTypeInfo[Array[Char]]):
     """"""
     def __init__(self) -> None:
@@ -381,6 +389,7 @@ class CharArrayTypeInfo(TraceLoggingTypeInfo[Array[Char]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CharTypeInfo(TraceLoggingTypeInfo[Char]):
     """"""
     def __init__(self) -> None:
@@ -419,6 +428,7 @@ class CharTypeInfo(TraceLoggingTypeInfo[Char]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClassPropertyWriter[ContainerType, ValueType](PropertyAccessor[ContainerType]):
     """"""
     def __init__(self, property: PropertyAnalysis) -> None:
@@ -436,6 +446,7 @@ class ClassPropertyWriter[ContainerType, ValueType](PropertyAccessor[ContainerTy
     def Write(self, collector: TraceLoggingDataCollector, container: ContainerType) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcurrentSetItem[KeyType, ItemType](ABC, Object):
     """"""
     @overload
@@ -453,6 +464,7 @@ class ConcurrentSetItem[KeyType, ItemType](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcurrentSet[KeyType, ItemType](ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -468,6 +480,7 @@ class ConcurrentSet[KeyType, ItemType](ValueType):
     def TryGet(self, key: KeyType) -> ItemType:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ControllerCommand(Enum):
     """"""
 
@@ -480,6 +493,7 @@ class ControllerCommand(Enum):
     SendManifest: ControllerCommand = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DataCollector(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -491,6 +505,7 @@ class DataCollector(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DateTimeOffsetTypeInfo(TraceLoggingTypeInfo[DateTimeOffset]):
     """"""
     def __init__(self) -> None:
@@ -529,6 +544,7 @@ class DateTimeOffsetTypeInfo(TraceLoggingTypeInfo[DateTimeOffset]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DateTimeTypeInfo(TraceLoggingTypeInfo[DateTime]):
     """"""
     def __init__(self) -> None:
@@ -567,6 +583,7 @@ class DateTimeTypeInfo(TraceLoggingTypeInfo[DateTime]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecimalTypeInfo(TraceLoggingTypeInfo[Decimal]):
     """"""
     def __init__(self) -> None:
@@ -605,6 +622,7 @@ class DecimalTypeInfo(TraceLoggingTypeInfo[Decimal]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DoubleArrayTypeInfo(TraceLoggingTypeInfo[Array[Double]]):
     """"""
     def __init__(self) -> None:
@@ -643,6 +661,7 @@ class DoubleArrayTypeInfo(TraceLoggingTypeInfo[Array[Double]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DoubleTypeInfo(TraceLoggingTypeInfo[Double]):
     """"""
     def __init__(self) -> None:
@@ -681,6 +700,7 @@ class DoubleTypeInfo(TraceLoggingTypeInfo[Double]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EmptyStruct(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -692,6 +712,7 @@ class EmptyStruct(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumByteTypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -730,6 +751,7 @@ class EnumByteTypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumHelper[UnderlyingType](ABC, Object):
     """"""
     @classmethod
@@ -744,6 +766,7 @@ class EnumHelper[UnderlyingType](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumInt16TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -782,6 +805,7 @@ class EnumInt16TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumInt32TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -820,6 +844,7 @@ class EnumInt32TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumInt64TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -858,6 +883,7 @@ class EnumInt64TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumSByteTypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -896,6 +922,7 @@ class EnumSByteTypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumUInt16TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -934,6 +961,7 @@ class EnumUInt16TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumUInt32TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -972,6 +1000,7 @@ class EnumUInt32TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumUInt64TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     """"""
     def __init__(self) -> None:
@@ -1010,6 +1039,7 @@ class EnumUInt64TypeInfo[EnumType](TraceLoggingTypeInfo[EnumType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumerableTypeInfo[IterableType, ElementType](TraceLoggingTypeInfo[IterableType]):
     """"""
     def __init__(self, elementInfo: TraceLoggingTypeInfo[ElementType]) -> None:
@@ -1048,6 +1078,7 @@ class EnumerableTypeInfo[IterableType, ElementType](TraceLoggingTypeInfo[Iterabl
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EtwSession(Object):
     """"""
 
@@ -1070,6 +1101,7 @@ class EtwSession(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventActivityOptions(Enum):
     """"""
 
@@ -1082,6 +1114,7 @@ class EventActivityOptions(Enum):
     Detachable: EventActivityOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, eventId: int) -> None:
@@ -1170,6 +1203,7 @@ class EventAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventChannel(Enum):
     """"""
 
@@ -1184,6 +1218,7 @@ class EventChannel(Enum):
     Debug: EventChannel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventChannelAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1234,6 +1269,7 @@ class EventChannelAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventChannelType(Enum):
     """"""
 
@@ -1246,6 +1282,7 @@ class EventChannelType(Enum):
     Debug: EventChannelType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventCommand(Enum):
     """"""
 
@@ -1258,6 +1295,7 @@ class EventCommand(Enum):
     SendManifest: EventCommand = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventCommandEventArgs(EventArgs):
     """"""
     @property
@@ -1279,6 +1317,7 @@ class EventCommandEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventDataAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1324,6 +1363,7 @@ class EventDataAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventDescriptor(ValueType):
     """"""
     @overload
@@ -1378,6 +1418,7 @@ class EventDescriptor(ValueType):
     def __ne__(self, other: EventDescriptor) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventDispatcher(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1389,6 +1430,7 @@ class EventDispatcher(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventFieldAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1439,6 +1481,7 @@ class EventFieldAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventFieldFormat(Enum):
     """"""
 
@@ -1457,12 +1500,14 @@ class EventFieldFormat(Enum):
     HResult: EventFieldFormat = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventFieldTags(Enum):
     """"""
 
     _None: EventFieldTags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventIgnoreAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1503,6 +1548,7 @@ class EventIgnoreAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventKeywords(Enum):
     """"""
 
@@ -1527,6 +1573,7 @@ class EventKeywords(Enum):
     All: EventKeywords = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventLevel(Enum):
     """"""
 
@@ -1543,6 +1590,7 @@ class EventLevel(Enum):
     Verbose: EventLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventListener(Object, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -1584,6 +1632,7 @@ class EventListener(Object, IDisposable):
     EventWritten: EventType[EventHandler[EventWrittenEventArgs]] = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventManifestOptions(Enum):
     """"""
 
@@ -1598,6 +1647,7 @@ class EventManifestOptions(Enum):
     AllowEventSourceOverride: EventManifestOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventOpcode(Enum):
     """"""
 
@@ -1624,6 +1674,7 @@ class EventOpcode(Enum):
     Receive: EventOpcode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventPayload(
     Object,
     ICollection[KeyValuePair[String, Object]],
@@ -1702,6 +1753,7 @@ class EventPayload(
     def __setitem__(self, key: str, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventProvider(Object, IDisposable):
     """"""
     def Close(self) -> None:
@@ -1725,6 +1777,7 @@ class EventProvider(Object, IDisposable):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class EventData(ValueType):
         """"""
         def Equals(self, obj: object) -> bool:
@@ -1736,6 +1789,7 @@ class EventProvider(Object, IDisposable):
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class SessionInfo(ValueType):
         """"""
         def Equals(self, obj: object) -> bool:
@@ -1747,6 +1801,7 @@ class EventProvider(Object, IDisposable):
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class WriteEventErrorCode(Enum):
         """"""
 
@@ -1763,6 +1818,7 @@ class EventProvider(Object, IDisposable):
         Other: EventProvider.WriteEventErrorCode = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventSource(Object, IDisposable):
     """"""
     @overload
@@ -1881,6 +1937,7 @@ class EventSource(Object, IDisposable):
     EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventSourceActivity(Object, IDisposable):
     """"""
     def __init__(self, eventSource: EventSource) -> None:
@@ -1943,6 +2000,7 @@ class EventSourceActivity(Object, IDisposable):
     def op_Implicit(cls, eventSource: EventSource) -> EventSourceActivity:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventSourceAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1998,6 +2056,7 @@ class EventSourceAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventSourceCreatedEventArgs(EventArgs):
     """"""
     def __init__(self) -> None:
@@ -2014,6 +2073,7 @@ class EventSourceCreatedEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventSourceException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -2066,6 +2126,7 @@ class EventSourceException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventSourceOptions(ValueType):
     """"""
     @property
@@ -2102,6 +2163,7 @@ class EventSourceOptions(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventSourceSettings(Enum):
     """"""
 
@@ -2114,18 +2176,21 @@ class EventSourceSettings(Enum):
     EtwSelfDescribingEventFormat: EventSourceSettings = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventTags(Enum):
     """"""
 
     _None: EventTags = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventTask(Enum):
     """"""
 
     _None: EventTask = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventWrittenEventArgs(EventArgs):
     """"""
     @property
@@ -2182,6 +2247,7 @@ class EventWrittenEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FieldMetadata(Object):
     """"""
     @overload
@@ -2212,6 +2278,7 @@ class FieldMetadata(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FrameworkEventSource(EventSource, IDisposable):
     """"""
 
@@ -2541,6 +2608,7 @@ class FrameworkEventSource(EventSource, IDisposable):
         """"""
     EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
     """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Keywords(ABC, Object):
         """"""
 
@@ -2563,6 +2631,7 @@ class FrameworkEventSource(EventSource, IDisposable):
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Opcodes(ABC, Object):
         """"""
 
@@ -2577,6 +2646,7 @@ class FrameworkEventSource(EventSource, IDisposable):
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Tasks(ABC, Object):
         """"""
 
@@ -2595,6 +2665,7 @@ class FrameworkEventSource(EventSource, IDisposable):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GuidArrayTypeInfo(TraceLoggingTypeInfo[Array[Guid]]):
     """"""
     def __init__(self) -> None:
@@ -2633,6 +2704,7 @@ class GuidArrayTypeInfo(TraceLoggingTypeInfo[Array[Guid]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GuidTypeInfo(TraceLoggingTypeInfo[Guid]):
     """"""
     def __init__(self) -> None:
@@ -2671,6 +2743,7 @@ class GuidTypeInfo(TraceLoggingTypeInfo[Guid]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Int16ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int16]]):
     """"""
     def __init__(self) -> None:
@@ -2709,6 +2782,7 @@ class Int16ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int16]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Int16TypeInfo(TraceLoggingTypeInfo[Int16]):
     """"""
     def __init__(self) -> None:
@@ -2747,6 +2821,7 @@ class Int16TypeInfo(TraceLoggingTypeInfo[Int16]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Int32ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int32]]):
     """"""
     def __init__(self) -> None:
@@ -2785,6 +2860,7 @@ class Int32ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int32]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Int32TypeInfo(TraceLoggingTypeInfo[Int32]):
     """"""
     def __init__(self) -> None:
@@ -2823,6 +2899,7 @@ class Int32TypeInfo(TraceLoggingTypeInfo[Int32]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Int64ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int64]]):
     """"""
     def __init__(self) -> None:
@@ -2861,6 +2938,7 @@ class Int64ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int64]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Int64TypeInfo(TraceLoggingTypeInfo[Int64]):
     """"""
     def __init__(self) -> None:
@@ -2899,6 +2977,7 @@ class Int64TypeInfo(TraceLoggingTypeInfo[Int64]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntPtrArrayTypeInfo(TraceLoggingTypeInfo[Array[IntPtr]]):
     """"""
     def __init__(self) -> None:
@@ -2937,6 +3016,7 @@ class IntPtrArrayTypeInfo(TraceLoggingTypeInfo[Array[IntPtr]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntPtrTypeInfo(TraceLoggingTypeInfo[IntPtr]):
     """"""
     def __init__(self) -> None:
@@ -2975,6 +3055,7 @@ class IntPtrTypeInfo(TraceLoggingTypeInfo[IntPtr]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvokeTypeInfo[ContainerType](TraceLoggingTypeInfo[ContainerType]):
     """"""
     def __init__(self, typeAnalysis: TypeAnalysis) -> None:
@@ -3013,6 +3094,7 @@ class InvokeTypeInfo[ContainerType](TraceLoggingTypeInfo[ContainerType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, valueObj: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyValuePairTypeInfo[K, V](TraceLoggingTypeInfo[KeyValuePair[K, V]]):
     """"""
     def __init__(self, recursionCheck: List[Type]) -> None:
@@ -3053,6 +3135,7 @@ class KeyValuePairTypeInfo[K, V](TraceLoggingTypeInfo[KeyValuePair[K, V]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManifestBuilder(Object):
     """"""
     def __init__(
@@ -3098,6 +3181,7 @@ class ManifestBuilder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManifestEnvelope(ValueType):
     """"""
 
@@ -3123,12 +3207,14 @@ class ManifestEnvelope(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class ManifestFormats(Enum):
         """"""
 
         SimpleXmlFormat: ManifestEnvelope.ManifestFormats = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameInfo(ConcurrentSetItem[KeyValuePair[String, EventTags], NameInfo]):
     """"""
     def __init__(self, name: str, tags: EventTags, typeMetadataSize: int) -> None:
@@ -3148,6 +3234,7 @@ class NameInfo(ConcurrentSetItem[KeyValuePair[String, EventTags], NameInfo]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NonEventAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -3188,6 +3275,7 @@ class NonEventAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NonGenericProperytWriter[ContainerType](PropertyAccessor[ContainerType]):
     """"""
     def __init__(self, property: PropertyAnalysis) -> None:
@@ -3205,6 +3293,7 @@ class NonGenericProperytWriter[ContainerType](PropertyAccessor[ContainerType]):
     def Write(self, collector: TraceLoggingDataCollector, container: ContainerType) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullTypeInfo[DataType](TraceLoggingTypeInfo[DataType]):
     """"""
     def __init__(self) -> None:
@@ -3243,6 +3332,7 @@ class NullTypeInfo[DataType](TraceLoggingTypeInfo[DataType]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableTypeInfo[T](TraceLoggingTypeInfo[T | None]):
     """"""
     def __init__(self, recursionCheck: List[Type]) -> None:
@@ -3281,6 +3371,7 @@ class NullableTypeInfo[T](TraceLoggingTypeInfo[T | None]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PropertyAccessor[ContainerType](ABC, Object):
     """"""
     @classmethod
@@ -3299,6 +3390,7 @@ class PropertyAccessor[ContainerType](ABC, Object):
     def Write(self, collector: TraceLoggingDataCollector, value: ContainerType) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PropertyAnalysis(Object):
     """"""
     def __init__(
@@ -3318,6 +3410,7 @@ class PropertyAnalysis(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SByteArrayTypeInfo(TraceLoggingTypeInfo[Array[SByte]]):
     """"""
     def __init__(self) -> None:
@@ -3356,6 +3449,7 @@ class SByteArrayTypeInfo(TraceLoggingTypeInfo[Array[SByte]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SByteTypeInfo(TraceLoggingTypeInfo[SByte]):
     """"""
     def __init__(self) -> None:
@@ -3394,6 +3488,7 @@ class SByteTypeInfo(TraceLoggingTypeInfo[SByte]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SessionMask(ValueType):
     """"""
     @overload
@@ -3457,6 +3552,7 @@ class SessionMask(ValueType):
     def __setitem__(self, perEventSourceSessionId: int, value: bool) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SimpleEventTypes[T](TraceLoggingEventTypes):
     """"""
     @classmethod
@@ -3472,6 +3568,7 @@ class SimpleEventTypes[T](TraceLoggingEventTypes):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SingleArrayTypeInfo(TraceLoggingTypeInfo[Array[Single]]):
     """"""
     def __init__(self) -> None:
@@ -3510,6 +3607,7 @@ class SingleArrayTypeInfo(TraceLoggingTypeInfo[Array[Single]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SingleTypeInfo(TraceLoggingTypeInfo[Single]):
     """"""
     def __init__(self) -> None:
@@ -3548,6 +3646,7 @@ class SingleTypeInfo(TraceLoggingTypeInfo[Single]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Statics(ABC, Object):
     """"""
 
@@ -3695,6 +3794,7 @@ class Statics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringTypeInfo(TraceLoggingTypeInfo[String]):
     """"""
     def __init__(self) -> None:
@@ -3733,6 +3833,7 @@ class StringTypeInfo(TraceLoggingTypeInfo[String]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StructPropertyWriter[ContainerType, ValueType](PropertyAccessor[ContainerType]):
     """"""
     def __init__(self, property: PropertyAnalysis) -> None:
@@ -3750,6 +3851,7 @@ class StructPropertyWriter[ContainerType, ValueType](PropertyAccessor[ContainerT
     def Write(self, collector: TraceLoggingDataCollector, container: ContainerType) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TimeSpanTypeInfo(TraceLoggingTypeInfo[TimeSpan]):
     """"""
     def __init__(self) -> None:
@@ -3788,6 +3890,7 @@ class TimeSpanTypeInfo(TraceLoggingTypeInfo[TimeSpan]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TraceLoggingDataCollector(Object):
     """"""
     @overload
@@ -3900,6 +4003,7 @@ class TraceLoggingDataCollector(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TraceLoggingDataType(Enum):
     """"""
 
@@ -3978,6 +4082,7 @@ class TraceLoggingDataType(Enum):
     HResult: TraceLoggingDataType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TraceLoggingEventTypes(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3989,6 +4094,7 @@ class TraceLoggingEventTypes(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TraceLoggingMetadataCollector(Object):
     """"""
     def AddArray(self, name: str, type: TraceLoggingDataType) -> None:
@@ -4014,6 +4120,7 @@ class TraceLoggingMetadataCollector(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TraceLoggingTypeInfo(ABC, Object):
     """"""
     @property
@@ -4048,6 +4155,7 @@ class TraceLoggingTypeInfo(ABC, Object):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TraceLoggingTypeInfo[DataType](ABC, TraceLoggingTypeInfo):
     """"""
     @classmethod
@@ -4088,6 +4196,7 @@ class TraceLoggingTypeInfo[DataType](ABC, TraceLoggingTypeInfo):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeAnalysis(Object):
     """"""
     def __init__(
@@ -4103,6 +4212,7 @@ class TypeAnalysis(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UInt16ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt16]]):
     """"""
     def __init__(self) -> None:
@@ -4141,6 +4251,7 @@ class UInt16ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt16]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UInt16TypeInfo(TraceLoggingTypeInfo[UInt16]):
     """"""
     def __init__(self) -> None:
@@ -4179,6 +4290,7 @@ class UInt16TypeInfo(TraceLoggingTypeInfo[UInt16]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UInt32ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt32]]):
     """"""
     def __init__(self) -> None:
@@ -4217,6 +4329,7 @@ class UInt32ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt32]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UInt32TypeInfo(TraceLoggingTypeInfo[UInt32]):
     """"""
     def __init__(self) -> None:
@@ -4255,6 +4368,7 @@ class UInt32TypeInfo(TraceLoggingTypeInfo[UInt32]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UInt64ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt64]]):
     """"""
     def __init__(self) -> None:
@@ -4293,6 +4407,7 @@ class UInt64ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt64]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UInt64TypeInfo(TraceLoggingTypeInfo[UInt64]):
     """"""
     def __init__(self) -> None:
@@ -4331,6 +4446,7 @@ class UInt64TypeInfo(TraceLoggingTypeInfo[UInt64]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UIntPtrArrayTypeInfo(TraceLoggingTypeInfo[Array[UIntPtr]]):
     """"""
     def __init__(self) -> None:
@@ -4369,6 +4485,7 @@ class UIntPtrArrayTypeInfo(TraceLoggingTypeInfo[Array[UIntPtr]]):
     def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UIntPtrTypeInfo(TraceLoggingTypeInfo[UIntPtr]):
     """"""
     def __init__(self) -> None:

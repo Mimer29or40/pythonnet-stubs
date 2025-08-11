@@ -10,6 +10,7 @@ from System import Type
 from System import UInt32
 from System.Runtime.InteropServices import _Attribute
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExceptionDispatchInfo(Object):
     """"""
     @property
@@ -29,6 +30,7 @@ class ExceptionDispatchInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FirstChanceExceptionEventArgs(EventArgs):
     """"""
     def __init__(self, exception: Exception) -> None:
@@ -45,6 +47,7 @@ class FirstChanceExceptionEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HandleProcessCorruptedStateExceptionsAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:

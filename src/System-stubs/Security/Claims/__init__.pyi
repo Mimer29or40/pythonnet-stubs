@@ -16,6 +16,7 @@ from System.IO import BinaryWriter
 from System.Security.Principal import IIdentity
 from System.Security.Principal import IPrincipal
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Claim(Object):
     """"""
     @overload
@@ -87,6 +88,7 @@ class Claim(Object):
     def WriteTo(self, writer: BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClaimTypes(ABC, Object):
     """"""
 
@@ -207,6 +209,7 @@ class ClaimTypes(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClaimValueTypes(ABC, Object):
     """"""
 
@@ -273,6 +276,7 @@ class ClaimValueTypes(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClaimsIdentity(Object, IIdentity):
     """"""
 
@@ -393,6 +397,7 @@ class ClaimsIdentity(Object, IIdentity):
     def WriteTo(self, writer: BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClaimsPrincipal(Object, IPrincipal):
     """"""
     @overload
@@ -476,6 +481,7 @@ class ClaimsPrincipal(Object, IPrincipal):
     def WriteTo(self, writer: BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicRoleClaimProvider(ABC, Object):
     """"""
     @classmethod
@@ -492,6 +498,7 @@ class DynamicRoleClaimProvider(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RoleClaimProvider(Object):
     """"""
     def __init__(self, issuer: str, roles: Array[str], subject: ClaimsIdentity) -> None:

@@ -7,6 +7,7 @@ from System import Array
 from System import Object
 from System import Type
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Environment(ABC, Object):
     """"""
 

@@ -30,6 +30,7 @@ from System.Security.Principal import TokenImpersonationLevel
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthenticatedStream(ABC, Stream, IDisposable):
     """"""
     @property
@@ -164,6 +165,7 @@ class AuthenticatedStream(ABC, Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AuthenticationLevel(Enum):
     """"""
 
@@ -174,6 +176,7 @@ class AuthenticationLevel(Enum):
     MutualAuthRequired: AuthenticationLevel = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EncryptionPolicy(Enum):
     """"""
 
@@ -193,6 +196,7 @@ type LocalCertificateSelectionCallback = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NegoState(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -204,6 +208,7 @@ class NegoState(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NegotiateStream(AuthenticatedStream, IDisposable):
     """"""
     @overload
@@ -548,6 +553,7 @@ class NegotiateStream(AuthenticatedStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ProtectionLevel(Enum):
     """"""
 
@@ -558,6 +564,7 @@ class ProtectionLevel(Enum):
     EncryptAndSign: ProtectionLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProtocolToken(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -578,6 +585,7 @@ type RemoteCertificateValidationCallback = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SSPIHandleCache(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -589,6 +597,7 @@ class SSPIHandleCache(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SecureChannel(Object):
     """"""
     def CreateFatalHandshakeAlertToken(
@@ -606,6 +615,7 @@ class SecureChannel(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SslPolicyErrors(Enum):
     """"""
 
@@ -618,6 +628,7 @@ class SslPolicyErrors(Enum):
     RemoteCertificateChainErrors: SslPolicyErrors = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SslSessionsCache(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -629,6 +640,7 @@ class SslSessionsCache(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SslState(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -640,6 +652,7 @@ class SslState(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SslStream(AuthenticatedStream, IDisposable):
     """"""
     @overload
@@ -992,6 +1005,7 @@ class SslStream(AuthenticatedStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TlsAlertMessage(Enum):
     """"""
 
@@ -1044,6 +1058,7 @@ class TlsAlertMessage(Enum):
     UnsupportedExt: TlsAlertMessage = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TlsAlertType(Enum):
     """"""
 
@@ -1052,6 +1067,7 @@ class TlsAlertType(Enum):
     Fatal: TlsAlertType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _SslStream(Object):
     """"""
     def Equals(self, obj: object) -> bool:

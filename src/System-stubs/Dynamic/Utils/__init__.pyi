@@ -7,6 +7,7 @@ from System import Object
 from System import Type
 from System.Collections.Generic import IEqualityComparer
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CacheDict[TKey, TValue](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -18,6 +19,7 @@ class CacheDict[TKey, TValue](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CollectionExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -29,6 +31,7 @@ class CollectionExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractUtils(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -40,6 +43,7 @@ class ContractUtils(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EmptyReadOnlyCollection[T](ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -51,6 +55,7 @@ class EmptyReadOnlyCollection[T](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Helpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -62,6 +67,7 @@ class Helpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReferenceEqualityComparer[T](Object, IEqualityComparer[T]):
     """"""
     @overload
@@ -81,6 +87,7 @@ class ReferenceEqualityComparer[T](Object, IEqualityComparer[T]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -92,6 +99,7 @@ class TypeExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeUtils(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

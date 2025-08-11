@@ -133,6 +133,7 @@ class Builder:
             param_str = param_str + " = ..."
         return param_str
 
+    # noinspection PyMethodMayBeStatic
     def build_generic_params(self, *types: CType, declaring_type: CType | None = None) -> str:
         """Build a generic param declaration."""
 
@@ -377,7 +378,22 @@ class Builder:
 
         parent_str: str = f"({', '.join(parents)})" if len(parents) > 0 else ""
 
-        lines: list[str] = [f"{'    ' * indent}class {obj.name}{generic_arg_str}{parent_str}:"]
+        inspections: Sequence[str] = [
+            "PyMethodOverriding",
+            "PyPep8Naming",
+            "PyRedeclaration",
+            "PyTypeHints",
+            "PyUnresolvedReferences",
+            "PyOverloads",
+            "PyClassVar",
+            "DuplicatedCode",
+            "SpellCheckingInspection",
+        ]
+
+        lines: list[str] = [
+            f"{'    ' * indent}# noinspection {','.join(inspections)}",
+            f"{'    ' * indent}class {obj.name}{generic_arg_str}{parent_str}:",
+        ]
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
@@ -397,7 +413,17 @@ class Builder:
 
         self.import_set.add(self.ENUM)
 
-        lines: list[str] = [f"{'    ' * indent}class {obj.name}(Enum):"]
+        inspections: Sequence[str] = [
+            "PyPep8Naming",
+            "PyRedeclaration",
+            "DuplicatedCode",
+            "SpellCheckingInspection",
+        ]
+
+        lines: list[str] = [
+            f"{'    ' * indent}# noinspection {','.join(inspections)}",
+            f"{'    ' * indent}class {obj.name}(Enum):",
+        ]
 
         doc_node: DocNode = self.doc_tree[obj.unique_name]
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
@@ -451,7 +477,7 @@ class Builder:
             namespace_name: str = ".".join(split[:-1])
             if namespace == namespace_name:
                 continue
-            lines.append(f"from {namespace_name} import {split[-1]}")
+            lines.append(f"from {namespace_name.replace(namespace, '')} import {split[-1]}")
 
         if import_event_type:
             lines.append("class EventType[T]:")
@@ -532,13 +558,16 @@ def format_stubs(args: BuildArguments) -> None:
         "N803",  # pep8-naming: Argument name should be lowercase
         "N815",  # pep8-naming: Variable in class scope should not be mixedCase
         "N818",  # pep8-naming: Exception name should be named with an Error suffix
+        "D203",  # pydocstyle: 1 blank line required before class docstring
         "D205",  # pydocstyle: 1 blank line required between summary line and description
+        "D213",  # pydocstyle: Multi-line docstring summary should start at the second line
         "D418",  # pydocstyle: Function decorated with `@overload` shouldn't contain a docstring
         "D419",  # pydocstyle: Docstring is empty
         "A001",  # flake8-builtins: Variable is shadowing a Python builtin
         "A002",  # flake8-builtins: Function argument is shadowing a Python builtin
         "A004",  # flake8-builtins: Import is shadowing a Python builtin
         "PYI021",  # flake8-pyi: Docstrings should not be included in stubs
+        "PYI034",  # flake8-pyi: methods in classes like usually return at runtime
         "PLE0302",  # : The special method expects 2 parameters, 3 were given
     ]
 

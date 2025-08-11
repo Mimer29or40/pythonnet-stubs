@@ -21,11 +21,8 @@ from System import SystemException
 from System import Type
 from System import UInt32
 from System import ValueType
-from System.Collections import IComparer
 from System.Collections import IDictionary
 from System.Collections import IDictionaryEnumerator
-from System.Collections import IEnumerable
-from System.Collections import IEqualityComparer
 from System.Collections.Generic import Dictionary
 from System.Collections.Generic import IComparer
 from System.Collections.Generic import IEnumerable
@@ -43,8 +40,13 @@ from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 from System.Threading import StackCrawlMark
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FastResourceComparer(
-    Object, IComparer[String], IEqualityComparer[String], IComparer, IEqualityComparer
+    Object,
+    IComparer[String],
+    IEqualityComparer[String],
+    IComparer,
+    IEqualityComparer,
 ):
     """"""
     def __init__(self) -> None:
@@ -86,6 +88,7 @@ class FastResourceComparer(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileBasedResourceGroveler(Object, IResourceGroveler):
     """"""
     def __init__(self, mediator: ResourceManager.ResourceManagerMediator) -> None:
@@ -110,6 +113,7 @@ class FileBasedResourceGroveler(Object, IResourceGroveler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IResourceGroveler(ABC):
     """"""
     def GrovelForResourceSet(
@@ -124,6 +128,7 @@ class IResourceGroveler(ABC):
     def HasNeutralResources(self, culture: CultureInfo, defaultResName: str) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IResourceReader(ABC, IEnumerable, IDisposable):
     """"""
     def Close(self) -> None:
@@ -135,6 +140,7 @@ class IResourceReader(ABC, IEnumerable, IDisposable):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IResourceWriter(ABC, IDisposable):
     """"""
     @overload
@@ -153,6 +159,7 @@ class IResourceWriter(ABC, IDisposable):
     def Generate(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManifestBasedResourceGroveler(Object, IResourceGroveler):
     """"""
     def __init__(self, mediator: ResourceManager.ResourceManagerMediator) -> None:
@@ -177,6 +184,7 @@ class ManifestBasedResourceGroveler(Object, IResourceGroveler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MissingManifestResourceException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -229,6 +237,7 @@ class MissingManifestResourceException(SystemException, _Exception, ISerializabl
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MissingSatelliteAssemblyException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -287,6 +296,7 @@ class MissingSatelliteAssemblyException(SystemException, _Exception, ISerializab
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NeutralResourcesLanguageAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -309,7 +319,12 @@ class NeutralResourcesLanguageAttribute(Attribute, _Attribute):
     def GetHashCode(self) -> int:
         """"""
     def GetIDsOfNames(
-        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+        self,
+        riid: Guid,
+        rgszNames: IntPtr,
+        cNames: int,
+        lcid: int,
+        rgDispId: IntPtr,
     ) -> None:
         """"""
     def GetType(self) -> Type:
@@ -337,6 +352,7 @@ class NeutralResourcesLanguageAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PRIExceptionInfo(Object):
     """"""
 
@@ -355,6 +371,7 @@ class PRIExceptionInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceFallbackManager(Object, IEnumerable[CultureInfo], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -370,6 +387,7 @@ class ResourceFallbackManager(Object, IEnumerable[CultureInfo], IEnumerable):
     def __iter__(self) -> Iterator[CultureInfo]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceLocator(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -381,6 +399,7 @@ class ResourceLocator(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceManager(Object):
     """"""
 
@@ -410,7 +429,10 @@ class ResourceManager(Object):
         """"""
     @classmethod
     def CreateFileBasedResourceManager(
-        cls, baseName: str, resourceDir: str, usingResourceSet: Type
+        cls,
+        baseName: str,
+        resourceDir: str,
+        usingResourceSet: Type,
     ) -> ResourceManager:
         """"""
     def Equals(self, obj: object) -> bool:
@@ -424,7 +446,10 @@ class ResourceManager(Object):
     def GetObject(self, name: str, culture: CultureInfo) -> object:
         """"""
     def GetResourceSet(
-        self, culture: CultureInfo, createIfNotExists: bool, tryParents: bool
+        self,
+        culture: CultureInfo,
+        createIfNotExists: bool,
+        tryParents: bool,
     ) -> ResourceSet:
         """"""
     @overload
@@ -446,6 +471,7 @@ class ResourceManager(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceReader(Object, IEnumerable, IResourceReader, IDisposable):
     """"""
     @overload
@@ -465,7 +491,10 @@ class ResourceReader(Object, IEnumerable, IResourceReader, IDisposable):
     def GetHashCode(self) -> int:
         """"""
     def GetResourceData(
-        self, resourceName: str, resourceType: String, resourceData: Byte
+        self,
+        resourceName: str,
+        resourceType: String,
+        resourceData: Byte,
     ) -> tuple[None, String, Byte]:
         """"""
     def GetType(self) -> Type:
@@ -475,6 +504,7 @@ class ResourceReader(Object, IEnumerable, IResourceReader, IDisposable):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceSet(Object, IEnumerable, IDisposable):
     """"""
     @overload
@@ -519,6 +549,7 @@ class ResourceSet(Object, IEnumerable, IDisposable):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ResourceTypeCode(Enum):
     """"""
 
@@ -565,6 +596,7 @@ class ResourceTypeCode(Enum):
     StartOfUserTypes: ResourceTypeCode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceWriter(Object, IResourceWriter, IDisposable):
     """"""
     @overload
@@ -610,6 +642,7 @@ class ResourceWriter(Object, IResourceWriter, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RuntimeResourceSet(ResourceSet, IEnumerable, IDisposable):
     """"""
     def Close(self) -> None:
@@ -645,6 +678,7 @@ class RuntimeResourceSet(ResourceSet, IEnumerable, IDisposable):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SatelliteContractVersionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, version: str) -> None:
@@ -660,7 +694,12 @@ class SatelliteContractVersionAttribute(Attribute, _Attribute):
     def GetHashCode(self) -> int:
         """"""
     def GetIDsOfNames(
-        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+        self,
+        riid: Guid,
+        rgszNames: IntPtr,
+        cNames: int,
+        lcid: int,
+        rgDispId: IntPtr,
     ) -> None:
         """"""
     def GetType(self) -> Type:
@@ -688,6 +727,7 @@ class SatelliteContractVersionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UltimateResourceFallbackLocation(Enum):
     """"""
 
@@ -696,6 +736,7 @@ class UltimateResourceFallbackLocation(Enum):
     Satellite: UltimateResourceFallbackLocation = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsRuntimeResourceManagerBase(Object):
     """"""
     def __init__(self) -> None:
@@ -712,7 +753,10 @@ class WindowsRuntimeResourceManagerBase(Object):
     def GetType(self) -> Type:
         """"""
     def Initialize(
-        self, libpath: str, reswFilename: str, exceptionInfo: PRIExceptionInfo
+        self,
+        libpath: str,
+        reswFilename: str,
+        exceptionInfo: PRIExceptionInfo,
     ) -> tuple[bool, PRIExceptionInfo]:
         """"""
     def SetGlobalResourceContextDefaultCulture(self, ci: CultureInfo) -> bool:
@@ -720,6 +764,7 @@ class WindowsRuntimeResourceManagerBase(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class __HResults(ABC, Object):
     """"""
 

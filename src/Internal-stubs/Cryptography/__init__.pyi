@@ -19,6 +19,7 @@ from System.Security.Cryptography import ICryptoTransform
 from System.Security.Cryptography import KeySizes
 from System.Security.Cryptography import PaddingMode
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BasicSymmetricCipher(ABC, Object, IDisposable):
     """"""
     @property
@@ -41,6 +42,7 @@ class BasicSymmetricCipher(ABC, Object, IDisposable):
     def TransformFinal(self, input: Array[int], inputOffset: int, count: int) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BasicSymmetricCipherBCrypt(BasicSymmetricCipher, IDisposable):
     """"""
     def __init__(
@@ -73,6 +75,7 @@ class BasicSymmetricCipherBCrypt(BasicSymmetricCipher, IDisposable):
     def TransformFinal(self, input: Array[int], inputOffset: int, count: int) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BasicSymmetricCipherNCrypt(BasicSymmetricCipher, IDisposable):
     """"""
     def __init__(
@@ -104,6 +107,7 @@ class BasicSymmetricCipherNCrypt(BasicSymmetricCipher, IDisposable):
     def TransformFinal(self, input: Array[int], inputOffset: int, count: int) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngSymmetricAlgorithmCore(ValueType):
     """"""
     @overload
@@ -149,6 +153,7 @@ class CngSymmetricAlgorithmCore(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptoThrowHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -163,6 +168,7 @@ class CryptoThrowHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Helpers(ABC, Object):
     """"""
     @classmethod
@@ -197,6 +203,7 @@ class Helpers(ABC, Object):
     def UsesIv(cls, cipherMode: CipherMode) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICngSymmetricAlgorithm(ABC):
     """"""
     @property
@@ -233,6 +240,7 @@ class ICngSymmetricAlgorithm(ABC):
     def IsWeakKey(self, key: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyPropertyName(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -244,6 +252,7 @@ class KeyPropertyName(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymmetricImportExportExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -261,6 +270,7 @@ class SymmetricImportExportExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UniversalCryptoDecryptor(UniversalCryptoTransform, ICryptoTransform, IDisposable):
     """"""
     def __init__(
@@ -303,6 +313,7 @@ class UniversalCryptoDecryptor(UniversalCryptoTransform, ICryptoTransform, IDisp
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UniversalCryptoEncryptor(UniversalCryptoTransform, ICryptoTransform, IDisposable):
     """"""
     def __init__(
@@ -345,6 +356,7 @@ class UniversalCryptoEncryptor(UniversalCryptoTransform, ICryptoTransform, IDisp
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UniversalCryptoTransform(ABC, Object, ICryptoTransform, IDisposable):
     """"""
     @property

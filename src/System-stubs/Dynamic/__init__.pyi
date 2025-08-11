@@ -31,6 +31,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryOperationBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -79,6 +80,7 @@ class BinaryOperationBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BindingRestrictions(ABC, Object):
     """"""
 
@@ -111,6 +113,7 @@ class BindingRestrictions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CallInfo(Object):
     """"""
     @overload
@@ -134,6 +137,7 @@ class CallInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConvertBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -183,6 +187,7 @@ class ConvertBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CreateInstanceBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -234,6 +239,7 @@ class CreateInstanceBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeleteIndexBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -285,6 +291,7 @@ class DeleteIndexBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeleteMemberBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -334,6 +341,7 @@ class DeleteMemberBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicMetaObject(Object):
     """"""
 
@@ -415,6 +423,7 @@ class DynamicMetaObject(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicMetaObjectBinder(ABC, CallSiteBinder):
     """"""
     @property
@@ -450,6 +459,7 @@ class DynamicMetaObjectBinder(ABC, CallSiteBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicObject(Object, IDynamicMetaObjectProvider):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -501,6 +511,7 @@ class DynamicObject(Object, IDynamicMetaObjectProvider):
     ) -> tuple[bool, Object]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExpandoClass(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -512,6 +523,7 @@ class ExpandoClass(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExpandoObject(
     Object,
     ICollection[KeyValuePair[String, Object]],
@@ -598,6 +610,7 @@ class ExpandoObject(
     PropertyChanged: EventType[PropertyChangedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GetIndexBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -649,6 +662,7 @@ class GetIndexBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GetMemberBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -698,17 +712,20 @@ class GetMemberBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDynamicMetaObjectProvider(ABC):
     """"""
     def GetMetaObject(self, parameter: Expression) -> DynamicMetaObject:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IInvokeOnGetBinder(ABC):
     """"""
     @property
     def InvokeOnGet(self) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvokeBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -760,6 +777,7 @@ class InvokeBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvokeMemberBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -824,6 +842,7 @@ class InvokeMemberBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SetIndexBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -876,6 +895,7 @@ class SetIndexBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SetMemberBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -930,6 +950,7 @@ class SetMemberBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnaryOperationBinder(ABC, DynamicMetaObjectBinder):
     """"""
     @property
@@ -976,6 +997,7 @@ class UnaryOperationBinder(ABC, DynamicMetaObjectBinder):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UpdateDelegates(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

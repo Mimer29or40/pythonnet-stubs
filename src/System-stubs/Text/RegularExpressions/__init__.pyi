@@ -25,6 +25,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CachedCodeEntry(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -36,6 +37,7 @@ class CachedCodeEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Capture(Object):
     """"""
     @property
@@ -56,6 +58,7 @@ class Capture(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CaptureCollection(Object, ICollection, IEnumerable):
     """"""
     @property
@@ -92,6 +95,7 @@ class CaptureCollection(Object, ICollection, IEnumerable):
     def __getitem__(self, i: int) -> Capture:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CaptureEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -113,6 +117,7 @@ class CaptureEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompiledRegexRunner(RegexRunner):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -124,6 +129,7 @@ class CompiledRegexRunner(RegexRunner):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompiledRegexRunnerFactory(RegexRunnerFactory):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -138,6 +144,7 @@ class CompiledRegexRunnerFactory(RegexRunnerFactory):
 type CreateInstanceDelegate = Callable[[], RegexRunner]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExclusiveReference(Object):
     """"""
     def __init__(self) -> None:
@@ -154,6 +161,7 @@ class ExclusiveReference(Object):
 type FindFirstCharDelegate = Callable[[RegexRunner], bool]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Group(Capture):
     """"""
     @property
@@ -186,6 +194,7 @@ class Group(Capture):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupCollection(Object, ICollection, IEnumerable):
     """"""
     @property
@@ -226,6 +235,7 @@ class GroupCollection(Object, ICollection, IEnumerable):
     def __getitem__(self, groupname: str) -> Group:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -247,6 +257,7 @@ class GroupEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Match(Group):
     """"""
     @property
@@ -290,6 +301,7 @@ class Match(Group):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MatchCollection(Object, ICollection, IEnumerable):
     """"""
     @property
@@ -326,6 +338,7 @@ class MatchCollection(Object, ICollection, IEnumerable):
     def __getitem__(self, i: int) -> Match:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MatchEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -347,6 +360,7 @@ class MatchEnumerator(Object, IEnumerator):
 type MatchEvaluator = Callable[[Match], str]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MatchSparse(Match):
     """"""
     @property
@@ -386,6 +400,7 @@ class MatchSparse(Match):
 type NoParamDelegate = Callable[[RegexRunner], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Regex(Object, ISerializable):
     """"""
 
@@ -610,6 +625,7 @@ class Regex(Object, ISerializable):
     def Unescape(cls, str: str) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexBoyerMoore(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -621,6 +637,7 @@ class RegexBoyerMoore(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexCharClass(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -632,6 +649,7 @@ class RegexCharClass(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexCode(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -643,6 +661,7 @@ class RegexCode(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexCompilationInfo(Object):
     """"""
     @overload
@@ -700,6 +719,7 @@ class RegexCompilationInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexCompiler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -711,6 +731,7 @@ class RegexCompiler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexFC(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -722,6 +743,7 @@ class RegexFC(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexFCD(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -733,6 +755,7 @@ class RegexFCD(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexInterpreter(RegexRunner):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -744,6 +767,7 @@ class RegexInterpreter(RegexRunner):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexLWCGCompiler(RegexCompiler):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -755,6 +779,7 @@ class RegexLWCGCompiler(RegexCompiler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexMatchTimeoutException(TimeoutException, _Exception, ISerializable):
     """"""
     @overload
@@ -819,6 +844,7 @@ class RegexMatchTimeoutException(TimeoutException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexNode(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -830,6 +856,7 @@ class RegexNode(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RegexOptions(Enum):
     """"""
 
@@ -854,6 +881,7 @@ class RegexOptions(Enum):
     CultureInvariant: RegexOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexParser(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -865,6 +893,7 @@ class RegexParser(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexPrefix(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -876,6 +905,7 @@ class RegexPrefix(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexReplacement(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -887,6 +917,7 @@ class RegexReplacement(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexRunner(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -898,6 +929,7 @@ class RegexRunner(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexRunnerFactory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -909,6 +941,7 @@ class RegexRunnerFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexTree(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -920,6 +953,7 @@ class RegexTree(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexTypeCompiler(RegexCompiler):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -931,6 +965,7 @@ class RegexTypeCompiler(RegexCompiler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegexWriter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -942,6 +977,7 @@ class RegexWriter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SharedReference(Object):
     """"""
     def __init__(self) -> None:

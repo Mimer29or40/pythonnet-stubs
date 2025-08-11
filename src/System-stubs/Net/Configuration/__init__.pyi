@@ -31,6 +31,7 @@ from System.Net.Mail import SmtpDeliveryMethod
 from System.Net.Security import EncryptionPolicy
 from System.Net.Sockets import IPProtectionLevel
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthenticationModuleElement(ConfigurationElement):
     """"""
     @overload
@@ -78,6 +79,7 @@ class AuthenticationModuleElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthenticationModuleElementCollection(
     ConfigurationElementCollection, ICollection, IEnumerable
 ):
@@ -184,6 +186,7 @@ class AuthenticationModuleElementCollection(
     def __setitem__(self, name: str, value: AuthenticationModuleElement) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthenticationModulesSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -228,6 +231,7 @@ class AuthenticationModulesSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthenticationModulesSectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -239,6 +243,7 @@ class AuthenticationModulesSectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BypassElement(ConfigurationElement):
     """"""
     @overload
@@ -286,6 +291,7 @@ class BypassElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BypassElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -390,6 +396,7 @@ class BypassElementCollection(ConfigurationElementCollection, ICollection, IEnum
     def __setitem__(self, name: str, value: BypassElement) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigurationStrings(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -401,6 +408,7 @@ class ConfigurationStrings(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConnectionManagementElement(ConfigurationElement):
     """"""
     @overload
@@ -453,6 +461,7 @@ class ConnectionManagementElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConnectionManagementElementCollection(
     ConfigurationElementCollection, ICollection, IEnumerable
 ):
@@ -559,6 +568,7 @@ class ConnectionManagementElementCollection(
     def __setitem__(self, name: str, value: ConnectionManagementElement) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConnectionManagementSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -603,6 +613,7 @@ class ConnectionManagementSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConnectionManagementSectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -614,6 +625,7 @@ class ConnectionManagementSectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultProxySection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -674,6 +686,7 @@ class DefaultProxySection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultProxySectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -685,6 +698,7 @@ class DefaultProxySectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FtpCachePolicyElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -728,6 +742,7 @@ class FtpCachePolicyElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HttpCachePolicyElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -786,6 +801,7 @@ class HttpCachePolicyElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HttpListenerElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -830,6 +846,7 @@ class HttpListenerElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HttpListenerTimeoutsElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -886,6 +903,7 @@ class HttpListenerTimeoutsElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HttpWebRequestElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -944,6 +962,7 @@ class HttpWebRequestElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Ipv6Element(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -987,6 +1006,7 @@ class Ipv6Element(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailSettingsSectionGroup(ConfigurationSectionGroup):
     """"""
     def __init__(self) -> None:
@@ -1032,6 +1052,7 @@ class MailSettingsSectionGroup(ConfigurationSectionGroup):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailSettingsSectionGroupInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1043,6 +1064,7 @@ class MailSettingsSectionGroupInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ModuleElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1086,6 +1108,7 @@ class ModuleElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetSectionGroup(ConfigurationSectionGroup):
     """"""
     def __init__(self) -> None:
@@ -1152,6 +1175,7 @@ class NetSectionGroup(ConfigurationSectionGroup):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PerformanceCountersElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1195,6 +1219,7 @@ class PerformanceCountersElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProxyElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1257,6 +1282,7 @@ class ProxyElement(ConfigurationElement):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class AutoDetectValues(Enum):
         """"""
 
@@ -1267,6 +1293,7 @@ class ProxyElement(ConfigurationElement):
         Unspecified: ProxyElement.AutoDetectValues = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class BypassOnLocalValues(Enum):
         """"""
 
@@ -1277,6 +1304,7 @@ class ProxyElement(ConfigurationElement):
         Unspecified: ProxyElement.BypassOnLocalValues = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class UseSystemDefaultValues(Enum):
         """"""
 
@@ -1287,6 +1315,7 @@ class ProxyElement(ConfigurationElement):
         Unspecified: ProxyElement.UseSystemDefaultValues = ...
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCachingSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -1354,6 +1383,7 @@ class RequestCachingSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RequestCachingSectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1365,6 +1395,7 @@ class RequestCachingSectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServicePointManagerElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1438,6 +1469,7 @@ class ServicePointManagerElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -1506,6 +1538,7 @@ class SettingsSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SettingsSectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1517,6 +1550,7 @@ class SettingsSectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpNetworkElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1595,6 +1629,7 @@ class SmtpNetworkElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpNetworkElementInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1606,6 +1641,7 @@ class SmtpNetworkElementInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -1668,6 +1704,7 @@ class SmtpSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpSectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1679,6 +1716,7 @@ class SmtpSectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpSpecifiedPickupDirectoryElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1722,6 +1760,7 @@ class SmtpSpecifiedPickupDirectoryElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpSpecifiedPickupDirectoryElementInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1733,6 +1772,7 @@ class SmtpSpecifiedPickupDirectoryElementInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SocketElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1786,6 +1826,7 @@ class SocketElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UnicodeDecodingConformance(Enum):
     """"""
 
@@ -1798,6 +1839,7 @@ class UnicodeDecodingConformance(Enum):
     Loose: UnicodeDecodingConformance = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UnicodeEncodingConformance(Enum):
     """"""
 
@@ -1808,6 +1850,7 @@ class UnicodeEncodingConformance(Enum):
     Compat: UnicodeEncodingConformance = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebProxyScriptElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -1856,6 +1899,7 @@ class WebProxyScriptElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebRequestModuleElement(ConfigurationElement):
     """"""
     @overload
@@ -1911,6 +1955,7 @@ class WebRequestModuleElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebRequestModuleElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -2015,6 +2060,7 @@ class WebRequestModuleElementCollection(ConfigurationElementCollection, ICollect
     def __setitem__(self, name: str, value: WebRequestModuleElement) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebRequestModulesSection(ConfigurationSection):
     """"""
     def __init__(self) -> None:
@@ -2059,6 +2105,7 @@ class WebRequestModulesSection(ConfigurationSection):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebRequestModulesSectionInternal(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2070,6 +2117,7 @@ class WebRequestModulesSectionInternal(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebUtilityElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -2118,6 +2166,7 @@ class WebUtilityElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowsAuthenticationElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:

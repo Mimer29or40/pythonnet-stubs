@@ -10,6 +10,7 @@ from System import Type
 from System.Runtime.Remoting import ObjectHandle
 from System.Security.Policy import EvidenceBase
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ActivationArguments(EvidenceBase):
     """"""
     @overload
@@ -46,6 +47,7 @@ class ActivationArguments(EvidenceBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationActivator(Object):
     """"""
     def __init__(self) -> None:
@@ -67,6 +69,7 @@ class ApplicationActivator(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManifestRunner(Object):
     """"""
     def Equals(self, obj: object) -> bool:

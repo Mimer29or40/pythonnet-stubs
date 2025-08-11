@@ -20,6 +20,7 @@ from System.Security.Authentication.ExtendedProtection import ExtendedProtection
 from System.Security.Authentication.ExtendedProtection import PolicyEnforcement
 from System.Security.Authentication.ExtendedProtection import ProtectionScenario
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExtendedProtectionConfigurationStrings(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -31,6 +32,7 @@ class ExtendedProtectionConfigurationStrings(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExtendedProtectionPolicyElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -84,6 +86,7 @@ class ExtendedProtectionPolicyElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServiceNameElement(ConfigurationElement):
     """"""
     def __init__(self) -> None:
@@ -127,6 +130,7 @@ class ServiceNameElement(ConfigurationElement):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServiceNameElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:

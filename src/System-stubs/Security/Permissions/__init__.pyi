@@ -32,6 +32,7 @@ from System.Security.Cryptography import CspParameters
 from System.Security.Cryptography.X509Certificates import X509Certificate
 from System.Security.Util import StringExpressionSet
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class BuiltInPermissionFlag(Enum):
     """"""
 
@@ -66,6 +67,7 @@ class BuiltInPermissionFlag(Enum):
     KeyContainerPermission: BuiltInPermissionFlag = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BuiltInPermissionIndex(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -77,6 +79,7 @@ class BuiltInPermissionIndex(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeAccessSecurityAttribute(ABC, SecurityAttribute, _Attribute):
     """"""
     @property
@@ -127,6 +130,7 @@ class CodeAccessSecurityAttribute(ABC, SecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnvironmentPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -181,6 +185,7 @@ class EnvironmentPermission(
     def Union(self, other: IPermission) -> IPermission:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EnvironmentPermissionAccess(Enum):
     """"""
 
@@ -193,6 +198,7 @@ class EnvironmentPermissionAccess(Enum):
     AllAccess: EnvironmentPermissionAccess = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -260,6 +266,7 @@ class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnvironmentStringExpressionSet(StringExpressionSet):
     """"""
     @overload
@@ -304,6 +311,7 @@ class EnvironmentStringExpressionSet(StringExpressionSet):
     def UnsafeToStringArray(self) -> Array[str]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileDialogPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -357,6 +365,7 @@ class FileDialogPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileDialogPermissionAccess(Enum):
     """"""
 
@@ -369,6 +378,7 @@ class FileDialogPermissionAccess(Enum):
     OpenSave: FileDialogPermissionAccess = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileDialogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -431,6 +441,7 @@ class FileDialogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileIOAccess(Object):
     """"""
     @overload
@@ -488,6 +499,7 @@ class FileIOAccess(Object):
     def Union(self, operand: FileIOAccess) -> FileIOAccess:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileIOPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -573,6 +585,7 @@ class FileIOPermission(
     def Union(self, other: IPermission) -> IPermission:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileIOPermissionAccess(Enum):
     """"""
 
@@ -589,6 +602,7 @@ class FileIOPermissionAccess(Enum):
     AllAccess: FileIOPermissionAccess = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileIOPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -691,6 +705,7 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GacIdentityPermission(
     CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -732,6 +747,7 @@ class GacIdentityPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GacIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -784,6 +800,7 @@ class GacIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HostProtectionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     @overload
@@ -890,6 +907,7 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HostProtectionPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -943,6 +961,7 @@ class HostProtectionPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HostProtectionResource(Enum):
     """"""
 
@@ -969,11 +988,13 @@ class HostProtectionResource(Enum):
     All: HostProtectionResource = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IBuiltInPermission(ABC):
     """"""
     def GetTokenIndex(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDRole(Object):
     """"""
     def __init__(self) -> None:
@@ -987,11 +1008,13 @@ class IDRole(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IUnrestrictedPermission(ABC):
     """"""
     def IsUnrestricted(self) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageContainment(Enum):
     """"""
 
@@ -1020,6 +1043,7 @@ class IsolatedStorageContainment(Enum):
     UnrestrictedIsolatedStorage: IsolatedStorageContainment = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageFilePermission(
     IsolatedStoragePermission,
     IBuiltInPermission,
@@ -1074,6 +1098,7 @@ class IsolatedStorageFilePermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageFilePermissionAttribute(IsolatedStoragePermissionAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -1136,6 +1161,7 @@ class IsolatedStorageFilePermissionAttribute(IsolatedStoragePermissionAttribute,
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStoragePermission(
     ABC, CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -1181,6 +1207,7 @@ class IsolatedStoragePermission(
     def Union(self, other: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStoragePermissionAttribute(ABC, CodeAccessSecurityAttribute, _Attribute):
     """"""
     @property
@@ -1241,6 +1268,7 @@ class IsolatedStoragePermissionAttribute(ABC, CodeAccessSecurityAttribute, _Attr
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyContainerPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -1302,6 +1330,7 @@ class KeyContainerPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyContainerPermissionAccessEntry(Object):
     """"""
     @overload
@@ -1360,6 +1389,7 @@ class KeyContainerPermissionAccessEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyContainerPermissionAccessEntryCollection(Object, ICollection, IEnumerable):
     """"""
     @property
@@ -1407,6 +1437,7 @@ class KeyContainerPermissionAccessEntryCollection(Object, ICollection, IEnumerab
     def __getitem__(self, index: int) -> KeyContainerPermissionAccessEntry:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyContainerPermissionAccessEntryEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -1425,6 +1456,7 @@ class KeyContainerPermissionAccessEntryEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -1507,6 +1539,7 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class KeyContainerPermissionFlags(Enum):
     """"""
 
@@ -1533,6 +1566,7 @@ class KeyContainerPermissionFlags(Enum):
     AllFlags: KeyContainerPermissionFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PermissionSetAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -1612,6 +1646,7 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PermissionState(Enum):
     """"""
 
@@ -1620,6 +1655,7 @@ class PermissionState(Enum):
     Unrestricted: PermissionState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrincipalPermission(
     Object, IBuiltInPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable
 ):
@@ -1660,6 +1696,7 @@ class PrincipalPermission(
     def Union(self, other: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrincipalPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -1727,6 +1764,7 @@ class PrincipalPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PublisherIdentityPermission(
     CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -1773,6 +1811,7 @@ class PublisherIdentityPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -1840,6 +1879,7 @@ class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribu
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReflectionPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -1893,6 +1933,7 @@ class ReflectionPermission(
     def Union(self, other: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReflectionPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -1970,6 +2011,7 @@ class ReflectionPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ReflectionPermissionFlag(Enum):
     """"""
 
@@ -1986,6 +2028,7 @@ class ReflectionPermissionFlag(Enum):
     RestrictedMemberAccess: ReflectionPermissionFlag = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegistryPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -2051,6 +2094,7 @@ class RegistryPermission(
     def Union(self, other: IPermission) -> IPermission:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RegistryPermissionAccess(Enum):
     """"""
 
@@ -2065,6 +2109,7 @@ class RegistryPermissionAccess(Enum):
     AllAccess: RegistryPermissionAccess = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegistryPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -2152,6 +2197,7 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourcePermissionBase(
     ABC, CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -2192,6 +2238,7 @@ class ResourcePermissionBase(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourcePermissionBaseEntry(Object):
     """"""
     @overload
@@ -2215,6 +2262,7 @@ class ResourcePermissionBaseEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SecurityAction(Enum):
     """"""
 
@@ -2237,6 +2285,7 @@ class SecurityAction(Enum):
     RequestRefuse: SecurityAction = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SecurityAttribute(ABC, Attribute, _Attribute):
     """"""
     @property
@@ -2287,6 +2336,7 @@ class SecurityAttribute(ABC, Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SecurityPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -2340,6 +2390,7 @@ class SecurityPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SecurityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -2467,6 +2518,7 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SecurityPermissionFlag(Enum):
     """"""
 
@@ -2503,6 +2555,7 @@ class SecurityPermissionFlag(Enum):
     AllFlags: SecurityPermissionFlag = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SiteIdentityPermission(
     CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -2549,6 +2602,7 @@ class SiteIdentityPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SiteIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -2606,6 +2660,7 @@ class SiteIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StorePermission(
     CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -2652,6 +2707,7 @@ class StorePermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StorePermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -2744,6 +2800,7 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StorePermissionFlags(Enum):
     """"""
 
@@ -2766,6 +2823,7 @@ class StorePermissionFlags(Enum):
     AllFlags: StorePermissionFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongName2(Object):
     """"""
 
@@ -2796,6 +2854,7 @@ class StrongName2(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongNameIdentityPermission(
     CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -2852,6 +2911,7 @@ class StrongNameIdentityPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -2919,6 +2979,7 @@ class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attrib
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongNamePublicKeyBlob(Object):
     """"""
     def __init__(self, publicKey: Array[int]) -> None:
@@ -2932,6 +2993,7 @@ class StrongNamePublicKeyBlob(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeDescriptorPermission(
     CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -2978,6 +3040,7 @@ class TypeDescriptorPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -3040,6 +3103,7 @@ class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute, _Attribute)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeDescriptorPermissionFlags(Enum):
     """"""
 
@@ -3048,6 +3112,7 @@ class TypeDescriptorPermissionFlags(Enum):
     RestrictedRegistrationAccess: TypeDescriptorPermissionFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UIPermission(
     CodeAccessPermission,
     IBuiltInPermission,
@@ -3114,6 +3179,7 @@ class UIPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UIPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -3176,6 +3242,7 @@ class UIPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UIPermissionClipboard(Enum):
     """"""
 
@@ -3186,6 +3253,7 @@ class UIPermissionClipboard(Enum):
     AllClipboard: UIPermissionClipboard = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UIPermissionWindow(Enum):
     """"""
 
@@ -3198,6 +3266,7 @@ class UIPermissionWindow(Enum):
     AllWindows: UIPermissionWindow = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UrlIdentityPermission(
     CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -3244,6 +3313,7 @@ class UrlIdentityPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -3301,6 +3371,7 @@ class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ZoneIdentityPermission(
     CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -3347,6 +3418,7 @@ class ZoneIdentityPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ZoneIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:

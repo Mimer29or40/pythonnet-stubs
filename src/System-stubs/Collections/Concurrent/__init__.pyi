@@ -38,13 +38,13 @@ from System.Diagnostics.Tracing import EventLevel
 from System.Diagnostics.Tracing import EventSource
 from System.Diagnostics.Tracing import EventSourceOptions
 from System.Diagnostics.Tracing import EventSourceSettings
-from System.Diagnostics.Tracing import T
 from System.Threading import CancellationToken
 
 class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlockingCollection[T](
     Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnumerable, IDisposable
 ):
@@ -230,6 +230,7 @@ class BlockingCollection[T](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CDSCollectionETWBCLProvider(EventSource, IDisposable):
     """"""
 
@@ -306,6 +307,7 @@ class CDSCollectionETWBCLProvider(EventSource, IDisposable):
     EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcurrentBag[T](
     Object,
     IProducerConsumerCollection[T],
@@ -364,6 +366,7 @@ class ConcurrentBag[T](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcurrentDictionary[TKey, TValue](
     Object,
     ICollection[KeyValuePair[TKey, TValue]],
@@ -559,6 +562,7 @@ class ConcurrentDictionary[TKey, TValue](
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcurrentQueue[T](
     Object,
     IProducerConsumerCollection[T],
@@ -619,6 +623,7 @@ class ConcurrentQueue[T](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcurrentStack[T](
     Object,
     IProducerConsumerCollection[T],
@@ -693,6 +698,7 @@ class ConcurrentStack[T](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EnumerablePartitionerOptions(Enum):
     """"""
 
@@ -701,6 +707,7 @@ class EnumerablePartitionerOptions(Enum):
     NoBuffering: EnumerablePartitionerOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IProducerConsumerCollection[T](ABC, IEnumerable[T], ICollection, IEnumerable):
     """"""
     @property
@@ -731,6 +738,7 @@ class IProducerConsumerCollection[T](ABC, IEnumerable[T], ICollection, IEnumerab
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderablePartitioner[TSource](ABC, Partitioner[TSource]):
     """"""
     @property
@@ -764,6 +772,7 @@ class OrderablePartitioner[TSource](ABC, Partitioner[TSource]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Partitioner(ABC, Object):
     """"""
     @classmethod
@@ -817,6 +826,7 @@ class Partitioner(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Partitioner[TSource](ABC, Object):
     """"""
     @property
@@ -835,6 +845,7 @@ class Partitioner[TSource](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView[T](Object):
     """"""
     def __init__(self, collection: IProducerConsumerCollection[T]) -> None:
@@ -851,6 +862,7 @@ class SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView[T](Object)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemThreadingCollection_IProducerConsumerCollectionDebugView[T](Object):
     """"""
     def __init__(self, collection: IProducerConsumerCollection[T]) -> None:
@@ -867,6 +879,7 @@ class SystemThreadingCollection_IProducerConsumerCollectionDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemThreadingCollections_BlockingCollectionDebugView[T](Object):
     """"""
     def __init__(self, collection: BlockingCollection[T]) -> None:
@@ -883,6 +896,7 @@ class SystemThreadingCollections_BlockingCollectionDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VolatileBool(ValueType):
     """"""
 

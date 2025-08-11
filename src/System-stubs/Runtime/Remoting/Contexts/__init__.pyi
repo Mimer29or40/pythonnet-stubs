@@ -23,6 +23,7 @@ from System.Runtime.Remoting.Messaging import IMessageCtrl
 from System.Runtime.Remoting.Messaging import IMessageSink
 from System.Runtime.Remoting.Messaging import InternalSink
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArrayWithSize(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -34,6 +35,7 @@ class ArrayWithSize(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CallBackHelper(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -45,6 +47,7 @@ class CallBackHelper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Context(Object):
     """"""
     def __init__(self) -> None:
@@ -102,6 +105,7 @@ class Context(Object):
     def UnregisterDynamicProperty(cls, name: str, obj: ContextBoundObject, ctx: Context) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContextAttribute(Attribute, _Attribute, IContextAttribute, IContextProperty):
     """"""
     def __init__(self, name: str) -> None:
@@ -153,6 +157,7 @@ class ContextAttribute(Attribute, _Attribute, IContextAttribute, IContextPropert
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContextProperty(Object):
     """"""
     @property
@@ -173,6 +178,7 @@ class ContextProperty(Object):
 type CrossContextDelegate = Callable[[], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicPropertyHolder(Object):
     """"""
     def __init__(self) -> None:
@@ -186,6 +192,7 @@ class DynamicPropertyHolder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContextAttribute(ABC):
     """"""
     def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> None:
@@ -193,6 +200,7 @@ class IContextAttribute(ABC):
     def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContextProperty(ABC):
     """"""
     @property
@@ -203,6 +211,7 @@ class IContextProperty(ABC):
     def IsNewContextOK(self, newCtx: Context) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContextPropertyActivator(ABC):
     """"""
     def CollectFromClientContext(self, msg: IConstructionCallMessage) -> None:
@@ -216,31 +225,37 @@ class IContextPropertyActivator(ABC):
     def IsOKToActivate(self, msg: IConstructionCallMessage) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContributeClientContextSink(ABC):
     """"""
     def GetClientContextSink(self, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContributeDynamicSink(ABC):
     """"""
     def GetDynamicSink(self) -> IDynamicMessageSink:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContributeEnvoySink(ABC):
     """"""
     def GetEnvoySink(self, obj: MarshalByRefObject, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContributeObjectSink(ABC):
     """"""
     def GetObjectSink(self, obj: MarshalByRefObject, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IContributeServerContextSink(ABC):
     """"""
     def GetServerContextSink(self, nextSink: IMessageSink) -> IMessageSink:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDynamicMessageSink(ABC):
     """"""
     def ProcessMessageFinish(self, replyMsg: IMessage, bCliSide: bool, bAsync: bool) -> None:
@@ -248,12 +263,14 @@ class IDynamicMessageSink(ABC):
     def ProcessMessageStart(self, reqMsg: IMessage, bCliSide: bool, bAsync: bool) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDynamicProperty(ABC):
     """"""
     @property
     def Name(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SynchronizationAttribute(
     ContextAttribute,
     _Attribute,
@@ -343,6 +360,7 @@ class SynchronizationAttribute(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SynchronizedClientContextSink(InternalSink, IMessageSink):
     """"""
     @property
@@ -361,6 +379,7 @@ class SynchronizedClientContextSink(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SynchronizedServerContextSink(InternalSink, IMessageSink):
     """"""
     @property
@@ -379,6 +398,7 @@ class SynchronizedServerContextSink(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WorkItem(Object):
     """"""
     def Equals(self, obj: object) -> bool:

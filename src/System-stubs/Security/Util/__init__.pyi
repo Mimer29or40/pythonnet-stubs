@@ -17,6 +17,7 @@ from System.Security import SecurityElement
 from System.Security.Permissions import PermissionState
 from System.Security.Policy import CodeGroup
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Config(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -28,6 +29,7 @@ class Config(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DirectoryString(SiteString):
     """"""
     @overload
@@ -63,6 +65,7 @@ class DirectoryString(SiteString):
     def Union(self, operand: SiteString) -> SiteString:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Hex(ABC, Object):
     """"""
     @classmethod
@@ -83,6 +86,7 @@ class Hex(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LocalSiteString(SiteString):
     """"""
     def __init__(self, site: str) -> None:
@@ -114,6 +118,7 @@ class LocalSiteString(SiteString):
     def Union(self, operand: SiteString) -> SiteString:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Parser(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -125,6 +130,7 @@ class Parser(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class QuickCacheEntryType(Enum):
     """"""
 
@@ -141,6 +147,7 @@ class QuickCacheEntryType(Enum):
     FullTrustAll: QuickCacheEntryType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SiteString(Object):
     """"""
     def __init__(self, site: str) -> None:
@@ -166,6 +173,7 @@ class SiteString(Object):
     def Union(self, operand: SiteString) -> SiteString:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringExpressionSet(Object):
     """"""
     @overload
@@ -216,6 +224,7 @@ class StringExpressionSet(Object):
     def UnsafeToStringArray(self) -> Array[str]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenBasedSet(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -227,6 +236,7 @@ class TokenBasedSet(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenBasedSetEnumerator(ValueType):
     """"""
 
@@ -249,6 +259,7 @@ class TokenBasedSetEnumerator(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Tokenizer(Object):
     """"""
 
@@ -265,6 +276,7 @@ class Tokenizer(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenizerShortBlock(Object):
     """"""
     def __init__(self) -> None:
@@ -278,6 +290,7 @@ class TokenizerShortBlock(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenizerStream(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -289,6 +302,7 @@ class TokenizerStream(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenizerStringBlock(Object):
     """"""
     def __init__(self) -> None:
@@ -302,6 +316,7 @@ class TokenizerStringBlock(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class URLString(SiteString):
     """"""
     @overload
@@ -362,6 +377,7 @@ class URLString(SiteString):
     def Union(self, operand: SiteString) -> SiteString:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class XMLUtil(ABC, Object):
     """"""
     @classmethod

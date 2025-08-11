@@ -16,6 +16,7 @@ from System.Runtime.Remoting.Messaging import IMessage
 from System.Runtime.Remoting.Messaging import IMessageCtrl
 from System.Runtime.Remoting.Messaging import IMessageSink
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientSponsor(MarshalByRefObject, ISponsor):
     """"""
     @overload
@@ -52,6 +53,7 @@ class ClientSponsor(MarshalByRefObject, ISponsor):
     def Unregister(self, obj: MarshalByRefObject) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ILease(ABC):
     """"""
     @property
@@ -86,11 +88,13 @@ class ILease(ABC):
     def Unregister(self, obj: ISponsor) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISponsor(ABC):
     """"""
     def Renewal(self, lease: ILease) -> TimeSpan:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Lease(MarshalByRefObject, ILease):
     """"""
     @property
@@ -139,6 +143,7 @@ class Lease(MarshalByRefObject, ILease):
     def Unregister(self, sponsor: ISponsor) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LeaseLifeTimeServiceProperty(Object, IContextProperty, IContributeObjectSink):
     """"""
     def __init__(self) -> None:
@@ -161,6 +166,7 @@ class LeaseLifeTimeServiceProperty(Object, IContextProperty, IContributeObjectSi
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LeaseManager(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -172,6 +178,7 @@ class LeaseManager(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LeaseSink(Object, IMessageSink):
     """"""
     def __init__(self, lease: Lease, nextSink: IMessageSink) -> None:
@@ -192,6 +199,7 @@ class LeaseSink(Object, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class LeaseState(Enum):
     """"""
 
@@ -206,6 +214,7 @@ class LeaseState(Enum):
     Expired: LeaseState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LifetimeServices(Object):
     """"""
     def __init__(self) -> None:

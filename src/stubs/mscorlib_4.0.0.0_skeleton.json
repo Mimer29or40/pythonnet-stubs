@@ -238176,7 +238176,7 @@
               "declaring_type": "System.Reflection:__Filters",
               "parameters": [
                 {
-                  "name": "cls",
+                  "name": "_cls",
                   "type": "System:Type",
                   "default": false,
                   "out": false
@@ -238198,7 +238198,7 @@
               "declaring_type": "System.Reflection:__Filters",
               "parameters": [
                 {
-                  "name": "cls",
+                  "name": "_cls",
                   "type": "System:Type",
                   "default": false,
                   "out": false
@@ -251788,7 +251788,7 @@
                   "out": false
                 },
                 {
-                  "name": "cls",
+                  "name": "_cls",
                   "type": "System:Type",
                   "default": false,
                   "out": false
@@ -257058,7 +257058,7 @@
               "declaring_type": "System.Reflection.Emit:MethodRental",
               "parameters": [
                 {
-                  "name": "cls",
+                  "name": "_cls",
                   "type": "System:Type",
                   "default": false,
                   "out": false
@@ -398505,7 +398505,7 @@
               "declaring_type": "System.Security:PermissionToken",
               "parameters": [
                 {
-                  "name": "cls",
+                  "name": "_cls",
                   "type": "System:Type",
                   "default": false,
                   "out": false
@@ -398616,7 +398616,7 @@
               "declaring_type": "System.Security:PermissionToken",
               "parameters": [
                 {
-                  "name": "cls",
+                  "name": "_cls",
                   "type": "System:Type",
                   "default": false,
                   "out": false

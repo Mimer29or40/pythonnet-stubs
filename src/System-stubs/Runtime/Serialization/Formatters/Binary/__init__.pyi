@@ -23,6 +23,7 @@ from System.Runtime.Serialization.Formatters import FormatterAssemblyStyle
 from System.Runtime.Serialization.Formatters import FormatterTypeStyle
 from System.Runtime.Serialization.Formatters import TypeFilterLevel
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryArray(Object, IStreamable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -38,6 +39,7 @@ class BinaryArray(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class BinaryArrayTypeEnum(Enum):
     """"""
 
@@ -54,6 +56,7 @@ class BinaryArrayTypeEnum(Enum):
     RectangularOffset: BinaryArrayTypeEnum = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryAssembly(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -71,6 +74,7 @@ class BinaryAssembly(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryAssemblyInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -82,6 +86,7 @@ class BinaryAssemblyInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryConverter(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -93,6 +98,7 @@ class BinaryConverter(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryCrossAppDomainAssembly(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -110,6 +116,7 @@ class BinaryCrossAppDomainAssembly(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryCrossAppDomainMap(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -127,6 +134,7 @@ class BinaryCrossAppDomainMap(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryCrossAppDomainString(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -144,6 +152,7 @@ class BinaryCrossAppDomainString(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryFormatter(Object, IRemotingFormatter, IFormatter):
     """"""
     @overload
@@ -219,6 +228,7 @@ class BinaryFormatter(Object, IRemotingFormatter, IFormatter):
     ) -> object:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class BinaryHeaderEnum(Enum):
     """"""
 
@@ -269,6 +279,7 @@ class BinaryHeaderEnum(Enum):
     MethodReturn: BinaryHeaderEnum = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryMethodCall(Object):
     """"""
     def __init__(self) -> None:
@@ -282,6 +293,7 @@ class BinaryMethodCall(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryMethodCallMessage(Object):
     """"""
     @property
@@ -314,6 +326,7 @@ class BinaryMethodCallMessage(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryMethodReturn(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -331,6 +344,7 @@ class BinaryMethodReturn(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryMethodReturnMessage(Object):
     """"""
     @property
@@ -357,6 +371,7 @@ class BinaryMethodReturnMessage(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryObject(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -374,6 +389,7 @@ class BinaryObject(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryObjectString(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -391,6 +407,7 @@ class BinaryObjectString(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryObjectWithMap(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -408,6 +425,7 @@ class BinaryObjectWithMap(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryObjectWithMapTyped(Object, IStreamable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -423,6 +441,7 @@ class BinaryObjectWithMapTyped(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class BinaryTypeEnum(Enum):
     """"""
 
@@ -443,6 +462,7 @@ class BinaryTypeEnum(Enum):
     PrimitiveArray: BinaryTypeEnum = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryUtil(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -462,6 +482,7 @@ class BinaryUtil(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Converter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -473,6 +494,7 @@ class Converter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IOUtil(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -484,6 +506,7 @@ class IOUtil(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IStreamable(ABC):
     """"""
     def Read(self, input: __BinaryParser) -> None:
@@ -491,6 +514,7 @@ class IStreamable(ABC):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntSizedArray(Object, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -506,6 +530,7 @@ class IntSizedArray(Object, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalArrayTypeE(Enum):
     """"""
 
@@ -520,6 +545,7 @@ class InternalArrayTypeE(Enum):
     Base64: InternalArrayTypeE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalElementTypeE(Enum):
     """"""
 
@@ -530,6 +556,7 @@ class InternalElementTypeE(Enum):
     Member: InternalElementTypeE = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalFE(Object):
     """"""
     def __init__(self) -> None:
@@ -543,6 +570,7 @@ class InternalFE(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalMemberTypeE(Enum):
     """"""
 
@@ -555,6 +583,7 @@ class InternalMemberTypeE(Enum):
     Item: InternalMemberTypeE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalMemberValueE(Enum):
     """"""
 
@@ -569,6 +598,7 @@ class InternalMemberValueE(Enum):
     Null: InternalMemberValueE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalNameSpaceE(Enum):
     """"""
 
@@ -593,6 +623,7 @@ class InternalNameSpaceE(Enum):
     CallElement: InternalNameSpaceE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalObjectPositionE(Enum):
     """"""
 
@@ -605,6 +636,7 @@ class InternalObjectPositionE(Enum):
     Headers: InternalObjectPositionE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalObjectTypeE(Enum):
     """"""
 
@@ -615,6 +647,7 @@ class InternalObjectTypeE(Enum):
     Array: InternalObjectTypeE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalParseStateE(Enum):
     """"""
 
@@ -627,6 +660,7 @@ class InternalParseStateE(Enum):
     MemberChild: InternalParseStateE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalParseTypeE(Enum):
     """"""
 
@@ -657,6 +691,7 @@ class InternalParseTypeE(Enum):
     BodyEnd: InternalParseTypeE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalPrimitiveTypeE(Enum):
     """"""
 
@@ -699,6 +734,7 @@ class InternalPrimitiveTypeE(Enum):
     String: InternalPrimitiveTypeE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalSerializerTypeE(Enum):
     """"""
 
@@ -707,6 +743,7 @@ class InternalSerializerTypeE(Enum):
     Binary: InternalSerializerTypeE = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberPrimitiveTyped(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -724,6 +761,7 @@ class MemberPrimitiveTyped(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberPrimitiveUnTyped(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -741,6 +779,7 @@ class MemberPrimitiveUnTyped(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberReference(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -758,6 +797,7 @@ class MemberReference(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MessageEnd(Object, IStreamable):
     """"""
     @overload
@@ -779,6 +819,7 @@ class MessageEnd(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MessageEnum(Enum):
     """"""
 
@@ -813,6 +854,7 @@ class MessageEnum(Enum):
     GenericMethod: MessageEnum = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameCache(Object):
     """"""
     def __init__(self) -> None:
@@ -826,6 +868,7 @@ class NameCache(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameInfo(Object):
     """"""
     @property
@@ -845,6 +888,7 @@ class NameInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectMap(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -856,6 +900,7 @@ class ObjectMap(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectMapInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -867,6 +912,7 @@ class ObjectMapInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectNull(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -888,6 +934,7 @@ class ObjectNull(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectProgress(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -899,6 +946,7 @@ class ObjectProgress(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectReader(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -910,6 +958,7 @@ class ObjectReader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectWriter(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -921,6 +970,7 @@ class ObjectWriter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParseRecord(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -932,6 +982,7 @@ class ParseRecord(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrimitiveArray(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -943,6 +994,7 @@ class PrimitiveArray(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadObjectInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -954,6 +1006,7 @@ class ReadObjectInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerObjectInfoCache(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -965,6 +1018,7 @@ class SerObjectInfoCache(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerObjectInfoInit(Object):
     """"""
     def __init__(self) -> None:
@@ -978,6 +1032,7 @@ class SerObjectInfoInit(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerStack(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -989,6 +1044,7 @@ class SerStack(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationHeaderRecord(Object, IStreamable):
     """"""
     def Dump(self) -> None:
@@ -1006,6 +1062,7 @@ class SerializationHeaderRecord(Object, IStreamable):
     def Write(self, sout: __BinaryWriter) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SizedArray(Object, ICloneable):
     """"""
     def Clone(self) -> object:
@@ -1019,6 +1076,7 @@ class SizedArray(Object, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SoapAttributeType(Enum):
     """"""
 
@@ -1033,6 +1091,7 @@ class SoapAttributeType(Enum):
     XmlAttribute: SoapAttributeType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeInformation(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1044,6 +1103,7 @@ class TypeInformation(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ValueFixup(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1055,6 +1115,7 @@ class ValueFixup(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ValueFixupEnum(Enum):
     """"""
 
@@ -1067,6 +1128,7 @@ class ValueFixupEnum(Enum):
     Member: ValueFixupEnum = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WriteObjectInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1078,6 +1140,7 @@ class WriteObjectInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class __BinaryParser(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1089,6 +1152,7 @@ class __BinaryParser(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class __BinaryWriter(Object):
     """"""
     def Equals(self, obj: object) -> bool:

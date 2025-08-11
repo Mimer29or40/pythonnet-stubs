@@ -14,6 +14,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FormatterAssemblyStyle(Enum):
     """"""
 
@@ -22,6 +23,7 @@ class FormatterAssemblyStyle(Enum):
     Full: FormatterAssemblyStyle = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FormatterTypeStyle(Enum):
     """"""
 
@@ -32,6 +34,7 @@ class FormatterTypeStyle(Enum):
     XsdString: FormatterTypeStyle = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IFieldInfo(ABC):
     """"""
     @property
@@ -45,6 +48,7 @@ class IFieldInfo(ABC):
     @FieldTypes.setter
     def FieldTypes(self, value: Array[Type]) -> None: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISoapMessage(ABC):
     """"""
     @property
@@ -78,6 +82,7 @@ class ISoapMessage(ABC):
     @XmlNameSpace.setter
     def XmlNameSpace(self, value: str) -> None: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalRM(Object):
     """"""
     def __init__(self) -> None:
@@ -97,6 +102,7 @@ class InternalRM(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalST(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -126,6 +132,7 @@ class InternalST(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerTrace(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -137,6 +144,7 @@ class SerTrace(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServerFault(Object):
     """"""
     def __init__(self, exceptionType: str, message: str, stackTrace: str) -> None:
@@ -165,6 +173,7 @@ class ServerFault(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapFault(Object, ISerializable):
     """"""
     @overload
@@ -206,6 +215,7 @@ class SoapFault(Object, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapMessage(Object, ISoapMessage):
     """"""
     def __init__(self) -> None:
@@ -249,6 +259,7 @@ class SoapMessage(Object, ISoapMessage):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeFilterLevel(Enum):
     """"""
 

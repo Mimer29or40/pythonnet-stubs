@@ -18,6 +18,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InstanceNotFoundException(InstrumentationException, _Exception, ISerializable):
     """"""
     @overload
@@ -70,6 +71,7 @@ class InstanceNotFoundException(InstrumentationException, _Exception, ISerializa
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InstrumentationBaseException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -122,6 +124,7 @@ class InstrumentationBaseException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InstrumentationException(InstrumentationBaseException, _Exception, ISerializable):
     """"""
     @overload
@@ -177,6 +180,7 @@ class InstrumentationException(InstrumentationBaseException, _Exception, ISerial
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementBindAttribute(ManagementNewInstanceAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -227,6 +231,7 @@ class ManagementBindAttribute(ManagementNewInstanceAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementCommitAttribute(ManagementMemberAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -272,6 +277,7 @@ class ManagementCommitAttribute(ManagementMemberAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementConfigurationAttribute(ManagementMemberAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -327,6 +333,7 @@ class ManagementConfigurationAttribute(ManagementMemberAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ManagementConfigurationType(Enum):
     """"""
 
@@ -335,6 +342,7 @@ class ManagementConfigurationType(Enum):
     OnCommit: ManagementConfigurationType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementCreateAttribute(ManagementNewInstanceAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -380,6 +388,7 @@ class ManagementCreateAttribute(ManagementNewInstanceAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementEntityAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -435,6 +444,7 @@ class ManagementEntityAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementEnumeratorAttribute(ManagementNewInstanceAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -485,6 +495,7 @@ class ManagementEnumeratorAttribute(ManagementNewInstanceAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ManagementHostingModel(Enum):
     """"""
 
@@ -497,6 +508,7 @@ class ManagementHostingModel(Enum):
     LocalSystem: ManagementHostingModel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementKeyAttribute(ManagementMemberAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -542,6 +554,7 @@ class ManagementKeyAttribute(ManagementMemberAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementMemberAttribute(ABC, Attribute, _Attribute):
     """"""
     @property
@@ -585,6 +598,7 @@ class ManagementMemberAttribute(ABC, Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementNameAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, name: str) -> None:
@@ -628,6 +642,7 @@ class ManagementNameAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementNewInstanceAttribute(ABC, ManagementMemberAttribute, _Attribute):
     """"""
     @property
@@ -671,6 +686,7 @@ class ManagementNewInstanceAttribute(ABC, ManagementMemberAttribute, _Attribute)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementProbeAttribute(ManagementMemberAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -721,6 +737,7 @@ class ManagementProbeAttribute(ManagementMemberAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementReferenceAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -766,6 +783,7 @@ class ManagementReferenceAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementRemoveAttribute(ManagementMemberAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -816,6 +834,7 @@ class ManagementRemoveAttribute(ManagementMemberAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagementTaskAttribute(ManagementMemberAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -866,6 +885,7 @@ class ManagementTaskAttribute(ManagementMemberAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WmiConfigurationAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, scope: str) -> None:

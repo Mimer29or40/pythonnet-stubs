@@ -7,6 +7,7 @@ from System import Object
 from System import Type
 from System.Diagnostics.Contracts import ContractFailureKind
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContractHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

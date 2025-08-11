@@ -8,6 +8,7 @@ from System import Array
 from System import Object
 from System import Type
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalActivationContextHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -40,6 +41,7 @@ class InternalActivationContextHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalApplicationIdentityHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

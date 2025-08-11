@@ -15,6 +15,7 @@ from System.Deployment.Internal.Isolation import IReferenceIdentity
 from System.Deployment.Internal.Isolation import ISection
 from System.Deployment.Internal.Isolation import ISectionEntry
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssemblyReferenceDependentAssemblyEntry(Object, IDisposable):
     """"""
 
@@ -57,6 +58,7 @@ class AssemblyReferenceDependentAssemblyEntry(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AssemblyReferenceDependentAssemblyEntryFieldId(Enum):
     """"""
 
@@ -87,6 +89,7 @@ class AssemblyReferenceDependentAssemblyEntryFieldId(Enum):
     AssemblyReferenceDependentAssembly_HashElements: AssemblyReferenceDependentAssemblyEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssemblyReferenceEntry(Object):
     """"""
 
@@ -107,6 +110,7 @@ class AssemblyReferenceEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AssemblyReferenceEntryFieldId(Enum):
     """"""
 
@@ -115,6 +119,7 @@ class AssemblyReferenceEntryFieldId(Enum):
     AssemblyReference_DependentAssembly: AssemblyReferenceEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssemblyRequestEntry(Object):
     """"""
 
@@ -133,12 +138,14 @@ class AssemblyRequestEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AssemblyRequestEntryFieldId(Enum):
     """"""
 
     AssemblyRequest_permissionSetID: AssemblyRequestEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CLRSurrogateEntry(Object):
     """"""
 
@@ -159,6 +166,7 @@ class CLRSurrogateEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CLRSurrogateEntryFieldId(Enum):
     """"""
 
@@ -167,6 +175,7 @@ class CLRSurrogateEntryFieldId(Enum):
     CLRSurrogate_ClassName: CLRSurrogateEntryFieldId = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMSSECTIONID(Enum):
     """"""
 
@@ -213,6 +222,7 @@ class CMSSECTIONID(Enum):
     CMSSECTIONID_COUNTER_SECTION: CMSSECTIONID = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_ASSEMBLY_DEPLOYMENT_FLAG(Enum):
     """"""
 
@@ -231,6 +241,7 @@ class CMS_ASSEMBLY_DEPLOYMENT_FLAG(Enum):
     CMS_ASSEMBLY_DEPLOYMENT_FLAG_CREATE_DESKTOP_SHORTCUT: CMS_ASSEMBLY_DEPLOYMENT_FLAG = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG(Enum):
     """"""
 
@@ -247,6 +258,7 @@ class CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG(Enum):
     CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_ALLOW_DELAYED_BINDING: CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_ASSEMBLY_REFERENCE_FLAG(Enum):
     """"""
 
@@ -265,12 +277,14 @@ class CMS_ASSEMBLY_REFERENCE_FLAG(Enum):
     CMS_ASSEMBLY_REFERENCE_FLAG_PREREQUISITE: CMS_ASSEMBLY_REFERENCE_FLAG = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_COM_SERVER_FLAG(Enum):
     """"""
 
     CMS_COM_SERVER_FLAG_IS_CLR_CLASS: CMS_COM_SERVER_FLAG = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_ENTRY_POINT_FLAG(Enum):
     """"""
 
@@ -281,12 +295,14 @@ class CMS_ENTRY_POINT_FLAG(Enum):
     CMS_ENTRY_POINT_FLAG_CUSTOMUX: CMS_ENTRY_POINT_FLAG = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_FILE_FLAG(Enum):
     """"""
 
     CMS_FILE_FLAG_OPTIONAL: CMS_FILE_FLAG = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_FILE_HASH_ALGORITHM(Enum):
     """"""
 
@@ -305,6 +321,7 @@ class CMS_FILE_HASH_ALGORITHM(Enum):
     CMS_FILE_HASH_ALGORITHM_MD2: CMS_FILE_HASH_ALGORITHM = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_FILE_WRITABLE_TYPE(Enum):
     """"""
 
@@ -313,6 +330,7 @@ class CMS_FILE_WRITABLE_TYPE(Enum):
     CMS_FILE_WRITABLE_TYPE_APPLICATION_DATA: CMS_FILE_WRITABLE_TYPE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_HASH_DIGESTMETHOD(Enum):
     """"""
 
@@ -325,6 +343,7 @@ class CMS_HASH_DIGESTMETHOD(Enum):
     CMS_HASH_DIGESTMETHOD_SHA512: CMS_HASH_DIGESTMETHOD = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_HASH_TRANSFORM(Enum):
     """"""
 
@@ -333,12 +352,14 @@ class CMS_HASH_TRANSFORM(Enum):
     CMS_HASH_TRANSFORM_MANIFESTINVARIANT: CMS_HASH_TRANSFORM = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_SCHEMA_VERSION(Enum):
     """"""
 
     CMS_SCHEMA_VERSION_V1: CMS_SCHEMA_VERSION = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_TIME_UNIT_TYPE(Enum):
     """"""
 
@@ -351,6 +372,7 @@ class CMS_TIME_UNIT_TYPE(Enum):
     CMS_TIME_UNIT_TYPE_MONTHS: CMS_TIME_UNIT_TYPE = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CMS_USAGE_PATTERN(Enum):
     """"""
 
@@ -363,6 +385,7 @@ class CMS_USAGE_PATTERN(Enum):
     CMS_USAGE_PATTERN_SCOPE_MASK: CMS_USAGE_PATTERN = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class COMServerEntry(Object):
     """"""
 
@@ -393,6 +416,7 @@ class COMServerEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class COMServerEntryFieldId(Enum):
     """"""
 
@@ -411,6 +435,7 @@ class COMServerEntryFieldId(Enum):
     COMServer_HostFile: COMServerEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CategoryMembershipDataEntry(Object):
     """"""
 
@@ -431,6 +456,7 @@ class CategoryMembershipDataEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CategoryMembershipDataEntryFieldId(Enum):
     """"""
 
@@ -439,6 +465,7 @@ class CategoryMembershipDataEntryFieldId(Enum):
     CategoryMembershipData_Description: CategoryMembershipDataEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CategoryMembershipEntry(Object):
     """"""
 
@@ -457,12 +484,14 @@ class CategoryMembershipEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CategoryMembershipEntryFieldId(Enum):
     """"""
 
     CategoryMembership_SubcategoryMembership: CategoryMembershipEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CmsUtils(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -474,6 +503,7 @@ class CmsUtils(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompatibleFrameworksMetadataEntry(Object):
     """"""
 
@@ -490,12 +520,14 @@ class CompatibleFrameworksMetadataEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CompatibleFrameworksMetadataEntryFieldId(Enum):
     """"""
 
     CompatibleFrameworksMetadata_SupportUrl: CompatibleFrameworksMetadataEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DependentOSMetadataEntry(Object):
     """"""
 
@@ -524,6 +556,7 @@ class DependentOSMetadataEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DependentOSMetadataEntryFieldId(Enum):
     """"""
 
@@ -542,6 +575,7 @@ class DependentOSMetadataEntryFieldId(Enum):
     DependentOSMetadata_ServicePackMinor: DependentOSMetadataEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeploymentMetadataEntry(Object):
     """"""
 
@@ -566,6 +600,7 @@ class DeploymentMetadataEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DeploymentMetadataEntryFieldId(Enum):
     """"""
 
@@ -580,6 +615,7 @@ class DeploymentMetadataEntryFieldId(Enum):
     DeploymentMetadata_DeploymentFlags: DeploymentMetadataEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DescriptionMetadataEntry(Object):
     """"""
 
@@ -606,6 +642,7 @@ class DescriptionMetadataEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DescriptionMetadataEntryFieldId(Enum):
     """"""
 
@@ -622,6 +659,7 @@ class DescriptionMetadataEntryFieldId(Enum):
     DescriptionMetadata_SuiteName: DescriptionMetadataEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EntryPointEntry(Object):
     """"""
 
@@ -646,6 +684,7 @@ class EntryPointEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EntryPointEntryFieldId(Enum):
     """"""
 
@@ -658,6 +697,7 @@ class EntryPointEntryFieldId(Enum):
     EntryPoint_Flags: EntryPointEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileAssociationEntry(Object):
     """"""
 
@@ -682,6 +722,7 @@ class FileAssociationEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileAssociationEntryFieldId(Enum):
     """"""
 
@@ -694,6 +735,7 @@ class FileAssociationEntryFieldId(Enum):
     FileAssociation_Parameter: FileAssociationEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileEntry(Object, IDisposable):
     """"""
 
@@ -744,6 +786,7 @@ class FileEntry(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileEntryFieldId(Enum):
     """"""
 
@@ -776,6 +819,7 @@ class FileEntryFieldId(Enum):
     File_HashElements: FileEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashElementEntry(Object, IDisposable):
     """"""
 
@@ -812,6 +856,7 @@ class HashElementEntry(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HashElementEntryFieldId(Enum):
     """"""
 
@@ -830,6 +875,7 @@ class HashElementEntryFieldId(Enum):
     HashElement_Xml: HashElementEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IAssemblyReferenceDependentAssemblyEntry(ABC):
     """"""
     @property
@@ -866,6 +912,7 @@ class IAssemblyReferenceDependentAssemblyEntry(ABC):
     def SupportUrl(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IAssemblyReferenceEntry(ABC):
     """"""
     @property
@@ -881,6 +928,7 @@ class IAssemblyReferenceEntry(ABC):
     def ReferenceIdentity(self) -> IReferenceIdentity:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IAssemblyRequestEntry(ABC):
     """"""
     @property
@@ -893,6 +941,7 @@ class IAssemblyRequestEntry(ABC):
     def permissionSetID(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICLRSurrogateEntry(ABC):
     """"""
     @property
@@ -908,6 +957,7 @@ class ICLRSurrogateEntry(ABC):
     def RuntimeVersion(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICMS(ABC):
     """"""
     @property
@@ -977,6 +1027,7 @@ class ICMS(ABC):
     def WindowClassSection(self) -> ISection:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICOMServerEntry(ABC):
     """"""
     @property
@@ -1007,6 +1058,7 @@ class ICOMServerEntry(ABC):
     def TypeLibrary(self) -> Guid:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICategoryMembershipDataEntry(ABC):
     """"""
     @property
@@ -1022,6 +1074,7 @@ class ICategoryMembershipDataEntry(ABC):
     def index(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICategoryMembershipEntry(ABC):
     """"""
     @property
@@ -1034,6 +1087,7 @@ class ICategoryMembershipEntry(ABC):
     def SubcategoryMembership(self) -> ISection:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICompatibleFrameworksMetadataEntry(ABC):
     """"""
     @property
@@ -1043,6 +1097,7 @@ class ICompatibleFrameworksMetadataEntry(ABC):
     def SupportUrl(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDependentOSMetadataEntry(ABC):
     """"""
     @property
@@ -1070,6 +1125,7 @@ class IDependentOSMetadataEntry(ABC):
     def SupportUrl(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDeploymentMetadataEntry(ABC):
     """"""
     @property
@@ -1091,6 +1147,7 @@ class IDeploymentMetadataEntry(ABC):
     def MinimumRequiredVersion(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDescriptionMetadataEntry(ABC):
     """"""
     @property
@@ -1115,6 +1172,7 @@ class IDescriptionMetadataEntry(ABC):
     def SupportUrl(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEntryPointEntry(ABC):
     """"""
     @property
@@ -1136,6 +1194,7 @@ class IEntryPointEntry(ABC):
     def Name(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IFileAssociationEntry(ABC):
     """"""
     @property
@@ -1157,6 +1216,7 @@ class IFileAssociationEntry(ABC):
     def ProgID(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IFileEntry(ABC):
     """"""
     @property
@@ -1205,6 +1265,7 @@ class IFileEntry(ABC):
     def WritableType(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IHashElementEntry(ABC):
     """"""
     @property
@@ -1229,6 +1290,7 @@ class IHashElementEntry(ABC):
     def index(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMetadataSectionEntry(ABC):
     """"""
     @property
@@ -1295,6 +1357,7 @@ class IMetadataSectionEntry(ABC):
     def defaultPermissionSetID(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMuiResourceIdLookupMapEntry(ABC):
     """"""
     @property
@@ -1306,6 +1369,7 @@ class IMuiResourceIdLookupMapEntry(ABC):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMuiResourceMapEntry(ABC):
     """"""
     @property
@@ -1318,6 +1382,7 @@ class IMuiResourceMapEntry(ABC):
     def ResourceTypeIdString(self) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMuiResourceTypeIdIntEntry(ABC):
     """"""
     @property
@@ -1330,6 +1395,7 @@ class IMuiResourceTypeIdIntEntry(ABC):
     def StringIds(self) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMuiResourceTypeIdStringEntry(ABC):
     """"""
     @property
@@ -1342,6 +1408,7 @@ class IMuiResourceTypeIdStringEntry(ABC):
     def StringIds(self) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPermissionSetEntry(ABC):
     """"""
     @property
@@ -1354,6 +1421,7 @@ class IPermissionSetEntry(ABC):
     def XmlSegment(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IProgIdRedirectionEntry(ABC):
     """"""
     @property
@@ -1366,6 +1434,7 @@ class IProgIdRedirectionEntry(ABC):
     def RedirectedGuid(self) -> Guid:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IResourceTableMappingEntry(ABC):
     """"""
     @property
@@ -1378,6 +1447,7 @@ class IResourceTableMappingEntry(ABC):
     def id(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISubcategoryMembershipEntry(ABC):
     """"""
     @property
@@ -1390,6 +1460,7 @@ class ISubcategoryMembershipEntry(ABC):
     def Subcategory(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IWindowClassEntry(ABC):
     """"""
     @property
@@ -1405,6 +1476,7 @@ class IWindowClassEntry(ABC):
     def fVersioned(self) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataSectionEntry(Object, IDisposable):
     """"""
 
@@ -1469,6 +1541,7 @@ class MetadataSectionEntry(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MetadataSectionEntryFieldId(Enum):
     """"""
 
@@ -1517,6 +1590,7 @@ class MetadataSectionEntryFieldId(Enum):
     MetadataSection_CompatibleFrameworksData: MetadataSectionEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MuiResourceIdLookupMapEntry(Object):
     """"""
 
@@ -1533,12 +1607,14 @@ class MuiResourceIdLookupMapEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MuiResourceIdLookupMapEntryFieldId(Enum):
     """"""
 
     MuiResourceIdLookupMap_Count: MuiResourceIdLookupMapEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MuiResourceMapEntry(Object, IDisposable):
     """"""
 
@@ -1567,6 +1643,7 @@ class MuiResourceMapEntry(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MuiResourceMapEntryFieldId(Enum):
     """"""
 
@@ -1579,6 +1656,7 @@ class MuiResourceMapEntryFieldId(Enum):
     MuiResourceMap_ResourceTypeIdStringSize: MuiResourceMapEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MuiResourceTypeIdIntEntry(Object, IDisposable):
     """"""
 
@@ -1607,6 +1685,7 @@ class MuiResourceTypeIdIntEntry(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MuiResourceTypeIdIntEntryFieldId(Enum):
     """"""
 
@@ -1619,6 +1698,7 @@ class MuiResourceTypeIdIntEntryFieldId(Enum):
     MuiResourceTypeIdInt_IntegerIdsSize: MuiResourceTypeIdIntEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MuiResourceTypeIdStringEntry(Object, IDisposable):
     """"""
 
@@ -1647,6 +1727,7 @@ class MuiResourceTypeIdStringEntry(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MuiResourceTypeIdStringEntryFieldId(Enum):
     """"""
 
@@ -1659,6 +1740,7 @@ class MuiResourceTypeIdStringEntryFieldId(Enum):
     MuiResourceTypeIdString_IntegerIdsSize: MuiResourceTypeIdStringEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PermissionSetEntry(Object):
     """"""
 
@@ -1677,12 +1759,14 @@ class PermissionSetEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PermissionSetEntryFieldId(Enum):
     """"""
 
     PermissionSet_XmlSegment: PermissionSetEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProgIdRedirectionEntry(Object):
     """"""
 
@@ -1701,12 +1785,14 @@ class ProgIdRedirectionEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ProgIdRedirectionEntryFieldId(Enum):
     """"""
 
     ProgIdRedirection_RedirectedGuid: ProgIdRedirectionEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResourceTableMappingEntry(Object):
     """"""
 
@@ -1725,12 +1811,14 @@ class ResourceTableMappingEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ResourceTableMappingEntryFieldId(Enum):
     """"""
 
     ResourceTableMapping_FinalStringMapped: ResourceTableMappingEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SubcategoryMembershipEntry(Object):
     """"""
 
@@ -1749,12 +1837,14 @@ class SubcategoryMembershipEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SubcategoryMembershipEntryFieldId(Enum):
     """"""
 
     SubcategoryMembership_CategoryMembershipData: SubcategoryMembershipEntryFieldId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WindowClassEntry(Object):
     """"""
 
@@ -1775,6 +1865,7 @@ class WindowClassEntry(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WindowClassEntryFieldId(Enum):
     """"""
 

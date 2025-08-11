@@ -22,6 +22,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoundPlayer(Component, IComponent, ISerializable, IDisposable):
     """"""
     @overload
@@ -103,6 +104,7 @@ class SoundPlayer(Component, IComponent, ISerializable, IDisposable):
     StreamChanged: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemSound(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -116,6 +118,7 @@ class SystemSound(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemSounds(Object):
     """"""
     @classmethod

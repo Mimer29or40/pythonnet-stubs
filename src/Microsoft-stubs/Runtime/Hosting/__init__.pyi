@@ -10,6 +10,7 @@ from System import IntPtr
 from System import Object
 from System import Type
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClrStrongName(ABC):
     """"""
     def GetHashFromAssemblyFile(
@@ -145,6 +146,7 @@ class IClrStrongName(ABC):
     ) -> tuple[int, IntPtr, Int32]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClrStrongNameUsingIntPtr(ABC):
     """"""
     def GetHashFromAssemblyFile(
@@ -278,6 +280,7 @@ class IClrStrongNameUsingIntPtr(ABC):
     ) -> tuple[int, IntPtr, Int32]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongNameHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

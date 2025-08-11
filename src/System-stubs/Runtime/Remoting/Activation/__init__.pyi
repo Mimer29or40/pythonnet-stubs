@@ -26,6 +26,7 @@ from System.Runtime.Remoting.Messaging import IMethodMessage
 from System.Runtime.Remoting.Messaging import IMethodReturnMessage
 from System.Runtime.Remoting.Messaging import LogicalCallContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ActivationAttributeStack(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -37,6 +38,7 @@ class ActivationAttributeStack(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ActivationListener(MarshalByRefObject, IActivator):
     """"""
     def __init__(self) -> None:
@@ -66,6 +68,7 @@ class ActivationListener(MarshalByRefObject, IActivator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ActivationServices(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -77,6 +80,7 @@ class ActivationServices(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ActivatorLevel(Enum):
     """"""
 
@@ -91,6 +95,7 @@ class ActivatorLevel(Enum):
     Machine: ActivatorLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AppDomainLevelActivator(Object, IActivator):
     """"""
     @property
@@ -112,6 +117,7 @@ class AppDomainLevelActivator(Object, IActivator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstructionLevelActivator(Object, IActivator):
     """"""
     @property
@@ -133,6 +139,7 @@ class ConstructionLevelActivator(Object, IActivator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContextLevelActivator(Object, IActivator):
     """"""
     @property
@@ -154,6 +161,7 @@ class ContextLevelActivator(Object, IActivator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IActivator(ABC):
     """"""
     @property
@@ -167,6 +175,7 @@ class IActivator(ABC):
     def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IConstructionCallMessage(ABC, IMessage, IMethodCallMessage, IMethodMessage):
     """"""
     @property
@@ -231,6 +240,7 @@ class IConstructionCallMessage(ABC, IMessage, IMethodCallMessage, IMethodMessage
     def GetInArgName(self, index: int) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IConstructionReturnMessage(ABC, IMessage, IMethodMessage, IMethodReturnMessage):
     """"""
     @property
@@ -284,6 +294,7 @@ class IConstructionReturnMessage(ABC, IMessage, IMethodMessage, IMethodReturnMes
     def GetOutArgName(self, index: int) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LocalActivator(ContextAttribute, _Attribute, IActivator, IContextAttribute, IContextProperty):
     """"""
     @property
@@ -343,6 +354,7 @@ class LocalActivator(ContextAttribute, _Attribute, IActivator, IContextAttribute
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotePropertyHolderAttribute(Object, IContextAttribute):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -358,6 +370,7 @@ class RemotePropertyHolderAttribute(Object, IContextAttribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingXmlConfigFileData(Object):
     """"""
     def __init__(self) -> None:
@@ -371,6 +384,7 @@ class RemotingXmlConfigFileData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingXmlConfigFileParser(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -388,6 +402,7 @@ class RemotingXmlConfigFileParser(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UrlAttribute(ContextAttribute, _Attribute, IContextAttribute, IContextProperty):
     """"""
     def __init__(self, callsiteURL: str) -> None:

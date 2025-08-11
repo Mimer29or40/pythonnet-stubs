@@ -36,6 +36,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComponentSerializationService(ABC, Object):
     """"""
     def CreateStore(self) -> SerializationStore:
@@ -86,6 +87,7 @@ class ComponentSerializationService(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContextStack(Object):
     """"""
     def __init__(self) -> None:
@@ -117,6 +119,7 @@ class ContextStack(Object):
     def __getitem__(self, type: Type) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultSerializationProviderAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -164,6 +167,7 @@ class DefaultSerializationProviderAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerLoader(ABC, Object):
     """"""
     @property
@@ -184,6 +188,7 @@ class DesignerLoader(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DesignerSerializerAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -237,6 +242,7 @@ class DesignerSerializerAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerLoaderHost(ABC, IDesignerHost, IServiceContainer, IServiceProvider):
     """"""
     @property
@@ -318,6 +324,7 @@ class IDesignerLoaderHost(ABC, IDesignerHost, IServiceContainer, IServiceProvide
     TransactionOpening: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerLoaderHost2(
     ABC, IDesignerLoaderHost, IDesignerHost, IServiceContainer, IServiceProvider
 ):
@@ -411,6 +418,7 @@ class IDesignerLoaderHost2(
     TransactionOpening: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerLoaderService(ABC):
     """"""
     def AddLoadDependency(self) -> None:
@@ -420,6 +428,7 @@ class IDesignerLoaderService(ABC):
     def Reload(self) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerSerializationManager(ABC, IServiceProvider):
     """"""
     @property
@@ -455,6 +464,7 @@ class IDesignerSerializationManager(ABC, IServiceProvider):
     SerializationComplete: EventType[EventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerSerializationProvider(ABC):
     """"""
     def GetSerializer(
@@ -466,6 +476,7 @@ class IDesignerSerializationProvider(ABC):
     ) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDesignerSerializationService(ABC):
     """"""
     def Deserialize(self, serializationData: object) -> ICollection:
@@ -473,6 +484,7 @@ class IDesignerSerializationService(ABC):
     def Serialize(self, objects: ICollection) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class INameCreationService(ABC):
     """"""
     def CreateName(self, container: IContainer, dataType: Type) -> str:
@@ -482,6 +494,7 @@ class INameCreationService(ABC):
     def ValidateName(self, name: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InstanceDescriptor(Object):
     """"""
     @overload
@@ -510,6 +523,7 @@ class InstanceDescriptor(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberRelationship(ValueType):
     """"""
 
@@ -545,6 +559,7 @@ class MemberRelationship(ValueType):
     def __ne__(self, other: MemberRelationship) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberRelationshipService(ABC, Object):
     """"""
     @property
@@ -581,6 +596,7 @@ class MemberRelationshipService(ABC, Object):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ResolveNameEventArgs(EventArgs):
     """"""
     def __init__(self, name: str) -> None:
@@ -605,6 +621,7 @@ class ResolveNameEventArgs(EventArgs):
 type ResolveNameEventHandler = Callable[[object, ResolveNameEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RootDesignerSerializerAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -663,6 +680,7 @@ class RootDesignerSerializerAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationStore(ABC, Object, IDisposable):
     """"""
     @property

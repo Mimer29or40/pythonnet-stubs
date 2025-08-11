@@ -28,11 +28,8 @@ from System import Object
 from System import SystemException
 from System import Type
 from System import ValueType
-from System.Collections import ICollection
 from System.Collections import IDictionary
-from System.Collections import IEnumerable
 from System.Collections import IEnumerator
-from System.Collections import IList
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IEnumerable
 from System.Collections.Generic import IEnumerator
@@ -53,12 +50,14 @@ from System.Security import ManifestKinds
 from System.Security import SecureString
 from System.Security import SecurityElement
 from System.Security.AccessControl import CryptoKeySecurity
-from System.Security.Cryptography.X509Certificates import AuthenticodeSignatureInformation
-from System.Security.Cryptography.X509Certificates import X509RevocationFlag
-from System.Security.Cryptography.X509Certificates import X509RevocationMode
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
+from .X509Certificates import AuthenticodeSignatureInformation
+from .X509Certificates import X509RevocationFlag
+from .X509Certificates import X509RevocationMode
+
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Aes(ABC, SymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -141,6 +140,7 @@ class Aes(ABC, SymmetricAlgorithm, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AesCng(Aes, ICngSymmetricAlgorithm, IDisposable):
     """"""
     @overload
@@ -243,6 +243,7 @@ class AesCng(Aes, ICngSymmetricAlgorithm, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AesCryptoServiceProvider(Aes, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -319,6 +320,7 @@ class AesCryptoServiceProvider(Aes, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AesManaged(Aes, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -395,6 +397,7 @@ class AesManaged(Aes, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsnEncodedData(Object):
     """"""
     @overload
@@ -432,6 +435,7 @@ class AsnEncodedData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsnEncodedDataCollection(Object, ICollection, IEnumerable):
     """"""
     @overload
@@ -481,6 +485,7 @@ class AsnEncodedDataCollection(Object, ICollection, IEnumerable):
     def __getitem__(self, index: int) -> AsnEncodedData:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsnEncodedDataEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -499,6 +504,7 @@ class AsnEncodedDataEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsymmetricAlgorithm(ABC, Object, IDisposable):
     """"""
     @property
@@ -540,6 +546,7 @@ class AsymmetricAlgorithm(ABC, Object, IDisposable):
     def ToXmlString(self, includePrivateParameters: bool) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsymmetricKeyExchangeDeformatter(ABC, Object):
     """"""
     @property
@@ -560,6 +567,7 @@ class AsymmetricKeyExchangeDeformatter(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsymmetricKeyExchangeFormatter(ABC, Object):
     """"""
     @property
@@ -582,6 +590,7 @@ class AsymmetricKeyExchangeFormatter(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AsymmetricPaddingMode(Enum):
     """"""
 
@@ -594,6 +603,7 @@ class AsymmetricPaddingMode(Enum):
     Pss: AsymmetricPaddingMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsymmetricSignatureDeformatter(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -615,6 +625,7 @@ class AsymmetricSignatureDeformatter(ABC, Object):
     def VerifySignature(self, rgbHash: Array[int], rgbSignature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsymmetricSignatureFormatter(ABC, Object):
     """"""
     @overload
@@ -636,6 +647,7 @@ class AsymmetricSignatureFormatter(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BCRYPT_DSA_KEY_BLOB_V2(ValueType):
     """"""
 
@@ -668,6 +680,7 @@ class BCRYPT_DSA_KEY_BLOB_V2(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BCryptAlgorithmHandleCache(Object):
     """"""
     def __init__(self) -> None:
@@ -685,6 +698,7 @@ class BCryptAlgorithmHandleCache(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BCryptHashAlgorithm(Object, IDisposable):
     """"""
     def __init__(self, algorithm: CngAlgorithm, implementation: str) -> None:
@@ -708,6 +722,7 @@ class BCryptHashAlgorithm(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BCryptNative(ABC, Object):
     """"""
     @classmethod
@@ -748,6 +763,7 @@ class BCryptNative(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BigInt(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -779,6 +795,7 @@ class BigInt(Object):
     def __lt__(self, other: BigInt) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CAPI(CAPIMethods):
     """"""
     def __init__(self) -> None:
@@ -792,6 +809,7 @@ class CAPI(CAPIMethods):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CAPIBase(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -803,6 +821,7 @@ class CAPIBase(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CAPIMethods(ABC, CAPIUnsafe):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -814,6 +833,7 @@ class CAPIMethods(ABC, CAPIUnsafe):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CAPINative(ABC, CAPIBase):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -825,6 +845,7 @@ class CAPINative(ABC, CAPIBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CAPISafe(ABC, CAPINative):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -839,6 +860,7 @@ class CAPISafe(ABC, CAPINative):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CAPIUnsafe(ABC, CAPISafe):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -850,6 +872,7 @@ class CAPIUnsafe(ABC, CAPISafe):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CapiHashAlgorithm(Object, IDisposable):
     """"""
     def __init__(
@@ -876,6 +899,7 @@ class CapiHashAlgorithm(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CapiNative(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -887,6 +911,7 @@ class CapiNative(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CapiSymmetricAlgorithm(Object, ICryptoTransform, IDisposable):
     """"""
     def __init__(
@@ -937,6 +962,7 @@ class CapiSymmetricAlgorithm(Object, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CipherMode(Enum):
     """"""
 
@@ -951,6 +977,7 @@ class CipherMode(Enum):
     CTS: CipherMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngAlgorithm(Object, IEquatable[CngAlgorithm]):
     """"""
     def __init__(self, algorithm: str) -> None:
@@ -1037,6 +1064,7 @@ class CngAlgorithm(Object, IEquatable[CngAlgorithm]):
     def __ne__(self, other: CngAlgorithm) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngAlgorithmGroup(Object, IEquatable[CngAlgorithmGroup]):
     """"""
     def __init__(self, algorithmGroup: str) -> None:
@@ -1087,6 +1115,7 @@ class CngAlgorithmGroup(Object, IEquatable[CngAlgorithmGroup]):
     def __ne__(self, other: CngAlgorithmGroup) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngExportPolicies(Enum):
     """"""
 
@@ -1101,6 +1130,7 @@ class CngExportPolicies(Enum):
     AllowPlaintextArchiving: CngExportPolicies = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngHashAlgorithmFactory[THashAlgorithm](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1112,6 +1142,7 @@ class CngHashAlgorithmFactory[THashAlgorithm](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngKey(Object, IDisposable):
     """"""
     @property
@@ -1231,6 +1262,7 @@ class CngKey(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngKeyBlobFormat(Object, IEquatable[CngKeyBlobFormat]):
     """"""
     def __init__(self, format: str) -> None:
@@ -1293,6 +1325,7 @@ class CngKeyBlobFormat(Object, IEquatable[CngKeyBlobFormat]):
     def __ne__(self, other: CngKeyBlobFormat) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngKeyCreationOptions(Enum):
     """"""
 
@@ -1303,6 +1336,7 @@ class CngKeyCreationOptions(Enum):
     OverwriteExistingKey: CngKeyCreationOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngKeyCreationParameters(Object):
     """"""
     def __init__(self) -> None:
@@ -1349,6 +1383,7 @@ class CngKeyCreationParameters(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngKeyHandleOpenOptions(Enum):
     """"""
 
@@ -1357,6 +1392,7 @@ class CngKeyHandleOpenOptions(Enum):
     EphemeralKey: CngKeyHandleOpenOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngKeyOpenOptions(Enum):
     """"""
 
@@ -1369,6 +1405,7 @@ class CngKeyOpenOptions(Enum):
     Silent: CngKeyOpenOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngKeyTypes(Enum):
     """"""
 
@@ -1377,6 +1414,7 @@ class CngKeyTypes(Enum):
     MachineKey: CngKeyTypes = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngKeyUsages(Enum):
     """"""
 
@@ -1391,6 +1429,7 @@ class CngKeyUsages(Enum):
     AllUsages: CngKeyUsages = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngProperty(ValueType, IEquatable[CngProperty]):
     """"""
     def __init__(self, name: str, value: Array[int], options: CngPropertyOptions) -> None:
@@ -1426,6 +1465,7 @@ class CngProperty(ValueType, IEquatable[CngProperty]):
     def __ne__(self, other: CngProperty) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngPropertyCollection(
     Collection[CngProperty],
     ICollection[CngProperty],
@@ -1535,6 +1575,7 @@ class CngPropertyCollection(
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngPropertyOptions(Enum):
     """"""
 
@@ -1545,6 +1586,7 @@ class CngPropertyOptions(Enum):
     Persist: CngPropertyOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngProvider(Object, IEquatable[CngProvider]):
     """"""
     def __init__(self, provider: str) -> None:
@@ -1583,6 +1625,7 @@ class CngProvider(Object, IEquatable[CngProvider]):
     def __ne__(self, other: CngProvider) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CngUIPolicy(Object):
     """"""
     @overload
@@ -1639,6 +1682,7 @@ class CngUIPolicy(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CngUIProtectionLevels(Enum):
     """"""
 
@@ -1649,6 +1693,7 @@ class CngUIProtectionLevels(Enum):
     ForceHighProtection: CngUIProtectionLevels = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Constants(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1660,6 +1705,7 @@ class Constants(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptoAPITransform(Object, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -1705,6 +1751,7 @@ class CryptoAPITransform(Object, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CryptoAPITransformMode(Enum):
     """"""
 
@@ -1713,6 +1760,7 @@ class CryptoAPITransformMode(Enum):
     Decrypt: CryptoAPITransformMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptoConfig(Object):
     """"""
     def __init__(self) -> None:
@@ -1750,6 +1798,7 @@ class CryptoConfig(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptoStream(Stream, IDisposable):
     """"""
     @overload
@@ -1881,6 +1930,7 @@ class CryptoStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CryptoStreamMode(Enum):
     """"""
 
@@ -1889,6 +1939,7 @@ class CryptoStreamMode(Enum):
     Write: CryptoStreamMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptographicException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -1947,6 +1998,7 @@ class CryptographicException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptographicUnexpectedOperationException(CryptographicException, _Exception, ISerializable):
     """"""
     @overload
@@ -2002,6 +2054,7 @@ class CryptographicUnexpectedOperationException(CryptographicException, _Excepti
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CspAlgorithmType(Enum):
     """"""
 
@@ -2010,6 +2063,7 @@ class CspAlgorithmType(Enum):
     Dss: CspAlgorithmType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CspKeyContainerInfo(Object):
     """"""
     def __init__(self, parameters: CspParameters) -> None:
@@ -2062,6 +2116,7 @@ class CspKeyContainerInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CspParameters(Object):
     """"""
 
@@ -2134,6 +2189,7 @@ class CspParameters(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CspProviderFlags(Enum):
     """"""
 
@@ -2156,6 +2212,7 @@ class CspProviderFlags(Enum):
     CreateEphemeralKey: CspProviderFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DES(ABC, SymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -2244,6 +2301,7 @@ class DES(ABC, SymmetricAlgorithm, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DESCryptoServiceProvider(DES, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -2320,6 +2378,7 @@ class DESCryptoServiceProvider(DES, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSA(ABC, AsymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -2408,6 +2467,7 @@ class DSA(ABC, AsymmetricAlgorithm, IDisposable):
     def VerifySignature(self, rgbHash: Array[int], rgbSignature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSACng(DSA, IDisposable):
     """"""
     @overload
@@ -2492,6 +2552,7 @@ class DSACng(DSA, IDisposable):
     def VerifySignature(self, rgbHash: Array[int], rgbSignature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSACryptoServiceProvider(DSA, ICspAsymmetricAlgorithm, IDisposable):
     """"""
     @overload
@@ -2612,6 +2673,7 @@ class DSACryptoServiceProvider(DSA, ICspAsymmetricAlgorithm, IDisposable):
     def VerifySignature(self, rgbHash: Array[int], rgbSignature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSACspObject(Object):
     """"""
     def __init__(self) -> None:
@@ -2625,6 +2687,7 @@ class DSACspObject(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DSAFIPSVERSION_ENUM(Enum):
     """"""
 
@@ -2633,6 +2696,7 @@ class DSAFIPSVERSION_ENUM(Enum):
     DSA_FIPS186_3: DSAFIPSVERSION_ENUM = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSAParameters(ValueType):
     """"""
 
@@ -2661,6 +2725,7 @@ class DSAParameters(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSASignatureDeformatter(AsymmetricSignatureDeformatter):
     """"""
     @overload
@@ -2688,6 +2753,7 @@ class DSASignatureDeformatter(AsymmetricSignatureDeformatter):
     def VerifySignature(self, rgbHash: Array[int], rgbSignature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSASignatureDescription(SignatureDescription):
     """"""
     def __init__(self) -> None:
@@ -2727,6 +2793,7 @@ class DSASignatureDescription(SignatureDescription):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DSASignatureFormatter(AsymmetricSignatureFormatter):
     """"""
     @overload
@@ -2754,6 +2821,7 @@ class DSASignatureFormatter(AsymmetricSignatureFormatter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeriveBytes(ABC, Object, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -2771,6 +2839,7 @@ class DeriveBytes(ABC, Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECCng(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2782,6 +2851,7 @@ class ECCng(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECCurve(ValueType):
     """"""
 
@@ -2839,6 +2909,7 @@ class ECCurve(ValueType):
         """"""
     def Validate(self) -> None:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class ECCurveType(Enum):
         """"""
 
@@ -2855,6 +2926,7 @@ class ECCurve(ValueType):
         Named: ECCurve.ECCurveType = ...
         """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class NamedCurves(ABC, Object):
         """"""
         @classmethod
@@ -2934,6 +3006,7 @@ class ECCurve(ValueType):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECDiffieHellman(ABC, AsymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -3035,6 +3108,7 @@ class ECDiffieHellman(ABC, AsymmetricAlgorithm, IDisposable):
     def ToXmlString(self, includePrivateParameters: bool) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECDiffieHellmanCng(ECDiffieHellman, IDisposable):
     """"""
     @overload
@@ -3193,6 +3267,7 @@ class ECDiffieHellmanCng(ECDiffieHellman, IDisposable):
     def ToXmlString(self, includePrivateParameters: bool) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECDiffieHellmanCngPublicKey(ECDiffieHellmanPublicKey, IDisposable):
     """"""
     @property
@@ -3227,6 +3302,7 @@ class ECDiffieHellmanCngPublicKey(ECDiffieHellmanPublicKey, IDisposable):
     def ToXmlString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ECDiffieHellmanKeyDerivationFunction(Enum):
     """"""
 
@@ -3237,6 +3313,7 @@ class ECDiffieHellmanKeyDerivationFunction(Enum):
     Tls: ECDiffieHellmanKeyDerivationFunction = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECDiffieHellmanPublicKey(ABC, Object, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -3258,6 +3335,7 @@ class ECDiffieHellmanPublicKey(ABC, Object, IDisposable):
     def ToXmlString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECDsa(ABC, AsymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -3350,6 +3428,7 @@ class ECDsa(ABC, AsymmetricAlgorithm, IDisposable):
     def VerifyHash(self, hash: Array[int], signature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECDsaCng(ECDsa, IDisposable):
     """"""
     @overload
@@ -3472,12 +3551,14 @@ class ECDsaCng(ECDsa, IDisposable):
     def VerifyHash(self, hash: Array[int], signature: Array[int]) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ECKeyXmlFormat(Enum):
     """"""
 
     Rfc4050: ECKeyXmlFormat = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECParameters(ValueType):
     """"""
 
@@ -3498,6 +3579,7 @@ class ECParameters(ValueType):
     def Validate(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ECPoint(ValueType):
     """"""
 
@@ -3514,6 +3596,7 @@ class ECPoint(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EncryptionMode(Enum):
     """"""
 
@@ -3522,6 +3605,7 @@ class EncryptionMode(Enum):
     Decrypt: EncryptionMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FromBase64Transform(Object, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -3568,6 +3652,7 @@ class FromBase64Transform(Object, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FromBase64TransformMode(Enum):
     """"""
 
@@ -3576,6 +3661,7 @@ class FromBase64TransformMode(Enum):
     DoNotIgnoreWhiteSpaces: FromBase64TransformMode = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HASHALGORITHM_ENUM(Enum):
     """"""
 
@@ -3586,6 +3672,7 @@ class HASHALGORITHM_ENUM(Enum):
     DSA_HASH_ALGORITHM_SHA512: HASHALGORITHM_ENUM = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HMAC(ABC, KeyedHashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -3661,6 +3748,7 @@ class HMAC(ABC, KeyedHashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HMACMD5(HMAC, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -3734,6 +3822,7 @@ class HMACMD5(HMAC, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HMACRIPEMD160(HMAC, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -3807,6 +3896,7 @@ class HMACRIPEMD160(HMAC, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HMACSHA1(HMAC, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -3883,6 +3973,7 @@ class HMACSHA1(HMAC, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HMACSHA256(HMAC, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -3956,6 +4047,7 @@ class HMACSHA256(HMAC, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HMACSHA384(HMAC, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -4034,6 +4126,7 @@ class HMACSHA384(HMAC, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HMACSHA512(HMAC, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -4112,6 +4205,7 @@ class HMACSHA512(HMAC, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashAlgorithm(ABC, Object, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -4177,6 +4271,7 @@ class HashAlgorithm(ABC, Object, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashAlgorithmName(ValueType, IEquatable[HashAlgorithmName]):
     """"""
     def __init__(self, name: str) -> None:
@@ -4227,6 +4322,7 @@ class HashAlgorithmName(ValueType, IEquatable[HashAlgorithmName]):
     def __ne__(self, other: HashAlgorithmName) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICryptoTransform(ABC, IDisposable):
     """"""
     @property
@@ -4257,6 +4353,7 @@ class ICryptoTransform(ABC, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICspAsymmetricAlgorithm(ABC):
     """"""
     @property
@@ -4267,6 +4364,7 @@ class ICspAsymmetricAlgorithm(ABC):
     def ImportCspBlob(self, rawData: Array[int]) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IncrementalHash(Object, IDisposable):
     """"""
     @property
@@ -4297,6 +4395,7 @@ class IncrementalHash(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class KeyNumber(Enum):
     """"""
 
@@ -4305,6 +4404,7 @@ class KeyNumber(Enum):
     Signature: KeyNumber = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeySizes(Object):
     """"""
     def __init__(self, minSize: int, maxSize: int, skipSize: int) -> None:
@@ -4327,6 +4427,7 @@ class KeySizes(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyedHashAlgorithm(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -4397,6 +4498,7 @@ class KeyedHashAlgorithm(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MACTripleDES(KeyedHashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @overload
@@ -4473,6 +4575,7 @@ class MACTripleDES(KeyedHashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MD5(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -4538,6 +4641,7 @@ class MD5(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MD5Cng(MD5, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -4597,6 +4701,7 @@ class MD5Cng(MD5, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MD5CryptoServiceProvider(MD5, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -4656,6 +4761,7 @@ class MD5CryptoServiceProvider(MD5, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManifestSignatureInformation(Object):
     """"""
     @property
@@ -4698,6 +4804,7 @@ class ManifestSignatureInformation(Object):
     ) -> ManifestSignatureInformationCollection:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManifestSignatureInformationCollection(
     ReadOnlyCollection[ManifestSignatureInformation],
     ICollection[ManifestSignatureInformation],
@@ -4803,6 +4910,7 @@ class ManifestSignatureInformationCollection(
     def __setitem__(self, index: int, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MaskGenerationMethod(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -4816,6 +4924,7 @@ class MaskGenerationMethod(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NCryptNative(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -4827,6 +4936,7 @@ class NCryptNative(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NativeHmac(Object, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -4840,6 +4950,7 @@ class NativeHmac(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Oid(Object):
     """"""
     @overload
@@ -4879,6 +4990,7 @@ class Oid(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OidCollection(Object, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -4924,6 +5036,7 @@ class OidCollection(Object, ICollection, IEnumerable):
     def __getitem__(self, oid: str) -> Oid:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OidEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -4942,6 +5055,7 @@ class OidEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class OidGroup(Enum):
     """"""
 
@@ -4968,6 +5082,7 @@ class OidGroup(Enum):
     KeyDerivationFunction: OidGroup = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PKCS1MaskGenerationMethod(MaskGenerationMethod):
     """"""
     def __init__(self) -> None:
@@ -4988,6 +5103,7 @@ class PKCS1MaskGenerationMethod(MaskGenerationMethod):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PaddingMode(Enum):
     """"""
 
@@ -5002,6 +5118,7 @@ class PaddingMode(Enum):
     ISO10126: PaddingMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PasswordDeriveBytes(DeriveBytes, IDisposable):
     """"""
     @overload
@@ -5080,6 +5197,7 @@ class PasswordDeriveBytes(DeriveBytes, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RC2(ABC, SymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -5167,6 +5285,7 @@ class RC2(ABC, SymmetricAlgorithm, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RC2CryptoServiceProvider(RC2, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -5253,6 +5372,7 @@ class RC2CryptoServiceProvider(RC2, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RIPEMD160(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -5318,6 +5438,7 @@ class RIPEMD160(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RIPEMD160Managed(RIPEMD160, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -5377,6 +5498,7 @@ class RIPEMD160Managed(RIPEMD160, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RNGCryptoServiceProvider(RandomNumberGenerator, IDisposable):
     """"""
     @overload
@@ -5410,6 +5532,7 @@ class RNGCryptoServiceProvider(RandomNumberGenerator, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSA(ABC, AsymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -5532,6 +5655,7 @@ class RSA(ABC, AsymmetricAlgorithm, IDisposable):
     ) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSACng(RSA, IDisposable):
     """"""
     @overload
@@ -5650,6 +5774,7 @@ class RSACng(RSA, IDisposable):
     ) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSACryptoServiceProvider(RSA, ICspAsymmetricAlgorithm, IDisposable):
     """"""
     @overload
@@ -5816,6 +5941,7 @@ class RSACryptoServiceProvider(RSA, ICspAsymmetricAlgorithm, IDisposable):
     def VerifyHash(self, rgbHash: Array[int], str: str, rgbSignature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSACspObject(Object):
     """"""
     def __init__(self) -> None:
@@ -5829,6 +5955,7 @@ class RSACspObject(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAEncryptionPadding(Object, IEquatable[RSAEncryptionPadding]):
     """"""
     @property
@@ -5883,6 +6010,7 @@ class RSAEncryptionPadding(Object, IEquatable[RSAEncryptionPadding]):
     def __ne__(self, other: RSAEncryptionPadding) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RSAEncryptionPaddingMode(Enum):
     """"""
 
@@ -5891,6 +6019,7 @@ class RSAEncryptionPaddingMode(Enum):
     Oaep: RSAEncryptionPaddingMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAOAEPKeyExchangeDeformatter(AsymmetricKeyExchangeDeformatter):
     """"""
     @overload
@@ -5917,6 +6046,7 @@ class RSAOAEPKeyExchangeDeformatter(AsymmetricKeyExchangeDeformatter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAOAEPKeyExchangeFormatter(AsymmetricKeyExchangeFormatter):
     """"""
     @overload
@@ -5955,6 +6085,7 @@ class RSAOAEPKeyExchangeFormatter(AsymmetricKeyExchangeFormatter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1KeyExchangeDeformatter(AsymmetricKeyExchangeDeformatter):
     """"""
     @overload
@@ -5986,6 +6117,7 @@ class RSAPKCS1KeyExchangeDeformatter(AsymmetricKeyExchangeDeformatter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1KeyExchangeFormatter(AsymmetricKeyExchangeFormatter):
     """"""
     @overload
@@ -6019,6 +6151,7 @@ class RSAPKCS1KeyExchangeFormatter(AsymmetricKeyExchangeFormatter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1SHA1SignatureDescription(RSAPKCS1SignatureDescription):
     """"""
     def __init__(self) -> None:
@@ -6058,6 +6191,7 @@ class RSAPKCS1SHA1SignatureDescription(RSAPKCS1SignatureDescription):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1SHA256SignatureDescription(RSAPKCS1SignatureDescription):
     """"""
     def __init__(self) -> None:
@@ -6097,6 +6231,7 @@ class RSAPKCS1SHA256SignatureDescription(RSAPKCS1SignatureDescription):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1SHA384SignatureDescription(RSAPKCS1SignatureDescription):
     """"""
     def __init__(self) -> None:
@@ -6136,6 +6271,7 @@ class RSAPKCS1SHA384SignatureDescription(RSAPKCS1SignatureDescription):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1SHA512SignatureDescription(RSAPKCS1SignatureDescription):
     """"""
     def __init__(self) -> None:
@@ -6175,6 +6311,7 @@ class RSAPKCS1SHA512SignatureDescription(RSAPKCS1SignatureDescription):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1SignatureDeformatter(AsymmetricSignatureDeformatter):
     """"""
     @overload
@@ -6202,6 +6339,7 @@ class RSAPKCS1SignatureDeformatter(AsymmetricSignatureDeformatter):
     def VerifySignature(self, rgbHash: Array[int], rgbSignature: Array[int]) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1SignatureDescription(ABC, SignatureDescription):
     """"""
     @property
@@ -6239,6 +6377,7 @@ class RSAPKCS1SignatureDescription(ABC, SignatureDescription):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAPKCS1SignatureFormatter(AsymmetricSignatureFormatter):
     """"""
     @overload
@@ -6266,6 +6405,7 @@ class RSAPKCS1SignatureFormatter(AsymmetricSignatureFormatter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSAParameters(ValueType):
     """"""
 
@@ -6294,6 +6434,7 @@ class RSAParameters(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RSASignaturePadding(Object, IEquatable[RSASignaturePadding]):
     """"""
     @property
@@ -6330,6 +6471,7 @@ class RSASignaturePadding(Object, IEquatable[RSASignaturePadding]):
     def __ne__(self, other: RSASignaturePadding) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RSASignaturePaddingMode(Enum):
     """"""
 
@@ -6338,6 +6480,7 @@ class RSASignaturePaddingMode(Enum):
     Pss: RSASignaturePaddingMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RandomNumberGenerator(ABC, Object, IDisposable):
     """"""
     @classmethod
@@ -6367,6 +6510,7 @@ class RandomNumberGenerator(ABC, Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Rfc2898DeriveBytes(DeriveBytes, IDisposable):
     """"""
     @overload
@@ -6432,6 +6576,7 @@ class Rfc2898DeriveBytes(DeriveBytes, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Rfc4050KeyFormatter(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -6443,6 +6588,7 @@ class Rfc4050KeyFormatter(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Rijndael(ABC, SymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -6525,6 +6671,7 @@ class Rijndael(ABC, SymmetricAlgorithm, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RijndaelManaged(Rijndael, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -6601,6 +6748,7 @@ class RijndaelManaged(Rijndael, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RijndaelManagedTransform(Object, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -6646,6 +6794,7 @@ class RijndaelManagedTransform(Object, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RijndaelManagedTransformMode(Enum):
     """"""
 
@@ -6654,6 +6803,7 @@ class RijndaelManagedTransformMode(Enum):
     Decrypt: RijndaelManagedTransformMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA1(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -6719,6 +6869,7 @@ class SHA1(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA1Cng(SHA1, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -6778,6 +6929,7 @@ class SHA1Cng(SHA1, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA1CryptoServiceProvider(SHA1, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -6837,6 +6989,7 @@ class SHA1CryptoServiceProvider(SHA1, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA1Managed(SHA1, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -6896,6 +7049,7 @@ class SHA1Managed(SHA1, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA256(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -6961,6 +7115,7 @@ class SHA256(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA256Cng(SHA256, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7020,6 +7175,7 @@ class SHA256Cng(SHA256, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA256CngFactory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -7031,6 +7187,7 @@ class SHA256CngFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA256CryptoServiceProvider(SHA256, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7090,6 +7247,7 @@ class SHA256CryptoServiceProvider(SHA256, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA256Managed(SHA256, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7149,6 +7307,7 @@ class SHA256Managed(SHA256, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA384(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -7214,6 +7373,7 @@ class SHA384(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA384Cng(SHA384, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7273,6 +7433,7 @@ class SHA384Cng(SHA384, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA384CngFactory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -7284,6 +7445,7 @@ class SHA384CngFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA384CryptoServiceProvider(SHA384, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7343,6 +7505,7 @@ class SHA384CryptoServiceProvider(SHA384, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA384Managed(SHA384, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7402,6 +7565,7 @@ class SHA384Managed(SHA384, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA512(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     """"""
     @property
@@ -7467,6 +7631,7 @@ class SHA512(ABC, HashAlgorithm, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA512Cng(SHA512, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7526,6 +7691,7 @@ class SHA512Cng(SHA512, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA512CngFactory(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -7537,6 +7703,7 @@ class SHA512CngFactory(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA512CryptoServiceProvider(SHA512, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7596,6 +7763,7 @@ class SHA512CryptoServiceProvider(SHA512, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SHA512Managed(SHA512, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -7655,6 +7823,7 @@ class SHA512Managed(SHA512, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCertContextHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7684,6 +7853,7 @@ class SafeCertContextHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCertStoreHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7713,6 +7883,7 @@ class SafeCertStoreHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCryptMsgHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7742,6 +7913,7 @@ class SafeCryptMsgHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCryptProvHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7771,6 +7943,7 @@ class SafeCryptProvHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7800,6 +7973,7 @@ class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCspHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7829,6 +8003,7 @@ class SafeCspHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeCspKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7858,6 +8033,7 @@ class SafeCspKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7887,6 +8063,7 @@ class SafeHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7916,6 +8093,7 @@ class SafeKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7945,6 +8123,7 @@ class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeLocalAllocHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -7974,6 +8153,7 @@ class SafeLocalAllocHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeProvHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -8003,6 +8183,7 @@ class SafeProvHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SignatureDescription(Object):
     """"""
     @overload
@@ -8046,6 +8227,7 @@ class SignatureDescription(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SignatureVerificationResult(Enum):
     """"""
 
@@ -8122,6 +8304,7 @@ class SignatureVerificationResult(Enum):
     InvalidCertificateName: SignatureVerificationResult = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongNameSignatureInformation(Object):
     """"""
     @property
@@ -8148,6 +8331,7 @@ class StrongNameSignatureInformation(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymmetricAlgorithm(ABC, Object, IDisposable):
     """"""
     @property
@@ -8230,6 +8414,7 @@ class SymmetricAlgorithm(ABC, Object, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TailStream(Stream, IDisposable):
     """"""
     def __init__(self, bufferSize: int) -> None:
@@ -8353,6 +8538,7 @@ class TailStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ToBase64Transform(Object, ICryptoTransform, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -8395,6 +8581,7 @@ class ToBase64Transform(Object, ICryptoTransform, IDisposable):
     ) -> Array[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TripleDES(ABC, SymmetricAlgorithm, IDisposable):
     """"""
     @property
@@ -8480,6 +8667,7 @@ class TripleDES(ABC, SymmetricAlgorithm, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TripleDESCng(TripleDES, ICngSymmetricAlgorithm, IDisposable):
     """"""
     @overload
@@ -8582,6 +8770,7 @@ class TripleDESCng(TripleDES, ICngSymmetricAlgorithm, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TripleDESCryptoServiceProvider(TripleDES, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -8658,6 +8847,7 @@ class TripleDESCryptoServiceProvider(TripleDES, IDisposable):
     def ValidKeySize(self, bitLength: int) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Utils(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -8669,6 +8859,7 @@ class Utils(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class X509Utils(Object):
     """"""
     def __init__(self) -> None:

@@ -13,6 +13,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthenticationException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -65,6 +66,7 @@ class AuthenticationException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CipherAlgorithmType(Enum):
     """"""
 
@@ -89,6 +91,7 @@ class CipherAlgorithmType(Enum):
     Rc4: CipherAlgorithmType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ExchangeAlgorithmType(Enum):
     """"""
 
@@ -101,6 +104,7 @@ class ExchangeAlgorithmType(Enum):
     DiffieHellman: ExchangeAlgorithmType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HashAlgorithmType(Enum):
     """"""
 
@@ -117,6 +121,7 @@ class HashAlgorithmType(Enum):
     Sha512: HashAlgorithmType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvalidCredentialException(AuthenticationException, _Exception, ISerializable):
     """"""
     @overload
@@ -169,6 +174,7 @@ class InvalidCredentialException(AuthenticationException, _Exception, ISerializa
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SslProtocols(Enum):
     """"""
 

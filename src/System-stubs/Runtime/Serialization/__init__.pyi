@@ -51,11 +51,13 @@ from System.Runtime.InteropServices import _Attribute
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.InteropServices import _FieldInfo
 from System.Runtime.InteropServices import _MemberInfo
-from System.Runtime.Serialization.Formatters import TypeFilterLevel
+
+from .Formatters import TypeFilterLevel
 
 type DeserializationEventHandler = Callable[[object], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FixupHolder(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -67,6 +69,7 @@ class FixupHolder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FixupHolderList(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -78,6 +81,7 @@ class FixupHolderList(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Formatter(ABC, Object, IFormatter):
     """"""
     @property
@@ -108,6 +112,7 @@ class Formatter(ABC, Object, IFormatter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FormatterConverter(Object, IFormatterConverter):
     """"""
     def __init__(self) -> None:
@@ -159,6 +164,7 @@ class FormatterConverter(Object, IFormatterConverter):
     def ToUInt64(self, value: object) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FormatterServices(ABC, Object):
     """"""
     @classmethod
@@ -203,11 +209,13 @@ class FormatterServices(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDeserializationCallback(ABC):
     """"""
     def OnDeserialization(self, sender: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IFormatter(ABC):
     """"""
     @property
@@ -230,6 +238,7 @@ class IFormatter(ABC):
     def Serialize(self, serializationStream: Stream, graph: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IFormatterConverter(ABC):
     """"""
     @overload
@@ -269,21 +278,25 @@ class IFormatterConverter(ABC):
     def ToUInt64(self, value: object) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IObjectReference(ABC):
     """"""
     def GetRealObject(self, context: StreamingContext) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISafeSerializationData(ABC):
     """"""
     def CompleteDeserialization(self, deserialized: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISerializable(ABC):
     """"""
     def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISerializationSurrogate(ABC):
     """"""
     def GetObjectData(
@@ -299,6 +312,7 @@ class ISerializationSurrogate(ABC):
     ) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISurrogateSelector(ABC):
     """"""
     def ChainSelector(self, selector: ISurrogateSelector) -> None:
@@ -310,6 +324,7 @@ class ISurrogateSelector(ABC):
     ) -> tuple[ISerializationSurrogate, ISurrogateSelector]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongList(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -321,6 +336,7 @@ class LongList(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberHolder(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -332,6 +348,7 @@ class MemberHolder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectCloneHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -343,6 +360,7 @@ class ObjectCloneHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectHolder(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -354,6 +372,7 @@ class ObjectHolder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectHolderList(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -365,6 +384,7 @@ class ObjectHolderList(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectHolderListEnumerator(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -376,6 +396,7 @@ class ObjectHolderListEnumerator(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectIDGenerator(Object):
     """"""
     def __init__(self) -> None:
@@ -393,6 +414,7 @@ class ObjectIDGenerator(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectManager(Object):
     """"""
     def __init__(self, selector: ISurrogateSelector, context: StreamingContext) -> None:
@@ -455,6 +477,7 @@ class ObjectManager(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OnDeserializedAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -495,6 +518,7 @@ class OnDeserializedAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OnDeserializingAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -535,6 +559,7 @@ class OnDeserializingAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OnSerializedAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -575,6 +600,7 @@ class OnSerializedAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OnSerializingAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -615,6 +641,7 @@ class OnSerializingAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OptionalFieldAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -660,6 +687,7 @@ class OptionalFieldAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeSerializationEventArgs(EventArgs):
     """"""
     @property
@@ -676,6 +704,7 @@ class SafeSerializationEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeSerializationManager(Object, IObjectReference, ISerializable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -691,6 +720,7 @@ class SafeSerializationManager(Object, IObjectReference, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationBinder(ABC, Object):
     """"""
     def BindToName(
@@ -708,6 +738,7 @@ class SerializationBinder(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationEntry(ValueType):
     """"""
     @property
@@ -731,6 +762,7 @@ class SerializationEntry(ValueType):
 type SerializationEventHandler = Callable[[StreamingContext], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationEvents(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -742,6 +774,7 @@ class SerializationEvents(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationEventsCache(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -753,6 +786,7 @@ class SerializationEventsCache(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -805,6 +839,7 @@ class SerializationException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _MemberInfo):
     """"""
     @property
@@ -946,6 +981,7 @@ class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _M
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationInfo(Object):
     """"""
     @overload
@@ -1073,6 +1109,7 @@ class SerializationInfo(Object):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationInfoEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -1100,6 +1137,7 @@ class SerializationInfoEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationObjectManager(Object):
     """"""
     def __init__(self, context: StreamingContext) -> None:
@@ -1117,6 +1155,7 @@ class SerializationObjectManager(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StreamingContext(ValueType):
     """"""
     @overload
@@ -1140,6 +1179,7 @@ class StreamingContext(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StreamingContextStates(Enum):
     """"""
 
@@ -1162,6 +1202,7 @@ class StreamingContextStates(Enum):
     All: StreamingContextStates = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SurrogateForCyclicalReference(Object, ISerializationSurrogate):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1185,6 +1226,7 @@ class SurrogateForCyclicalReference(Object, ISerializationSurrogate):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SurrogateHashtable(
     Hashtable,
     ICollection,
@@ -1264,6 +1306,7 @@ class SurrogateHashtable(
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SurrogateKey(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1275,6 +1318,7 @@ class SurrogateKey(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SurrogateSelector(Object, ISurrogateSelector):
     """"""
     def __init__(self) -> None:
@@ -1302,6 +1346,7 @@ class SurrogateSelector(Object, ISurrogateSelector):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeLoadExceptionHolder(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1313,6 +1358,7 @@ class TypeLoadExceptionHolder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ValueTypeFixupInfo(Object):
     """"""
     def __init__(self, containerID: int, member: FieldInfo, parentIndex: Array[int]) -> None:

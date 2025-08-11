@@ -47617,7 +47617,7 @@
             "doc_formatted": {},
             "parameters": {
               "opcode": "",
-              "cls": ""
+              "_cls": ""
             },
             "exceptions": {}
           },
@@ -48001,7 +48001,7 @@
             "doc": "",
             "doc_formatted": {},
             "parameters": {
-              "cls": "",
+              "_cls": "",
               "methodtoken": "",
               "rgIL": "",
               "methodSize": "",
@@ -55641,7 +55641,7 @@
           "doc": "",
           "doc_formatted": {},
           "parameters": {
-            "cls": "",
+            "_cls": "",
             "filterCriteria": ""
           },
           "return": "",
@@ -55651,7 +55651,7 @@
           "doc": "",
           "doc_formatted": {},
           "parameters": {
-            "cls": "",
+            "_cls": "",
             "filterCriteria": ""
           },
           "return": "",
@@ -93113,7 +93113,7 @@
           "doc": "",
           "doc_formatted": {},
           "parameters": {
-            "cls": ""
+            "_cls": ""
           },
           "return": "",
           "exceptions": {}
@@ -93159,7 +93159,7 @@
           "doc": "",
           "doc_formatted": {},
           "parameters": {
-            "cls": ""
+            "_cls": ""
           },
           "return": "",
           "exceptions": {}

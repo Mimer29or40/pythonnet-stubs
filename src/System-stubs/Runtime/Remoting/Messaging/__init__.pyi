@@ -46,6 +46,7 @@ from System.Runtime.Serialization import StreamingContext
 from System.Runtime.Serialization.Formatters import IFieldInfo
 from System.Threading import WaitHandle
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArgMapper(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -57,6 +58,7 @@ class ArgMapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsyncReplySink(Object, IMessageSink):
     """"""
     @property
@@ -75,6 +77,7 @@ class AsyncReplySink(Object, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsyncResult(Object, IMessageSink, IAsyncResult):
     """"""
     @property
@@ -117,6 +120,7 @@ class AsyncResult(Object, IMessageSink, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CCMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     """"""
 
@@ -183,6 +187,7 @@ class CCMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CRMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     """"""
 
@@ -251,6 +256,7 @@ class CRMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CallContext(Object):
     """"""
     @classmethod
@@ -290,6 +296,7 @@ class CallContext(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CallContextRemotingData(Object, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -305,6 +312,7 @@ class CallContextRemotingData(Object, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CallContextSecurityData(Object, ICloneable):
     """"""
     def __init__(self) -> None:
@@ -320,6 +328,7 @@ class CallContextSecurityData(Object, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientAsyncReplyTerminatorSink(Object, IMessageSink):
     """"""
     @property
@@ -338,6 +347,7 @@ class ClientAsyncReplyTerminatorSink(Object, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientContextTerminatorSink(InternalSink, IMessageSink):
     """"""
     def __init__(self) -> None:
@@ -358,6 +368,7 @@ class ClientContextTerminatorSink(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstructionCall(
     MethodCall,
     IConstructionCallMessage,
@@ -473,6 +484,7 @@ class ConstructionCall(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstructionResponse(
     MethodResponse,
     IConstructionReturnMessage,
@@ -569,6 +581,7 @@ class ConstructionResponse(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstructorCallMessage(
     Object, IConstructionCallMessage, IMessage, IMethodCallMessage, IMethodMessage
 ):
@@ -647,6 +660,7 @@ class ConstructorCallMessage(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstructorReturnMessage(
     ReturnMessage, IConstructionReturnMessage, IMessage, IMethodMessage, IMethodReturnMessage
 ):
@@ -725,6 +739,7 @@ class ConstructorReturnMessage(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DisposeSink(Object, IMessageSink):
     """"""
     @property
@@ -743,6 +758,7 @@ class DisposeSink(Object, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnvoyTerminatorSink(InternalSink, IMessageSink):
     """"""
     def __init__(self) -> None:
@@ -763,6 +779,7 @@ class EnvoyTerminatorSink(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ErrorMessage(Object, IMessage, IMethodCallMessage, IMethodMessage):
     """"""
     def __init__(self) -> None:
@@ -820,6 +837,7 @@ class ErrorMessage(Object, IMessage, IMethodCallMessage, IMethodMessage):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Header(Object):
     """"""
 
@@ -854,6 +872,7 @@ class Header(Object):
 type HeaderHandler = Callable[[Array[Header]], object]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IInternalMessage(ABC):
     """"""
     @property
@@ -873,20 +892,24 @@ class IInternalMessage(ABC):
     def SetURI(self, uri: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ILogicalThreadAffinative(ABC):
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMessage(ABC):
     """"""
     @property
     def Properties(self) -> IDictionary:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMessageCtrl(ABC):
     """"""
     def Cancel(self, msToCancel: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMessageSink(ABC):
     """"""
     @property
@@ -897,6 +920,7 @@ class IMessageSink(ABC):
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMethodCallMessage(ABC, IMessage, IMethodMessage):
     """"""
     @property
@@ -944,6 +968,7 @@ class IMethodCallMessage(ABC, IMessage, IMethodMessage):
     def GetInArgName(self, index: int) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMethodMessage(ABC, IMessage):
     """"""
     @property
@@ -981,6 +1006,7 @@ class IMethodMessage(ABC, IMessage):
     def GetArgName(self, index: int) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMethodReturnMessage(ABC, IMessage, IMethodMessage):
     """"""
     @property
@@ -1034,6 +1060,7 @@ class IMethodReturnMessage(ABC, IMessage, IMethodMessage):
     def GetOutArgName(self, index: int) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IRemotingFormatter(ABC, IFormatter):
     """"""
     @property
@@ -1064,11 +1091,13 @@ class IRemotingFormatter(ABC, IFormatter):
     def Serialize(self, serializationStream: Stream, graph: object, headers: Array[Header]) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISerializationRootObject(ABC):
     """"""
     def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IllogicalCallContext(Object):
     """"""
     def __init__(self) -> None:
@@ -1090,6 +1119,7 @@ class IllogicalCallContext(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalMessageWrapper(Object):
     """"""
     def __init__(self, msg: IMessage) -> None:
@@ -1103,6 +1133,7 @@ class InternalMessageWrapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalSink(Object):
     """"""
     def __init__(self) -> None:
@@ -1116,6 +1147,7 @@ class InternalSink(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LogicalCallContext(Object, ISerializable, ICloneable):
     """"""
     @property
@@ -1140,6 +1172,7 @@ class LogicalCallContext(Object, ISerializable, ICloneable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MCMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     """"""
 
@@ -1206,6 +1239,7 @@ class MCMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MRMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     """"""
 
@@ -1274,6 +1308,7 @@ class MRMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Message(
     Object, IInternalMessage, IMessage, IMethodCallMessage, IMethodMessage, ISerializable
 ):
@@ -1376,6 +1411,7 @@ class Message(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MessageDictionary(ABC, Object, ICollection, IDictionary, IEnumerable):
     """"""
     @property
@@ -1437,6 +1473,7 @@ class MessageDictionary(ABC, Object, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MessageDictionaryEnumerator(Object, IDictionaryEnumerator, IEnumerator):
     """"""
     def __init__(self, md: MessageDictionary, hashtable: IDictionary) -> None:
@@ -1466,6 +1503,7 @@ class MessageDictionaryEnumerator(Object, IDictionaryEnumerator, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MessageSmuggler(Object):
     """"""
     def __init__(self) -> None:
@@ -1479,6 +1517,7 @@ class MessageSmuggler(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MessageSurrogate(Object, ISerializationSurrogate):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1505,6 +1544,7 @@ class MessageSurrogate(Object, ISerializationSurrogate):
 type MessageSurrogateFilter = Callable[[str, object], bool]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCall(
     Object,
     IInternalMessage,
@@ -1602,6 +1642,7 @@ class MethodCall(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallMessageWrapper(
     InternalMessageWrapper, IMessage, IMethodCallMessage, IMethodMessage
 ):
@@ -1665,6 +1706,7 @@ class MethodCallMessageWrapper(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodResponse(
     Object,
     IInternalMessage,
@@ -1760,6 +1802,7 @@ class MethodResponse(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodReturnMessageWrapper(
     InternalMessageWrapper, IMessage, IMethodMessage, IMethodReturnMessage
 ):
@@ -1833,6 +1876,7 @@ class MethodReturnMessageWrapper(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjRefSurrogate(Object, ISerializationSurrogate):
     """"""
     def __init__(self) -> None:
@@ -1858,6 +1902,7 @@ class ObjRefSurrogate(Object, ISerializationSurrogate):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OneWayAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1898,6 +1943,7 @@ class OneWayAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingSurrogate(Object, ISerializationSurrogate):
     """"""
     def __init__(self) -> None:
@@ -1923,6 +1969,7 @@ class RemotingSurrogate(Object, ISerializationSurrogate):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingSurrogateSelector(Object, ISurrogateSelector):
     """"""
     def __init__(self) -> None:
@@ -1955,6 +2002,7 @@ class RemotingSurrogateSelector(Object, ISurrogateSelector):
     def UseSoapFormat(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReturnMessage(Object, IMessage, IMethodMessage, IMethodReturnMessage):
     """"""
     @overload
@@ -2031,6 +2079,7 @@ class ReturnMessage(Object, IMessage, IMethodMessage, IMethodReturnMessage):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SerializationMonkey(Object, IFieldInfo, ISerializable):
     """"""
     @property
@@ -2054,6 +2103,7 @@ class SerializationMonkey(Object, IFieldInfo, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServerContextTerminatorSink(InternalSink, IMessageSink):
     """"""
     def __init__(self) -> None:
@@ -2074,6 +2124,7 @@ class ServerContextTerminatorSink(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServerObjectTerminatorSink(InternalSink, IMessageSink):
     """"""
     @property
@@ -2092,6 +2143,7 @@ class ServerObjectTerminatorSink(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmuggledMethodCallMessage(MessageSmuggler):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2103,6 +2155,7 @@ class SmuggledMethodCallMessage(MessageSmuggler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmuggledMethodReturnMessage(MessageSmuggler):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2114,6 +2167,7 @@ class SmuggledMethodReturnMessage(MessageSmuggler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmuggledObjRef(Object):
     """"""
     def __init__(self, objRef: ObjRef) -> None:
@@ -2130,6 +2184,7 @@ class SmuggledObjRef(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapMessageSurrogate(Object, ISerializationSurrogate):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2153,6 +2208,7 @@ class SoapMessageSurrogate(Object, ISerializationSurrogate):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StackBasedReturnMessage(
     Object, IInternalMessage, IMessage, IMethodMessage, IMethodReturnMessage
 ):
@@ -2232,6 +2288,7 @@ class StackBasedReturnMessage(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StackBuilderSink(Object, IMessageSink):
     """"""
     @overload
@@ -2260,6 +2317,7 @@ class StackBuilderSink(Object, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TransitionCall(Object, IInternalMessage, IMessage, IMessageSink, ISerializable):
     """"""
     @property

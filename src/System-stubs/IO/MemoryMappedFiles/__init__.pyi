@@ -20,7 +20,6 @@ from System.IO import FileStream
 from System.IO import HandleInheritability
 from System.IO import SeekOrigin
 from System.IO import Stream
-from System.IO import T
 from System.IO import UnmanagedMemoryAccessor
 from System.IO import UnmanagedMemoryStream
 from System.Runtime.Remoting import ObjRef
@@ -38,6 +37,7 @@ from System.Security.Principal import IdentityReference
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedFile(Object, IDisposable):
     """"""
     @property
@@ -214,6 +214,7 @@ class MemoryMappedFile(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedFileAccess(Enum):
     """"""
 
@@ -230,6 +231,7 @@ class MemoryMappedFileAccess(Enum):
     ReadWriteExecute: MemoryMappedFileAccess = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedFileOptions(Enum):
     """"""
 
@@ -238,6 +240,7 @@ class MemoryMappedFileOptions(Enum):
     DelayAllocatePages: MemoryMappedFileOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedFileRights(Enum):
     """"""
 
@@ -268,6 +271,7 @@ class MemoryMappedFileRights(Enum):
     AccessSystemSecurity: MemoryMappedFileRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
     """"""
     def __init__(self) -> None:
@@ -396,6 +400,7 @@ class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedView(Object, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -411,6 +416,7 @@ class MemoryMappedView(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedViewAccessor(UnmanagedMemoryAccessor, IDisposable):
     """"""
     @property
@@ -515,6 +521,7 @@ class MemoryMappedViewAccessor(UnmanagedMemoryAccessor, IDisposable):
     def WriteArray[T](self, position: int, array: Array[T], offset: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):
     """"""
     @property

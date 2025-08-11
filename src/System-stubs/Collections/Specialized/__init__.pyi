@@ -32,6 +32,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BackCompatibleStringComparer(Object, IEqualityComparer):
     """"""
     @overload
@@ -55,6 +56,7 @@ class BackCompatibleStringComparer(Object, IEqualityComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BitVector32(ValueType):
     """"""
     @overload
@@ -112,6 +114,7 @@ class BitVector32(ValueType):
     @overload
     def __setitem__(self, bit: int, value: bool) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Section(ValueType):
         """"""
         @property
@@ -148,6 +151,7 @@ class BitVector32(ValueType):
         def __ne__(self, other: BitVector32.Section) -> bool:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CollectionsUtil(Object):
     """"""
     def __init__(self) -> None:
@@ -176,6 +180,7 @@ class CollectionsUtil(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompatibleComparer(Object, IEqualityComparer):
     """"""
     @property
@@ -209,6 +214,7 @@ class CompatibleComparer(Object, IEqualityComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FixedStringLookup(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -220,6 +226,7 @@ class FixedStringLookup(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HybridDictionary(Object, ICollection, IDictionary, IEnumerable):
     """"""
     @overload
@@ -293,12 +300,14 @@ class HybridDictionary(Object, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class INotifyCollectionChanged(ABC):
     """"""
 
     CollectionChanged: EventType[NotifyCollectionChangedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IOrderedDictionary(ABC, ICollection, IDictionary, IEnumerable):
     """"""
     @property
@@ -364,6 +373,7 @@ class IOrderedDictionary(ABC, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListDictionary(Object, ICollection, IDictionary, IEnumerable):
     """"""
     @overload
@@ -431,6 +441,7 @@ class ListDictionary(Object, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameObjectCollectionBase(
     ABC, Object, ICollection, IEnumerable, IDeserializationCallback, ISerializable
 ):
@@ -467,6 +478,7 @@ class NameObjectCollectionBase(
         """"""
     def __len__(self) -> int:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class KeysCollection(Object, ICollection, IEnumerable):
         """"""
         @property
@@ -502,6 +514,7 @@ class NameObjectCollectionBase(
         def __getitem__(self, index: int) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameValueCollection(
     NameObjectCollectionBase, ICollection, IEnumerable, IDeserializationCallback, ISerializable
 ):
@@ -606,6 +619,7 @@ class NameValueCollection(
         """"""
     def __setitem__(self, name: str, value: str) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class KeysCollection(Object, ICollection, IEnumerable):
         """"""
         @property
@@ -641,6 +655,7 @@ class NameValueCollection(
         def __getitem__(self, index: int) -> str:
             """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class NotifyCollectionChangedAction(Enum):
     """"""
 
@@ -655,6 +670,7 @@ class NotifyCollectionChangedAction(Enum):
     Reset: NotifyCollectionChangedAction = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NotifyCollectionChangedEventArgs(EventArgs):
     """"""
     @overload
@@ -739,6 +755,7 @@ type NotifyCollectionChangedEventHandler = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderedDictionary(
     Object,
     IOrderedDictionary,
@@ -838,6 +855,7 @@ class OrderedDictionary(
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringCollection(Object, ICollection, IEnumerable, IList):
     """"""
     def __init__(self) -> None:
@@ -939,6 +957,7 @@ class StringCollection(Object, ICollection, IEnumerable, IList):
     def __setitem__(self, index: int, value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringDictionary(Object, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -998,6 +1017,7 @@ class StringDictionary(Object, IEnumerable):
     def __setitem__(self, key: str, value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringDictionaryWithComparer(StringDictionary, IEnumerable):
     """"""
     @overload
@@ -1061,6 +1081,7 @@ class StringDictionaryWithComparer(StringDictionary, IEnumerable):
     def __setitem__(self, key: str, value: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringEnumerator(Object):
     """"""
     @property

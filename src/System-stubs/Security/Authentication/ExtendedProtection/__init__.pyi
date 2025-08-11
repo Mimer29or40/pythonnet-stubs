@@ -26,6 +26,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ChannelBinding(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -58,6 +59,7 @@ class ChannelBinding(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ChannelBindingKind(Enum):
     """"""
 
@@ -68,6 +70,7 @@ class ChannelBindingKind(Enum):
     Endpoint: ChannelBindingKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExtendedProtectionPolicy(Object, ISerializable):
     """"""
     @overload
@@ -121,6 +124,7 @@ class ExtendedProtectionPolicy(Object, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExtendedProtectionPolicyTypeConverter(TypeConverter):
     """"""
     def __init__(self) -> None:
@@ -258,6 +262,7 @@ class ExtendedProtectionPolicyTypeConverter(TypeConverter):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class StandardValuesCollection(Object, ICollection, IEnumerable):
         """"""
         def __init__(self, values: ICollection) -> None:
@@ -293,6 +298,7 @@ class ExtendedProtectionPolicyTypeConverter(TypeConverter):
         def __getitem__(self, index: int) -> object:
             """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PolicyEnforcement(Enum):
     """"""
 
@@ -303,6 +309,7 @@ class PolicyEnforcement(Enum):
     Always: PolicyEnforcement = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ProtectionScenario(Enum):
     """"""
 
@@ -311,6 +318,7 @@ class ProtectionScenario(Enum):
     TrustedProxy: ProtectionScenario = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServiceNameCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     """"""
     def __init__(self, items: ICollection) -> None:
@@ -351,6 +359,7 @@ class ServiceNameCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenBinding(Object):
     """"""
     @property
@@ -367,6 +376,7 @@ class TokenBinding(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TokenBindingType(Enum):
     """"""
 

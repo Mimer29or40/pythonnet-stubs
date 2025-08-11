@@ -40,7 +40,6 @@ from System.Diagnostics.Tracing import EventSource
 from System.Diagnostics.Tracing import EventSourceOptions
 from System.Diagnostics.Tracing import EventSourceSettings
 from System.Diagnostics.Tracing import EventTask
-from System.Diagnostics.Tracing import T
 from System.Linq import IGrouping
 from System.Linq import ILookup
 from System.Linq import IOrderedEnumerable
@@ -55,6 +54,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AnyAllSearchOperator[TInput](
     UnaryQueryOperator[TInput, Boolean], IEnumerable[Boolean], IEnumerable
 ):
@@ -80,6 +80,7 @@ class AnyAllSearchOperator[TInput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[bool]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArrayMergeHelper[TInputOutput](Object, IMergeHelper[TInputOutput]):
     """"""
     def __init__(self, settings: QuerySettings, queryResults: QueryResults[TInputOutput]) -> None:
@@ -101,6 +102,7 @@ class ArrayMergeHelper[TInputOutput](Object, IMergeHelper[TInputOutput]):
     def __iter__(self) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssociativeAggregationOperator[TInput, TIntermediate, TOutput](
     UnaryQueryOperator[TInput, TIntermediate], IEnumerable[TIntermediate], IEnumerable
 ):
@@ -130,6 +132,7 @@ class AssociativeAggregationOperator[TInput, TIntermediate, TOutput](
     ) -> Iterator[TIntermediate]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsynchronousChannelMergeEnumerator[T](
     MergeEnumerator[T], IEnumerator[T], IEnumerator, IDisposable
 ):
@@ -152,6 +155,7 @@ class AsynchronousChannelMergeEnumerator[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsynchronousChannel[T](Object, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -165,6 +169,7 @@ class AsynchronousChannel[T](Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryQueryOperator[TLeftInput, TRightInput, TOutput](
     ABC, QueryOperator[TOutput], IEnumerable[TOutput], IEnumerable
 ):
@@ -199,6 +204,7 @@ class BinaryQueryOperator[TLeftInput, TRightInput, TOutput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CancellableEnumerable(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -210,6 +216,7 @@ class CancellableEnumerable(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CancellationState(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -221,6 +228,7 @@ class CancellationState(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcatKey[TLeftKey, TRightKey](ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -232,6 +240,7 @@ class ConcatKey[TLeftKey, TRightKey](ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcatQueryOperator[TSource](
     BinaryQueryOperator[TSource, TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
@@ -268,6 +277,7 @@ class ConcatQueryOperator[TSource](
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContainsSearchOperator[TInput](
     UnaryQueryOperator[TInput, Boolean], IEnumerable[Boolean], IEnumerable
 ):
@@ -293,6 +303,7 @@ class ContainsSearchOperator[TInput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[bool]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CountAggregationOperator[TSource](
     InlinedAggregationOperator[TSource, Int32, Int32], IEnumerable[Int32], IEnumerable
 ):
@@ -318,6 +329,7 @@ class CountAggregationOperator[TSource](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecimalAverageAggregationOperator(
     InlinedAggregationOperator[Decimal, Pair[Decimal, Int64], Decimal],
     IEnumerable[Pair[Decimal, Int64]],
@@ -347,6 +359,7 @@ class DecimalAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[Decimal, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecimalMinMaxAggregationOperator(
     InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
 ):
@@ -372,6 +385,7 @@ class DecimalMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Decimal]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DecimalSumAggregationOperator(
     InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
 ):
@@ -397,6 +411,7 @@ class DecimalSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Decimal]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultIfEmptyQueryOperator[TSource](
     UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
@@ -424,6 +439,7 @@ class DefaultIfEmptyQueryOperator[TSource](
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultMergeHelper[TInputOutput, TIgnoreKey](Object, IMergeHelper[TInputOutput]):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -443,6 +459,7 @@ class DefaultMergeHelper[TInputOutput, TIgnoreKey](Object, IMergeHelper[TInputOu
     def __iter__(self) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DistinctQueryOperator[TInputOutput](
     UnaryQueryOperator[TInputOutput, TInputOutput], IEnumerable[TInputOutput], IEnumerable
 ):
@@ -472,6 +489,7 @@ class DistinctQueryOperator[TInputOutput](
     ) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DoubleAverageAggregationOperator(
     InlinedAggregationOperator[Double, Pair[Double, Int64], Double],
     IEnumerable[Pair[Double, Int64]],
@@ -501,6 +519,7 @@ class DoubleAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[float, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DoubleMinMaxAggregationOperator(
     InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
 ):
@@ -526,6 +545,7 @@ class DoubleMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DoubleSumAggregationOperator(
     InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
 ):
@@ -551,6 +571,7 @@ class DoubleSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ElementAtQueryOperator[TSource](
     UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
@@ -578,6 +599,7 @@ class ElementAtQueryOperator[TSource](
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EmptyEnumerable[T](ParallelQuery[T], IEnumerable[T], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -593,6 +615,7 @@ class EmptyEnumerable[T](ParallelQuery[T], IEnumerable[T], IEnumerable):
     def __iter__[T](self) -> Iterator[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EmptyEnumerator[T](
     QueryOperatorEnumerator[T, Int32], IEnumerator[T], IEnumerator, IDisposable
 ):
@@ -617,6 +640,7 @@ class EmptyEnumerator[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumerableWrapperWeakToStrong(Object, IEnumerable[Object], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -632,6 +656,7 @@ class EnumerableWrapperWeakToStrong(Object, IEnumerable[Object], IEnumerable):
     def __iter__(self) -> Iterator[object]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExceptQueryOperator[TInputOutput](
     BinaryQueryOperator[TInputOutput, TInputOutput, TInputOutput],
     IEnumerable[TInputOutput],
@@ -672,6 +697,7 @@ class ExceptQueryOperator[TInputOutput](
     ) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExceptionAggregator(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -683,6 +709,7 @@ class ExceptionAggregator(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExchangeUtilities(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -694,6 +721,7 @@ class ExchangeUtilities(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FirstQueryOperator[TSource](
     UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
@@ -721,6 +749,7 @@ class FirstQueryOperator[TSource](
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FixedMaxHeap[TElement](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -732,6 +761,7 @@ class FixedMaxHeap[TElement](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FloatAverageAggregationOperator(
     InlinedAggregationOperator[Single, Pair[Double, Int64], Single],
     IEnumerable[Pair[Double, Int64]],
@@ -761,6 +791,7 @@ class FloatAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[float, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FloatMinMaxAggregationOperator(
     InlinedAggregationOperator[Single, Single, Single], IEnumerable[Single], IEnumerable
 ):
@@ -786,6 +817,7 @@ class FloatMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FloatSumAggregationOperator(
     InlinedAggregationOperator[Single, Double, Single], IEnumerable[Double], IEnumerable
 ):
@@ -811,6 +843,7 @@ class FloatSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ForAllOperator[TInput](UnaryQueryOperator[TInput, TInput], IEnumerable[TInput], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -836,6 +869,7 @@ class ForAllOperator[TInput](UnaryQueryOperator[TInput, TInput], IEnumerable[TIn
     def __iter__[TInput](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TInput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ForAllSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -847,6 +881,7 @@ class ForAllSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupByElementSelectorQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrderKey](
     GroupByQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrderKey]
 ):
@@ -862,6 +897,7 @@ class GroupByElementSelectorQueryOperatorEnumerator[TSource, TGroupKey, TElement
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupByGrouping[TGroupKey, TElement](
     Object, IEnumerable[TElement], IEnumerable, IGrouping[TGroupKey, TElement]
 ):
@@ -882,6 +918,7 @@ class GroupByGrouping[TGroupKey, TElement](
     def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupByIdentityQueryOperatorEnumerator[TSource, TGroupKey, TOrderKey](
     GroupByQueryOperatorEnumerator[TSource, TGroupKey, TSource, TOrderKey]
 ):
@@ -897,6 +934,7 @@ class GroupByIdentityQueryOperatorEnumerator[TSource, TGroupKey, TOrderKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupByQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrderKey](
     ABC, QueryOperatorEnumerator[IGrouping[TGroupKey, TElement], TOrderKey]
 ):
@@ -912,6 +950,7 @@ class GroupByQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrderKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupByQueryOperator[TSource, TGroupKey, TElement](
     UnaryQueryOperator[TSource, IGrouping[TGroupKey, TElement]],
     IEnumerable[IGrouping[TGroupKey, TElement]],
@@ -943,6 +982,7 @@ class GroupByQueryOperator[TSource, TGroupKey, TElement](
     ) -> Iterator[IGrouping[TGroupKey, TElement]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GroupJoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     BinaryQueryOperator[TLeftInput, TRightInput, TOutput], IEnumerable[TOutput], IEnumerable
 ):
@@ -977,6 +1017,7 @@ class GroupJoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GrowingArray[T](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -988,6 +1029,7 @@ class GrowingArray[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashJoinQueryOperatorEnumerator[TLeftInput, TLeftKey, TRightInput, THashKey, TOutput](
     QueryOperatorEnumerator[TOutput, TLeftKey]
 ):
@@ -1003,6 +1045,7 @@ class HashJoinQueryOperatorEnumerator[TLeftInput, TLeftKey, TRightInput, THashKe
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashLookup[TKey, TValue](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1014,6 +1057,7 @@ class HashLookup[TKey, TValue](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashRepartitionEnumerator[TInputOutput, THashKey, TIgnoreKey](
     QueryOperatorEnumerator[Pair[TInputOutput, THashKey], Int32]
 ):
@@ -1029,6 +1073,7 @@ class HashRepartitionEnumerator[TInputOutput, THashKey, TIgnoreKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashRepartitionStream[TInputOutput, THashKey, TOrderKey](
     ABC, PartitionedStream[Pair[TInputOutput, THashKey], TOrderKey]
 ):
@@ -1045,6 +1090,7 @@ class HashRepartitionStream[TInputOutput, THashKey, TOrderKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMergeHelper[TInputOutput](ABC):
     """"""
     def Execute(self) -> None:
@@ -1056,16 +1102,19 @@ class IMergeHelper[TInputOutput](ABC):
     def __iter__(self) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IParallelPartitionable[T](ABC):
     """"""
     def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator[T, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPartitionedStreamRecipient[TElement](ABC):
     """"""
     def Receive[TKey](self, partitionedStream: PartitionedStream[TElement, TKey]) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IndexedSelectQueryOperator[TInput, TOutput](
     UnaryQueryOperator[TInput, TOutput], IEnumerable[TOutput], IEnumerable
 ):
@@ -1091,6 +1140,7 @@ class IndexedSelectQueryOperator[TInput, TOutput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IndexedWhereQueryOperator[TInputOutput](
     UnaryQueryOperator[TInputOutput, TInputOutput], IEnumerable[TInputOutput], IEnumerable
 ):
@@ -1120,6 +1170,7 @@ class IndexedWhereQueryOperator[TInputOutput](
     ) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InlinedAggregationOperatorEnumerator[TIntermediate](
     ABC, QueryOperatorEnumerator[TIntermediate, Int32]
 ):
@@ -1135,6 +1186,7 @@ class InlinedAggregationOperatorEnumerator[TIntermediate](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InlinedAggregationOperator[TSource, TIntermediate, TResult](
     ABC, UnaryQueryOperator[TSource, TIntermediate], IEnumerable[TIntermediate], IEnumerable
 ):
@@ -1164,6 +1216,7 @@ class InlinedAggregationOperator[TSource, TIntermediate, TResult](
     ) -> Iterator[TIntermediate]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntAverageAggregationOperator(
     InlinedAggregationOperator[Int32, Pair[Int64, Int64], Double],
     IEnumerable[Pair[Int64, Int64]],
@@ -1193,6 +1246,7 @@ class IntAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[int, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntMinMaxAggregationOperator(
     InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
 ):
@@ -1218,6 +1272,7 @@ class IntMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntSumAggregationOperator(
     InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
 ):
@@ -1243,6 +1298,7 @@ class IntSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntValueEvent(ManualResetEventSlim, IDisposable):
     """"""
     @property
@@ -1287,6 +1343,7 @@ class IntValueEvent(ManualResetEventSlim, IDisposable):
     def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntersectQueryOperator[TInputOutput](
     BinaryQueryOperator[TInputOutput, TInputOutput, TInputOutput],
     IEnumerable[TInputOutput],
@@ -1327,6 +1384,7 @@ class IntersectQueryOperator[TInputOutput](
     ) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class JoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     BinaryQueryOperator[TLeftInput, TRightInput, TOutput], IEnumerable[TOutput], IEnumerable
 ):
@@ -1361,6 +1419,7 @@ class JoinQueryOperator[TLeftInput, TRightInput, TKey, TOutput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LastQueryOperator[TSource](
     UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
@@ -1388,6 +1447,7 @@ class LastQueryOperator[TSource](
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListChunk[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1403,6 +1463,7 @@ class ListChunk[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable):
     def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListQueryResults[T](QueryResults[T], ICollection[T], IEnumerable[T], IList[T], IEnumerable):
     """"""
     @property
@@ -1455,6 +1516,7 @@ class ListQueryResults[T](QueryResults[T], ICollection[T], IEnumerable[T], IList
     def __setitem__(self, index: int, value: T) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongAverageAggregationOperator(
     InlinedAggregationOperator[Int64, Pair[Int64, Int64], Double],
     IEnumerable[Pair[Int64, Int64]],
@@ -1484,6 +1546,7 @@ class LongAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[int, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongCountAggregationOperator[TSource](
     InlinedAggregationOperator[TSource, Int64, Int64], IEnumerable[Int64], IEnumerable
 ):
@@ -1509,6 +1572,7 @@ class LongCountAggregationOperator[TSource](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongMinMaxAggregationOperator(
     InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
 ):
@@ -1534,6 +1598,7 @@ class LongMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongSumAggregationOperator(
     InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
 ):
@@ -1559,6 +1624,7 @@ class LongSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Lookup[TKey, TElement](
     Object, IEnumerable[IGrouping[TKey, TElement]], IEnumerable, ILookup[TKey, TElement]
 ):
@@ -1590,6 +1656,7 @@ class Lookup[TKey, TElement](
     def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MergeEnumerator[TInputOutput](
     ABC, Object, IEnumerator[TInputOutput], IEnumerator, IDisposable
 ):
@@ -1612,6 +1679,7 @@ class MergeEnumerator[TInputOutput](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MergeExecutor[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1627,6 +1695,7 @@ class MergeExecutor[TInputOutput](Object, IEnumerable[TInputOutput], IEnumerable
     def __iter__[TInputOutput](self) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NoKeyMemoizationRequired(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1638,6 +1707,7 @@ class NoKeyMemoizationRequired(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableDecimalAverageAggregationOperator(
     InlinedAggregationOperator[Decimal | None, Pair[Decimal, Int64], Decimal | None],
     IEnumerable[Pair[Decimal, Int64]],
@@ -1667,6 +1737,7 @@ class NullableDecimalAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[Decimal, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableDecimalMinMaxAggregationOperator(
     InlinedAggregationOperator[Decimal | None, Decimal | None, Decimal | None],
     IEnumerable[Decimal | None],
@@ -1696,6 +1767,7 @@ class NullableDecimalMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Decimal | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableDecimalSumAggregationOperator(
     InlinedAggregationOperator[Decimal | None, Decimal | None, Decimal | None],
     IEnumerable[Decimal | None],
@@ -1725,6 +1797,7 @@ class NullableDecimalSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Decimal | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableDoubleAverageAggregationOperator(
     InlinedAggregationOperator[Double | None, Pair[Double, Int64], Double | None],
     IEnumerable[Pair[Double, Int64]],
@@ -1754,6 +1827,7 @@ class NullableDoubleAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[float, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableDoubleMinMaxAggregationOperator(
     InlinedAggregationOperator[Double | None, Double | None, Double | None],
     IEnumerable[Double | None],
@@ -1781,6 +1855,7 @@ class NullableDoubleMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableDoubleSumAggregationOperator(
     InlinedAggregationOperator[Double | None, Double | None, Double | None],
     IEnumerable[Double | None],
@@ -1808,6 +1883,7 @@ class NullableDoubleSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableFloatAverageAggregationOperator(
     InlinedAggregationOperator[Single | None, Pair[Double, Int64], Single | None],
     IEnumerable[Pair[Double, Int64]],
@@ -1837,6 +1913,7 @@ class NullableFloatAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[float, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableFloatMinMaxAggregationOperator(
     InlinedAggregationOperator[Single | None, Single | None, Single | None],
     IEnumerable[Single | None],
@@ -1864,6 +1941,7 @@ class NullableFloatMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableFloatSumAggregationOperator(
     InlinedAggregationOperator[Single | None, Double | None, Single | None],
     IEnumerable[Double | None],
@@ -1891,6 +1969,7 @@ class NullableFloatSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[float | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableIntAverageAggregationOperator(
     InlinedAggregationOperator[Int32 | None, Pair[Int64, Int64], Double | None],
     IEnumerable[Pair[Int64, Int64]],
@@ -1920,6 +1999,7 @@ class NullableIntAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[int, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableIntMinMaxAggregationOperator(
     InlinedAggregationOperator[Int32 | None, Int32 | None, Int32 | None],
     IEnumerable[Int32 | None],
@@ -1947,6 +2027,7 @@ class NullableIntMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableIntSumAggregationOperator(
     InlinedAggregationOperator[Int32 | None, Int32 | None, Int32 | None],
     IEnumerable[Int32 | None],
@@ -1974,6 +2055,7 @@ class NullableIntSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableLongAverageAggregationOperator(
     InlinedAggregationOperator[Int64 | None, Pair[Int64, Int64], Double | None],
     IEnumerable[Pair[Int64, Int64]],
@@ -2003,6 +2085,7 @@ class NullableLongAverageAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[Pair[int, int]]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableLongMinMaxAggregationOperator(
     InlinedAggregationOperator[Int64 | None, Int64 | None, Int64 | None],
     IEnumerable[Int64 | None],
@@ -2030,6 +2113,7 @@ class NullableLongMinMaxAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableLongSumAggregationOperator(
     InlinedAggregationOperator[Int64 | None, Int64 | None, Int64 | None],
     IEnumerable[Int64 | None],
@@ -2057,6 +2141,7 @@ class NullableLongSumAggregationOperator(
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[int | None]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderPreservingMergeHelper[TInputOutput, TKey](Object, IMergeHelper[TInputOutput]):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2076,6 +2161,7 @@ class OrderPreservingMergeHelper[TInputOutput, TKey](Object, IMergeHelper[TInput
     def __iter__(self) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderPreservingPipeliningMergeHelper[TOutput, TKey](Object, IMergeHelper[TOutput]):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2095,6 +2181,7 @@ class OrderPreservingPipeliningMergeHelper[TOutput, TKey](Object, IMergeHelper[T
     def __iter__[TOutput](self) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderPreservingPipeliningSpoolingTask[TOutput, TKey](SpoolingTaskBase):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2120,6 +2207,7 @@ class OrderPreservingPipeliningSpoolingTask[TOutput, TKey](SpoolingTaskBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderPreservingSpoolingTask[TInputOutput, TKey](SpoolingTaskBase):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2131,6 +2219,7 @@ class OrderPreservingSpoolingTask[TInputOutput, TKey](SpoolingTaskBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderedGroupByElementSelectorQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrderKey](
     OrderedGroupByQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrderKey]
 ):
@@ -2146,6 +2235,7 @@ class OrderedGroupByElementSelectorQueryOperatorEnumerator[TSource, TGroupKey, T
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderedGroupByGrouping[TGroupKey, TOrderKey, TElement](
     Object, IEnumerable[TElement], IEnumerable, IGrouping[TGroupKey, TElement]
 ):
@@ -2166,6 +2256,7 @@ class OrderedGroupByGrouping[TGroupKey, TOrderKey, TElement](
     def __iter__[TElement](self) -> Iterator[TElement]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderedGroupByIdentityQueryOperatorEnumerator[TSource, TGroupKey, TOrderKey](
     OrderedGroupByQueryOperatorEnumerator[TSource, TGroupKey, TSource, TOrderKey]
 ):
@@ -2181,6 +2272,7 @@ class OrderedGroupByIdentityQueryOperatorEnumerator[TSource, TGroupKey, TOrderKe
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderedGroupByQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrderKey](
     ABC, QueryOperatorEnumerator[IGrouping[TGroupKey, TElement], TOrderKey]
 ):
@@ -2196,6 +2288,7 @@ class OrderedGroupByQueryOperatorEnumerator[TSource, TGroupKey, TElement, TOrder
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderedHashRepartitionEnumerator[TInputOutput, THashKey, TOrderKey](
     QueryOperatorEnumerator[Pair[TInputOutput, THashKey], TOrderKey]
 ):
@@ -2211,6 +2304,7 @@ class OrderedHashRepartitionEnumerator[TInputOutput, THashKey, TOrderKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderedHashRepartitionStream[TInputOutput, THashKey, TOrderKey](
     HashRepartitionStream[TInputOutput, THashKey, TOrderKey]
 ):
@@ -2227,6 +2321,7 @@ class OrderedHashRepartitionStream[TInputOutput, THashKey, TOrderKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OrderingQueryOperator[TSource](QueryOperator[TSource], IEnumerable[TSource], IEnumerable):
     """"""
     def __init__(self, child: QueryOperator[TSource], orderOn: bool) -> None:
@@ -2254,6 +2349,7 @@ class OrderingQueryOperator[TSource](QueryOperator[TSource], IEnumerable[TSource
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class OrdinalIndexState(Enum):
     """"""
 
@@ -2266,6 +2362,7 @@ class OrdinalIndexState(Enum):
     Shuffled: OrdinalIndexState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PairComparer[T, U](Object, IComparer[Pair[T, U]]):
     """"""
     def __init__(self, comparer1: IComparer[T], comparer2: IComparer[U]) -> None:
@@ -2281,6 +2378,7 @@ class PairComparer[T, U](Object, IComparer[Pair[T, U]]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Pair[T, U](ValueType):
     """"""
     def __init__(self, first: T, second: U) -> None:
@@ -2304,6 +2402,7 @@ class Pair[T, U](ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelEnumerableWrapper(ParallelQuery[Object], IEnumerable[Object], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2319,6 +2418,7 @@ class ParallelEnumerableWrapper(ParallelQuery[Object], IEnumerable[Object], IEnu
     def __iter__(self) -> Iterator[object]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelEnumerableWrapper[T](ParallelQuery[T], IEnumerable[T], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2334,6 +2434,7 @@ class ParallelEnumerableWrapper[T](ParallelQuery[T], IEnumerable[T], IEnumerable
     def __iter__[T](self) -> Iterator[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PartitionedDataSource[T](PartitionedStream[T, Int32]):
     """"""
     @property
@@ -2348,6 +2449,7 @@ class PartitionedDataSource[T](PartitionedStream[T, Int32]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PartitionedStreamMerger[TOutput](Object, IPartitionedStreamRecipient[TOutput]):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2361,6 +2463,7 @@ class PartitionedStreamMerger[TOutput](Object, IPartitionedStreamRecipient[TOutp
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PartitionedStream[TElement, TKey](Object):
     """"""
     @property
@@ -2375,6 +2478,7 @@ class PartitionedStream[TElement, TKey](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PartitionerQueryOperator[TElement](
     QueryOperator[TElement], IEnumerable[TElement], IEnumerable
 ):
@@ -2402,6 +2506,7 @@ class PartitionerQueryOperator[TElement](
     def __iter__[TElement](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TElement]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PipelineSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2413,6 +2518,7 @@ class PipelineSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PlinqEtwProvider(EventSource, IDisposable):
     """"""
     @property
@@ -2475,6 +2581,7 @@ class PlinqEtwProvider(EventSource, IDisposable):
         """"""
     EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
     """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Tasks(Object):
         """"""
 
@@ -2493,6 +2600,7 @@ class PlinqEtwProvider(EventSource, IDisposable):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProducerComparerInt(Object, IComparer[Producer[Int32]]):
     """"""
     def __init__(self) -> None:
@@ -2508,6 +2616,7 @@ class ProducerComparerInt(Object, IComparer[Producer[Int32]]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Producer[TKey](ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2519,6 +2628,7 @@ class Producer[TKey](ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class QueryAggregationOptions(Enum):
     """"""
 
@@ -2531,6 +2641,7 @@ class QueryAggregationOptions(Enum):
     AssociativeCommutative: QueryAggregationOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryExecutionOption[TSource](QueryOperator[TSource], IEnumerable[TSource], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2556,6 +2667,7 @@ class QueryExecutionOption[TSource](QueryOperator[TSource], IEnumerable[TSource]
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryLifecycle(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2567,6 +2679,7 @@ class QueryLifecycle(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryOpeningEnumerator[TOutput](Object, IEnumerator[TOutput], IEnumerator, IDisposable):
     """"""
     @property
@@ -2587,6 +2700,7 @@ class QueryOpeningEnumerator[TOutput](Object, IEnumerator[TOutput], IEnumerator,
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryOperatorEnumerator[TElement, TKey](ABC, Object):
     """"""
     def Dispose(self) -> None:
@@ -2600,6 +2714,7 @@ class QueryOperatorEnumerator[TElement, TKey](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryOperator[TOutput](ABC, ParallelQuery[TOutput], IEnumerable[TOutput], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2623,6 +2738,7 @@ class QueryOperator[TOutput](ABC, ParallelQuery[TOutput], IEnumerable[TOutput], 
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryResults[T](ABC, Object, ICollection[T], IEnumerable[T], IList[T], IEnumerable):
     """"""
     @property
@@ -2675,6 +2791,7 @@ class QueryResults[T](ABC, Object, ICollection[T], IEnumerable[T], IList[T], IEn
     def __setitem__(self, index: int, value: T) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QuerySettings(ValueType):
     """"""
     def CleanStateAtQueryEnd(self) -> None:
@@ -2688,6 +2805,7 @@ class QuerySettings(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryTask(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2699,6 +2817,7 @@ class QueryTask(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QueryTaskGroupState(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2710,6 +2829,7 @@ class QueryTaskGroupState(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RangeEnumerable(
     ParallelQuery[Int32], IEnumerable[Int32], IEnumerable, IParallelPartitionable[Int32]
 ):
@@ -2729,6 +2849,7 @@ class RangeEnumerable(
     def __iter__(self) -> Iterator[int]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RepeatEnumerable[TResult](
     ParallelQuery[TResult], IEnumerable[TResult], IEnumerable, IParallelPartitionable[TResult]
 ):
@@ -2750,6 +2871,7 @@ class RepeatEnumerable[TResult](
     def __iter__[TResult](self) -> Iterator[TResult]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReverseComparer[T](Object, IComparer[T]):
     """"""
     def Compare(self, x: T, y: T) -> int:
@@ -2763,6 +2885,7 @@ class ReverseComparer[T](Object, IComparer[T]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReverseQueryOperator[TSource](
     UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
@@ -2790,6 +2913,7 @@ class ReverseQueryOperator[TSource](
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ScanQueryOperator[TElement](QueryOperator[TElement], IEnumerable[TElement], IEnumerable):
     """"""
     @property
@@ -2818,6 +2942,7 @@ class ScanQueryOperator[TElement](QueryOperator[TElement], IEnumerable[TElement]
     def __iter__[TElement](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TElement]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Scheduling(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2829,6 +2954,7 @@ class Scheduling(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SelectManyQueryOperator[TLeftInput, TRightInput, TOutput](
     UnaryQueryOperator[TLeftInput, TOutput], IEnumerable[TOutput], IEnumerable
 ):
@@ -2854,6 +2980,7 @@ class SelectManyQueryOperator[TLeftInput, TRightInput, TOutput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SelectQueryOperator[TInput, TOutput](
     UnaryQueryOperator[TInput, TOutput], IEnumerable[TOutput], IEnumerable
 ):
@@ -2879,6 +3006,7 @@ class SelectQueryOperator[TInput, TOutput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Shared[T](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2890,6 +3018,7 @@ class Shared[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SingleQueryOperator[TSource](
     UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
@@ -2917,6 +3046,7 @@ class SingleQueryOperator[TSource](
     def __iter__[TSource](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TSource]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortHelper[TInputOutput, TKey](SortHelper[TInputOutput], IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -2930,6 +3060,7 @@ class SortHelper[TInputOutput, TKey](SortHelper[TInputOutput], IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortHelper[TInputOutput](ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2941,6 +3072,7 @@ class SortHelper[TInputOutput](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortQueryOperatorEnumerator[TInputOutput, TKey, TSortKey](
     QueryOperatorEnumerator[TInputOutput, TSortKey]
 ):
@@ -2959,6 +3091,7 @@ class SortQueryOperatorEnumerator[TInputOutput, TKey, TSortKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortQueryOperatorResults[TInputOutput, TSortKey](
     QueryResults[TInputOutput],
     ICollection[TInputOutput],
@@ -3017,6 +3150,7 @@ class SortQueryOperatorResults[TInputOutput, TSortKey](
     def __setitem__[TInputOutput](self, index: int, value: TInputOutput) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortQueryOperator[TInputOutput, TSortKey](
     UnaryQueryOperator[TInputOutput, TInputOutput],
     IEnumerable[TInputOutput],
@@ -3053,6 +3187,7 @@ class SortQueryOperator[TInputOutput, TSortKey](
     ) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SpoolingTask(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3064,6 +3199,7 @@ class SpoolingTask(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SpoolingTaskBase(ABC, QueryTask):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3075,6 +3211,7 @@ class SpoolingTaskBase(ABC, QueryTask):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StopAndGoSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3086,6 +3223,7 @@ class StopAndGoSpoolingTask[TInputOutput, TIgnoreKey](SpoolingTaskBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SynchronousChannelMergeEnumerator[T](
     MergeEnumerator[T], IEnumerator[T], IEnumerator, IDisposable
 ):
@@ -3108,6 +3246,7 @@ class SynchronousChannelMergeEnumerator[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SynchronousChannel[T](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3119,6 +3258,7 @@ class SynchronousChannel[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TakeOrSkipQueryOperator[TResult](
     UnaryQueryOperator[TResult, TResult], IEnumerable[TResult], IEnumerable
 ):
@@ -3146,6 +3286,7 @@ class TakeOrSkipQueryOperator[TResult](
     def __iter__[TResult](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TResult]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TakeOrSkipWhileQueryOperator[TResult](
     UnaryQueryOperator[TResult, TResult], IEnumerable[TResult], IEnumerable
 ):
@@ -3173,6 +3314,7 @@ class TakeOrSkipWhileQueryOperator[TResult](
     def __iter__[TResult](self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TResult]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TraceHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3184,6 +3326,7 @@ class TraceHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnaryQueryOperator[TInput, TOutput](
     ABC, QueryOperator[TOutput], IEnumerable[TOutput], IEnumerable
 ):
@@ -3209,6 +3352,7 @@ class UnaryQueryOperator[TInput, TOutput](
     def __iter__(self, mergeOptions: ParallelMergeOptions | None) -> Iterator[TOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnionQueryOperator[TInputOutput](
     BinaryQueryOperator[TInputOutput, TInputOutput, TInputOutput],
     IEnumerable[TInputOutput],
@@ -3249,6 +3393,7 @@ class UnionQueryOperator[TInputOutput](
     ) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnorderedHashRepartitionStream[TInputOutput, THashKey, TIgnoreKey](
     HashRepartitionStream[TInputOutput, THashKey, Int32]
 ):
@@ -3265,6 +3410,7 @@ class UnorderedHashRepartitionStream[TInputOutput, THashKey, TIgnoreKey](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Util(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3276,6 +3422,7 @@ class Util(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WhereQueryOperator[TInputOutput](
     UnaryQueryOperator[TInputOutput, TInputOutput], IEnumerable[TInputOutput], IEnumerable
 ):
@@ -3305,6 +3452,7 @@ class WhereQueryOperator[TInputOutput](
     ) -> Iterator[TInputOutput]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WrapperEqualityComparer[T](ValueType, IEqualityComparer[Wrapper[T]]):
     """"""
     @overload
@@ -3324,6 +3472,7 @@ class WrapperEqualityComparer[T](ValueType, IEqualityComparer[Wrapper[T]]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Wrapper[T](ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3335,6 +3484,7 @@ class Wrapper[T](ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ZipQueryOperator[TLeftInput, TRightInput, TOutput](
     QueryOperator[TOutput], IEnumerable[TOutput], IEnumerable
 ):

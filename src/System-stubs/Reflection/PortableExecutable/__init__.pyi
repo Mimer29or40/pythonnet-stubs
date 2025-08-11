@@ -19,6 +19,7 @@ from System.IO import Stream
 from System.Reflection.Metadata import BlobReader
 from System.Reflection.Metadata import MetadataReaderProvider
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Characteristics(Enum):
     """"""
 
@@ -53,6 +54,7 @@ class Characteristics(Enum):
     BytesReversedHi: Characteristics = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeViewDebugDirectoryData(ValueType):
     """"""
     @property
@@ -73,6 +75,7 @@ class CodeViewDebugDirectoryData(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CoffHeader(Object):
     """"""
     @property
@@ -105,6 +108,7 @@ class CoffHeader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CorFlags(Enum):
     """"""
 
@@ -123,6 +127,7 @@ class CorFlags(Enum):
     Prefers32Bit: CorFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CorHeader(Object):
     """"""
     @property
@@ -167,6 +172,7 @@ class CorHeader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DebugDirectoryEntry(ValueType):
     """"""
     def __init__(
@@ -213,6 +219,7 @@ class DebugDirectoryEntry(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DebugDirectoryEntryType(Enum):
     """"""
 
@@ -227,6 +234,7 @@ class DebugDirectoryEntryType(Enum):
     EmbeddedPortablePdb: DebugDirectoryEntryType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DirectoryEntry(ValueType):
     """"""
 
@@ -245,6 +253,7 @@ class DirectoryEntry(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DllCharacteristics(Enum):
     """"""
 
@@ -275,6 +284,7 @@ class DllCharacteristics(Enum):
     TerminalServerAware: DllCharacteristics = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Machine(Enum):
     """"""
 
@@ -327,6 +337,7 @@ class Machine(Enum):
     M32R: Machine = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PEBinaryReader(ValueType):
     """"""
     def __init__(self, stream: Stream, size: int) -> None:
@@ -361,6 +372,7 @@ class PEBinaryReader(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PEHeader(Object):
     """"""
     @property
@@ -501,6 +513,7 @@ class PEHeader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PEHeaders(Object):
     """"""
     @overload
@@ -564,6 +577,7 @@ class PEHeaders(Object):
     def TryGetDirectoryOffset(self, directory: DirectoryEntry, offset: Int32) -> tuple[bool, Int32]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PEMagic(Enum):
     """"""
 
@@ -572,6 +586,7 @@ class PEMagic(Enum):
     PE32Plus: PEMagic = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PEMemoryBlock(ValueType):
     """"""
     @property
@@ -595,6 +610,7 @@ class PEMemoryBlock(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PEReader(Object, IDisposable):
     """"""
     @overload
@@ -666,6 +682,7 @@ class PEReader(Object, IDisposable):
     ) -> tuple[bool, MetadataReaderProvider, String]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PEStreamOptions(Enum):
     """"""
 
@@ -680,6 +697,7 @@ class PEStreamOptions(Enum):
     IsLoadedImage: PEStreamOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PEStreamOptionsExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -694,6 +712,7 @@ class PEStreamOptionsExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SectionCharacteristics(Enum):
     """"""
 
@@ -790,6 +809,7 @@ class SectionCharacteristics(Enum):
     MemWrite: SectionCharacteristics = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SectionHeader(ValueType):
     """"""
     @property
@@ -831,6 +851,7 @@ class SectionHeader(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Subsystem(Enum):
     """"""
 

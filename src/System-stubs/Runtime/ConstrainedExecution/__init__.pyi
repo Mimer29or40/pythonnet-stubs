@@ -11,6 +11,7 @@ from System import Type
 from System import UInt32
 from System.Runtime.InteropServices import _Attribute
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Cer(Enum):
     """"""
 
@@ -21,6 +22,7 @@ class Cer(Enum):
     Success: Cer = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Consistency(Enum):
     """"""
 
@@ -33,6 +35,7 @@ class Consistency(Enum):
     WillNotCorruptState: Consistency = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CriticalFinalizerObject(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -44,6 +47,7 @@ class CriticalFinalizerObject(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrePrepareMethodAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -84,6 +88,7 @@ class PrePrepareMethodAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReliabilityContractAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, consistencyGuarantee: Consistency, cer: Cer) -> None:

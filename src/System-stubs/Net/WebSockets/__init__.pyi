@@ -41,6 +41,7 @@ from System.Security.Principal import IPrincipal
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientWebSocket(WebSocket, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -101,6 +102,7 @@ class ClientWebSocket(WebSocket, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientWebSocketOptions(Object):
     """"""
     @property
@@ -154,6 +156,7 @@ class ClientWebSocketOptions(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HttpListenerWebSocketContext(WebSocketContext):
     """"""
     @property
@@ -201,6 +204,7 @@ class HttpListenerWebSocketContext(WebSocketContext):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InternalClientWebSocket(WebSocketBase, IDisposable):
     """"""
     def __init__(
@@ -265,6 +269,7 @@ class InternalClientWebSocket(WebSocketBase, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServerWebSocket(WebSocketBase, IDisposable):
     """"""
     def __init__(
@@ -327,6 +332,7 @@ class ServerWebSocket(WebSocketBase, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocket(ABC, Object, IDisposable):
     """"""
     @property
@@ -408,6 +414,7 @@ class WebSocket(ABC, Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketBase(ABC, WebSocket, IDisposable):
     """"""
     @property
@@ -461,6 +468,7 @@ class WebSocketBase(ABC, WebSocket, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketBuffer(Object, IDisposable):
     """"""
     @property
@@ -484,6 +492,7 @@ class WebSocketBuffer(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WebSocketCloseStatus(Enum):
     """"""
 
@@ -508,6 +517,7 @@ class WebSocketCloseStatus(Enum):
     InternalServerError: WebSocketCloseStatus = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketConnectionStream(BufferedReadStream, WebSocketBase.IWebSocketStream, IDisposable):
     """"""
     def __init__(self, connectStream: ConnectStream, connectionGroupName: str) -> None:
@@ -639,6 +649,7 @@ class WebSocketConnectionStream(BufferedReadStream, WebSocketBase.IWebSocketStre
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketContext(ABC, Object):
     """"""
     @property
@@ -686,6 +697,7 @@ class WebSocketContext(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WebSocketError(Enum):
     """"""
 
@@ -710,6 +722,7 @@ class WebSocketError(Enum):
     InvalidState: WebSocketError = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketException(Win32Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -806,6 +819,7 @@ class WebSocketException(Win32Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -817,6 +831,7 @@ class WebSocketHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, IDisposable):
     """"""
     def __init__(
@@ -953,6 +968,7 @@ class WebSocketHttpListenerDuplexStream(Stream, WebSocketBase.IWebSocketStream, 
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WebSocketMessageType(Enum):
     """"""
 
@@ -963,6 +979,7 @@ class WebSocketMessageType(Enum):
     Close: WebSocketMessageType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketProtocolComponent(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -977,6 +994,7 @@ class WebSocketProtocolComponent(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WebSocketReceiveResult(Object):
     """"""
     @overload
@@ -1018,6 +1036,7 @@ class WebSocketReceiveResult(Object):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class WebSocketState(Enum):
     """"""
 

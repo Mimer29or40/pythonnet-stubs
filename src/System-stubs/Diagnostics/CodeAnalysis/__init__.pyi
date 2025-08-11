@@ -7,6 +7,7 @@ from System import Type
 from System import UInt32
 from System.Runtime.InteropServices import _Attribute
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExcludeFromCodeCoverageAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -47,6 +48,7 @@ class ExcludeFromCodeCoverageAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SuppressMessageAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, category: str, checkId: str) -> None:

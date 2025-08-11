@@ -33,6 +33,7 @@ from System.Threading import CancellationToken
 from System.Threading import WaitHandle
 from System.Threading.Tasks import Task
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class BlockType(Enum):
     """"""
 
@@ -43,6 +44,7 @@ class BlockType(Enum):
     Dynamic: BlockType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CompressionLevel(Enum):
     """"""
 
@@ -53,6 +55,7 @@ class CompressionLevel(Enum):
     NoCompression: CompressionLevel = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CompressionMode(Enum):
     """"""
 
@@ -61,6 +64,7 @@ class CompressionMode(Enum):
     Compress: CompressionMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompressionTracingSwitch(Switch):
     """"""
     @property
@@ -89,6 +93,7 @@ class CompressionTracingSwitch(Switch):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CompressionTracingSwitchLevel(Enum):
     """"""
 
@@ -99,6 +104,7 @@ class CompressionTracingSwitchLevel(Enum):
     Verbose: CompressionTracingSwitchLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CopyEncoder(Object):
     """"""
     def __init__(self) -> None:
@@ -114,6 +120,7 @@ class CopyEncoder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Crc32Helper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -128,6 +135,7 @@ class Crc32Helper(ABC, Object):
     def UpdateCrc32(cls, crc32: int, buffer: Array[int], offset: int, length: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeflateInput(Object):
     """"""
     def __init__(self) -> None:
@@ -141,6 +149,7 @@ class DeflateInput(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeflateStream(Stream, IDisposable):
     """"""
     @overload
@@ -282,6 +291,7 @@ class DeflateStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeflateStreamAsyncResult(Object, IAsyncResult):
     """"""
 
@@ -324,6 +334,7 @@ class DeflateStreamAsyncResult(Object, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeflaterManaged(Object, IDeflater, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -345,6 +356,7 @@ class DeflaterManaged(Object, IDeflater, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DeflaterZLib(Object, IDeflater, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -366,6 +378,7 @@ class DeflaterZLib(Object, IDeflater, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FastEncoder(Object):
     """"""
     def __init__(self) -> None:
@@ -379,6 +392,7 @@ class FastEncoder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FastEncoderStatics(ABC, Object):
     """"""
     @classmethod
@@ -393,6 +407,7 @@ class FastEncoderStatics(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FastEncoderWindow(Object):
     """"""
     def __init__(self) -> None:
@@ -421,6 +436,7 @@ class FastEncoderWindow(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GZipConstants(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -432,6 +448,7 @@ class GZipConstants(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GZipDecoder(Object, IFileFormatReader):
     """"""
     def __init__(self) -> None:
@@ -455,6 +472,7 @@ class GZipDecoder(Object, IFileFormatReader):
     def Validate(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GZipFormatter(Object, IFileFormatWriter):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -472,6 +490,7 @@ class GZipFormatter(Object, IFileFormatWriter):
     def UpdateWithBytesRead(self, buffer: Array[int], offset: int, bytesToCopy: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GZipStream(Stream, IDisposable):
     """"""
     @overload
@@ -613,6 +632,7 @@ class GZipStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HuffmanTree(Object):
     """"""
     def __init__(self, codeLengths: Array[int]) -> None:
@@ -636,6 +656,7 @@ class HuffmanTree(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDeflater(ABC, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -649,6 +670,7 @@ class IDeflater(ABC, IDisposable):
     def SetInput(self, inputBuffer: Array[int], startIndex: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IFileFormatReader(ABC):
     """"""
     def ReadFooter(self, input: InputBuffer) -> bool:
@@ -660,6 +682,7 @@ class IFileFormatReader(ABC):
     def Validate(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IFileFormatWriter(ABC):
     """"""
     def GetFooter(self) -> Array[int]:
@@ -669,6 +692,7 @@ class IFileFormatWriter(ABC):
     def UpdateWithBytesRead(self, buffer: Array[int], offset: int, bytesToCopy: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IInflater(ABC, IDisposable):
     """"""
     @property
@@ -685,6 +709,7 @@ class IInflater(ABC, IDisposable):
     def SetInput(self, inputBytes: Array[int], offset: int, length: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Inflater(Object, IInflater, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -711,6 +736,7 @@ class Inflater(Object, IInflater, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InflaterState(Enum):
     """"""
 
@@ -761,6 +787,7 @@ class InflaterState(Enum):
     Done: InflaterState = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InflaterZlib(Object, IInflater, IDisposable):
     """"""
     @property
@@ -785,6 +812,7 @@ class InflaterZlib(Object, IInflater, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InputBuffer(Object):
     """"""
     def __init__(self) -> None:
@@ -820,6 +848,7 @@ class InputBuffer(Object):
     def TryLoad16Bits(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Match(Object):
     """"""
     def __init__(self) -> None:
@@ -833,6 +862,7 @@ class Match(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OutputBuffer(Object):
     """"""
     def __init__(self) -> None:
@@ -846,6 +876,7 @@ class OutputBuffer(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OutputWindow(Object):
     """"""
     def __init__(self) -> None:
@@ -873,6 +904,7 @@ class OutputWindow(Object):
     def WriteLengthDistance(self, length: int, distance: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ZLibException(IOException, _Exception, ISerializable):
     """"""
     @overload
@@ -939,6 +971,7 @@ class ZLibException(IOException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ZLibNative(ABC, Object):
     """"""
 
@@ -990,6 +1023,7 @@ class ZLibNative(ABC, Object):
     @classmethod
     def ZLibCompileFlags(cls) -> int:
         """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class CompressionLevel(Enum):
         """"""
 
@@ -1002,12 +1036,14 @@ class ZLibNative(ABC, Object):
         DefaultCompression: ZLibNative.CompressionLevel = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class CompressionMethod(Enum):
         """"""
 
         Deflated: ZLibNative.CompressionMethod = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class CompressionStrategy(Enum):
         """"""
 
@@ -1022,6 +1058,7 @@ class ZLibNative(ABC, Object):
         Fixed: ZLibNative.CompressionStrategy = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class ErrorCode(Enum):
         """"""
 
@@ -1044,6 +1081,7 @@ class ZLibNative(ABC, Object):
         ErrorNo: ZLibNative.ErrorCode = ...
         """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class FlushCode(Enum):
         """"""
 
@@ -1060,6 +1098,7 @@ class ZLibNative(ABC, Object):
         Block: ZLibNative.FlushCode = ...
         """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class ZLibStreamHandle(SafeHandleMinusOneIsInvalid, IDisposable):
         """"""
         def __init__(self) -> None:
@@ -1145,6 +1184,7 @@ class ZLibNative(ABC, Object):
             """"""
         def ToString(self) -> str:
             """"""
+        # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
         class State(Enum):
             """"""
 

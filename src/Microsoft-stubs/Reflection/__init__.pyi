@@ -7,6 +7,7 @@ from System import Type
 from System import TypeCode
 from System.Reflection import Assembly
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReflectionExtensions(ABC, Object):
     """"""
     @classmethod

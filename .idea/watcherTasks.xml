@@ -4,6 +4,7 @@
     <enabled-global>
       <option value="ruff check" />
       <option value="ruff format" />
+      <option value="ruff format stubs" />
     </enabled-global>
   </component>
 </project>

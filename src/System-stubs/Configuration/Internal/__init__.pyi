@@ -3,6 +3,7 @@
 from System import Object
 from System import Type
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConfigurationManagerHelper(Object, IConfigurationManagerHelper):
     """"""
     def EnsureNetConfigLoaded(self) -> None:

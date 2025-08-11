@@ -34,6 +34,7 @@ from System.Runtime.CompilerServices import CallSiteBinder
 from System.Runtime.CompilerServices import DebugInfoGenerator
 from System.Runtime.InteropServices import _Attribute
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AnalyzeTypeIsResult(Enum):
     """"""
 
@@ -46,6 +47,7 @@ class AnalyzeTypeIsResult(Enum):
     Unknown: AnalyzeTypeIsResult = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArgumentProviderOps(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -57,6 +59,7 @@ class ArgumentProviderOps(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssignBinaryExpression(BinaryExpression):
     """"""
     @property
@@ -105,6 +108,7 @@ class AssignBinaryExpression(BinaryExpression):
     ) -> BinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BinaryExpression(Expression):
     """"""
     @property
@@ -153,6 +157,7 @@ class BinaryExpression(Expression):
     ) -> BinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Block2(BlockExpression):
     """"""
     @property
@@ -192,6 +197,7 @@ class Block2(BlockExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Block3(BlockExpression):
     """"""
     @property
@@ -231,6 +237,7 @@ class Block3(BlockExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Block4(BlockExpression):
     """"""
     @property
@@ -270,6 +277,7 @@ class Block4(BlockExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Block5(BlockExpression):
     """"""
     @property
@@ -309,6 +317,7 @@ class Block5(BlockExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlockExpression(Expression):
     """"""
     @property
@@ -348,6 +357,7 @@ class BlockExpression(Expression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlockExpressionList(
     Object, ICollection[Expression], IEnumerable[Expression], IList[Expression], IEnumerable
 ):
@@ -402,6 +412,7 @@ class BlockExpressionList(
     def __setitem__(self, index: int, value: Expression) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlockN(BlockExpression):
     """"""
     @property
@@ -441,6 +452,7 @@ class BlockN(BlockExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ByRefParameterExpression(TypedParameterExpression):
     """"""
     @property
@@ -473,6 +485,7 @@ class ByRefParameterExpression(TypedParameterExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CatchBlock(Object):
     """"""
     @property
@@ -500,6 +513,7 @@ class CatchBlock(Object):
     ) -> CatchBlock:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClearDebugInfoExpression(DebugInfoExpression):
     """"""
     @property
@@ -544,6 +558,7 @@ class ClearDebugInfoExpression(DebugInfoExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CoalesceConversionBinaryExpression(BinaryExpression):
     """"""
     @property
@@ -592,6 +607,7 @@ class CoalesceConversionBinaryExpression(BinaryExpression):
     ) -> BinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConditionalExpression(Expression):
     """"""
     @property
@@ -631,6 +647,7 @@ class ConditionalExpression(Expression):
     ) -> ConditionalExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstantCheck(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -642,6 +659,7 @@ class ConstantCheck(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConstantExpression(Expression):
     """"""
     @property
@@ -671,6 +689,7 @@ class ConstantExpression(Expression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DebugInfoExpression(Expression):
     """"""
     @property
@@ -715,6 +734,7 @@ class DebugInfoExpression(Expression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DebugViewWriter(ExpressionVisitor):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -740,6 +760,7 @@ class DebugViewWriter(ExpressionVisitor):
     ) -> ReadOnlyCollection[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultExpression(Expression):
     """"""
     @property
@@ -766,6 +787,7 @@ class DefaultExpression(Expression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicExpression(Expression, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -906,6 +928,7 @@ class DynamicExpression(Expression, IArgumentProvider, IDynamicExpression):
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicExpression1(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -952,6 +975,7 @@ class DynamicExpression1(DynamicExpression, IArgumentProvider, IDynamicExpressio
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicExpression2(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -998,6 +1022,7 @@ class DynamicExpression2(DynamicExpression, IArgumentProvider, IDynamicExpressio
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicExpression3(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -1044,6 +1069,7 @@ class DynamicExpression3(DynamicExpression, IArgumentProvider, IDynamicExpressio
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicExpression4(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -1090,6 +1116,7 @@ class DynamicExpression4(DynamicExpression, IArgumentProvider, IDynamicExpressio
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicExpressionN(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -1136,6 +1163,7 @@ class DynamicExpressionN(DynamicExpression, IArgumentProvider, IDynamicExpressio
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicExpressionVisitor(ABC, ExpressionVisitor):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1161,6 +1189,7 @@ class DynamicExpressionVisitor(ABC, ExpressionVisitor):
     ) -> ReadOnlyCollection[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ElementInit(Object, IArgumentProvider):
     """"""
     @property
@@ -1185,6 +1214,7 @@ class ElementInit(Object, IArgumentProvider):
     def Update(self, arguments: IEnumerable[Expression]) -> ElementInit:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Error(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1196,6 +1226,7 @@ class Error(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Expression(ABC, Object):
     """"""
     @property
@@ -2765,6 +2796,7 @@ class Expression(ABC, Object):
     def Variable(cls, type: Type, name: str) -> ParameterExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExpressionStringBuilder(ExpressionVisitor):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2790,6 +2822,7 @@ class ExpressionStringBuilder(ExpressionVisitor):
     ) -> ReadOnlyCollection[T]:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ExpressionType(Enum):
     """"""
 
@@ -2964,6 +2997,7 @@ class ExpressionType(Enum):
     IsFalse: ExpressionType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExpressionVisitor(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2995,6 +3029,7 @@ class ExpressionVisitor(ABC, Object):
     ) -> ReadOnlyCollection[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Expression[TDelegate](LambdaExpression):
     """"""
     @property
@@ -3057,6 +3092,7 @@ class Expression[TDelegate](LambdaExpression):
     ) -> Expression[TDelegate]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FieldExpression(MemberExpression):
     """"""
     def __init__(self, expression: Expression, member: FieldInfo) -> None:
@@ -3093,6 +3129,7 @@ class FieldExpression(MemberExpression):
     def Update(self, expression: Expression) -> MemberExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FullConditionalExpression(ConditionalExpression):
     """"""
     @property
@@ -3132,6 +3169,7 @@ class FullConditionalExpression(ConditionalExpression):
     ) -> ConditionalExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FullConditionalExpressionWithType(FullConditionalExpression):
     """"""
     @property
@@ -3171,6 +3209,7 @@ class FullConditionalExpressionWithType(FullConditionalExpression):
     ) -> ConditionalExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GotoExpression(Expression):
     """"""
     @property
@@ -3208,6 +3247,7 @@ class GotoExpression(Expression):
     def Update(self, target: LabelTarget, value: Expression) -> GotoExpression:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class GotoExpressionKind(Enum):
     """"""
 
@@ -3220,6 +3260,7 @@ class GotoExpressionKind(Enum):
     Continue: GotoExpressionKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IArgumentProvider(ABC):
     """"""
     @property
@@ -3228,6 +3269,7 @@ class IArgumentProvider(ABC):
     def GetArgument(self, index: int) -> Expression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDynamicExpression(ABC, IArgumentProvider):
     """"""
     @property
@@ -3243,6 +3285,7 @@ class IDynamicExpression(ABC, IArgumentProvider):
     def Rewrite(self, args: Array[Expression]) -> Expression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IndexExpression(Expression, IArgumentProvider):
     """"""
     @property
@@ -3285,6 +3328,7 @@ class IndexExpression(Expression, IArgumentProvider):
     def Update(self, object: Expression, arguments: IEnumerable[Expression]) -> IndexExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InstanceMethodCallExpression2(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(
@@ -3333,6 +3377,7 @@ class InstanceMethodCallExpression2(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InstanceMethodCallExpression3(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(
@@ -3386,6 +3431,7 @@ class InstanceMethodCallExpression3(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InstanceMethodCallExpressionN(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(self, method: MethodInfo, instance: Expression, args: IList[Expression]) -> None:
@@ -3432,6 +3478,7 @@ class InstanceMethodCallExpressionN(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvocationExpression(Expression, IArgumentProvider):
     """"""
     @property
@@ -3473,6 +3520,7 @@ class InvocationExpression(Expression, IArgumentProvider):
     ) -> InvocationExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LabelExpression(Expression):
     """"""
     @property
@@ -3507,6 +3555,7 @@ class LabelExpression(Expression):
     def Update(self, target: LabelTarget, defaultValue: Expression) -> LabelExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LabelTarget(Object):
     """"""
     @property
@@ -3524,6 +3573,7 @@ class LabelTarget(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LambdaExpression(ABC, Expression):
     """"""
     @property
@@ -3582,6 +3632,7 @@ class LambdaExpression(ABC, Expression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListArgumentProvider(
     Object, ICollection[Expression], IEnumerable[Expression], IList[Expression], IEnumerable
 ):
@@ -3636,6 +3687,7 @@ class ListArgumentProvider(
     def __setitem__(self, index: int, value: Expression) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ListInitExpression(Expression):
     """"""
     @property
@@ -3672,6 +3724,7 @@ class ListInitExpression(Expression):
     ) -> ListInitExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LogicalBinaryExpression(BinaryExpression):
     """"""
     @property
@@ -3720,6 +3773,7 @@ class LogicalBinaryExpression(BinaryExpression):
     ) -> BinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LoopExpression(Expression):
     """"""
     @property
@@ -3759,6 +3813,7 @@ class LoopExpression(Expression):
     ) -> LoopExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberAssignment(MemberBinding):
     """"""
     @property
@@ -3781,6 +3836,7 @@ class MemberAssignment(MemberBinding):
     def Update(self, expression: Expression) -> MemberAssignment:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberBinding(ABC, Object):
     """"""
     @property
@@ -3798,6 +3854,7 @@ class MemberBinding(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MemberBindingType(Enum):
     """"""
 
@@ -3808,6 +3865,7 @@ class MemberBindingType(Enum):
     ListBinding: MemberBindingType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberExpression(Expression):
     """"""
     @property
@@ -3842,6 +3900,7 @@ class MemberExpression(Expression):
     def Update(self, expression: Expression) -> MemberExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberInitExpression(Expression):
     """"""
     @property
@@ -3878,6 +3937,7 @@ class MemberInitExpression(Expression):
     ) -> MemberInitExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberListBinding(MemberBinding):
     """"""
     @property
@@ -3900,6 +3960,7 @@ class MemberListBinding(MemberBinding):
     def Update(self, initializers: IEnumerable[ElementInit]) -> MemberListBinding:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemberMemberBinding(MemberBinding):
     """"""
     @property
@@ -3922,6 +3983,7 @@ class MemberMemberBinding(MemberBinding):
     def Update(self, bindings: IEnumerable[MemberBinding]) -> MemberMemberBinding:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodBinaryExpression(SimpleBinaryExpression):
     """"""
     @property
@@ -3970,6 +4032,7 @@ class MethodBinaryExpression(SimpleBinaryExpression):
     ) -> BinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallExpression(Expression, IArgumentProvider):
     """"""
     @property
@@ -4014,6 +4077,7 @@ class MethodCallExpression(Expression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallExpression1(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(self, method: MethodInfo, arg0: Expression) -> None:
@@ -4060,6 +4124,7 @@ class MethodCallExpression1(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallExpression2(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(self, method: MethodInfo, arg0: Expression, arg1: Expression) -> None:
@@ -4106,6 +4171,7 @@ class MethodCallExpression2(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallExpression3(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(
@@ -4154,6 +4220,7 @@ class MethodCallExpression3(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallExpression4(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(
@@ -4207,6 +4274,7 @@ class MethodCallExpression4(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallExpression5(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(
@@ -4261,6 +4329,7 @@ class MethodCallExpression5(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodCallExpressionN(MethodCallExpression, IArgumentProvider):
     """"""
     def __init__(self, method: MethodInfo, args: IList[Expression]) -> None:
@@ -4307,6 +4376,7 @@ class MethodCallExpressionN(MethodCallExpression, IArgumentProvider):
     ) -> MethodCallExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NewArrayBoundsExpression(NewArrayExpression):
     """"""
     @property
@@ -4338,6 +4408,7 @@ class NewArrayBoundsExpression(NewArrayExpression):
     def Update(self, expressions: IEnumerable[Expression]) -> NewArrayExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NewArrayExpression(Expression):
     """"""
     @property
@@ -4369,6 +4440,7 @@ class NewArrayExpression(Expression):
     def Update(self, expressions: IEnumerable[Expression]) -> NewArrayExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NewArrayInitExpression(NewArrayExpression):
     """"""
     @property
@@ -4400,6 +4472,7 @@ class NewArrayInitExpression(NewArrayExpression):
     def Update(self, expressions: IEnumerable[Expression]) -> NewArrayExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NewExpression(Expression, IArgumentProvider):
     """"""
     @property
@@ -4442,6 +4515,7 @@ class NewExpression(Expression, IArgumentProvider):
     def Update(self, arguments: IEnumerable[Expression]) -> NewExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NewValueTypeExpression(NewExpression, IArgumentProvider):
     """"""
     @property
@@ -4484,6 +4558,7 @@ class NewValueTypeExpression(NewExpression, IArgumentProvider):
     def Update(self, arguments: IEnumerable[Expression]) -> NewExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OldExpressionVisitor(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -4495,6 +4570,7 @@ class OldExpressionVisitor(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OpAssignMethodConversionBinaryExpression(MethodBinaryExpression):
     """"""
     @property
@@ -4543,6 +4619,7 @@ class OpAssignMethodConversionBinaryExpression(MethodBinaryExpression):
     ) -> BinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParameterExpression(Expression):
     """"""
     @property
@@ -4575,6 +4652,7 @@ class ParameterExpression(Expression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrimitiveParameterExpression[T](ParameterExpression):
     """"""
     @property
@@ -4607,6 +4685,7 @@ class PrimitiveParameterExpression[T](ParameterExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PropertyExpression(MemberExpression):
     """"""
     def __init__(self, expression: Expression, member: PropertyInfo) -> None:
@@ -4643,6 +4722,7 @@ class PropertyExpression(MemberExpression):
     def Update(self, expression: Expression) -> MemberExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReadOnlyCollectionExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -4654,6 +4734,7 @@ class ReadOnlyCollectionExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RuntimeVariablesExpression(Expression):
     """"""
     @property
@@ -4685,6 +4766,7 @@ class RuntimeVariablesExpression(Expression):
     def Update(self, variables: IEnumerable[ParameterExpression]) -> RuntimeVariablesExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SR(Object):
     """"""
     @classmethod
@@ -4715,6 +4797,7 @@ class SR(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SRCategoryAttribute(CategoryAttribute, _Attribute):
     """"""
     def __init__(self, category: str) -> None:
@@ -4758,6 +4841,7 @@ class SRCategoryAttribute(CategoryAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SRDescriptionAttribute(DescriptionAttribute, _Attribute):
     """"""
     def __init__(self, description: str) -> None:
@@ -4801,6 +4885,7 @@ class SRDescriptionAttribute(DescriptionAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Scope1(ScopeExpression):
     """"""
     @property
@@ -4840,6 +4925,7 @@ class Scope1(ScopeExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ScopeExpression(BlockExpression):
     """"""
     @property
@@ -4879,6 +4965,7 @@ class ScopeExpression(BlockExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ScopeN(ScopeExpression):
     """"""
     @property
@@ -4918,6 +5005,7 @@ class ScopeN(ScopeExpression):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ScopeWithType(ScopeN):
     """"""
     @property
@@ -4957,6 +5045,7 @@ class ScopeWithType(ScopeN):
     ) -> BlockExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Set[T](Object, ICollection[T], IEnumerable[T], IEnumerable):
     """"""
     @property
@@ -4994,6 +5083,7 @@ class Set[T](Object, ICollection[T], IEnumerable[T], IEnumerable):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SimpleBinaryExpression(BinaryExpression):
     """"""
     @property
@@ -5042,6 +5132,7 @@ class SimpleBinaryExpression(BinaryExpression):
     ) -> BinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SpanDebugInfoExpression(DebugInfoExpression):
     """"""
     @property
@@ -5086,6 +5177,7 @@ class SpanDebugInfoExpression(DebugInfoExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StackGuard(Object):
     """"""
     def __init__(self) -> None:
@@ -5117,6 +5209,7 @@ class StackGuard(Object):
     def TryEnterOnCurrentStack(self) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Strings(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -5128,6 +5221,7 @@ class Strings(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SwitchCase(Object):
     """"""
     @property
@@ -5147,6 +5241,7 @@ class SwitchCase(Object):
     def Update(self, testValues: IEnumerable[Expression], body: Expression) -> SwitchCase:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SwitchExpression(Expression):
     """"""
     @property
@@ -5189,6 +5284,7 @@ class SwitchExpression(Expression):
     ) -> SwitchExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymbolDocumentInfo(Object):
     """"""
     @property
@@ -5212,6 +5308,7 @@ class SymbolDocumentInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SymbolDocumentWithGuids(SymbolDocumentInfo):
     """"""
     @property
@@ -5235,6 +5332,7 @@ class SymbolDocumentWithGuids(SymbolDocumentInfo):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TryExpression(Expression):
     """"""
     @property
@@ -5281,6 +5379,7 @@ class TryExpression(Expression):
     ) -> TryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeBinaryExpression(Expression):
     """"""
     @property
@@ -5315,6 +5414,7 @@ class TypeBinaryExpression(Expression):
     def Update(self, expression: Expression) -> TypeBinaryExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypedConstantExpression(ConstantExpression):
     """"""
     @property
@@ -5344,6 +5444,7 @@ class TypedConstantExpression(ConstantExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypedDynamicExpression1(DynamicExpression1, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -5390,6 +5491,7 @@ class TypedDynamicExpression1(DynamicExpression1, IArgumentProvider, IDynamicExp
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypedDynamicExpression2(DynamicExpression2, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -5436,6 +5538,7 @@ class TypedDynamicExpression2(DynamicExpression2, IArgumentProvider, IDynamicExp
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypedDynamicExpression3(DynamicExpression3, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -5482,6 +5585,7 @@ class TypedDynamicExpression3(DynamicExpression3, IArgumentProvider, IDynamicExp
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypedDynamicExpression4(DynamicExpression4, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -5528,6 +5632,7 @@ class TypedDynamicExpression4(DynamicExpression4, IArgumentProvider, IDynamicExp
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypedDynamicExpressionN(DynamicExpressionN, IArgumentProvider, IDynamicExpression):
     """"""
     @property
@@ -5574,6 +5679,7 @@ class TypedDynamicExpressionN(DynamicExpressionN, IArgumentProvider, IDynamicExp
     def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypedParameterExpression(ParameterExpression):
     """"""
     @property
@@ -5606,6 +5712,7 @@ class TypedParameterExpression(ParameterExpression):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnaryExpression(Expression):
     """"""
     @property

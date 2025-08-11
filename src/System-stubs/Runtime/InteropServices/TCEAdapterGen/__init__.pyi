@@ -9,6 +9,7 @@ from System.Collections import ArrayList
 from System.Reflection import RuntimeAssembly
 from System.Reflection.Emit import ModuleBuilder
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventItfInfo(Object):
     """"""
     def __init__(
@@ -35,6 +36,7 @@ class EventItfInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventProviderWriter(Object):
     """"""
     def __init__(
@@ -57,6 +59,7 @@ class EventProviderWriter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventSinkHelperWriter(Object):
     """"""
 
@@ -75,6 +78,7 @@ class EventSinkHelperWriter(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NameSpaceExtractor(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -89,6 +93,7 @@ class NameSpaceExtractor(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TCEAdapterGenerator(Object):
     """"""
     def __init__(self) -> None:

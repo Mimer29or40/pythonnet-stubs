@@ -26,6 +26,7 @@ from System.Runtime.Remoting.Messaging import IMessageCtrl
 from System.Runtime.Remoting.Messaging import IMessageSink
 from System.Runtime.Remoting.Messaging import InternalSink
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ADAsyncWorkItem(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -37,6 +38,7 @@ class ADAsyncWorkItem(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AggregateDictionary(Object, ICollection, IDictionary, IEnumerable):
     """"""
     def __init__(self, dictionaries: ICollection) -> None:
@@ -100,6 +102,7 @@ class AggregateDictionary(Object, ICollection, IDictionary, IEnumerable):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsyncMessageHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -111,6 +114,7 @@ class AsyncMessageHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsyncWorkItem(Object, IMessageSink):
     """"""
     @property
@@ -129,6 +133,7 @@ class AsyncWorkItem(Object, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BaseChannelObjectWithProperties(ABC, Object, ICollection, IDictionary, IEnumerable):
     """"""
     @property
@@ -193,6 +198,7 @@ class BaseChannelObjectWithProperties(ABC, Object, ICollection, IDictionary, IEn
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BaseChannelSinkWithProperties(
     ABC, BaseChannelObjectWithProperties, ICollection, IDictionary, IEnumerable
 ):
@@ -259,6 +265,7 @@ class BaseChannelSinkWithProperties(
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BaseChannelWithProperties(
     ABC, BaseChannelObjectWithProperties, ICollection, IDictionary, IEnumerable
 ):
@@ -325,6 +332,7 @@ class BaseChannelWithProperties(
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ChannelDataStore(Object, IChannelDataStore):
     """"""
     def __init__(self, channelURIs: Array[str]) -> None:
@@ -352,6 +360,7 @@ class ChannelDataStore(Object, IChannelDataStore):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ChannelServices(Object):
     """"""
     @classmethod
@@ -403,6 +412,7 @@ class ChannelServices(Object):
     def UnregisterChannel(cls, chnl: IChannel) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ChannelServicesData(Object):
     """"""
     def __init__(self) -> None:
@@ -416,6 +426,7 @@ class ChannelServicesData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClientChannelSinkStack(Object, IClientChannelSinkStack, IClientResponseChannelSinkStack):
     """"""
     @overload
@@ -443,6 +454,7 @@ class ClientChannelSinkStack(Object, IClientChannelSinkStack, IClientResponseCha
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CrossAppDomainChannel(Object, IChannel, IChannelReceiver, IChannelSender):
     """"""
     def __init__(self) -> None:
@@ -480,6 +492,7 @@ class CrossAppDomainChannel(Object, IChannel, IChannelReceiver, IChannelSender):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CrossAppDomainData(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -491,6 +504,7 @@ class CrossAppDomainData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CrossAppDomainSerializer(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -502,6 +516,7 @@ class CrossAppDomainSerializer(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CrossAppDomainSink(InternalSink, IMessageSink):
     """"""
     @property
@@ -520,6 +535,7 @@ class CrossAppDomainSink(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CrossContextChannel(InternalSink, IMessageSink):
     """"""
     def __init__(self) -> None:
@@ -540,6 +556,7 @@ class CrossContextChannel(InternalSink, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DictionaryEnumeratorByKeys(Object, IDictionaryEnumerator, IEnumerator):
     """"""
     def __init__(self, properties: IDictionary) -> None:
@@ -569,6 +586,7 @@ class DictionaryEnumeratorByKeys(Object, IDictionaryEnumerator, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DispatchChannelSink(Object, IChannelSinkBase, IServerChannelSink):
     """"""
     @property
@@ -614,6 +632,7 @@ class DispatchChannelSink(Object, IChannelSinkBase, IServerChannelSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DispatchChannelSinkProvider(Object, IServerChannelSinkProvider):
     """"""
     @property
@@ -634,6 +653,7 @@ class DispatchChannelSinkProvider(Object, IServerChannelSinkProvider):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IChannel(ABC):
     """"""
     @property
@@ -645,6 +665,7 @@ class IChannel(ABC):
     def Parse(self, url: str, objectURI: String) -> tuple[str, String]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IChannelDataStore(ABC):
     """"""
     @property
@@ -660,6 +681,7 @@ class IChannelDataStore(ABC):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IChannelReceiver(ABC, IChannel):
     """"""
     @property
@@ -680,6 +702,7 @@ class IChannelReceiver(ABC, IChannel):
     def StopListening(self, data: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IChannelReceiverHook(ABC):
     """"""
     @property
@@ -694,6 +717,7 @@ class IChannelReceiverHook(ABC):
     def AddHookChannelUri(self, channelUri: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IChannelSender(ABC, IChannel):
     """"""
     @property
@@ -709,12 +733,14 @@ class IChannelSender(ABC, IChannel):
     def Parse(self, url: str, objectURI: String) -> tuple[str, String]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IChannelSinkBase(ABC):
     """"""
     @property
     def Properties(self) -> IDictionary:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClientChannelSink(ABC, IChannelSinkBase):
     """"""
     @property
@@ -751,6 +777,7 @@ class IClientChannelSink(ABC, IChannelSinkBase):
     ) -> tuple[None, ITransportHeaders, Stream]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClientChannelSinkProvider(ABC):
     """"""
     @property
@@ -763,6 +790,7 @@ class IClientChannelSinkProvider(ABC):
     ) -> IClientChannelSink:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClientChannelSinkStack(ABC, IClientResponseChannelSinkStack):
     """"""
     def AsyncProcessResponse(self, headers: ITransportHeaders, stream: Stream) -> None:
@@ -776,6 +804,7 @@ class IClientChannelSinkStack(ABC, IClientResponseChannelSinkStack):
     def Push(self, sink: IClientChannelSink, state: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClientFormatterSink(ABC, IChannelSinkBase, IClientChannelSink, IMessageSink):
     """"""
     @property
@@ -819,6 +848,7 @@ class IClientFormatterSink(ABC, IChannelSinkBase, IClientChannelSink, IMessageSi
     def SyncProcessMessage(self, msg: IMessage) -> IMessage:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClientFormatterSinkProvider(ABC, IClientChannelSinkProvider):
     """"""
     @property
@@ -831,6 +861,7 @@ class IClientFormatterSinkProvider(ABC, IClientChannelSinkProvider):
     ) -> IClientChannelSink:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IClientResponseChannelSinkStack(ABC):
     """"""
     def AsyncProcessResponse(self, headers: ITransportHeaders, stream: Stream) -> None:
@@ -840,6 +871,7 @@ class IClientResponseChannelSinkStack(ABC):
     def DispatchReplyMessage(self, msg: IMessage) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISecurableChannel(ABC):
     """"""
     @property
@@ -848,6 +880,7 @@ class ISecurableChannel(ABC):
     @IsSecured.setter
     def IsSecured(self, value: bool) -> None: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IServerChannelSink(ABC, IChannelSinkBase):
     """"""
     @property
@@ -885,6 +918,7 @@ class IServerChannelSink(ABC, IChannelSinkBase):
     ) -> tuple[ServerProcessing, IMessage, ITransportHeaders, Stream]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IServerChannelSinkProvider(ABC):
     """"""
     @property
@@ -897,6 +931,7 @@ class IServerChannelSinkProvider(ABC):
     def GetChannelData(self, channelData: IChannelDataStore) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IServerChannelSinkStack(ABC, IServerResponseChannelSinkStack):
     """"""
     def AsyncProcessResponse(
@@ -916,6 +951,7 @@ class IServerChannelSinkStack(ABC, IServerResponseChannelSinkStack):
     def StoreAndDispatch(self, sink: IServerChannelSink, state: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IServerFormatterSinkProvider(ABC, IServerChannelSinkProvider):
     """"""
     @property
@@ -928,6 +964,7 @@ class IServerFormatterSinkProvider(ABC, IServerChannelSinkProvider):
     def GetChannelData(self, channelData: IChannelDataStore) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IServerResponseChannelSinkStack(ABC):
     """"""
     def AsyncProcessResponse(
@@ -937,6 +974,7 @@ class IServerResponseChannelSinkStack(ABC):
     def GetResponseStream(self, msg: IMessage, headers: ITransportHeaders) -> Stream:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITransportHeaders(ABC):
     """"""
     @property
@@ -953,6 +991,7 @@ class ITransportHeaders(ABC):
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Perf_Contexts(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -964,6 +1003,7 @@ class Perf_Contexts(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegisteredChannel(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -975,6 +1015,7 @@ class RegisteredChannel(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegisteredChannelList(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -986,6 +1027,7 @@ class RegisteredChannelList(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RemotingProfilerEvent(Enum):
     """"""
 
@@ -994,6 +1036,7 @@ class RemotingProfilerEvent(Enum):
     ClientReceive: RemotingProfilerEvent = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServerAsyncReplyTerminatorSink(Object, IMessageSink):
     """"""
     @property
@@ -1012,6 +1055,7 @@ class ServerAsyncReplyTerminatorSink(Object, IMessageSink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ServerChannelSinkStack(Object, IServerChannelSinkStack, IServerResponseChannelSinkStack):
     """"""
     def __init__(self) -> None:
@@ -1041,6 +1085,7 @@ class ServerChannelSinkStack(Object, IServerChannelSinkStack, IServerResponseCha
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ServerProcessing(Enum):
     """"""
 
@@ -1051,6 +1096,7 @@ class ServerProcessing(Enum):
     Async: ServerProcessing = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SinkProviderData(Object):
     """"""
     def __init__(self, name: str) -> None:
@@ -1073,6 +1119,7 @@ class SinkProviderData(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TransportHeaders(Object, ITransportHeaders):
     """"""
     def __init__(self) -> None:

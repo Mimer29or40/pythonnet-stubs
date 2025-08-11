@@ -18,6 +18,7 @@ from System.Security.Permissions import IUnrestrictedPermission
 from System.Security.Permissions import PermissionState
 from System.Security.Permissions import SecurityAction
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AspNetHostingPermission(
     CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
@@ -64,6 +65,7 @@ class AspNetHostingPermission(
     def Union(self, target: IPermission) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     """"""
     def __init__(self, action: SecurityAction) -> None:
@@ -121,6 +123,7 @@ class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AspNetHostingPermissionLevel(Enum):
     """"""
 

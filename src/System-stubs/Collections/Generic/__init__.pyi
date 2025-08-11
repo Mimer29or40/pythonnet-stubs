@@ -38,6 +38,7 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArrayBuilder[T](ValueType):
     """"""
     def __init__(self, capacity: int) -> None:
@@ -78,6 +79,7 @@ class ArrayBuilder[T](ValueType):
     def __setitem__(self, index: int, value: T) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArraySortHelper[TKey, TValue](Object, IArraySortHelper[TKey, TValue]):
     """"""
     def __init__(self) -> None:
@@ -104,6 +106,7 @@ class ArraySortHelper[TKey, TValue](Object, IArraySortHelper[TKey, TValue]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArraySortHelper[T](Object, IArraySortHelper[T]):
     """"""
     def __init__(self) -> None:
@@ -127,6 +130,7 @@ class ArraySortHelper[T](Object, IArraySortHelper[T]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BitHelper(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -138,6 +142,7 @@ class BitHelper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ByteEqualityComparer(EqualityComparer[Byte], IEqualityComparer[Byte], IEqualityComparer):
     """"""
     def __init__(self) -> None:
@@ -165,6 +170,7 @@ class ByteEqualityComparer(EqualityComparer[Byte], IEqualityComparer[Byte], IEqu
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Comparer[T](ABC, Object, IComparer[T], IComparer):
     """"""
     @classmethod
@@ -189,6 +195,7 @@ class Comparer[T](ABC, Object, IComparer[T], IComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComparisonComparer[T](Comparer[T], IComparer[T], IComparer):
     """"""
     def __init__(self, comparison: Comparison[T]) -> None:
@@ -208,6 +215,7 @@ class ComparisonComparer[T](Comparer[T], IComparer[T], IComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CopyPosition(ValueType):
     """"""
     @classmethod
@@ -223,6 +231,7 @@ class CopyPosition(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Dictionary[TKey, TValue](
     Object,
     ICollection[KeyValuePair[TKey, TValue]],
@@ -374,6 +383,7 @@ class Dictionary[TKey, TValue](
     @overload
     def __setitem__(self, key: object, value: object) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[TKey, TValue](
         ValueType,
         IEnumerator[KeyValuePair[TKey, TValue]],
@@ -409,6 +419,7 @@ class Dictionary[TKey, TValue](
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class KeyCollection[TKey, TValue](
         Object,
         ICollection[TKey],
@@ -464,6 +475,7 @@ class Dictionary[TKey, TValue](
             """"""
         def __len__(self) -> int:
             """"""
+        # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
         class Enumerator[TKey, TValue](ValueType, IEnumerator[TKey], IEnumerator, IDisposable):
             """"""
             @property
@@ -484,6 +496,7 @@ class Dictionary[TKey, TValue](
             def ToString(self) -> str:
                 """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class ValueCollection[TKey, TValue](
         Object,
         ICollection[TValue],
@@ -541,6 +554,7 @@ class Dictionary[TKey, TValue](
             """"""
         def __len__(self) -> int:
             """"""
+        # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
         class Enumerator[TKey, TValue](ValueType, IEnumerator[TValue], IEnumerator, IDisposable):
             """"""
             @property
@@ -561,6 +575,7 @@ class Dictionary[TKey, TValue](
             def ToString(self) -> str:
                 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumEqualityComparer[T](
     EqualityComparer[T], IEqualityComparer[T], IEqualityComparer, ISerializable
 ):
@@ -592,6 +607,7 @@ class EnumEqualityComparer[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EnumerableHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -603,6 +619,7 @@ class EnumerableHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EqualityComparer[T](ABC, Object, IEqualityComparer[T], IEqualityComparer):
     """"""
     @classmethod
@@ -632,6 +649,7 @@ class EqualityComparer[T](ABC, Object, IEqualityComparer[T], IEqualityComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericArraySortHelper[TKey, TValue](Object, IArraySortHelper[TKey, TValue]):
     """"""
     def __init__(self) -> None:
@@ -654,6 +672,7 @@ class GenericArraySortHelper[TKey, TValue](Object, IArraySortHelper[TKey, TValue
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericArraySortHelper[T](Object, IArraySortHelper[T]):
     """"""
     def __init__(self) -> None:
@@ -673,6 +692,7 @@ class GenericArraySortHelper[T](Object, IArraySortHelper[T]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericComparer[T](Comparer[T], IComparer[T], IComparer):
     """"""
     def __init__(self) -> None:
@@ -692,6 +712,7 @@ class GenericComparer[T](Comparer[T], IComparer[T], IComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqualityComparer):
     """"""
     def __init__(self) -> None:
@@ -719,6 +740,7 @@ class GenericEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqu
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashSetDebugView[T](Object):
     """"""
     def __init__(self, set: HashSet[T]) -> None:
@@ -735,6 +757,7 @@ class HashSetDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashSetEqualityComparer[T](Object, IEqualityComparer[HashSet[T]]):
     """"""
     @overload
@@ -760,6 +783,7 @@ class HashSetEqualityComparer[T](Object, IEqualityComparer[HashSet[T]]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashSet[T](
     Object,
     ICollection[T],
@@ -866,6 +890,7 @@ class HashSet[T](
         """"""
     def __len__(self) -> int:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[T](ValueType, IEnumerator[T], IEnumerator, IDisposable):
         """"""
         @property
@@ -886,6 +911,7 @@ class HashSet[T](
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IArraySortHelper[TKey, TValue](ABC):
     """"""
     def Sort(
@@ -898,6 +924,7 @@ class IArraySortHelper[TKey, TValue](ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IArraySortHelper[TKey](ABC):
     """"""
     def BinarySearch(
@@ -907,6 +934,7 @@ class IArraySortHelper[TKey](ABC):
     def Sort(self, keys: Array[TKey], index: int, length: int, comparer: IComparer[TKey]) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICollection[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     @property
@@ -936,11 +964,13 @@ class ICollection[T](ABC, IEnumerable[T], IEnumerable):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IComparer[T](ABC):
     """"""
     def Compare(self, x: T, y: T) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDictionary[TKey, TValue](
     ABC,
     ICollection[KeyValuePair[TKey, TValue]],
@@ -1012,6 +1042,7 @@ class IDictionary[TKey, TValue](
     def __setitem__(self, key: TKey, value: TValue) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumerable[T](ABC, IEnumerable):
     """"""
     def GetEnumerator[T](self) -> IEnumerator[T]:
@@ -1019,6 +1050,7 @@ class IEnumerable[T](ABC, IEnumerable):
     def __iter__[T](self) -> Iterator[T]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEnumerator[T](ABC, IEnumerator, IDisposable):
     """"""
     @property
@@ -1031,6 +1063,7 @@ class IEnumerator[T](ABC, IEnumerator, IDisposable):
     def Reset(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEqualityComparer[T](ABC):
     """"""
     def Equals(self, x: T, y: T) -> bool:
@@ -1038,6 +1071,7 @@ class IEqualityComparer[T](ABC):
     def GetHashCode(self, obj: T) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IList[T](ABC, ICollection[T], IEnumerable[T], IEnumerable):
     """"""
     @property
@@ -1082,6 +1116,7 @@ class IList[T](ABC, ICollection[T], IEnumerable[T], IEnumerable):
     def __setitem__(self, index: int, value: T) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReadOnlyCollection[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     @property
@@ -1094,6 +1129,7 @@ class IReadOnlyCollection[T](ABC, IEnumerable[T], IEnumerable):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReadOnlyDictionary[TKey, TValue](
     ABC,
     IEnumerable[KeyValuePair[TKey, TValue]],
@@ -1128,6 +1164,7 @@ class IReadOnlyDictionary[TKey, TValue](
     def __getitem__(self, key: TKey) -> TValue:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReadOnlyList[T](ABC, IEnumerable[T], IReadOnlyCollection[T], IEnumerable):
     """"""
     @property
@@ -1145,6 +1182,7 @@ class IReadOnlyList[T](ABC, IEnumerable[T], IReadOnlyCollection[T], IEnumerable)
     def __getitem__(self, index: int) -> T:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ISet[T](ABC, ICollection[T], IEnumerable[T], IEnumerable):
     """"""
     @property
@@ -1194,6 +1232,7 @@ class ISet[T](ABC, ICollection[T], IEnumerable[T], IEnumerable):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IntrospectiveSortUtilities(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1205,6 +1244,7 @@ class IntrospectiveSortUtilities(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyNotFoundException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -1257,6 +1297,7 @@ class KeyNotFoundException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyValuePair[TKey, TValue](ValueType):
     """"""
     def __init__(self, key: TKey, value: TValue) -> None:
@@ -1276,6 +1317,7 @@ class KeyValuePair[TKey, TValue](ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LargeArrayBuilder[T](ValueType):
     """"""
     @overload
@@ -1318,6 +1360,7 @@ class LargeArrayBuilder[T](ValueType):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LinkedListNode[T](Object):
     """"""
     def __init__(self, value: T) -> None:
@@ -1345,6 +1388,7 @@ class LinkedListNode[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LinkedList[T](
     Object,
     ICollection[T],
@@ -1456,6 +1500,7 @@ class LinkedList[T](
         """"""
     def __len__(self) -> int:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[T](
         ValueType, IEnumerator[T], IEnumerator, IDeserializationCallback, ISerializable, IDisposable
     ):
@@ -1482,6 +1527,7 @@ class LinkedList[T](
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class List[T](
     Object,
     ICollection[T],
@@ -1698,6 +1744,7 @@ class List[T](
     @overload
     def __setitem__(self, index: int, value: object) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[T](ValueType, IEnumerator[T], IEnumerator, IDisposable):
         """"""
         @property
@@ -1718,6 +1765,7 @@ class List[T](
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LongEnumEqualityComparer[T](
     EqualityComparer[T], IEqualityComparer[T], IEqualityComparer, ISerializable
 ):
@@ -1753,6 +1801,7 @@ class LongEnumEqualityComparer[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Marker(ValueType):
     """"""
     def __init__(self, count: int, index: int) -> None:
@@ -1774,6 +1823,7 @@ class Marker(ValueType):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Mscorlib_CollectionDebugView[T](Object):
     """"""
     def __init__(self, collection: ICollection[T]) -> None:
@@ -1790,6 +1840,7 @@ class Mscorlib_CollectionDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Mscorlib_DictionaryDebugView[K, V](Object):
     """"""
     def __init__(self, dictionary: IDictionary[K, V]) -> None:
@@ -1806,6 +1857,7 @@ class Mscorlib_DictionaryDebugView[K, V](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Mscorlib_DictionaryKeyCollectionDebugView[TKey, TValue](Object):
     """"""
     def __init__(self, collection: ICollection[TKey]) -> None:
@@ -1822,6 +1874,7 @@ class Mscorlib_DictionaryKeyCollectionDebugView[TKey, TValue](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Mscorlib_DictionaryValueCollectionDebugView[TKey, TValue](Object):
     """"""
     def __init__(self, collection: ICollection[TValue]) -> None:
@@ -1838,6 +1891,7 @@ class Mscorlib_DictionaryValueCollectionDebugView[TKey, TValue](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Mscorlib_KeyedCollectionDebugView[K, T](Object):
     """"""
     def __init__(self, keyedCollection: KeyedCollection[K, T]) -> None:
@@ -1854,6 +1908,7 @@ class Mscorlib_KeyedCollectionDebugView[K, T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableComparer[T](Comparer[T | None], IComparer[T | None], IComparer):
     """"""
     def __init__(self) -> None:
@@ -1873,6 +1928,7 @@ class NullableComparer[T](Comparer[T | None], IComparer[T | None], IComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableEqualityComparer[T](
     EqualityComparer[T | None], IEqualityComparer[T | None], IEqualityComparer
 ):
@@ -1902,6 +1958,7 @@ class NullableEqualityComparer[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectComparer[T](Comparer[T], IComparer[T], IComparer):
     """"""
     def __init__(self) -> None:
@@ -1921,6 +1978,7 @@ class ObjectComparer[T](Comparer[T], IComparer[T], IComparer):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqualityComparer):
     """"""
     def __init__(self) -> None:
@@ -1948,6 +2006,7 @@ class ObjectEqualityComparer[T](EqualityComparer[T], IEqualityComparer[T], IEqua
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Queue[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnumerable):
     """"""
     @overload
@@ -2004,6 +2063,7 @@ class Queue[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         """"""
     def __len__(self) -> int:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[T](ValueType, IEnumerator[T], IEnumerator, IDisposable):
         """"""
         @property
@@ -2024,6 +2084,7 @@ class Queue[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RandomizedObjectEqualityComparer(Object, IEqualityComparer, IWellKnownStringEqualityComparer):
     """"""
     def __init__(self) -> None:
@@ -2049,6 +2110,7 @@ class RandomizedObjectEqualityComparer(Object, IEqualityComparer, IWellKnownStri
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RandomizedStringEqualityComparer(
     Object, IEqualityComparer[String], IEqualityComparer, IWellKnownStringEqualityComparer
 ):
@@ -2082,6 +2144,7 @@ class RandomizedStringEqualityComparer(
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SByteEnumEqualityComparer[T](
     EnumEqualityComparer[T], IEqualityComparer[T], IEqualityComparer, ISerializable
 ):
@@ -2117,6 +2180,7 @@ class SByteEnumEqualityComparer[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ShortEnumEqualityComparer[T](
     EnumEqualityComparer[T], IEqualityComparer[T], IEqualityComparer, ISerializable
 ):
@@ -2152,6 +2216,7 @@ class ShortEnumEqualityComparer[T](
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortedDictionary[TKey, TValue](
     Object,
     ICollection[KeyValuePair[TKey, TValue]],
@@ -2287,6 +2352,7 @@ class SortedDictionary[TKey, TValue](
     @overload
     def __setitem__(self, key: object, value: object) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[TKey, TValue](
         ValueType,
         IEnumerator[KeyValuePair[TKey, TValue]],
@@ -2322,6 +2388,7 @@ class SortedDictionary[TKey, TValue](
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class KeyCollection[TKey, TValue](
         Object,
         ICollection[TKey],
@@ -2379,6 +2446,7 @@ class SortedDictionary[TKey, TValue](
             """"""
         def __len__(self) -> int:
             """"""
+        # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
         class Enumerator[TKey, TValue](ValueType, IEnumerator[TKey], IEnumerator, IDisposable):
             """"""
             @property
@@ -2399,6 +2467,7 @@ class SortedDictionary[TKey, TValue](
             def ToString(self) -> str:
                 """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class ValueCollection[TKey, TValue](
         Object,
         ICollection[TValue],
@@ -2456,6 +2525,7 @@ class SortedDictionary[TKey, TValue](
             """"""
         def __len__(self) -> int:
             """"""
+        # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
         class Enumerator[TKey, TValue](ValueType, IEnumerator[TValue], IEnumerator, IDisposable):
             """"""
             @property
@@ -2476,6 +2546,7 @@ class SortedDictionary[TKey, TValue](
             def ToString(self) -> str:
                 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortedList[TKey, TValue](
     Object,
     ICollection[KeyValuePair[TKey, TValue]],
@@ -2633,6 +2704,7 @@ class SortedList[TKey, TValue](
     def __setitem__(self, key: object, value: object) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortedSetDebugView[T](Object):
     """"""
     def __init__(self, set: SortedSet[T]) -> None:
@@ -2649,6 +2721,7 @@ class SortedSetDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortedSetEqualityComparer[T](Object, IEqualityComparer[SortedSet[T]]):
     """"""
     @overload
@@ -2682,6 +2755,7 @@ class SortedSetEqualityComparer[T](Object, IEqualityComparer[SortedSet[T]]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SortedSet[T](
     Object,
     ICollection[T],
@@ -2807,6 +2881,7 @@ class SortedSet[T](
         """"""
     def __len__(self) -> int:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[T](
         ValueType, IEnumerator[T], IEnumerator, IDeserializationCallback, ISerializable, IDisposable
     ):
@@ -2833,6 +2908,7 @@ class SortedSet[T](
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SparseArrayBuilder[T](ValueType):
     """"""
     def __init__(self, initialize: bool) -> None:
@@ -2866,6 +2942,7 @@ class SparseArrayBuilder[T](ValueType):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Stack[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnumerable):
     """"""
     @overload
@@ -2922,6 +2999,7 @@ class Stack[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         """"""
     def __len__(self) -> int:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[T](ValueType, IEnumerator[T], IEnumerator, IDisposable):
         """"""
         @property
@@ -2942,6 +3020,7 @@ class Stack[T](Object, IEnumerable[T], IReadOnlyCollection[T], ICollection, IEnu
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class System_CollectionDebugView[T](Object):
     """"""
     def __init__(self, collection: ICollection[T]) -> None:
@@ -2958,6 +3037,7 @@ class System_CollectionDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class System_DictionaryDebugView[K, V](Object):
     """"""
     def __init__(self, dictionary: IDictionary[K, V]) -> None:
@@ -2974,6 +3054,7 @@ class System_DictionaryDebugView[K, V](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class System_DictionaryKeyCollectionDebugView[TKey, TValue](Object):
     """"""
     def __init__(self, collection: ICollection[TKey]) -> None:
@@ -2990,6 +3071,7 @@ class System_DictionaryKeyCollectionDebugView[TKey, TValue](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class System_DictionaryValueCollectionDebugView[TKey, TValue](Object):
     """"""
     def __init__(self, collection: ICollection[TValue]) -> None:
@@ -3006,6 +3088,7 @@ class System_DictionaryValueCollectionDebugView[TKey, TValue](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class System_QueueDebugView[T](Object):
     """"""
     def __init__(self, queue: Queue[T]) -> None:
@@ -3022,6 +3105,7 @@ class System_QueueDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class System_StackDebugView[T](Object):
     """"""
     def __init__(self, stack: Stack[T]) -> None:
@@ -3038,6 +3122,7 @@ class System_StackDebugView[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TreeRotation(Enum):
     """"""
 
@@ -3050,6 +3135,7 @@ class TreeRotation(Enum):
     LeftRightRotation: TreeRotation = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TreeSet[T](
     SortedSet[T],
     ICollection[T],
@@ -3168,6 +3254,7 @@ class TreeSet[T](
         """"""
     def __len__(self) -> int:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Enumerator[T](
         ValueType, IEnumerator[T], IEnumerator, IDeserializationCallback, ISerializable, IDisposable
     ):

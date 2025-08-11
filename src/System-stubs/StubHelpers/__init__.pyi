@@ -9,6 +9,7 @@ from System import Type
 from System import ValueType
 from System.Runtime.InteropServices import SafeHandle
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AnsiBSTRMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -20,6 +21,7 @@ class AnsiBSTRMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AnsiCharMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -31,6 +33,7 @@ class AnsiCharMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsAnyMarshaler(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -42,6 +45,7 @@ class AsAnyMarshaler(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BSTRMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -53,6 +57,7 @@ class BSTRMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CSTRMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -64,6 +69,7 @@ class CSTRMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CleanupWorkList(Object):
     """"""
     def __init__(self) -> None:
@@ -81,6 +87,7 @@ class CleanupWorkList(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CleanupWorkListElement(Object):
     """"""
 
@@ -99,6 +106,7 @@ class CleanupWorkListElement(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DateMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -110,6 +118,7 @@ class DateMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DateTimeNative(ValueType):
     """"""
 
@@ -124,6 +133,7 @@ class DateTimeNative(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DateTimeOffsetMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -135,6 +145,7 @@ class DateTimeOffsetMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventArgsMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -146,6 +157,7 @@ class EventArgsMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HResultExceptionMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -157,6 +169,7 @@ class HResultExceptionMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HStringMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -168,6 +181,7 @@ class HStringMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InterfaceMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -179,6 +193,7 @@ class InterfaceMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KeyValuePairMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -190,6 +205,7 @@ class KeyValuePairMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MngdHiddenLengthArrayMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -201,6 +217,7 @@ class MngdHiddenLengthArrayMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MngdNativeArrayMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -212,6 +229,7 @@ class MngdNativeArrayMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MngdRefCustomMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -223,6 +241,7 @@ class MngdRefCustomMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MngdSafeArrayMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -234,6 +253,7 @@ class MngdSafeArrayMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NativeVariant(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -245,6 +265,7 @@ class NativeVariant(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NullableMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -256,6 +277,7 @@ class NullableMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -267,6 +289,7 @@ class ObjectMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StubHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -278,6 +301,7 @@ class StubHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemTypeMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -289,6 +313,7 @@ class SystemTypeMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeKind(Enum):
     """"""
 
@@ -299,6 +324,7 @@ class TypeKind(Enum):
     Projection: TypeKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeNameNative(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -310,6 +336,7 @@ class TypeNameNative(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UTF8BufferMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -321,6 +348,7 @@ class UTF8BufferMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UTF8Marshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -332,6 +360,7 @@ class UTF8Marshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UriMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -343,6 +372,7 @@ class UriMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VBByValStrMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -354,6 +384,7 @@ class VBByValStrMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ValueClassMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -365,6 +396,7 @@ class ValueClassMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WSTRBufferMarshaler(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -376,6 +408,7 @@ class WSTRBufferMarshaler(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WinRTTypeNameConverter(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

@@ -45,6 +45,7 @@ from System.Security.Cryptography.X509Certificates import X509Certificate
 from System.Security.Permissions import FileIOPermissionAccess
 from System.Security.Permissions import StrongNamePublicKeyBlob
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AllMembershipCondition(
     Object,
     IConstantMembershipCondition,
@@ -85,6 +86,7 @@ class AllMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AppDomainEvidenceFactory(Object, IRuntimeEvidenceFactory):
     """"""
     @property
@@ -103,6 +105,7 @@ class AppDomainEvidenceFactory(Object, IRuntimeEvidenceFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationDirectory(EvidenceBase):
     """"""
     def __init__(self, name: str) -> None:
@@ -123,6 +126,7 @@ class ApplicationDirectory(EvidenceBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationDirectoryMembershipCondition(
     Object,
     IConstantMembershipCondition,
@@ -163,6 +167,7 @@ class ApplicationDirectoryMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationSecurityInfo(Object):
     """"""
     def __init__(self, activationContext: ActivationContext) -> None:
@@ -196,6 +201,7 @@ class ApplicationSecurityInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationSecurityManager(ABC, Object):
     """"""
     @classmethod
@@ -220,6 +226,7 @@ class ApplicationSecurityManager(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationTrust(EvidenceBase, ISecurityEncodable):
     """"""
     @overload
@@ -276,6 +283,7 @@ class ApplicationTrust(EvidenceBase, ISecurityEncodable):
     def ToXml(self) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationTrustCollection(Object, ICollection, IEnumerable):
     """"""
     @property
@@ -353,6 +361,7 @@ class ApplicationTrustCollection(Object, ICollection, IEnumerable):
     def __getitem__(self, appFullName: str) -> ApplicationTrust:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ApplicationTrustEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -371,6 +380,7 @@ class ApplicationTrustEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ApplicationVersionMatch(Enum):
     """"""
 
@@ -379,6 +389,7 @@ class ApplicationVersionMatch(Enum):
     MatchAllVersions: ApplicationVersionMatch = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssemblyEvidenceFactory(Object, IRuntimeEvidenceFactory):
     """"""
     @property
@@ -397,6 +408,7 @@ class AssemblyEvidenceFactory(Object, IRuntimeEvidenceFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeConnectAccess(Object):
     """"""
 
@@ -431,6 +443,7 @@ class CodeConnectAccess(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeGroup(ABC, Object):
     """"""
     @property
@@ -502,6 +515,7 @@ class CodeGroup(ABC, Object):
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeGroupPositionMarker(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -513,6 +527,7 @@ class CodeGroupPositionMarker(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeGroupStack(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -524,6 +539,7 @@ class CodeGroupStack(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CodeGroupStackFrame(Object):
     """"""
     def __init__(self) -> None:
@@ -537,6 +553,7 @@ class CodeGroupStackFrame(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ConfigId(Enum):
     """"""
 
@@ -549,6 +566,7 @@ class ConfigId(Enum):
     EnterprisePolicyLevel: ConfigId = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Evidence(Object, ICollection, IEnumerable):
     """"""
     @overload
@@ -623,6 +641,7 @@ class Evidence(Object, ICollection, IEnumerable):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EvidenceBase(ABC, Object):
     """"""
     def Clone(self) -> EvidenceBase:
@@ -636,6 +655,7 @@ class EvidenceBase(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EvidenceTypeDescriptor(Object):
     """"""
     def __init__(self) -> None:
@@ -671,6 +691,7 @@ class EvidenceTypeDescriptor(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EvidenceTypeGenerated(Enum):
     """"""
 
@@ -693,6 +714,7 @@ class EvidenceTypeGenerated(Enum):
     Zone: EvidenceTypeGenerated = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
     """"""
     def __init__(
@@ -770,6 +792,7 @@ class FileCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FirstMatchCodeGroup(CodeGroup):
     """"""
     def __init__(self, membershipCondition: IMembershipCondition, policy: PolicyStatement) -> None:
@@ -843,6 +866,7 @@ class FirstMatchCodeGroup(CodeGroup):
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GacInstalled(EvidenceBase, IIdentityPermissionFactory):
     """"""
     def __init__(self) -> None:
@@ -862,6 +886,7 @@ class GacInstalled(EvidenceBase, IIdentityPermissionFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GacMembershipCondition(
     Object,
     IConstantMembershipCondition,
@@ -902,6 +927,7 @@ class GacMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Hash(EvidenceBase, ISerializable):
     """"""
     def __init__(self, assembly: Assembly) -> None:
@@ -939,6 +965,7 @@ class Hash(EvidenceBase, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HashMembershipCondition(
     Object,
     IDeserializationCallback,
@@ -994,6 +1021,7 @@ class HashMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IApplicationTrustManager(ABC, ISecurityEncodable):
     """"""
     def DetermineApplicationTrust(
@@ -1005,9 +1033,11 @@ class IApplicationTrustManager(ABC, ISecurityEncodable):
     def ToXml(self) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IConstantMembershipCondition(ABC):
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDelayEvaluatedEvidence(ABC):
     """"""
     @property
@@ -1019,11 +1049,13 @@ class IDelayEvaluatedEvidence(ABC):
     def MarkUsed(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IIdentityPermissionFactory(ABC):
     """"""
     def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ILegacyEvidenceAdapter(ABC):
     """"""
     @property
@@ -1033,6 +1065,7 @@ class ILegacyEvidenceAdapter(ABC):
     def EvidenceType(self) -> Type:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IMembershipCondition(ABC, ISecurityEncodable, ISecurityPolicyEncodable):
     """"""
     def Check(self, evidence: Evidence) -> bool:
@@ -1056,6 +1089,7 @@ class IMembershipCondition(ABC, ISecurityEncodable, ISecurityPolicyEncodable):
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IReportMatchMembershipCondition(
     ABC, IMembershipCondition, ISecurityEncodable, ISecurityPolicyEncodable
 ):
@@ -1085,6 +1119,7 @@ class IReportMatchMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IRuntimeEvidenceFactory(ABC):
     """"""
     @property
@@ -1095,11 +1130,13 @@ class IRuntimeEvidenceFactory(ABC):
     def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IUnionSemanticCodeGroup(ABC):
     """"""
     def InternalResolve(self, evidence: Evidence) -> PolicyStatement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LegacyEvidenceList(
     EvidenceBase, IEnumerable[EvidenceBase], IEnumerable, ILegacyEvidenceAdapter
 ):
@@ -1129,6 +1166,7 @@ class LegacyEvidenceList(
     def __iter__(self) -> Iterator[EvidenceBase]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LegacyEvidenceWrapper(EvidenceBase, ILegacyEvidenceAdapter):
     """"""
     @property
@@ -1148,6 +1186,7 @@ class LegacyEvidenceWrapper(EvidenceBase, ILegacyEvidenceAdapter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
     """"""
 
@@ -1234,6 +1273,7 @@ class NetCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PEFileEvidenceFactory(Object, IRuntimeEvidenceFactory):
     """"""
     @property
@@ -1252,6 +1292,7 @@ class PEFileEvidenceFactory(Object, IRuntimeEvidenceFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PermissionRequestEvidence(EvidenceBase):
     """"""
     def __init__(
@@ -1280,6 +1321,7 @@ class PermissionRequestEvidence(EvidenceBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PolicyException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -1332,6 +1374,7 @@ class PolicyException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PolicyLevel(Object):
     """"""
     @property
@@ -1402,6 +1445,7 @@ class PolicyLevel(Object):
     def ToXml(self) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PolicyStatement(Object, ISecurityEncodable, ISecurityPolicyEncodable):
     """"""
     @overload
@@ -1446,6 +1490,7 @@ class PolicyStatement(Object, ISecurityEncodable, ISecurityPolicyEncodable):
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PolicyStatementAttribute(Enum):
     """"""
 
@@ -1458,6 +1503,7 @@ class PolicyStatementAttribute(Enum):
     All: PolicyStatementAttribute = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Publisher(EvidenceBase, IIdentityPermissionFactory):
     """"""
     def __init__(self, cert: X509Certificate) -> None:
@@ -1480,6 +1526,7 @@ class Publisher(EvidenceBase, IIdentityPermissionFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PublisherMembershipCondition(
     Object,
     IConstantMembershipCondition,
@@ -1525,6 +1572,7 @@ class PublisherMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Site(EvidenceBase, IIdentityPermissionFactory):
     """"""
     def __init__(self, name: str) -> None:
@@ -1550,6 +1598,7 @@ class Site(EvidenceBase, IIdentityPermissionFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SiteMembershipCondition(
     Object,
     IConstantMembershipCondition,
@@ -1595,6 +1644,7 @@ class SiteMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongName(EvidenceBase, IDelayEvaluatedEvidence, IIdentityPermissionFactory):
     """"""
     def __init__(self, blob: StrongNamePublicKeyBlob, name: str, version: Version) -> None:
@@ -1631,6 +1681,7 @@ class StrongName(EvidenceBase, IDelayEvaluatedEvidence, IIdentityPermissionFacto
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StrongNameMembershipCondition(
     Object,
     IConstantMembershipCondition,
@@ -1686,6 +1737,7 @@ class StrongNameMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TrustManagerContext(Object):
     """"""
     @overload
@@ -1733,6 +1785,7 @@ class TrustManagerContext(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TrustManagerUIContext(Enum):
     """"""
 
@@ -1743,6 +1796,7 @@ class TrustManagerUIContext(Enum):
     Run: TrustManagerUIContext = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnionCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
     """"""
     def __init__(self, membershipCondition: IMembershipCondition, policy: PolicyStatement) -> None:
@@ -1818,6 +1872,7 @@ class UnionCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Url(EvidenceBase, IIdentityPermissionFactory):
     """"""
     def __init__(self, name: str) -> None:
@@ -1840,6 +1895,7 @@ class Url(EvidenceBase, IIdentityPermissionFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UrlMembershipCondition(
     Object,
     IConstantMembershipCondition,
@@ -1885,6 +1941,7 @@ class UrlMembershipCondition(
     def ToXml(self, level: PolicyLevel) -> SecurityElement:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Zone(EvidenceBase, IIdentityPermissionFactory):
     """"""
     def __init__(self, zone: SecurityZone) -> None:
@@ -1910,6 +1967,7 @@ class Zone(EvidenceBase, IIdentityPermissionFactory):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ZoneMembershipCondition(
     Object,
     IConstantMembershipCondition,

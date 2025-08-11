@@ -40,11 +40,13 @@ from System.Security.Policy import Evidence
 from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class INormalizeForIsolatedStorage(ABC):
     """"""
     def Normalize(self) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorage(ABC, MarshalByRefObject):
     """"""
     @property
@@ -95,6 +97,7 @@ class IsolatedStorage(ABC, MarshalByRefObject):
     def __delitem__(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -147,6 +150,7 @@ class IsolatedStorageException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageFile(IsolatedStorage, IDisposable):
     """"""
     @property
@@ -327,6 +331,7 @@ class IsolatedStorageFile(IsolatedStorage, IDisposable):
     def __delitem__(self, scope: IsolatedStorageScope) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageFileEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -345,6 +350,7 @@ class IsolatedStorageFileEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageFileStream(FileStream, IDisposable):
     """"""
     @overload
@@ -538,6 +544,7 @@ class IsolatedStorageFileStream(FileStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageScope(Enum):
     """"""
 
@@ -556,12 +563,14 @@ class IsolatedStorageScope(Enum):
     Application: IsolatedStorageScope = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageSecurityOptions(Enum):
     """"""
 
     IncreaseQuotaForApplication: IsolatedStorageSecurityOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IsolatedStorageSecurityState(SecurityState):
     """"""
     @property
@@ -588,6 +597,7 @@ class IsolatedStorageSecurityState(SecurityState):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeIsolatedStorageFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -617,6 +627,7 @@ class SafeIsolatedStorageFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposab
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TwoLevelFileEnumerator(Object, IEnumerator):
     """"""
     def __init__(self, root: str) -> None:
@@ -637,6 +648,7 @@ class TwoLevelFileEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TwoPaths(Object):
     """"""
 
@@ -655,6 +667,7 @@ class TwoPaths(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class __HResults(ABC, Object):
     """"""
 

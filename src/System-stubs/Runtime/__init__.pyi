@@ -10,9 +10,11 @@ from System import IntPtr
 from System import Object
 from System import Type
 from System import UInt32
-from System.Runtime.ConstrainedExecution import CriticalFinalizerObject
-from System.Runtime.InteropServices import _Attribute
 
+from .ConstrainedExecution import CriticalFinalizerObject
+from .InteropServices import _Attribute
+
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AssemblyTargetedPatchBandAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, targetedPatchBand: str) -> None:
@@ -56,6 +58,7 @@ class AssemblyTargetedPatchBandAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class GCLargeObjectHeapCompactionMode(Enum):
     """"""
 
@@ -64,6 +67,7 @@ class GCLargeObjectHeapCompactionMode(Enum):
     CompactOnce: GCLargeObjectHeapCompactionMode = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class GCLatencyMode(Enum):
     """"""
 
@@ -78,6 +82,7 @@ class GCLatencyMode(Enum):
     NoGCRegion: GCLatencyMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GCSettings(ABC, Object):
     """"""
     @classmethod
@@ -107,6 +112,7 @@ class GCSettings(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MemoryFailPoint(CriticalFinalizerObject, IDisposable):
     """"""
     def __init__(self, sizeInMegabytes: int) -> None:
@@ -122,6 +128,7 @@ class MemoryFailPoint(CriticalFinalizerObject, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProfileOptimization(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -139,6 +146,7 @@ class ProfileOptimization(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TargetedPatchingOptOutAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, reason: str) -> None:

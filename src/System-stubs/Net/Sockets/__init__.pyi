@@ -52,6 +52,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AcceptAsyncResult(ContextAwareResult, IAsyncResult):
     """"""
     @property
@@ -80,6 +81,7 @@ type AcceptExDelegate = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AcceptOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
     @property
@@ -103,6 +105,7 @@ class AcceptOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AddressFamily(Enum):
     """"""
 
@@ -169,6 +172,7 @@ class AddressFamily(Enum):
     Unknown: AddressFamily = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AsyncEventBits(Enum):
     """"""
 
@@ -197,6 +201,7 @@ class AsyncEventBits(Enum):
     FdAllEvents: AsyncEventBits = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AsyncEventBitsPos(Enum):
     """"""
 
@@ -223,6 +228,7 @@ class AsyncEventBitsPos(Enum):
     FdMaxEvents: AsyncEventBitsPos = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BaseOverlappedAsyncResult(ContextAwareResult, IAsyncResult):
     """"""
     @property
@@ -246,6 +252,7 @@ class BaseOverlappedAsyncResult(ContextAwareResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConnectAsyncResult(ContextAwareResult, IAsyncResult):
     """"""
     @property
@@ -274,6 +281,7 @@ type ConnectExDelegate = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
     @property
@@ -302,6 +310,7 @@ type DisconnectExDelegate = Callable[[SafeCloseSocket, SafeHandle, int, int], bo
 type DisconnectExDelegate_Blocking = Callable[[IntPtr, IntPtr, int, int], bool]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DisconnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
     @property
@@ -325,6 +334,7 @@ class DisconnectOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DynamicWinsockMethods(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -348,6 +358,7 @@ type GetAcceptExSockaddrsDelegate = Callable[
 ]
 """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IOControlCode(Enum):
     """"""
 
@@ -420,6 +431,7 @@ class IOControlCode(Enum):
     AddressListSort: IOControlCode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPPacketInformation(ValueType):
     """"""
     @property
@@ -451,6 +463,7 @@ class IPPacketInformation(ValueType):
     def __ne__(self, other: IPPacketInformation) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IPProtectionLevel(Enum):
     """"""
 
@@ -463,6 +476,7 @@ class IPProtectionLevel(Enum):
     Unspecified: IPProtectionLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IPv6MulticastOption(Object):
     """"""
     @overload
@@ -490,6 +504,7 @@ class IPv6MulticastOption(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IoctlSocketConstants(ABC, Object):
     """"""
 
@@ -510,6 +525,7 @@ class IoctlSocketConstants(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LingerOption(Object):
     """"""
     def __init__(self, enable: bool, seconds: int) -> None:
@@ -533,6 +549,7 @@ class LingerOption(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MulticastOption(Object):
     """"""
     @overload
@@ -568,6 +585,7 @@ class MulticastOption(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MultipleConnectAsync(ABC, Object):
     """"""
     def Cancel(self) -> None:
@@ -583,6 +601,7 @@ class MultipleConnectAsync(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MultipleSocketMultipleConnectAsync(MultipleConnectAsync):
     """"""
     def __init__(self, socketType: SocketType, protocolType: ProtocolType) -> None:
@@ -600,6 +619,7 @@ class MultipleSocketMultipleConnectAsync(MultipleConnectAsync):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkEvents(ValueType):
     """"""
 
@@ -616,6 +636,7 @@ class NetworkEvents(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NetworkStream(Stream, IDisposable):
     """"""
     @overload
@@ -751,6 +772,7 @@ class NetworkStream(Stream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
     @property
@@ -774,6 +796,7 @@ class OverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OverlappedCache(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -785,6 +808,7 @@ class OverlappedCache(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ProtocolFamily(Enum):
     """"""
 
@@ -851,6 +875,7 @@ class ProtocolFamily(Enum):
     Unknown: ProtocolFamily = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ProtocolType(Enum):
     """"""
 
@@ -905,6 +930,7 @@ class ProtocolType(Enum):
     Unknown: ProtocolType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReceiveFromOverlappedAsyncResult(OverlappedAsyncResult, IAsyncResult):
     """"""
     @property
@@ -928,6 +954,7 @@ class ReceiveFromOverlappedAsyncResult(OverlappedAsyncResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ReceiveMessageOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
     @property
@@ -951,6 +978,7 @@ class ReceiveMessageOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResul
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SelectMode(Enum):
     """"""
 
@@ -961,6 +989,7 @@ class SelectMode(Enum):
     SelectError: SelectMode = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SendPacketsElement(Object):
     """"""
     @overload
@@ -1007,6 +1036,7 @@ class SendPacketsElement(Object):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SingleSocketMultipleConnectAsync(MultipleConnectAsync):
     """"""
     def __init__(self, socket: Socket, userSocket: bool) -> None:
@@ -1024,6 +1054,7 @@ class SingleSocketMultipleConnectAsync(MultipleConnectAsync):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Socket(Object, IDisposable):
     """"""
     @overload
@@ -1612,6 +1643,7 @@ class Socket(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SocketAsyncEventArgs(EventArgs, IDisposable):
     """"""
     def __init__(self) -> None:
@@ -1716,6 +1748,7 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
     Completed: EventType[EventHandler[SocketAsyncEventArgs]] = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketAsyncOperation(Enum):
     """"""
 
@@ -1740,6 +1773,7 @@ class SocketAsyncOperation(Enum):
     SendTo: SocketAsyncOperation = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketClientAccessPolicyProtocol(Enum):
     """"""
 
@@ -1748,6 +1782,7 @@ class SocketClientAccessPolicyProtocol(Enum):
     Http: SocketClientAccessPolicyProtocol = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketError(Enum):
     """"""
 
@@ -1846,6 +1881,7 @@ class SocketError(Enum):
     SocketError: SocketError = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SocketException(Win32Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -1904,6 +1940,7 @@ class SocketException(Win32Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketFlags(Enum):
     """"""
 
@@ -1928,6 +1965,7 @@ class SocketFlags(Enum):
     Partial: SocketFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SocketInformation(ValueType):
     """"""
     @property
@@ -1949,6 +1987,7 @@ class SocketInformation(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketInformationOptions(Enum):
     """"""
 
@@ -1961,6 +2000,7 @@ class SocketInformationOptions(Enum):
     UseOnlyOverlappedIO: SocketInformationOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketOptionLevel(Enum):
     """"""
 
@@ -1975,6 +2015,7 @@ class SocketOptionLevel(Enum):
     Socket: SocketOptionLevel = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketOptionName(Enum):
     """"""
 
@@ -2071,6 +2112,7 @@ class SocketOptionName(Enum):
     ExclusiveAddressUse: SocketOptionName = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SocketReceiveFromResult(ValueType):
     """"""
 
@@ -2087,6 +2129,7 @@ class SocketReceiveFromResult(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SocketReceiveMessageFromResult(ValueType):
     """"""
 
@@ -2107,6 +2150,7 @@ class SocketReceiveMessageFromResult(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketShutdown(Enum):
     """"""
 
@@ -2117,6 +2161,7 @@ class SocketShutdown(Enum):
     Both: SocketShutdown = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SocketTaskExtensions(ABC, Object):
     """"""
     @classmethod
@@ -2199,6 +2244,7 @@ class SocketTaskExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SocketType(Enum):
     """"""
 
@@ -2215,6 +2261,7 @@ class SocketType(Enum):
     Unknown: SocketType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TcpClient(Object, IDisposable):
     """"""
     @overload
@@ -2328,6 +2375,7 @@ class TcpClient(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TcpListener(Object):
     """"""
     @overload
@@ -2390,6 +2438,7 @@ class TcpListener(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TimeValue(ValueType):
     """"""
 
@@ -2406,6 +2455,7 @@ class TimeValue(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TransmitFileOptions(Enum):
     """"""
 
@@ -2422,6 +2472,7 @@ class TransmitFileOptions(Enum):
     UseKernelApc: TransmitFileOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TransmitFileOverlappedAsyncResult(BaseOverlappedAsyncResult, IAsyncResult):
     """"""
     @property
@@ -2450,6 +2501,7 @@ type TransmitPacketsDelegate = Callable[
 ]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UdpClient(Object, IDisposable):
     """"""
     @overload
@@ -2599,6 +2651,7 @@ class UdpClient(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UdpReceiveResult(ValueType, IEquatable[UdpReceiveResult]):
     """"""
     def __init__(self, buffer: Array[int], remoteEndPoint: IPEndPoint) -> None:

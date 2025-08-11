@@ -13,6 +13,7 @@ from System.Reflection.Metadata import HandleKind
 from System.Reflection.Metadata import MethodDebugInformationHandle
 from System.Reflection.Metadata import MethodDefinitionHandle
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlobHeap(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -26,6 +27,7 @@ class BlobHeap(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class COR20Constants(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -37,6 +39,7 @@ class COR20Constants(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DocumentTableReader(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -48,6 +51,7 @@ class DocumentTableReader(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HandleType(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -59,6 +63,7 @@ class HandleType(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HeapHandleType(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -70,6 +75,7 @@ class HeapHandleType(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HeapSizeFlag(Enum):
     """"""
 
@@ -84,6 +90,7 @@ class HeapSizeFlag(Enum):
     DeletedMarks: HeapSizeFlag = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HeapSizes(Enum):
     """"""
 
@@ -96,6 +103,7 @@ class HeapSizes(Enum):
     ExtraData: HeapSizes = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataStreamConstants(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -107,6 +115,7 @@ class MetadataStreamConstants(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MetadataStreamKind(Enum):
     """"""
 
@@ -117,6 +126,7 @@ class MetadataStreamKind(Enum):
     Uncompressed: MetadataStreamKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataTokens(ABC, Object):
     """"""
 
@@ -149,6 +159,7 @@ class MetadataTokens(ABC, Object):
     def TryGetTableIndex(cls, type: HandleKind, index: TableIndex) -> tuple[bool, TableIndex]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodDebugInformationTableReader(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -160,6 +171,7 @@ class MethodDebugInformationTableReader(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StreamHeader(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -171,6 +183,7 @@ class StreamHeader(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringHandleType(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -182,6 +195,7 @@ class StringHandleType(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class StringKind(Enum):
     """"""
 
@@ -194,6 +208,7 @@ class StringKind(Enum):
     WinRTPrefixed: StringKind = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TableIndex(Enum):
     """"""
 
@@ -304,6 +319,7 @@ class TableIndex(Enum):
     CustomDebugInformation: TableIndex = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TableMask(Enum):
     """"""
 
@@ -418,6 +434,7 @@ class TableMask(Enum):
     AllTables: TableMask = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TokenTypeIds(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

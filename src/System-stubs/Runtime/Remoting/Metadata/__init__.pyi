@@ -11,6 +11,7 @@ from System import Type
 from System import UInt32
 from System.Runtime.InteropServices import _Attribute
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingCachedData(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -22,6 +23,7 @@ class RemotingCachedData(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingFieldCachedData(RemotingCachedData):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -33,6 +35,7 @@ class RemotingFieldCachedData(RemotingCachedData):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingMethodCachedData(RemotingCachedData):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -44,6 +47,7 @@ class RemotingMethodCachedData(RemotingCachedData):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingParameterCachedData(RemotingCachedData):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -55,6 +59,7 @@ class RemotingParameterCachedData(RemotingCachedData):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RemotingTypeCachedData(RemotingCachedData):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -66,6 +71,7 @@ class RemotingTypeCachedData(RemotingCachedData):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -121,6 +127,7 @@ class SoapAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapFieldAttribute(SoapAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -188,6 +195,7 @@ class SoapFieldAttribute(SoapAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapMethodAttribute(SoapAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -263,6 +271,7 @@ class SoapMethodAttribute(SoapAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SoapOption(Enum):
     """"""
 
@@ -279,6 +288,7 @@ class SoapOption(Enum):
     Option2: SoapOption = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapParameterAttribute(SoapAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -334,6 +344,7 @@ class SoapParameterAttribute(SoapAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SoapTypeAttribute(SoapAttribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -414,6 +425,7 @@ class SoapTypeAttribute(SoapAttribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class XmlFieldOrderOption(Enum):
     """"""
 

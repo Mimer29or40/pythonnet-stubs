@@ -8,6 +8,7 @@ from System import Type
 from System.Runtime.InteropServices.WindowsRuntime import RuntimeClass
 from System.Runtime.Remoting import ObjRef
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AsyncCausalityStatus(Enum):
     """"""
 
@@ -20,6 +21,7 @@ class AsyncCausalityStatus(Enum):
     Error: AsyncCausalityStatus = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CausalityRelation(Enum):
     """"""
 
@@ -34,6 +36,7 @@ class CausalityRelation(Enum):
     Error: CausalityRelation = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CausalitySource(Enum):
     """"""
 
@@ -44,6 +47,7 @@ class CausalitySource(Enum):
     System: CausalitySource = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CausalitySynchronousWork(Enum):
     """"""
 
@@ -54,6 +58,7 @@ class CausalitySynchronousWork(Enum):
     Execution: CausalitySynchronousWork = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CausalityTraceLevel(Enum):
     """"""
 
@@ -64,6 +69,7 @@ class CausalityTraceLevel(Enum):
     Verbose: CausalityTraceLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IAsyncCausalityTracerStatics(ABC):
     """"""
     def TraceOperationCompletion(
@@ -111,6 +117,7 @@ class IAsyncCausalityTracerStatics(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITracingStatusChangedEventArgs(ABC):
     """"""
     @property
@@ -120,6 +127,7 @@ class ITracingStatusChangedEventArgs(ABC):
     def TraceLevel(self) -> CausalityTraceLevel:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TracingStatusChangedEventArgs(RuntimeClass, ITracingStatusChangedEventArgs):
     """"""
     def __init__(self) -> None:

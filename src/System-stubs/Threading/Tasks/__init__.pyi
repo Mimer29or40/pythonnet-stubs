@@ -43,7 +43,6 @@ from System.Diagnostics.Tracing import EventSource
 from System.Diagnostics.Tracing import EventSourceOptions
 from System.Diagnostics.Tracing import EventSourceSettings
 from System.Diagnostics.Tracing import EventTask
-from System.Diagnostics.Tracing import T
 from System.Reflection import MethodBase
 from System.Runtime.CompilerServices import ConfiguredTaskAwaitable
 from System.Runtime.CompilerServices import ICriticalNotifyCompletion
@@ -64,6 +63,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AsyncCausalityStatus(Enum):
     """"""
 
@@ -76,6 +76,7 @@ class AsyncCausalityStatus(Enum):
     Error: AsyncCausalityStatus = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AsyncCausalityTracer(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -87,6 +88,7 @@ class AsyncCausalityTracer(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AwaitTaskContinuation(TaskContinuation, IThreadPoolWorkItem):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -102,6 +104,7 @@ class AwaitTaskContinuation(TaskContinuation, IThreadPoolWorkItem):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BeginEndAwaitableAdapter(Object, ICriticalNotifyCompletion, INotifyCompletion):
     """"""
 
@@ -129,6 +132,7 @@ class BeginEndAwaitableAdapter(Object, ICriticalNotifyCompletion, INotifyComplet
     def UnsafeOnCompleted(self, continuation: Action) -> None:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CausalityRelation(Enum):
     """"""
 
@@ -143,6 +147,7 @@ class CausalityRelation(Enum):
     Error: CausalityRelation = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CausalitySynchronousWork(Enum):
     """"""
 
@@ -153,6 +158,7 @@ class CausalitySynchronousWork(Enum):
     Execution: CausalitySynchronousWork = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CausalityTraceLevel(Enum):
     """"""
 
@@ -163,6 +169,7 @@ class CausalityTraceLevel(Enum):
     Verbose: CausalityTraceLevel = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompletionActionInvoker(Object, IThreadPoolWorkItem):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -178,6 +185,7 @@ class CompletionActionInvoker(Object, IThreadPoolWorkItem):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ConcurrentExclusiveSchedulerPair(Object):
     """"""
     @overload
@@ -214,6 +222,7 @@ class ConcurrentExclusiveSchedulerPair(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     Task[TResult], IThreadPoolWorkItem, IAsyncResult, IDisposable
 ):
@@ -574,6 +583,7 @@ class ContinuationResultTaskFromResultTask[TAntecedentResult, TResult](
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContinuationResultTaskFromTask[TResult](
     Task[TResult], IThreadPoolWorkItem, IAsyncResult, IDisposable
 ):
@@ -934,6 +944,7 @@ class ContinuationResultTaskFromTask[TResult](
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContinuationTaskFromResultTask[TAntecedentResult](
     Task, IThreadPoolWorkItem, IAsyncResult, IDisposable
 ):
@@ -1151,6 +1162,7 @@ class ContinuationTaskFromResultTask[TAntecedentResult](
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
     def __init__(
@@ -1366,6 +1378,7 @@ class ContinuationTaskFromTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposa
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericDelegateCache[TAntecedentResult, TResult](ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1377,6 +1390,7 @@ class GenericDelegateCache[TAntecedentResult, TResult](ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IProducerConsumerQueue[T](ABC, IEnumerable[T], IEnumerable):
     """"""
     @property
@@ -1398,11 +1412,13 @@ class IProducerConsumerQueue[T](ABC, IEnumerable[T], IEnumerable):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITaskCompletionAction(ABC):
     """"""
     def Invoke(self, completingTask: Task) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IndexRange(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1414,6 +1430,7 @@ class IndexRange(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InternalTaskOptions(Enum):
     """"""
 
@@ -1436,6 +1453,7 @@ class InternalTaskOptions(Enum):
     InternalOptionsMask: InternalTaskOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MultiProducerMultiConsumerQueue[T](
     ConcurrentQueue[T],
     IProducerConsumerCollection[T],
@@ -1495,6 +1513,7 @@ class MultiProducerMultiConsumerQueue[T](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PaddingFor32(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1506,6 +1525,7 @@ class PaddingFor32(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PaddingHelpers(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1517,6 +1537,7 @@ class PaddingHelpers(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Parallel(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1810,6 +1831,7 @@ class Parallel(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
     @property
@@ -2015,6 +2037,7 @@ class ParallelForReplicaTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposabl
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
     @property
@@ -2220,6 +2243,7 @@ class ParallelForReplicatingTask(Task, IThreadPoolWorkItem, IAsyncResult, IDispo
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelLoopResult(ValueType):
     """"""
     @property
@@ -2237,6 +2261,7 @@ class ParallelLoopResult(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelLoopState(Object):
     """"""
     @property
@@ -2264,6 +2289,7 @@ class ParallelLoopState(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelLoopState32(ParallelLoopState):
     """"""
     @property
@@ -2291,6 +2317,7 @@ class ParallelLoopState32(ParallelLoopState):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelLoopState64(ParallelLoopState):
     """"""
     @property
@@ -2318,6 +2345,7 @@ class ParallelLoopState64(ParallelLoopState):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelLoopStateFlags(Object):
     """"""
     def __init__(self) -> None:
@@ -2331,6 +2359,7 @@ class ParallelLoopStateFlags(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelLoopStateFlags32(ParallelLoopStateFlags):
     """"""
     def __init__(self) -> None:
@@ -2344,6 +2373,7 @@ class ParallelLoopStateFlags32(ParallelLoopStateFlags):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelLoopStateFlags64(ParallelLoopStateFlags):
     """"""
     def __init__(self) -> None:
@@ -2357,6 +2387,7 @@ class ParallelLoopStateFlags64(ParallelLoopStateFlags):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ParallelOptions(Object):
     """"""
     def __init__(self) -> None:
@@ -2385,6 +2416,7 @@ class ParallelOptions(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RangeManager(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2396,6 +2428,7 @@ class RangeManager(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RangeWorker(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2407,6 +2440,7 @@ class RangeWorker(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Shared[T](Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2418,6 +2452,7 @@ class Shared[T](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SingleProducerSingleConsumerQueue[T](
     Object, IEnumerable[T], IEnumerable, IProducerConsumerQueue[T]
 ):
@@ -2455,6 +2490,7 @@ class SingleProducerSingleConsumerQueue[T](
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StackGuard(Object):
     """"""
     def __init__(self) -> None:
@@ -2468,6 +2504,7 @@ class StackGuard(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StandardTaskContinuation(TaskContinuation):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2479,6 +2516,7 @@ class StandardTaskContinuation(TaskContinuation):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SynchronizationContextAwaitTaskContinuation(AwaitTaskContinuation, IThreadPoolWorkItem):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -2494,6 +2532,7 @@ class SynchronizationContextAwaitTaskContinuation(AwaitTaskContinuation, IThread
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SynchronizationContextTaskScheduler(TaskScheduler):
     """"""
     @property
@@ -2511,6 +2550,7 @@ class SynchronizationContextTaskScheduler(TaskScheduler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemThreadingTasks_FutureDebugView[TResult](Object):
     """"""
     def __init__(self, task: Task[TResult]) -> None:
@@ -2545,6 +2585,7 @@ class SystemThreadingTasks_FutureDebugView[TResult](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemThreadingTasks_TaskDebugView(Object):
     """"""
     def __init__(self, task: Task) -> None:
@@ -2576,6 +2617,7 @@ class SystemThreadingTasks_TaskDebugView(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
     @overload
@@ -2972,6 +3014,7 @@ class Task(Object, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     def Yield(cls) -> YieldAwaitable:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskCanceledException(OperationCanceledException, _Exception, ISerializable):
     """"""
     @overload
@@ -3033,6 +3076,7 @@ class TaskCanceledException(OperationCanceledException, _Exception, ISerializabl
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskCompletionSource[TResult](Object):
     """"""
     @overload
@@ -3083,6 +3127,7 @@ class TaskCompletionSource[TResult](Object):
     def TrySetResult(self, result: TResult) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskContinuation(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3094,6 +3139,7 @@ class TaskContinuation(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TaskContinuationOptions(Enum):
     """"""
 
@@ -3128,6 +3174,7 @@ class TaskContinuationOptions(Enum):
     ExecuteSynchronously: TaskContinuationOptions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TaskCreationOptions(Enum):
     """"""
 
@@ -3146,6 +3193,7 @@ class TaskCreationOptions(Enum):
     RunContinuationsAsynchronously: TaskCreationOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskExceptionHolder(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3157,6 +3205,7 @@ class TaskExceptionHolder(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3176,6 +3225,7 @@ class TaskExtensions(ABC, Object):
     def Unwrap(cls, task: Task[Task]) -> Task:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskFactory(Object):
     """"""
     @overload
@@ -3762,6 +3812,7 @@ class TaskFactory(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskFactory[TResult](Object):
     """"""
     @overload
@@ -4083,6 +4134,7 @@ class TaskFactory[TResult](Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskScheduler(ABC, Object):
     """"""
     @classmethod
@@ -4113,6 +4165,7 @@ class TaskScheduler(ABC, Object):
     UnobservedTaskException: EventType[EventHandler[UnobservedTaskExceptionEventArgs]] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskSchedulerAwaitTaskContinuation(AwaitTaskContinuation, IThreadPoolWorkItem):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -4128,6 +4181,7 @@ class TaskSchedulerAwaitTaskContinuation(AwaitTaskContinuation, IThreadPoolWorkI
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskSchedulerException(Exception, _Exception, ISerializable):
     """"""
     @overload
@@ -4183,6 +4237,7 @@ class TaskSchedulerException(Exception, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TaskStatus(Enum):
     """"""
 
@@ -4203,6 +4258,7 @@ class TaskStatus(Enum):
     Faulted: TaskStatus = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TaskToApm(ABC, Object):
     """"""
     @classmethod
@@ -4220,6 +4276,7 @@ class TaskToApm(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     """"""
     @overload
@@ -4611,6 +4668,7 @@ class Task[TResult](Task, IThreadPoolWorkItem, IAsyncResult, IDisposable):
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ThreadPoolTaskScheduler(TaskScheduler):
     """"""
     @property
@@ -4628,6 +4686,7 @@ class ThreadPoolTaskScheduler(TaskScheduler):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TplEtwProvider(EventSource, IDisposable):
     """"""
 
@@ -4804,6 +4863,7 @@ class TplEtwProvider(EventSource, IDisposable):
         """"""
     EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
     """"""
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class ForkJoinOperationType(Enum):
         """"""
 
@@ -4814,6 +4874,7 @@ class TplEtwProvider(EventSource, IDisposable):
         ParallelForEach: TplEtwProvider.ForkJoinOperationType = ...
         """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Keywords(Object):
         """"""
 
@@ -4850,6 +4911,7 @@ class TplEtwProvider(EventSource, IDisposable):
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
     class TaskWaitBehavior(Enum):
         """"""
 
@@ -4858,6 +4920,7 @@ class TplEtwProvider(EventSource, IDisposable):
         Asynchronous: TplEtwProvider.TaskWaitBehavior = ...
         """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Tasks(Object):
         """"""
 
@@ -4890,6 +4953,7 @@ class TplEtwProvider(EventSource, IDisposable):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnobservedTaskExceptionEventArgs(EventArgs):
     """"""
     def __init__(self, exception: AggregateException) -> None:
@@ -4911,6 +4975,7 @@ class UnobservedTaskExceptionEventArgs(EventArgs):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnwrapPromise[TResult](
     Task[TResult], ITaskCompletionAction, IThreadPoolWorkItem, IAsyncResult, IDisposable
 ):
@@ -5265,6 +5330,7 @@ class UnwrapPromise[TResult](
     def Wait(self, timeout: TimeSpan) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VoidTaskResult(ValueType):
     """"""
     def Equals(self, obj: object) -> bool:

@@ -26,6 +26,7 @@ from System.Runtime.Serialization import StreamingContext
 from System.Security.Principal import IdentityReference
 from System.Security.Principal import SecurityIdentifier
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AccessControlActions(Enum):
     """"""
 
@@ -36,6 +37,7 @@ class AccessControlActions(Enum):
     Change: AccessControlActions = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AccessControlModification(Enum):
     """"""
 
@@ -52,6 +54,7 @@ class AccessControlModification(Enum):
     RemoveSpecific: AccessControlModification = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AccessControlSections(Enum):
     """"""
 
@@ -68,6 +71,7 @@ class AccessControlSections(Enum):
     All: AccessControlSections = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AccessControlType(Enum):
     """"""
 
@@ -76,6 +80,7 @@ class AccessControlType(Enum):
     Deny: AccessControlType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AccessRule(ABC, AuthorizationRule):
     """"""
     @property
@@ -102,6 +107,7 @@ class AccessRule(ABC, AuthorizationRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AccessRule[T](AccessRule):
     """"""
     @overload
@@ -157,6 +163,7 @@ class AccessRule[T](AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AceEnumerator(Object, IEnumerator):
     """"""
     @property
@@ -175,6 +182,7 @@ class AceEnumerator(Object, IEnumerator):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AceFlags(Enum):
     """"""
 
@@ -199,6 +207,7 @@ class AceFlags(Enum):
     AuditFlags: AceFlags = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AceQualifier(Enum):
     """"""
 
@@ -211,6 +220,7 @@ class AceQualifier(Enum):
     SystemAlarm: AceQualifier = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AceType(Enum):
     """"""
 
@@ -251,6 +261,7 @@ class AceType(Enum):
     MaxDefinedAceType: AceType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AuditFlags(Enum):
     """"""
 
@@ -261,6 +272,7 @@ class AuditFlags(Enum):
     Failure: AuditFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuditRule(ABC, AuthorizationRule):
     """"""
     @property
@@ -287,6 +299,7 @@ class AuditRule(ABC, AuthorizationRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuditRule[T](AuditRule):
     """"""
     @overload
@@ -342,6 +355,7 @@ class AuditRule[T](AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthorizationRule(ABC, Object):
     """"""
     @property
@@ -365,6 +379,7 @@ class AuthorizationRule(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AuthorizationRuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
     """"""
     def __init__(self) -> None:
@@ -406,6 +421,7 @@ class AuthorizationRuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerab
     def __getitem__(self, index: int) -> AuthorizationRule:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CommonAce(QualifiedAce):
     """"""
     def __init__(
@@ -480,6 +496,7 @@ class CommonAce(QualifiedAce):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CommonAcl(ABC, GenericAcl, ICollection, IEnumerable):
     """"""
     @property
@@ -542,6 +559,7 @@ class CommonAcl(ABC, GenericAcl, ICollection, IEnumerable):
     def __setitem__(self, index: int, value: GenericAce) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CommonObjectSecurity(ABC, ObjectSecurity):
     """"""
     @property
@@ -646,6 +664,7 @@ class CommonObjectSecurity(ABC, ObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CommonSecurityDescriptor(GenericSecurityDescriptor):
     """"""
     @overload
@@ -734,6 +753,7 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CompoundAce(KnownAce):
     """"""
     def __init__(
@@ -795,12 +815,14 @@ class CompoundAce(KnownAce):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CompoundAceType(Enum):
     """"""
 
     Impersonation: CompoundAceType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ControlFlags(Enum):
     """"""
 
@@ -839,6 +861,7 @@ class ControlFlags(Enum):
     SelfRelative: ControlFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptoKeyAccessRule(AccessRule):
     """"""
     @overload
@@ -878,6 +901,7 @@ class CryptoKeyAccessRule(AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptoKeyAuditRule(AuditRule):
     """"""
     @overload
@@ -915,6 +939,7 @@ class CryptoKeyAuditRule(AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CryptoKeyRights(Enum):
     """"""
 
@@ -951,6 +976,7 @@ class CryptoKeyRights(Enum):
     GenericRead: CryptoKeyRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CryptoKeySecurity(NativeObjectSecurity):
     """"""
     @overload
@@ -1083,6 +1109,7 @@ class CryptoKeySecurity(NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CustomAce(GenericAce):
     """"""
 
@@ -1133,6 +1160,7 @@ class CustomAce(GenericAce):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DirectoryObjectSecurity(ABC, ObjectSecurity):
     """"""
     @property
@@ -1265,6 +1293,7 @@ class DirectoryObjectSecurity(ABC, ObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DirectorySecurity(FileSystemSecurity):
     """"""
     @overload
@@ -1397,6 +1426,7 @@ class DirectorySecurity(FileSystemSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
     """"""
     @overload
@@ -1580,6 +1610,7 @@ class DiscretionaryAcl(CommonAcl, ICollection, IEnumerable):
     def __setitem__(self, index: int, value: GenericAce) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventWaitHandleAccessRule(AccessRule):
     """"""
     @overload
@@ -1622,6 +1653,7 @@ class EventWaitHandleAccessRule(AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventWaitHandleAuditRule(AuditRule):
     """"""
     def __init__(
@@ -1655,6 +1687,7 @@ class EventWaitHandleAuditRule(AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class EventWaitHandleRights(Enum):
     """"""
 
@@ -1673,6 +1706,7 @@ class EventWaitHandleRights(Enum):
     FullControl: EventWaitHandleRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EventWaitHandleSecurity(NativeObjectSecurity):
     """"""
     def __init__(self) -> None:
@@ -1801,6 +1835,7 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSecurity(FileSystemSecurity):
     """"""
     @overload
@@ -1933,6 +1968,7 @@ class FileSecurity(FileSystemSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemAccessRule(AccessRule):
     """"""
     @overload
@@ -1995,6 +2031,7 @@ class FileSystemAccessRule(AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemAuditRule(AuditRule):
     """"""
     @overload
@@ -2054,6 +2091,7 @@ class FileSystemAuditRule(AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FileSystemRights(Enum):
     """"""
 
@@ -2104,6 +2142,7 @@ class FileSystemRights(Enum):
     FullControl: FileSystemRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FileSystemSecurity(ABC, NativeObjectSecurity):
     """"""
     @property
@@ -2230,6 +2269,7 @@ class FileSystemSecurity(ABC, NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericAce(ABC, Object):
     """"""
     @property
@@ -2281,6 +2321,7 @@ class GenericAce(ABC, Object):
     def __ne__(self, other: GenericAce) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericAcl(ABC, Object, ICollection, IEnumerable):
     """"""
 
@@ -2337,6 +2378,7 @@ class GenericAcl(ABC, Object, ICollection, IEnumerable):
     def __setitem__(self, index: int, value: GenericAce) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GenericSecurityDescriptor(ABC, Object):
     """"""
     @property
@@ -2375,6 +2417,7 @@ class GenericSecurityDescriptor(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class InheritanceFlags(Enum):
     """"""
 
@@ -2385,6 +2428,7 @@ class InheritanceFlags(Enum):
     ObjectInherit: InheritanceFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class KnownAce(ABC, GenericAce):
     """"""
     @property
@@ -2433,6 +2477,7 @@ class KnownAce(ABC, GenericAce):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MutexAccessRule(AccessRule):
     """"""
     @overload
@@ -2470,6 +2515,7 @@ class MutexAccessRule(AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MutexAuditRule(AuditRule):
     """"""
     def __init__(
@@ -2503,6 +2549,7 @@ class MutexAuditRule(AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MutexRights(Enum):
     """"""
 
@@ -2521,6 +2568,7 @@ class MutexRights(Enum):
     FullControl: MutexRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MutexSecurity(NativeObjectSecurity):
     """"""
     @overload
@@ -2653,6 +2701,7 @@ class MutexSecurity(NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NativeObjectSecurity(ABC, CommonObjectSecurity):
     """"""
     @property
@@ -2757,6 +2806,7 @@ class NativeObjectSecurity(ABC, CommonObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectAccessRule(ABC, AccessRule):
     """"""
     @property
@@ -2792,6 +2842,7 @@ class ObjectAccessRule(ABC, AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectAce(QualifiedAce):
     """"""
     def __init__(
@@ -2884,6 +2935,7 @@ class ObjectAce(QualifiedAce):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ObjectAceFlags(Enum):
     """"""
 
@@ -2894,6 +2946,7 @@ class ObjectAceFlags(Enum):
     InheritedObjectAceTypePresent: ObjectAceFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectAuditRule(ABC, AuditRule):
     """"""
     @property
@@ -2929,6 +2982,7 @@ class ObjectAuditRule(ABC, AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectSecurity(ABC, Object):
     """"""
     @property
@@ -3028,6 +3082,7 @@ class ObjectSecurity(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ObjectSecurity[T](ABC, NativeObjectSecurity):
     """"""
     @property
@@ -3154,6 +3209,7 @@ class ObjectSecurity[T](ABC, NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Privilege(Object):
     """"""
 
@@ -3239,6 +3295,7 @@ class Privilege(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrivilegeNotHeldException(UnauthorizedAccessException, _Exception, ISerializable):
     """"""
     @overload
@@ -3294,6 +3351,7 @@ class PrivilegeNotHeldException(UnauthorizedAccessException, _Exception, ISerial
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PropagationFlags(Enum):
     """"""
 
@@ -3304,6 +3362,7 @@ class PropagationFlags(Enum):
     InheritOnly: PropagationFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QualifiedAce(ABC, KnownAce):
     """"""
     @property
@@ -3365,6 +3424,7 @@ class QualifiedAce(ABC, KnownAce):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RawAcl(GenericAcl, ICollection, IEnumerable):
     """"""
     @overload
@@ -3424,6 +3484,7 @@ class RawAcl(GenericAcl, ICollection, IEnumerable):
     def __setitem__(self, index: int, value: GenericAce) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RawSecurityDescriptor(GenericSecurityDescriptor):
     """"""
     @overload
@@ -3488,6 +3549,7 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegistryAccessRule(AccessRule):
     """"""
     @overload
@@ -3547,6 +3609,7 @@ class RegistryAccessRule(AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegistryAuditRule(AuditRule):
     """"""
     @overload
@@ -3596,6 +3659,7 @@ class RegistryAuditRule(AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RegistryRights(Enum):
     """"""
 
@@ -3628,6 +3692,7 @@ class RegistryRights(Enum):
     FullControl: RegistryRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegistrySecurity(NativeObjectSecurity):
     """"""
     def __init__(self) -> None:
@@ -3756,6 +3821,7 @@ class RegistrySecurity(NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ResourceType(Enum):
     """"""
 
@@ -3786,6 +3852,7 @@ class ResourceType(Enum):
     RegistryWow6432Key: ResourceType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SecurityInfos(Enum):
     """"""
 
@@ -3798,6 +3865,7 @@ class SecurityInfos(Enum):
     SystemAcl: SecurityInfos = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SemaphoreAccessRule(AccessRule):
     """"""
     @overload
@@ -3837,6 +3905,7 @@ class SemaphoreAccessRule(AccessRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SemaphoreAuditRule(AuditRule):
     """"""
     def __init__(
@@ -3870,6 +3939,7 @@ class SemaphoreAuditRule(AuditRule):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SemaphoreRights(Enum):
     """"""
 
@@ -3888,6 +3958,7 @@ class SemaphoreRights(Enum):
     FullControl: SemaphoreRights = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SemaphoreSecurity(NativeObjectSecurity):
     """"""
     @overload
@@ -4020,6 +4091,7 @@ class SemaphoreSecurity(NativeObjectSecurity):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SystemAcl(CommonAcl, ICollection, IEnumerable):
     """"""
     @overload
@@ -4195,6 +4267,7 @@ class SystemAcl(CommonAcl, ICollection, IEnumerable):
     def __setitem__(self, index: int, value: GenericAce) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Win32(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:

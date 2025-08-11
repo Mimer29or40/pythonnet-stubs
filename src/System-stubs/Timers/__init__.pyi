@@ -26,6 +26,7 @@ class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ElapsedEventArgs(EventArgs):
     """"""
     @property
@@ -43,6 +44,7 @@ class ElapsedEventArgs(EventArgs):
 type ElapsedEventHandler = Callable[[object, ElapsedEventArgs], None]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Timer(Component, IComponent, ISupportInitialize, IDisposable):
     """"""
     @overload
@@ -110,6 +112,7 @@ class Timer(Component, IComponent, ISupportInitialize, IDisposable):
     Elapsed: EventType[ElapsedEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TimersDescriptionAttribute(DescriptionAttribute, _Attribute):
     """"""
     def __init__(self, description: str) -> None:

@@ -31,6 +31,7 @@ from System.Threading import CancellationToken
 from System.Threading import WaitHandle
 from System.Threading.Tasks import Task
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Base64WriteStateInfo(WriteStateInfoBase):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -42,6 +43,7 @@ class Base64WriteStateInfo(WriteStateInfoBase):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BaseWriter(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -53,6 +55,7 @@ class BaseWriter(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContentDisposition(Object):
     """"""
     @overload
@@ -108,6 +111,7 @@ class ContentDisposition(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ContentTransferEncoding(Enum):
     """"""
 
@@ -128,6 +132,7 @@ class ContentTransferEncoding(Enum):
     Unspecified: ContentTransferEncoding = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ContentType(Object):
     """"""
     @overload
@@ -168,6 +173,7 @@ class ContentType(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DispositionTypeNames(ABC, Object):
     """"""
 
@@ -184,6 +190,7 @@ class DispositionTypeNames(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EightBitStream(DelegatedStream, IEncodableStream, IDisposable):
     """"""
     @property
@@ -308,6 +315,7 @@ class EightBitStream(DelegatedStream, IEncodableStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EncodedStreamFactory(Object):
     """"""
     def __init__(self) -> None:
@@ -321,6 +329,7 @@ class EncodedStreamFactory(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HeaderCollection(
     NameValueCollection, ICollection, IEnumerable, IDeserializationCallback, ISerializable
 ):
@@ -401,6 +410,7 @@ class HeaderCollection(
         """"""
     def __setitem__(self, name: str, value: str) -> None:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class KeysCollection(Object, ICollection, IEnumerable):
         """"""
         @property
@@ -436,6 +446,7 @@ class HeaderCollection(
         def __getitem__(self, index: int) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IEncodableStream(ABC):
     """"""
     def DecodeBytes(self, buffer: Array[int], offset: int, count: int) -> int:
@@ -447,6 +458,7 @@ class IEncodableStream(ABC):
     def GetStream(self) -> Stream:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MailBnfHelper(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -458,6 +470,7 @@ class MailBnfHelper(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MediaTypeNames(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -468,6 +481,7 @@ class MediaTypeNames(ABC, Object):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Application(ABC, Object):
         """"""
 
@@ -490,6 +504,7 @@ class MediaTypeNames(ABC, Object):
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Image(ABC, Object):
         """"""
 
@@ -508,6 +523,7 @@ class MediaTypeNames(ABC, Object):
         def ToString(self) -> str:
             """"""
 
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class Text(ABC, Object):
         """"""
 
@@ -528,6 +544,7 @@ class MediaTypeNames(ABC, Object):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MimeBasePart(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -539,6 +556,7 @@ class MimeBasePart(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MimeMultiPart(MimeBasePart):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -550,6 +568,7 @@ class MimeMultiPart(MimeBasePart):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MimeMultiPartType(Enum):
     """"""
 
@@ -564,6 +583,7 @@ class MimeMultiPartType(Enum):
     Unknown: MimeMultiPartType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MimePart(MimeBasePart, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -577,6 +597,7 @@ class MimePart(MimeBasePart, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MimeWriter(BaseWriter):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -588,6 +609,7 @@ class MimeWriter(BaseWriter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MultiAsyncResult(LazyAsyncResult, IAsyncResult):
     """"""
     @property
@@ -611,6 +633,7 @@ class MultiAsyncResult(LazyAsyncResult, IAsyncResult):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QEncodedStream(DelegatedStream, IEncodableStream, IDisposable):
     """"""
     @property
@@ -735,6 +758,7 @@ class QEncodedStream(DelegatedStream, IEncodableStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class QuotedPrintableStream(DelegatedStream, IEncodableStream, IDisposable):
     """"""
     @property
@@ -859,6 +883,7 @@ class QuotedPrintableStream(DelegatedStream, IEncodableStream, IDisposable):
     def WriteByte(self, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SmtpDateTime(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -870,6 +895,7 @@ class SmtpDateTime(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TransferEncoding(Enum):
     """"""
 
@@ -884,6 +910,7 @@ class TransferEncoding(Enum):
     Unknown: TransferEncoding = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class WriteStateInfoBase(Object):
     """"""
     def Equals(self, obj: object) -> bool:

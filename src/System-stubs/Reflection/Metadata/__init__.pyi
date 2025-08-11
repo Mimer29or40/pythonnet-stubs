@@ -17,11 +17,11 @@ from System import Int32
 from System import Object
 from System import Type
 from System import ValueType
-from System.Collections import IEnumerable
 from System.Collections.Generic import IEnumerable
 from System.Collections.Immutable import ImmutableArray
 from System.IO import Stream
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlobContentId(ValueType, IEquatable[BlobContentId]):
     """"""
     @overload
@@ -65,6 +65,7 @@ class BlobContentId(ValueType, IEquatable[BlobContentId]):
     def __ne__(self, other: BlobContentId) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlobHandle(ValueType, IEquatable[BlobHandle]):
     """"""
     @property
@@ -83,6 +84,7 @@ class BlobHandle(ValueType, IEquatable[BlobHandle]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BlobReader(ValueType):
     """"""
     def __init__(self, buffer: int, length: int) -> None:
@@ -169,6 +171,7 @@ class BlobReader(ValueType):
     def TryReadCompressedSignedInteger(self, value: Int32) -> tuple[bool, Int32]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DebugMetadataHeader(Object):
     """"""
     @property
@@ -186,6 +189,7 @@ class DebugMetadataHeader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Document(ValueType):
     """"""
     @property
@@ -200,6 +204,7 @@ class Document(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DocumentHandle(ValueType, IEquatable[DocumentHandle]):
     """"""
     @property
@@ -228,6 +233,7 @@ class DocumentHandle(ValueType, IEquatable[DocumentHandle]):
     def __ne__(self, other: DocumentHandle) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DocumentNameBlobHandle(ValueType, IEquatable[DocumentNameBlobHandle]):
     """"""
     @property
@@ -262,6 +268,7 @@ class DocumentNameBlobHandle(ValueType, IEquatable[DocumentNameBlobHandle]):
     def __ne__(self, other: DocumentNameBlobHandle) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Handle(ValueType, IEquatable[Handle]):
     """"""
     @property
@@ -293,6 +300,7 @@ class Handle(ValueType, IEquatable[Handle]):
     def __ne__(self, other: Handle) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class HandleKind(Enum):
     """"""
 
@@ -371,6 +379,7 @@ class HandleKind(Enum):
     NamespaceDefinition: HandleKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HandleKindExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -382,6 +391,7 @@ class HandleKindExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MetadataKind(Enum):
     """"""
 
@@ -392,6 +402,7 @@ class MetadataKind(Enum):
     ManagedWindowsMetadata: MetadataKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataReader(Object):
     """"""
     def __init__(self, metadata: int, length: int, options: MetadataReaderOptions) -> None:
@@ -422,6 +433,7 @@ class MetadataReader(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MetadataReaderOptions(Enum):
     """"""
 
@@ -432,6 +444,7 @@ class MetadataReaderOptions(Enum):
     ApplyWindowsRuntimeProjections: MetadataReaderOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataReaderProvider(Object, IDisposable):
     """"""
     def Dispose(self) -> None:
@@ -473,6 +486,7 @@ class MetadataReaderProvider(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class MetadataStreamOptions(Enum):
     """"""
 
@@ -483,6 +497,7 @@ class MetadataStreamOptions(Enum):
     PrefetchMetadata: MetadataStreamOptions = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MetadataStreamOptionsExtensions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -497,6 +512,7 @@ class MetadataStreamOptionsExtensions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodDebugInformation(ValueType):
     """"""
     @property
@@ -516,6 +532,7 @@ class MethodDebugInformation(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodDebugInformationHandle(ValueType, IEquatable[MethodDebugInformationHandle]):
     """"""
     @property
@@ -554,6 +571,7 @@ class MethodDebugInformationHandle(ValueType, IEquatable[MethodDebugInformationH
     def __ne__(self, other: MethodDebugInformationHandle) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MethodDefinitionHandle(ValueType, IEquatable[MethodDefinitionHandle]):
     """"""
     @property
@@ -590,6 +608,7 @@ class MethodDefinitionHandle(ValueType, IEquatable[MethodDefinitionHandle]):
     def __ne__(self, other: MethodDefinitionHandle) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PathUtilities(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -601,6 +620,7 @@ class PathUtilities(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PortablePdbVersions(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -612,6 +632,7 @@ class PortablePdbVersions(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SequencePoint(ValueType, IEquatable[SequencePoint]):
     """"""
 
@@ -651,6 +672,7 @@ class SequencePoint(ValueType, IEquatable[SequencePoint]):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SequencePointCollection(ValueType, IEnumerable[SequencePoint], IEnumerable):
     """"""
     def Equals(self, obj: object) -> bool:

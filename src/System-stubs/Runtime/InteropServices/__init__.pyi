@@ -77,10 +77,6 @@ from System.Reflection import TypeAttributes
 from System.Reflection import TypeFilter
 from System.Reflection.Emit import AssemblyBuilder
 from System.Runtime.ConstrainedExecution import CriticalFinalizerObject
-from System.Runtime.InteropServices.ComTypes import DISPPARAMS
-from System.Runtime.InteropServices.ComTypes import INVOKEKIND
-from System.Runtime.InteropServices.ComTypes import ITypeInfo
-from System.Runtime.InteropServices.ComTypes import ITypeLib
 from System.Runtime.Remoting import ObjRef
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
@@ -89,10 +85,16 @@ from System.Security import SecureString
 from System.Security.Policy import Evidence
 from System.Threading import Thread
 
+from .ComTypes import DISPPARAMS
+from .ComTypes import INVOKEKIND
+from .ComTypes import ITypeInfo
+from .ComTypes import ITypeLib
+
 class EventType[T]:
     def __iadd__(self, other: T) -> Self: ...
     def __isub__(self, other: T) -> Self: ...
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AllowReversePInvokeCallsAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -133,6 +135,7 @@ class AllowReversePInvokeCallsAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class Architecture(Enum):
     """"""
 
@@ -145,6 +148,7 @@ class Architecture(Enum):
     Arm64: Architecture = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ArrayWithOffset(ValueType):
     """"""
     def __init__(self, array: object, offset: int) -> None:
@@ -176,6 +180,7 @@ class ArrayWithOffset(ValueType):
     def __ne__(self, other: ArrayWithOffset) -> bool:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class AssemblyRegistrationFlags(Enum):
     """"""
 
@@ -184,6 +189,7 @@ class AssemblyRegistrationFlags(Enum):
     SetCodeBase: AssemblyRegistrationFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class AutomationProxyAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, val: bool) -> None:
@@ -227,6 +233,7 @@ class AutomationProxyAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BINDPTR(ValueType):
     """"""
 
@@ -245,6 +252,7 @@ class BINDPTR(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BIND_OPTS(ValueType):
     """"""
 
@@ -265,6 +273,7 @@ class BIND_OPTS(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BStrWrapper(Object):
     """"""
     @overload
@@ -285,6 +294,7 @@ class BStrWrapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class BestFitMappingAttribute(Attribute, _Attribute):
     """"""
 
@@ -331,6 +341,7 @@ class BestFitMappingAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CALLCONV(Enum):
     """"""
 
@@ -355,6 +366,7 @@ class CALLCONV(Enum):
     CC_MAX: CALLCONV = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class COMException(ExternalException, _Exception, ISerializable):
     """"""
     @overload
@@ -413,6 +425,7 @@ class COMException(ExternalException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CONNECTDATA(ValueType):
     """"""
 
@@ -429,6 +442,7 @@ class CONNECTDATA(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CallingConvention(Enum):
     """"""
 
@@ -443,6 +457,7 @@ class CallingConvention(Enum):
     FastCall: CallingConvention = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CharSet(Enum):
     """"""
 
@@ -455,6 +470,7 @@ class CharSet(Enum):
     Auto: CharSet = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ClassInterfaceAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -502,6 +518,7 @@ class ClassInterfaceAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ClassInterfaceType(Enum):
     """"""
 
@@ -512,6 +529,7 @@ class ClassInterfaceType(Enum):
     AutoDual: ClassInterfaceType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CoClassAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, coClass: Type) -> None:
@@ -555,6 +573,7 @@ class CoClassAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComAliasNameAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, alias: str) -> None:
@@ -598,6 +617,7 @@ class ComAliasNameAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _MemberInfo):
     """"""
     def __init__(self, type: Type, eventName: str) -> None:
@@ -711,6 +731,7 @@ class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _EventInfo, _Member
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComCompatibleVersionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, major: int, minor: int, build: int, revision: int) -> None:
@@ -763,6 +784,7 @@ class ComCompatibleVersionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComConversionLossAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -803,6 +825,7 @@ class ComConversionLossAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComDefaultInterfaceAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, defaultInterface: Type) -> None:
@@ -846,6 +869,7 @@ class ComDefaultInterfaceAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComEventInterfaceAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, SourceInterface: Type, EventProvider: Type) -> None:
@@ -892,6 +916,7 @@ class ComEventInterfaceAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComEventsHelper(ABC, Object):
     """"""
     @classmethod
@@ -911,6 +936,7 @@ class ComEventsHelper(ABC, Object):
     def __delitem__(self, rcw: object, iid: Guid, dispid: int, d: Delegate) -> Delegate:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComEventsInfo(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -922,6 +948,7 @@ class ComEventsInfo(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComEventsMethod(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -933,6 +960,7 @@ class ComEventsMethod(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComEventsSink(Object, ICustomQueryInterface, NativeMethods.IDispatch):
     """"""
     def AddMethod(self, dispid: int) -> ComEventsMethod:
@@ -972,6 +1000,7 @@ class ComEventsSink(Object, ICustomQueryInterface, NativeMethods.IDispatch):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComImportAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1012,6 +1041,7 @@ class ComImportAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ComInterfaceType(Enum):
     """"""
 
@@ -1024,6 +1054,7 @@ class ComInterfaceType(Enum):
     InterfaceIsIInspectable: ComInterfaceType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ComMemberType(Enum):
     """"""
 
@@ -1034,6 +1065,7 @@ class ComMemberType(Enum):
     PropSet: ComMemberType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComRegisterFunctionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1074,6 +1106,7 @@ class ComRegisterFunctionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComSourceInterfacesAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -1138,6 +1171,7 @@ class ComSourceInterfacesAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComUnregisterFunctionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -1178,6 +1212,7 @@ class ComUnregisterFunctionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ComVisibleAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, visibility: bool) -> None:
@@ -1221,6 +1256,7 @@ class ComVisibleAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CriticalHandle(ABC, CriticalFinalizerObject, IDisposable):
     """"""
     @property
@@ -1244,6 +1280,7 @@ class CriticalHandle(ABC, CriticalFinalizerObject, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class CurrencyWrapper(Object):
     """"""
     @overload
@@ -1264,6 +1301,7 @@ class CurrencyWrapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CustomQueryInterfaceMode(Enum):
     """"""
 
@@ -1272,6 +1310,7 @@ class CustomQueryInterfaceMode(Enum):
     Allow: CustomQueryInterfaceMode = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class CustomQueryInterfaceResult(Enum):
     """"""
 
@@ -1282,6 +1321,7 @@ class CustomQueryInterfaceResult(Enum):
     Failed: CustomQueryInterfaceResult = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DESCKIND(Enum):
     """"""
 
@@ -1298,6 +1338,7 @@ class DESCKIND(Enum):
     DESCKIND_MAX: DESCKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DISPPARAMS(ValueType):
     """"""
 
@@ -1318,6 +1359,7 @@ class DISPPARAMS(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultCharSetAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, charSet: CharSet) -> None:
@@ -1361,6 +1403,7 @@ class DefaultCharSetAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultDllImportSearchPathsAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, paths: DllImportSearchPath) -> None:
@@ -1404,6 +1447,7 @@ class DefaultDllImportSearchPathsAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DefaultParameterValueAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, value: object) -> None:
@@ -1447,6 +1491,7 @@ class DefaultParameterValueAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DispIdAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, dispId: int) -> None:
@@ -1490,6 +1535,7 @@ class DispIdAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DispatchWrapper(Object):
     """"""
     def __init__(self, obj: object) -> None:
@@ -1506,6 +1552,7 @@ class DispatchWrapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class DllImportAttribute(Attribute, _Attribute):
     """"""
 
@@ -1566,6 +1613,7 @@ class DllImportAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class DllImportSearchPath(Enum):
     """"""
 
@@ -1584,6 +1632,7 @@ class DllImportSearchPath(Enum):
     SafeDirectories: DllImportSearchPath = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ELEMDESC(ValueType):
     """"""
 
@@ -1599,6 +1648,7 @@ class ELEMDESC(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class DESCUNION(ValueType):
         """"""
 
@@ -1615,6 +1665,7 @@ class ELEMDESC(ValueType):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class EXCEPINFO(ValueType):
     """"""
 
@@ -1643,6 +1694,7 @@ class EXCEPINFO(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ErrorWrapper(Object):
     """"""
     @overload
@@ -1666,6 +1718,7 @@ class ErrorWrapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ExporterEventKind(Enum):
     """"""
 
@@ -1676,6 +1729,7 @@ class ExporterEventKind(Enum):
     ERROR_REFTOINVALIDASSEMBLY: ExporterEventKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExtensibleClassFactory(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1690,6 +1744,7 @@ class ExtensibleClassFactory(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ExternalException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -1748,6 +1803,7 @@ class ExternalException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FILETIME(ValueType):
     """"""
 
@@ -1764,6 +1820,7 @@ class FILETIME(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FUNCDESC(ValueType):
     """"""
 
@@ -1800,6 +1857,7 @@ class FUNCDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FUNCFLAGS(Enum):
     """"""
 
@@ -1830,6 +1888,7 @@ class FUNCFLAGS(Enum):
     FUNCFLAG_FIMMEDIATEBIND: FUNCFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class FUNCKIND(Enum):
     """"""
 
@@ -1844,6 +1903,7 @@ class FUNCKIND(Enum):
     FUNC_DISPATCH: FUNCKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class FieldOffsetAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, offset: int) -> None:
@@ -1887,6 +1947,7 @@ class FieldOffsetAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GCHandle(ValueType):
     """"""
     @property
@@ -1942,6 +2003,7 @@ class GCHandle(ValueType):
     def __ne__(self, other: GCHandle) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GCHandleCookieTable(Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -1953,6 +2015,7 @@ class GCHandleCookieTable(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class GCHandleType(Enum):
     """"""
 
@@ -1965,6 +2028,7 @@ class GCHandleType(Enum):
     Pinned: GCHandleType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class GuidAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, guid: str) -> None:
@@ -2008,6 +2072,7 @@ class GuidAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HandleCollector(Object):
     """"""
     @overload
@@ -2045,6 +2110,7 @@ class HandleCollector(Object):
     def __len__(self) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class HandleRef(ValueType):
     """"""
     def __init__(self, wrapper: object, handle: IntPtr) -> None:
@@ -2070,16 +2136,19 @@ class HandleRef(ValueType):
     def op_Explicit(cls, value: HandleRef) -> IntPtr:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomAdapter(ABC):
     """"""
     def GetUnderlyingObject(self) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomFactory(ABC):
     """"""
     def CreateInstance(self, serverType: Type) -> MarshalByRefObject:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomMarshaler(ABC):
     """"""
     def CleanUpManagedData(self, ManagedObj: object) -> None:
@@ -2093,11 +2162,13 @@ class ICustomMarshaler(ABC):
     def MarshalNativeToManaged(self, pNativeData: IntPtr) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ICustomQueryInterface(ABC):
     """"""
     def GetInterface(self, iid: Guid, ppv: IntPtr) -> tuple[CustomQueryInterfaceResult, IntPtr]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDLDESC(ValueType):
     """"""
 
@@ -2114,6 +2185,7 @@ class IDLDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IDLFLAG(Enum):
     """"""
 
@@ -2128,6 +2200,7 @@ class IDLFLAG(Enum):
     IDLFLAG_FRETVAL: IDLFLAG = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IDispatchImplAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -2175,6 +2248,7 @@ class IDispatchImplAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IDispatchImplType(Enum):
     """"""
 
@@ -2185,6 +2259,7 @@ class IDispatchImplType(Enum):
     CompatibleImpl: IDispatchImplType = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class IMPLTYPEFLAGS(Enum):
     """"""
 
@@ -2197,6 +2272,7 @@ class IMPLTYPEFLAGS(Enum):
     IMPLTYPEFLAG_FDEFAULTVTABLE: IMPLTYPEFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class INVOKEKIND(Enum):
     """"""
 
@@ -2209,6 +2285,7 @@ class INVOKEKIND(Enum):
     INVOKE_PROPERTYPUTREF: INVOKEKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class IRegistrationServices(ABC):
     """"""
     def GetManagedCategoryGuid(self) -> Guid:
@@ -2228,6 +2305,7 @@ class IRegistrationServices(ABC):
     def UnregisterAssembly(self, assembly: Assembly) -> bool:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeLibConverter(ABC):
     """"""
     def ConvertAssemblyToTypeLib(
@@ -2268,11 +2346,13 @@ class ITypeLibConverter(ABC):
     ) -> tuple[bool, String, String]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeLibExporterNameProvider(ABC):
     """"""
     def GetNames(self) -> Array[str]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeLibExporterNotifySink(ABC):
     """"""
     def ReportEvent(self, eventKind: ExporterEventKind, eventCode: int, eventMsg: str) -> None:
@@ -2280,6 +2360,7 @@ class ITypeLibExporterNotifySink(ABC):
     def ResolveRef(self, assembly: Assembly) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ITypeLibImporterNotifySink(ABC):
     """"""
     def ReportEvent(self, eventKind: ImporterEventKind, eventCode: int, eventMsg: str) -> None:
@@ -2287,6 +2368,7 @@ class ITypeLibImporterNotifySink(ABC):
     def ResolveRef(self, typeLib: object) -> Assembly:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ImportedFromTypeLibAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, tlbFile: str) -> None:
@@ -2330,6 +2412,7 @@ class ImportedFromTypeLibAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ImporterCallback(Object, ITypeLibImporterNotifySink):
     """"""
     def __init__(self) -> None:
@@ -2347,6 +2430,7 @@ class ImporterCallback(Object, ITypeLibImporterNotifySink):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class ImporterEventKind(Enum):
     """"""
 
@@ -2357,6 +2441,7 @@ class ImporterEventKind(Enum):
     ERROR_REFTOINVALIDTYPELIB: ImporterEventKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -2397,6 +2482,7 @@ class InAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InterfaceTypeAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -2444,6 +2530,7 @@ class InterfaceTypeAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvalidComObjectException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -2496,6 +2583,7 @@ class InvalidComObjectException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class InvalidOleVariantTypeException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -2548,6 +2636,7 @@ class InvalidOleVariantTypeException(SystemException, _Exception, ISerializable)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class LCIDConversionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, lcid: int) -> None:
@@ -2591,6 +2680,7 @@ class LCIDConversionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class LIBFLAGS(Enum):
     """"""
 
@@ -2603,6 +2693,7 @@ class LIBFLAGS(Enum):
     LIBFLAG_FHASDISKIMAGE: LIBFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class LayoutKind(Enum):
     """"""
 
@@ -2613,6 +2704,7 @@ class LayoutKind(Enum):
     Auto: LayoutKind = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ManagedToNativeComInteropStubAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, classType: Type, methodName: str) -> None:
@@ -2659,6 +2751,7 @@ class ManagedToNativeComInteropStubAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Marshal(ABC, Object):
     """"""
 
@@ -3289,6 +3382,7 @@ class Marshal(ABC, Object):
     def ZeroFreeGlobalAllocUnicode(cls, s: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MarshalAsAttribute(Attribute, _Attribute):
     """"""
 
@@ -3355,6 +3449,7 @@ class MarshalAsAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class MarshalDirectiveException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -3407,6 +3502,7 @@ class MarshalDirectiveException(SystemException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NativeBuffer(Object, IDisposable):
     """"""
     def __init__(self, initialMinCapacity: int = ...) -> None:
@@ -3440,6 +3536,7 @@ class NativeBuffer(Object, IDisposable):
     def __setitem__(self, index: int, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class NativeMethods(ABC, Object):
     """"""
     def Equals(self, obj: object) -> bool:
@@ -3451,6 +3548,7 @@ class NativeMethods(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OSPlatform(ValueType, IEquatable[OSPlatform]):
     """"""
     @classmethod
@@ -3494,6 +3592,7 @@ class OSPlatform(ValueType, IEquatable[OSPlatform]):
 type ObjectCreationDelegate = Callable[[IntPtr], IntPtr]
 """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OptionalAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -3534,6 +3633,7 @@ class OptionalAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class OutAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -3574,6 +3674,7 @@ class OutAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PARAMDESC(ValueType):
     """"""
 
@@ -3590,6 +3691,7 @@ class PARAMDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PARAMFLAG(Enum):
     """"""
 
@@ -3610,6 +3712,7 @@ class PARAMFLAG(Enum):
     PARAMFLAG_FHASCUSTDATA: PARAMFLAG = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class PInvokeMap(Enum):
     """"""
 
@@ -3658,6 +3761,7 @@ class PInvokeMap(Enum):
     ThrowOnUnmappableCharUseAsm: PInvokeMap = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PreserveSigAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -3698,6 +3802,7 @@ class PreserveSigAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class PrimaryInteropAssemblyAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, major: int, minor: int) -> None:
@@ -3744,6 +3849,7 @@ class PrimaryInteropAssemblyAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class ProgIdAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, progId: str) -> None:
@@ -3787,6 +3893,7 @@ class ProgIdAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RegistrationClassContext(Enum):
     """"""
 
@@ -3827,6 +3934,7 @@ class RegistrationClassContext(Enum):
     FromDefaultContext: RegistrationClassContext = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class RegistrationConnectionType(Enum):
     """"""
 
@@ -3841,6 +3949,7 @@ class RegistrationConnectionType(Enum):
     Surrogate: RegistrationConnectionType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RegistrationServices(Object, IRegistrationServices):
     """"""
     def __init__(self) -> None:
@@ -3878,6 +3987,7 @@ class RegistrationServices(Object, IRegistrationServices):
     def UnregisterTypeForComClients(self, cookie: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RuntimeEnvironment(Object):
     """"""
     def __init__(self) -> None:
@@ -3910,6 +4020,7 @@ class RuntimeEnvironment(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class RuntimeInformation(ABC, Object):
     """"""
     @classmethod
@@ -3940,6 +4051,7 @@ class RuntimeInformation(ABC, Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SEHException(ExternalException, _Exception, ISerializable):
     """"""
     @overload
@@ -3997,6 +4109,7 @@ class SEHException(ExternalException, _Exception, ISerializable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class STATSTG(ValueType):
     """"""
 
@@ -4031,6 +4144,7 @@ class STATSTG(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class SYSKIND(Enum):
     """"""
 
@@ -4041,6 +4155,7 @@ class SYSKIND(Enum):
     SYS_MAC: SYSKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeArrayRankMismatchException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -4093,6 +4208,7 @@ class SafeArrayRankMismatchException(SystemException, _Exception, ISerializable)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeArrayTypeMismatchException(SystemException, _Exception, ISerializable):
     """"""
     @overload
@@ -4145,6 +4261,7 @@ class SafeArrayTypeMismatchException(SystemException, _Exception, ISerializable)
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     @property
@@ -4198,6 +4315,7 @@ class SafeBuffer(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeHandle(ABC, CriticalFinalizerObject, IDisposable):
     """"""
     @property
@@ -4227,6 +4345,7 @@ class SafeHandle(ABC, CriticalFinalizerObject, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeHeapHandle(SafeBuffer, IDisposable):
     """"""
     def __init__(self, byteLength: int) -> None:
@@ -4284,6 +4403,7 @@ class SafeHeapHandle(SafeBuffer, IDisposable):
     def WriteArray[T](self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SafeHeapHandleCache(Object, IDisposable):
     """"""
     def __init__(self, minSize: int = ..., maxSize: int = ..., maxHandles: int = ...) -> None:
@@ -4303,6 +4423,7 @@ class SafeHeapHandleCache(Object, IDisposable):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class SetWin32ContextInIDispatchAttribute(Attribute, _Attribute):
     """"""
     def __init__(self) -> None:
@@ -4343,6 +4464,7 @@ class SetWin32ContextInIDispatchAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StandardOleMarshalObject(MarshalByRefObject, UnsafeNativeMethods.IMarshal):
     """"""
     def CreateObjRef(self, requestedType: Type) -> ObjRef:
@@ -4396,6 +4518,7 @@ class StandardOleMarshalObject(MarshalByRefObject, UnsafeNativeMethods.IMarshal)
     def UnmarshalInterface(self, pStm: IntPtr, riid: Guid, ppv: IntPtr) -> tuple[int, IntPtr]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StringBuffer(NativeBuffer, IDisposable):
     """"""
     @overload
@@ -4485,6 +4608,7 @@ class StringBuffer(NativeBuffer, IDisposable):
     def __setitem__(self, index: int, value: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class StructLayoutAttribute(Attribute, _Attribute):
     """"""
 
@@ -4539,6 +4663,7 @@ class StructLayoutAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TYPEATTR(ValueType):
     """"""
 
@@ -4589,6 +4714,7 @@ class TYPEATTR(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TYPEDESC(ValueType):
     """"""
 
@@ -4605,6 +4731,7 @@ class TYPEDESC(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TYPEFLAGS(Enum):
     """"""
 
@@ -4639,6 +4766,7 @@ class TYPEFLAGS(Enum):
     TYPEFLAG_FPROXY: TYPEFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TYPEKIND(Enum):
     """"""
 
@@ -4661,6 +4789,7 @@ class TYPEKIND(Enum):
     TKIND_MAX: TYPEKIND = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TYPELIBATTR(ValueType):
     """"""
 
@@ -4685,6 +4814,7 @@ class TYPELIBATTR(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeIdentifierAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -4735,6 +4865,7 @@ class TypeIdentifierAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeLibConverter(Object, ITypeLibConverter):
     """"""
     def __init__(self) -> None:
@@ -4785,6 +4916,7 @@ class TypeLibConverter(Object, ITypeLibConverter):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeLibExporterFlags(Enum):
     """"""
 
@@ -4801,6 +4933,7 @@ class TypeLibExporterFlags(Enum):
     ExportAs64Bit: TypeLibExporterFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeLibFuncAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -4848,6 +4981,7 @@ class TypeLibFuncAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeLibFuncFlags(Enum):
     """"""
 
@@ -4878,6 +5012,7 @@ class TypeLibFuncFlags(Enum):
     FImmediateBind: TypeLibFuncFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeLibImportClassAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, importClass: Type) -> None:
@@ -4921,6 +5056,7 @@ class TypeLibImportClassAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeLibImporterFlags(Enum):
     """"""
 
@@ -4953,6 +5089,7 @@ class TypeLibImporterFlags(Enum):
     ImportAsArm: TypeLibImporterFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeLibTypeAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -5000,6 +5137,7 @@ class TypeLibTypeAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeLibTypeFlags(Enum):
     """"""
 
@@ -5032,6 +5170,7 @@ class TypeLibTypeFlags(Enum):
     FReverseBind: TypeLibTypeFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeLibVarAttribute(Attribute, _Attribute):
     """"""
     @overload
@@ -5079,6 +5218,7 @@ class TypeLibVarAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class TypeLibVarFlags(Enum):
     """"""
 
@@ -5109,6 +5249,7 @@ class TypeLibVarFlags(Enum):
     FImmediateBind: TypeLibVarFlags = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class TypeLibVersionAttribute(Attribute, _Attribute):
     """"""
     def __init__(self, major: int, minor: int) -> None:
@@ -5155,6 +5296,7 @@ class TypeLibVersionAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIBindCtx(ABC):
     """"""
     def EnumObjectParam(self, ppenum: UCOMIEnumString) -> tuple[None, UCOMIEnumString]:
@@ -5180,6 +5322,7 @@ class UCOMIBindCtx(ABC):
     def SetBindOptions(self, pbindopts: BIND_OPTS) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIConnectionPoint(ABC):
     """"""
     def Advise(self, pUnkSink: object, pdwCookie: Int32) -> tuple[None, Int32]:
@@ -5195,6 +5338,7 @@ class UCOMIConnectionPoint(ABC):
     def Unadvise(self, dwCookie: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIConnectionPointContainer(ABC):
     """"""
     def EnumConnectionPoints(
@@ -5206,6 +5350,7 @@ class UCOMIConnectionPointContainer(ABC):
     ) -> tuple[None, UCOMIConnectionPoint]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIEnumConnectionPoints(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumConnectionPoints) -> tuple[None, UCOMIEnumConnectionPoints]:
@@ -5219,6 +5364,7 @@ class UCOMIEnumConnectionPoints(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIEnumConnections(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumConnections) -> tuple[None, UCOMIEnumConnections]:
@@ -5232,6 +5378,7 @@ class UCOMIEnumConnections(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIEnumMoniker(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumMoniker) -> tuple[None, UCOMIEnumMoniker]:
@@ -5245,6 +5392,7 @@ class UCOMIEnumMoniker(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIEnumString(ABC):
     """"""
     def Clone(self, ppenum: UCOMIEnumString) -> tuple[None, UCOMIEnumString]:
@@ -5258,6 +5406,7 @@ class UCOMIEnumString(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIEnumVARIANT(ABC):
     """"""
     def Clone(self, ppenum: int) -> None:
@@ -5269,6 +5418,7 @@ class UCOMIEnumVARIANT(ABC):
     def Skip(self, celt: int) -> int:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIEnumerable(ABC):
     """"""
     def GetEnumerator(self) -> IEnumerator:
@@ -5276,6 +5426,7 @@ class UCOMIEnumerable(ABC):
     def __iter__(self) -> Iterator:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIEnumerator(ABC):
     """"""
     @property
@@ -5286,6 +5437,7 @@ class UCOMIEnumerator(ABC):
     def Reset(self) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIExpando(ABC, UCOMIReflect):
     """"""
     @property
@@ -5351,6 +5503,7 @@ class UCOMIExpando(ABC, UCOMIReflect):
     def RemoveMember(self, m: MemberInfo) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIMoniker(ABC):
     """"""
     def BindToObject(
@@ -5425,6 +5578,7 @@ class UCOMIMoniker(ABC):
     def Save(self, pStm: UCOMIStream, fClearDirty: bool) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIPersistFile(ABC):
     """"""
     def GetClassID(self, pClassID: Guid) -> tuple[None, Guid]:
@@ -5440,6 +5594,7 @@ class UCOMIPersistFile(ABC):
     def SaveCompleted(self, pszFileName: str) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIReflect(ABC):
     """"""
     @property
@@ -5497,6 +5652,7 @@ class UCOMIReflect(ABC):
     ) -> object:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIRunningObjectTable(ABC):
     """"""
     def EnumRunning(self, ppenumMoniker: UCOMIEnumMoniker) -> tuple[None, UCOMIEnumMoniker]:
@@ -5518,6 +5674,7 @@ class UCOMIRunningObjectTable(ABC):
     def Revoke(self, dwRegister: int) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMIStream(ABC):
     """"""
     def Clone(self, ppstm: UCOMIStream) -> tuple[None, UCOMIStream]:
@@ -5543,6 +5700,7 @@ class UCOMIStream(ABC):
     def Write(self, pv: Array[int], cb: int, pcbWritten: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMITypeComp(ABC):
     """"""
     def Bind(
@@ -5560,6 +5718,7 @@ class UCOMITypeComp(ABC):
     ) -> tuple[None, UCOMITypeInfo, UCOMITypeComp]:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMITypeInfo(ABC):
     """"""
     def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> tuple[None, IntPtr]:
@@ -5630,6 +5789,7 @@ class UCOMITypeInfo(ABC):
     def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UCOMITypeLib(ABC):
     """"""
     def FindName(
@@ -5667,6 +5827,7 @@ class UCOMITypeLib(ABC):
     def ReleaseTLibAttr(self, pTLibAttr: IntPtr) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnknownWrapper(Object):
     """"""
     def __init__(self, obj: object) -> None:
@@ -5683,6 +5844,7 @@ class UnknownWrapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class UnmanagedFunctionPointerAttribute(Attribute, _Attribute):
     """"""
 
@@ -5735,6 +5897,7 @@ class UnmanagedFunctionPointerAttribute(Attribute, _Attribute):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class UnmanagedType(Enum):
     """"""
 
@@ -5815,6 +5978,7 @@ class UnmanagedType(Enum):
     LPUTF8Str: UnmanagedType = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VARDESC(ValueType):
     """"""
 
@@ -5836,6 +6000,7 @@ class VARDESC(ValueType):
         """"""
     def ToString(self) -> str:
         """"""
+    # noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
     class DESCUNION(ValueType):
         """"""
 
@@ -5852,6 +6017,7 @@ class VARDESC(ValueType):
         def ToString(self) -> str:
             """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class VARFLAGS(Enum):
     """"""
 
@@ -5882,6 +6048,7 @@ class VARFLAGS(Enum):
     VARFLAG_FIMMEDIATEBIND: VARFLAGS = ...
     """"""
 
+# noinspection PyPep8Naming,PyRedeclaration,DuplicatedCode,SpellCheckingInspection
 class VarEnum(Enum):
     """"""
 
@@ -5974,6 +6141,7 @@ class VarEnum(Enum):
     VT_BYREF: VarEnum = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class Variant(ValueType):
     """"""
     @property
@@ -6098,6 +6266,7 @@ class Variant(ValueType):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class VariantWrapper(Object):
     """"""
     def __init__(self, obj: object) -> None:
@@ -6114,6 +6283,7 @@ class VariantWrapper(Object):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _Activator(ABC):
     """"""
     def GetIDsOfNames(
@@ -6137,6 +6307,7 @@ class _Activator(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _Assembly(ABC):
     """"""
     @property
@@ -6267,6 +6438,7 @@ class _Assembly(ABC):
     ModuleResolve: EventType[ModuleResolveEventHandler] = ...
     """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _AssemblyBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -6290,6 +6462,7 @@ class _AssemblyBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _AssemblyName(ABC):
     """"""
     def GetIDsOfNames(
@@ -6313,6 +6486,7 @@ class _AssemblyName(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _Attribute(ABC):
     """"""
     def GetIDsOfNames(
@@ -6336,6 +6510,7 @@ class _Attribute(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _ConstructorBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -6359,6 +6534,7 @@ class _ConstructorBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _ConstructorInfo(ABC):
     """"""
     @property
@@ -6483,6 +6659,7 @@ class _ConstructorInfo(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _CustomAttributeBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -6506,6 +6683,7 @@ class _CustomAttributeBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _EnumBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -6529,6 +6707,7 @@ class _EnumBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _EventBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -6552,6 +6731,7 @@ class _EventBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _EventInfo(ABC):
     """"""
     @property
@@ -6637,6 +6817,7 @@ class _EventInfo(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _Exception(ABC):
     """"""
     @property
@@ -6674,6 +6855,7 @@ class _Exception(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _FieldBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -6697,6 +6879,7 @@ class _FieldBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _FieldInfo(ABC):
     """"""
     @property
@@ -6812,6 +6995,7 @@ class _FieldInfo(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _ILGenerator(ABC):
     """"""
     def GetIDsOfNames(
@@ -6835,6 +7019,7 @@ class _ILGenerator(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _LocalBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -6858,6 +7043,7 @@ class _LocalBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _MemberInfo(ABC):
     """"""
     @property
@@ -6909,6 +7095,7 @@ class _MemberInfo(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _MethodBase(ABC):
     """"""
     @property
@@ -7026,6 +7213,7 @@ class _MethodBase(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _MethodBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -7049,6 +7237,7 @@ class _MethodBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _MethodInfo(ABC):
     """"""
     @property
@@ -7174,6 +7363,7 @@ class _MethodInfo(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _MethodRental(ABC):
     """"""
     def GetIDsOfNames(
@@ -7197,6 +7387,7 @@ class _MethodRental(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _Module(ABC):
     """"""
     def GetIDsOfNames(
@@ -7220,6 +7411,7 @@ class _Module(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _ModuleBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -7243,6 +7435,7 @@ class _ModuleBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _ParameterBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -7266,6 +7459,7 @@ class _ParameterBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _ParameterInfo(ABC):
     """"""
     def GetIDsOfNames(
@@ -7289,6 +7483,7 @@ class _ParameterInfo(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _PropertyBuilder(ABC):
     """"""
     def GetIDsOfNames(
@@ -7312,6 +7507,7 @@ class _PropertyBuilder(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _PropertyInfo(ABC):
     """"""
     @property
@@ -7425,6 +7621,7 @@ class _PropertyInfo(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _SignatureHelper(ABC):
     """"""
     def GetIDsOfNames(
@@ -7448,6 +7645,7 @@ class _SignatureHelper(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _Thread(ABC):
     """"""
     def GetIDsOfNames(
@@ -7471,6 +7669,7 @@ class _Thread(ABC):
     ) -> None:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _Type(ABC):
     """"""
     @property
@@ -7877,6 +8076,7 @@ class _Type(ABC):
     def ToString(self) -> str:
         """"""
 
+# noinspection PyMethodOverriding,PyPep8Naming,PyRedeclaration,PyTypeHints,PyUnresolvedReferences,PyOverloads,PyClassVar,DuplicatedCode,SpellCheckingInspection
 class _TypeBuilder(ABC):
     """"""
     def GetIDsOfNames(
