@@ -227,7 +227,10 @@ def _extract_members[T: CWrapper](
         for member in member_func(parent, binding_flags):
             key: str = member.unique_name
             try:
-                found[key] = replace(found[key], declaring_type=member.declaring_type)
+                if isinstance(found[key], CTypeDefinition):
+                    found[key] = replace(found[key], parent=member.parent)
+                else:
+                    found[key] = replace(found[key], declaring_type=member.declaring_type)
             except KeyError:
                 found[key] = member
 
@@ -422,6 +425,7 @@ def extract_assemblies(
 
         type_definitions: dict[str, list[CTypeDefinition]] = defaultdict(list)
         info: TypeInfo
+        # TODO(Ryan): Need better handling for when types cannot be gotten from an assembly
         for info in (t for t in cs_assembly.GetTypes() if valid_type(t)):
             type_definition: CTypeDefinition = extract_type_def(info)
             if type_definition is None:
