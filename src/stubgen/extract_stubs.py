@@ -72,7 +72,7 @@ logger: Logger = get_logger(__name__)
 
 
 # noinspection PyUnreachableCode
-def extract_type(info: TypeInfo, use_generic: bool = False) -> CType | None:
+def extract_type(info: TypeInfo | None, use_generic: bool = False) -> CType | None:
     """Extract a TypeInfo object into a CType."""
     if info is None:
         return None
@@ -83,12 +83,17 @@ def extract_type(info: TypeInfo, use_generic: bool = False) -> CType | None:
 
     name: str = make_python_name(info.Name)
     if info.IsArray and name != "Array":
-        return CType(name="Array", namespace="System", inner=[extract_type(info.GetElementType())])
+        inner: CType | None = extract_type(info.GetElementType())
+        return CType(
+            name="Array",
+            namespace="System",
+            inner=[] if inner is None else [inner],
+        )
 
     reference: bool = info.IsByRef
     nullable: bool = False
 
-    underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
+    underlying_type: TypeInfo | None = Nullable.GetUnderlyingType(info)  # ty:ignore[unresolved-attribute]
     if underlying_type is not None:
         info = underlying_type
         name = make_python_name(info.Name)
@@ -121,12 +126,12 @@ def extract_parameter(info: ParameterInfo) -> CParameter:
     try:
         # This is here because record methods don't have "HasDefaultValue"
         default = info.HasDefaultValue
-    except TypeLoadException:
+    except TypeLoadException:  # ty:ignore[invalid-exception-caught]
         default = info.IsOptional
 
     return CParameter(
         name="param" if info.Name is None else make_python_name(info.Name),
-        type=extract_type(info.ParameterType),
+        type=extract_type(info.ParameterType) or CType.VOID,
         default=default,
         out=info.IsOut,
     )
@@ -136,8 +141,8 @@ def extract_field(info: FieldInfo) -> CField:
     """Extract a FieldInfo object into a CField."""
     return CField(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.DeclaringType, use_generic=True),
-        return_type=extract_type(info.FieldType),
+        declaring_type=extract_type(info.DeclaringType, use_generic=True) or CType.VOID,
+        return_type=extract_type(info.FieldType) or CType.VOID,
         static=info.IsStatic,
     )
 
@@ -145,7 +150,7 @@ def extract_field(info: FieldInfo) -> CField:
 def extract_constructor(info: ConstructorInfo) -> CConstructor:
     """Extract a ConstructorInfo object into a CConstructor."""
     return CConstructor(
-        declaring_type=extract_type(info.DeclaringType, use_generic=True),
+        declaring_type=extract_type(info.DeclaringType, use_generic=True) or CType.VOID,
         parameters=list(map(extract_parameter, info.GetParameters())),
     )
 
@@ -162,8 +167,8 @@ def extract_property(info: PropertyInfo) -> CProperty:
 
     return CProperty(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(declaring_type, use_generic=True),
-        type=extract_type(info.PropertyType),
+        declaring_type=extract_type(declaring_type, use_generic=True) or CType.VOID,
+        type=extract_type(info.PropertyType) or CType.VOID,
         setter=set_method is not None,
         static=get_method is not None and get_method.IsStatic,
     )
@@ -171,7 +176,7 @@ def extract_property(info: PropertyInfo) -> CProperty:
 
 def extract_method(info: MethodInfo) -> CMethod:
     """Extract a MethodInfo object into a CMethod."""
-    return_types: list[CType] = [extract_type(info.ReturnType)]
+    return_types: list[CType] = [extract_type(info.ReturnType) or CType.VOID]
 
     parameters: list[CParameter] = []
     for parameter_info in info.GetParameters():
@@ -182,7 +187,8 @@ def extract_method(info: MethodInfo) -> CMethod:
 
     return CMethod(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.GetBaseDefinition().DeclaringType, use_generic=True),
+        declaring_type=extract_type(info.GetBaseDefinition().DeclaringType, use_generic=True)
+        or CType.VOID,
         parameters=parameters,
         return_types=return_types,
         static=info.IsStatic,
@@ -193,8 +199,8 @@ def extract_event(info: EventInfo) -> CEvent:
     """Extract a EventInfo object into a CEvent."""
     return CEvent(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.DeclaringType),
-        type=extract_type(info.EventHandlerType),
+        declaring_type=extract_type(info.DeclaringType) or CType.VOID,
+        type=extract_type(info.EventHandlerType) or CType.VOID,
     )
 
 
@@ -225,11 +231,14 @@ def _extract_members[T: CWrapper](
     for parent in get_parents(type_info):
         member: T
         for member in member_func(parent, binding_flags):
+            # noinspection PyTypeChecker
             key: str = member.unique_name
             try:
                 if isinstance(found[key], CTypeDefinition):
+                    # noinspection PyUnresolvedReferences
                     found[key] = replace(found[key], parent=member.parent)
                 else:
+                    # noinspection PyUnresolvedReferences
                     found[key] = replace(found[key], declaring_type=member.declaring_type)
             except KeyError:
                 found[key] = member
@@ -334,7 +343,9 @@ def _get_events(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CE
     return map(extract_event, type_info.GetEvents(binding_flags))
 
 
-def _get_nested(type_info: TypeInfo, binding_flags: BindingFlags) -> Iterable[CTypeDefinition]:
+def _get_nested(
+    type_info: TypeInfo, binding_flags: BindingFlags
+) -> Iterable[CTypeDefinition | None]:
     return map(extract_type_def, type_info.GetNestedTypes(binding_flags))
 
 
@@ -347,7 +358,7 @@ def extract_type_def(info: TypeInfo) -> CTypeDefinition | None:
     if info.IsInterface:
         return extract_class(info)
     # noinspection PyTypeChecker
-    if info not in (Delegate, MulticastDelegate) and info.IsSubclassOf(Delegate):
+    if info not in (Delegate, MulticastDelegate) and info.IsSubclassOf(Delegate):  # ty:ignore[invalid-argument-type]
         return extract_delegate(info)
     if info.IsClass:
         return extract_class(info)
@@ -399,7 +410,7 @@ def extract_delegate(info: TypeInfo) -> CDelegate:
         namespace=info.Namespace,
         parent=extract_type(info.DeclaringType),
         parameters=list(map(extract_parameter, invoke.GetParameters())),
-        return_type=extract_type(invoke.ReturnType),
+        return_type=extract_type(invoke.ReturnType) or CType.VOID,
     )
 
 
@@ -413,8 +424,7 @@ def extract_assemblies(
     def extract_assembly(assembly_name: str, output_dir: Path = output_dir) -> None:
         logger.info("Extracting assembly: %r", assembly_name)
 
-        # noinspection PyUnresolvedReferences
-        cs_assembly: Assembly = clr.AddReference(assembly_name)
+        cs_assembly: Assembly = clr.AddReference(assembly_name)  # ty:ignore[unresolved-attribute]
 
         def valid_type(type_info: TypeInfo) -> bool:
             if type_info.Namespace is None or type_info.IsNested:
@@ -427,7 +437,7 @@ def extract_assemblies(
         info: TypeInfo
         # TODO(Ryan): Need better handling for when types cannot be gotten from an assembly
         for info in (t for t in cs_assembly.GetTypes() if valid_type(t)):
-            type_definition: CTypeDefinition = extract_type_def(info)
+            type_definition: CTypeDefinition | None = extract_type_def(info)
             if type_definition is None:
                 logger.warning("Unable to parse type: %s", info.FullName)
                 continue

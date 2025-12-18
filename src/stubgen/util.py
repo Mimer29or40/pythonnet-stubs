@@ -62,7 +62,7 @@ def compare_string(x: str | None, y: str | None) -> CompareResults:
         case (str(), None):
             return 1
         case (str(), str()):
-            return 0 if x == y else (-1 if x < y else 1)
+            return 0 if x == y else (-1 if x < y else 1)  # ty:ignore[unsupported-operator]
     # This should never be reached, as long as the parameter types are correct
     # noinspection PyUnreachableCode
     raise NotImplementedError  # pragma: no cover
@@ -99,7 +99,7 @@ def merge_sequence[T](
     x: Sequence[T] | None,
     y: Sequence[T] | None,
     merge_func: MergeFunc[T],
-) -> list[T] | None:
+) -> Sequence[T] | None:
     """Merge two sequences into one."""
     match x, y:
         case (None, None):
@@ -109,10 +109,10 @@ def merge_sequence[T](
         case (Sequence(), None):
             return x
         case (Sequence(), Sequence()):
-            merged: list[T] = list(x)
+            merged: list[T] = list(x)  # ty:ignore[invalid-argument-type]
             obj1: T
             obj2: T
-            for obj2 in y:
+            for obj2 in y:  # ty:ignore[not-iterable]
                 try:
                     index: int = merged.index(obj2)
                     obj1 = merged[index]
@@ -139,14 +139,14 @@ def merge_mapping[T](
         case (Mapping(), None):
             return x
         case (Mapping(), Mapping()):
-            merged: dict[str, T] = dict(x)
+            merged: dict[str, T] = dict(x)  # ty:ignore[no-matching-overload]
             name: str
             obj1: T
             obj2: T
-            for name, obj2 in y.items():
-                if name in x:
-                    obj1 = x[name]
-                    obj2 = merge_func(obj1, obj2)
+            for name, obj2 in y.items():  # ty:ignore[possibly-missing-attribute]
+                if name in merged:
+                    obj1: T = merged[name]
+                    obj2: T = merge_func(obj1, obj2)
                 merged[name] = obj2
             return merged
     # This should never be reached, as long as the parameter types are correct
@@ -176,8 +176,7 @@ def to_c_list[T](list_type: type[T], iterable: Iterable[T]) -> List[T]:
     :param iterable: The iterable.
     :return: The List
     """
-    # noinspection PyTypeHints
-    list_obj = List[list_type]()
+    list_obj: List[T] = List[list_type]()  # ty:ignore[invalid-type-form]
 
     for obj in iterable:
         list_obj.Add(obj)
@@ -202,8 +201,7 @@ def to_c_dict[K, V](
     :param mapping: The mapping.
     :return: The Dictionary
     """
-    # noinspection PyTypeHints
-    dict_obj = Dictionary[key_type, value_type]()
+    dict_obj: Dictionary[K, V] = Dictionary[key_type, value_type]()  # ty:ignore[invalid-type-form]
 
     for key, value in mapping.items():
         dict_obj.Add(key, value)

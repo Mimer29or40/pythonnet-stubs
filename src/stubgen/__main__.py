@@ -84,6 +84,8 @@ def main(*args: str) -> CommandResult:
         if verbose:
             from stubgen.log import root_handler
 
+            assert root_handler is not None
+
             root_handler.setLevel(logging.DEBUG)
 
         output_dir: Path = parsed_args.output_dir

@@ -78,8 +78,7 @@ LIST = CType(name="IList", namespace="System.Collections.Generic", inner=[generi
 @pytest.fixture(scope="session")
 def assembly() -> Assembly:
     """Assembly fixture."""
-    # noinspection PyUnresolvedReferences
-    return clr.AddReference(TEST_LIB)
+    return clr.AddReference(TEST_LIB)  # ty:ignore[unresolved-attribute]
 
 
 class _Base:
@@ -92,14 +91,14 @@ class _Base:
                     continue
                 if make_python_name(type_info.Name) == name:
                     return type_info
-        except ReflectionTypeLoadException as e:
+        except ReflectionTypeLoadException as e:  # ty:ignore[invalid-exception-caught]
             pprint([_e.Message for _e in e.LoaderExceptions])
         raise NameError(f"Unable to find type named {name!r}")
 
     @classmethod
     def basic_class(cls, declaring_type: CType, parent: CType | None = None) -> CClass:
         name: str = declaring_type.name
-        namespace: str = declaring_type.namespace
+        namespace: str | None = declaring_type.namespace
         generic_args: Sequence[CType] = declaring_type.inner
         if parent is not None:
             declaring_type = replace(declaring_type, name=f"{parent.name}.{declaring_type.name}")
@@ -138,7 +137,7 @@ class _Base:
     @classmethod
     def basic_struct(cls, declaring_type: CType, parent: CType | None = None) -> CClass:
         name: str = declaring_type.name
-        namespace: str = declaring_type.namespace
+        namespace: str | None = declaring_type.namespace
         generic_args: Sequence[CType] = declaring_type.inner
         return CClass(
             name=name,
@@ -174,7 +173,7 @@ class _Base:
     @classmethod
     def basic_record(cls, declaring_type: CType, parent: CType | None = None) -> CClass:
         name: str = declaring_type.name
-        namespace: str = declaring_type.namespace
+        namespace: str | None = declaring_type.namespace
         generic_args: Sequence[CType] = declaring_type.inner
         if parent is not None:
             declaring_type = replace(declaring_type, name=f"{parent.name}.{declaring_type.name}")

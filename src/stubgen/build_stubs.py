@@ -130,7 +130,7 @@ class Builder:
 
         param_str: str = f"{obj.name}: {self.build_type(obj.type, convert=True)}"
         if obj.default:
-            param_str = param_str + " = ..."
+            param_str = f"{param_str} = ..."
         return param_str
 
     # noinspection PyMethodMayBeStatic
@@ -173,7 +173,8 @@ class Builder:
 
         lines: list[str] = [f"{'    ' * indent}{obj.name}: {type_str}"]
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent))
 
         return lines
@@ -213,7 +214,8 @@ class Builder:
             f"{'    ' * indent}def __init__{generic_params}({', '.join(parameters)}) -> None:",
         )
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         return lines
@@ -243,7 +245,8 @@ class Builder:
         property_type: str = self.build_type(obj.type, convert=True)
         lines.append(f"{indent_str}def {obj.name}({self_cls}) -> {property_type}:")
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         if obj.setter:
@@ -303,7 +306,8 @@ class Builder:
             f"({', '.join(param_strs)}) -> {return_str}:",
         )
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         return lines
@@ -330,7 +334,8 @@ class Builder:
             f"{indent_str}{obj.name}: EventType[{self.build_type(obj.type, convert=True)}] = ...",
         ]
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent))
 
         return lines
@@ -395,7 +400,8 @@ class Builder:
             f"{'    ' * indent}class {obj.name}{generic_arg_str}{parent_str}:",
         ]
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         lines.extend(self.build_fields(obj, indent=indent + 1))
@@ -425,13 +431,15 @@ class Builder:
             f"{'    ' * indent}class {obj.name}(Enum):",
         ]
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         for field_obj in obj.fields:
             lines.append(f"{'    ' * (indent + 1)}{field_obj}: {obj.qualified_name} = ...")
 
-            doc_node: DocNode = self.doc_tree[f"{obj.namespace}.{obj.name}.{field_obj}"]
+            doc_node: DocNode | None = self.doc_tree[f"{obj.namespace}.{obj.name}.{field_obj}"]
+            assert doc_node is not None
             lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent + 1))
 
         return lines
@@ -456,7 +464,8 @@ class Builder:
             f"Callable[[{', '.join(parameters)}], {return_str}]",
         ]
 
-        doc_node: DocNode = self.doc_tree[obj.unique_name]
+        doc_node: DocNode | None = self.doc_tree[obj.unique_name]
+        assert doc_node is not None
         lines.extend(doc_node.doc_string(line_length=self.line_length, indent=indent))
 
         return lines
@@ -523,7 +532,7 @@ def build_stubs(
         namespace_file: Path = Path()
         for name in namespace.name.split("."):
             dir_name: str = f"{name}-stubs" if namespace_dir is output_dir else name
-            namespace_dir = namespace_dir / dir_name
+            namespace_dir /= dir_name
             namespace_dir.mkdir(parents=True, exist_ok=True)
 
             namespace_file = namespace_dir / "__init__.pyi"
@@ -686,7 +695,9 @@ def command_build(args: BuildArguments) -> CommandResult:
     for skeleton_file in Path().glob(args.skeletons):
         logger.info("Loading skeletons file: '%s'", skeleton_file)
         skeleton: CAssembly = CAssembly.from_json(json.loads(skeleton_file.read_text()))
-        namespaces = merge_mapping(namespaces, skeleton.namespaces, CNamespace.merge)
+        namespaces: Mapping[str, CNamespace] = (
+            merge_mapping(namespaces, skeleton.namespaces, CNamespace.merge) or {}
+        )
 
     build_stubs(
         builder,

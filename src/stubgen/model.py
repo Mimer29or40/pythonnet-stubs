@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 from abc import ABC
 from abc import abstractmethod
+from collections.abc import Mapping
 from dataclasses import dataclass
 from dataclasses import field
 from functools import partial
@@ -24,7 +25,6 @@ from stubgen.util import merge_sequence
 from stubgen.util import merge_string
 
 if TYPE_CHECKING:  # pragma: no cover
-    from collections.abc import Mapping
     from collections.abc import Sequence
     from logging import Logger
 
@@ -47,7 +47,7 @@ class DocTree:
         :param node: The fully qualified name of the node to get.
         :return: The DocNode node, if it exists.
         """
-        return DocTree._get_node(self.children, self._split_node_string(node))
+        return self._get_node(self.children, self._split_node_string(node))
 
     def to_json(self) -> JsonType:
         """Convert this DocTree into a JSON compatible object."""
@@ -56,20 +56,21 @@ class DocTree:
     @classmethod
     def from_json(cls, obj: JsonType) -> Self:
         """Convert a JSON object into a DocTree."""
-        return DocTree(
-            children=[DocNode.from_json(k, v) for k, v in obj.items()],
-        )
+        assert isinstance(obj, Mapping)
+
+        return cls(children=[DocNode.from_json(k, v) for k, v in obj.items()])  # ty:ignore[invalid-argument-type]
 
     @classmethod
-    def merge(cls, obj1: DocTree, obj2: DocTree) -> DocTree:
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
         """Merge two DocTrees into a single DocTree."""
-        children: Mapping[str, DocNode] = merge_mapping(
+        children: Mapping[str, DocNode] | None = merge_mapping(
             {c.name: c for c in obj1.children},
             {c.name: c for c in obj2.children},
             DocNode.merge,
         )
+        assert children is not None
 
-        return DocTree(children=sorted(children.values(), key=lambda c: c.name))
+        return cls(children=sorted(children.values(), key=lambda c: c.name))
 
     @staticmethod
     def _get_node(children: Sequence[DocNode], nodes: Sequence[str]) -> DocNode | None:
@@ -203,28 +204,33 @@ class DocNode:
     @classmethod
     def from_json(cls, name: str, obj: JsonType) -> Self:
         """Convert a JSON object into a DocTree."""
-        obj = dict(obj)
-        return DocNode(
+        assert isinstance(obj, Mapping)
+
+        obj: dict[str, Any] = dict(obj)  # ty:ignore[no-matching-overload]
+        return cls(
             name=name,
             doc=obj.pop("doc", ""),
             doc_formatted=obj.pop("doc_formatted", {}),
             parameter_docs=obj.pop("parameters", None),
             return_doc=obj.pop("return", None),
             exception_docs=obj.pop("exceptions", None),
-            children=[DocNode.from_json(k, v) for k, v in obj.items()],
+            children=[cls.from_json(k, v) for k, v in obj.items()],
         )
 
     @classmethod
-    def merge(cls, obj1: DocNode, obj2: DocNode) -> DocNode:
+    def merge(cls, obj1: Self, obj2: Self) -> Self:
         """Merge two DocNodes into a single DocNode."""
         logger.debug("Merging DocNode %r and %r", obj1.name, obj2.name)
 
-        doc: str = merge_string(obj1.doc, obj2.doc)
+        doc: str = merge_string(obj1.doc, obj2.doc) or ""
 
-        doc_formatted: Mapping[str, Sequence[str]] = merge_mapping(
-            obj1.doc_formatted,
-            obj2.doc_formatted,
-            partial(merge_sequence, merge_func=merge_string),
+        doc_formatted: Mapping[str, Sequence[str]] = (
+            merge_mapping(
+                obj1.doc_formatted,
+                obj2.doc_formatted,
+                partial(merge_sequence, merge_func=merge_string),  # ty:ignore[invalid-argument-type]
+            )
+            or {}
         )
 
         parameter_docs: Mapping[str, str] | None = merge_mapping(
@@ -243,13 +249,16 @@ class DocNode:
         if exception_docs is not None:
             exception_docs = dict(sorted(exception_docs.items()))
 
-        children: Mapping[str, DocNode] = merge_mapping(
-            {c.name: c for c in obj1.children},
-            {c.name: c for c in obj2.children},
-            DocNode.merge,
+        children: Mapping[str, DocNode] = (
+            merge_mapping(
+                {c.name: c for c in obj1.children},
+                {c.name: c for c in obj2.children},
+                DocNode.merge,
+            )
+            or {}
         )
 
-        return DocNode(
+        return cls(
             name=obj1.name,
             doc=doc,
             doc_formatted=doc_formatted,
@@ -374,11 +383,11 @@ class CType(CWrapper):
         """Get the full name representation of this CType."""
         name: str = self.name
         if self.reference:
-            name = "*" + name
+            name = f"*{name}"
         if self.generic:
-            name = "$" + name
+            name = f"${name}"
         if self.nullable:
-            name = name + "?"
+            name = f"{name}?"
         if self.namespace is not None:
             name = f"{self.namespace}:{name}"
         if len(self.inner) > 0:
@@ -391,13 +400,19 @@ class CType(CWrapper):
 
     @classmethod
     @override
-    def from_json(cls, json: JsonType) -> Self | None:
+    def from_json(cls, json: JsonType) -> Self | None:  # ty:ignore[invalid-method-override]
         if json is None:
             return None
-        match: re.Match = re.match(
+
+        assert isinstance(json, str)
+
+        match: re.Match[str] | None = re.match(
             r"(?:(\w+(?:\.\w+)*):)?(\$?\*?\w+(?:\.\w+)*\??)(?:\[(.*)])?",
             json,
         )
+        if match is None:
+            return None
+
         name: str = match.group(2)
         inner: Sequence[CType] = []
         if (inner_str := match.group(3)) is not None:
@@ -414,7 +429,7 @@ class CType(CWrapper):
 
     @classmethod
     @override
-    def compare(cls, x: Self, y: Self) -> CompareResults:
+    def compare(cls, x: Self, y: Self) -> CompareResults:  # ty:ignore[invalid-method-override]
         c: CompareResults
         if (c := compare_string(x.namespace, y.namespace)) != 0:
             return c
@@ -454,16 +469,18 @@ class CParameter(CWrapper):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
-            type=CType.from_json(json["type"]),
+            type=CType.from_json(json["type"]) or CType.VOID,
             default=json["default"],
             out=json["out"],
         )
 
     @classmethod
     @override
-    def compare(cls, x: Self, y: Self) -> CompareResults:
+    def compare(cls, x: Self, y: Self) -> CompareResults:  # ty:ignore[invalid-method-override]
         """Compare two C# wrappers."""
         return CType.compare(x.type, y.type)
 
@@ -502,10 +519,12 @@ class CField(CMember):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
-            declaring_type=CType.from_json(json["declaring_type"]),
-            return_type=CType.from_json(json["return_type"]),
+            declaring_type=CType.from_json(json["declaring_type"]) or CType.VOID,
+            return_type=CType.from_json(json["return_type"]) or CType.VOID,
             static=json["static"],
         )
 
@@ -519,7 +538,7 @@ class CConstructor(CMember):
 
     @property
     def unique_name(self) -> str:
-        """Get the name that appears when generating the doc json."""
+        """Get the name that appears when generating the doc JSON."""
         param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.name}({param_types})"
 
@@ -540,14 +559,16 @@ class CConstructor(CMember):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
-            declaring_type=CType.from_json(json["declaring_type"]),
+            declaring_type=CType.from_json(json["declaring_type"]) or CType.VOID,
             parameters=list(map(CParameter.from_json, json["parameters"])),
         )
 
     @classmethod
     @override
-    def compare(cls, x: Self, y: Self) -> CompareResults:
+    def compare(cls, x: Self, y: Self) -> CompareResults:  # ty:ignore[invalid-method-override]
         return CParameter.compare_seq(x.parameters, y.parameters)
 
 
@@ -579,10 +600,12 @@ class CProperty(CMember):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
-            declaring_type=CType.from_json(json["declaring_type"]),
-            type=CType.from_json(json["type"]),
+            declaring_type=CType.from_json(json["declaring_type"]) or CType.VOID,
+            type=CType.from_json(json["type"]) or CType.VOID,
             setter=json["setter"],
             static=json["static"],
         )
@@ -598,7 +621,7 @@ class CMethod(CMember):
 
     @property
     def unique_name(self) -> str:
-        """Get the name that appears when generating the doc json."""
+        """Get the name that appears when generating the doc JSON."""
         param_types: str = ", ".join(p.type.full_name for p in self.parameters)
         return f"{self.name}({param_types})"
 
@@ -630,9 +653,11 @@ class CMethod(CMember):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
-            declaring_type=CType.from_json(json["declaring_type"]),
+            declaring_type=CType.from_json(json["declaring_type"]) or CType.VOID,
             parameters=list(map(CParameter.from_json, json["parameters"])),
             return_types=list(map(CType.from_json, json["return_types"])),
             static=json["static"],
@@ -640,7 +665,7 @@ class CMethod(CMember):
 
     @classmethod
     @override
-    def compare(cls, x: Self, y: Self) -> CompareResults:
+    def compare(cls, x: Self, y: Self) -> CompareResults:  # ty:ignore[invalid-method-override]
         c: CompareResults
         if (c := compare_string(x.name, y.name)) != 0:
             return c
@@ -670,10 +695,12 @@ class CEvent(CMember):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
-            declaring_type=CType.from_json(json["declaring_type"]),
-            type=CType.from_json(json["type"]),
+            declaring_type=CType.from_json(json["declaring_type"]) or CType.VOID,
+            type=CType.from_json(json["type"]) or CType.VOID,
         )
 
 
@@ -704,25 +731,27 @@ class CTypeDefinition(CWrapper, DocNodeMixin, MergeMixin, ABC):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         match json["type"]:
             case "class":
-                return CClass.from_json(json)
+                return CClass.from_json(json)  # ty:ignore[invalid-return-type]
             case "enum":
-                return CEnum.from_json(json)
+                return CEnum.from_json(json)  # ty:ignore[invalid-return-type]
             case "delegate":
-                return CDelegate.from_json(json)
+                return CDelegate.from_json(json)  # ty:ignore[invalid-return-type]
         raise NotImplementedError  # pragma: no cover
 
     @classmethod
     @override
-    def merge(cls, obj1: Self, obj2: Self) -> Self:
+    def merge(cls, obj1: Self, obj2: Self) -> Self:  # ty:ignore[invalid-method-override]
         match obj1, obj2:
             case CClass(), CClass():
-                return CClass.merge(obj1, obj2)
+                return CClass.merge(obj1, obj2)  # ty:ignore[invalid-return-type, invalid-argument-type]
             case CEnum(), CEnum():
-                return CEnum.merge(obj1, obj2)
+                return CEnum.merge(obj1, obj2)  # ty:ignore[invalid-return-type, invalid-argument-type]
             case CDelegate(), CDelegate():
-                return CDelegate.merge(obj1, obj2)
+                return CDelegate.merge(obj1, obj2)  # ty:ignore[invalid-return-type, invalid-argument-type]
         # noinspection PyUnreachableCode
         raise TypeError(
             f"Type definitions are not the same: {type(obj1)} != {type(obj2)}",
@@ -754,7 +783,7 @@ class CClass(CTypeDefinition):
             "abstract": self.abstract,
             "generic_args": [a.to_json() for a in self.generic_args],
             "super_class": None if self.super_class is None else self.super_class.to_json(),
-            "interfaces": sorted(i.to_json() for i in self.interfaces),
+            "interfaces": sorted(i.to_json() for i in self.interfaces),  # ty:ignore[invalid-argument-type]
             "fields": {k: v.to_json() for k, v in self.fields.items()},
             "constructors": {k: v.to_json() for k, v in self.constructors.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
@@ -783,6 +812,8 @@ class CClass(CTypeDefinition):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
             namespace=json["namespace"],
@@ -801,45 +832,45 @@ class CClass(CTypeDefinition):
 
     @classmethod
     @override
-    def merge(cls, obj1: Self, obj2: Self) -> Self:
+    def merge(cls, obj1: Self, obj2: Self) -> Self:  # ty:ignore[invalid-method-override]
         logger.debug("Merging CClasses %r and %r", obj1.name, obj2.name)
 
         def first[T: CWrapper](o1: T, _: T) -> T:  # pragma: no cover
             return o1
 
-        interfaces: Sequence[CType] = merge_sequence(obj1.interfaces, obj2.interfaces, first)
+        interfaces: Sequence[CType] = merge_sequence(obj1.interfaces, obj2.interfaces, first) or []
         fields: Mapping[str, CField] = merge_mapping(
             obj1.fields,
             obj2.fields,
             first,
-        )
+        ) or {}
         constructors: Mapping[str, CConstructor] = merge_mapping(
             obj1.constructors,
             obj2.constructors,
             first,
-        )
+        ) or {}
         properties: Mapping[str, CProperty] = merge_mapping(
             obj1.properties,
             obj2.properties,
             first,
-        )
+        ) or {}
         methods: Mapping[str, CMethod] = merge_mapping(
             obj1.methods,
             obj2.methods,
             first,
-        )
+        ) or {}
         events: Mapping[str, CEvent] = merge_mapping(
             obj1.events,
             obj2.events,
             first,
-        )
+        ) or {}
         nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
             obj1.nested_types,
             obj2.nested_types,
             CTypeDefinition.merge,
-        )
+        ) or {}
 
-        return CClass(
+        return cls(
             name=obj1.name,
             namespace=obj1.namespace,
             parent=obj1.parent,
@@ -882,6 +913,8 @@ class CEnum(CTypeDefinition):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
             namespace=json["namespace"],
@@ -891,10 +924,10 @@ class CEnum(CTypeDefinition):
 
     @classmethod
     @override
-    def merge(cls, obj1: Self, obj2: Self) -> Self:
+    def merge(cls, obj1: Self, obj2: Self) -> Self:  # ty:ignore[invalid-method-override]
         logger.debug("Merging CEnums %r and %r", obj1.name, obj2.name)
 
-        return CEnum(
+        return cls(
             name=obj1.name,
             namespace=obj1.namespace,
             parent=obj1.parent,
@@ -939,20 +972,22 @@ class CDelegate(CTypeDefinition):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
             namespace=json["namespace"],
             parent=CType.from_json(json["parent"]),
             parameters=list(map(CParameter.from_json, json["parameters"])),
-            return_type=CType.from_json(json["return_type"]),
+            return_type=CType.from_json(json["return_type"]) or CType.VOID,
         )
 
     @classmethod
     @override
-    def merge(cls, obj1: Self, obj2: Self) -> Self:
+    def merge(cls, obj1: Self, obj2: Self) -> Self:  # ty:ignore[invalid-method-override]
         logger.debug("Merging CDelegates %r and %r", obj1.name, obj2.name)
 
-        return CDelegate(
+        return cls(
             name=obj1.name,
             namespace=obj1.namespace,
             parent=obj1.parent,
@@ -988,6 +1023,8 @@ class CNamespace(CWrapper, DocNodeMixin, MergeMixin):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
             types={k: CTypeDefinition.from_json(v) for k, v in json["types"].items()},
@@ -995,20 +1032,17 @@ class CNamespace(CWrapper, DocNodeMixin, MergeMixin):
 
     @classmethod
     @override
-    def merge(cls, obj1: Self, obj2: Self) -> Self:
+    def merge(cls, obj1: Self, obj2: Self) -> Self:  # ty:ignore[invalid-method-override]
         logger.debug("Merging CNamespaces %r and %r", obj1.name, obj2.name)
+        mapping: Mapping[str, CTypeDefinition] = merge_mapping(
+            obj1.types,
+            obj2.types,
+            CTypeDefinition.merge,
+        ) or {}
 
-        return CNamespace(
+        return cls(
             name=obj1.name,
-            types=dict(
-                sorted(
-                    merge_mapping(
-                        obj1.types,
-                        obj2.types,
-                        CTypeDefinition.merge,
-                    ).items(),
-                ),
-            ),
+            types=dict(sorted(mapping.items())),
         )
 
 
@@ -1041,6 +1075,8 @@ class CAssembly(CWrapper):
     @classmethod
     @override
     def from_json(cls, json: JsonType) -> Self:
+        assert isinstance(json, Mapping)
+
         return cls(
             name=json["name"],
             version=json["version"],
@@ -1049,7 +1085,7 @@ class CAssembly(CWrapper):
 
     @classmethod
     @override
-    def compare(cls, x: Self, y: Self) -> CompareResults:
+    def compare(cls, x: Self, y: Self) -> CompareResults:  # ty:ignore[invalid-method-override]
         c: CompareResults
         if (c := compare_string(x.name, y.name)) != 0:
             return c

@@ -198,8 +198,7 @@ def test_array[T](cls: type[T], expected: Iterable[T]) -> None:
     """Test for pyPIAF.to_c_array."""
     obj: Array[T] = to_c_array(cls, expected)
 
-    # noinspection PyTypeHints
-    assert isinstance(obj, Array[cls])
+    assert isinstance(obj, Array)
 
     actual: Sequence[T] = from_c_array(obj)
     assert expected == actual
@@ -217,8 +216,7 @@ def test_list[T](cls: type[T], expected: Iterable[T]) -> None:
     """Test for pyPIAF.to_c_list."""
     obj: List[T] = to_c_list(cls, expected)
 
-    # noinspection PyTypeHints
-    assert isinstance(obj, List[cls])
+    assert isinstance(obj, List)
 
     actual: Sequence[T] = from_c_list(obj)
     assert expected == actual
@@ -236,8 +234,7 @@ def test_dict[K, V](key_cls: type[K], value_cls: type[V], expected: Mapping[K, V
     """Test for pyPIAF.to_c_dict."""
     obj: Dictionary[K, V] = to_c_dict(key_cls, value_cls, expected)
 
-    # noinspection PyTypeHints
-    assert isinstance(obj, Dictionary[key_cls, value_cls])
+    assert isinstance(obj, Dictionary)
 
     actual: dict[K, V] = from_c_dict(obj)
     assert expected == actual

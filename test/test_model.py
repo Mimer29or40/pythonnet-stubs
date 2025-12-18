@@ -748,7 +748,7 @@ class TestCType:
     def test_from_json(self, obj: CType, json: JsonType) -> None:
         """Test for CType.from_json()."""
         expected: CType = obj
-        actual: CType = CType.from_json(json)
+        actual: CType | None = CType.from_json(json)
 
         assert actual == expected
 

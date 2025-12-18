@@ -37,8 +37,6 @@ classifiers = [
 requires-python = ">=3.13"
 dependencies = [
     "pythonnet>=3.0.0",
-    "ruff>=0.12.7",
-    "tox>=4.28.4",
 ]
 dynamic = ["version"]
 
@@ -54,8 +52,8 @@ stubgen = "stubgen.__main__:main"
 
 [project.optional-dependencies]
 tests = [
-    "tox>=4.28.4",
-    "pytest>=8.4.1",
+    "tox>=4.32.0",
+    "pytest>=9.0.2",
 ]
 
 [build-system]
@@ -178,3 +176,10 @@ force-single-line = true
 known-third-party = ["System", "Microsoft", "Internal", "Accessibility", "MS"]
 known-first-party = ["stubgen"]
 required-imports = ["from __future__ import annotations"]
+
+[tool.ty.rules]
+
+[tool.ty.src]
+exclude = [
+    "**/*.pyi",
+]
