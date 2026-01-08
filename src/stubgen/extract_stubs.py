@@ -225,27 +225,28 @@ def _extract_members[T: CWrapper](
 
     def get_parents(root: TypeInfo) -> list[TypeInfo]:
         parents: list[TypeInfo] = []
+        interfaces: list[TypeInfo] = []
         visited: set[str] = {type_key(root)}
         stack: list[TypeInfo] = [root]
         while stack:
             current: TypeInfo = stack.pop()
             base_type: TypeInfo | None = current.BaseType
-            if base_type is None:
-                continue
-            if type_key(base_type) in visited:
-                continue
 
-            parents.append(base_type)
-            stack.append(base_type)
-            visited.add(type_key(base_type))
+            if base_type is not None:
+                k = type_key(base_type)
+                if k not in visited:
+                    parents.append(base_type)
+                    stack.append(base_type)
+                    visited.add(k)
 
             for interface in current.GetInterfaces():
-                if type_key(interface) in visited:
-                    continue
-                parents.append(interface)
-                stack.append(interface)
-                visited.add(type_key(interface))
-        return parents
+                k = type_key(interface)
+                if k not in visited:
+                    interfaces.append(interface)
+                    stack.append(interface)
+                    visited.add(k)
+
+        return parents + interfaces
 
     if skip_parents:
         return found
