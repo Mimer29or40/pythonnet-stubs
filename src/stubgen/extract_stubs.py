@@ -212,16 +212,41 @@ def _extract_members[T: CWrapper](
     binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
     found: dict[str, T] = {obj.unique_name: obj for obj in member_func(type_info, binding_flags)}
 
-    def get_parents(type_info: TypeInfo) -> list[TypeInfo]:
+    def type_key(t: TypeInfo) -> str:
+        assembly_qualified_name = getattr(t, "AssemblyQualifiedName", None)
+        if assembly_qualified_name:
+            return str(assembly_qualified_name)
+        full_name = getattr(t, "FullName", None)
+        if full_name:
+            return str(full_name)
+        namespace = getattr(t, "Namespace", None)
+        name = getattr(t, "Name", None)
+        return f"{namespace}.{name}"
+
+    def get_parents(root: TypeInfo) -> list[TypeInfo]:
         parents: list[TypeInfo] = []
-        if type_info.BaseType is not None:
-            parents.append(type_info.BaseType)
-            parents.extend(get_parents(type_info.BaseType))
-        interface: TypeInfo
-        for interface in type_info.GetInterfaces():
-            parents.append(interface)
-            parents.extend(get_parents(interface))
-        return parents
+        interfaces: list[TypeInfo] = []
+        visited: set[str] = {type_key(root)}
+        stack: list[TypeInfo] = [root]
+        while stack:
+            current: TypeInfo = stack.pop()
+            base_type: TypeInfo | None = current.BaseType
+
+            if base_type is not None:
+                k = type_key(base_type)
+                if k not in visited:
+                    parents.append(base_type)
+                    stack.append(base_type)
+                    visited.add(k)
+
+            for interface in current.GetInterfaces():
+                k = type_key(interface)
+                if k not in visited:
+                    interfaces.append(interface)
+                    stack.append(interface)
+                    visited.add(k)
+
+        return parents + interfaces
 
     if skip_parents:
         return found
@@ -383,7 +408,7 @@ def extract_class(info: TypeInfo) -> CClass:
         properties=_extract_members(info, _get_properties),
         methods=_get_methods(info),
         events=_extract_members(info, _get_events),
-        nested_types=_extract_members(info, _get_nested),
+        nested_types=_extract_members(info, _get_nested, True),
     )
 
 
